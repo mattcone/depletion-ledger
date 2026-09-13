@@ -294,7 +294,7 @@ export const branchTracks = [
 // ---------- Branch weights history ----------
 export const branchWeights = [
   { date: "Jun 30", holds: 65, standoff: 35, lapse: 0, note: "Initial model: about 65% odds of de-escalation." },
-  { date: "Sep 2", holds: 35, standoff: 60, lapse: 5, note: "Odds changed after the claim of 8.6M barrels per day failed to hold up." },
+  { date: "Sep 2", holds: 35, standoff: 60, lapse: 5, note: "Reported Hormuz traffic of 8.6M barrels per day was not backed by vessel tracking, which showed 7% of normal transits." },
   { date: "Sep 7", holds: 15, standoff: 55, lapse: 30, note: "A shipping exclusion zone was imposed, and a base in a third country was hit for the first time." },
   { date: "Sep 9", holds: 10, standoff: 50, lapse: 40, note: "Tanker losses reached 10 per week, Brent passed $100, and Jazan was affected." },
   { date: "Sep 11", holds: 10, standoff: 40, lapse: 50, note: "The Saudi bypass pipeline was suspended, and the Houthis held the entire Red Sea coast. An official pipeline restart would return the odds to 10/50/40." },
@@ -452,8 +452,8 @@ export const watchList = [
 export const cascade = [
   { date: "Sep 14–21", region: "US East Coast", trigger: "Diesel and heating-oil stocks could fall below a month of supply. They are already 27% lower than last year." },
   { date: "Sep 30", region: "Russia", trigger: "The diesel export ban expires. With more than 30% of refining capacity damaged, Russia may have little fuel available to export." },
-  { date: "Early Oct", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, a level that would put pressure on trading. The estimate shifts to mid-October if the strait closes fully." },
   { date: "≈ mid-October", region: "China", trigger: "Commercial oil stocks could begin to fall faster than normal." },
+  { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, a level that would put pressure on trading. If the strait closes fully, the estimate moves up to mid-October." },
   { date: "≈ late October", region: "Europe, at the pump", trigger: "Shortages could reach consumers, with price increases putting pressure on governments." },
   { date: "Nov 10–30", region: "Air travel", trigger: "Russia's jet-fuel export ban begins Nov 30. The world's remaining stocks amount to about 26 days of flying." },
 ];
