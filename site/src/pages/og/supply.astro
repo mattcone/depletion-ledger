@@ -1,0 +1,242 @@
+---
+// Share card source page: the supply (SPR) chart as a 1200x630 Open Graph image.
+// NOT a site page — excluded from the sitemap and robots. scripts/make-og.mjs
+// renders this route with headless Chrome to /og-supply.png after each build.
+// Keep it self-contained: fixed size, no animation, no tooltips, fonts via the
+// same Google Fonts link as the site (headless Chrome loads them fine).
+import { sprWeekly, sprPreWar, DATA_AS_OF, CRISIS_DAY_1 } from "../../data/crisis.ts";
+
+const dayNum = Math.round(
+  (Date.parse(DATA_AS_OF) - Date.parse(CRISIS_DAY_1)) / 86400000
+);
+const last = sprWeekly[sprWeekly.length - 1];
+const fmt = (iso: string) =>
+  new Date(iso + "T12:00:00").toLocaleDateString("en-US", {
+    timeZone: "UTC",
+    month: "short",
+    day: "numeric",
+  });
+const asOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", {
+  timeZone: "UTC",
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+});
+const drawn = +(sprPreWar - last.level).toFixed(1);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>The Depletion Ledger — share card</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+      body {
+        background: #f2f1ec;
+        color: #1c1b17;
+        font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+      }
+      .mono {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+      }
+      .faint {
+        color: #8a867a;
+      }
+      .swatch {
+        display: inline-block;
+        width: 20px;
+        border-top-width: 2px;
+        margin-right: 6px;
+        transform: translateY(-3px);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      style="width: 1200px; height: 630px; box-sizing: border-box; padding: 48px 64px 40px; display: flex; flex-direction: column;"
+    >
+      <div class="mono faint" style="font-size: 12.5px; letter-spacing: 0.14em;">
+        THE DEPLETION LEDGER · HORMUZ & RED SEA · DAY {dayNum}
+      </div>
+      <h1 style="margin: 12px 0 0; font-size: 40px; line-height: 1.05; font-weight: 800; letter-spacing: -0.02em;">
+        The reserve is drawing down
+      </h1>
+      <p class="faint" style="margin: 10px 0 0; font-size: 15px;">
+        US Strategic Petroleum Reserve, million barrels — actual (EIA weekly) and projected
+        draws to the floors. Data as of {asOf}.
+      </p>
+
+      <div
+        class="mono faint"
+        style="margin-top: 18px; font-size: 12px; display: flex; gap: 28px; align-items: center;"
+      >
+        <span><span class="swatch" style="border-top-style: solid; border-top-color: #1c1b17;"></span>actual (EIA weekly)</span>
+        <span><span class="swatch" style="border-top-style: dashed; border-top-color: #3d6b64;"></span>holds · 0.45M b/d</span>
+        <span><span class="swatch" style="border-top-style: dashed; border-top-color: #b4690e;"></span>standoff · 0.70M b/d</span>
+        <span><span class="swatch" style="border-top-style: dashed; border-top-color: #b3261e;"></span>lapse · 1.35M b/d</span>
+        <span><span class="swatch" style="border-top-style: dotted; border-top-color: rgba(179,38,30,0.55);"></span>reserve floors</span>
+      </div>
+
+      <div style="position: relative; flex: 1; margin-top: 8px;">
+        <canvas id="card"></canvas>
+      </div>
+
+      <div
+        class="mono faint"
+        style="display: flex; justify-content: space-between; font-size: 12.5px; margin-top: 14px;"
+      >
+        <span>
+          {last.level.toFixed(1)}M bbl (w/e {fmt(last.date)}) · −{drawn}M since pre-war
+          {sprPreWar}M
+        </span>
+        <span>depletion.org</span>
+      </div>
+    </div>
+
+    <script>
+      import Chart from "chart.js/auto";
+      import { sprWeekly, sprScenarios } from "../../data/crisis.ts";
+
+      const fmt = (iso: string) =>
+        new Date(iso + "T12:00:00").toLocaleDateString("en-US", {
+          timeZone: "UTC",
+          month: "short",
+          day: "numeric",
+        });
+      const future: string[] = [];
+      const lastDate = sprWeekly[sprWeekly.length - 1].date;
+      {
+        const d = new Date(lastDate + "T12:00:00Z");
+        for (let i = 0; i < 22; i++) {
+          d.setUTCDate(d.getUTCDate() + 7);
+          future.push(
+            d.toLocaleDateString("en-US", { timeZone: "UTC", month: "short", day: "numeric" })
+          );
+        }
+      }
+      const labels = [...sprWeekly.map((p) => fmt(p.date)), ...future];
+      const anchorIdx = sprWeekly.length - 1;
+      const anchorLevel = sprWeekly[anchorIdx].level;
+      const scenarioLine = (rate: number) =>
+        labels.map((_, i) =>
+          i <= anchorIdx
+            ? i === anchorIdx
+              ? anchorLevel
+              : null
+            : Math.max(70, anchorLevel - rate * 7 * (i - anchorIdx))
+        );
+
+      const directLabels = {
+        id: "directLabels",
+        afterDatasetsDraw(chart: Chart) {
+          const { ctx } = chart;
+          const x = chart.scales.x;
+          const y = chart.scales.y;
+          // floor lines: label at the left edge
+          const floors = [250, 180];
+          ctx.save();
+          ctx.font = "500 11.5px 'IBM Plex Mono', monospace";
+          ctx.fillStyle = "rgba(179,38,30,0.75)";
+          for (const f of floors) {
+            ctx.fillText(
+              f === 250 ? "250M · GEF operational floor" : "180M · hard-operable floor",
+              x.getPixelForValue(1) + 6,
+              y.getPixelForValue(f) - 6
+            );
+          }
+          // scenario lines: label at the right end
+          const ends = [
+            { rate: 0.45, color: "#3d6b64", text: "0.45M/d" },
+            { rate: 0.7, color: "#b4690e", text: "0.70M/d" },
+            { rate: 1.35, color: "#b3261e", text: "1.35M/d" },
+          ];
+          for (const e of ends) {
+            const lvl = Math.max(70, anchorLevel - e.rate * 7 * (labels.length - 1 - anchorIdx));
+            ctx.fillStyle = e.color;
+            ctx.textAlign = "left";
+            ctx.fillText(e.text, x.getPixelForValue(labels.length - 1) - 52, y.getPixelForValue(lvl) - 7);
+          }
+          ctx.restore();
+        },
+      };
+
+      new Chart(document.getElementById("card")!, {
+        type: "line",
+        data: {
+          labels,
+          datasets: [
+            {
+              data: [...sprWeekly.map((p) => p.level), ...labels.slice(anchorIdx + 1).map(() => null)],
+              borderColor: "#1c1b17",
+              borderWidth: 2.5,
+              pointRadius: 0,
+              tension: 0.1,
+              spanGaps: false,
+            },
+            ...sprScenarios.map((s, i) => ({
+              data: scenarioLine(s.rate),
+              borderColor: ["#3d6b64", "#b4690e", "#b3261e"][i],
+              borderDash: [5, 4],
+              borderWidth: 1.5,
+              pointRadius: 0,
+              spanGaps: false,
+            })),
+            ...[250, 180].map((f) => ({
+              data: labels.map(() => f),
+              borderColor: "rgba(179,38,30,0.35)",
+              borderDash: [2, 5],
+              borderWidth: 1,
+              pointRadius: 0,
+            })),
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: false, // deterministic screenshots
+          events: [], // no interaction on a card
+          scales: {
+            y: {
+              min: 140,
+              max: 420,
+              grid: { display: false },
+              border: { display: false },
+              ticks: {
+                color: "#8a867a",
+                padding: 8,
+                stepSize: 50,
+                font: { family: "'IBM Plex Mono', monospace", size: 11.5 },
+                callback: (v: unknown) => `${v}M`,
+              },
+            },
+            x: {
+              grid: { display: false },
+              border: { color: "#d8d4c6" },
+              ticks: {
+                color: "#8a867a",
+                padding: 6,
+                maxTicksLimit: 8,
+                font: { family: "'IBM Plex Mono', monospace", size: 11.5 },
+              },
+            },
+          },
+          plugins: { tooltip: { enabled: false }, legend: { display: false } },
+        },
+        plugins: [directLabels],
+      });
+    </script>
+  </body>
+</html>

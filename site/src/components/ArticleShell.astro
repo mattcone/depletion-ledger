@@ -1,0 +1,42 @@
+---
+// Shared page chrome for the article pages.
+import "../styles/global.css";
+import SiteFooter from "./SiteFooter.astro";
+import SiteMeta from "./SiteMeta.astro";
+import TopNav from "./TopNav.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  url?: string; // canonical path for meta/OG tags
+  current?: string; // which nav item is active
+}
+const { title, description = "", url = "/model", current = "" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — The Depletion Ledger</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <SiteMeta title={`${title} — The Depletion Ledger`} description={description} url={url} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <TopNav current={current} />
+
+      <slot />
+
+      <SiteFooter />
+    </div>
+  </body>
+</html>

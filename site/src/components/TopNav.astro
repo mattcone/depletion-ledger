@@ -1,0 +1,29 @@
+---
+// Top navigation — identical on every page (no wordmark: the hero carries the identity).
+interface Props {
+  current: string; // "home" | "model"
+}
+const { current } = Astro.props;
+
+const nav = [
+  { href: "/", label: "Dashboard", id: "home" },
+  { href: "/model", label: "Model", id: "model" },
+];
+---
+
+<nav class="flex flex-wrap items-baseline gap-x-5 gap-y-1 border-b border-rule py-4 text-sm">
+  {
+    nav.map((n) => (
+      <a
+        href={n.href}
+        class={
+          current === n.id
+            ? "font-semibold"
+            : "text-ink/70 hover:text-ink"
+        }
+      >
+        {n.label}
+      </a>
+    ))
+  }
+</nav>

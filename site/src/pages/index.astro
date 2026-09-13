@@ -1,0 +1,2394 @@
+---
+import "../styles/global.css";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteMeta from "../components/SiteMeta.astro";
+import TopNav from "../components/TopNav.astro";
+import {
+  stats, brentYtd, brentMonthlyAvgs, wtiWeekly, gasolineYtd, gasolinePreCrisis,
+  dieselYtd, dieselOldRecord, sprWeekly, sprPreWar, sprFloors, sprScenarios,
+  invSnapshot, branchWeights, branchTracks, watchList, cascade, billLedger,
+  sprDrawDeltas, sprDrawPace4w, sprFloor250Date, sprFloor180Date, sprLapse250Date, sprLapse180Date,
+  DATA_AS_OF, CRISIS_DAY_1,
+  russiaCapacityAnchors, russiaCurrentSpread, russiaSnapshot, russiaBanCascade,
+  globalRefining, demandDecline,
+  recessionOdds, ratesStats, foodStats, foodLagBars,
+} from "../data/crisis";
+
+// Crisis day number, computed from the data-as-of date (NOT the viewer's clock) so the
+// page is a stable snapshot: Sep 11 data = day 195, no matter when someone loads it.
+const dayNum = Math.round((Date.parse(DATA_AS_OF) - Date.parse(CRISIS_DAY_1)) / 86400000);
+
+// SPR cavern gauge geometry (static data → precomputed)
+// Scale runs 60 → 750M so the all-time record (Dec 2009, 726.6M) fits in the bar.
+const y = (level: number) => 430 - ((level - 60) / (750 - 60)) * 400;
+const yPreWar = y(sprPreWar);      // 415.441
+const yNow = y(286.604);
+const g = sprFloors.map((f) => ({ ...f, y: y(f.level) }));
+// Historical anchors — EIA official monthly series (eia.gov/dnav/pet/hist, MCSSTUS1)
+const hist = [
+  { level: 726.6, label: "727 · 2009", tip: "727 — Dec 2009 · all-time peak (EIA monthly series)" },
+  { level: 591.7, label: "592 · 1995", tip: "592 — 1995 · mid-90s plateau (EIA)" },
+  { level: 293.8, label: "294 · 1982", tip: "294 — Dec 1982 · record low, until this crisis (EIA)" },
+].map((h) => ({ ...h, y: y(h.level) }));
+
+// SPR drawdown sparkline (last 16 weeks) — Tufte: no axes, dots at max/min
+const drawSpark = sprDrawDeltas.slice(-16);
+const sparkMax = Math.max(...drawSpark.map((d) => d.mmbbl));
+const sparkPts = drawSpark.map((d, i) => ({
+  x: 4 + (i / (drawSpark.length - 1)) * 152,
+  y: 36 - (d.mmbbl / sparkMax) * 30,
+}));
+const sparkMaxPt = sparkPts[drawSpark.findIndex((d) => d.mmbbl === sparkMax)];
+const sparkMinI = drawSpark.findIndex((d) => d.mmbbl === Math.min(...drawSpark.map((d) => d.mmbbl)));
+const sparkMinPt = sparkPts[sparkMinI];
+const sparkLine = sparkPts.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
+const latestDrawPace = (sprDrawDeltas[sprDrawDeltas.length - 1].mmbbl / 7).toFixed(2);
+
+// Data-as-of date, formatted (UTC so it's deterministic regardless of build timezone)
+const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", {
+  timeZone: "UTC",
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+
+// Floor dates, formatted
+// UTC so the date is deterministic regardless of the build machine's timezone/DST
+const fmtFloor = (d: Date) => d.toLocaleDateString("en-US", { timeZone: "UTC", month: "short", day: "numeric" });
+const floor250 = fmtFloor(sprFloor250Date); // "Oct 19" (standoff path)
+const floor180 = `${fmtFloor(sprFloor180Date)}, ${sprFloor180Date.getFullYear()}`;
+const floorLapse250 = fmtFloor(sprLapse250Date); // "Sep 24" (lapse path — top track since Sep 11)
+const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYear()}`;
+
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Depletion Ledger — The Oil Supply Crisis</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta
+      name="description"
+      content={`Hormuz and the Red Sea are closed to oil shipping, and the world now uses more oil than it produces. The US Strategic Petroleum Reserve is at its lowest level since 1982. A scenario model, not a prediction. Day ${dayNum}, data as of ${dataAsOf}.`}
+    />
+    <SiteMeta
+      title="The Depletion Ledger — The Oil Supply Crisis"
+      description={`Hormuz and the Red Sea are closed to oil shipping, and the world now uses more oil than it produces. The US Strategic Petroleum Reserve is at its lowest level since 1982. A scenario model, not a prediction. Day ${dayNum}, data as of ${dataAsOf}.`}
+      url="/"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <!-- Top nav (shared component — identical on every page) -->
+      <TopNav current="home" />
+
+      <!-- Hero: title + chokepoint map -->
+      <header class="grid gap-8 border-b border-rule py-12 lg:grid-cols-[1fr_480px] lg:items-center lg:gap-16">
+        <div>
+          <h1 class="text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl">
+            The Depletion Ledger
+          </h1>
+          <div class="mt-3 max-w-prose space-y-3 text-[15px] leading-relaxed text-ink/80">
+            <p>
+              Oil is the lifeblood of the world economy. We refine it into the fuels that grow
+              our food and move our goods. It's in the gas in your car and the underwear you put
+              on this morning.
+            </p>
+            <p>
+              Since the US and Israel went to war with Iran in February 2026, the world has been
+              using more oil than it produces. The Strait of Hormuz and the Red Sea are
+              effectively closed to oil shipping, cutting off roughly 20% of the world's oil
+              supply. Russian refinery strikes and export bans are making the situation worse.
+              The US Strategic Petroleum Reserve is at its lowest level since 1982.
+            </p>
+            <p>
+              This site tracks how much buffer is left. It's a scenario model, not a prediction,
+              with three possible futures. The odds change only when something verifiable
+              changes, and every forecast gets scored against what actually happens.
+            </p>
+          </div>
+          <p class="mt-4 font-mono text-xs text-faint tabular">
+            Last updated {dataAsOf}
+          </p>
+          <nav class="mt-6 flex flex-wrap gap-x-5 gap-y-1 text-sm">
+            <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#prices">Prices</a>
+            <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#supply">Supply</a>
+            <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#refining">Refining</a>
+            <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#secondorder">Second order effects</a>
+            <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#watchlist">Watch list</a>
+          </nav>
+        </div>
+
+
+
+        <!-- Chokepoint map: the geography of the crisis -->
+        <figure class="mx-auto w-full max-w-[480px]">
+          <svg viewBox="0 0 320 265" role="img" aria-label="Map of the crisis area: the Red Sea between Africa and the Arabian Peninsula, narrowing to the strait of Bab el-Mandeb; and the Persian Gulf between Saudi Arabia and Iran, exiting through the Strait of Hormuz. Both chokepoints are marked with red dots.">
+            <!-- country coastlines: Natural Earth 110m (public domain) -->
+            <path d="M-64.541,276.628L-72.632,271.948L-76.295,268.862L-76.982,265.518L-75.265,261.043L-75.303,256.654L-81.409,249.922L-82.592,245.299L-82.478,242.683L-86.37,239.497L-86.485,233.206L-88.698,229.016L-92.438,229.641L-91.37,225.649L-88.622,221.116L-89.843,216.594L-86.332,213.248L-88.546,210.693L-85.76,203.925L-80.913,195.832L-71.754,196.596L-72.288,152.446L-72.174,147.717L-59.962,147.678L-59.962,124.998L-17.333,124.998L23.769,124.998L65.824,124.998L69.259,136.184L66.931,138.239L68.458,149.873L72.35,163.288L76.396,166.031L82.196,170.167L76.815,176.514L69.03,178.338L65.672,181.736L64.641,189.095L60.062,205.261L61.207,209.638L59.489,219.031L55.215,229.752L48.804,235.133L44.262,243.397L43.194,247.803L38.156,250.835L35.027,262.099L35.179,271.749L35.065,263.39L33.577,263.172L33.767,257.82L32.508,254.12L27.051,249.868L25.753,242.079L27.051,234.087L22.128,233.334L21.402,235.757L15.029,236.307L17.586,239.478L18.464,245.976L12.663,251.894L7.397,259.66L1.901,260.77L-6.991,254.484L-10.998,256.709L-12.105,259.842L-17.562,261.88L-17.906,264.1L-28.477,264.1L-29.927,261.88L-37.56,261.516L-41.376,263.354L-44.315,262.426L-49.772,256.162L-51.604,253.189L-59.236,254.667L-62.137,259.66L-64.885,269.261L-68.51,271.277L-71.754,272.456Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M189.855,31.431L184.016,24.975L183.901,18.422L180.505,18.422L182.26,9.43L176.803,-0.079L163.828,-6.991L156.462,-19.082L158.943,-29.102L164.247,-33.566L163.446,-41.159L156.5,-45.076L149.631,-60.828L143.83,-71.535L145.929,-75.709L142.609,-91.331L149.86,-95.242L151.539,-90.055L156.92,-83.742L164.171,-81.946L168.025,-82.338L180.505,-92.424L184.474,-93.448L187.603,-89.405L183.978,-82.66L190.58,-75.572L193.213,-76.235L196.572,-66.314L206.608,-63.533L213.974,-56.872L229.048,-54.587L245.611,-58.084L246.642,-61.211L255.954,-63.782L263.472,-71.444L270.57,-71.058L275.226,-73.563L282.744,-72.31L294.498,-65.522L302.932,-64.053L315.068,-52.307L322.968,-51.838L323.884,-40.784L319.572,-24.657L316.671,-15.346L321.289,-13.472L316.747,-6.541L320.22,3.509L321.06,11.432L329.074,13.535L329.952,21.495L320.335,32.631L325.563,39.026L329.837,46.35L339.989,51.658L340.256,62.207L345.332,64.145L346.209,69.622L330.944,75.737L326.937,89.412L306.978,85.862L295.414,83.158L283.469,81.645L278.966,67.128L273.89,65.013L265.723,67.148L255.038,72.893L242.1,68.959L231.376,59.8L221.187,56.395L214.088,44.958L206.265,28.716L200.579,30.706L193.824,26.639Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M45.56,38.388L57.39,40.322L61.97,36.575L64.489,32.176L72.579,30.479L74.335,26.39L77.846,24.288L67.275,11.916L88.493,5.67L90.516,3.785L103.301,7.171L119.062,15.887L148.982,40.548L168.674,41.513L178.139,42.683L180.772,48.455L188.252,48.129L192.412,58.504L197.64,61.237L199.434,65.416L206.685,70.426L207.295,75.297L206.265,79.233L207.601,83.198L210.654,86.477L212.066,90.323L213.631,93.191L216.836,95.501L219.775,94.672L221.797,99.126L222.217,101.8L226.263,113.52L258.129,119.318L260.266,116.889L265.113,124.998L258.052,147.717L226.263,158.966L195.694,163.25L185.81,168.279L178.215,179.953L173.254,181.811L170.582,178.112L166.537,178.676L156.271,177.548L154.363,176.439L142.113,176.702L139.25,177.699L134.9,174.821L132.076,180.272L133.144,184.941L128.527,188.478L127.115,183.76L123.947,180.422L123.107,175.988L117.65,171.996L112.002,162.644L108.987,153.493L101.66,145.749L96.927,143.894L89.905,133.087L88.684,125.153L89.142,118.366L83.074,105.586L78.113,101.053L72.388,98.654L68.877,91.965L69.45,89.333L66.511,83.258L63.42,80.629L59.299,71.831L52.811,62.247L47.43,54.018L42.125,54.079L43.804,47.454L44.262,43.237Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M380.175,-63.375L386.052,-63.285L394.066,-60.49L397.31,-58.871L404.981,-63.127L408.53,-60.558L411.965,-66.677L418.3,-66.405L419.941,-68.354L421.048,-73.791L425.627,-78.479L431.352,-75.412L430.207,-71.285L433.412,-70.648L432.42,-59.433L436.618,-55.08L440.32,-57.882L445.014,-59.185L451.616,-65.16L458.944,-64.166L469.858,-64.143L471.766,-60.332L465.584,-58.826L460.203,-56.379L448.029,-54.856L436.656,-52.084L430.436,-46.341L432.954,-40.806L434.176,-34.334L428.871,-28.906L429.329,-23.961L426.429,-19.342L416.315,-19.732L420.513,-11.322L413.758,-8.104L409.255,-0.504L409.828,7.023L405.706,10.526L401.775,9.367L393.685,10.99L392.501,14.481L384.602,14.46L378.725,21.453L378.343,31.907L364.566,36.988L357.162,35.916L355.025,38.574L348.69,37.029L338.081,38.841L320.335,32.631L329.952,21.495L329.074,13.535L321.06,11.432L320.22,3.509L316.747,-6.541L321.289,-13.472L316.671,-15.346L319.572,-24.657L323.884,-40.784L334.722,-35.849L342.698,-37.587L344.912,-43.503L353.27,-45.475L359.261,-49.475L361.36,-60.04L370.29,-62.608L371.97,-67.379L376.969,-63.804Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M500.16,-38.754L489.932,-27.88L478.102,-25.962L462.035,-29.102L456.806,-23.548L460.585,-12.375L464.248,-3.807L472.797,2.406L463.79,9.641L463.943,18.485L453.639,30.831L446.999,43.176L435.931,55.827L423.604,54.913L411.927,67.43L418.872,72.753L420.055,81.845L426.009,87.807L428.146,97.827L404.79,97.787L397.73,105.547L389.983,102.605L386.815,94.258L378.61,85.345L359.07,87.549L341.859,87.767L326.937,89.412L330.944,75.737L346.209,69.622L345.332,64.145L340.256,62.207L339.989,51.658L329.837,46.35L325.563,39.026L320.335,32.631L338.081,38.841L348.69,37.029L355.025,38.574L357.162,35.916L364.566,36.988L378.343,31.907L378.725,21.453L384.602,14.46L392.501,14.481L393.685,10.99L401.775,9.367L405.706,10.526L409.828,7.023L409.255,-0.504L413.758,-8.104L420.513,-11.322L416.315,-19.732L426.429,-19.342L429.329,-23.961L428.871,-28.906L434.176,-34.334L432.954,-40.806L430.436,-46.341L436.656,-52.084L448.029,-54.856L460.203,-56.379L465.584,-58.826L471.766,-60.332L479.59,-54.14L482.719,-44.035Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M1.863,326.948L-7.449,319.881L-9.968,315.346L-15.883,317.596L-20.768,316.894L-23.63,318.675L-28.362,317.398L-34.812,308.611L-36.491,305.24L-44.429,301.021L-47.101,294.613L-51.527,290.006L-58.664,284.435L-58.74,280.959L-64.541,276.628L-71.754,272.456L-68.51,271.277L-64.885,269.261L-62.137,259.66L-59.236,254.667L-51.604,253.189L-49.772,256.162L-44.315,262.426L-41.376,263.354L-37.56,261.516L-29.927,261.88L-28.477,264.1L-17.906,264.1L-17.562,261.88L-12.105,259.842L-10.998,256.709L-6.991,254.484L1.901,260.77L7.397,259.66L12.663,251.894L18.464,245.976L17.586,239.478L15.029,236.307L21.402,235.757L22.128,233.334L27.051,234.087L25.753,242.079L27.051,249.868L32.508,254.12L33.767,257.82L33.577,263.172L35.065,263.39L35.179,271.749L33.577,275.033L27.967,275.286L24.341,281.394L30.867,282.154L36.248,287.366L38.08,291.632L42.926,294.107L49.185,305.709L42.011,312.735L35.485,319.071L28.959,323.963L21.517,323.946L12.968,326.427L6.252,324.053Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M181.612,279.057L151.653,311.079L137.838,311.547L128.412,319.053L121.619,319.251L118.719,322.597L111.468,322.597L107.193,318.999L97.5,323.442L94.37,327.883L87.31,327.038L84.944,325.815L82.464,326.103L79.143,325.995L65.71,316.966L58.344,316.966L54.719,313.474L54.719,307.493L49.185,305.709L42.926,294.107L38.08,291.632L36.248,287.366L30.867,282.154L24.341,281.394L27.967,275.286L33.577,275.033L35.179,271.749L35.027,262.099L38.156,250.835L43.194,247.803L44.262,243.397L48.804,235.133L55.215,229.752L59.489,219.031L61.207,209.638L73.533,211.934L76.854,203.758L83.265,208.73L89.486,206.152L92.043,208.452L99.332,208.581L108.567,212.97L111.277,216.741L116.009,220.249L120.36,226.625L123.985,230.138L120.245,234.931L116.658,240.01L117.497,242.994L117.65,246.286L123.565,246.469L126.122,245.701L128.488,247.639L126.16,251.456L130.091,257.383L133.984,262.572L138.029,266.391L172.72,279.129Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M260.266,116.889L260.533,112.253L263.624,107.466L263.662,102.742L268.471,100.444L266.563,98.831L267.441,91.253L272.86,91.194L277.63,99.165L283.546,103.37L291.293,104.9L297.59,106.996L302.36,113.618L305.222,117.433L309.039,118.891L309,121.453L305.146,128.265L303.467,131.468L299.002,135.107L295.033,142.86L290.224,142.266L288.011,144.965L286.331,150.693L287.629,158.207L286.637,159.573L281.752,159.535L275.111,163.723L274.081,169.167L271.677,171.525L265.075,171.43L260.915,174.238L260.953,178.713L255.839,181.811L250,180.76L242.902,184.491L238.017,185.128L234.544,177.379L226.263,158.966L258.052,147.717L265.113,124.998ZM271.41,81.944L269.425,77.916L272.478,73.895L273.814,74.917L272.822,79.792Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M226.263,158.966L234.544,177.379L238.017,185.128L230.346,188.085L228.285,192.998L228.056,196.745L217.485,201.379L200.541,206.505L191.038,214.228L186.382,214.838L183.214,214.191L176.994,218.717L170.239,220.821L161.347,221.374L158.675,222.001L156.348,224.876L153.562,225.667L151.921,228.428L146.692,228.189L143.296,229.66L135.968,229.108L133.221,222.757L133.526,216.797L131.77,213.581L129.71,205.484L126.657,200.97L128.794,200.431L127.687,195.404L128.985,193.278L128.527,188.478L133.144,184.941L132.076,180.272L134.9,174.821L139.25,177.699L142.113,176.702L154.363,176.439L156.271,177.548L166.537,178.676L170.582,178.112L173.254,181.811L178.215,179.953L185.81,168.279L195.694,163.25Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M65.824,124.998L23.769,124.998L-17.333,124.998L-59.962,124.998L-59.962,82.323L-59.962,39.829L-63.129,30.002L-60.419,22.413L-62.06,17.124L-58.206,11.179L-44.124,10.969L-33.896,14.25L-23.401,17.92L-18.478,19.844L-10.311,15.908L-5.961,12.358L3.389,11.327L10.946,12.905L13.808,19.05L16.289,15.006L24.761,17.94L33.042,18.631L38.271,15.509L44.186,33.458L45.216,36.617L42.24,41.513L39.95,50.639L37.088,56.902L34.607,58.99L31.058,55.116L26.287,49.762L18.731,32.363L17.624,33.458L22.013,46.289L28.539,58.383L36.553,76.897L40.446,83.298L43.881,89.927L53.383,102.821L51.284,104.841L51.628,112.35L63.954,122.655Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M115.856,382.021L109.559,373.263L109.445,334.639L118.719,322.597L121.619,319.251L128.412,319.053L137.838,311.547L151.653,311.079L181.612,279.057L189.015,270.115L193.786,263.518L193.786,257.911L193.786,247.036L193.824,242.573L193.9,242.408L197.297,242.189L202.182,240.577L207.792,239.497L212.829,235.793L216.836,235.757L217.065,238.745L216.111,245.043L216.149,250.708L213.898,254.612L210.921,266.245L205.807,278.205L199.243,291.867L190.16,307.493L181.115,319.395L168.636,333.885L158.027,342.487L142.189,353.005L132.305,361.08L120.703,373.909L118.261,379.508Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M90.516,3.785L86.242,-11.579L109.712,-24.852L113.719,-40.519L112.727,-50.077L118.528,-53.335L123.947,-61.616L128.488,-63.691L140.853,-61.954L144.555,-58.578L149.631,-60.828L156.5,-45.076L163.446,-41.159L164.247,-33.566L158.943,-29.102L156.462,-19.082L163.828,-6.991L176.803,-0.079L182.26,9.43L180.505,18.422L183.901,18.422L184.016,24.975L189.855,31.431L183.596,30.831L176.46,29.815L168.674,41.513L148.982,40.548L119.062,15.887L103.301,7.171Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M61.207,209.638L60.062,205.261L64.641,189.095L65.672,181.736L69.03,178.338L76.815,176.514L82.196,170.167L88.341,183.029L91.279,193.166L97.08,198.533L111.544,208.896L117.421,215.115L123.184,221.411L126.504,225.152L131.694,228.428L128.527,231.075L123.985,230.138L120.36,226.625L116.009,220.249L111.277,216.741L108.567,212.97L99.332,208.581L92.043,208.452L89.486,206.152L83.265,208.73L76.854,203.758L73.533,211.934Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M53.689,-3.103L53.46,-3.188L54.91,-5.109L54.757,-10.291L57.352,-17.245L63.115,-22.072L61.397,-27.095L56.627,-27.771L55.635,-37.675L58.23,-43.038L61.054,-45.897L63.916,-48.785L64.489,-56.133L67.962,-53.558L79.639,-57.254L85.249,-54.744L93.989,-54.789L106.201,-59.77L111.887,-59.545L123.947,-61.616L118.528,-53.335L112.727,-50.077L113.719,-40.519L109.712,-24.852L86.242,-11.579L65.481,1.876Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M193.9,242.408L193.824,242.573L193.786,247.036L193.786,257.911L193.786,263.518L189.015,270.115L181.612,279.057L172.72,279.129L138.029,266.391L133.984,262.572L130.091,257.383L126.16,251.456L128.488,247.639L132.381,241.841L135.854,243.836L137.915,248.315L142.685,252.825L147.952,252.861L157.95,250.105L169.476,248.827L178.826,245.464L184.092,244.75L187.87,242.774Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M221.797,99.126L223.667,98.555L224.087,101.741L232.369,99.913L241.146,100.208L247.558,100.562L254.809,92.677L262.708,85.167L269.425,77.916L271.41,81.944L272.86,91.194L267.441,91.253L266.563,98.831L268.471,100.444L263.662,102.742L263.624,107.466L260.533,112.253L260.266,116.889L258.129,119.318L226.263,113.52L222.217,101.8Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M53.689,-3.103L51.819,0.856L48.002,-0.887L45.789,7.467L48.422,8.86L45.712,10.568L45.254,13.851L50.254,12.169L50.521,16.998L45.216,36.617L44.186,33.458L38.271,15.509L41.324,11.432L40.599,10.716L43.423,4.887L45.56,-4.597L47.086,-7.783L47.392,-7.911L50.941,-7.89L51.895,-10.119L54.757,-10.291L54.91,-5.109L53.46,-3.188Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M51.819,0.856L53.689,-3.103L65.481,1.876L86.242,-11.579L90.516,3.785L88.493,5.67L67.275,11.916L77.846,24.288L74.335,26.39L72.579,30.479L64.489,32.176L61.97,36.575L57.39,40.322L45.56,38.388L45.216,36.617L50.521,16.998L50.254,12.169L51.819,8.523Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M123.985,230.138L128.527,231.075L131.694,228.428L134.213,231.791L133.869,236.289L127.84,238.892L132.381,241.841L128.488,247.639L126.122,245.701L123.565,246.469L117.65,246.286L117.497,242.994L116.658,240.01L120.245,234.931Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M213.631,93.191L212.944,84.67L215.806,78.495L218.706,77.216L221.912,80.908L222.103,87.787L219.775,94.672L216.836,95.501Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M183.596,30.831L185.81,36.225L184.855,39.006L188.252,48.129L180.772,48.455L178.139,42.683L168.674,41.513L176.46,29.815Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <path d="M50.254,12.169L45.254,13.851L45.712,10.568L48.422,8.86L45.789,7.467L48.002,-0.887L51.819,0.856L51.819,8.523Z" fill="#ece9dd" stroke="#d0ccbe" stroke-width="0.5" />
+            <!-- water names -->
+            <text x="84" y="148" transform="rotate(72 84 148)" text-anchor="middle" font-size="9" font-style="italic" font-family="Georgia, serif" fill="#8a867a">Red Sea</text>
+            <text x="225" y="74" transform="rotate(30 225 74)" text-anchor="middle" font-size="9" font-style="italic" font-family="Georgia, serif" fill="#8a867a">Persian Gulf</text>
+            <text x="225" y="230" font-size="9" font-style="italic" font-family="Georgia, serif" fill="#8a867a">Arabian Sea</text>
+            <!-- land names -->
+            <text x="254" y="36" text-anchor="middle" font-size="9" font-style="italic" font-family="Georgia, serif" fill="#8a867a">Iran</text>
+            <text x="158" y="112" text-anchor="middle" font-size="9" font-style="italic" font-family="Georgia, serif" fill="#8a867a">Saudi Arabia</text>
+            <text x="172" y="196" text-anchor="middle" font-size="9" font-style="italic" font-family="Georgia, serif" fill="#8a867a">Yemen</text>
+            <text x="278" y="140" text-anchor="middle" font-size="9" font-style="italic" font-family="Georgia, serif" fill="#8a867a">Oman</text>
+            <!-- chokepoint markers -->
+            <circle cx="276" cy="70" r="7.5" fill="none" stroke="#b3261e" stroke-width="1" opacity="0.5" />
+            <circle cx="276" cy="70" r="3.5" fill="#b3261e" />
+            <circle cx="139" cy="231" r="7.5" fill="none" stroke="#b3261e" stroke-width="1" opacity="0.5" />
+            <circle cx="139" cy="231" r="3.5" fill="#b3261e" />
+            <!-- chokepoint labels -->
+            <text x="318" y="90" text-anchor="end" font-size="9.5" font-weight="600" font-family="IBM Plex Mono, monospace" fill="#b3261e">Hormuz</text>
+            <!-- endpoint sits on the outline circle's rim (r 7.5 from 276,70), not inside it -->
+            <line x1="301" y1="85" x2="282.4" y2="73.9" stroke="#b3261e" stroke-width="0.75" opacity="0.6" />
+            <text x="163" y="258" font-size="9.5" font-weight="600" font-family="IBM Plex Mono, monospace" fill="#b3261e">Bab el-Mandeb</text>
+            <line x1="162" y1="252" x2="144" y2="237" stroke="#b3261e" stroke-width="0.75" opacity="0.6" />
+          </svg>
+          <figcaption class="mt-2 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+            Hormuz: 7 transits on Sep 10, zero crude (Kpler) · 102 for the week ending Sep 3 (Lloyd&#39;s List) · 130+/day pre-crisis · Bab el-Mandeb: dry cargo partly back · crude &lt;3/day
+          </figcaption>
+        </figure>
+      </header>
+
+      <!-- Stat strip -->
+      <section class="grid grid-cols-2 border-x border-b border-rule md:grid-cols-3 lg:grid-cols-5">
+        {stats.map((s, i) => (
+          <div class={`px-4 py-4 ${i % 2 === 1 ? "border-l border-rule" : ""} md:[&:nth-child(3n+2)]:border-l md:[&:nth-child(3n+2)]:border-rule lg:[&:not(:first-child)]:border-l lg:border-rule`}>
+            <p class="text-xs text-faint">{s.label}</p>
+            <p class="tabular mt-1 font-mono text-xl font-semibold text-ink">
+              {s.value}
+            </p>
+            <p class="mt-1 text-[11px] leading-snug text-faint">{s.sub}</p>
+          </div>
+        ))}
+      </section>
+
+      <!-- Brent YTD + depletion-runway quadrants -->
+      <section id="prices" class="pb-12 pt-20">
+        <div class="mb-10">
+          <h2 class="text-2xl font-bold tracking-tight">Prices</h2>
+          <p class="mt-3 max-w-3xl text-[13px] leading-relaxed text-ink/70">
+            Everything money-related in this crisis, in one place. Brent is the world benchmark
+            for crude oil — when the news says "oil price," it means Brent. The gasoline and
+            diesel numbers are US national weekly averages; there is no verified weekly world
+            series for those yet, so the world signal comes through Brent and the two gas
+            benchmarks further down this section. All points are sourced — none are
+            interpolated.
+          </p>
+        </div>
+      <!-- US fuels YTD -->
+      <div class="grid gap-10 lg:grid-cols-2">
+        <div>
+          <div class="mb-4">
+            <h2 class="text-xl font-bold tracking-tight">US gasoline prices are up 53%</h2>
+            <p class="mt-2 font-mono text-[11px] text-faint">EIA weekly, national</p>
+          </div>
+          <div class="h-72">
+            <canvas id="gasChart" role="img" aria-label="US gasoline, EIA weekly national average (AAA daily readings Sep 7 to 13): $2.81 in January, May peak $4.50, $4.31 on Sep 13. Reference line at the January pre-crisis $2.81."></canvas>
+          </div>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            From $2.81 in January to $4.31 now — +53%, with the May peak at $4.50. Every month of
+            2026 since March has averaged above pre-crisis levels.
+          </p>
+        </div>
+        <div>
+          <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+            <h2 class="text-xl font-bold tracking-tight">US diesel prices are up 66%</h2>
+            <p class="font-mono text-[11px] text-faint">AAA national, sourced points</p>
+          </div>
+          <div class="h-72">
+            <canvas id="dieselChart" role="img" aria-label="US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $6.20 on Sep 13, a fourth straight record."></canvas>
+          </div>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            From $3.72 in the last pre-war week (Feb 27) to a new all-time record $6.20 on Sep 13
+            — a fourth straight record, after passing $6.00 on Sep 11 — +67%, the same baseline as the stat card above.
+            The old record (June 2022, ≈$5.85) fell on Sep 4. The chart plots weekly anchors —
+            the daily Sep 3–12 readings are in the crack spread chart below. Diesel leads
+            gasoline: product, not crude, is the scarce thing.
+          </p>
+        </div>
+      </div>
+
+      <!-- Natural gas: TTF (Europe) + JKM (Asia) — verified series, two sources, no interpolation -->
+      <div class="mt-12">
+        <div class="grid gap-10 lg:grid-cols-2">
+          <div>
+            <div class="mb-4">
+              <h2 class="text-xl font-bold tracking-tight">Natural gas prices in Europe are up 50%</h2>
+              <p class="mt-2 font-mono text-[11px] text-faint">TTF, $/MMBtu · filled: EIA weekly avgs (Jan–Apr) · hollow: assessed spot (May–Aug)</p>
+            </div>
+            <div class="h-72">
+              <canvas id="gasTtfChart" role="img" aria-label="TTF, Europe's gas benchmark, 2026 year to date: $12.40 in January, $11.00 before the closure, spiking to a three-year high of $18.89 on Mar 20, easing to $14.10 after the June ceasefire, $19.90 on Jul 31, about $16.80 on Aug 19. Reference line at the pre-closure week's $10.99."></canvas>
+            </div>
+            <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+              TTF is Europe's benchmark gas price — where most of the continent's gas trades. It's up
+              about 50% from before the closure, after hitting a three-year high in March and
+              easing on the June ceasefire. Europe entered winter with storage at 48% against a
+              five-year average of 63%, so it had to buy spot LNG in the exact season the strait
+              closed.
+            </p>
+          </div>
+          <div>
+            <div class="mb-4">
+              <h2 class="text-xl font-bold tracking-tight">Natural gas prices in Asia are up 117%</h2>
+              <p class="mt-2 font-mono text-[11px] text-faint">JKM, $/MMBtu · filled: EIA weekly avgs (Jan–Apr) · hollow: assessed spot (May–Aug)</p>
+            </div>
+            <div class="h-72">
+              <canvas id="gasJkmChart" role="img" aria-label="JKM, Asia's LNG benchmark, 2026 year to date: $10.66 before the closure, spiking to $20.67 on Mar 20, easing to $15.20 on Jun 26, then climbing to an all-time record $23.17 on Aug 19. Reference line at the pre-closure week's $10.66."></canvas>
+            </div>
+            <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+              JKM is Asia's benchmark LNG price. It's more than double pre-closure, and set a
+              record — $23.17 — on Aug 19. Qatar's Ras Laffan feeds most of Asia's LNG, and its
+              3–5 year outage has pushed Asian buyers into global spot markets all summer. Asia
+              stores almost no gas, so JKM tracks spot supply and weather.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brent + crack (moved below the gas rows) -->
+      <div class="mt-12 grid gap-10 lg:grid-cols-2">
+        <div class="min-w-0">
+          <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+            <h2 class="text-xl font-bold tracking-tight">Brent and WTI prices are up 38% and 45%</h2>
+            <p class="font-mono text-[11px] text-faint tabular">Brent: sourced points (EIA monthly avgs: Mar $103.0 · Apr $117.29 · Jul $83.76) · WTI: weekly (FRED)</p>
+          </div>
+          <div class="h-80 sm:h-[440px]">
+            <canvas id="brentChart" role="img" aria-label="Crude oil, 2026 year to date: Brent at $76 before the closure, $126 intraday peak in March, $74 on Jun 30, a single-day jump to $108.03 on Sep 10, then a settle of $104.61 on Sep 11; WTI weekly from about $58 in January to $102.93 on Sep 10 and $100.05 on Sep 11. Reference lines at $100 and the pre-crisis $76."></canvas>
+          </div>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            Observed points only — hollow markers are a source's rounded estimate, not a measured
+            close. The path: $76 before the closure → $126 intraday peak (March, +65% — the largest
+            monthly rise in oil-market history) → $95 by mid-April on ceasefire hopes → $74 on Jun 30
+            → back through $100 on Sep 9 as the tanker war took hold — then +$6.82 in a single day
+            to $108.03 on Sep 10, then −2.8% to $104.61 on Sep 11. The gray weekly line is WTI
+            (FRED spot; the Sep 10–11 points are the front-month close and the settle) — the benchmark US products price
+            against; it reconciles within about a dollar of news-reported settlements, while FRED's
+            Brent series does not, so it is the crude basis for the crack chart beside it. Physical
+            benchmarks ran higher still: the IEA's North Sea Dated printed $113.48 on Sep 9. And
+            positioning is one-sided — hedge funds and money managers added 12% to their combined
+            Brent/WTI net longs across August (OPEC).
+          </p>
+        </div>
+        <div class="min-w-0">
+          <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+            <h2 class="text-xl font-bold tracking-tight">Diesel crack is up 80%</h2>
+            <p class="font-mono text-[11px] text-faint tabular">Retail price less WTI, $/bbl · weekly (EIA/AAA − FRED).</p>
+          </div>
+          <div class="h-80 sm:h-[440px]">
+            <canvas id="crackChart" role="img" aria-label="Crack spread — US retail price less WTI, dollars per barrel, 2026: diesel from about 89 in mid-January, breaking above the 140s in early September to 153.6 on Sep 6 as retail's record streak ran ahead of crude, 148 on Sep 10 when crude jumped faster than retail, then new peaks of 154.3 on Sep 11, 158.7 on Sep 12, and 160.5 on Sep 13 as diesel set back-to-back records; gasoline from about 59 in January to about 81 on Sep 13, after dipping to 52 in March. The diesel series is display-thinned in September; the daily readings live in the data and the stat card."></canvas>
+          </div>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            The crack is what's left after you subtract crude from the product price — the money
+            for refining, hauling, and retailing. Diesel's has nearly doubled since January: ~$89
+            to $160.5 on Sep 13 — a fourth straight all-time diesel reading ($6.20) against WTI,
+            which settled 2.4% lower at $100.05 on Sep 11, the last settle before the weekend. The path wasn't monotonic: $153.6 on Sep 6, when
+            retail's record streak was running ahead of crude; $148 on Sep 10, the crack
+            compressing — crude jumped faster than the pump.
+            Gasoline's has widened too (~$59 to $78–84), after dipping to $52 in March when crude
+            spiked faster than the pump price. Crude is up 38–45% vs pre-war; the product is up
+            more. At wholesale the squeeze is wider still: the IEA puts US diesel/gasoil above
+            $200/bbl in early September — 94% above pre-war — with the Gulf's and Russia's combined
+            diesel exports down 1.6 mb/d from February. Basis: retail
+            prices (EIA/AAA) less FRED's weekly WTI (the Sep 10–11 points are the front-month close and the settle) — the official EIA crack uses wholesale prices
+            and sits lower, but moves the same way. Six product dates have no same-day FRED WTI
+            value (four Mondays, two Sundays, a Saturday); those cracks use the nearest trading day's
+            WTI (±1–2 days) — no interpolation.
+          </p>
+        </div>
+      </div>
+      </section>
+
+      <!-- Supply -->
+      <section id="supply" class="pb-12 pt-20">
+        <div class="mb-10">
+          <h2 class="text-2xl font-bold tracking-tight">Supply</h2>
+          <p class="mt-3 max-w-3xl text-[13px] leading-relaxed text-ink/70">
+            What got lost, drained, or stopped: the world's oil balance flipped from a surplus to a
+            drawdown the month the war began; the bill so far, paid in reserves; the US stockpile
+            draining toward its floors.
+          </p>
+        </div>
+
+        <!-- World oil balance: the flip (moved from the old #flip section — now leads Supply) -->
+        <div class="mb-3">
+          <h2 class="text-xl font-bold tracking-tight">The world is using more oil than it produces</h2>
+          <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
+            The world's oil balance flipped from a ≈4M&nbsp;b/d surplus to net withdrawals the month
+            the war began. Every month since has been paid for in reserves, by the whole world.
+            This week's IEA report puts the full-year supply loss at 5.7&nbsp;mb/d, about 6% of the
+            world's oil, and sees no full recovery in Middle East flows until 2027. In August,
+            global production fell to 100.1&nbsp;mb/d, with more than 10&nbsp;mb/d of Gulf output still
+            shut in. Saudi output alone fell 2.3&nbsp;mb/d in a single month, to 5.97.
+          </p>
+        </div>
+        <div class="h-80 sm:h-[400px]">
+          <canvas id="flipChart" role="img" aria-label="World oil balance, million barrels per day, January to August 2026 actuals: a 3.5 to 4.2 surplus in January and February, then net withdrawals every month after the war began on February 28 — 5.2 in March, the worst month, easing to 0.1 in July and back to 4.1 in August. The zero line marks the flip: above it the world built inventories, below it the world ran on reserves."></canvas>
+        </div>
+        <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+          World oil balance, million b/d — production minus consumption, EIA STEO Table 3a, reported months
+          (Jan–Aug actuals; the EIA's forecast tail is not shown) · the physical loss peaked at 11.2M b/d of Gulf
+          shut-in in May — demand destruction and non-Gulf supply absorbed most of it · the IEA's observed-inventories count: 507 mb drawn since February —
+          2.8 mb/d on average, 95 mb of it in August alone.
+        </p>
+
+        <div class="mt-12 grid gap-8 lg:grid-cols-[300px_1fr]">
+          <div>
+            <h3 class="text-lg font-bold tracking-tight">The bill, paid in reserves</h3>
+            <p class="mt-1 text-[13px] leading-relaxed text-faint">What the deficit has consumed so far — every figure verified as of Sep 11.</p>
+          </div>
+          <div class="border border-rule rounded-md">
+            {billLedger.map((b, i) => (
+              <div class={`flex flex-wrap items-baseline gap-x-4 gap-y-0.5 px-4 py-3 ${i > 0 ? "border-t border-rule/70" : ""}`}>
+                <p class="w-52 shrink-0 text-sm font-medium text-ink">{b.name}</p>
+                <p class="tabular font-mono text-sm font-semibold text-alarm">{b.value}</p>
+                <p class="w-full text-xs text-faint sm:w-auto">{b.note}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Strategic Petroleum Reserve: the star of the Supply section -->
+        <div class="mt-12 mb-4 flex flex-wrap items-baseline justify-between gap-2">
+          <h2 class="text-xl font-bold tracking-tight">The Strategic Petroleum Reserve is at its lowest level in 44 years</h2>
+          <p class="font-mono text-[11px] text-faint">EIA weekly ending stocks, million bbl</p>
+        </div>
+        <p class="mb-6 max-w-prose text-[13px] leading-relaxed text-ink/80">
+          The Strategic Petroleum Reserve (SPR) is the US government's emergency stockpile of
+          crude oil, built after the 1970s energy shocks. It held 415.4M barrels when the war
+          began; it holds 286.6M now. It is being drawn to keep fuel flowing while Gulf barrels
+          are stranded, and its pace is the clearest gauge of how badly the market is hurting.
+        </p>
+        <!-- SPR chart (full width) -->
+        <div class="relative h-96">
+            <canvas id="sprChart" role="img" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 286.6 million on Aug 28. Three dashed scenario paths to March 2027 at 0.45, 0.70, and 1.35 million barrels per day; floors at 300 (cavern, breached Aug 14), 250 (GEF minimum), 180 (operable), 70 (DOE safe minimum)."></canvas>
+            <div
+              id="sprFloorTip"
+              class="pointer-events-none absolute z-10 hidden max-w-[300px] border border-rule bg-[rgba(255,255,248,0.97)] px-3 py-2 text-[12px] leading-snug text-ink shadow-sm"
+              style="font-family: Georgia, serif"
+            ></div>
+          </div>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            The red lines are floors, not forecasts: <span class="font-semibold text-ink">~300M</span> is the cavern-damage threshold — below it the caverns cannot safely be refilled after a draw (breached Aug 14). <span class="font-semibold text-ink">250M</span> is the GEF operational minimum for a sustained draw, <span class="font-semibold text-ink">180M</span> the hard operable limit, and <span class="font-semibold text-ink">70M</span> the DOE's stated safe minimum — the draw stops there, it does not continue. The dashed paths project three draw rates from the Aug 28 level out to ~March 2027: 0.45M b/d (corridor holds, ~205M by then), 0.70M b/d (standoff, reaches 250M in late October and ~160M by March), 1.35M b/d (corridor lapses, through 250M within a month and pinned at the 70M floor from ~Feb 2027). The EIA's report lands every Wednesday for the week ending 12 days earlier — Wednesday's print (Sep 9) was the Aug 28 week, so the next point on the chart arrives Sep 16 (the Sep 4 week).
+          </p>
+
+      <!-- Likely outcomes -->
+      <section class="mt-12">
+        <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+          <h2 class="text-xl font-bold tracking-tight">Likely outcomes</h2>
+          <p class="font-mono text-[11px] text-faint">Probability of each track — reweighted only on regime events.</p>
+        </div>
+        <div class="space-y-3">
+          {branchWeights.slice().reverse().map((b) => (
+            <div>
+              <div class="flex items-center gap-3">
+                <span class="w-14 shrink-0 font-mono text-xs text-faint tabular">{b.date}</span>
+                <div class="flex h-7 w-full overflow-hidden rounded-sm">
+                  <div style={`width: ${b.holds}%`} class="flex items-center justify-center bg-calm text-[10px] font-medium text-white">{b.holds ? b.holds + "%" : ""}</div>
+                  <div style={`width: ${b.standoff}%`} class="flex items-center justify-center bg-crude text-[10px] font-medium text-white">{b.standoff ? b.standoff + "%" : ""}</div>
+                  <div style={`width: ${b.lapse}%`} class="flex items-center justify-center bg-alarm text-[10px] font-medium text-white">{b.lapse ? b.lapse + "%" : ""}</div>
+                </div>
+              </div>
+              <p class="mt-1 pl-[68px] text-xs text-faint">{b.note}</p>
+            </div>
+          ))}
+        </div>
+        <div class="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-xs text-faint">
+          <span><span class="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm bg-calm"></span>corridor holds</span>
+          <span><span class="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm bg-crude"></span>standoff drift</span>
+          <span><span class="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm bg-alarm"></span>corridor lapses</span>
+        </div>
+
+        <!-- What the tracks are -->
+        <div class="mt-8 grid gap-6 md:grid-cols-3">
+          {branchTracks.map((t) => (
+            <div class={`border-l-2 pl-4 ${t.border}`}>
+              <div class="flex items-baseline justify-between gap-2">
+                <p class="font-semibold">{t.name}</p>
+                <p class="tabular font-mono text-sm font-semibold">{t.weight}</p>
+              </div>
+              <p class="mt-1.5 text-[13px] leading-relaxed text-ink/75">{t.what}</p>
+              <p class="mt-1.5 text-[13px] leading-relaxed text-faint">{t.path}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- How the weights work — full mechanism moved to the model page (Sep 11 pass) -->
+        <p class="mt-8 max-w-4xl text-[13px] leading-relaxed text-ink/75">
+          The odds are judgment weights that move only on pre-decided events; a quiet week is not evidence. The
+          full rule, the reversion clause, and the dated triggers live on
+          <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/model/">the model page</a>.
+        </p>
+      </section>
+
+        <!-- Cavern gauge + supply snapshot + drawdown clock: one row -->
+        <div class="mt-12 grid items-start gap-10 lg:grid-cols-3">
+        <!-- SPR cavern gauge -->
+        <div>
+          <h2 class="mb-4 text-xl font-bold tracking-tight">The stockpile, in context</h2>
+          <p class="mb-4 text-[13px] leading-relaxed text-faint">
+            The stockpile's whole history on one scale: 727M at the December 2009 peak, 294M at
+            the previous record low in December 1982, and 286.6 now. The green dash marks where
+            the war began. At the 70M floor the draw stops — it does not continue.
+          </p>
+          <figure class="relative mx-auto w-full max-w-[280px]">
+          <svg id="sprGauge" viewBox="0 0 320 470" role="img" aria-label="SPR level gauge on a scale from 60 to 750 million barrels. Now 286.6, down from 415.4 pre-war. Grey historical markers: 727 all-time peak in December 2009, 592 in the mid-1990s, and 294 in December 1982 — the previous record low, now breached. Red dashed lines mark the floors at 300, 250, 180, and 70. Hover any line for details.">
+            <!-- historical anchors (EIA all-time record) -->
+            {hist.map((h) => (
+              <g>
+                <line x1="88" x2="96" y1={h.y} y2={h.y} stroke="#8a867a" stroke-width="1" />
+                <text x="84" y={h.y + 3.5} text-anchor="end" font-size="9.5" font-family="IBM Plex Mono, monospace" fill="#8a867a">{h.label}</text>
+              </g>
+            ))}
+            <!-- cavern shell -->
+            <rect x="96" y="30" width="120" height="400" fill="none" stroke="#d8d4c6" stroke-width="1.5" rx="4" />
+            <!-- oil fill -->
+            <path d={`M96 ${yNow} h120 v${430 - yNow} h-120 z`} fill="rgba(180,105,14,0.28)" />
+            <line x1="96" x2="216" y1={yNow} y2={yNow} stroke="#1c1b17" stroke-width="2.5" />
+            <!-- pre-war level -->
+            <line x1="96" x2="216" y1={yPreWar} y2={yPreWar} stroke="#3d6b64" stroke-width="1.5" stroke-dasharray="4 3" />
+            <!-- floors (top to bottom: 300, 250, 180, 70 — hover for what each means) -->
+            {g.map((f) => (
+              <line x1="96" x2="216" y1={f.y} y2={f.y} stroke="#b3261e" stroke-width={f.level === 70 ? 1.5 : 1} stroke-dasharray="3 3" opacity={f.level === 300 ? 0.9 : 0.55} />
+            ))}
+            <!-- labels -->
+            <text x="224" y={yPreWar - 6} font-size="10" font-family="IBM Plex Mono, monospace" fill="#3d6b64">415.4 pre-war</text>
+            <text x="224" y={yNow + 14} font-size="11" font-weight="600" font-family="IBM Plex Mono, monospace" fill="#1c1b17">286.6 now</text>
+            <!-- hover hit-areas (transparent, wide) -->
+            {g.map((f) => (
+              <line x1="96" x2="216" y1={f.y} y2={f.y} stroke="transparent" stroke-width="12" style="cursor:crosshair" data-tip={f.name} />
+            ))}
+            {hist.map((h) => (
+              <line x1="30" x2="96" y1={h.y} y2={h.y} stroke="transparent" stroke-width="12" style="cursor:crosshair" data-tip={h.tip} />
+            ))}
+            <line x1="96" x2="216" y1={yPreWar} y2={yPreWar} stroke="transparent" stroke-width="8" style="cursor:crosshair" data-tip="415.4 — pre-war level (Feb 27, 2026, EIA)" />
+            <line x1="96" x2="216" y1={yNow} y2={yNow} stroke="transparent" stroke-width="8" style="cursor:crosshair" data-tip="286.6 — now (EIA, w/e Aug 28) · lowest level in 44 years" />
+          </svg>
+          <figcaption class="mt-2 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+            SPR, million bbl (EIA w/e Aug 28)
+            <span class="block">−128.8M since Feb 27 · lowest level in 44 years</span>
+            <span class="block text-alarm/80">red lines: the floors — 300 · 250 · 180 · 70 (hover a line)</span>
+          </figcaption>
+        </figure>
+        <script>
+          // SPR gauge tooltips: plain DOM tooltip (reliable cross-browser, unlike SVG/canvas ones)
+          const sprGauge = document.getElementById("sprGauge");
+          if (sprGauge) {
+            const tip = document.createElement("div");
+            tip.style.cssText =
+              "position:fixed;z-index:20;display:none;pointer-events:none;max-width:240px;background:#1c1b17;color:#f5f4f0;font:11px/1.5 'IBM Plex Mono',monospace;padding:5px 9px;border-radius:3px;box-shadow:0 2px 10px rgba(0,0,0,.2)";
+            document.body.appendChild(tip);
+            sprGauge.querySelectorAll("[data-tip]").forEach((el) => {
+              el.addEventListener("mousemove", (e) => {
+                tip.textContent = el.getAttribute("data-tip");
+                tip.style.display = "block";
+                tip.style.left = e.clientX + 14 + "px";
+                tip.style.top = e.clientY - 12 + "px";
+              });
+              el.addEventListener("mouseleave", () => {
+                tip.style.display = "none";
+              });
+            });
+          }
+        </script>
+        </div>
+        <div>
+          <h2 class="mb-4 text-xl font-bold tracking-tight">Supply snapshot</h2>
+          <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
+            The release began in earnest Apr 3 (413.3M) and ran fastest in May (≈1.2M b/d). The
+            draw has slowed to ≈0.45M b/d — the corridor-holds pace — while diesel and heating-oil stocks sit 14%
+            below their 5-year average.
+          </p>
+          <div class="border border-rule rounded-md">
+            {invSnapshot.map((r, i) => (
+              <div class={`px-4 py-3 ${i > 0 ? "border-t border-rule" : ""}`}>
+                <div class="flex items-baseline justify-between gap-3">
+                  <p class="text-sm font-semibold">{r.name}</p>
+                  <p class="tabular font-mono text-sm font-semibold">{r.value}</p>
+                </div>
+                <p class="mt-0.5 text-xs text-faint">{r.delta}</p>
+                <p class="mt-1 text-xs text-crude">{r.flag}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- The drawdown clock -->
+        <div>
+          <h2 class="mb-4 text-xl font-bold tracking-tight">The drawdown clock</h2>
+          <p class="mb-4 text-[13px] leading-relaxed text-faint">
+            How fast the stockpile is draining, and when the path hits the floors — EIA weekly, as of Sep 9.
+          </p>
+          <div class="space-y-6">
+            <!-- Quadrant: current SPR drawdown rate -->
+            <div class="flex flex-col justify-between border border-rule p-5">
+              <div>
+                <p class="text-xs text-faint">SPR drawdown rate</p>
+                <p class="tabular mt-2 font-mono text-3xl font-semibold text-crude">
+                  {sprDrawPace4w}<span class="ml-1 text-sm font-medium text-ink/60">million barrels/day</span>
+                </p>
+                <p class="mt-1.5 text-xs leading-relaxed text-faint">
+                  4-week average, EIA weekly report (week ending Aug 28) · latest single week: {latestDrawPace}.
+                </p>
+              </div>
+              <div>
+                <svg viewBox="0 0 160 40" class="w-full" role="img" aria-label="Sparkline of weekly SPR draw, last 16 weeks: from a May peak of 9.9 million barrels per week to 3.1 now">
+                  <polyline points={sparkLine} fill="none" stroke="#b4690e" stroke-width="1.5" />
+                  <circle cx={sparkMaxPt.x} cy={sparkMaxPt.y} r="1.8" fill="#b4690e" />
+                  <circle cx={sparkMinPt.x} cy={sparkMinPt.y} r="1.8" fill="#1c1b17" />
+                </svg>
+                <p class="mt-1 text-[11px] text-faint">Weekly drain in millions of barrels — May peak of 9.9M, now 3.1M.</p>
+              </div>
+            </div>
+
+            <!-- Quadrant: 250M floor date, most likely path -->
+            <div class="flex flex-col justify-between border border-rule p-5">
+              <div>
+                <p class="text-xs text-faint">250M operational floor hit</p>
+                <p class="tabular mt-2 font-mono text-3xl font-semibold text-alarm">
+                  ≈ {floorLapse250}<span class="ml-1 text-sm font-medium text-ink/60">2026</span>
+                </p>
+                <p class="mt-1.5 text-xs leading-relaxed text-faint">
+                  Top track since the Sep 11 reweight — the corridor-lapse path (50%): draining at 1.35M barrels/day from 286.6M barrels (week ending Aug 28). The 40% standoff path reaches it {floor250}.
+                </p>
+              </div>
+              <p class="border-t border-rule/70 pt-2 text-[11px] leading-relaxed text-faint">
+                Next floor — the 180M operable limit: ≈ {floorLapse180} on the lapse path, {floor180} on the standoff path.
+              </p>
+            </div>
+          </div>
+        </div>
+        </div>
+
+      </section>
+
+      <!-- Refining: where the product squeeze actually is -->
+      <section id="refining" class="pb-12 pt-20">
+        <div class="mb-10">
+          <h2 class="text-2xl font-bold tracking-tight">Refining</h2>
+          <p class="mt-3 max-w-3xl text-[13px] leading-relaxed text-ink/70">
+            Crude is the easy half of the story — the scarce thing is the diesel, gasoline, and jet
+            fuel that only refineries make. US refineries are still running above last year's pace;
+            the rest of the world is not; and Russia's refineries are being taken out one strike at
+            a time. The IEA calls the world's refining system “stretched to the limit” in this
+            week's report — Atlantic Basin refining margins hit record levels in August, led by
+            diesel cracks.
+          </p>
+        </div>
+
+        <!-- US refinery utilization 2026 vs 2025 + global refining anchors -->
+        <div class="grid gap-10 lg:grid-cols-3">
+          <div class="lg:col-span-2">
+            <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+              <h2 class="text-xl font-bold tracking-tight">US refineries are running flat out — above 95% of capacity since June</h2>
+              <p class="font-mono text-[11px] text-faint">Utilization, % of operable capacity, weekly.</p>
+            </div>
+            <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
+              The odd one out in this crisis: the US is not cutting, it is pushing at the ceiling. The EIA's weekly report
+              measures runs against operable capacity — in 2026, US refineries have run above 95% every week since Jun 5,
+              peaking at 98.0% the week of Aug 28, and product exports set a record 8 mb/d in August (OPEC). The same
+              stretch of 2025 averaged 90.8%, with a deeper winter maintenance dip. The diesel squeeze is not being made
+              in the United States — it is in Europe, Asia, and Russia, below.
+            </p>
+            <div class="relative h-96">
+              <canvas id="refineryChart" role="img" aria-label="US refinery utilization, percent of operable capacity, weekly: 2026 above 2025 from spring onward — a dip to 88.6 percent in late February, then a steady climb from 95.3 on Jun 5 to a 98.0 peak on Aug 28, at 97.8 on Sep 4; the same period in 2025 ranged from 83.5 to 96.9."></canvas>
+            </div>
+            <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+              EIA Weekly Petroleum Status Report (WPULEUS3), week ending Friday · utilization = gross inputs ÷ latest reported
+              operable capacity (EIA's definition) · 2025 line = same Jan–Sep window · in mb/d: runs 16.3–17.3 (STEO 4a),
+              above 2025 in every month · the price symptom: the crack-spread chart in Prices.
+            </p>
+          </div>
+          <div>
+            <h2 class="mb-4 text-xl font-bold tracking-tight">Global refining</h2>
+            <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
+              The squeeze the US hasn't felt yet is the norm everywhere else. Anchors from the
+              IEA's Aug 12 report:
+            </p>
+            <div class="border border-rule rounded-md">
+              {globalRefining.map((r, i) => (
+                <div class={`px-4 py-3 ${i > 0 ? "border-t border-rule" : ""}`}>
+                  <div class="flex items-baseline justify-between gap-3">
+                    <p class="text-sm font-semibold">{r.name}</p>
+                    <p class="tabular font-mono text-sm font-semibold">{r.value}</p>
+                  </div>
+                  <p class="mt-0.5 text-xs text-faint">{r.delta}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Russia: the second front (moved from Supply into Refining) -->
+        <div class="mt-12">
+          <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+            <h2 class="text-xl font-bold tracking-tight">Russia down 30% of refining capacity — and still falling</h2>
+            <p class="font-mono text-[11px] text-faint">estimated capacity remaining, % of pre-strike</p>
+          </div>
+          <div class="relative h-96">
+            <canvas id="russiaChart" role="img" aria-label="Estimated remaining Russian refining capacity, September 2024 to September 2026: flat at 100 percent until strikes began in August 2025, about 75 percent by April 2026, about 70 percent by August 29, with current estimates spread between 46 and 80 percent remaining."></canvas>
+          </div>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            The war has a second front: strikes on Russian refineries are destroying the world's
+            capacity to make the fuel other countries import — the diesel and petrol Russia used to
+            sell, and now can no longer spare its own people. The line connects
+            verified anchors only: 100% until the first strikes (Aug 2025), ~75% by mid-April, ~70% by
+            Aug 29 (Moscow Times: over 30% of actual capacity offline). The red bar is the current spread of
+            estimates, because the sources disagree — Ukraine's General Staff says 42.74% is out, Russian
+            Forbes says 54%, the IEA says over 20%.
+          </p>
+          <div class="mt-8 grid gap-10 lg:grid-cols-2">
+            <div>
+              <h3 class="text-sm font-bold tracking-tight">Russia snapshot</h3>
+              <div class="mt-3 border border-rule rounded-md">
+                {
+                  russiaSnapshot.map((r, i) => (
+                    <div class={`px-4 py-3 ${i > 0 ? "border-t border-rule" : ""}`}>
+                      <div class="flex items-baseline justify-between gap-3">
+                        <p class="text-sm font-semibold">{r.name}</p>
+                        <p class="tabular font-mono text-sm font-semibold">{r.value}</p>
+                      </div>
+                      <p class="mt-0.5 text-xs text-faint">{r.delta}</p>
+                      {r.flag && <p class="mt-1 text-xs text-crude">{r.flag}</p>}
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold tracking-tight">The export ban calendar</h3>
+              <p class="mt-1 text-[13px] leading-relaxed text-ink/70">
+                Russia is banning its fuel exports one at a time — diesel from Sep 30, jet fuel from
+                Nov 30 — hoarding what little it can still make for its own stations, its army, and the
+                coming winter. Each date is the <em>consequence</em> of the damage — a global product-supply
+                shock landing inside the heating season.
+              </p>
+              <div class="mt-3 border border-rule rounded-md">
+                {
+                  russiaBanCascade.map((b, i) => (
+                    <div class={`flex items-baseline gap-4 px-4 py-3 ${i > 0 ? "border-t border-rule/70" : ""}`}>
+                      <p class="tabular w-28 shrink-0 font-mono text-sm font-semibold text-alarm">{b.date}</p>
+                      <p class="text-sm">{b.what}</p>
+                    </div>
+                  ))
+                }
+              </div>
+              <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+                And the hole is not being filled: the Belarus rail line — Russia's one external lifeline —
+                is running 25× normal flow, and Kyrgyzstan, which imports over 90% of its petrol from
+                Russia, is down to about six weeks of reserves.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Second-order effects: recession, rates, food -->
+      <section id="secondorder" class="pb-12 pt-20">
+        <div class="mb-10">
+          <h2 class="text-2xl font-bold tracking-tight">Second order effects</h2>
+          <p class="mt-3 max-w-3xl text-[13px] leading-relaxed text-ink/70">
+            The oil shock is becoming an economy-wide shock — with a lag. The same force that is
+            capping oil prices — demand destruction — is what's slowing the economy. The chart below
+            measures it directly; three channels carry it into the economy: recession risk, a
+            hawkish central bank that is <em>hiking</em> rather than cushioning, and a food shock
+            that lands 12–18 months after the war.
+          </p>
+        </div>
+
+        <!-- Demand destruction: the force, measured directly -->
+        <div class="grid gap-10 lg:grid-cols-3">
+          <div class="lg:col-span-2">
+            <h3 class="text-lg font-bold tracking-tight">Demand destruction: world demand fell up to 4% — May was the worst</h3>
+            <p class="mt-2 font-mono text-[11px] text-faint">World petroleum & liquid fuels consumption, mb/d · monthly (EIA STEO, Sep 9 release) · Jan – Aug, 2026 vs 2025.</p>
+            <div class="mt-4 h-72">
+              <canvas id="demandChart" role="img" aria-label="World petroleum consumption, 2026 versus the same months of 2025, in million barrels per day: in line with last year through March, then falling away — 99.2 in May, 4.3 below the prior year, 101.8 in July, 3.6 below — recovering to 103.7 in August, within 0.8 of the year earlier."></canvas>
+            </div>
+            <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+              The force that is capping prices, measured directly: world consumption fell up to
+              4.3 mb/d — about 4% — below last year in May, is still 3.6 below in July, and has
+              recovered to 0.8 below by August. The full year is uglier than that monthly trend
+              suggests: the IEA this week cut its 2026 demand forecast to −2.5 mb/d, from −1.6
+              in the August edition — the quarterly pace runs −5.3 in Q2, easing to −3.4 in Q3
+              and −2.0 in Q4, so the year's average is set by a deep first half even as the
+              monthly gap narrows. The destruction is broad: the Middle East itself is the
+              biggest decliner, then the rest of Asia, then the US. The losses are concentrated in
+              middle distillates and petrochemical feedstock, especially in Asia, and the IEA sees
+              demand recovering by 2.6 mb/d in 2027. The institutions disagree on the scale: OPEC,
+              reporting a day earlier, sees 2026 demand up 0.4 mb/d — a 2.9 mb/d spread between the
+              two forecasts.
+            </p>
+            <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+              EIA STEO Table 3e (Sep 9 2026, forecast completed Sep 3) · Jan–Aug 2026 are actuals in
+              that release · world/regional values are EIA estimates (apparent consumption, incl.
+              refinery fuel & bunkering) · Sep 2026 onward is forecast, not shown.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold tracking-tight">Where the July decline sits</h3>
+            <p class="mt-2 text-[13px] leading-relaxed text-faint">Million b/d, July 2026 vs July 2025 — same table.</p>
+            <div class="mt-4 border border-rule rounded-md">
+              {demandDecline.map((r, i) => (
+                <div class={`px-4 py-3 ${i > 0 ? "border-t border-rule/70" : ""} ${r.sub ? "bg-[#f2f1ec]/70" : ""}`}>
+                  <div class="flex items-baseline justify-between gap-3">
+                    <p class="text-sm font-semibold">{r.region}</p>
+                    <p class="tabular shrink-0 font-mono text-sm font-semibold text-alarm">{r.to - r.from >= 0 ? "+" : "−"}{Math.abs(r.to - r.from).toFixed(1)}</p>
+                  </div>
+                  <p class="mt-0.5 tabular text-xs text-faint">{r.from.toFixed(1)} → {r.to.toFixed(1)} mb/d{r.sub ? ` · ${r.sub}` : ""}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-12 grid gap-10 lg:grid-cols-2">
+          <div>
+            <h3 class="text-lg font-bold tracking-tight">Recession: betting markets have joined the banks</h3>
+            <p class="mt-2 max-w-prose text-[13px] leading-relaxed text-faint">
+              Odds of a US recession (July–Sep 2026). The banks' numbers are for the next 12 months:
+              25% to 50%, with Goldman up from 20% to 30% since the war began. <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="https://polymarket.com/dashboards/macro" target="_blank" rel="noopener">Polymarket</a>'s
+              number is for a longer window — recession by end-2027, about 15 months — and it is 32%.
+              That matches the banks' number despite the extra three months. The consensus still expects to
+              dodge it; the banks and the betting markets say otherwise.
+            </p>
+            <div class="mt-5 h-72">
+              <canvas id="recessionChart" role="img" aria-label="Dot plot of 12-month US recession odds by institution: Moody's 50 percent, JPMorgan 35, Goldman Sachs 30, New York Fed model 25, TD Securities 25, Wall Street Journal poll of 74 economists 25, and Polymarket 32 percent for the longer window through end-2027."></canvas>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold tracking-tight">The Fed is hiking, not cushioning</h3>
+            <p class="mt-2 max-w-prose text-[13px] leading-relaxed text-faint">
+              The standard recession-aversion move — cutting rates — is off the table. A newly hawkish
+              Fed is pricing in <em>hikes</em>. The Aug PPI printed 5.4% on Sep 10; the Aug CPI came out
+              Sep 11 — headline 3.4% (flat), core 2.4% (easing), energy +16.3% for the
+              year. A hike into
+              the winter drawdown would be the single most bearish macro signal in this model.
+            </p>
+            <div class="mt-5 grid grid-cols-1 border border-rule sm:grid-cols-3">
+              {
+                ratesStats.map((s, i) => (
+                  <div class={`px-4 py-4 ${i > 0 ? "border-l border-rule" : ""}`}>
+                    <p class="text-xs text-faint">{s.label}</p>
+                    <p class="tabular mt-1 font-mono text-xl font-semibold text-ink">{s.value}</p>
+                    <p class="mt-1 text-[11px] leading-snug text-faint">{s.sub}</p>
+                  </div>
+                ))
+              }
+            </div>
+            <p class="mt-4 text-[13px] leading-relaxed text-ink/80">
+              Meanwhile the ECB says Germany and Italy would both be in a technical recession by end-2026
+              if the conflict drags on — the European version of the same trade, without the Fed's
+              balance-sheet cushion.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-12">
+          <h3 class="text-lg font-bold tracking-tight">Bonds and inflation: the crisis is now in the price of money</h3>
+          <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
+            The oil shock reaches the rest of the economy through two numbers: what the government
+            pays to borrow, and what you pay at the register. Both are at multi-year highs, and
+            together they explain why the Fed is talking about <em>hiking</em> rates instead of cutting
+            them to cushion a slowdown.
+          </p>
+
+          <div class="mt-6 grid gap-10 lg:grid-cols-2">
+            <div>
+              <h3 class="text-lg font-bold tracking-tight">US 10-year Treasury yield</h3>
+              <p class="mt-2 font-mono text-[11px] text-faint">10-yr US Treasury, % · weekly closes (FRED) · Jan 2 – Sep 10.</p>
+              <div class="mt-4 h-72">
+                <canvas id="treasury10yChart" role="img" aria-label="US 10-year Treasury yield, 2026: 4.19 percent on Jan 2, falling to 3.97 on Feb 27 before the war, then rising steadily through the crisis — 4.44 by late March, 4.59 in mid-May, 4.69 in late July — to 4.95 on Sep 10 and 4.97 on Sep 11, which touched 4.992 intraday, the highest since October 2023. Reference lines at the pre-closure 3.97 and at 4.8, the January 2025 high that strategists watch."></canvas>
+              </div>
+              <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+                The 10-year is the rate the US government pays to borrow for a decade — the benchmark
+                behind mortgage and business loan rates. It is up 100 basis points from before the
+                war. Two forces are pushing it up: inflation stuck above 3%, which keeps the Fed
+                hawkish (a 25bp hike on Sep 16 is now priced at about 86%, against 62% on
+                Polymarket), and fiscal worry — national debt above $40&nbsp;trillion with
+                $8.4&nbsp;trillion of Treasuries rolling over by year-end. The 4.8% line — the high
+                reached in January 2025 — has now been broken and held: 4.83 on Sep 9, 4.95 on
+                Sep 10, 4.97 on Sep 11 with an intraday touch of 4.992 — the highest since October
+                2023, the level strategists say would start causing "meaningful problems" in other
+                markets if it holds (CNBC, Sep 11). The 2-year sits at 4.63%, its highest since
+                July 2024 — that's where the hike is priced. The 10-year breakeven (inflation
+                expectations) actually eased to 2.36%, so the sell-off is a real-rate story, not an
+                inflation-expectations story.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold tracking-tight">US inflation: wholesale running hotter</h3>
+              <p class="mt-2 font-mono text-[11px] text-faint">CPI (retail, amber) + PPI final demand (wholesale, blue) · % year-over-year · monthly (BLS) · Jan – Aug.</p>
+              <div class="mt-4 h-72">
+                <canvas id="cpiChart" role="img" aria-label="US price inflation, 2026, percent year-over-year: consumer prices (CPI) 2.39 in January and 2.41 in February before the war, jumping to 3.3 in March and 3.8 in April, peaking at 4.2 in May, easing to 3.4 in July and holding at 3.4 in August (energy up 16.3% for the year did the work); wholesale prices (PPI) rising from 3.1 in January to a May peak of 5.9, at 5.4 in August. Reference line at the Fed's 2 percent target."></canvas>
+              </div>
+              <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+                The consumer side of the crisis: inflation jumped from about 2.4% to 4.2% in three
+                months as the oil shock hit the pump, then eased to 3.4% in July — and held exactly
+                there in August — +0.4% for the month, with energy up 2.1% (gasoline +3.9%, over a third
+                of the increase) doing the work, and core easing to 2.4%
+                from 2.5% — though the monthly core rise (+0.3%) still ran above forecast, and it was
+                the last major print before the Fed's Sep 16 meeting. Still well above the Fed's 2% target. Wholesale prices ran hotter and
+                earlier: the PPI peaked at 5.9% in May and printed 5.4% in August (July revised to
+                4.8%) — energy, with diesel up 24.1% from a year ago, explains most of the rise.
+                Factories feel the oil shock before households do (BLS, Sep 10–11).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-12">
+          <h3 class="text-lg font-bold tracking-tight">The food shock lands 12–18 months after the war</h3>
+          <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
+            Gas is about a third of the marginal cost of nitrogen fertiliser. With Qatari LNG offline
+            for 3–5 years and Asian gas at all-time highs, the 2027 harvest is a <em>one-shot bet</em>:
+            farmers plant in March–April on the fertiliser prices set that winter. The last two times
+            fertiliser plus freight spiked like this — 2007–08 and 2022 — food prices followed within
+            12–18 months. There is <em>no model behind this one</em>: unlike the charts above, these
+            are documented lag windows from two historical shocks — order-of-magnitude timing, not
+            a forecast.
+          </p>
+          <div class="mt-5 grid grid-cols-1 border border-rule sm:grid-cols-3">
+            {
+              foodStats.map((s, i) => (
+                <div class={`px-4 py-4 ${i > 0 ? "border-l border-rule" : ""}`}>
+                  <p class="text-xs text-faint">{s.label}</p>
+                  <p class="tabular mt-1 font-mono text-xl font-semibold text-ink">{s.value}</p>
+                  <p class="mt-1 text-[11px] leading-snug text-faint">{s.sub}</p>
+                </div>
+              ))
+            }
+          </div>
+          <div class="mt-6 h-72 sm:h-80">
+            <canvas id="foodChart" role="img" aria-label="Gantt chart of the food-shock lag chain on a date axis from February 2026 to mid-2028. A vertical line marks the war beginning February 28, 2026. Bars: freight costs in food prices during the fourth quarter of 2026; fertiliser prices peaking December 2026 to February 2027; 2027 plantings March to April 2027; harvest damage fixed July to October 2027; and the food-price spike from late 2027 through mid-2028."></canvas>
+          </div>
+          <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+            The lag chain: energy shock → freight + gas → fertiliser → plantings → harvest → food prices. Each bar is the documented window from 2007–08 / 2022. The spike lands on top of the terminal state, not before it.
+          </p>
+        </div>
+      </section>
+
+
+      <!-- Watch list + cascade -->
+      <div class="grid gap-10 border-t border-rule py-12 lg:grid-cols-2">
+        <!-- Watch list -->
+        <section id="watchlist">
+          <div class="mb-4">
+            <h2 class="text-xl font-bold tracking-tight">Upcoming watch list</h2>
+            <p class="mt-1 text-[13px] text-faint">Dated events that will tell us where this is heading.</p>
+          </div>
+          <div class="border border-rule rounded-md">
+            {watchList.map((w, i) => (
+              <div class={`px-4 py-3 ${i > 0 ? "border-t border-rule/70" : ""}`}>
+                <p class="tabular font-mono text-xs text-crude">{w.date}</p>
+                <p class="mt-1 text-sm leading-snug text-ink/85">{w.item}</p>
+                <p class="mt-0.5 text-xs text-faint">{w.why}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- Cascade -->
+        <section id="cascade">
+          <div class="mb-4">
+            <h2 class="text-xl font-bold tracking-tight">Breaking-points cascade</h2>
+            <p class="mt-1 text-[13px] text-faint">
+              The order in which the world runs out, if the crisis continues. The first two dates
+              are arithmetic on published stock levels; the rest are inferences from customs and
+              stock data — expect them to be rough by a week or two.
+            </p>
+          </div>
+          <div class="border border-rule rounded-md">
+            {cascade.map((c, i) => (
+              <div class={`px-4 py-3 ${i > 0 ? "border-t border-rule/70" : ""}`}>
+                <div class="flex items-baseline justify-between gap-3">
+                  <p class="font-medium text-ink">{c.region}</p>
+                  <p class="tabular shrink-0 font-mono text-xs text-alarm">{c.date}</p>
+                </div>
+                <p class="mt-0.5 text-xs leading-snug text-faint">{c.trigger}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <!-- Footer -->
+      <SiteFooter />
+    </div>
+
+    <script>
+      import Chart from "chart.js/auto";
+      import {
+        brentYtd, wtiWeekly, gasolineYtd, gasolinePreCrisis, dieselYtd, dieselOldRecord,
+        gasTtf, gasJkm, gasPreClosure,
+        treasury10y, treasuryPreWar, treasuryTestLevel, cpiYtd, ppiYtd, fedCpiTarget,
+        sprWeekly, sprFloors, sprScenarios, worldBalance,
+        russiaCapacityAnchors, russiaCurrentSpread, recessionOdds, foodLagBars,
+        usRefineryUtil2026, usRefineryUtil2025,
+        worldConsumption2025, worldConsumption2026,
+      } from "../data/crisis";
+
+      // ---- Tufte chart treatment (tufte-data-viz skill) ----
+      // No legends (direct labels), no gridlines (hover crosshair), no animation,
+      // serif data text, plain tooltips, thin bottom axis only.
+      // Debug handle for QA scripts (harmless in production)
+      (window as any).__charts = (window as any).__charts || {};
+      Chart.defaults.font.family = "Georgia, 'Times New Roman', serif";
+      Chart.defaults.font.size = 11;
+      Chart.defaults.color = "#8a867a";
+      Chart.defaults.animation = false;
+      Chart.defaults.plugins.legend.display = false;
+      Chart.defaults.plugins.tooltip.backgroundColor = "rgba(255,255,248,0.97)";
+      Chart.defaults.plugins.tooltip.titleColor = "#6b675c";
+      Chart.defaults.plugins.tooltip.bodyColor = "#1c1b17";
+      Chart.defaults.plugins.tooltip.borderWidth = 0;
+      Chart.defaults.plugins.tooltip.cornerRadius = 2;
+      Chart.defaults.plugins.tooltip.padding = 8;
+      Chart.defaults.plugins.tooltip.displayColors = false;
+
+      const xScale = {
+        grid: { display: false },
+        border: { display: true, color: "#d8d4c6", width: 0.5 },
+        ticks: { color: "#8a867a", padding: 8 },
+      };
+      const yScale = (min: number, max: number, fmtTick: (v: unknown) => string, limit?: number) => ({
+        min, max,
+        grid: { display: false },
+        border: { display: false },
+        ticks: { color: "#8a867a", padding: 8, maxTicksLimit: limit, callback: fmtTick },
+      });
+
+      // Hover crosshair — replaces permanent gridlines
+      const crosshair = {
+        id: "crosshair",
+        afterDatasetsDraw(chart: Chart) {
+          const act = chart.tooltip?.getActiveElements();
+          if (!act || !act.length) return;
+          const { ctx, chartArea } = chart;
+          const x = act[0].element.x;
+          ctx.save();
+          ctx.strokeStyle = "rgba(28,27,23,0.3)";
+          ctx.lineWidth = 1;
+          ctx.setLineDash([3, 3]);
+          ctx.beginPath();
+          ctx.moveTo(x, chartArea.top);
+          ctx.lineTo(x, chartArea.bottom);
+          ctx.stroke();
+          ctx.restore();
+        },
+      };
+
+      // Direct labels at specific data points (replaces legends)
+      const directLabels = (specs: {
+        dataset: number; index: number; text: string;
+        dx?: number; dy?: number; align?: CanvasTextAlign;
+        color?: string; font?: string;
+      }[]) => ({
+        id: "directLabels",
+        afterDatasetsDraw(chart: Chart) {
+          const { ctx } = chart;
+          for (const s of specs) {
+            const el = chart.getDatasetMeta(s.dataset).data[s.index];
+            if (!el) continue;
+            ctx.save();
+            ctx.font = s.font || "italic 11.5px Georgia, serif";
+            ctx.fillStyle = s.color || "#1c1b17";
+            ctx.textAlign = s.align || "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(s.text, el.x + (s.dx ?? 0), el.y + (s.dy ?? -14));
+            ctx.restore();
+          }
+        },
+      });
+
+      // Inline labels on horizontal reference lines
+      const refLabels = (specs: {
+        value: number; text: string; color: string; align: "left" | "right";
+      }[]) => ({
+        id: "refLabels",
+        afterDatasetsDraw(chart: Chart) {
+          const { ctx, chartArea, scales } = chart;
+          for (const s of specs) {
+            const y = scales.y.getPixelForValue(s.value);
+            if (y < chartArea.top + 8 || y > chartArea.bottom - 6) continue;
+            ctx.save();
+            ctx.font = "10.5px Georgia, serif";
+            ctx.fillStyle = s.color;
+            ctx.textBaseline = "bottom";
+            ctx.textAlign = s.align === "left" ? "left" : "right";
+            ctx.fillText(s.text, s.align === "left" ? chartArea.left + 6 : chartArea.right - 6, y - 3);
+            ctx.restore();
+          }
+        },
+      });
+
+      const fmt = (iso: string) =>
+        new Date(iso + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" });
+
+      // Marker styling: filled = observed, hollow = source estimate
+      const markers = (pts: { approx?: boolean }[], color: string) => ({
+        pointRadius: pts.map(() => 3.5),
+        pointBackgroundColor: pts.map((p) => (p.approx ? "#f2f1ec" : color)),
+        pointBorderColor: color,
+        pointBorderWidth: pts.map((p) => (p.approx ? 1.5 : 0)),
+      });
+
+      const endpoint = { font: "600 12.5px Georgia, serif", color: "#1c1b17", align: "right" as CanvasTextAlign, dx: -10, dy: -12 };
+      const note = { font: "italic 11.5px Georgia, serif", color: "#8a867a" };
+
+      // Brent chart (linear time + WTI weekly) is built below, after moneyXScale is defined.
+
+      // The flip: world oil balance — surplus before the war, net withdrawals after.
+      // Reported months only (STEO actuals Jan–Aug 2026); the forecast tail is deliberately
+      // absent. The zero line is the protagonist; pre-war segments grey, post-war red.
+      {
+        const b0 = Date.parse("2026-01-01T12:00:00");
+        const bday = (iso: string) => Math.round((Date.parse(iso + "T12:00:00") - b0) / 86400000);
+        const bpts = worldBalance.map((p) => ({ x: bday(p.date), y: p.value }));
+        new Chart(document.getElementById("flipChart")!, {
+          type: "line",
+          data: {
+            datasets: [
+              {
+                label: "World balance",
+                data: bpts,
+                borderColor: "#b3261e",
+                borderWidth: 2,
+                // Gentle curve: monthly points, and the rest of the dashboard uses light tension.
+                // Deliberately modest (0.2) — the flip is abrupt, and a strong curve would
+                // soften the Feb→Mar break that is the whole point of the chart.
+                tension: 0.2,
+                segment: {
+                  borderColor: (c) => (c.p0.parsed.y > 0 && c.p1.parsed.y > 0 ? "#8a867a" : "#b3261e"),
+                },
+                pointRadius: bpts.map((_, i) => (i === bpts.length - 1 ? 4 : 3)),
+                pointBackgroundColor: bpts.map((_, i) => (i < 2 ? "#8a867a" : "#b3261e")),
+                pointBorderColor: "#f2f1ec",
+                pointBorderWidth: 1,
+              },
+              {
+                label: "zero",
+                data: [{ x: 0, y: 0 }, { x: 235, y: 0 }],
+                borderColor: "#1c1b17",
+                borderWidth: 1.5,
+                pointRadius: 0,
+              },
+              {
+                label: "war begins",
+                data: [
+                  { x: bday("2026-02-28"), y: -6 },
+                  { x: bday("2026-02-28"), y: 4.5 },
+                ],
+                borderColor: "rgba(28,27,23,0.35)",
+                borderDash: [3, 3],
+                borderWidth: 1,
+                pointRadius: 0,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "nearest", intersect: false, axis: "x" as const },
+            layout: { padding: { top: 20 } },
+            scales: {
+              x: {
+                type: "linear",
+                min: 0,
+                max: 235,
+                grid: { display: false },
+                border: { display: true, color: "#d8d4c6", width: 0.5 },
+                afterBuildTicks: (scale) => {
+                  scale.ticks = [0, 31, 59, 90, 120, 151, 181, 212].map((v) => ({ value: v }));
+                },
+                ticks: {
+                  color: "#8a867a",
+                  padding: 8,
+                  font: { family: "Georgia, serif", size: 11 },
+                  callback: (v: unknown) =>
+                    ({ 0: "Jan", 31: "Feb", 59: "Mar", 90: "Apr", 120: "May", 151: "Jun", 181: "Jul", 212: "Aug" } as Record<number, string>)[Number(v)] ?? "",
+                },
+              },
+              y: {
+                type: "linear" as const,
+                min: -6,
+                max: 5,
+                grid: { display: false },
+                border: { display: true, color: "#d8d4c6", width: 0.5 },
+                ticks: {
+                  color: "#8a867a",
+                  padding: 8,
+                  stepSize: 2,
+                  callback: (v: unknown) => {
+                    const n = Number(v);
+                    return n > 0 ? `+${n}` : String(n);
+                  },
+                },
+              },
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                filter: (item) => item.datasetIndex === 0,
+                callbacks: {
+                  title: (items: { dataIndex: number }[]) => fmt(worldBalance[items[0].dataIndex].date),
+                  label: (ctx) =>
+                    ` ${ctx.parsed.y > 0 ? "+" : ""}${ctx.parsed.y.toFixed(1)}M b/d — world balance (EIA STEO, actual)`,
+                },
+              },
+            },
+          },
+          plugins: [
+            crosshair,
+            directLabels([
+              { dataset: 0, index: 1, text: "+4.2 — pre-war surplus", align: "left", dx: 8, dy: 16, color: "#8a867a" },
+              { dataset: 2, index: 1, text: "war begins Feb 28", align: "left", dx: 6, dy: -10, ...note },
+              { dataset: 0, index: 2, text: "−5.2 — worst month", align: "left", dx: 6, dy: -16, color: "#b3261e" },
+              { dataset: 0, index: 6, text: "−0.1 (Jul)", dy: 18, color: "#8a867a" },
+              { dataset: 0, index: 7, text: "−4.1 (Aug, latest)", ...endpoint, color: "#b3261e" },
+            ]),
+          ],
+        });
+      }
+
+      // US refinery utilization: 2026 vs 2025, weekly, % of operable capacity
+      // (linear x = day of year; weeks don't align across years → nearest-x interaction)
+      {
+        const doy = (iso: string) => {
+          const [y, m, d] = iso.split("-").map(Number);
+          return Math.round((Date.UTC(y, m - 1, d) - Date.UTC(y, 0, 1)) / 864e5);
+        };
+        const u26 = usRefineryUtil2026.map((p) => ({ x: doy(p.date), y: p.value }));
+        const u25 = usRefineryUtil2025.map((p) => ({ x: doy(p.date), y: p.value }));
+        const monthTicks = [0, 31, 59, 90, 120, 151, 181, 212, 243];
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"];
+        new Chart(document.getElementById("refineryChart")!, {
+          type: "line",
+          data: {
+            datasets: [
+              {
+                label: "2026",
+                data: u26,
+                borderColor: "#1c1b17",
+                borderWidth: 2,
+                tension: 0.15,
+                ...markers(u26, "#1c1b17"),
+              },
+              {
+                label: "2025",
+                data: u25,
+                borderColor: "#8a867a",
+                borderWidth: 1.5,
+                tension: 0.15,
+                pointRadius: 2,
+                pointBackgroundColor: "#8a867a",
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "nearest", axis: "x", intersect: false },
+            layout: { padding: { top: 18 } },
+            scales: {
+              y: yScale(80, 100, (v) => `${v}`, 5),
+              x: {
+                type: "linear" as const,
+                min: 0,
+                max: 252,
+                grid: { display: false },
+                border: { display: true, color: "#d8d4c6", width: 0.5 },
+                afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
+                  scale.ticks = monthTicks.map((v) => ({ value: v }));
+                },
+                ticks: {
+                  color: "#8a867a",
+                  padding: 8,
+                  callback: (v: unknown) => {
+                    const i = monthTicks.indexOf(Number(v));
+                    return i >= 0 ? monthNames[i] : "";
+                  },
+                },
+              },
+            },
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  title: (items: { dataIndex: number; datasetIndex: number }[]) => {
+                    const pts = items[0].datasetIndex === 0 ? usRefineryUtil2026 : usRefineryUtil2025;
+                    return pts[items[0].dataIndex].date;
+                  },
+                  label: (ctx: { dataIndex: number }) =>
+                    ` ${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}% of operable capacity`,
+                },
+              },
+            },
+          },
+          plugins: [
+            crosshair,
+            directLabels([
+              { dataset: 0, index: 0, text: "2026", align: "left", dx: 10, dy: -10, ...endpoint },
+              { dataset: 0, index: u26.length - 1, text: "97.8", ...endpoint },
+              { dataset: 1, index: 0, text: "2025", align: "left", dx: 10, dy: 16, ...endpoint, color: "#8a867a" },
+              { dataset: 1, index: u25.length - 1, text: "94.9", ...endpoint, color: "#8a867a" },
+            ]),
+          ],
+        });
+      }
+
+      // Demand destruction: world consumption 2026 vs 2025 (linear x = day of year,
+      // mid-month points; months align across years but nearest-x keeps the gap readable)
+      {
+        const wdoy = (iso: string) => {
+          const [y, m, d] = iso.split("-").map(Number);
+          return Math.round((Date.UTC(y, m - 1, d) - Date.UTC(y, 0, 1)) / 864e5);
+        };
+        const w26 = worldConsumption2026.map((p) => ({ x: wdoy(p.date), y: p.value }));
+        const w25 = worldConsumption2025.map((p) => ({ x: wdoy(p.date), y: p.value }));
+        const wTicks = [0, 31, 59, 90, 120, 151, 181, 212];
+        const wNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
+        new Chart(document.getElementById("demandChart")!, {
+          type: "line",
+          data: {
+            datasets: [
+              {
+                label: "2026",
+                data: w26,
+                borderColor: "#1c1b17",
+                borderWidth: 2,
+                tension: 0.2,
+                ...markers(w26, "#1c1b17"),
+              },
+              {
+                label: "2025",
+                data: w25,
+                borderColor: "#8a867a",
+                borderWidth: 1.5,
+                tension: 0.2,
+                pointRadius: 2,
+                pointBackgroundColor: "#8a867a",
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "nearest", axis: "x", intersect: false },
+            layout: { padding: { top: 18 } },
+            scales: {
+              y: yScale(98, 106.5, (v) => `${v}`, 5),
+              x: {
+                type: "linear" as const,
+                min: 0,
+                max: 232,
+                grid: { display: false },
+                border: { display: true, color: "#d8d4c6", width: 0.5 },
+                afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
+                  scale.ticks = wTicks.map((v) => ({ value: v }));
+                },
+                ticks: {
+                  color: "#8a867a",
+                  padding: 8,
+                  callback: (v: unknown) => {
+                    const i = wTicks.indexOf(Number(v));
+                    return i >= 0 ? wNames[i] : "";
+                  },
+                },
+              },
+            },
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  title: (items: { dataIndex: number; datasetIndex: number }[]) => {
+                    const pts = items[0].datasetIndex === 0 ? worldConsumption2026 : worldConsumption2025;
+                    return new Date(pts[items[0].dataIndex].date + "T12:00:00").toLocaleDateString("en-US", {
+                      month: "long",
+                      year: "numeric",
+                    });
+                  },
+                  label: (ctx: { parsed: { y: number }; dataset: { label: string } }) =>
+                    ` ${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)} mb/d`,
+                },
+              },
+            },
+          },
+          plugins: [
+            crosshair,
+            directLabels([
+              { dataset: 0, index: 0, text: "2026", align: "left", dx: 10, dy: -10, ...endpoint },
+              { dataset: 1, index: 0, text: "2025", align: "left", dx: 10, dy: 16, ...endpoint, color: "#8a867a" },
+              { dataset: 0, index: 4, text: "−4.3 below 2025 (May)", align: "left", dx: 8, dy: 20, ...note },
+              { dataset: 0, index: w26.length - 1, text: "103.7 (Aug)", align: "right", dx: -6, dy: 16, ...endpoint },
+            ]),
+          ],
+        });
+      }
+
+      // Russia: refining capacity, two years (linear x = days since 2024-09-01)
+      {
+        const russiaDay0 = Date.parse("2024-09-01");
+        const rday = (iso: string) => Math.round((Date.parse(iso) - russiaDay0) / 86400000);
+        const rpts = russiaCapacityAnchors.map((p) => ({ x: rday(p.date), y: p.pct }));
+        const spreadX = rday(russiaCurrentSpread.date);
+        new Chart(document.getElementById("russiaChart")!, {
+          type: "line",
+          data: {
+            datasets: [
+              {
+                label: "capacity remaining",
+                data: rpts,
+                borderColor: "#1c1b17",
+                borderWidth: 2,
+                pointRadius: 3.5,
+                pointBackgroundColor: "#1c1b17",
+              },
+              {
+                label: "estimates now",
+                data: [
+                  { x: spreadX, y: russiaCurrentSpread.low },
+                  { x: spreadX, y: russiaCurrentSpread.high },
+                ],
+                borderColor: "#b3261e",
+                borderWidth: 3,
+                pointRadius: 0,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "nearest", intersect: false },
+            layout: { padding: { top: 18, right: 16 } },
+            scales: {
+              x: {
+                type: "linear",
+                min: 0,
+                max: 860,
+                grid: { display: false },
+                border: { display: true, color: "#d8d4c6", width: 0.5 },
+                afterBuildTicks: (scale) => {
+                  scale.ticks = [0, 182, 365, 547, 730].map((v) => ({ value: v }));
+                },
+                ticks: {
+                  color: "#8a867a",
+                  padding: 8,
+                  font: { family: "Georgia, serif", size: 11 },
+                  callback: (v: unknown) =>
+                    ({ 0: "Sep 24", 182: "Mar 25", 365: "Sep 25", 547: "Mar 26", 730: "Sep 26" } as Record<number, string>)[Number(v)] ?? "",
+                },
+              },
+              y: {
+                min: 0,
+                max: 104, // headroom so the 100% line doesn't ride the top edge
+                grid: { display: false },
+                border: { display: false },
+                afterBuildTicks: (scale) => {
+                  scale.ticks = [0, 25, 50, 75, 100].map((v) => ({ value: v }));
+                },
+                ticks: {
+                  color: "#8a867a",
+                  padding: 8,
+                  font: { family: "Georgia, serif", size: 11 },
+                  callback: (v: unknown) => `${v}%`,
+                },
+              },
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  title: () => "",
+                  label: (ctx) =>
+                    ctx.datasetIndex === 0
+                      ? ` ${russiaCapacityAnchors[ctx.dataIndex].label}`
+                      : ` estimates now: ${russiaCurrentSpread.low}–${russiaCurrentSpread.high}% remaining (spread of sources)`,
+                },
+              },
+            },
+          },
+          plugins: [
+            crosshair,
+            directLabels([
+              // every label sits in a verified-empty region (below the line / right of the bar)
+              { dataset: 0, index: 1, text: "strikes begin (Aug 2025)", align: "right", dx: -8, dy: 16, ...note },
+              { dataset: 0, index: 2, text: "~75% (Apr 2026)", dy: 22, ...note },
+              { dataset: 0, index: 3, text: "~70% (Aug 29)", align: "right", dx: -10, dy: 30, ...note },
+              { dataset: 1, index: 1, text: "Sep 9: 46–80%", align: "left", dx: 10, dy: -68, color: "#b3261e" },
+            ]),
+          ],
+        });
+      }
+
+      // Second order: recession odds dot plot (category y, linear x)
+      {
+        const names = [...recessionOdds].reverse().map((r) => r.name); // first category = bottom
+        const byName: Record<string, (typeof recessionOdds)[number]> = {};
+        for (const r of recessionOdds) byName[r.name] = r;
+        new Chart(document.getElementById("recessionChart")!, {
+          type: "scatter",
+          data: {
+            datasets: [
+              {
+                label: "recession odds",
+                data: recessionOdds.map((r) => ({ x: r.pct, y: r.name })),
+                pointRadius: 4.5,
+                pointBackgroundColor: "#b4690e",
+                pointBorderColor: "#1c1b17",
+                pointBorderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "nearest", intersect: true },
+            layout: { padding: { right: 36 } },
+            scales: {
+              x: {
+                type: "linear",
+                min: 0,
+                max: 62,
+                grid: { display: false },
+                border: { display: true, color: "#d8d4c6", width: 0.5 },
+                ticks: {
+                  color: "#8a867a",
+                  padding: 8,
+                  stepSize: 10,
+                  callback: (v: unknown) => `${v}%`,
+                },
+              },
+              y: {
+                type: "category",
+                labels: names,
+                grid: { display: false },
+                border: { display: false },
+                ticks: {
+                  color: "#1c1b17",
+                  padding: 6,
+                  autoSkip: false,
+                  font: { family: "Archivo, sans-serif", size: 12, weight: 500 },
+                },
+              },
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  title: () => "",
+                  label: (ctx) => {
+                    if (ctx.datasetIndex !== 0) return "";
+                    const r = byName[String(ctx.raw.y)];
+                    return r ? ` ${r.pct}% — 12-mo US recession${r.note ? " · " + r.note : ""}` : "";
+                  },
+                },
+              },
+            },
+          },
+          plugins: [
+            directLabels(
+              recessionOdds.map((r, i) => ({
+                dataset: 0,
+                index: i,
+                text: `${r.pct}%`,
+                dx: 9,
+                dy: 1,
+                align: "left" as const,
+                font: "12px 'IBM Plex Mono', monospace",
+                color: "#1c1b17",
+              }))
+            ),
+          ],
+        });
+      }
+
+      // Second order: food-shock lag chain (gantt — each bar is the documented window)
+      {
+        const foodDay0 = Date.parse("2026-02-28");
+        const fday = (iso: string) => Math.round((Date.parse(iso) - foodDay0) / 86400000);
+        const rows = [...foodLagBars].reverse(); // first category = bottom
+        new Chart(document.getElementById("foodChart")!, {
+          type: "bar",
+          data: {
+            labels: rows.map((r) => r.name),
+            datasets: [
+              {
+                label: "window",
+                data: rows.map((r) => [fday(r.start), fday(r.end)]),
+                backgroundColor: rows.map((r) => (r.name === "food-price spike" ? "#b3261e" : "#1c1b17")),
+                barThickness: 18,
+              },
+              {
+                label: "war begins",
+                type: "line",
+                data: [
+                  { x: 0, y: rows[0].name },
+                  { x: 0, y: rows[rows.length - 1].name },
+                ],
+                borderColor: "#1c1b17",
+                borderWidth: 1.5,
+                pointRadius: 0,
+              },
+            ],
+          },
+          options: {
+            indexAxis: "y",
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "nearest", intersect: true },
+            layout: { padding: { top: 26, right: 80 } },
+            scales: {
+              x: {
+                type: "linear",
+                min: 0,
+                max: 950,
+                grid: { display: false },
+                border: { display: true, color: "#d8d4c6", width: 0.5 },
+                afterBuildTicks: (scale) => {
+                  scale.ticks = [0, 90, 180, 270, 365, 455, 545, 635, 725, 815].map((v) => ({ value: v }));
+                },
+                ticks: {
+                  color: "#8a867a",
+                  padding: 8,
+                  font: { family: "Georgia, serif", size: 11 },
+                  callback: (v: unknown) =>
+                    ({
+                      0: "Feb 26", 90: "May 26", 180: "Aug 26", 270: "Nov 26",
+                      365: "Feb 27", 455: "May 27", 545: "Aug 27", 635: "Nov 27",
+                      725: "Feb 28", 815: "May 28",
+                    } as Record<number, string>)[Number(v)] ?? "",
+                },
+              },
+              y: {
+                type: "category",
+                grid: { display: false },
+                border: { display: false },
+                ticks: {
+                  color: "#1c1b17",
+                  padding: 6,
+                  autoSkip: false,
+                  font: { family: "Archivo, sans-serif", size: 12, weight: 500 },
+                },
+              },
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  title: () => "",
+                  label: (ctx) => {
+                    if (ctx.datasetIndex !== 0) return "";
+                    const r = rows[ctx.dataIndex];
+                    return ` ${r.name}: ${r.window}`;
+                  },
+                },
+              },
+            },
+          },
+          plugins: [
+            // window label at the right end of each bar
+            directLabels(
+              rows.map((r, i) => ({
+                dataset: 0,
+                index: i,
+                text: r.window,
+                dx: 8,
+                dy: 1,
+                align: "left" as const,
+                font: "11.5px 'IBM Plex Mono', monospace",
+                color: r.name === "food-price spike" ? "#b3261e" : "#1c1b17",
+              }))
+            ),
+            // war-begins label above the reference line
+            directLabels([
+              { dataset: 1, index: 0, text: "war begins — Feb 28, 2026", align: "left", dx: 2, dy: -18, ...note },
+            ]),
+          ],
+        });
+      }
+
+      // Gasoline YTD
+      new Chart(document.getElementById("gasChart")!, {
+        type: "line",
+        data: {
+          labels: gasolineYtd.map((p) => fmt(p.date)),
+          datasets: [
+            {
+              label: "EIA national (AAA daily Sep 7–11)",
+              data: gasolineYtd.map((p) => p.value),
+              borderColor: "#1c1b17",
+              borderWidth: 1.75,
+              tension: 0.15,
+              pointRadius: 0,
+            },
+            {
+              label: "Jan (pre-crisis)",
+              data: gasolineYtd.map(() => gasolinePreCrisis),
+              borderColor: "rgba(61,107,100,0.6)",
+              borderDash: [4, 4],
+              pointRadius: 0,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          layout: { padding: { top: 18 } },
+          scales: { y: yScale(2.5, 4.7, (v) => `$${v}`, 6), x: { ...xScale, ticks: { ...xScale.ticks, maxTicksLimit: 9 } } },
+        },
+        plugins: [
+          crosshair,
+          refLabels([
+            { value: gasolinePreCrisis, text: "Jan $2.81 (pre-crisis)", color: "#3d6b64", align: "left" },
+          ]),
+          directLabels([
+            { dataset: 0, index: gasolineYtd.length - 1, text: "Sep 13 · $4.31", ...endpoint },
+            { dataset: 0, index: 18, text: "May peak $4.50", dy: -14, color: "#1c1b17" },
+          ]),
+        ],
+      });
+
+      // Diesel YTD — category axis, so the chart view keeps a steady weekly-or-better
+      // cadence: the daily Sep 3/6/9/10 readings are left out here (they stay in
+      // dieselYtd for the stat card; the crack chart below keeps its own thinned view)
+      // so the 1–3-day-apart September dates don't claim ~46% of the axis.
+      const dieselView = dieselYtd.filter(
+        (p) => p.date < "2026-09-03" || p.date === "2026-09-04" || p.date === "2026-09-11" || p.date === "2026-09-12" || p.date === "2026-09-13",
+      );
+      new Chart(document.getElementById("dieselChart")!, {
+        type: "line",
+        data: {
+          labels: dieselView.map((p) => fmt(p.date)),
+          datasets: [
+            {
+              label: "AAA national",
+              data: dieselView.map((p) => p.value),
+              borderColor: "#b3261e",
+              borderWidth: 2,
+              tension: 0.15,
+              ...markers(dieselView, "#b3261e"),
+            },
+            {
+              label: "Jun 2022 record",
+              data: dieselView.map(() => dieselOldRecord),
+              borderColor: "rgba(179,38,30,0.45)",
+              borderDash: [6, 4],
+              pointRadius: 0,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          layout: { padding: { top: 18 } },
+          scales: { y: yScale(3.2, 6.2, (v) => `$${v}`, 7), x: xScale },
+          plugins: {
+            tooltip: {
+              callbacks: {
+                title: (items: { dataIndex: number }[]) => fmt(dieselView[items[0].dataIndex].date),
+                label: (ctx) =>
+                  ctx.datasetIndex === 0
+                    ? ` $${ctx.parsed.y.toFixed(2)}${dieselView[ctx.dataIndex].note ? " — " + dieselView[ctx.dataIndex].note : ""}`
+                    : null,
+              },
+            },
+          },
+        },
+        plugins: [
+          crosshair,
+          refLabels([
+            { value: dieselOldRecord, text: "Jun 2022 record $5.85", color: "rgba(179,38,30,0.8)", align: "left" },
+          ]),
+          directLabels([
+            { dataset: 0, index: dieselView.length - 1, text: "Sep 13 · $6.20 (record)", ...endpoint, color: "#b3261e" },
+            { dataset: 0, index: 7, text: "old record broken", dy: 20, ...note, color: "rgba(179,38,30,0.75)" }, // Sep 4
+          ]),
+        ],
+      });
+
+      // ---- Natural gas: TTF (Europe) + JKM (Asia) ----
+      // Linear x-axis (days since Jan 1) so the weekly (Jan–Apr) and ~2-week (May–Aug)
+      // points sit at their true dates. No adapter needed: ticks built by hand.
+      const g0 = Date.parse("2026-01-01T12:00:00");
+      const gd = (iso: string) => Math.round((Date.parse(iso + "T12:00:00") - g0) / 86400000);
+      const gasMonthStarts = [0, 31, 59, 90, 120, 151, 181, 212, 243];
+      const gasMonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"];
+      const gasXScale = {
+        type: "linear" as const,
+        min: 0,
+        max: 257,
+        grid: { display: false },
+        border: { display: true, color: "#d8d4c6", width: 0.5 },
+        afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
+          scale.ticks = gasMonthStarts.map((v) => ({ value: v }));
+        },
+        ticks: {
+          color: "#8a867a",
+          padding: 8,
+          callback: (v: unknown) => {
+            const i = gasMonthStarts.indexOf(Number(v));
+            return i >= 0 ? gasMonthNames[i] : "";
+          },
+        },
+      };
+      const gasYScale = (max: number, ticks: number[]) => ({
+        min: 0,
+        max,
+        grid: { display: false },
+        border: { display: false },
+        afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
+          scale.ticks = ticks.map((v) => ({ value: v }));
+        },
+        ticks: { color: "#8a867a", padding: 8, callback: (v: unknown) => `$${v}` },
+      });
+      const gasRef = (val: number) => [{ x: 0, y: val }, { x: 250, y: val }];
+      const gasTooltip = (pts: { date: string; value: number; assessed?: boolean; note?: string }[]) => ({
+        callbacks: {
+          title: (items: { dataIndex: number }[]) => fmt(pts[items[0].dataIndex].date),
+          label: (ctx: { dataIndex: number }) => {
+            const p = pts[ctx.dataIndex];
+            return ` $${p.value.toFixed(2)} — ${p.note || (p.assessed ? "assessed spot" : "EIA weekly avg")}`;
+          },
+        },
+      });
+
+      // TTF (Europe)
+      new Chart(document.getElementById("gasTtfChart")!, {
+        type: "line",
+        data: {
+          datasets: [
+            {
+              label: "TTF",
+              data: gasTtf.map((p) => ({ x: gd(p.date), y: p.value })),
+              borderColor: "#3d6b64",
+              borderWidth: 1.75,
+              tension: 0.15,
+              ...markers(gasTtf.map((p) => ({ approx: p.assessed })), "#3d6b64"),
+            },
+            {
+              label: "pre-closure (Feb 27)",
+              data: gasRef(gasPreClosure.ttf),
+              borderColor: "rgba(138,134,122,0.7)",
+              borderDash: [4, 4],
+              pointRadius: 0,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          layout: { padding: { top: 20 } },
+          scales: { y: gasYScale(21, [0, 5, 10, 15, 20]), x: gasXScale },
+          plugins: { tooltip: gasTooltip(gasTtf) },
+        },
+        plugins: [
+          crosshair,
+          refLabels([
+            { value: gasPreClosure.ttf, text: "pre-closure (Feb 27) $11.0", color: "#8a867a", align: "right" },
+          ]),
+          directLabels([
+            { dataset: 0, index: 6, text: "Mar 20 · $18.9 — three-yr high", dy: -14, color: "#1c1b17" },
+            { dataset: 0, index: 21, text: "Jun 19 · $14.1 — ceasefire", dy: 18, color: "#8a867a" },
+          ]),
+        ],
+      });
+
+      // JKM (Asia)
+      new Chart(document.getElementById("gasJkmChart")!, {
+        type: "line",
+        data: {
+          datasets: [
+            {
+              label: "JKM",
+              data: gasJkm.map((p) => ({ x: gd(p.date), y: p.value })),
+              borderColor: "#b4690e",
+              borderWidth: 1.75,
+              tension: 0.15,
+              ...markers(gasJkm.map((p) => ({ approx: p.assessed })), "#b4690e"),
+            },
+            {
+              label: "pre-closure (Feb 27)",
+              data: gasRef(gasPreClosure.jkm),
+              borderColor: "rgba(138,134,122,0.7)",
+              borderDash: [4, 4],
+              pointRadius: 0,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          layout: { padding: { top: 20 } },
+          scales: { y: yScale(0, 25, (v) => `$${v}`, 6), x: gasXScale },
+          plugins: { tooltip: gasTooltip(gasJkm) },
+        },
+        plugins: [
+          crosshair,
+          refLabels([
+            { value: gasPreClosure.jkm, text: "pre-closure (Feb 27) $10.7", color: "#8a867a", align: "right" },
+          ]),
+          directLabels([
+            { dataset: 0, index: 6, text: "Mar 20 · $20.7 — peak", dy: -14, color: "#1c1b17" },
+            { dataset: 0, index: 22, text: "Jun 26 · $15.2 — ceasefire", dy: 18, color: "#8a867a" },
+            { dataset: 0, index: gasJkm.length - 1, text: "Aug 19 · $23.17 (record)", ...endpoint, color: "#b3261e" },
+          ]),
+        ],
+      });
+
+      // Wider x-scale for the bonds/inflation charts: data runs to Sep 12 (day 255).
+      const moneyXScale = { ...gasXScale, max: 257 };
+      const mref = (val: number) => [{ x: 0, y: val }, { x: 257, y: val }];
+
+      // Inflation chart: monthly points fall at month-END, so month ticks must sit at
+      // month-end too — gasXScale ticks at month-start, which reads one month ahead for
+      // end-of-month points (the Aug point would land just left of the "Sep" tick).
+      const inflMonthEnds = [30, 58, 89, 119, 149, 179, 210, 241];
+      const inflMonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
+      const cpiXScale = {
+        ...moneyXScale,
+        min: 28,
+        afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
+          scale.ticks = inflMonthEnds.map((v) => ({ value: v }));
+        },
+        ticks: {
+          color: "#8a867a",
+          padding: 8,
+          callback: (v: unknown) => {
+            const i = inflMonthEnds.indexOf(Number(v));
+            return i >= 0 ? inflMonthNames[i] : "";
+          },
+        },
+      };
+
+      // Brent (sourced points) + WTI (weekly FRED spot) — linear time scale
+      new Chart(document.getElementById("brentChart")!, {
+        type: "line",
+        data: {
+          datasets: [
+            {
+              label: "Brent",
+              data: brentYtd.map((b) => ({ x: gd(b.date), y: b.value })),
+              borderColor: "#b4690e",
+              borderWidth: 2,
+              tension: 0.15,
+              ...markers(brentYtd, "#b4690e"),
+            },
+            {
+              label: "WTI",
+              data: wtiWeekly.map((p) => ({ x: gd(p.date), y: p.value })),
+              borderColor: "#8a867a",
+              borderWidth: 1.5,
+              tension: 0.15,
+              ...markers(wtiWeekly.map(() => ({ approx: false })), "#8a867a"),
+            },
+            {
+              label: "$100",
+              data: mref(100),
+              borderColor: "rgba(179,38,30,0.5)",
+              borderDash: [6, 4],
+              pointRadius: 0,
+            },
+            {
+              label: "pre-crisis $76 (Feb 27)",
+              data: mref(76),
+              borderColor: "rgba(61,107,100,0.6)",
+              borderDash: [4, 4],
+              pointRadius: 0,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          // nearest (not index): the two series have different point counts, so index mode
+          // would pair array positions, not dates — the crosshair/tooltip would snap away.
+          interaction: { mode: "nearest", intersect: false, axis: "x" as const },
+          layout: { padding: { top: 20 } },
+          scales: { y: yScale(55, 135, (v) => `$${v}`, 8), x: moneyXScale },
+          plugins: {
+            tooltip: {
+              callbacks: {
+                title: (items: { dataIndex: number; dataset: { label: string } }[]) => {
+                  const it = items[0];
+                  const arr = it.dataset.label === "Brent" ? brentYtd : wtiWeekly;
+                  return fmt(arr[it.dataIndex].date);
+                },
+                label: (ctx) =>
+                  ctx.dataset.label === "Brent"
+                    ? ` $${ctx.parsed.y.toFixed(2)} — Brent${brentYtd[ctx.dataIndex].note ? " · " + brentYtd[ctx.dataIndex].note : ""}`
+                    : ctx.dataset.label === "WTI"
+                      ? ` $${ctx.parsed.y.toFixed(2)} — WTI (FRED weekly spot)`
+                      : null,
+              },
+            },
+          },
+        },
+        plugins: [
+          crosshair,
+          refLabels([
+            { value: 100, text: "$100", color: "rgba(179,38,30,0.8)", align: "left" },
+            { value: 76, text: "pre-crisis $76 (Feb 27)", color: "#3d6b64", align: "right" },
+          ]),
+          directLabels([
+            { dataset: 0, index: 14, text: "Sep 11 · $104.61 — Brent", ...endpoint },
+            { dataset: 0, index: 3, text: "peak $126 · Mar 18", dy: -16, color: "#1c1b17" },
+            { dataset: 0, index: 6, text: "Jun 30 · $74", dy: 20, ...note },
+            { dataset: 0, index: 1, text: "war began Feb 28", dx: 8, dy: 18, align: "left", ...note },
+            { dataset: 1, index: wtiWeekly.length - 1, text: "Sep 11 · $100.05 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a" },
+          ]),
+        ],
+      });
+
+      // Crack spread: retail product price less WTI, $/bbl (weekly).
+      // Derived arithmetic on verified series (EIA/AAA retail, FRED WTI) — not a sourced print.
+      // Gaps where FRED has no WTI value: null + spanGaps false = line breaks, no interpolation.
+      // Nearest WTI within a few days (ties go to the later date): covers the five product
+      // dates with no same-day FRED WTI — Jan 19→Jan 20, Feb 16→Feb 17, May 25→May 26,
+      // Sep 6→Sep 8, Sep 7→Sep 8. Observed values only, no interpolation.
+      const wtiList = wtiWeekly.map((p) => ({ day: gd(p.date), value: p.value })).sort((a, b) => a.day - b.day);
+      const nearestWti = (day: number) => {
+        let best = wtiList[0];
+        for (const w of wtiList) {
+          const d = Math.abs(w.day - day), bd = Math.abs(best.day - day);
+          if (d < bd || (d === bd && w.day > best.day)) best = w;
+        }
+        return best;
+      };
+      const crackPts = (pts: typeof gasolineYtd) =>
+        pts.map((p) => {
+          const w = nearestWti(gd(p.date));
+          return { date: p.date, x: gd(p.date), y: +((p.value * 42 - w.value) * 10).toFixed(0) / 10 };
+        });
+      const gasCrack = crackPts(gasolineYtd);
+      // Sep's AAA record streak is six 1–3-day-apart readings; on the linear time axis
+      // that's a bunched, unreadable cluster of dots. Display-thin to the story beats —
+      // the early-Sep breakout, the peak, the dip when crude outpaced retail, the latest.
+      // Same treatment as dieselView above. The dropped points (Sep 4, Sep 9, Sep 11, Sep 12) sit
+      // inside the visible segments, so the line's shape is unchanged.
+      const dieCrackSrc = dieselYtd.filter(
+        (p) => p.date < "2026-09-03" || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-13"].includes(p.date)
+      );
+      const dieCrack = crackPts(dieCrackSrc);
+      // Record label tracks the max, not a fixed offset from the end — new points keep landing.
+      const dieRecIdx = dieCrack.reduce((mi, p, i, a) => ((p.y ?? -1) > (a[mi].y ?? -1) ? i : mi), 0);
+      new Chart(document.getElementById("crackChart")!, {
+        type: "line",
+        data: {
+          datasets: [
+            {
+              label: "Diesel less WTI",
+              data: dieCrack,
+              borderColor: "#b3261e",
+              borderWidth: 1.75,
+              tension: 0.15,
+              spanGaps: false,
+              ...markers(dieCrack.map(() => ({ approx: false })), "#b3261e"),
+            },
+            {
+              label: "Gasoline less WTI",
+              data: gasCrack,
+              borderColor: "#8a867a",
+              borderWidth: 1.5,
+              tension: 0.15,
+              spanGaps: false,
+              ...markers(gasCrack.map(() => ({ approx: false })), "#8a867a"),
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          // nearest (not index): the two series have different point counts — index mode
+          // would pair array positions, not dates.
+          interaction: { mode: "nearest", intersect: false, axis: "x" as const },
+          layout: { padding: { top: 20 } },
+          scales: {
+            y: {
+              type: "linear" as const,
+              min: 40,
+              // headroom above the 160.5 record (Sep 13) so its label clears the top edge
+              max: 165,
+              afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
+                scale.ticks = [40, 60, 80, 100, 120, 140, 160].map((v) => ({ value: v }));
+              },
+              ticks: {
+                font: { family: "Georgia, serif", size: 11 },
+                color: "#8a867a",
+                callback: (v: string | number) => `$${v}`,
+              },
+              grid: { display: true, color: "rgba(28,27,23,0.05)" },
+              border: { display: false },
+            },
+            x: moneyXScale,
+          },
+          plugins: {
+            tooltip: {
+              callbacks: {
+                // date comes off the point itself — the diesel series is display-thinned,
+                // so array index would misalign against dieselYtd.
+                title: (items: { dataIndex: number; dataset: { data: { date: string }[] } }[]) =>
+                  fmt(items[0].dataset.data[items[0].dataIndex].date),
+                label: (ctx: { dataIndex: number; dataset: { label: string } }) =>
+                  ctx.parsed.y == null ? null : ` $${ctx.parsed.y.toFixed(1)} — ${ctx.dataset.label}`,
+              },
+            },
+          },
+        },
+        plugins: [
+          crosshair,
+          directLabels([
+            { dataset: 0, index: 0, text: "Jan · $89 — diesel", dx: 8, dy: 16, align: "left", color: "#8a867a" },
+            { dataset: 1, index: 0, text: "Jan · $59 — gasoline", dx: 8, dy: -12, align: "left", color: "#8a867a" },
+            { dataset: 1, index: 34, text: "Aug 31 · $84", dy: 16, align: "right", color: "#8a867a" },
+            { dataset: 0, index: dieRecIdx, text: `${fmt(dieCrack[dieRecIdx].date)} · $${Math.round(dieCrack[dieRecIdx].y)} — record`, dy: -16, color: "#b3261e" },
+            // Hidden while the record sits on the last point — the two labels would collide;
+            // the record label already carries that day's value.
+            ...(dieRecIdx === dieCrack.length - 1
+              ? []
+              : [{ dataset: 0, index: dieCrack.length - 1, text: `${fmt(dieCrack[dieCrack.length - 1].date)} · $${Math.round(dieCrack[dieCrack.length - 1].y)}`, ...endpoint, color: "#8a867a" }]),
+          ]),
+        ],
+      });
+
+      // US 10-year Treasury yield (weekly FRED closes)
+      new Chart(document.getElementById("treasury10yChart")!, {
+        type: "line",
+        data: {
+          datasets: [
+            {
+              label: "US 10-yr",
+              data: treasury10y.map((p) => ({ x: gd(p.date), y: p.value })),
+              borderColor: "#3d6b64",
+              borderWidth: 1.75,
+              tension: 0.15,
+              ...markers(treasury10y.map(() => ({ approx: false })), "#3d6b64"),
+            },
+            {
+              label: "pre-war (Feb 27)",
+              data: mref(treasuryPreWar),
+              borderColor: "rgba(138,134,122,0.7)",
+              borderDash: [4, 4],
+              pointRadius: 0,
+            },
+            {
+              label: "4.8% — Jan 2025 high",
+              data: mref(treasuryTestLevel),
+              borderColor: "rgba(138,134,122,0.55)",
+              borderDash: [2, 3],
+              pointRadius: 0,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          layout: { padding: { top: 20 } },
+          scales: {
+            y: {
+              type: "linear" as const,
+              min: 3.9,
+              max: 5.0,
+              afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
+                scale.ticks = [4.0, 4.2, 4.4, 4.6, 4.8, 5.0].map((v) => ({ value: v }));
+              },
+              ticks: {
+                font: { family: "Georgia, serif", size: 11 },
+                color: "#8a867a",
+                callback: (v: string | number) => `${v}%`,
+              },
+              grid: { display: true, color: "rgba(28,27,23,0.05)" },
+              border: { display: false },
+            },
+            x: moneyXScale,
+          },
+          plugins: {
+            tooltip: {
+              callbacks: {
+                title: (items: { dataIndex: number }[]) => fmt(treasury10y[items[0].dataIndex].date),
+                label: (ctx: { dataIndex: number }) => {
+                  const p = treasury10y[ctx.dataIndex];
+                  return ` ${p.value.toFixed(2)}% — 10-yr US Treasury (FRED weekly)`;
+                },
+              },
+            },
+          },
+        },
+        plugins: [
+          crosshair,
+          refLabels([
+            { value: treasuryPreWar, text: "pre-war (Feb 27) 3.97%", color: "#8a867a", align: "right" },
+            { value: treasuryTestLevel, text: "4.8% — Jan 2025 high", color: "#8a867a", align: "left" },
+          ]),
+          directLabels([
+            { dataset: 0, index: treasury10y.length - 1, text: "Sep 10 · 4.95% — 4.97 on Sep 11", ...endpoint, dy: 18, color: "#b3261e" },
+          ]),
+        ],
+      });
+
+      // US CPI + PPI, % YoY (monthly; every point an official BLS 12-mo pct change —
+      // CPI = CUUR0000SA0 all items, PPI = WPUFD4 final demand, not seasonally adjusted;
+      // pulled from the BLS API, Sep 10)
+      new Chart(document.getElementById("cpiChart")!, {
+        type: "line",
+        data: {
+          datasets: [
+            {
+              label: "US CPI YoY",
+              data: cpiYtd.map((p) => ({ x: gd(p.date), y: p.value })),
+              borderColor: "#b4690e",
+              borderWidth: 1.75,
+              tension: 0.15,
+              ...markers(cpiYtd.map((p) => ({ approx: p.computed })), "#b4690e"),
+            },
+            {
+              label: "US PPI YoY",
+              data: ppiYtd.map((p) => ({ x: gd(p.date), y: p.value })),
+              borderColor: "#4e79a7",
+              borderWidth: 1.75,
+              tension: 0.15,
+              ...markers(ppiYtd.map(() => ({ approx: false })), "#4e79a7"),
+            },
+            {
+              label: "Fed target",
+              data: mref(fedCpiTarget),
+              borderColor: "rgba(138,134,122,0.7)",
+              borderDash: [4, 4],
+              pointRadius: 0,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          layout: { padding: { top: 20 } },
+          scales: {
+            y: {
+              type: "linear" as const,
+              min: 1.8,
+              max: 6.4,
+              afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
+                scale.ticks = [2, 3, 4, 5, 6].map((v) => ({ value: v }));
+              },
+              ticks: {
+                font: { family: "Georgia, serif", size: 11 },
+                color: "#8a867a",
+                callback: (v: string | number) => `${v}%`,
+              },
+              grid: { display: true, color: "rgba(28,27,23,0.05)" },
+              border: { display: false },
+            },
+            x: cpiXScale,
+          },
+          plugins: {
+            tooltip: {
+              callbacks: {
+                title: (items: { dataIndex: number; dataset: { label: string } }[]) => {
+                  const it = items[0];
+                  const arr = it.dataset.label === "US PPI YoY" ? ppiYtd : cpiYtd;
+                  return fmt(arr[it.dataIndex].date);
+                },
+                label: (ctx: { dataIndex: number; dataset: { label: string } }) => {
+                  const isPpi = ctx.dataset.label === "US PPI YoY";
+                  const p = (isPpi ? ppiYtd : cpiYtd)[ctx.dataIndex];
+                  return ` ${ctx.dataset.label}: ${p.value.toFixed(isPpi ? 1 : 2)}% YoY — BLS`;
+                },
+              },
+            },
+          },
+        },
+        plugins: [
+          crosshair,
+          refLabels([
+            { value: fedCpiTarget, text: "Fed target 2%", color: "#8a867a", align: "right" },
+          ]),
+          directLabels([
+            { dataset: 0, index: 1, text: "Feb · 2.4% — pre-war", dy: 18, color: "#8a867a" },
+            { dataset: 0, index: 4, text: "May · 4.2% — CPI peak", dy: 18, color: "#1c1b17" },
+            { dataset: 0, index: cpiYtd.length - 1, text: "Aug · 3.4% — flat", ...endpoint, dy: 18, color: "#1c1b17" },
+            { dataset: 1, index: 4, text: "May · 5.9% — PPI peak", dy: -14, color: "#1c1b17" },
+            { dataset: 1, index: ppiYtd.length - 1, text: "Aug · 5.4% — latest", ...endpoint, color: "#1c1b17" },
+          ]),
+        ],
+      });
+
+      // SPR: full 2026 weekly actuals + scenario paths + floors
+      // Plain-language explanations for the four red floor lines — shown in an HTML
+      // tooltip when the cursor is within a few pixels of a line (below).
+      const floorExplains: Record<number, string> = {
+        300: "300M — cavern-damage threshold, breached Aug 14: below it the caverns cannot be safely refilled after a draw",
+        250: "250M — operational minimum for a sustained draw; the most-likely (standoff) path reaches it in late October",
+        180: "180M — hard operable limit",
+        70: "70M — the DOE's stated safe minimum: the draw stops here, it does not continue",
+      };
+      const futureWeeks: string[] = [];
+      for (let w = 1; w <= 26; w++) {
+        const d = new Date(Date.parse("2026-09-05") + (w - 1) * 7 * 86400000);
+        futureWeeks.push(d.toLocaleDateString("en-US", { month: "short", day: "numeric" }));
+      }
+      const sprLabels = [...sprWeekly.map((p) => fmt(p.date)), ...futureWeeks];
+      const anchorIdx = sprWeekly.length - 1;
+      // Scenario paths are clamped at the 70M DOE floor — the draw stops there, it does not continue.
+      const scenarioLine = (rate: number) =>
+        sprLabels.map((_, i) =>
+          i <= anchorIdx ? (i === anchorIdx ? sprWeekly[anchorIdx].level : null) : Math.max(70, sprWeekly[anchorIdx].level - rate * 7 * (i - anchorIdx))
+        );
+      const sprChart = new Chart(document.getElementById("sprChart")!, {
+        type: "line",
+        data: {
+          labels: sprLabels,
+          datasets: [
+            {
+              label: "Actual (EIA weekly)",
+              data: [...sprWeekly.map((p) => p.level), ...sprLabels.slice(anchorIdx + 1).map(() => null)],
+              borderColor: "#1c1b17",
+              borderWidth: 2,
+              pointRadius: 0,
+              tension: 0.1,
+              spanGaps: false,
+            },
+            ...sprScenarios.map((s, i) => ({
+              label: s.name,
+              data: scenarioLine(s.rate),
+              borderColor: ["#3d6b64", "#b4690e", "#b3261e"][i],
+              borderDash: [5, 4],
+              borderWidth: 1.5,
+              pointRadius: 0,
+              spanGaps: false,
+            })),
+            ...sprFloors.map((f) => ({
+              label: f.name,
+              data: sprLabels.map(() => f.level),
+              borderColor: "rgba(179,38,30,0.35)",
+              borderDash: [2, 5],
+              borderWidth: 1,
+              // Visible data point at the left edge, anchoring the inline label (like the dots on the other charts)
+              pointRadius: sprLabels.map((_, i) => (i === 0 ? 3.5 : 0)),
+              pointBackgroundColor: "rgba(179,38,30,0.85)",
+              pointBorderColor: "rgba(179,38,30,0.85)",
+            })),
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          scales: { y: yScale(60, 430, (v) => `${v}M`, 8), x: { ...xScale, ticks: { ...xScale.ticks, maxTicksLimit: 10 } } },
+          plugins: {
+            tooltip: {
+              // Actuals in the past; projected levels on the scenario paths in the future.
+              // (mode: "index" — hovering any week column lists every live line there; the
+              // scenario datasets are null before the anchor, so past weeks show the actual only.)
+              // The red floor lines carry their own hover message (the #sprFloorTip div, below).
+              filter: (item) => item.datasetIndex < 4,
+              callbacks: {
+                label: (ctx) =>
+                  ctx.datasetIndex === 0
+                    ? ` ${ctx.parsed.y.toFixed(1)}M bbl (EIA weekly)`
+                    : ` ${ctx.parsed.y.toFixed(1)}M bbl (projected — ${sprScenarios[ctx.datasetIndex - 1].name})`,
+              },
+            },
+          },
+        },
+        plugins: [
+          crosshair,
+          // Floor lines are labeled inline (left) — replaces the legend
+          refLabels([
+            { value: 300, text: "300 · cavern (breached Aug 14)", color: "rgba(179,38,30,0.85)", align: "left" },
+            { value: 250, text: "250 · GEF min", color: "rgba(179,38,30,0.6)", align: "left" },
+            { value: 180, text: "180 · operable", color: "rgba(179,38,30,0.6)", align: "left" },
+            { value: 70, text: "70 · DOE floor", color: "rgba(179,38,30,0.6)", align: "left" },
+          ]),
+          directLabels([
+            // Actuals endpoint (the anchor where scenarios begin)
+            { dataset: 0, index: anchorIdx, text: "286.6M · Aug 28", align: "right", dx: -12, dy: 16, font: "600 11.5px Georgia, serif" },
+            // Scenario paths labeled at their ~March 2027 endpoints
+            { dataset: 1, index: sprLabels.length - 1, text: "holds → 205M", align: "right", dx: -10, dy: 0, font: "11.5px Georgia, serif", color: "#3d6b64" },
+            { dataset: 2, index: sprLabels.length - 1, text: "standoff → 160M", align: "right", dx: -10, dy: 0, font: "11.5px Georgia, serif", color: "#b4690e" },
+            { dataset: 3, index: sprLabels.length - 1, text: "lapse → 70M floor", align: "right", dx: -10, dy: -14, font: "11.5px Georgia, serif", color: "#b3261e" },
+          ]),
+        ],
+      });
+
+      // Floor-line hover message: an HTML tooltip that appears when the cursor is
+      // within ~7px of a red floor line. Plain DOM — renders in any browser,
+      // independent of the canvas tooltip machinery.
+      {
+        const tip = document.getElementById("sprFloorTip")!;
+        const canvas = sprChart.canvas;
+        canvas.addEventListener("mousemove", (e) => {
+          const rect = canvas.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const area = sprChart.chartArea;
+          const ys = sprChart.scales["y"];
+          if (!area || !ys || x < area.left || x > area.right || y < area.top || y > area.bottom) {
+            tip.classList.add("hidden");
+            return;
+          }
+          let hitLevel = -1;
+          let hitY = 0;
+          for (const f of sprFloors) {
+            const ly = ys.getPixelForValue(f.level);
+            if (Math.abs(y - ly) <= 7) {
+              hitLevel = f.level;
+              hitY = ly;
+              break;
+            }
+          }
+          if (hitLevel < 0) {
+            tip.classList.add("hidden");
+            return;
+          }
+          tip.textContent = floorExplains[hitLevel];
+          tip.classList.remove("hidden");
+          let left = x + 14;
+          if (left + tip.offsetWidth > canvas.clientWidth - 8) left = x - tip.offsetWidth - 14;
+          tip.style.left = `${Math.max(8, left)}px`;
+          tip.style.top = `${Math.max(8, hitY - 46)}px`;
+        });
+        canvas.addEventListener("mouseleave", () => tip.classList.add("hidden"));
+      }
+
+      // Register chart instances for QA/debug scripts (harmless in production)
+      for (const id of ["brentChart", "gasChart", "dieselChart", "gasTtfChart", "gasJkmChart", "treasury10yChart", "cpiChart"]) {
+        (window as any).__charts[id] = Chart.getChart(document.getElementById(id)!);
+      }
+    </script>
+  </body>
+</html>

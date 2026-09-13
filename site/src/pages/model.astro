@@ -1,0 +1,121 @@
+---
+import { getEntry, render } from "astro:content";
+import ArticleShell from "../components/ArticleShell.astro";
+import {
+  DATA_AS_OF,
+  sprWeekly,
+  sprDrawPace4w,
+  sprPreWar,
+  branchWeights,
+} from "../data/crisis.ts";
+
+const entry = await getEntry("docs", "model");
+if (!entry) throw new Error("model entry missing");
+const { Content } = await render(entry);
+
+const last = sprWeekly[sprWeekly.length - 1];
+const odds = branchWeights[branchWeights.length - 1];
+// The strip and glance rail always follow the TOP track (lapse since the Sep 11
+// reweight); if a future reweight changes it, these follow automatically.
+const RATES = { holds: 0.45, standoff: 0.7, lapse: 1.35 } as const;
+const NAMES = { holds: "Corridor holds", standoff: "Standoff", lapse: "Corridor lapses" } as const;
+const topKey = (["holds", "standoff", "lapse"] as const).reduce((a, b) => (odds[b] > odds[a] ? b : a));
+const floorDate = (floor: number, rate: number) =>
+  new Date(Date.parse(last.date) + ((last.level - floor) / rate) * 86400000);
+const top250 = floorDate(250, RATES[topKey]);
+const top180 = floorDate(180, RATES[topKey]);
+const others = (["holds", "standoff", "lapse"] as const).filter((k) => k !== topKey);
+const fmtDate = (d: Date) =>
+  d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
+const asOf = fmtDate(new Date(`${DATA_AS_OF}T00:00:00Z`));
+const weekEnding = fmtDate(new Date(`${last.date}T00:00:00Z`)).replace(", 2026", "");
+
+// Stat strip — same structure and type as the dashboard's.
+const strip = [
+  {
+    label: "The reserve now",
+    value: `${last.level.toFixed(1)}M bbl`,
+    sub: `down from ${sprPreWar}M pre-war · EIA, w/e ${weekEnding}`,
+  },
+  {
+    label: "Drawing at",
+    value: `${sprDrawPace4w.toFixed(2)}M b/d`,
+    sub: "4-week average of the EIA weekly draws",
+  },
+  {
+    label: "Most likely future",
+    value: `${NAMES[topKey]} · ${odds[topKey]}%`,
+    sub: others.map((k) => `${NAMES[k].toLowerCase()} ${odds[k]}%`).join(" · "),
+  },
+  {
+    label: "Next floor on that path",
+    value: fmtDate(top250),
+    sub: `the 250M floor · the 180M floor: ${fmtDate(top180)}`,
+  },
+];
+
+// Sticky marginalia rail (Tufte): direct label → value pairs, no box.
+const glance = [
+  { label: `Reserve (w/e ${weekEnding})`, value: `${last.level.toFixed(1)}M bbl` },
+  { label: "Draw, 4-week avg", value: `${sprDrawPace4w.toFixed(2)}M b/d` },
+  { label: "250M floor (top path)", value: `≈ ${fmtDate(top250)}` },
+  { label: "180M floor (top path)", value: `≈ ${fmtDate(top180)}` },
+  { label: `Odds (${odds.date})`, value: `${odds.holds} / ${odds.standoff} / ${odds.lapse}` },
+];
+---
+
+<ArticleShell current="model" title={entry.data.title} description={entry.data.description}>
+  <!-- Hero: finding title + lead, dashboard type -->
+  <header class="border-b border-rule py-12">
+    <p class="text-[11px] font-semibold uppercase tracking-[0.12em] text-faint">
+      Model · updated {asOf}
+    </p>
+    <h1 class="mt-3 max-w-4xl text-3xl font-extrabold leading-[1.08] tracking-tight sm:text-4xl">
+      How long the oil lasts
+    </h1>
+    <p class="mt-4 max-w-3xl text-[15px] leading-relaxed text-ink/80">
+      A stress test, not a forecast. The model asks one question — <em>if each possible
+      future keeps going, how long do the world's oil buffers last?</em> — and re-answers
+      it every week with official data. Here is what goes in, what comes out, and why
+      the odds only move on pre-decided events.
+    </p>
+  </header>
+
+  <!-- Stat strip (same structure as the dashboard) -->
+  <section class="grid grid-cols-2 border-x border-b border-rule lg:grid-cols-4" aria-label="Model at a glance">
+    {strip.map((s, i) => (
+      <div class={`px-4 py-4 ${i % 2 === 1 ? "border-l border-rule" : ""} lg:[&:not(:first-child)]:border-l lg:border-rule`}>
+        <p class="text-xs text-faint">{s.label}</p>
+        <p class="tabular mt-1 font-mono text-xl font-semibold text-ink">{s.value}</p>
+        <p class="mt-1 text-[11px] leading-snug text-faint">{s.sub}</p>
+      </div>
+    ))}
+  </section>
+
+  <!-- Body: prose + sticky marginalia rail -->
+  <div class="grid gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-14">
+    <article class="prose-oil">
+      <Content />
+    </article>
+
+    <aside class="self-start text-sm lg:sticky lg:top-8">
+      <p class="border-b border-rule pb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-faint">
+        At a glance
+      </p>
+      <dl class="mt-4 space-y-3">
+        {glance.map((g) => (
+          <div class="flex items-baseline justify-between gap-3">
+            <dt class="text-[13px] leading-snug text-ink/70">{g.label}</dt>
+            <dd class="tabular whitespace-nowrap font-mono text-[13px] font-semibold text-ink">{g.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="mt-6 border-t border-rule pt-3 text-xs leading-relaxed text-faint">
+        Every figure on this page traces to a published report — the EIA, OPEC, the IEA,
+        the IMO, or ship-tracking data — and the technical specification keeps the exact
+        formulas and sources behind them.
+      </p>
+    </aside>
+  </div>
+
+</ArticleShell>

@@ -1,0 +1,22 @@
+{
+  // Static deploy to Cloudflare Workers.
+  //   npm run build && CLOUDFLARE_API_TOKEN=... npx wrangler deploy
+  // Auth: any CF token with Workers:Write (see README).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "oil-report",
+  // Keep the legacy subdomain working as an alias for shared links.
+  "workers_dev": true,
+  "compatibility_date": "2026-01-01",
+  "main": "./src/worker.js",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    // Run the worker before serving assets — the apex→www 301 lives in worker.js.
+    "run_worker_first": true
+  },
+  // Custom domains: www serves the site, apex 301s to www (see src/worker.js).
+  "routes": [
+    { "pattern": "www.depletion.org", "custom_domain": true },
+    { "pattern": "depletion.org", "custom_domain": true }
+  ]
+}

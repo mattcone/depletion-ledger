@@ -1,0 +1,40 @@
+---
+// Shared search + social meta for every page: canonical, Open Graph, Twitter card.
+// og:image is the supply-chart share card — /og/supply rendered to /og-supply.png
+// by scripts/make-og.mjs at build time (see site/README.md, "Share card").
+interface Props {
+  title: string;
+  description: string;
+  url: string; // path, e.g. "/" or "/model"
+}
+const { title, description, url } = Astro.props;
+const base = "https://www.depletion.org";
+const abs = url === "/" ? base : base + (url.endsWith("/") ? url : url + "/");
+const image = `${base}/og-supply.png`;
+---
+
+<link rel="canonical" href={abs} />
+
+<!-- Privacy-friendly analytics (self-hosted Plausible). No cookies. -->
+<script async src="https://hawk.forklabs.com/js/pa-QcGcmGeYN_74n-hloNcfD.js"></script>
+<script is:inline>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+
+<meta property="og:site_name" content="The Depletion Ledger" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={abs} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta
+  property="og:image:alt"
+  content="US Strategic Petroleum Reserve drawdown: actual EIA weekly levels and projected draw paths to the reserve's 250M and 180M floors"
+/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />

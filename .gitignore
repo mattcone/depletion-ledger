@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.astro/
+.wrangler/
+src/content/
+
+# API keys (research side; get your own — see research/API-RECIPES.md)
+.eia_api_key
+.bls_api_key
+
+# misc
+.env
+*.log
+.DS_Store
