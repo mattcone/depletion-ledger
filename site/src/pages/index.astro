@@ -71,11 +71,11 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta
       name="description"
-      content={`Hormuz and the Red Sea are closed to oil shipping, and the world now uses more oil than it produces. The US Strategic Petroleum Reserve is at its lowest level since 1982. A scenario model, not a prediction. Day ${dayNum}, data as of ${dataAsOf}.`}
+      content={`Track the 2026 oil supply crisis with charts of fuel prices, oil reserves, and effects on the economy. Explore how long stored oil could last under three scenarios. Day ${dayNum}, data as of ${dataAsOf}.`}
     />
     <SiteMeta
       title="The Depletion Ledger — The Oil Supply Crisis"
-      description={`Hormuz and the Red Sea are closed to oil shipping, and the world now uses more oil than it produces. The US Strategic Petroleum Reserve is at its lowest level since 1982. A scenario model, not a prediction. Day ${dayNum}, data as of ${dataAsOf}.`}
+      description={`Track the 2026 oil supply crisis with charts of fuel prices, oil reserves, and effects on the economy. Explore how long stored oil could last under three scenarios. Day ${dayNum}, data as of ${dataAsOf}.`}
       url="/"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -98,9 +98,9 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           </h1>
           <div class="mt-3 max-w-prose space-y-3 text-[15px] leading-relaxed text-ink/80">
             <p>
-              Oil is the lifeblood of the world economy. We refine it into the fuels that grow
-              our food and move our goods. It's in the gas in your car and the underwear you put
-              on this morning.
+              Oil is part of everyday life, even when you don't think about it. It's refined into
+              fuels that power cars, move goods, and help farmers grow our food. It's also used to
+              make things like the clothes we wear.
             </p>
             <p>
               Since the US and Israel went to war with Iran in February 2026, the world has been
@@ -110,9 +110,10 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
               The US Strategic Petroleum Reserve is at its lowest level since 1982.
             </p>
             <p>
-              This site tracks how much buffer is left. It's a scenario model, not a prediction,
-              with three possible futures. The odds change only when something verifiable
-              changes, and every forecast gets scored against what actually happens.
+              The Depletion Ledger tracks oil supplies, fuel prices, and how the shortage affects
+              people and businesses. You can use the charts below to see what's changed and explore
+              three ways the crisis could unfold. The model estimates how long stored oil could last
+              in each case, and keeps a record of its predictions so you can see how they hold up.
             </p>
           </div>
           <p class="mt-4 font-mono text-xs text-faint tabular">
@@ -122,7 +123,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#prices">Prices</a>
             <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#supply">Supply</a>
             <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#refining">Refining</a>
-            <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#secondorder">Second order effects</a>
+            <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#secondorder">Effects on the economy</a>
             <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#watchlist">Watch list</a>
           </nav>
         </div>
@@ -200,12 +201,10 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         <div class="mb-10">
           <h2 class="text-2xl font-bold tracking-tight">Prices</h2>
           <p class="mt-3 max-w-3xl text-[13px] leading-relaxed text-ink/70">
-            Everything money-related in this crisis, in one place. Brent is the world benchmark
-            for crude oil — when the news says "oil price," it means Brent. The gasoline and
-            diesel numbers are US national weekly averages; there is no verified weekly world
-            series for those yet, so the world signal comes through Brent and the two gas
-            benchmarks further down this section. All points are sourced — none are
-            interpolated.
+            These charts show how oil, gasoline, diesel, and natural gas prices have changed.
+            Brent is a widely used benchmark for the price of crude oil. The gasoline and diesel
+            charts use US national averages; the natural gas charts cover Europe and Asia.
+            Every plotted value comes from a source. Missing readings are left out.
           </p>
         </div>
       <!-- US fuels YTD -->
@@ -219,8 +218,9 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <canvas id="gasChart" role="img" aria-label="US gasoline, EIA weekly national average (AAA daily readings Sep 7 to 13): $2.81 in January, May peak $4.50, $4.31 on Sep 13. Reference line at the January pre-crisis $2.81."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            From $2.81 in January to $4.31 now — +53%, with the May peak at $4.50. Every month of
-            2026 since March has averaged above pre-crisis levels.
+            The national average has risen from $2.81 in January to $4.31, an increase of 53%.
+            Prices peaked at $4.50 in May. Every month since March has averaged above the levels
+            seen before the crisis.
           </p>
         </div>
         <div>
@@ -232,11 +232,12 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <canvas id="dieselChart" role="img" aria-label="US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $6.20 on Sep 13, a fourth straight record."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            From $3.72 in the last pre-war week (Feb 27) to a new all-time record $6.20 on Sep 13
-            — a fourth straight record, after passing $6.00 on Sep 11 — +67%, the same baseline as the stat card above.
-            The old record (June 2022, ≈$5.85) fell on Sep 4. The chart plots weekly anchors —
-            the daily Sep 3–13 readings are in the crack spread chart below. Diesel leads
-            gasoline: product, not crude, is the scarce thing.
+            Diesel cost $3.72 in the last week before the war, on Feb 27. By Sep 13, it had
+            reached $6.20, an increase of 67% and its fourth consecutive record. It passed the
+            previous record of about $5.85, set in June 2022, on Sep 4.
+            This chart shows selected weekly readings. You can see the daily Sep 3–13 readings
+            in the price spread chart below. Diesel prices have risen faster than gasoline prices
+            as supplies of refined fuel have tightened.
           </p>
         </div>
       </div>
@@ -253,11 +254,11 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
               <canvas id="gasTtfChart" role="img" aria-label="TTF, Europe's gas benchmark, 2026 year to date: $12.40 in January, $11.00 before the closure, spiking to a three-year high of $18.89 on Mar 20, easing to $14.10 after the June ceasefire, $19.90 on Jul 31, about $16.80 on Aug 19. Reference line at the pre-closure week's $10.99."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-              TTF is Europe's benchmark gas price — where most of the continent's gas trades. It's up
-              about 50% from before the closure, after hitting a three-year high in March and
-              easing on the June ceasefire. Europe entered winter with storage at 48% against a
-              five-year average of 63%, so it had to buy spot LNG in the exact season the strait
-              closed.
+              TTF is the benchmark used to track natural gas prices in Europe. It's up about 50%
+              from before the strait closed. Prices reached a three-year high in March, then eased
+              after the June ceasefire. Europe entered winter with gas storage at 48%, compared with
+              a five-year average of 63%. That left it buying liquefied natural gas (LNG) for immediate
+              delivery during the same season the strait closed.
             </p>
           </div>
           <div>
@@ -269,10 +270,11 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
               <canvas id="gasJkmChart" role="img" aria-label="JKM, Asia's LNG benchmark, 2026 year to date: $10.66 before the closure, spiking to $20.67 on Mar 20, easing to $15.20 on Jun 26, then climbing to an all-time record $23.17 on Aug 19. Reference line at the pre-closure week's $10.66."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-              JKM is Asia's benchmark LNG price. It's more than double pre-closure, and set a
-              record — $23.17 — on Aug 19. Qatar's Ras Laffan feeds most of Asia's LNG, and its
-              3–5 year outage has pushed Asian buyers into global spot markets all summer. Asia
-              stores almost no gas, so JKM tracks spot supply and weather.
+              JKM tracks the price of liquefied natural gas (LNG) delivered to Asia. It's more than
+              double the price before the closure and reached a record $23.17 on Aug 19. The expected
+              3–5 year outage at Qatar's Ras Laffan facility has forced Asian buyers to look elsewhere
+              for supplies throughout the summer. With little gas in storage, the region is particularly
+              sensitive to changes in supply and weather.
             </p>
           </div>
         </div>
@@ -289,43 +291,35 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <canvas id="brentChart" role="img" aria-label="Crude oil, 2026 year to date: Brent at $76 before the closure, $126 intraday peak in March, $74 on Jun 30, a single-day jump to $108.03 on Sep 10, then a settle of $104.61 on Sep 11; WTI weekly from about $58 in January to $102.93 on Sep 10 and $100.05 on Sep 11. Reference lines at $100 and the pre-crisis $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Observed points only — hollow markers are a source's rounded estimate, not a measured
-            close. The path: $76 before the closure → $126 intraday peak (March, +65% — the largest
-            monthly rise in oil-market history) → $95 by mid-April on ceasefire hopes → $74 on Jun 30
-            → back through $100 on Sep 9 as the tanker war took hold — then +$6.82 in a single day
-            to $108.03 on Sep 10, then −2.8% to $104.61 on Sep 11. The gray weekly line is WTI
-            (FRED spot; the Sep 10–11 points are the front-month close and the settle) — the benchmark US products price
-            against; it reconciles within about a dollar of news-reported settlements, while FRED's
-            Brent series does not, so it is the crude basis for the crack chart beside it. Physical
-            benchmarks ran higher still: the IEA's North Sea Dated printed $113.48 on Sep 9. And
-            positioning is one-sided — hedge funds and money managers added 12% to their combined
-            Brent/WTI net longs across August (OPEC).
+            Brent rose from $76 before the closure to an intraday peak of $126 in March, then
+            fell to $95 by mid-April and $74 on Jun 30 as hopes for a ceasefire grew. It passed
+            $100 again on Sep 9 as tanker attacks escalated, rose $6.82 to $108.03 on Sep 10,
+            and settled at $104.61 on Sep 11, down 2.8%.
+            The gray line shows West Texas Intermediate (WTI), a US crude oil benchmark. Most WTI
+            readings come from FRED's weekly spot series; the Sep 10–11 readings are futures closes.
+            WTI is also the crude price used in the fuel price spread chart beside this one.
+            Hollow markers indicate a source's rounded estimate.
           </p>
         </div>
         <div class="min-w-0">
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">Diesel crack is up 80%</h2>
+            <h2 class="text-xl font-bold tracking-tight">The diesel price spread is up 80%</h2>
             <p class="font-mono text-[11px] text-faint tabular">Retail price less WTI, $/bbl · weekly (EIA/AAA − FRED).</p>
           </div>
           <div class="h-80 sm:h-[440px]">
             <canvas id="crackChart" role="img" aria-label="Crack spread — US retail price less WTI, dollars per barrel, 2026: diesel from about 89 in mid-January, breaking above the 140s in early September to 153.6 on Sep 6 as retail's record streak ran ahead of crude, 148 on Sep 10 when crude jumped faster than retail, then new peaks of 154.3 on Sep 11, 158.7 on Sep 12, and 160.5 on Sep 13 as diesel set back-to-back records; gasoline from about 59 in January to about 81 on Sep 13, after dipping to 52 in March. The diesel series is display-thinned in September; the daily readings live in the data and the stat card."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The crack is what's left after you subtract crude from the product price — the money
-            for refining, hauling, and retailing. Diesel's has nearly doubled since January: ~$89
-            to $160.5 on Sep 13 — a fourth straight all-time diesel reading ($6.20) against WTI,
-            which settled 2.4% lower at $100.05 on Sep 11, the last settle before the weekend. The path wasn't monotonic: $153.6 on Sep 6, when
-            retail's record streak was running ahead of crude; $148 on Sep 10, the crack
-            compressing — crude jumped faster than the pump.
-            Gasoline's has widened too (~$59 to $78–84), after dipping to $52 in March when crude
-            spiked faster than the pump price. Crude is up 38–45% vs pre-war; the product is up
-            more. At wholesale the squeeze is wider still: the IEA puts US diesel/gasoil above
-            $200/bbl in early September — 94% above pre-war — with the Gulf's and Russia's combined
-            diesel exports down 1.6 mb/d from February. Basis: retail
-            prices (EIA/AAA) less FRED's weekly WTI (the Sep 10–11 points are the front-month close and the settle) — the official EIA crack uses wholesale prices
-            and sits lower, but moves the same way. Seven product dates have no same-day FRED WTI
-            value (four Mondays, two Sundays, a Saturday); those cracks use the nearest trading day's
-            WTI (±1–2 days) — no interpolation.
+            This chart subtracts the price of crude oil from the retail price of fuel, with both
+            expressed in dollars per barrel. The difference covers refining, transportation, and
+            retailing. It helps explain why prices at the pump can keep rising even when crude gets cheaper.
+            Diesel's spread grew from about $89 in January to $160.5 on Sep 13. It briefly narrowed
+            to $148 on Sep 10, when crude prices rose faster than pump prices. Gasoline's spread
+            has also widened, from about $59 to $78–84.
+            This uses retail prices from EIA and AAA, minus WTI from FRED, with futures closes for
+            Sep 10–11. The EIA's official <em>crack spread</em> uses wholesale fuel prices, so the
+            values differ. Seven fuel readings have no same-day WTI value; those use the nearest
+            trading day's price, within 1–2 days. No missing prices are estimated.
           </p>
         </div>
       </div>
@@ -336,9 +330,9 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         <div class="mb-10">
           <h2 class="text-2xl font-bold tracking-tight">Supply</h2>
           <p class="mt-3 max-w-3xl text-[13px] leading-relaxed text-ink/70">
-            What got lost, drained, or stopped: the world's oil balance flipped from a surplus to a
-            drawdown the month the war began; the bill so far, paid in reserves; the US stockpile
-            draining toward its floors.
+            When the world uses more oil than it produces, the difference comes out of storage.
+            These charts show how much oil has been withdrawn, how much is left, and how long the
+            US emergency reserve could last under each of the model's three scenarios.
           </p>
         </div>
 
@@ -346,12 +340,13 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         <div class="mb-3">
           <h2 class="text-xl font-bold tracking-tight">The world is using more oil than it produces</h2>
           <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
-            The world's oil balance flipped from a ≈4M&nbsp;b/d surplus to net withdrawals the month
-            the war began. Every month since has been paid for in reserves, by the whole world.
-            This week's IEA report puts the full-year supply loss at 5.7&nbsp;mb/d, about 6% of the
-            world's oil, and sees no full recovery in Middle East flows until 2027. In August,
-            global production fell to 100.1&nbsp;mb/d, with more than 10&nbsp;mb/d of Gulf output still
-            shut in. Saudi output alone fell 2.3&nbsp;mb/d in a single month, to 5.97.
+            Before the war, the world produced about 4 million more barrels of oil per day than
+            it used. Since the war began, it has had to draw on stored oil every month.
+            The IEA's latest report estimates a full-year supply loss of 5.7 million barrels per day,
+            about 6% of the world's oil, and expects Middle East oil flows to remain below normal
+            until 2027. Global production fell to 100.1 million barrels per day in August, with more
+            than 10 million barrels per day of Gulf production still shut down. Saudi production
+            alone fell by 2.3 million barrels per day that month, to 5.97 million.
           </p>
         </div>
         <div class="h-80 sm:h-[400px]">
@@ -366,8 +361,8 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
 
         <div class="mt-12 grid gap-8 lg:grid-cols-[300px_1fr]">
           <div>
-            <h3 class="text-lg font-bold tracking-tight">The bill, paid in reserves</h3>
-            <p class="mt-1 text-[13px] leading-relaxed text-faint">What the deficit has consumed so far — every figure verified as of Sep 11.</p>
+            <h3 class="text-lg font-bold tracking-tight">How much stored oil has been used</h3>
+            <p class="mt-1 text-[13px] leading-relaxed text-faint">Withdrawals and changes in demand, using figures available as of Sep 11.</p>
           </div>
           <div class="border border-rule rounded-md">
             {billLedger.map((b, i) => (
@@ -386,10 +381,11 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           <p class="font-mono text-[11px] text-faint">EIA weekly ending stocks, million bbl</p>
         </div>
         <p class="mb-6 max-w-prose text-[13px] leading-relaxed text-ink/80">
-          The Strategic Petroleum Reserve (SPR) is the US government's emergency stockpile of
-          crude oil, built after the 1970s energy shocks. It held 415.4M barrels when the war
-          began; it holds 286.6M now. It is being drawn to keep fuel flowing while Gulf barrels
-          are stranded, and its pace is the clearest gauge of how badly the market is hurting.
+          The Strategic Petroleum Reserve (SPR) is the US government's emergency supply of crude
+          oil. It was created after the energy shortages of the 1970s. The reserve held 415.4 million
+          barrels when the war began and holds 286.6 million in the latest report. Oil is being
+          released to help make up for supplies that can't leave the Gulf. The rate of those
+          withdrawals tells us how quickly the emergency supply is being used.
         </p>
         <!-- SPR chart (full width) -->
         <div class="relative h-96">
@@ -401,14 +397,23 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             ></div>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The red lines are floors, not forecasts: <span class="font-semibold text-ink">~300M</span> is the cavern-damage threshold — below it the caverns cannot safely be refilled after a draw (breached Aug 14). <span class="font-semibold text-ink">250M</span> is the GEF operational minimum for a sustained draw, <span class="font-semibold text-ink">180M</span> the hard operable limit, and <span class="font-semibold text-ink">70M</span> the DOE's stated safe minimum — the draw stops there, it does not continue. The dashed paths project three draw rates from the Aug 28 level out to ~March 2027: 0.45M b/d (corridor holds, ~205M by then), 0.70M b/d (standoff, reaches 250M in late October and ~160M by March), 1.35M b/d (corridor lapses, through 250M within a month and pinned at the 70M floor from ~Feb 2027). The EIA's report lands every Wednesday for the week ending 12 days earlier — Wednesday's print (Sep 9) was the Aug 28 week, so the next point on the chart arrives Sep 16 (the Sep 4 week).
+            The red lines mark the model's reserve thresholds, or <em>floors</em>. At about <span class="font-semibold text-ink">300M</span> barrels, some caverns risk damage and
+            can't safely be refilled after a withdrawal. That threshold was crossed on Aug 14.
+            The other floors are <span class="font-semibold text-ink">250M</span>, the GEF minimum
+            for sustained withdrawals; <span class="font-semibold text-ink">180M</span>, the hard
+            operating limit; and <span class="font-semibold text-ink">70M</span>, the Department
+            of Energy's stated safe minimum. The model stops withdrawals at 70M.
+            The dashed lines show what happens if withdrawals continue at 0.45M, 0.70M, or 1.35M
+            barrels per day from the Aug 28 level. The estimates extend to about March 2027.
+            The Sep 9 EIA report covers the week ending Aug 28. The next reading is due Sep 16,
+            for the week ending Sep 4.
           </p>
 
       <!-- Likely outcomes -->
       <section class="mt-12">
         <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-          <h2 class="text-xl font-bold tracking-tight">Likely outcomes</h2>
-          <p class="font-mono text-[11px] text-faint">Probability of each track — reweighted only on regime events.</p>
+          <h2 class="text-xl font-bold tracking-tight">Three possible outcomes</h2>
+          <p class="font-mono text-[11px] text-faint">Estimated odds, updated when specified events occur.</p>
         </div>
         <div class="space-y-3">
           {branchWeights.slice().reverse().map((b) => (
@@ -427,7 +432,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         </div>
         <div class="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-xs text-faint">
           <span><span class="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm bg-calm"></span>corridor holds</span>
-          <span><span class="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm bg-crude"></span>standoff drift</span>
+          <span><span class="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm bg-crude"></span>standoff</span>
           <span><span class="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm bg-alarm"></span>corridor lapses</span>
         </div>
 
@@ -447,9 +452,9 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
 
         <!-- How the weights work — full mechanism moved to the model page (Sep 11 pass) -->
         <p class="mt-8 max-w-4xl text-[13px] leading-relaxed text-ink/75">
-          The odds are judgment weights that move only on pre-decided events; a quiet week is not evidence. The
-          full rule, the reversion clause, and the dated triggers live on
-          <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/model/">the model page</a>.
+          These odds are based on judgment. They change when specified events occur, such as a
+          pipeline restarting or a shipping agreement breaking down. A quiet week alone doesn't
+          change them. You can read the rules and the events being watched on <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/model/">the model page</a>.
         </p>
       </section>
 
@@ -459,9 +464,10 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         <div>
           <h2 class="mb-4 text-xl font-bold tracking-tight">The stockpile, in context</h2>
           <p class="mb-4 text-[13px] leading-relaxed text-faint">
-            The stockpile's whole history on one scale: 727M at the December 2009 peak, 294M at
-            the previous record low in December 1982, and 286.6 now. The green dash marks where
-            the war began. At the 70M floor the draw stops — it does not continue.
+            This chart puts the current reserve in perspective. It held 727 million barrels at
+            its December 2009 peak and 294 million at the previous low in December 1982. Today it
+            holds 286.6 million. The green line marks the level before the war. In the model,
+            withdrawals stop at the 70 million barrel floor.
           </p>
           <figure class="relative mx-auto w-full max-w-[280px]">
           <svg id="sprGauge" viewBox="0 0 320 470" role="img" aria-label="SPR level gauge on a scale from 60 to 750 million barrels. Now 286.6, down from 415.4 pre-war. Grey historical markers: 727 all-time peak in December 2009, 592 in the mid-1990s, and 294 in December 1982 — the previous record low, now breached. Red dashed lines mark the floors at 300, 250, 180, and 70. Hover any line for details.">
@@ -527,9 +533,10 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         <div>
           <h2 class="mb-4 text-xl font-bold tracking-tight">Supply snapshot</h2>
           <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
-            The release began in earnest Apr 3 (413.3M) and ran fastest in May (≈1.2M b/d). The
-            draw has slowed to ≈0.45M b/d — the corridor-holds pace — while diesel and heating-oil stocks sit 14%
-            below their 5-year average.
+            Large withdrawals began on Apr 3, when the reserve held 413.3 million barrels, and
+            reached about 1.2 million barrels per day in May. They have since slowed to about
+            0.45 million barrels per day, the rate used in the corridor-holds scenario. Meanwhile,
+            US diesel and heating-oil stocks are 14% below their five-year average.
           </p>
           <div class="border border-rule rounded-md">
             {invSnapshot.map((r, i) => (
@@ -547,9 +554,9 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
 
         <!-- The drawdown clock -->
         <div>
-          <h2 class="mb-4 text-xl font-bold tracking-tight">The drawdown clock</h2>
+          <h2 class="mb-4 text-xl font-bold tracking-tight">How quickly the reserve is shrinking</h2>
           <p class="mb-4 text-[13px] leading-relaxed text-faint">
-            How fast the stockpile is draining, and when the path hits the floors — EIA weekly, as of Sep 9.
+            The current withdrawal rate and estimated dates for reaching the reserve thresholds, using the Sep 9 EIA report.
           </p>
           <div class="space-y-6">
             <!-- Quadrant: current SPR drawdown rate -->
@@ -576,12 +583,14 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <!-- Quadrant: 250M floor date, most likely path -->
             <div class="flex flex-col justify-between border border-rule p-5">
               <div>
-                <p class="text-xs text-faint">250M operational floor hit</p>
+                <p class="text-xs text-faint">Estimated date at 250M barrels</p>
                 <p class="tabular mt-2 font-mono text-3xl font-semibold text-alarm">
                   ≈ {floorLapse250}<span class="ml-1 text-sm font-medium text-ink/60">2026</span>
                 </p>
                 <p class="mt-1.5 text-xs leading-relaxed text-faint">
-                  Top track since the Sep 11 reweight — the corridor-lapse path (50%): draining at 1.35M barrels/day from 286.6M barrels (week ending Aug 28). The 40% standoff path reaches it {floor250}.
+                  The corridor-lapse scenario has the highest odds, at 50% as of Sep 11. It assumes
+                  withdrawals of 1.35M barrels per day from the reported 286.6M barrels on Aug 28.
+                  The standoff scenario, at 40%, reaches the same threshold on {floor250}.
                 </p>
               </div>
               <p class="border-t border-rule/70 pt-2 text-[11px] leading-relaxed text-faint">
@@ -599,12 +608,12 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         <div class="mb-10">
           <h2 class="text-2xl font-bold tracking-tight">Refining</h2>
           <p class="mt-3 max-w-3xl text-[13px] leading-relaxed text-ink/70">
-            Crude is the easy half of the story — the scarce thing is the diesel, gasoline, and jet
-            fuel that only refineries make. US refineries are still running above last year's pace;
-            the rest of the world is not; and Russia's refineries are being taken out one strike at
-            a time. The IEA calls the world's refining system “stretched to the limit” in this
-            week's report — Atlantic Basin refining margins hit record levels in August, led by
-            diesel cracks.
+            Crude oil has to be refined before it can be used as diesel, gasoline, or jet fuel.
+            That makes refinery capacity just as important as the amount of oil available.
+            US refineries are processing more oil than last year, while processing has fallen
+            elsewhere and strikes continue to damage Russian refineries. The IEA describes the
+            global refining system as “stretched to the limit.” Atlantic Basin refining margins
+            reached records in August, led by diesel.
           </p>
         </div>
 
@@ -612,15 +621,15 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         <div class="grid gap-10 lg:grid-cols-3">
           <div class="lg:col-span-2">
             <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-              <h2 class="text-xl font-bold tracking-tight">US refineries are running flat out — above 95% of capacity since June</h2>
+              <h2 class="text-xl font-bold tracking-tight">US refineries have run above 95% of capacity since June</h2>
               <p class="font-mono text-[11px] text-faint">Utilization, % of operable capacity, weekly.</p>
             </div>
             <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
-              The odd one out in this crisis: the US is not cutting, it is pushing at the ceiling. The EIA's weekly report
-              measures runs against operable capacity — in 2026, US refineries have run above 95% every week since Jun 5,
-              peaking at 98.0% the week of Aug 28, and product exports set a record 8 mb/d in August (OPEC). The same
-              stretch of 2025 averaged 90.8%, with a deeper winter maintenance dip. The diesel squeeze is not being made
-              in the United States — it is in Europe, Asia, and Russia, below.
+              US refineries have operated above 95% of their available capacity every week since
+              Jun 5, reaching 98.0% in the week ending Aug 28. The comparable period in 2025 averaged
+              90.8%. Fuel exports also reached a record 8 million barrels per day in August, according
+              to OPEC. US plants are working close to capacity, but shortages in Europe, Asia, and
+              Russia continue to put pressure on fuel supplies.
             </p>
             <div class="relative h-96">
               <canvas id="refineryChart" role="img" aria-label="US refinery utilization, percent of operable capacity, weekly: 2026 above 2025 from spring onward — a dip to 88.6 percent in late February, then a steady climb from 95.3 on Jun 5 to a 98.0 peak on Aug 28, at 97.8 on Sep 4; the same period in 2025 ranged from 83.5 to 96.9."></canvas>
@@ -628,14 +637,14 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
               EIA Weekly Petroleum Status Report (WPULEUS3), week ending Friday · utilization = gross inputs ÷ latest reported
               operable capacity (EIA's definition) · 2025 line = same Jan–Sep window · in mb/d: runs 16.3–17.3 (STEO 4a),
-              above 2025 in every month · the price symptom: the crack-spread chart in Prices.
+              above 2025 in every month · see the fuel price spread chart in Prices for the effect on costs.
             </p>
           </div>
           <div>
             <h2 class="mb-4 text-xl font-bold tracking-tight">Global refining</h2>
             <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
-              The squeeze the US hasn't felt yet is the norm everywhere else. Anchors from the
-              IEA's Aug 12 report:
+              Refineries elsewhere are processing less oil. These figures from the IEA's August
+              and September reports show the size of the decline.
             </p>
             <div class="border border-rule rounded-md">
               {globalRefining.map((r, i) => (
@@ -654,20 +663,19 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         <!-- Russia: the second front (moved from Supply into Refining) -->
         <div class="mt-12">
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">Russia down 30% of refining capacity — and still falling</h2>
+            <h2 class="text-xl font-bold tracking-tight">Russia has lost more than 30% of its refining capacity</h2>
             <p class="font-mono text-[11px] text-faint">estimated capacity remaining, % of pre-strike</p>
           </div>
           <div class="relative h-96">
             <canvas id="russiaChart" role="img" aria-label="Estimated remaining Russian refining capacity, September 2024 to September 2026: flat at 100 percent until strikes began in August 2025, about 75 percent by April 2026, about 70 percent by August 29, with current estimates spread between 46 and 80 percent remaining."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The war has a second front: strikes on Russian refineries are destroying the world's
-            capacity to make the fuel other countries import — the diesel and petrol Russia used to
-            sell, and now can no longer spare its own people. The line connects
-            verified anchors only: 100% until the first strikes (Aug 2025), ~75% by mid-April, ~70% by
-            Aug 29 (Moscow Times: over 30% of actual capacity offline). The red bar is the current spread of
-            estimates, because the sources disagree — Ukraine's General Staff says 42.74% is out, Russian
-            Forbes says 54%, the IEA says over 20%.
+            Strikes on Russian refineries are reducing the amount of fuel available to other
+            countries. The chart shows about 75% of capacity remaining by mid-April and about
+            70% by Aug 29, according to the Moscow Times. The red bar shows how much current
+            estimates differ: Ukraine's General Staff puts the capacity lost at 42.74%, Russian
+            Forbes at 54%, and the IEA at more than 20%. You can compare these estimates with
+            the reported outages and export restrictions below.
           </p>
           <div class="mt-8 grid gap-10 lg:grid-cols-2">
             <div>
@@ -690,10 +698,10 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <div>
               <h3 class="text-sm font-bold tracking-tight">The export ban calendar</h3>
               <p class="mt-1 text-[13px] leading-relaxed text-ink/70">
-                Russia is banning its fuel exports one at a time — diesel from Sep 30, jet fuel from
-                Nov 30 — hoarding what little it can still make for its own stations, its army, and the
-                coming winter. Each date is the <em>consequence</em> of the damage — a global product-supply
-                shock landing inside the heating season.
+                Russia's export restrictions leave less fuel available to other countries during the
+                heating season. Sep 30 is the next deadline for the diesel export ban, and the jet-fuel
+                export ban is scheduled to take effect on Nov 30. Damaged refineries also leave Russia
+                with less fuel for its own gas stations and military as winter approaches.
               </p>
               <div class="mt-3 border border-rule rounded-md">
                 {
@@ -706,9 +714,10 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
                 }
               </div>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-                And the hole is not being filled: the Belarus rail line — Russia's one external lifeline —
-                is running 25× its year-ago flow, and Kyrgyzstan, which imports over 90% of its petrol from
-                Russia, is down to about six weeks of reserves.
+                Imports aren't making up the difference. Fuel shipments on the Belarus rail route
+                are running at 25 times last year's volume. The shortage also affects countries that
+                rely on Russian fuel: Kyrgyzstan imports more than 90% of its gasoline from Russia
+                and has about six weeks of reserves left.
               </p>
             </div>
           </div>
@@ -718,37 +727,34 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       <!-- Second-order effects: recession, rates, food -->
       <section id="secondorder" class="pb-12 pt-20">
         <div class="mb-10">
-          <h2 class="text-2xl font-bold tracking-tight">Second order effects</h2>
+          <h2 class="text-2xl font-bold tracking-tight">Effects on the economy</h2>
           <p class="mt-3 max-w-3xl text-[13px] leading-relaxed text-ink/70">
-            The oil shock is becoming an economy-wide shock — with a lag. The same force that is
-            capping oil prices — demand destruction — is what's slowing the economy. The chart below
-            measures it directly; three channels carry it into the economy: recession risk, a
-            hawkish central bank that is <em>hiking</em> rather than cushioning, and a food shock
-            that lands 12–18 months after the war.
+            Higher energy costs affect more than your fuel bill. They can slow business activity,
+            keep inflation high, and eventually make food more expensive. People and businesses
+            also use less oil when they can no longer afford it. Economists call this <em>demand destruction</em>. The charts below show that decline alongside recession
+            estimates, interest rates, and the possible effects on food prices.
           </p>
         </div>
 
         <!-- Demand destruction: the force, measured directly -->
         <div class="grid gap-10 lg:grid-cols-3">
           <div class="lg:col-span-2">
-            <h3 class="text-lg font-bold tracking-tight">Demand destruction: world demand fell up to 4% — May was the worst</h3>
+            <h3 class="text-lg font-bold tracking-tight">World oil use fell about 4% in May compared with last year</h3>
             <p class="mt-2 font-mono text-[11px] text-faint">World petroleum & liquid fuels consumption, mb/d · monthly (EIA STEO, Sep 9 release) · Jan – Aug, 2026 vs 2025.</p>
             <div class="mt-4 h-72">
               <canvas id="demandChart" role="img" aria-label="World petroleum consumption, 2026 versus the same months of 2025, in million barrels per day: in line with last year through March, then falling away — 99.2 in May, 4.3 below the prior year, 101.8 in July, 3.6 below — recovering to 103.7 in August, within 0.8 of the year earlier."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-              The force that is capping prices, measured directly: world consumption fell up to
-              4.3 mb/d — about 4% — below last year in May, is still 3.6 below in July, and has
-              recovered to 0.8 below by August. The full year is uglier than that monthly trend
-              suggests: the IEA this week cut its 2026 demand forecast to −2.5 mb/d, from −1.6
-              in the August edition — the quarterly pace runs −5.3 in Q2, easing to −3.4 in Q3
-              and −2.0 in Q4, so the year's average is set by a deep first half even as the
-              monthly gap narrows. The destruction is broad: the Middle East itself is the
-              biggest decliner, then the rest of Asia, then the US. The losses are concentrated in
-              middle distillates and petrochemical feedstock, especially in Asia, and the IEA sees
-              demand recovering by 2.6 mb/d in 2027. The institutions disagree on the scale: OPEC,
-              reporting a day earlier, sees 2026 demand up 0.4 mb/d — a 2.9 mb/d spread between the
-              two forecasts.
+              World oil use fell 4.3 million barrels per day below last year's level in May, a
+              decline of about 4%. The gap narrowed to 3.6 million in July and 0.8 million in August.
+              Using less oil helps contain prices, but it also reflects the strain on the economy.
+              The IEA now expects demand to fall by 2.5 million barrels per day across 2026,
+              compared with its August estimate of 1.6 million. It expects the quarterly decline to
+              ease from 5.3 million in Q2 to 3.4 million in Q3 and 2.0 million in Q4, followed by a
+              2.6 million barrel per day recovery in 2027. The losses are concentrated in fuels such
+              as diesel and in raw materials used to make chemicals, especially in Asia.
+              These estimates aren't universally agreed on. OPEC expects demand to grow by 0.4 million
+              barrels per day in 2026, a difference of 2.9 million between the two forecasts.
             </p>
             <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
               EIA STEO Table 3e (Sep 9 2026, forecast completed Sep 3) · Jan–Aug 2026 are actuals in
@@ -757,7 +763,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             </p>
           </div>
           <div>
-            <h3 class="text-lg font-bold tracking-tight">Where the July decline sits</h3>
+            <h3 class="text-lg font-bold tracking-tight">Where oil use fell in July</h3>
             <p class="mt-2 text-[13px] leading-relaxed text-faint">Million b/d, July 2026 vs July 2025 — same table.</p>
             <div class="mt-4 border border-rule rounded-md">
               {demandDecline.map((r, i) => (
@@ -775,26 +781,25 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
 
         <div class="mt-12 grid gap-10 lg:grid-cols-2">
           <div>
-            <h3 class="text-lg font-bold tracking-tight">Recession: betting markets have joined the banks</h3>
+            <h3 class="text-lg font-bold tracking-tight">Estimates of US recession risk</h3>
             <p class="mt-2 max-w-prose text-[13px] leading-relaxed text-faint">
-              Odds of a US recession (July–Sep 2026). The banks' numbers are for the next 12 months:
-              25% to 50%, with Goldman up from 20% to 30% since the war began. <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="https://polymarket.com/dashboards/macro" target="_blank" rel="noopener">Polymarket</a>'s
-              number is for a longer window — recession by end-2027, about 15 months — and it is 32%.
-              That matches the banks' number despite the extra three months. The consensus still expects to
-              dodge it; the banks and the betting markets say otherwise.
+              These estimates, published between July and September 2026, put the chance of a US
+              recession over the next 12 months at 25% to 50%. Goldman Sachs raised its estimate
+              from 20% before the war to 30%. <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="https://polymarket.com/dashboards/macro" target="_blank" rel="noopener">Polymarket</a> puts the odds at 32%, but covers a longer period, through the end of 2027. Keep that
+              difference in mind when comparing the figures.
             </p>
             <div class="mt-5 h-72">
               <canvas id="recessionChart" role="img" aria-label="Dot plot of 12-month US recession odds by institution: Moody's 50 percent, JPMorgan 35, Goldman Sachs 30, New York Fed model 25, TD Securities 25, Wall Street Journal poll of 74 economists 25, and Polymarket 32 percent for the longer window through end-2027."></canvas>
             </div>
           </div>
           <div>
-            <h3 class="text-lg font-bold tracking-tight">The Fed is hiking, not cushioning</h3>
+            <h3 class="text-lg font-bold tracking-tight">Markets expect the Fed to raise rates</h3>
             <p class="mt-2 max-w-prose text-[13px] leading-relaxed text-faint">
-              The standard recession-aversion move — cutting rates — is off the table. A newly hawkish
-              Fed is pricing in <em>hikes</em>. The Aug PPI printed 5.4% on Sep 10; the Aug CPI came out
-              Sep 11 — headline 3.4% (flat), core 2.4% (easing), energy +16.3% for the
-              year. A hike into
-              the winter drawdown would be the single most bearish macro signal in this model.
+              The Federal Reserve can cut interest rates to support a slowing economy, but persistent
+              inflation makes that harder. August producer prices rose 5.4% from a year earlier.
+              Consumer inflation held at 3.4%, with energy up 16.3%, while core inflation eased to
+              2.4%. Markets expect a rate increase at the Sep 16 meeting. Higher borrowing costs
+              would add pressure as oil reserves are drawn down through the winter.
             </p>
             <div class="mt-5 grid grid-cols-1 border border-rule sm:grid-cols-3">
               {
@@ -808,20 +813,18 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
               }
             </div>
             <p class="mt-4 text-[13px] leading-relaxed text-ink/80">
-              Meanwhile the ECB says Germany and Italy would both be in a technical recession by end-2026
-              if the conflict drags on — the European version of the same trade, without the Fed's
-              balance-sheet cushion.
+              The European Central Bank says Germany and Italy could both be in a technical
+              recession by the end of 2026 if the conflict continues.
             </p>
           </div>
         </div>
 
         <div class="mt-12">
-          <h3 class="text-lg font-bold tracking-tight">Bonds and inflation: the crisis is now in the price of money</h3>
+          <h3 class="text-lg font-bold tracking-tight">Borrowing costs and inflation</h3>
           <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
-            The oil shock reaches the rest of the economy through two numbers: what the government
-            pays to borrow, and what you pay at the register. Both are at multi-year highs, and
-            together they explain why the Fed is talking about <em>hiking</em> rates instead of cutting
-            them to cushion a slowdown.
+            You can see the wider effects in borrowing costs and everyday prices. Both are at
+            multi-year highs. Together, they help explain why the Fed is considering higher
+            interest rates even as the economy slows.
           </p>
 
           <div class="mt-6 grid gap-10 lg:grid-cols-2">
@@ -832,52 +835,50 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
                 <canvas id="treasury10yChart" role="img" aria-label="US 10-year Treasury yield, 2026: 4.19 percent on Jan 2, falling to 3.97 on Feb 27 before the war, then rising steadily through the crisis — 4.44 by late March, 4.59 in mid-May, 4.69 in late July — to 4.95 on Sep 10 and 4.97 on Sep 11, which touched 4.992 intraday, the highest since October 2023. Reference lines at the pre-closure 3.97 and at 4.8, the January 2025 high that strategists watch."></canvas>
               </div>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-                The 10-year is the rate the US government pays to borrow for a decade — the benchmark
-                behind mortgage and business loan rates. It is up 100 basis points from before the
-                war. Two forces are pushing it up: inflation stuck above 3%, which keeps the Fed
-                hawkish (a 25bp hike on Sep 16 is now priced at about 86%, against 62% on
-                Polymarket), and fiscal worry — national debt above $40&nbsp;trillion with
-                $8.4&nbsp;trillion of Treasuries rolling over by year-end. The 4.8% line — the high
-                reached in January 2025 — has now been broken and held: 4.83 on Sep 9, 4.95 on
-                Sep 10, 4.97 on Sep 11 with an intraday touch of 4.992 — the highest since October
-                2023, the level strategists say would start causing "meaningful problems" in other
-                markets if it holds (CNBC, Sep 11). The 2-year sits at 4.63%, its highest since
-                July 2024 — that's where the hike is priced. The 10-year breakeven (inflation
-                expectations) actually eased to 2.36%, so the sell-off is a real-rate story, not an
-                inflation-expectations story.
+                The 10-year Treasury yield is the rate the US government pays to borrow for a decade.
+                It also influences mortgage and business loan rates. It has risen by 100 basis points,
+                or one percentage point, since before the war.
+                Inflation and concerns about government debt are both putting pressure on rates.
+                The national debt exceeds $40 trillion, and $8.4 trillion of Treasuries must be
+                refinanced by year-end. The 10-year yield reached 4.97% on Sep 11 and briefly touched
+                4.992%, its highest level since October 2023. The 2-year yield is at 4.63%, its
+                highest since July 2024. Meanwhile, the 10-year measure of expected inflation eased
+                to 2.36%, suggesting that the recent rise in yields reflects higher borrowing costs
+                after inflation rather than higher inflation expectations.
               </p>
             </div>
             <div>
-              <h3 class="text-lg font-bold tracking-tight">US inflation: wholesale running hotter</h3>
+              <h3 class="text-lg font-bold tracking-tight">US producer prices are rising faster than consumer prices</h3>
               <p class="mt-2 font-mono text-[11px] text-faint">CPI (retail, amber) + PPI final demand (wholesale, blue) · % year-over-year · monthly (BLS) · Jan – Aug.</p>
               <div class="mt-4 h-72">
                 <canvas id="cpiChart" role="img" aria-label="US price inflation, 2026, percent year-over-year: consumer prices (CPI) 2.39 in January and 2.41 in February before the war, jumping to 3.3 in March and 3.8 in April, peaking at 4.2 in May, easing to 3.4 in July and holding at 3.4 in August (energy up 16.3% for the year did the work); wholesale prices (PPI) rising from 3.1 in January to a May peak of 5.9, at 5.4 in August. Reference line at the Fed's 2 percent target."></canvas>
               </div>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-                The consumer side of the crisis: inflation jumped from about 2.4% to 4.2% in three
-                months as the oil shock hit the pump, then eased to 3.4% in July — and held exactly
-                there in August — +0.4% for the month, with energy up 2.1% (gasoline +3.9%, over a third
-                of the increase) doing the work, and core easing to 2.4%
-                from 2.5% — though the monthly core rise (+0.3%) still ran above forecast, and it was
-                the last major print before the Fed's Sep 16 meeting. Still well above the Fed's 2% target. Wholesale prices ran hotter and
-                earlier: the PPI peaked at 5.9% in May and printed 5.4% in August (July revised to
-                4.8%) — energy, with diesel up 24.1% from a year ago, explains most of the rise.
-                Factories feel the oil shock before households do (BLS, Sep 10–11).
+                Consumer inflation rose from about 2.4% to 4.2% in three months as fuel became more
+                expensive. It eased to 3.4% in July and stayed there in August. Prices rose 0.4% in
+                August alone, with gasoline's 3.9% increase accounting for more than a third of that rise.
+                Core inflation, which excludes food and energy, eased from 2.5% to 2.4% over the year,
+                although its 0.3% monthly increase was above expectations.
+                Producer prices rose faster, peaking at 5.9% in May and increasing 5.4% in August
+                compared with a year earlier. July's reading was revised to 4.8%. Energy explains
+                much of the increase, with diesel up 24.1%. These costs can reach businesses before
+                they show up in household spending (BLS, Sep 10–11).
               </p>
             </div>
           </div>
         </div>
 
         <div class="mt-12">
-          <h3 class="text-lg font-bold tracking-tight">The food shock lands 12–18 months after the war</h3>
+          <h3 class="text-lg font-bold tracking-tight">Higher energy costs can take 12–18 months to reach food prices</h3>
           <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
-            Gas is about a third of the marginal cost of nitrogen fertiliser. With Qatari LNG offline
-            for 3–5 years and Asian gas at all-time highs, the 2027 harvest is a <em>one-shot bet</em>:
-            farmers plant in March–April on the fertiliser prices set that winter. The last two times
-            fertiliser plus freight spiked like this — 2007–08 and 2022 — food prices followed within
-            12–18 months. There is <em>no model behind this one</em>: unlike the charts above, these
-            are documented lag windows from two historical shocks — order-of-magnitude timing, not
-            a forecast.
+            Natural gas accounts for about a third of the marginal cost of making nitrogen
+            fertilizer. With Qatari LNG expected to remain offline for 3–5 years and Asian gas
+            prices at record highs, fertilizer could be expensive when farmers prepare for
+            March–April planting in 2027.
+            In the 2007–08 and 2022 energy shocks, increases in fertilizer and freight costs
+            were followed by higher food prices within 12–18 months. The timeline below uses
+            those historical delays to illustrate how the effects could develop. It's a rough
+            comparison with past events, not a forecast produced by this model.
           </p>
           <div class="mt-5 grid grid-cols-1 border border-rule sm:grid-cols-3">
             {
@@ -891,10 +892,13 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             }
           </div>
           <div class="mt-6 h-72 sm:h-80">
-            <canvas id="foodChart" role="img" aria-label="Gantt chart of the food-shock lag chain on a date axis from February 2026 to mid-2028. A vertical line marks the war beginning February 28, 2026. Bars: freight costs in food prices during the fourth quarter of 2026; fertiliser prices peaking December 2026 to February 2027; 2027 plantings March to April 2027; harvest damage fixed July to October 2027; and the food-price spike from late 2027 through mid-2028."></canvas>
+            <canvas id="foodChart" role="img" aria-label="Illustrative timeline of how energy costs could affect food prices, from February 2026 to mid-2028, based on delays in past energy shocks. A vertical line marks the war beginning February 28, 2026. Bars: freight costs in food prices during the fourth quarter of 2026; fertilizer prices peaking December 2026 to February 2027; 2027 plantings March to April 2027; effects on harvests July to October 2027; and the food-price spike from late 2027 through mid-2028."></canvas>
           </div>
           <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-            The lag chain: energy shock → freight + gas → fertiliser → plantings → harvest → food prices. Each bar is the documented window from 2007–08 / 2022. The spike lands on top of the terminal state, not before it.
+            Higher energy prices can raise freight and fertilizer costs, affect planting and
+            harvests, and eventually raise food prices. The bars show approximate windows based
+            on the 2007–08 and 2022 shocks. Food prices could remain under pressure after oil
+            reserves have reached the model's thresholds.
           </p>
         </div>
       </section>
@@ -905,8 +909,8 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         <!-- Watch list -->
         <section id="watchlist">
           <div class="mb-4">
-            <h2 class="text-xl font-bold tracking-tight">Upcoming watch list</h2>
-            <p class="mt-1 text-[13px] text-faint">Dated events that will tell us where this is heading.</p>
+            <h2 class="text-xl font-bold tracking-tight">What to watch next</h2>
+            <p class="mt-1 text-[13px] text-faint">Upcoming reports and decisions that could change the outlook.</p>
           </div>
           <div class="border border-rule rounded-md">
             {watchList.map((w, i) => (
@@ -922,11 +926,11 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         <!-- Cascade -->
         <section id="cascade">
           <div class="mb-4">
-            <h2 class="text-xl font-bold tracking-tight">Breaking-points cascade</h2>
+            <h2 class="text-xl font-bold tracking-tight">Where shortages could appear next</h2>
             <p class="mt-1 text-[13px] text-faint">
-              The order in which the world runs out, if the crisis continues. The first two dates
-              are arithmetic on published stock levels; the rest are inferences from customs and
-              stock data — expect them to be rough by a week or two.
+              These are estimates of where shortages could become more severe if the crisis
+              continues. The first two dates use published stock levels; the others are inferred
+              from customs and inventory data. Allow for uncertainty of a week or two.
             </p>
           </div>
           <div class="border border-rule rounded-md">

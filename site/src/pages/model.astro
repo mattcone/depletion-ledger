@@ -38,17 +38,17 @@ const strip = [
     sub: `down from ${sprPreWar}M pre-war · EIA, w/e ${weekEnding}`,
   },
   {
-    label: "Drawing at",
+    label: "Daily withdrawals",
     value: `${sprDrawPace4w.toFixed(2)}M b/d`,
-    sub: "4-week average of the EIA weekly draws",
+    sub: "4-week average from EIA reports",
   },
   {
-    label: "Most likely future",
+    label: "Scenario with highest odds",
     value: `${NAMES[topKey]} · ${odds[topKey]}%`,
     sub: others.map((k) => `${NAMES[k].toLowerCase()} ${odds[k]}%`).join(" · "),
   },
   {
-    label: "Next floor on that path",
+    label: "Estimated date at 250M barrels",
     value: fmtDate(top250),
     sub: `the 250M floor · the 180M floor: ${fmtDate(top180)}`,
   },
@@ -57,9 +57,9 @@ const strip = [
 // Sticky marginalia rail (Tufte): direct label → value pairs, no box.
 const glance = [
   { label: `Reserve (w/e ${weekEnding})`, value: `${last.level.toFixed(1)}M bbl` },
-  { label: "Draw, 4-week avg", value: `${sprDrawPace4w.toFixed(2)}M b/d` },
-  { label: "250M floor (top path)", value: `≈ ${fmtDate(top250)}` },
-  { label: "180M floor (top path)", value: `≈ ${fmtDate(top180)}` },
+  { label: "Withdrawals, 4-week avg", value: `${sprDrawPace4w.toFixed(2)}M b/d` },
+  { label: "250M floor (leading scenario)", value: `≈ ${fmtDate(top250)}` },
+  { label: "180M floor (leading scenario)", value: `≈ ${fmtDate(top180)}` },
   { label: `Odds (${odds.date})`, value: `${odds.holds} / ${odds.standoff} / ${odds.lapse}` },
 ];
 ---
@@ -71,13 +71,13 @@ const glance = [
       Model · updated {asOf}
     </p>
     <h1 class="mt-3 max-w-4xl text-3xl font-extrabold leading-[1.08] tracking-tight sm:text-4xl">
-      How long the oil lasts
+      How the model works
     </h1>
     <p class="mt-4 max-w-3xl text-[15px] leading-relaxed text-ink/80">
-      A stress test, not a forecast. The model asks one question — <em>if each possible
-      future keeps going, how long do the world's oil buffers last?</em> — and re-answers
-      it every week with official data. Here is what goes in, what comes out, and why
-      the odds only move on pre-decided events.
+      How long could stored oil last if the crisis continues? This model explores three
+      possible scenarios and updates the estimates each week with official data. Here's
+      where the numbers come from, how the odds are assigned, and what you should keep
+      in mind when reading the results.
     </p>
   </header>
 
@@ -111,9 +111,9 @@ const glance = [
         ))}
       </dl>
       <p class="mt-6 border-t border-rule pt-3 text-xs leading-relaxed text-faint">
-        Every figure on this page traces to a published report — the EIA, OPEC, the IEA,
-        the IMO, or ship-tracking data — and the technical specification keeps the exact
-        formulas and sources behind them.
+        The inputs come from published reports and ship-tracking data. The probabilities
+        are assigned using judgment, and the dates are calculated from each scenario's
+        assumptions. The technical specification records the formulas and sources.
       </p>
     </aside>
   </div>
