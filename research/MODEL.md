@@ -26,7 +26,7 @@ The possible futures are compressed into three paths, each with an odds figure. 
 | Future | Odds (Sep 11) | What it looks like | What it does to the reserve |
 |---|---|---|---|
 | The corridor holds | 10% | the tanker-corridor deal works, traffic through the strait normalizes | drains slowly: 0.45M b/d |
-| The standoff | 40% | the status quo: the corridor barely works, attacks continue on both sides, the Saudi bypass pipeline is struck but restarts | drains at 0.70M b/d — the 250M floor around Oct 19 |
+| The standoff | 40% | the status quo: the corridor barely works, attacks continue on both sides, the Saudi bypass pipeline is struck, no restart date | drains at 0.70M b/d — the 250M floor around Oct 19 |
 | **The corridor lapses (most likely)** | **50%** | the deal breaks or is attacked, the strait is effectively closed, the bypass stays shut | drains at ~1.35M b/d — the 250M floor around Sep 24, the 180M floor by mid-November |
 
 *The odds moved Sep 9 → Sep 11 (10/50/40 → 10/40/50) when Saudi Arabia suspended the East–West pipeline after attacks on it: the bypass was the element keeping the "degraded, not closed" state alive. The move carries an explicit reversion — an official restart sends the odds back.*
@@ -40,7 +40,7 @@ The SPR is not a normal tank. It is a system of salt caverns with engineering li
 | 1 | ~300M bbl | some caverns below this level can no longer pump | **already breached (Aug 14)** |
 | 2 | 250M bbl | the operational minimum the reserve's operators cite | around Sep 24, 2026 |
 | 3 | 180M bbl | the hard operable limit | around Nov 14, 2026 |
-| 4 | 70M bbl | the absolute safe minimum set by the US Department of Energy | early January 2027 — the draw pins at the floor there |
+| 4 | 70M bbl | the absolute safe minimum set by the US Department of Energy | early February 2027 — the draw pins at the floor there |
 
 When the reserve reaches a floor, it stops being a source of supply. The shortfall doesn't disappear — it moves onto consumers, as higher prices and tighter fuel.
 
@@ -48,13 +48,15 @@ When the reserve reaches a floor, it stops being a source of supply. The shortfa
 
 Odds are the most subjective part of any model, so this one has a hard rule: **the three probabilities change only when a pre-decided, structural event happens** — not when the news cycle heats up. Recent events that did move the odds: the corridor deal was announced (and the ship-tracking data showed it wasn't working), the first missile strike on a base in a third country (Sep 9: 15/55/30 → 10/50/40), and on Sep 11 the suspension of Saudi Arabia's East–West pipeline after attacks on it — the bypass was the load-bearing element of the standoff path, so its going dark moved the odds from 10/50/40 to 10/40/50, with a pre-declared reversion to the old weights if the line restarts. Weekly wobbles in prices or traffic move the *dates*, not the *odds*.
 
-The pre-decided triggers, as of Sep 11:
+The pre-decided triggers, as of Sep 13:
 
 | If this happens | Weight moves |
 |---|---|
 | A verified corridor re-opening (IMO filing, sustained transits ≥40% of the 85/day baseline for two consecutive weeks), or a durable ceasefire | toward *holds* |
 | An official ESPO restart, or a damage assessment finding the line repairable in days | back to *standoff* — the reversion clause on the Sep 11 move |
-| Tanker losses above ~15/week · a Jazan or Abqaiq restart slipping · the ESPO suspension persisting past the Sep 16 print · a damage assessment calling for weeks · the Russia product-ban expiry on Sep 30 · a widening EIA–market spread · an adverse Polymarket settlement on Sep 14 or 30 | toward *lapses* |
+| Tanker losses above ~15/week · a Jazan or Abqaiq restart slipping · the ESPO suspension persisting past the Sep 16 print · a damage assessment calling for weeks · the Russia product-ban expiry on Sep 30 · a widening EIA–market spread · an adverse Polymarket settlement on Sep 14 or 30 · the Houthis blocking or attacking non-Saudi vessels in the Bab el-Mandeb (both chokepoints closed) | toward *lapses* |
+
+One more event is pre-committed as a regime event with its direction deliberately left open: if the US decides to strike the Houthis directly, the odds move — the direction will be assessed at the time.
 
 The slowest trigger is the EIA–market spread: the EIA's own outlook still sees ~$90 for late 2026 while spot Brent settled at $104.61 on Sep 11. A gap beyond ~$10–15 means the market is pricing lapse above 40%; the gap is now ~$15 — at the edge of the band.
 

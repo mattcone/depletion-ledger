@@ -334,7 +334,7 @@ export const billLedger = [
   { name: "IEA coordinated release", value: "400M bbl", note: "pulled from 32 countries · IEA" },
   { name: "China commercial stockpiles", value: "~2–3M b/d", note: "draw inferred from customs data · official SPR untouched" },
   { name: "Demand destruction", value: "−2.5M b/d", note: "full-year 2026, cut from −1.6 in the August edition · IEA OMR, Sep 11" },
-  { name: "Still in the hole", value: "−1.8M b/d", note: "Q4 2026 forecast — supply still below demand · IEA OMR, Aug 12" },
+  { name: "Still in the hole", value: "−1.8M b/d", note: "Q3 2026 forecast — supply below demand · IEA OMR, Aug 12" },
 ];
 
 // ---------- Demand destruction: world petroleum consumption (mb/d, monthly) ----------
