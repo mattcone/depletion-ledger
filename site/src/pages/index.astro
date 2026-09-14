@@ -178,7 +178,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <line x1="162" y1="252" x2="144" y2="237" stroke="#b3261e" stroke-width="0.75" opacity="0.6" />
           </svg>
           <figcaption class="mt-2 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-            Hormuz: 7 transits on Sep 10, zero crude (Kpler) · 102 for the week ending Sep 3 (Lloyd&#39;s List) · 130+/day pre-crisis · Bab el-Mandeb: dry cargo partly back · crude &lt;3/day
+            Hormuz: 14 tracked vessel transits over Sep 12–13 (7/day; The National) · 7 on Sep 10, zero crude (Kpler) · 102 for the week ending Sep 3 (Lloyd&#39;s List) · 130+/day pre-crisis · Bab el-Mandeb: dry cargo partly back · crude &lt;3/day
           </figcaption>
         </figure>
       </header>
@@ -211,14 +211,14 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       <div class="grid gap-10 lg:grid-cols-2">
         <div>
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">US gasoline prices are up 53%</h2>
+            <h2 class="text-xl font-bold tracking-tight">US gasoline prices are up 54%</h2>
             <p class="font-mono text-[11px] text-faint">EIA weekly, national</p>
           </div>
           <div class="h-72">
-            <canvas id="gasChart" role="img" aria-label="US gasoline, EIA weekly national average (AAA daily readings Sep 7 to 13): $2.81 in January, May peak $4.50, $4.31 on Sep 13. Reference line at the January pre-crisis $2.81."></canvas>
+            <canvas id="gasChart" role="img" aria-label="US gasoline, EIA weekly national average (AAA daily readings Sep 7 to 14): $2.81 in January, May peak $4.50, $4.32 on Sep 14. Reference line at the January pre-crisis $2.81."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The national average has risen from $2.81 in January to $4.31, an increase of 53%.
+            The national average has risen from $2.81 in January to $4.32, an increase of 54%.
             Prices peaked at $4.50 in May. Every month since March has averaged above the levels
             seen before the crisis.
           </p>
@@ -229,13 +229,13 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <p class="font-mono text-[11px] text-faint">AAA national, sourced points</p>
           </div>
           <div class="h-72">
-            <canvas id="dieselChart" role="img" aria-label="US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $6.20 on Sep 13, a fourth straight record."></canvas>
+            <canvas id="dieselChart" role="img" aria-label="US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $6.23 on Sep 14, a fifth straight record."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Diesel cost $3.72 in the last week before the war, on Feb 27. By Sep 13, it had
-            reached $6.20, an increase of 67% and its fourth consecutive record. It passed the
+            Diesel cost $3.72 in the last week before the war, on Feb 27. By Sep 14, it had
+            reached $6.23, an increase of 67% and its fifth consecutive record. It passed the
             previous record of about $5.85, set in June 2022, on Sep 4.
-            This chart shows selected readings. You can see the daily Sep 3–13 readings
+            This chart shows selected readings. You can see the daily Sep 3–14 readings
             in the price spread chart below. Diesel prices have risen faster than gasoline prices
             as supplies of refined fuel have tightened.
           </p>
@@ -295,6 +295,14 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             fell to $95 by mid-April and $74 on Jun 30 as hopes for a ceasefire grew. It passed
             $100 again on Sep 9 as tanker attacks escalated, rose $6.82 to $108.03 on Sep 10,
             and settled at $104.61 on Sep 11, down 2.8%.
+          </p>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            On the morning of Sep 14, Brent was trading above $108, a four-month high,
+            after talks between Gulf foreign ministers and Iran were postponed. This was a
+            live price. The day's closing price wasn't available at the time of this update,
+            so the chart still ends with the Sep 11 close.
+          </p>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The gray line shows West Texas Intermediate (WTI), a US crude oil benchmark. Most WTI
             readings come from FRED's weekly spot series; the Sep 10–11 readings are futures closes.
             WTI is also the crude price used in the fuel price spread chart beside this one.
@@ -303,17 +311,17 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         </div>
         <div class="min-w-0">
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">The diesel price spread is up 80%</h2>
+            <h2 class="text-xl font-bold tracking-tight">The diesel price spread is up 82%</h2>
             <p class="font-mono text-[11px] text-faint tabular">Retail price less WTI, $/bbl · weekly (EIA/AAA − FRED).</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="crackChart" role="img" aria-label="Crack spread — US retail price less WTI, dollars per barrel, 2026: diesel from about 89 in mid-January, breaking above the 140s in early September to 153.6 on Sep 6 as retail's record streak ran ahead of crude, 148 on Sep 10 when crude jumped faster than retail, then new peaks of 154.3 on Sep 11, 158.7 on Sep 12, and 160.5 on Sep 13 as diesel set back-to-back records; gasoline from about 59 in January to about 81 on Sep 13, after dipping to 52 in March. The diesel series is display-thinned in September; the daily readings live in the data and the stat card."></canvas>
+            <canvas id="crackChart" role="img" aria-label="Crack spread — US retail price less WTI, dollars per barrel, 2026: diesel from about 89 in mid-January, breaking above the 140s in early September to 153.6 on Sep 6 as retail's record streak ran ahead of crude, 148 on Sep 10 when crude jumped faster than retail, then new peaks of 154.3 on Sep 11, 158.7 on Sep 12, 160.5 on Sep 13, and 161.6 on Sep 14 as diesel set a fifth straight record; gasoline from about 59 in January to about 81 on Sep 14, after dipping to 52 in March. The diesel series is display-thinned in September; the daily readings live in the data and the stat card."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             This chart subtracts the price of crude oil from the retail price of fuel, with both
             expressed in dollars per barrel. The difference covers refining, transportation, and
             retailing. It helps explain why prices at the pump can keep rising even when crude gets cheaper.
-            Diesel's spread grew from about $89 in January to $160.5 on Sep 13. It briefly narrowed
+            Diesel's spread grew from about $89 in January to $161.6 on Sep 14. It briefly narrowed
             to $148 on Sep 10, when crude prices rose faster than pump prices. Gasoline's spread
             has also widened, from about $59 to $78–84.
             This uses retail prices from EIA and AAA, minus WTI from FRED, with futures closes for
@@ -1688,7 +1696,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             { value: gasolinePreCrisis, text: "Jan $2.81 (pre-crisis)", color: "#3d6b64", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: gasolineYtd.length - 1, text: "Sep 13 · $4.31", ...endpoint },
+            { dataset: 0, index: gasolineYtd.length - 1, text: "Sep 14 · $4.32", ...endpoint },
             { dataset: 0, index: 18, text: "May peak $4.50", dy: -14, color: "#1c1b17" },
           ]),
         ],
@@ -1703,7 +1711,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       const gasXScale = {
         type: "linear" as const,
         min: 0,
-        max: 257,
+        max: 259,
         grid: { display: false },
         border: { display: true, color: "#d8d4c6", width: 0.5 },
         afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
@@ -1722,10 +1730,10 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       // Diesel YTD — true-date axis. The mixed-source series (monthly + weekly + daily)
       // would be an unreadable blob in Sep if drawn whole, so the view keeps the story
       // beats: pre-Sep 3 points, Sep 4 (old record broken), Sep 11 (first above $6.00),
-      // Sep 13 (record). The daily Sep 3–13 points stay in dieselYtd for the stat card;
+      // Sep 14 (record). The daily Sep 3–14 points stay in dieselYtd for the stat card;
       // the crack chart below shows the full daily run on its own thinned view.
       const dieselView = dieselYtd.filter(
-        (p) => p.date < "2026-09-03" || p.date === "2026-09-04" || p.date === "2026-09-11" || p.date === "2026-09-13",
+        (p) => p.date < "2026-09-03" || p.date === "2026-09-04" || p.date === "2026-09-11" || p.date === "2026-09-14",
       );
       new Chart(document.getElementById("dieselChart")!, {
         type: "line",
@@ -1755,7 +1763,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           maintainAspectRatio: false,
           interaction: { mode: "index", intersect: false },
           layout: { padding: { top: 18 } },
-          // max 6.4 = headroom above the 6.2040 record; ticks still step 0.5 to 6.2
+          // max 6.4 = headroom above the 6.2301 record; ticks still step 0.5 to 6.2
           scales: { y: yScale(3.2, 6.4, (v) => `$${v}`, 7), x: gasXScale },
           plugins: {
             tooltip: {
@@ -1776,7 +1784,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             { value: dieselOldRecord, text: "Jun 2022 record $5.85", color: "rgba(179,38,30,0.8)", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: dieselView.length - 1, text: "Sep 13 · $6.20 (record)", ...endpoint, color: "#b3261e" },
+            { dataset: 0, index: dieselView.length - 1, text: "Sep 14 · $6.23 (record)", ...endpoint, color: "#b3261e" },
           ]),
         ],
       });
@@ -1894,7 +1902,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       });
 
       // Wider x-scale for the bonds/inflation charts: data runs to Sep 12 (day 255).
-      const moneyXScale = { ...gasXScale, max: 257 };
+      const moneyXScale = { ...gasXScale, max: 259 };
       const mref = (val: number) => [{ x: 0, y: val }, { x: 257, y: val }];
 
       // Inflation chart: monthly points fall at month-END, so month ticks must sit at
@@ -2026,10 +2034,10 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       // Sep's AAA record streak is six 1–3-day-apart readings; on the linear time axis
       // that's a bunched, unreadable cluster of dots. Display-thin to the story beats —
       // the early-Sep breakout, the peak, the dip when crude outpaced retail, the latest.
-      // Same treatment as dieselView above. The dropped points (Sep 4, Sep 9, Sep 11, Sep 12) sit
-      // inside the visible segments, so the line's shape is unchanged.
+      // Same treatment as dieselView above. The dropped points (Sep 4, Sep 9, Sep 11, Sep 12,
+      // Sep 13) sit inside the visible segments, so the line's shape is unchanged.
       const dieCrackSrc = dieselYtd.filter(
-        (p) => p.date < "2026-09-03" || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-13"].includes(p.date)
+        (p) => p.date < "2026-09-03" || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-14"].includes(p.date)
       );
       const dieCrack = crackPts(dieCrackSrc);
       // Record label tracks the max, not a fixed offset from the end — new points keep landing.
@@ -2069,7 +2077,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             y: {
               type: "linear" as const,
               min: 40,
-              // headroom above the 160.5 record (Sep 13) so its label clears the top edge
+              // headroom above the 161.6 record (Sep 14) so its label clears the top edge
               max: 165,
               afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
                 scale.ticks = [40, 60, 80, 100, 120, 140, 160].map((v) => ({ value: v }));
