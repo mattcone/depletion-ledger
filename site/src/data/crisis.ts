@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-09-13";
+export const DATA_AS_OF = "2026-09-14";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -22,8 +22,8 @@ export interface SeriesPoint {
 // ---------- Headline stats ----------
 export const stats = [
   { label: "Brent", value: "$104.61", sub: "Sep 11 settle −2.8% · +38% vs pre-crisis ~$76" },
-  { label: "US diesel (AAA)", value: "$6.20", sub: "Sep 13 · new all-time record ($6.2040) — fourth straight · +67% vs pre-war $3.72" },
-  { label: "US gasoline (AAA)", value: "$4.31", sub: "Sep 13 · +17¢ in a week (AAA) · +53% vs Jan $2.81" },
+  { label: "US diesel (AAA)", value: "$6.23", sub: "Sep 14 · new all-time record ($6.2301) — fifth straight · +67% vs pre-war $3.72" },
+  { label: "US gasoline (AAA)", value: "$4.32", sub: "Sep 14 · +17¢ in a week (AAA) · +54% vs Jan $2.81" },
   { label: "SPR", value: "286.6M", sub: "w/e Aug 28 · −128.8M since pre-war 415.4M · lowest since Dec 1982" },
   { label: "US diesel & heating oil", value: "104.2M", sub: "as of Aug 28 · down 14% vs 5-yr avg · East Coast stocks 27% below last year" },
 ];
@@ -157,6 +157,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-09-11", value: 4.2950, note: "AAA release Sep 11 (logged)" },
   { date: "2026-09-12", value: 4.3104, note: "AAA release Sep 12 (logged)" },
   { date: "2026-09-13", value: 4.3130, note: "AAA release Sep 13 (logged)" },
+  { date: "2026-09-14", value: 4.3163, note: "AAA release Sep 14 (logged)" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -177,6 +178,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-09-11", value: 6.0556, note: "AAA record — first above $6.00, +20.6¢ in a week" },
   { date: "2026-09-12", value: 6.1602, note: "AAA record — third straight, +27.8¢ in a week" },
   { date: "2026-09-13", value: 6.2040, note: "AAA record — fourth straight, +30.7¢ in a week (AAA week-ago avg $5.8970)" },
+  { date: "2026-09-14", value: 6.2301, note: "AAA record — fifth straight, +32.9¢ in a week (AAA week-ago avg $5.9015)" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 
@@ -440,11 +442,14 @@ export const globalRefining = [
 // ---------- Upcoming watch list ----------
 export const watchList = [
   { date: "Any day", item: "An official update on the East–West pipeline. Reports put the loss at about 700,000 barrels per day from a damaged pumping station. Claims of damage in “at least eight places” remain unconfirmed. Satellite imagery shows flaring along the route, and no restart date has been announced.", why: "The standoff scenario depends on this bypass. A restart date or an assessment that repairs will take only days would change the outlook." },
-  { date: "Sep 14", item: "Gulf foreign ministers and Iran's foreign minister meet in Salalah for the first ministerial contact of the war, and the Iran–Oman shared-route agreement is expected to be signed and notified to the IMO. Bahrain will not attend.", why: "The signing and the IMO notification would be the first concrete step toward restoring tanker transit, though diplomats cited by the Financial Times say a full reopening still requires a US–Iran agreement." },
+  { date: "Any day", item: "A new date for talks between Gulf foreign ministers and Iran. Oman postponed the Sep 14 meeting. The Associated Press reported that Saudi Arabia objected to changes to the Iran–Oman shipping agreement. Bahrain won't attend until diplomatic relations with Iran resume. Iran and Oman say they'll arrange a new date.", why: "Resuming talks could help restore tanker access. For now, there's no new meeting date, and fewer than 10 vessels per day are passing through the strait." },
+  { date: "Any day", item: "An updated count of vessels passing through Bab el-Mandeb. After a two-day Saudi air campaign, two reports suggest the Houthis have withdrawn most of their forces from the strait. The Houthis, meanwhile, claim to have captured more islands and struck the Khamis Mushait air base with a missile.", why: "The vessel count would help show whether shipping conditions are improving despite conflicting reports about control of the strait." },
+  { date: "Sep 14", item: "An announcement of US sanctions against a major Iranian bank. The Treasury secretary said it would come on Sep 14, but it hadn't been announced as of that morning.", why: "The bank named could help show which Iranian trade routes the sanctions would affect." },
   { date: "Sep 16", item: "The Fed announces its rate decision. Futures markets put the chance of a 25-basis-point increase, from 3.50–3.75% to 3.75–4.00%, at about 86%. Polymarket puts it at 62%.", why: "August core consumer inflation exceeded expectations. The 2-year Treasury yield is at 4.63%, its highest since July 2024, and the 10-year briefly reached 4.99% on Sep 11, its highest since October 2023." },
   { date: "Sep 16", item: "The EIA releases its weekly report for the week ending Sep 4. Watch whether US diesel stocks fall below 100M barrels and how quickly the SPR is being used.", why: "The report will help show whether supplies are tightening or recovering." },
   { date: "Sep 30", item: "Russia's diesel export ban expires unless it's extended again. The US-led coalition is due to complete its withdrawal from Iraq, including Patriots leaving Erbil. Prediction-market bets settle, and Sweden's fuel-tax cut ends.", why: "Several decisions and deadlines fall in the same week, each with implications for supplies or prices." },
   { date: "Oct 7", item: "The EIA publishes its monthly outlook, the first written after the tanker attacks, refinery strikes, and no-sailing zone.", why: "Watch whether the EIA changes its view that shipping remains constrained but open. Its outlook of about $90 for the second half of 2026 is roughly $15 below the latest Brent settlement of $104.61." },
+  { date: "Nov 3", item: "The US midterm elections. President Trump has said three times that the war will end just after the elections. He also says Iran is calling regularly to seek a deal.", why: "Watch whether negotiations and military activity support the administration's stated timeline." },
   { date: "Nov 30", item: "Russia's jet-fuel export ban takes effect.", why: "The ban would reduce aviation fuel supplies as other reserves are already running low." },
 ];
 
@@ -473,7 +478,7 @@ export const russiaCurrentSpread = { date: "2026-09-09", low: 46, high: 80 };
 
 // Snapshot card rows (name / value / delta / flag) — same shape as invSnapshot
 export const russiaSnapshot = [
-  { name: "capacity offline", value: ">30%", delta: "Aug 29, Moscow Times — up from ~25% in April", flag: "today's estimates: 42.7% out (UA Gen Staff) to 54% (Forbes)" },
+  { name: "capacity offline", value: ">30%", delta: "Aug 29, Moscow Times — up from ~25% in April", flag: "Early September estimates of capacity offline: 42.7% (Ukraine's General Staff) to 54% (Forbes)" },
   { name: "strikes in August", value: "21+", delta: "record month, near-daily (Bloomberg, Aug 29)", flag: "" },
   { name: "Kirishi — Russia's #2 plant", value: "halted", delta: "~400K b/d, its only NW plant, two strikes in a month (UA.NEWS, Sep 2)", flag: "" },
   { name: "Perm capacity", value: "−86%", delta: "primary capacity, satellite imagery (Bloomberg, Aug 25)", flag: "every major Lukoil refinery is offline" },
