@@ -8,6 +8,7 @@ const { current } = Astro.props;
 const nav = [
   { href: "/", label: "Dashboard", id: "home" },
   { href: "/model", label: "Model", id: "model" },
+  { href: "https://github.com/mattcone/depletion-ledger", label: "GitHub", id: "github", external: true },
 ];
 ---
 
@@ -16,6 +17,8 @@ const nav = [
     nav.map((n) => (
       <a
         href={n.href}
+        target={n.external ? "_blank" : undefined}
+        rel={n.external ? "noopener" : undefined}
         class={
           current === n.id
             ? "font-semibold"
