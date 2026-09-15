@@ -24,8 +24,8 @@ export const stats = [
   { label: "Brent", value: "$105.68", sub: "Sep 14 close · +40% vs pre-crisis ~$76" },
   { label: "US diesel (AAA)", value: "$6.27", sub: "Sep 15 · new all-time record ($6.2694) — sixth straight · +68% vs pre-war $3.72" },
   { label: "US gasoline (AAA)", value: "$4.33", sub: "Sep 15 · +18¢ in a week (AAA) · +54% vs Jan $2.81" },
-  { label: "SPR", value: "286.6M", sub: "w/e Aug 28 · −128.8M since pre-war 415.4M · lowest since Dec 1982" },
-  { label: "US diesel & heating oil", value: "104.2M", sub: "as of Aug 28 · down 14% vs 5-yr avg · East Coast stocks 27% below last year" },
+  { label: "SPR", value: "285.4M", sub: "Sep 4 · down 1.2M in a week · down 130.1M from pre-war 415.4M · lowest since Dec 1982" },
+  { label: "US diesel & heating oil", value: "106.3M", sub: "Sep 4 · up 2.1M in a week · 13% below 5-year average · East Coast stocks 28% below last year" },
 ];
 
 // ---------- Brent, $/bbl — 2026 YTD (observed points) ----------
@@ -223,10 +223,11 @@ export const sprWeekly: { date: string; level: number }[] = [
   { date: "2026-08-14", level: 293.426 },
   { date: "2026-08-21", level: 289.726 },
   { date: "2026-08-28", level: 286.604 },
+  { date: "2026-09-04", level: 285.360 },
 ];
 export const sprPreWar = 415.441; // Feb 27, 2026 (EIA)
 export const sprFloors = [
-  { level: 300, name: "cavern damage ~300M (breached Aug 14)" },
+  { level: 300, name: "cavern damage ~300M (first report below: week ending Aug 7)" },
   { level: 250, name: "GEF operational minimum 250M" },
   { level: 180, name: "hard-operable 180M" },
   { level: 70, name: "DOE stated safe minimum 70M" },
@@ -247,25 +248,25 @@ export const sprDrawDeltas: { date: string; mmbbl: number }[] = sprWeekly
 export const sprDrawPace4w = +(((sprWeekly[sprWeekly.length - 5].level - sprWeekly[sprWeekly.length - 1].level) / 28).toFixed(2));
 
 // Floor dates on the standoff path (40% since the Sep 11 reweight) at 0.70M b/d
-// from the last actual (286.604M, w/e Aug 28)
+// from the last actual (285.360M, w/e Sep 4)
 const STANDOFF_RATE = 0.7;
 const _anchorDate = Date.parse(sprWeekly[sprWeekly.length - 1].date);
 const _daysToFloor = (floor: number) => (sprWeekly[sprWeekly.length - 1].level - floor) / STANDOFF_RATE;
-export const sprFloor250Date = new Date(_anchorDate + _daysToFloor(250) * 86400000); // ≈ Oct 19 2026
-export const sprFloor180Date = new Date(_anchorDate + _daysToFloor(180) * 86400000); // ≈ Jan 27 2027
+export const sprFloor250Date = new Date(_anchorDate + _daysToFloor(250) * 86400000); // ≈ Oct 25 2026
+export const sprFloor180Date = new Date(_anchorDate + _daysToFloor(180) * 86400000); // ≈ Feb 1 2027
 
 // Floor dates on the LAPSE path (top track since the Sep 11 ESPO reweight) at 1.35M b/d,
-// same reported-basis anchor (286.604M, w/e Aug 28)
+// same reported-basis anchor (285.360M, w/e Sep 4)
 const LAPSE_RATE = 1.35;
 const _daysToFloorLapse = (floor: number) => (sprWeekly[sprWeekly.length - 1].level - floor) / LAPSE_RATE;
-export const sprLapse250Date = new Date(_anchorDate + _daysToFloorLapse(250) * 86400000); // ≈ Sep 24 2026
-export const sprLapse180Date = new Date(_anchorDate + _daysToFloorLapse(180) * 86400000); // ≈ Nov 14 2026
+export const sprLapse250Date = new Date(_anchorDate + _daysToFloorLapse(250) * 86400000); // ≈ Sep 30 2026
+export const sprLapse180Date = new Date(_anchorDate + _daysToFloorLapse(180) * 86400000); // ≈ Nov 21 2026
 
-// ---------- Supply snapshot (EIA WPSR w/e Aug 28 + STEO Sep 9) ----------
+// ---------- Supply snapshot (EIA WPSR w/e Sep 4, released Sep 10 + STEO Sep 9) ----------
 export const invSnapshot = [
-  { name: "SPR", value: "286.6M bbl", delta: "−128.8M (−31%) since pre-war 415.4M", flag: "lowest since Dec 1982" },
-  { name: "US diesel & heating oil", value: "104.2M bbl", delta: "down 14% from the 5-year average (121.2M bbl)", flag: "East Coast stocks are 27% below last year" },
-  { name: "US crude", value: "424.5M bbl", delta: "+1% vs 5-yr avg (420.3M)", flag: "Refined fuels remain in shorter supply than crude oil" },
+  { name: "SPR", value: "285.4M bbl", delta: "−130.1M (−31%) since pre-war 415.4M", flag: "Lowest since Dec 1982 · down 1.2M barrels in the week ending Sep 4" },
+  { name: "US diesel & heating oil", value: "106.3M bbl", delta: "Up 2.1M barrels in the week ending Sep 4; 13% below the 5-year average (EIA summary)", flag: "East Coast stocks are 28% below last year" },
+  { name: "US crude", value: "424.1M bbl", delta: "At the 5-year average (EIA summary, week ending Sep 4)", flag: "Refined fuels remain in shorter supply than crude oil" },
   { name: "Global inventories", value: "−400M bbl YTD", delta: "EIA estimate, Sep 9", flag: "falling through end of 2026" },
 ];
 
@@ -462,7 +463,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     items: [
       { item: "A verified count of vessels passing through Hormuz. Gen. Wright claims tankers are carrying 10 million barrels a day under Navy escort. Preliminary tracking shows four vessels on Sep 14, down from 14 a day a week earlier.", why: "The claimed volume is roughly half the pre-war flow. The next count will help assess whether shipping activity supports that claim." },
       { item: "The Fed's rate decision — futures put a 25-basis-point increase at about 86% (Polymarket, 62%).", why: "A hike would add borrowing-cost pressure on top of fuel prices." },
-      { item: "The EIA's weekly report for the week ending Sep 4 — US diesel stocks near 100M barrels, and the pace of SPR draws.", why: "The clearest weekly read on whether supplies are tightening or recovering." },
+      { item: "The EIA's report for the week ending Sep 11. Watch for another week of slower reserve withdrawals and rising diesel stocks. The previous report showed withdrawals of 1.2 million barrels, down about 60% in a week. Diesel stocks stood at 106.3 million barrels.", why: "The weekly figures help show whether supplies are tightening or recovering." },
     ],
   },
   {

@@ -116,10 +116,10 @@ Global inventories down **400M bbl YTD** (EIA est.). **Crucial caveat: inputs we
 1. **Regime change — the branch weights shift.** Sep 1–7 is the first direct US–Iran tanker war of the crisis: the US has destroyed/disabled Iranian tankers, the IRGC has fired ballistic missiles at a US carrier and destroyer, and Iran has now explicitly threatened the Gulf energy infrastructure (not just shipping). Updated branch weights (author's judgment, see banner): Branch 1 10→8%, Branch 2 30→25%, Branch 3 35→**40%**, Branch 4 25→**27%**. The stalemate is now both the most likely and the most sticky outcome — OPEC+ pausing its hikes removed the one supply-side lever that could have absorbed a corridor failure.
 2. **The US political tripwire has been crossed.** §11 said the political break would land early because Slovenia and Ireland broke on *price* in March/April, not scarcity. US retail diesel has now crossed the **June 2022 all-time record** ($5.85 → $5.90) — the price level at which the 2022 political response (price-cap politics, RFS waivers, the SPR release) was triggered. The breaking-points table gains a crossed row; the question is no longer *whether* the US political break comes but *how many weeks after the record*.
 3. **OPEC+ flat for October = no spare capacity this winter.** The +188K bpd September tranche was the last of the months-long cut rollback; the group now has to negotiate the 2027 quota framework *inside* the crisis before it will move again (Reuters). Mechanically this raises Branch 3's floor: ~3M b/d of spare capacity (Saudi/UAE) is locked by a cartel that has just demonstrated it will not add barrels while the strait is contested.
-4. **The SPR draw decelerated** — 286.6M (w/e Aug 28), −3.1M in the week ≈ **443K b/d**, half the prior week's pace (814K b/d). Demand destruction and product imports are absorbing the draw. At 443K b/d from 286.6M: the 250M operational floor is ~83 weeks out; the 180M hard floor ~241 weeks. **But the pace is regime-dependent**: a re-escalation that breaks the dark-fleet corridor — now directly at risk under the "tanker for tanker" policy — puts the 600–800K b/d pace back on the table.
+4. **The SPR draw decelerated** — 286.6M (w/e Aug 28), −3.1M in the week ≈ **443K b/d**, half the prior week's pace (814K b/d). Demand destruction and product imports are absorbing the draw. At 443K b/d from 286.6M: the 250M operational floor is ~83 days out; the 180M hard floor ~241 days. **But the pace is regime-dependent**: a re-escalation that breaks the dark-fleet corridor — now directly at risk under the "tanker for tanker" policy — puts the 600–800K b/d pace back on the table.
 5. **The Russia front hardened into contract failure.** Kirishi fully halted (hit twice, as was NORSI) plus >50% of gasoline contracts unfulfilled means the **Sep 30** jet-fuel/non-producer product export ban (row 1 of the §11 cascade) is no longer a policy choice — with >30% of actual refining capacity offline it is the *consequence* of the capacity loss, and it lands in **3 weeks**.
 6. **Saudi August exports at a 9-year low** confirms the §10 squeeze is working: between Hormuz (~4%) and Bab el-Mandeb (−97% in August), the world's largest exporter has lost both routes, and the Houthi language has escalated from attacks to a declared "blockade on Saudi navigation" — the Red Sea front is now policy, not opportunism.
-7. **The next 10 days of data set the frame:** STEO **Sep 9** (the Aug 11 Q3-Brent-$85 forecast is already broken at $97+); WPSR **Sep 16** (w/e Sep 4 — standard Wednesday schedule; the Sep 9 print is the w/e Aug 28 week); IEA OMR **~Sep 10**; Polymarket "by Sep 15" settles **~Sep 14/15** (~7%); the Russian ban **Sep 30**.
+7. **The next 10 days of data set the frame:** STEO **Sep 9** (the Aug 11 Q3-Brent-$85 forecast is already broken at $97+); WPSR **Sep 16 (w/e Sep 11** — the w/e Sep 4 print landed **Sep 10** and was ingested late Sep 15: SPR draw down ~60% to ~0.18M b/d, distillates BUILT 2.1M to 106.3M; see the Sep 15 log); IEA OMR **~Sep 10**; Polymarket "by Sep 15" settles **~Sep 14/15** (~7%); the Russian ban **Sep 30**.
 
 **What did not change:** the verified AIS floor is still 6–12 transits/day vs ~10+/day satellite-assisted (the gap between claimed and verified flow remains the story); ARA gasoil is flat at 12.08M bbl — the floor, not a recovery; China's 1.2–1.4B bbl buffer is untouched; the §11 12-month cascade is intact — the escalation changes the *pace* at which its rows arrive, not its existence.
 
@@ -152,32 +152,36 @@ The Aug 31 Kpler report of **8.6M bpd through Hormuz** — and the US administra
 
 ---
 
-## Depletion timeline (Sep 2, 2026 — Day 184)
+## Depletion timeline (updated Sep 15, 2026 — Day 199; prior view Sep 2, Day 184)
 
 *Current consolidated view. Supersedes §9 (Aug 29) and the §9A baseline; full model and assumptions remain in [§9A](#9a-depletion-model-from-current-state-aug-30). Dated snapshots below are preserved.*
 
-**Where the stocks are (EIA, w/e Aug 28 — released Sep 2):**
+**Where the stocks are (EIA, w/e Sep 4 — released Sep 10, ingested late Sep 15 after the watchlist carried the wrong week-ending):**
 
 | Stock | Level (M bbl) | WoW | Days of cover |
 |---|---|---|---|
-| Commercial crude | 424.5 | −4.45 | ~24 days vs refinery input |
-| **SPR** | **286.6** (lowest since Dec 1982) | **−3.12** (~0.45M b/d) | see below |
-| Gasoline | 205.7 | −1.17 | **~23 days** (supply 8.9M b/d) |
-| **Distillate/diesel** | **104.2** | +0.8 | **~28 days** (supply 3.7M b/d; still **14% below 5-yr avg**) |
-| Jet fuel | 45.7 (w/e Aug 21) | — | ~26 days |
+| Commercial crude | 424.1 | −0.39 | ~24 days vs refinery input |
+| **SPR** | **285.4** (lowest since Dec 1982) | **−1.24** (~0.18M b/d — down ~60% from the prior week's ~0.45M pace) | see below |
+| Gasoline | 206.9 | +1.27 | ~24 days (supply 8.6M b/d) |
+| **Distillate/diesel** | **106.3** | **+2.09 BUILD** | ~29 days (supply 3.7M b/d; **13% below 5-yr avg** per EIA summary — the STEO's sub-100M call is in question) |
+| Jet fuel | 46.0 (w/e Sep 4) | +0.16 | ~26 days |
 
-US 4-week demand 20.4M b/d (−4% YoY). **The binding constraints are distillates and the SPR — not crude** (424.5M is 1% *above* the 5-year average). The geographic weak spot is **PADD1 (East Coast) distillate** (−27% YoY at Aug 21), the same Atlantic pool that feeds 34% of ARA's gasoil imports — **the US East Coast and Europe break in the same week, not in sequence**.
+(Prior week, w/e Aug 28: crude 424.5, SPR 286.6 at −3.12, gasoline 205.7, distillate 104.2 at +0.8.)
 
-**SPR milestones (286.6M; −117.6M YoY from 404.2M pre-war):**
+US 4-week products supplied 20.1M b/d (−3.7% YoY, EIA summary). **The binding constraints are distillates and the SPR — not crude** (424.1M, matching the 5-year average per the Sep 4 report). The geographic weak spot is **PADD1 (East Coast) distillate** (21.7M, −28% YoY, w/e Sep 4), the same Atlantic pool that feeds 34% of ARA's gasoil imports — **the US East Coast and Europe break in the same week, not in sequence**.
 
-| Milestone | Level | At current pace (0.45M b/d) | At June-era pace (1.4M b/d — lapse branch) |
-|---|---|---|---|
-| Cavern-damage floor | ~300M | **breached Aug 14** | — |
-| GEF operational floor | ~250M | **~82 days (≈ late Nov)** | **~26 days** |
-| Hard operable floor | ~180M | ~8 months | ~76 days |
-| DOE safe minimum | ~70M | ~16 months | ~5 months |
+**SPR milestones (285.4M; −130.1M from 415.4M pre-war):**
 
-**The three branches (weights reweighted Sep 2 — tanker-for-tanker removed the last de-escalation restraint; corridor claims uncorroborated by AIS):**
+| Milestone | Level | @ 0.45M b/d (corridor holds) | @ 0.70M b/d (standoff) | @ 1.35M b/d (lapse) |
+|---|---|---|---|---|
+| Cavern-damage floor | ~300M | **crossed early Aug (first reported below wk of Aug 7)** | — | — |
+| GEF operational floor | ~250M | ~79 days (≈ late Nov) | ~51 days (≈ late Oct) | ~26 days (≈ Sep 30) |
+| Hard operable floor | ~180M | ~late Apr 2027 | ~Feb 2027 | ~78 days (≈ Nov 21) |
+| DOE safe minimum | ~70M | ~late Dec 2027 | ~early Jul 2027 | — |
+
+The reported one-week pace (0.18M b/d) is far below even the corridor-holds column — **the Sep 16 print (w/e Sep 11) is the check: a second slow week or a DOE statement is the reweight surface** (draw-rate change is the spec's trigger).
+
+**The three branches — snapshot as of Sep 2, retained for the record (its weights and end-of-November levels predate the Sep 11 reweight; the current framework is 10/40/50 with the milestone table above). It was set when tanker-for-tanker removed the last de-escalation restraint and corridor claims were uncorroborated by AIS:**
 
 | Branch (end of Nov) | Weight (Sep 2) | SPR | Distillate | PADD1 by mid-Nov | Retail diesel | First rationing |
 |---|---|---|---|---|---|---|
@@ -286,7 +290,7 @@ What changed since June 30, and where this model landed:
 
 | June 30 claim | Aug 29 reality | Verdict |
 |---|---|---|
-| "SPR ~3 weeks from 300M cavern-damage floor" | **SPR is at 289.7M — already below the 300M floor.** Broke through ~wk of Aug 14 (293.4M). Lowest since Dec 1982. | **Confirmed, early.** The floor estimate was validated by the data (GEF uses ~250M as the *operational* salt-dome limit; DOE's stated safe minimum is ~70M). |
+| "SPR ~3 weeks from 300M cavern-damage floor" | **SPR is at 289.7M — already below the 300M floor.** Broke through in the week ending Aug 7 (298.7M; 293.4M by wk of Aug 21). Lowest since Dec 1982. | **Confirmed, early.** The floor estimate was validated by the data (GEF uses ~250M as the *operational* salt-dome limit; DOE's stated safe minimum is ~70M). |
 | "Brent $74 — false signal, release-driven calm" | Brent peaked **$117.29 (Apr avg)**, fell to $83.76 (Jul avg), now **~$88.10**. Retail never came down: gasoline peaked $4.61/gal, diesel $5.60 (May); AAA national avg $4.090 (Aug 28). | **Confirmed.** The low *crude* price coexisted with record *retail* prices — the buffer was spent to hold the crack spreads down, not the pump. |
 | "Base case: deal-based recovery, December diesel ~92%" | GEF downgraded: base case is now **standoff (50% weight), December diesel 75–82%**; de-escalation weight cut 65%→**25%**. | **Deteriorated.** The winter cliff is now the base case, not the tail. |
 | "Hormuz 5% of normal (5 ships/day vs 93)" | PortWatch (Aug 23): **3 vessels = 4% of the 85/day baseline**. GEF 10-day avg ~15 (incl. dark operators); Goldman: Gulf exports ~15–16M b/d ≈ 2/3 of pre-war, but **86% of crude tankers operate dark**. | **Roughly stable — still closed to the insured world.** The "reopening" is a shadow-fleet corridor, not commercial normalization. |
@@ -373,9 +377,9 @@ The SPR is salt-cavern storage with geology physics — not a tank you can pump 
 | Threshold | Level (M bbl) | Status (Aug 28) |
 |---|---|---|
 | Pre-war (Feb 28, 2026) | 404.2 | — |
-| Cavern-collapse floor (engineering est.) | ~300 | **BREACHED** (wk of Aug 14) |
-| **Current holding** | **286.6** (Aug 21: 289.7) | lowest since Dec 1982 |
-| Operational floor (GEF; salt-dome hydraulic limit) | ~250 | ~82 days of runway at 0.45M b/d |
+| Cavern-collapse floor (engineering est.) | ~300 | **BREACHED** (first reported below wk of Aug 7) |
+| **Current holding** | **285.4** (w/e Sep 4; Aug 28: 286.6) | lowest since Dec 1982; w/e Sep 4 draw just 1.2M bbl (~0.18M b/d) |
+| Operational floor (GEF; salt-dome hydraulic limit) | ~250 | ~51 days at the model's 0.70M b/d standoff pace (~79 days at 0.45M) |
 | Hard operable floor (June est.) | ~180 | — |
 | DOE stated safe operating minimum | ~70 | **~16 months** at 0.45M b/d |
 | Absolute max (unrecoverable) | ~44 | — |
@@ -392,7 +396,7 @@ SPR inventory (million barrels)
 331 ┤       ●  Jun 19
 320 ┤
 300 ┤································  ~300M cavern-damage floor
-    │      ▲ BREACHED ~Aug 14 (293.4)
+    │      ▲ BREACHED wk of Aug 7 (298.7)
 290 ┤              ●  289.7 (Aug 21)
 280 ┤               ●  286.6 (Aug 28) ←
 260 ┤
@@ -413,10 +417,10 @@ SPR inventory (million barrels)
 
 | Measure | Value |
 |---|---|
-| YoY draw (404.2 → 286.6) | **−117.6M bbl** in ~6 months (avg ~0.65M b/d) |
-| Recent pace (wk of Aug 28) | **−3.12M/wk ≈ 0.45M b/d** — slowing |
-| Runway to 250M (GEF floor) | ~82 days (≈ late Nov) at recent pace |
-| Runway to 70M (DOE min) | ~16 months at recent pace |
+| YoY draw (405.2 → 285.4) | **−119.9M bbl (−29.6%)** YoY |
+| Recent pace (w/e Sep 4) | **−1.24M/wk ≈ 0.18M b/d** — down ~60% from the prior week (−3.12M ≈ 0.45M) |
+| Runway to 250M (GEF floor) | ~51 days (late Oct) at the model's 0.70M b/d; ~79 days at 0.45M; far longer at the reported 0.18M |
+| Runway to 70M (DOE min) | ~308 days (early Jul 2027) at 0.70M b/d, from the Sep 4 anchor |
 
 **Deep-dive note (Aug 19 – Sep 2):** the ~3M/wk draws continued all August even though the IEA release program — 400M bbl global, 172M US (authorized Mar 11, ~120 days) — nominally ended in early July — no DOE/EIA statement explains the continuation. 286.6M sits inside the "generally accepted operational minimum" band of 250–300M cited by traders (OilPrice, Sep 1). If the draws are discretionary and accelerating without announcement, the ~82-day runway to 250M shortens; the draw *rate* is the leading indicator, not the level.
 

@@ -4,7 +4,9 @@ When oil supplies are disrupted, countries can use stored oil to make up the dif
 
 You can use it to explore what happens if shipping recovers, the current standoff continues, or the disruption gets worse. The estimates are updated every week as new official data becomes available. They're conditional: each one depends on the assumptions for that scenario holding up.
 
-A quick note on units: oil is measured in **barrels**. One barrel holds about 42 US gallons, or 159 liters. **M b/d** means millions of barrels per day. The SPR held about 415 million barrels before the war and holds about 287 million in the latest report.
+A quick note on units: oil is measured in **barrels**. One barrel holds about 42 US gallons, or 159 liters. **M b/d** means millions of barrels per day.
+
+The SPR held about 415 million barrels before the war. In the latest report, for the week ending Sep 4, it held 285.4 million.
 
 ## Where the information comes from
 
@@ -27,9 +29,9 @@ The model groups the possible outcomes into three scenarios and assigns each an 
 
 | Scenario | Odds (Sep 11) | What happens | Effect on the reserve |
 |---|---|---|---|
-| The corridor holds | 10% | The shipping agreement works and tanker traffic returns to normal. | Withdrawals slow to 0.45M b/d. |
-| The standoff continues | 40% | The corridor barely works, attacks continue, and the damaged Saudi bypass pipeline has no restart date. | Withdrawals run at 0.70M b/d, reaching 250M barrels around Oct 19. |
-| **The corridor lapses** | **50%** | The agreement breaks down or comes under attack, the strait is effectively closed, and the bypass stays shut. | Withdrawals run at about 1.35M b/d, reaching 250M barrels around Sep 24 and 180M by mid-November. |
+| The corridor holds | 10% | The shipping agreement works and tanker traffic returns to normal. | Assumes withdrawals of 0.45M b/d. |
+| The standoff continues | 40% | The corridor barely works, attacks continue, and the damaged Saudi bypass pipeline has no restart date. | At 0.70M b/d, the reserve would reach 250M barrels in late October. |
+| **The corridor lapses** | **50%** | The agreement breaks down or comes under attack, the strait is effectively closed, and the bypass stays shut. | At about 1.35M b/d, the reserve would reach 250M barrels around Sep 30 and 180M around Nov 21. |
 
 The odds changed from 10/50/40 to 10/40/50 on Sep 11, after Saudi Arabia suspended the East–West pipeline following attacks. That pipeline allowed some oil to bypass the strait, so its closure weakened the case for the standoff scenario. An official restart would return the odds to their previous values.
 
@@ -43,9 +45,9 @@ The model tracks four thresholds, also called *floors*. The dates below assume t
 
 | Floor | Level | What it means | Estimated date in this scenario |
 |---|---|---|---|
-| 1 | About 300M barrels | Some caverns can no longer pump below this level. | **Already crossed, on Aug 14** |
-| 2 | 250M barrels | The operational minimum cited by the reserve's operators. | Around Sep 24, 2026 |
-| 3 | 180M barrels | The hard operating limit used in the model. | Around Nov 14, 2026 |
+| 1 | About 300M barrels | Some caverns can no longer pump below this level. | **First report below this level: week ending Aug 7** |
+| 2 | 250M barrels | The operational minimum cited by the reserve's operators. | Around Sep 30, 2026 |
+| 3 | 180M barrels | The hard operating limit used in the model. | Around Nov 21, 2026 |
 | 4 | 70M barrels | The safe minimum stated by the US Department of Energy. The model stops withdrawals here. | Early February 2027 |
 
 As these limits reduce the reserve's ability to supply oil, the shortage has to be absorbed elsewhere. That can mean higher prices and less fuel available to consumers.
@@ -72,7 +74,9 @@ The Houthis' territorial gains also need to be considered alongside shipping act
 
 A direct US strike on the Houthis would also trigger a review. The direction of that change would depend on the circumstances at the time.
 
-The gap between the EIA outlook and market prices takes longer to assess. The EIA still expects oil at about $90 in late 2026, while Brent closed at $106.20 on Sep 14. The model treats a gap above roughly $10–15 as a sign that the market may be assigning more than 40% odds to the corridor lapsing. The current gap is about $16, just above that range.
+The gap between the EIA outlook and market prices takes longer to assess. The EIA still expects oil at about $90 in late 2026. Brent's corrected closing price for Sep 14 was $105.68, a gap of about $16.
+
+The model treats a gap above roughly $10–15 as a sign that the market may be assigning more than 40% odds to the corridor lapsing. The current gap is just above that range.
 
 The postponed Sep 14 talks are an example of news that didn't change the odds. Oman postponed the first meeting of Gulf foreign ministers and Iran during the war, with no new date announced. The Associated Press reported that Saudi Arabia objected to proposed changes to the Iran–Oman shipping agreement. Bahrain had also said it wouldn't attend.
 

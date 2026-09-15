@@ -130,12 +130,87 @@ curl -sG "https://api.eia.gov/v2/petroleum/pnp/wiup/data/" \
 3. **Facet values are case-sensitive** — copy them verbatim from the facet endpoint.
 4. `start`/`end` are `YYYY-MM-DD`; `frequency`, `period`, `offset`, `limit` also supported.
 
+### Landing checks ("has the report landed?" — verified Sep 15, corrected Sep 15 evening)
+
+**Don't trust the watchlist dates — query the API for the newest period.** (The Sep 15
+watchlist said the WPSR printed Sep 16; the report for the week ending Sep 4 had actually
+been released Sep 10 and sat un-ingested for five days.)
+
+```bash
+# EIA WPSR (weekly): newest period on any wstk series
+KEY=$(tr -d '[:space:]' < /home/mcone/depletion-ledger/.eia_api_key)
+curl -sG "https://api.eia.gov/v2/petroleum/stoc/wstk/data/" \
+  --data-urlencode "api_key=$KEY" --data-urlencode "data[0]=value" \
+  --data-urlencode "facets[series][]=WGTSTUS1" --data-urlencode "frequency=weekly" \
+  --data-urlencode "sort[0][column]=period" --data-urlencode "sort[0][direction]=desc" --data-urlencode "length=1"
+# → newest period = week-ending Friday. VERIFIED CYCLE (Sep 15, from the EIA page + archive
+#   folders, which are named by RELEASE date): prints WEDNESDAY 10:30 ET for the week ending
+#   the PRECEDING Friday (w/e Aug 28 → Sep 2; w/e Sep 4 → Sep 10, one day late (Thu);
+#   w/e Sep 11 → Sep 16 per the page's "Next Release Date"). The Sep 9 log's "12 days earlier"
+#   reasoning was wrong — it caused the w/e Sep 4 print to be missed for 5 days. The live
+#   report CSVs: https://ir.eia.gov/wpsr/table1.csv (Table 1 incl. the SPR row); archive
+#   pages: /petroleum/supply/weekly/archive/2026/<release-date>/ . Newest period past the week
+#   in our records ⇒ new print — fetch table1.csv for the SPR level (not in the v2 API).
+
+# BLS CPI and PPI (monthly, released on DIFFERENT days — Aug 2026: PPI Sep 10, CPI Sep 11;
+# check each separately). Params are startyear/endyear + registrationkey (verified Sep 15).
+# Data comes back NEWEST-FIRST — the latest value is data[0], not data[-1].
+KEY=$(tr -d '[:space:]' < /home/mcone/depletion-ledger/.bls_api_key)
+curl -s -X POST "https://api.bls.gov/publicAPI/v2/timeseries/data/" -H 'Content-Type: application/json' \
+  -d "{\"seriesid\":[\"CUUR0000SA0\"],\"startyear\":\"2026\",\"endyear\":\"2026\",\"registrationkey\":\"$KEY\"}"
+# → data[0].period 'M08' ⇒ the Sep CPI print landed. bls.gov/schedule 403s — don't scrape it.
+```
+
+Series-ID gotchas (all hit Sep 15): BLS monthly CPI is `CUUR0000SA0` (all items) — `...SAH` is
+the HOUSING series (per BLS's series-report page), not an annual average; PPI final demand is `WPUFD4` — `PCUACO`/`PPIACO`/`WPUACO` all 404
+(`PPIACO` is FRED's, not BLS's). EIA: data routes must END in `/data/`; explore the tree by
+querying a parent WITHOUT `/data/` (returns its `routes`); series IDs are route-specific
+(`WPUSTCR1` 404s on wstk — the crude series there is `WCRSTUS1`).
+
+### Natural gas (TTF / JKM) — Global LNG Hub / JOGMEC weekly (verified Sep 15)
+
+No key. The primary series for the site's gas charts is the JOGMEC-assessed spot (published
+weekly by Global LNG Hub, ~Monday): `./search.js "Natural gas prices weekly update JKM TTF Global LNG Hub" -n 5 --freshness 1w`,
+then `./content.js` on the newest. Values are printed as bands ("high-USD 28s/MBtu", "$27.0/MMBtu")
+— plot the printed value; TTF is €/MWh, convert at the week's printed EURUSD. TE CFD quotes
+(GLNGH's own table) are NOT exchange settlements — never plot them over the JOGMEC-assessed points.
+
+**API survey (Sep 15 — no free API exists for TTF/JKM; don't re-litigate):**
+- **EIA: NO.** The Natural Gas Weekly Update (eia.gov/naturalgas/weekly/) prints weekly TTF/JKM
+  averages (sourced from Bloomberg) in PROSE only, and in this timeline the page is stale at
+  Jan 2026. The API's natural-gas price routes (`natural-gas/pri/sum`, `natural-gas/sum/lsum`)
+  support monthly/annual frequencies only (domestic survey data) — no TTF/JKM series, no weekly.
+- **TradingEconomics:** daily TTF + JKM CFD quotes on the commodity pages (free, manual — this is
+  how the Sep 14 TTF point came in, disclosed in the point note); the API (developer.tradingeconomics.com)
+  is paid and CFD-based, not assessments. The JKM CFD (24.89, Sep 11) missed JOGMEC's mid-28s badly.
+- **oilpriceapi.com:** has `NATURAL_GAS_EUR` (TTF) / `NATURAL_GAS_ASIA` (JKM) endpoints but
+  7-day trial only, then paid.
+- **World Bank Pink Sheet:** free, official, MONTHLY TTF (+ Henry Hub) — good cross-check, not a
+  weekly source. (JKM presence unconfirmed.)
+- **Paid/enterprise if it ever matters:** ICE EOD JQ/NA futures (licensed), Bloomberg/Refinitiv.
+- **So the workflow stands:** GLNGH/JOGMEC weekly post (free, assessed, predictable slug) as the
+  primary; TE CFD pages only as a same-week spot check with a disclosed note.
+
+### Al Jazeera RSS (verified Sep 15)
+
+`curl -s -A "Mozilla/5.0" "https://www.aljazeera.com/xml/rss/all.xml"` — the ALL feed works;
+per-section feeds (`economy.xml`, `middle-east.xml`) return empty. ~25 items, ~12h window. Scan
+titles for oil/shipping/Iran/Russia/Yemen/rates; read any relevant miss with `./content.js`.
+
+### FOMC calendar (verified Sep 15)
+
+`curl -s -A "Mozilla/5.0" "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"` —
+static HTML; month in `<div class="fomc-meeting--shaded...">`, dates in
+`<div class="fomc-meeting__date">15-16*</div>` (no year; blocks are ordered by year, newest
+2026 section starts with its JANUARY meeting, not the next one — parse year + month + day and
+select the current or next meeting by date.
+
 ### Series / routes used or queued
 
 | Route → series | What it is | Status |
 |---|---|---|
 | `petroleum/pnp/wiup` → `WPULEUS3` | **U.S. Percent Utilization of Refinery Operable Capacity** (weekly) | ✅ in the site (the Refining chart). Values are WPSR-reported; definition = gross inputs ÷ latest monthly operable capacity. 60 series exist in `wiup` (other fuels, other geographies). |
-| `petroleum/stoc` | Weekly US petroleum **inventories** (crude / gasoline / **distillates** / SPR) | queued — the watchlist item "diesel stocks under 100M bbl" should come from here directly instead of the WPSR press page. |
+| `petroleum/stoc/wstk/data/` | Weekly US petroleum **inventories** (crude / gasoline / distillates / residual). **Verified Sep 15**: query `facets[series][]` = `WCRSTUS1` (crude, 1000 bbl), `WDISTUS1` (distillate fuel oil), `WGTSTUS1` (total gasoline), `WRESTUS1` (residual), `WTTSTUS1` (total crude+products); PADD1 distillates = `WDISTP11`. `frequency=weekly` (PLAIN param — NOT `facets[frequency][]`, that 400s). Week-ending date = `period`. **SPR is NOT in wstk** — SPR level still comes from the WPSR workbook/press page. **Landing check**: sort period desc, length 1 — if the newest `period` advanced past the week in our records, the WPSR is out (the API can load a new period on release day). |
 | `petroleum/pri` | Weekly/monthly **prices** (spot & contract) | queued — candidate for reconciling the open Brent/WTI weekly-spot question (FRED `DCOILBRENTEU` vs EIA dnav `RBRTE`, ~$9 gap). |
 | `petroleum/move` | **Trade flows** (exports/imports by country, product) | queued — cross-check §7B Russian export volumes. |
 | `petroleum/crd` | Weekly **production** (crude & NGLs by region) | queued. |
