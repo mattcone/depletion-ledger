@@ -16,7 +16,7 @@ import {
 } from "../data/crisis";
 
 // Crisis day number, computed from the data-as-of date (NOT the viewer's clock) so the
-// page is a stable snapshot: Sep 14 data = day 198, no matter when someone loads it.
+// page is a stable snapshot: Sep 15 data = day 199, no matter when someone loads it.
 const dayNum = Math.round((Date.parse(DATA_AS_OF) - Date.parse(CRISIS_DAY_1)) / 86400000);
 
 // Watch list as flat ledger rows (date column + text). Tufte: structure from the date
@@ -191,7 +191,8 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <line x1="162" y1="252" x2="144" y2="237" stroke="#b3261e" stroke-width="0.75" opacity="0.6" />
           </svg>
           <figcaption class="mt-2 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-            Hormuz: 14 tracked vessel transits over Sep 12–13 (7/day; The National) · 7 on Sep 10, zero crude (Kpler) · 102 for the week ending Sep 3 (Lloyd&#39;s List) · 130+/day pre-crisis · Bab el-Mandeb: Houthis now hold Mokha, Perim, and the Hanish islands (Sep 14) · 13–17 inbound vessels/day (Windward)
+            <span class="block">Hormuz: 4 vessels on Sep 14 (preliminary tracking) · 14 over Sep 12–13 (7/day; The National) · 7 on Sep 10, none carrying crude oil (Kpler) · 102 for the week ending Sep 3 (Lloyd&#39;s List) · more than 130/day before the crisis.</span>
+            <span class="mt-1 block">Bab el-Mandeb: the Houthis held Mokha, Perim, and the Hanish islands as of Sep 14. On Sep 15, they claimed 85 vessels had passed through the strait in 72 hours.</span>
           </figcaption>
         </figure>
       </header>
@@ -228,27 +229,27 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <p class="font-mono text-[11px] text-faint">EIA weekly, national</p>
           </div>
           <div class="h-72">
-            <canvas id="gasChart" role="img" aria-label="US gasoline, EIA weekly national average (AAA daily readings Sep 10 to 14): $2.81 in January, May peak $4.50, $4.32 on Sep 14. Reference line at the January pre-crisis $2.81."></canvas>
+            <canvas id="gasChart" role="img" aria-label="US gasoline, EIA weekly national average (AAA daily readings Sep 10 to 15): $2.81 in January, May peak $4.50, $4.33 on Sep 15. Reference line at the January pre-crisis $2.81."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The national average has risen from $2.81 in January to $4.32, an increase of 54%.
+            The national average has risen from $2.81 in January to $4.33, an increase of 54%.
             Prices peaked at $4.50 in May. Every month since March has averaged above the levels
             seen before the crisis.
           </p>
         </div>
         <div>
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">US diesel prices are up 67%</h2>
+            <h2 class="text-xl font-bold tracking-tight">US diesel prices are up 68%</h2>
             <p class="font-mono text-[11px] text-faint">AAA national, sourced points</p>
           </div>
           <div class="h-72">
-            <canvas id="dieselChart" role="img" aria-label="US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $6.23 on Sep 14, a fifth straight record."></canvas>
+            <canvas id="dieselChart" role="img" aria-label="US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $6.27 on Sep 15, a sixth straight record."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Diesel cost $3.72 in the last week before the war, on Feb 27. By Sep 14, it had
-            reached $6.23, an increase of 67% and its fifth consecutive record. It passed the
+            Diesel cost $3.72 in the last week before the war, on Feb 27. By Sep 15, it had
+            reached $6.27, an increase of 68% and its sixth consecutive record. It passed the
             previous record of about $5.85, set in June 2022, on Sep 4.
-            This chart shows selected readings. You can see the daily Sep 3–14 readings
+            This chart shows selected readings. You can see the daily Sep 3–15 readings
             in the price spread chart below. Diesel prices have risen faster than gasoline prices
             as supplies of refined fuel have tightened.
           </p>
@@ -311,18 +312,19 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <p class="font-mono text-[11px] text-faint tabular">Brent: sourced points (EIA monthly avgs: Mar $103.0 · Apr $117.29 · Jul $83.76) · WTI: weekly (FRED)</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil, 2026 year to date: Brent at $76 before the closure, $126 intraday peak in March, $74 on Jun 30, a single-day jump to $108.03 on Sep 10, a settle of $104.61 on Sep 11, and a close of $106.20 on Sep 14; WTI weekly from about $58 in January to $102.93 on Sep 10, $100.05 on Sep 11, and $101.90 on Sep 14. Reference lines at $100 and the pre-crisis $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil, 2026 year to date: Brent at $76 before the closure, $126 intraday peak in March, $74 on Jun 30, a single-day jump to $108.03 on Sep 10, a settle of $104.61 on Sep 11, and a close of $105.68 on Sep 14; WTI weekly from about $58 in January to $102.93 on Sep 10, $100.05 on Sep 11, and $101.39 on Sep 14. Reference lines at $100 and the pre-crisis $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Brent rose from $76 before the closure to an intraday peak of $126 in March, then
             fell to $95 by mid-April and $74 on Jun 30 as hopes for a ceasefire grew. It passed
             $100 again on Sep 9 as tanker attacks escalated, rose $6.82 to $108.03 on Sep 10,
             and settled at $104.61 on Sep 11.
-            </p>
-            <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Brent closed at $106.20 on Sep 14. The increase followed the postponement of talks
-            between Gulf foreign ministers and Iran, along with reports that Saudi Arabia's
-            East–West pipeline could remain out of service for 3–5 weeks.
+          </p>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            Brent closed at $105.68 on Sep 14 after reaching $108 earlier in the day.
+            Prices rose after talks between Gulf foreign ministers and Iran were postponed.
+            Reuters also reported that stocks at Yanbu, Saudi Arabia's Red Sea port, could
+            support another five to seven days of exports if the East–West pipeline remains closed.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The gray line shows West Texas Intermediate (WTI), a US crude oil benchmark. Most WTI
@@ -337,13 +339,13 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <p class="font-mono text-[11px] text-faint tabular">Retail price less WTI, $/bbl · weekly (EIA/AAA − FRED).</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. Diesel rises from about $89 in January to $153.6 on Sep 6, narrows to $148 on Sep 10, and reaches $159.8 on Sep 14. Gasoline rises from about $59 in January to $79.4 on Sep 14, after falling to $52 in March. The diesel chart shows selected readings to keep nearby points legible."></canvas>
+            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. Diesel rises from about $89 in January to $153.6 on Sep 6, narrows to $148 on Sep 10, and reaches $161.9 on Sep 15. Gasoline rises from about $59 in January to $80.4 on Sep 15, after falling to $52 in March. The diesel chart shows selected readings to keep nearby points legible."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             This chart subtracts the price of crude oil from the retail price of fuel, with both
             expressed in dollars per barrel. The difference covers refining, transportation, and
             retailing. It helps explain why prices at the pump can keep rising even when crude gets cheaper.
-            Diesel's spread grew from about $89 in January to $159.8 on Sep 14. It briefly narrowed
+            Diesel's spread grew from about $89 in January to $161.9 on Sep 15. It briefly narrowed
             to $148 on Sep 10, when crude prices rose faster than pump prices. Gasoline's spread
             has also widened, from about $59 to $78–84.
             This uses retail prices from EIA and AAA, minus WTI from FRED, with futures closes for
@@ -860,21 +862,30 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           <div class="mt-6 grid gap-10 lg:grid-cols-2">
             <div>
               <h3 class="text-lg font-bold tracking-tight">US 10-year Treasury yield</h3>
-              <p class="mt-2 font-mono text-[11px] text-faint">10-yr US Treasury, % · weekly closes (FRED) · Jan 2 – Sep 14 · Sep 11 and 14: Yahoo session closes.</p>
+              <p class="mt-2 font-mono text-[11px] text-faint">10-year US Treasury yield, % · chart through Sep 14 · weekly closes (FRED) · Sep 11 and 14: Yahoo closing values.</p>
               <div class="mt-4 h-72">
-                <canvas id="treasury10yChart" role="img" aria-label="US 10-year Treasury yield, 2026: 4.19 percent on Jan 2, falling to 3.97 on Feb 27 before the war, then rising steadily through the crisis — 4.44 by late March, 4.59 in mid-May, 4.69 in late July — to 4.95 on Sep 10, 4.975 on Sep 11, which touched 4.992 intraday, the highest since October 2023, and easing to 4.961 on Sep 14. Reference lines at the pre-closure 3.97 and at 4.8, the January 2025 high that strategists watch."></canvas>
+                <canvas id="treasury10yChart" role="img" aria-label="US 10-year Treasury yield, 2026: 4.19% on Jan 2, falling to 3.97% on Feb 27 before the war, then rising to 4.44% by late March, 4.59% in mid-May, 4.69% in late July, 4.95% on Sep 10, and 4.975% on Sep 11. The chart ends at 4.961% on Sep 14. Reference lines mark the pre-war 3.97% and the January 2025 high of 4.8%."></canvas>
               </div>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 The 10-year Treasury yield is the rate the US government pays to borrow for a decade.
-                It also influences mortgage and business loan rates. It has risen by 100 basis points,
-                or one percentage point, since before the war.
+                It also influences mortgage and business loan rates. It has risen by about one
+                percentage point, or 100 basis points, since before the war.
                 Inflation and concerns about government debt are both putting pressure on rates.
                 The national debt exceeds $40 trillion, and $8.4 trillion of Treasuries must be
-                refinanced by year-end. The 10-year yield reached 4.975% on Sep 11, briefly touched
-                4.992% — its highest level since October 2023 — then eased to 4.961% on Sep 14.
-                The 2-year yield was 4.63% on Sep 11, its highest since July 2024. Meanwhile, the 10-year measure of expected inflation eased
-                to 2.36%, suggesting that the recent rise in yields reflects higher borrowing costs
-                after inflation rather than higher inflation expectations.
+                refinanced by year-end.
+              </p>
+              <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+                The 10-year yield closed at 4.975% on Sep 11 after briefly reaching 4.992%,
+                its highest level since October 2023. It eased to 4.961% on Sep 14.
+                Al Jazeera reported that it reached 5.02% during trading on Sep 15, its highest
+                level since 2007, as traders anticipated a Federal Reserve rate increase.
+                That latest quote isn't plotted; the chart shows closing values through Sep 14.
+              </p>
+              <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+                The 2-year yield was 4.63% on Sep 11, its highest since July 2024.
+                The market's measure of expected inflation over the next 10 years eased to 2.36%.
+                That suggests investors are seeking higher returns after inflation, even as
+                their inflation expectations have fallen.
               </p>
             </div>
             <div>
@@ -1716,7 +1727,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             { value: gasolinePreCrisis, text: "Jan $2.81 (pre-crisis)", color: "#3d6b64", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: gasolineYtd.length - 1, text: "Sep 14 · $4.32", ...endpoint },
+            { dataset: 0, index: gasolineYtd.length - 1, text: "Sep 15 · $4.33", ...endpoint },
             { dataset: 0, index: 18, text: "May peak $4.50", dy: -14, color: "#1c1b17" },
           ]),
         ],
@@ -1750,10 +1761,10 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       // Diesel YTD — true-date axis. The mixed-source series (monthly + weekly + daily)
       // would be an unreadable blob in Sep if drawn whole, so the view keeps the story
       // beats: pre-Sep 3 points, Sep 4 (old record broken), Sep 11 (first above $6.00),
-      // Sep 14 (record). The daily Sep 3–14 points stay in dieselYtd for the stat card;
+      // Sep 15 (record). The daily Sep 3–15 points stay in dieselYtd for the stat card;
       // the crack chart below shows the full daily run on its own thinned view.
       const dieselView = dieselYtd.filter(
-        (p) => p.date < "2026-09-03" || p.date === "2026-09-04" || p.date === "2026-09-11" || p.date === "2026-09-14",
+        (p) => p.date < "2026-09-03" || p.date === "2026-09-04" || p.date === "2026-09-11" || p.date === "2026-09-14" || p.date === "2026-09-15",
       );
       new Chart(document.getElementById("dieselChart")!, {
         type: "line",
@@ -1783,7 +1794,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           maintainAspectRatio: false,
           interaction: { mode: "index", intersect: false },
           layout: { padding: { top: 18 } },
-          // max 6.4 = headroom above the 6.2301 record; ticks still step 0.5 to 6.2
+          // max 6.4 = headroom above the 6.2694 record; ticks still step 0.5 to 6.2
           scales: { y: yScale(3.2, 6.4, (v) => `$${v}`, 7), x: gasXScale },
           plugins: {
             tooltip: {
@@ -1804,7 +1815,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             { value: dieselOldRecord, text: "Jun 2022 record $5.85", color: "rgba(179,38,30,0.8)", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: dieselView.length - 1, text: "Sep 14 · $6.23 (record)", ...endpoint, color: "#b3261e" },
+            { dataset: 0, index: dieselView.length - 1, text: "Sep 15 · $6.27 (record)", ...endpoint, color: "#b3261e" },
           ]),
         ],
       });
@@ -2022,11 +2033,11 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             { value: 76, text: "pre-crisis $76 (Feb 27)", color: "#3d6b64", align: "right" },
           ]),
           directLabels([
-            { dataset: 0, index: 15, text: "Sep 14 · $106.20 — Brent", ...endpoint },
+            { dataset: 0, index: 15, text: "Sep 14 · $105.68 — Brent", ...endpoint },
             { dataset: 0, index: 3, text: "peak $126 · Mar 18", dy: -16, color: "#1c1b17" },
             { dataset: 0, index: 6, text: "Jun 30 · $74", dy: 20, ...note },
             { dataset: 0, index: 1, text: "war began Feb 28", dx: 8, dy: 18, align: "left", ...note },
-            { dataset: 1, index: wtiWeekly.length - 1, text: "Sep 14 · $101.90 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a" },
+            { dataset: 1, index: wtiWeekly.length - 1, text: "Sep 14 · $101.39 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a" },
           ]),
         ],
       });
@@ -2059,7 +2070,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       // Same treatment as dieselView above. The dropped points (Sep 4, Sep 9, Sep 11, Sep 12,
       // Sep 13) sit inside the visible segments, so the line's shape is unchanged.
       const dieCrackSrc = dieselYtd.filter(
-        (p) => p.date < "2026-09-03" || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-14"].includes(p.date)
+        (p) => p.date < "2026-09-03" || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-14", "2026-09-15"].includes(p.date)
       );
       const dieCrack = crackPts(dieCrackSrc);
       // Record label tracks the max, not a fixed offset from the end — new points keep landing.
