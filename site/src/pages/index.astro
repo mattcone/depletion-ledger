@@ -35,7 +35,7 @@ for (const grp of watchGroups) {
 // Scale runs 60 → 750M so the all-time record (Dec 2009, 726.6M) fits in the bar.
 const y = (level: number) => 430 - ((level - 60) / (750 - 60)) * 400;
 const yPreWar = y(sprPreWar);      // 415.441
-const yNow = y(286.604);
+const yNow = y(285.360);
 const g = sprFloors.map((f) => ({ ...f, y: y(f.level) }));
 // Historical anchors — EIA official monthly series (eia.gov/dnav/pet/hist, MCSSTUS1)
 const hist = [
@@ -68,9 +68,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
 // Floor dates, formatted
 // UTC so the date is deterministic regardless of the build machine's timezone/DST
 const fmtFloor = (d: Date) => d.toLocaleDateString("en-US", { timeZone: "UTC", month: "short", day: "numeric" });
-const floor250 = fmtFloor(sprFloor250Date); // "Oct 19" (standoff path)
+const floor250 = fmtFloor(sprFloor250Date); // "Oct 25" (standoff path)
 const floor180 = `${fmtFloor(sprFloor180Date)}, ${sprFloor180Date.getFullYear()}`;
-const floorLapse250 = fmtFloor(sprLapse250Date); // "Sep 24" (lapse path — top track since Sep 11)
+const floorLapse250 = fmtFloor(sprLapse250Date); // "Sep 30" (lapse path — top track since Sep 11)
 const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYear()}`;
 
 ---
@@ -321,7 +321,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             and settled at $104.61 on Sep 11.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Brent closed at $105.68 on Sep 14 after reaching $108 earlier in the day.
+            Brent closed at $105.68 on Sep 14 after reaching $106.73 earlier in the day.
             Prices rose after talks between Gulf foreign ministers and Iran were postponed.
             Reuters also reported that stocks at Yanbu, Saudi Arabia's Red Sea port, could
             support another five to seven days of exports if the East–West pipeline remains closed.
@@ -415,13 +415,13 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         <p class="mb-6 max-w-prose text-[13px] leading-relaxed text-ink/80">
           The Strategic Petroleum Reserve (SPR) is the US government's emergency supply of crude
           oil. It was created after the energy shortages of the 1970s. The reserve held 415.4 million
-          barrels when the war began and holds 286.6 million in the latest report. Oil is being
-          released to help make up for supplies that can't leave the Gulf. The rate of those
-          withdrawals tells us how quickly the emergency supply is being used.
+          barrels when the war began. The latest report puts it at 285.4 million as of Sep 4.
+          Oil is being released to help make up for supplies that can't leave the Gulf. You can
+          use the withdrawal rate to see how quickly the emergency supply is being used.
         </p>
         <!-- SPR chart (full width) -->
         <div class="relative h-96">
-            <canvas id="sprChart" role="img" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 286.6 million on Aug 28. Three dashed scenario paths to March 2027 at 0.45, 0.70, and 1.35 million barrels per day; floors at 300 (cavern, breached Aug 14), 250 (GEF minimum), 180 (operable), 70 (DOE safe minimum)."></canvas>
+            <canvas id="sprChart" role="img" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 285.4 million on Sep 4. Three dashed scenario paths to March 2027 at 0.45, 0.70, and 1.35 million barrels per day; floors at 300 (cavern, first reported below in the week ending Aug 7), 250 (GEF minimum), 180 (operable), 70 (DOE safe minimum)."></canvas>
             <div
               id="sprFloorTip"
               class="pointer-events-none absolute z-10 hidden max-w-[300px] border border-rule bg-[rgba(255,255,248,0.97)] px-3 py-2 text-[12px] leading-snug text-ink shadow-sm"
@@ -430,15 +430,23 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The red lines mark the model's reserve thresholds, or <em>floors</em>. At about <span class="font-semibold text-ink">300M</span> barrels, some caverns risk damage and
-            can't safely be refilled after a withdrawal. That threshold was crossed on Aug 14.
+            can't safely be refilled after a withdrawal. The first report below that threshold
+            was for the week ending Aug 7, at 298.7 million barrels.
+          </p>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The other floors are <span class="font-semibold text-ink">250M</span>, the GEF minimum
             for sustained withdrawals; <span class="font-semibold text-ink">180M</span>, the hard
             operating limit; and <span class="font-semibold text-ink">70M</span>, the Department
             of Energy's stated safe minimum. The model stops withdrawals at 70M.
+          </p>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The dashed lines show what happens if withdrawals continue at 0.45M, 0.70M, or 1.35M
-            barrels per day from the Aug 28 level. The estimates extend to about March 2027.
-            The Sep 9 EIA report covers the week ending Aug 28. The next reading is due Sep 16,
-            for the week ending Sep 4.
+            barrels per day from the Sep 4 level. The estimates extend to about March 2027.
+          </p>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            Withdrawals slowed to about 0.2 million barrels a day in the week ending Sep 4,
+            while diesel stocks rose by 2.1 million barrels, according to the EIA's Sep 10 report.
+            The next report is due Sep 16 and covers the week ending Sep 11.
           </p>
 
       <!-- Likely outcomes -->
@@ -497,12 +505,12 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           <h2 class="mb-4 text-xl font-bold tracking-tight">The stockpile, in context</h2>
           <p class="mb-4 text-[13px] leading-relaxed text-faint">
             This chart puts the current reserve in perspective. It held 727 million barrels at
-            its December 2009 peak and 294 million at the previous low in December 1982. Today it
-            holds 286.6 million. The green line marks the level before the war. In the model,
+            its December 2009 peak and 294 million at the previous low in December 1982. It
+            held 285.4 million on Sep 4. The green line marks the level before the war. In the model,
             withdrawals stop at the 70 million barrel floor.
           </p>
           <figure class="relative mx-auto w-full max-w-[280px]">
-          <svg id="sprGauge" viewBox="0 0 320 470" role="img" aria-label="SPR level gauge on a scale from 60 to 750 million barrels. Now 286.6, down from 415.4 pre-war. Grey historical markers: 727 all-time peak in December 2009, 592 in the mid-1990s, and 294 in December 1982 — the previous record low, now breached. Red dashed lines mark the floors at 300, 250, 180, and 70. Hover any line for details.">
+          <svg id="sprGauge" viewBox="0 0 320 470" role="img" aria-label="SPR level gauge on a scale from 60 to 750 million barrels. Now 285.4, down from 415.4 pre-war. Grey historical markers: 727 all-time peak in December 2009, 592 in the mid-1990s, and 294 in December 1982 — the previous record low, now breached. Red dashed lines mark the floors at 300, 250, 180, and 70. Hover any line for details.">
             <!-- historical anchors (EIA all-time record) -->
             {hist.map((h) => (
               <g>
@@ -523,7 +531,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             ))}
             <!-- labels -->
             <text x="224" y={yPreWar - 6} font-size="10" font-family="IBM Plex Mono, monospace" fill="#3d6b64">415.4 pre-war</text>
-            <text x="224" y={yNow + 14} font-size="11" font-weight="600" font-family="IBM Plex Mono, monospace" fill="#1c1b17">286.6 now</text>
+            <text x="224" y={yNow + 14} font-size="11" font-weight="600" font-family="IBM Plex Mono, monospace" fill="#1c1b17">285.4 now</text>
             <!-- hover hit-areas (transparent, wide) -->
             {g.map((f) => (
               <line x1="96" x2="216" y1={f.y} y2={f.y} stroke="transparent" stroke-width="12" style="cursor:crosshair" data-tip={f.name} />
@@ -532,11 +540,11 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
               <line x1="30" x2="96" y1={h.y} y2={h.y} stroke="transparent" stroke-width="12" style="cursor:crosshair" data-tip={h.tip} />
             ))}
             <line x1="96" x2="216" y1={yPreWar} y2={yPreWar} stroke="transparent" stroke-width="8" style="cursor:crosshair" data-tip="415.4 — pre-war level (Feb 27, 2026, EIA)" />
-            <line x1="96" x2="216" y1={yNow} y2={yNow} stroke="transparent" stroke-width="8" style="cursor:crosshair" data-tip="286.6 — now (EIA, w/e Aug 28) · lowest level in 44 years" />
+            <line x1="96" x2="216" y1={yNow} y2={yNow} stroke="transparent" stroke-width="8" style="cursor:crosshair" data-tip="285.4 — now (EIA, w/e Sep 4) · lowest level in 44 years" />
           </svg>
           <figcaption class="mt-2 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-            SPR, million bbl (EIA w/e Aug 28)
-            <span class="block">−128.8M since Feb 27 · lowest level in 44 years</span>
+            SPR, million bbl (EIA w/e Sep 4)
+            <span class="block">Down 130.1M since Feb 27 · lowest level in 44 years</span>
             <span class="block text-alarm/80">red lines: the floors — 300 · 250 · 180 · 70 (hover a line)</span>
           </figcaption>
         </figure>
@@ -565,10 +573,15 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         <div>
           <h2 class="mb-4 text-xl font-bold tracking-tight">Supply snapshot</h2>
           <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
-            Large withdrawals began on Apr 3, when the reserve held 413.3 million barrels, and
-            reached about 1.2 million barrels per day in May. They have since slowed to about
-            0.45 million barrels per day, the rate used in the corridor-holds scenario. Meanwhile,
-            US diesel and heating-oil stocks are 14% below their five-year average.
+            Large withdrawals began on Apr 3, when the reserve held 413.3 million barrels.
+            They reached about 1.2 million barrels per day in May. In the week ending Sep 4,
+            withdrawals averaged about 0.18 million barrels per day, down about 60% from the
+            previous week. That's below the 0.45 million barrels per day assumed in the
+            corridor-holds scenario.
+          </p>
+          <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
+            US diesel and heating-oil stocks were 13% below their five-year average on Sep 4,
+            according to the EIA.
           </p>
           <div class="border border-rule rounded-md">
             {invSnapshot.map((r, i) => (
@@ -588,27 +601,28 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         <div>
           <h2 class="mb-4 text-xl font-bold tracking-tight">How quickly the reserve is shrinking</h2>
           <p class="mb-4 text-[13px] leading-relaxed text-faint">
-            The current withdrawal rate and estimated dates for reaching the reserve thresholds, using the Sep 9 EIA report.
+            The latest withdrawal rate and estimated dates for reaching the reserve thresholds,
+            using the EIA's Sep 10 report for the week ending Sep 4.
           </p>
           <div class="space-y-6">
             <!-- Quadrant: current SPR drawdown rate -->
             <div class="flex flex-col justify-between border border-rule p-5">
               <div>
-                <p class="text-xs text-faint">SPR drawdown rate</p>
+                <p class="text-xs text-faint">SPR withdrawal rate</p>
                 <p class="tabular mt-2 font-mono text-3xl font-semibold text-crude">
                   {sprDrawPace4w}<span class="ml-1 text-sm font-medium text-ink/60">million barrels/day</span>
                 </p>
                 <p class="mt-1.5 text-xs leading-relaxed text-faint">
-                  4-week average, EIA weekly report (week ending Aug 28) · latest single week: {latestDrawPace}.
+                  4-week average, EIA weekly report (week ending Sep 4) · latest single week: {latestDrawPace}.
                 </p>
               </div>
               <div>
-                <svg viewBox="0 0 160 40" class="w-full" role="img" aria-label="Sparkline of weekly SPR draw, last 16 weeks: from a May peak of 9.9 million barrels per week to 3.1 now">
+                <svg viewBox="0 0 160 40" class="w-full" role="img" aria-label="Weekly SPR withdrawals over 16 weeks, ending Sep 4: about 9 million barrels at the late-May peak, falling to 1.2 million in the latest week. The earlier peak of 9.9 million barrels in the week ending May 15 isn't shown.">
                   <polyline points={sparkLine} fill="none" stroke="#b4690e" stroke-width="1.5" />
                   <circle cx={sparkMaxPt.x} cy={sparkMaxPt.y} r="1.8" fill="#b4690e" />
                   <circle cx={sparkMinPt.x} cy={sparkMinPt.y} r="1.8" fill="#1c1b17" />
                 </svg>
-                <p class="mt-1 text-[11px] text-faint">Weekly drain in millions of barrels — May peak of 9.9M, now 3.1M.</p>
+                <p class="mt-1 text-[11px] text-faint">Weekly withdrawals: about 9M barrels at the late-May peak, falling to 1.2M by Sep 4. The earlier 9.9M peak in the week ending May 15 falls outside this 16-week chart.</p>
               </div>
             </div>
 
@@ -621,7 +635,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
                 </p>
                 <p class="mt-1.5 text-xs leading-relaxed text-faint">
                   The corridor-lapse scenario has the highest odds, at 50% as of Sep 11. It assumes
-                  withdrawals of 1.35M barrels per day from the reported 286.6M barrels on Aug 28.
+                  withdrawals of 1.35M barrels per day from the reported 285.4M barrels on Sep 4.
                   The standoff scenario, at 40%, reaches the same threshold on {floor250}.
                 </p>
               </div>
@@ -2329,15 +2343,19 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       // Plain-language explanations for the four red floor lines — shown in an HTML
       // tooltip when the cursor is within a few pixels of a line (below).
       const floorExplains: Record<number, string> = {
-        300: "300M — cavern-damage threshold, breached Aug 14: below it the caverns cannot be safely refilled after a draw",
-        250: "250M — operational minimum for a sustained draw; the most-likely (standoff) path reaches it in late October",
+        300: "300M — the model's cavern-damage threshold. Below it, caverns can't safely be refilled after withdrawals. First report below this level: week ending Aug 7.",
+        250: "250M — operational minimum for sustained withdrawals. The leading scenario, corridor lapse, would reach it around Sep 30. The standoff scenario would reach it in late October.",
         180: "180M — hard operable limit",
         70: "70M — the DOE's stated safe minimum: the draw stops here, it does not continue",
       };
+      // Projected week-ending dates: derive from the last reported week (so a new WPSR
+      // shifts them automatically) and format in UTC at noon so the label is identical
+      // in every viewer's timezone.
       const futureWeeks: string[] = [];
+      const _lastWeekEnd = Date.parse(sprWeekly[sprWeekly.length - 1].date + "T12:00:00Z");
       for (let w = 1; w <= 26; w++) {
-        const d = new Date(Date.parse("2026-09-05") + (w - 1) * 7 * 86400000);
-        futureWeeks.push(d.toLocaleDateString("en-US", { month: "short", day: "numeric" }));
+        const d = new Date(_lastWeekEnd + w * 7 * 86400000);
+        futureWeeks.push(d.toLocaleDateString("en-US", { timeZone: "UTC", month: "short", day: "numeric" }));
       }
       const sprLabels = [...sprWeekly.map((p) => fmt(p.date)), ...futureWeeks];
       const anchorIdx = sprWeekly.length - 1;
@@ -2407,17 +2425,17 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           crosshair,
           // Floor lines are labeled inline (left) — replaces the legend
           refLabels([
-            { value: 300, text: "300 · cavern (breached Aug 14)", color: "rgba(179,38,30,0.85)", align: "left" },
+            { value: 300, text: "300 · cavern (crossed early Aug)", color: "rgba(179,38,30,0.85)", align: "left" },
             { value: 250, text: "250 · GEF min", color: "rgba(179,38,30,0.6)", align: "left" },
             { value: 180, text: "180 · operable", color: "rgba(179,38,30,0.6)", align: "left" },
             { value: 70, text: "70 · DOE floor", color: "rgba(179,38,30,0.6)", align: "left" },
           ]),
           directLabels([
             // Actuals endpoint (the anchor where scenarios begin)
-            { dataset: 0, index: anchorIdx, text: "286.6M · Aug 28", align: "right", dx: -12, dy: 16, font: "600 11.5px Georgia, serif" },
+            { dataset: 0, index: anchorIdx, text: "285.4M · Sep 4", align: "right", dx: -12, dy: 16, font: "600 11.5px Georgia, serif" },
             // Scenario paths labeled at their ~March 2027 endpoints
-            { dataset: 1, index: sprLabels.length - 1, text: "holds → 205M", align: "right", dx: -10, dy: 0, font: "11.5px Georgia, serif", color: "#3d6b64" },
-            { dataset: 2, index: sprLabels.length - 1, text: "standoff → 160M", align: "right", dx: -10, dy: 0, font: "11.5px Georgia, serif", color: "#b4690e" },
+            { dataset: 1, index: sprLabels.length - 1, text: "holds → 203M", align: "right", dx: -10, dy: 0, font: "11.5px Georgia, serif", color: "#3d6b64" },
+            { dataset: 2, index: sprLabels.length - 1, text: "standoff → 158M", align: "right", dx: -10, dy: 0, font: "11.5px Georgia, serif", color: "#b4690e" },
             { dataset: 3, index: sprLabels.length - 1, text: "lapse → 70M floor", align: "right", dx: -10, dy: -14, font: "11.5px Georgia, serif", color: "#b3261e" },
           ]),
         ],

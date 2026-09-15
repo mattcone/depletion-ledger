@@ -72,11 +72,11 @@ const drawn = +(sprPreWar - last.level).toFixed(1);
         THE DEPLETION LEDGER · HORMUZ & RED SEA · DAY {dayNum}
       </div>
       <h1 style="margin: 12px 0 0; font-size: 40px; line-height: 1.05; font-weight: 800; letter-spacing: -0.02em;">
-        The reserve is drawing down
+        The emergency oil reserve is shrinking
       </h1>
       <p class="faint" style="margin: 10px 0 0; font-size: 15px;">
-        US Strategic Petroleum Reserve, million barrels — actual (EIA weekly) and projected
-        draws to the floors. Data as of {asOf}.
+        US Strategic Petroleum Reserve, million barrels. Solid line: EIA reports. Dashed lines:
+        model estimates. Updated {asOf}.
       </p>
 
       <div
@@ -87,7 +87,7 @@ const drawn = +(sprPreWar - last.level).toFixed(1);
         <span><span class="swatch" style="border-top-style: dashed; border-top-color: #3d6b64;"></span>holds · 0.45M b/d</span>
         <span><span class="swatch" style="border-top-style: dashed; border-top-color: #b4690e;"></span>standoff · 0.70M b/d</span>
         <span><span class="swatch" style="border-top-style: dashed; border-top-color: #b3261e;"></span>lapse · 1.35M b/d</span>
-        <span><span class="swatch" style="border-top-style: dotted; border-top-color: rgba(179,38,30,0.55);"></span>reserve floors</span>
+        <span><span class="swatch" style="border-top-style: dotted; border-top-color: rgba(179,38,30,0.55);"></span>reserve thresholds</span>
       </div>
 
       <div style="position: relative; flex: 1; margin-top: 8px;">
@@ -99,8 +99,7 @@ const drawn = +(sprPreWar - last.level).toFixed(1);
         style="display: flex; justify-content: space-between; font-size: 12.5px; margin-top: 14px;"
       >
         <span>
-          {last.level.toFixed(1)}M bbl (w/e {fmt(last.date)}) · −{drawn}M since pre-war
-          {sprPreWar}M
+          {last.level.toFixed(1)}M barrels as of {fmt(last.date)} · down {drawn}M from {sprPreWar}M before the war
         </span>
         <span>depletion.org</span>
       </div>
@@ -152,7 +151,7 @@ const drawn = +(sprPreWar - last.level).toFixed(1);
           ctx.fillStyle = "rgba(179,38,30,0.75)";
           for (const f of floors) {
             ctx.fillText(
-              f === 250 ? "250M · GEF operational floor" : "180M · hard-operable floor",
+              f === 250 ? "250M · GEF withdrawal threshold" : "180M · operating limit",
               x.getPixelForValue(1) + 6,
               y.getPixelForValue(f) - 6
             );
