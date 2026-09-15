@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-09-14";
+export const DATA_AS_OF = "2026-09-15";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -21,9 +21,9 @@ export interface SeriesPoint {
 
 // ---------- Headline stats ----------
 export const stats = [
-  { label: "Brent", value: "$106.20", sub: "Sep 14 close · +40% vs pre-crisis ~$76" },
-  { label: "US diesel (AAA)", value: "$6.23", sub: "Sep 14 · new all-time record ($6.2301) — fifth straight · +67% vs pre-war $3.72" },
-  { label: "US gasoline (AAA)", value: "$4.32", sub: "Sep 14 · +17¢ in a week (AAA) · +54% vs Jan $2.81" },
+  { label: "Brent", value: "$105.68", sub: "Sep 14 close · +40% vs pre-crisis ~$76" },
+  { label: "US diesel (AAA)", value: "$6.27", sub: "Sep 15 · new all-time record ($6.2694) — sixth straight · +68% vs pre-war $3.72" },
+  { label: "US gasoline (AAA)", value: "$4.33", sub: "Sep 15 · +18¢ in a week (AAA) · +54% vs Jan $2.81" },
   { label: "SPR", value: "286.6M", sub: "w/e Aug 28 · −128.8M since pre-war 415.4M · lowest since Dec 1982" },
   { label: "US diesel & heating oil", value: "104.2M", sub: "as of Aug 28 · down 14% vs 5-yr avg · East Coast stocks 27% below last year" },
 ];
@@ -45,7 +45,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-09-09", value: 100.71, note: "settle +$3.58 · intraday high $101.25" },
   { date: "2026-09-10", value: 108.03, note: "close +$6.82 in a day (Yahoo front-month; Convex cross-check)" },
   { date: "2026-09-11", value: 104.61, note: "settle −2.8% (CNBC)" },
-  { date: "2026-09-14", value: 106.20, note: "front-month close (Yahoo)" },
+  { date: "2026-09-14", value: 105.68, note: "closing price (Yahoo, corrected Sep 15)" },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -113,7 +113,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-09-09", value: 97.26 },
   { date: "2026-09-10", value: 102.93 },
   { date: "2026-09-11", value: 100.05, note: "settle −2.4% (CNBC)" },
-  { date: "2026-09-14", value: 101.90, note: "front-month close (Yahoo; FRED not yet posted)" },
+  { date: "2026-09-14", value: 101.39, note: "front-month futures close (Yahoo, corrected Sep 15; FRED not yet available)" },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -160,6 +160,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-09-12", value: 4.3104, note: "AAA release Sep 12 (logged)" },
   { date: "2026-09-13", value: 4.3130, note: "AAA release Sep 13 (logged)" },
   { date: "2026-09-14", value: 4.3163, note: "AAA release Sep 14 (logged)" },
+  { date: "2026-09-15", value: 4.3289, note: "AAA release, Sep 15" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -180,7 +181,8 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-09-11", value: 6.0556, note: "AAA record — first above $6.00, +20.6¢ in a week" },
   { date: "2026-09-12", value: 6.1602, note: "AAA record — third straight, +27.8¢ in a week" },
   { date: "2026-09-13", value: 6.2040, note: "AAA record — fourth straight, +30.7¢ in a week (AAA week-ago avg $5.8970)" },
-  { date: "2026-09-14", value: 6.2301, note: "AAA record — fifth straight, +32.9¢ in a week (AAA week-ago avg $5.9015)" },
+  { date: "2026-09-14", value: 6.2301, note: "AAA record — fifth consecutive day" },
+  { date: "2026-09-15", value: 6.2694, note: "AAA record — sixth consecutive day, up 36.8¢ from $5.9012 a week earlier" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 
@@ -449,16 +451,16 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "An official repair estimate for the East–West pipeline — AP cites 3–5 weeks; WSJ quotes analysts putting the outage at over 2.5 million barrels a day.", why: "The standoff scenario depends on this bypass. An assessment that repairs take only days would reverse the Sep 11 change in odds." },
-      { item: "A new date for the Gulf–Iran talks, postponed from Sep 14 in Salalah.", why: "Resuming the talks could help restore tanker access through Hormuz." },
-      { item: "Shipping conditions after the Houthis captured the Hanish islands (Sep 13–14) — 13–17 vessels a day are still entering Bab el-Mandeb.", why: "An attack on a non-Saudi vessel would push the model toward the corridor-lapsing scenario." },
+      { item: "An official repair estimate for the East–West pipeline. AP reports 3–5 weeks. Analysts quoted by the Wall Street Journal estimate lost flow at more than 2.5 million barrels a day. Reuters reports that stocks at Yanbu, Saudi Arabia's Red Sea port, could support another five to seven days of exports.", why: "The standoff scenario depends on this bypass. An official assessment that repairs will take only days would reverse the Sep 11 change in odds." },
+      { item: "A new date for the Gulf–Iran talks in Salalah, postponed from Sep 14. Iran says Saudi Arabia requested the delay because of events in Yemen.", why: "Resuming the talks could help restore tanker access through Hormuz." },
+      { item: "Shipping conditions after the Houthis captured the Hanish islands on Sep 13–14. The Houthis claim 85 vessels passed through Bab el-Mandeb in 72 hours. Missile and drone attacks on Saudi cities wounded 13 civilians on Sep 13–14.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes." },
       { item: "How banks respond to the Sep 14 sanctions on Russia's VTB; Treasury is meeting with financial institutions this week.", why: "If banks stop handling VTB's payments, Iran loses channels for receiving oil revenue." },
     ],
   },
   {
     when: "Sep 16",
     items: [
-      { item: "A verified count of vessels passing through Hormuz — Gen. Wright claims 10 million barrels a day; ship trackers show fewer than 10 vessels a day.", why: "Roughly half of the pre-war flow is unaccounted for. The next count will test the claim." },
+      { item: "A verified count of vessels passing through Hormuz. Gen. Wright claims tankers are carrying 10 million barrels a day under Navy escort. Preliminary tracking shows four vessels on Sep 14, down from 14 a day a week earlier.", why: "The claimed volume is roughly half the pre-war flow. The next count will help assess whether shipping activity supports that claim." },
       { item: "The Fed's rate decision — futures put a 25-basis-point increase at about 86% (Polymarket, 62%).", why: "A hike would add borrowing-cost pressure on top of fuel prices." },
       { item: "The EIA's weekly report for the week ending Sep 4 — US diesel stocks near 100M barrels, and the pace of SPR draws.", why: "The clearest weekly read on whether supplies are tightening or recovering." },
     ],
