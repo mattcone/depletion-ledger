@@ -21,7 +21,7 @@ export interface SeriesPoint {
 
 // ---------- Headline stats ----------
 export const stats = [
-  { label: "Brent", value: "$104.61", sub: "Sep 11 settle −2.8% · +38% vs pre-crisis ~$76" },
+  { label: "Brent", value: "$106.20", sub: "Sep 14 close · +40% vs pre-crisis ~$76" },
   { label: "US diesel (AAA)", value: "$6.23", sub: "Sep 14 · new all-time record ($6.2301) — fifth straight · +67% vs pre-war $3.72" },
   { label: "US gasoline (AAA)", value: "$4.32", sub: "Sep 14 · +17¢ in a week (AAA) · +54% vs Jan $2.81" },
   { label: "SPR", value: "286.6M", sub: "w/e Aug 28 · −128.8M since pre-war 415.4M · lowest since Dec 1982" },
@@ -45,6 +45,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-09-09", value: 100.71, note: "settle +$3.58 · intraday high $101.25" },
   { date: "2026-09-10", value: 108.03, note: "close +$6.82 in a day (Yahoo front-month; Convex cross-check)" },
   { date: "2026-09-11", value: 104.61, note: "settle −2.8% (CNBC)" },
+  { date: "2026-09-14", value: 106.20, note: "front-month close (Yahoo)" },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -53,10 +54,11 @@ export const brentMonthlyAvgs = [
 ];
 
 // ---------- WTI spot, $/bbl — FRED DCOILWTICO, sampled on the product dates below ----------
-// Mondays (EIA gasoline) + Wednesdays (AAA diesel). Five product dates have no same-day FRED
-// value (Jan 19, Feb 16, May 25, Sep 7 — Mondays; Sep 6 — a Sunday); for those, the crack math
-// uses the NEXT trading day's WTI (Jan 20, Feb 17, May 26, Sep 8 — included below, also drawn
-// on the WTI line). Disclosed in the crack caption. No interpolation, ever.
+// Mondays (EIA gasoline) + Wednesdays (AAA diesel). Six product dates have no same-day FRED
+// value (Jan 19, Feb 16, May 25 — Mondays; Sep 6 — a Sunday; Sep 12–13 — weekend AAA dailies);
+// for those, the crack math uses the nearest trading day's WTI (Jan 20, Feb 17, May 26, Sep 8,
+// Sep 11, Sep 14 — included below, also drawn on the WTI line). Disclosed in the crack caption.
+// No interpolation, ever.
 // Basis check: Sep 9 FRED 97.26 vs news settlement 96.38 (~$0.9 spot-vs-settle, acceptable).
 // FRED's Brent (DCOILBRENTEU, = EIA dnav RBRTE) does NOT reconcile with tracked settlements
 // (Sep 9: 109.51 vs 100.71, a ~$9 gap — same FRED issue as PPIACO) — WTI is the crude basis.
@@ -64,7 +66,7 @@ export const brentMonthlyAvgs = [
 // morning; the spot-vs-futures gap is ≈$1.2 (Sep 9: FRED 97.26 vs Yahoo 96.05). Disclosed here
 // rather than silently mixed into the FRED series.
 // SeriesPoint (not a bare {date, value}): the tail is mixed-source — FRED weekly closes
-// plus the Sep 10 front-month close and the Sep 11 settle, flagged in the notes.
+// plus the Sep 10 front-month close and the Sep 11 and Sep 14 closes, flagged in the notes.
 export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-01-05", value: 58.1 },
   { date: "2026-01-12", value: 59.39 },
@@ -111,11 +113,12 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-09-09", value: 97.26 },
   { date: "2026-09-10", value: 102.93 },
   { date: "2026-09-11", value: 100.05, note: "settle −2.4% (CNBC)" },
+  { date: "2026-09-14", value: 101.90, note: "front-month close (Yahoo; FRED not yet posted)" },
 ];
 
-// ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily from
-// Sep 7 (per-point notes below; the Sep 7 point was added without a logged source
-// and is flagged approx until verified or removed) ----------
+// ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
+// (per-point notes below). A Sep 7 point (4.157, no logged source) was removed on the
+// Sep 14 accuracy pass — the published AAA record runs from the Sep 10 release ----------
 export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-01-05", value: 2.796 },
   { date: "2026-01-12", value: 2.779 },
@@ -152,7 +155,6 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-08-17", value: 4.049 },
   { date: "2026-08-24", value: 4.085 },
   { date: "2026-08-31", value: 4.071 },
-  { date: "2026-09-07", value: 4.157, approx: true, note: "AAA — source not in research log (added Sep 8); verify or remove" },
   { date: "2026-09-10", value: 4.2770, note: "AAA release Sep 10 (logged)" },
   { date: "2026-09-11", value: 4.2950, note: "AAA release Sep 11 (logged)" },
   { date: "2026-09-12", value: 4.3104, note: "AAA release Sep 12 (logged)" },
@@ -441,14 +443,15 @@ export const globalRefining = [
 
 // ---------- Upcoming watch list ----------
 export const watchList = [
-  { date: "Any day", item: "An official update on the East–West pipeline. Reports put the loss at about 700,000 barrels per day from a damaged pumping station. Claims of damage in “at least eight places” remain unconfirmed. Satellite imagery shows flaring along the route, and no restart date has been announced.", why: "The standoff scenario depends on this bypass. A restart date or an assessment that repairs will take only days would change the outlook." },
-  { date: "Any day", item: "A new date for talks between Gulf foreign ministers and Iran. Oman postponed the Sep 14 meeting. The Associated Press reported that Saudi Arabia objected to changes to the Iran–Oman shipping agreement. Bahrain won't attend until diplomatic relations with Iran resume. Iran and Oman say they'll arrange a new date.", why: "Resuming talks could help restore tanker access. For now, there's no new meeting date, and fewer than 10 vessels per day are passing through the strait." },
-  { date: "Any day", item: "An updated count of vessels passing through Bab el-Mandeb. After a two-day Saudi air campaign, two reports suggest the Houthis have withdrawn most of their forces from the strait. The Houthis, meanwhile, claim to have captured more islands and struck the Khamis Mushait air base with a missile.", why: "The vessel count would help show whether shipping conditions are improving despite conflicting reports about control of the strait." },
-  { date: "Sep 14", item: "An announcement of US sanctions against a major Iranian bank. The Treasury secretary said it would come on Sep 14, but it hadn't been announced as of that morning.", why: "The bank named could help show which Iranian trade routes the sanctions would affect." },
+  { date: "Any day", item: "An official repair estimate for the East–West pipeline. On Sep 14, the Associated Press reported that oil could start flowing again in 3–5 weeks; other estimates put it at more than 6 weeks. Satellite images show crews replacing a section of pipe. Prediction markets put the chance of a restart by Sep 30 at 67–85%.", why: "The standoff scenario depends on this bypass. An official restart or an assessment that repairs will take only days would reverse the Sep 11 change in odds. The reports so far suggest repairs will take weeks." },
+  { date: "Sep 16", item: "A verified count of vessels passing through Hormuz. Gen. Q. Daniel Wright says 10 million barrels per day are moving through the strait, but ship trackers show fewer than 10 vessels a day recently. The IMF's PortWatch recorded 6 on Sep 6, compared with about 85 per day before the crisis.", why: "The claimed volume is roughly half the pre-war flow of 20–23 million barrels per day. Ships with their tracking systems switched off could explain some of the difference, but that hasn't been verified. The next transit count will help assess the claim." },
+  { date: "Any day", item: "A new date for talks between Gulf foreign ministers and Iran. Oman postponed the Sep 14 meeting in Salalah and hasn't announced a new date. The Associated Press reported that Saudi Arabia objected to changes to the Iran–Oman shipping agreement. Bahrain won't attend until diplomatic relations with Iran resume.", why: "The meeting was meant to help reach a temporary agreement on shipping through Hormuz. Resuming talks could help restore tanker access. For now, fewer than 10 vessels per day are passing through the strait." },
+  { date: "Any day", item: "Shipping conditions after the Houthis captured Greater and Lesser Hanish on Sep 13–14. Hundreds of government-allied forces withdrew from the islands. The Houthis also hold Mokha, Perim island, and the Dhubab district. About 13–17 vessels a day are still entering Bab el-Mandeb.", why: "The model calls for higher odds of the corridor lapsing if the Houthis block or attack non-Saudi vessels, or if traffic falls to the levels seen in Hormuz. That would leave both routes effectively closed to general shipping." },
+  { date: "Week of Sep 14", item: "How banks respond to US sanctions on VTB. On Sep 14, the Treasury sanctioned the Russian bank for helping Iran move frozen assets and evade sanctions. Banks outside the US could also face sanctions if they continue dealing with VTB. Treasury is meeting with financial institutions during the week of Sep 14.", why: "VTB has thousands of branches and a substantial presence in India, Southeast Asia, and China. If other banks stop handling its payments, Iran could have fewer ways to receive oil revenue." },
   { date: "Sep 16", item: "The Fed announces its rate decision. Futures markets put the chance of a 25-basis-point increase, from 3.50–3.75% to 3.75–4.00%, at about 86%. Polymarket puts it at 62%.", why: "August core consumer inflation exceeded expectations. The 2-year Treasury yield is at 4.63%, its highest since July 2024, and the 10-year briefly reached 4.99% on Sep 11, its highest since October 2023." },
   { date: "Sep 16", item: "The EIA releases its weekly report for the week ending Sep 4. Watch whether US diesel stocks fall below 100M barrels and how quickly the SPR is being used.", why: "The report will help show whether supplies are tightening or recovering." },
   { date: "Sep 30", item: "Russia's diesel export ban expires unless it's extended again. The US-led coalition is due to complete its withdrawal from Iraq, including Patriots leaving Erbil. Prediction-market bets settle, and Sweden's fuel-tax cut ends.", why: "Several decisions and deadlines fall in the same week, each with implications for supplies or prices." },
-  { date: "Oct 7", item: "The EIA publishes its monthly outlook, the first written after the tanker attacks, refinery strikes, and no-sailing zone.", why: "Watch whether the EIA changes its view that shipping remains constrained but open. Its outlook of about $90 for the second half of 2026 is roughly $15 below the latest Brent settlement of $104.61." },
+  { date: "Oct 7", item: "The EIA publishes its monthly outlook, the first written after the tanker attacks, refinery strikes, and no-sailing zone.", why: "Watch whether the EIA changes its view that shipping remains constrained but open. Its outlook of about $90 for the second half of 2026 is roughly $16 below the latest Brent close of $106.20." },
   { date: "Nov 3", item: "The US midterm elections. President Trump has said three times that the war will end just after the elections. He also says Iran is calling regularly to seek a deal.", why: "Watch whether negotiations and military activity support the administration's stated timeline." },
   { date: "Nov 30", item: "Russia's jet-fuel export ban takes effect.", why: "The ban would reduce aviation fuel supplies as other reserves are already running low." },
 ];
@@ -481,6 +484,7 @@ export const russiaSnapshot = [
   { name: "capacity offline", value: ">30%", delta: "Aug 29, Moscow Times — up from ~25% in April", flag: "Early September estimates of capacity offline: 42.7% (Ukraine's General Staff) to 54% (Forbes)" },
   { name: "strikes in August", value: "21+", delta: "record month, near-daily (Bloomberg, Aug 29)", flag: "" },
   { name: "Kirishi — Russia's #2 plant", value: "halted", delta: "~400K b/d, its only NW plant, two strikes in a month (UA.NEWS, Sep 2)", flag: "" },
+  { name: "Ryazan (Rosneft) — Moscow's main supplier", value: "down", delta: "~156K barrels/day; both primary units offline since Sep 6, with repairs expected to take several weeks (Reuters, Sep 10)", flag: "" },
   { name: "Perm capacity", value: "−86%", delta: "primary capacity, satellite imagery (Bloomberg, Aug 25)", flag: "every major Lukoil refinery is offline" },
   { name: "Novorossiysk — main Black Sea port", value: "hit", delta: "fuel-oil terminal + the city, 4 killed (Sep 8–9)", flag: "crude outflow 800 → 350 kb/d, Jul → Aug — all three export directions now under attack" },
   { name: "stations rationed", value: "28%", delta: "nationwide caps; Moscow 90% out of AI-92 (Euronews, Aug 20)", flag: "" },
@@ -497,14 +501,17 @@ export const russiaBanCascade = [
 // ---------- Second-order effects (recession / rates / food — report macro channel + §11B) ----------
 // 12-mo US recession odds, July–Sep 2026. Polymarket is "by end-2027" (longer window, ~15 months).
 // Ordered by pct desc (chart plots in array order, first = top).
+// Goldman: 25% (Mar 12) → 30% (Mar 25) → 25% (May 11) → 15% (Jun 26, current). The Sep 14
+// "raised this week" quote (Hatzius, Bloomberg TV) restated the 15% with a caveat that the
+// odds could be higher given the oil shock — not a new revision. See logs/2026-09-14.md.
 export const recessionOdds = [
   { name: "Moody's", pct: 50, note: "highest estimate" },
   { name: "JPMorgan", pct: 35, note: "" },
   { name: "Polymarket (by end-2027)", pct: 32, note: "longer window" },
-  { name: "Goldman Sachs", pct: 30, note: "20% pre-war" },
   { name: "NY Fed model", pct: 25, note: "" },
   { name: "TD Securities", pct: 25, note: "Sep 7" },
   { name: "WSJ poll (74 economists)", pct: 25, note: "33% in April" },
+  { name: "Goldman Sachs", pct: 15, note: "since Jun 26 · restated Sep 14" },
 ];
 
 export const ratesStats = [
@@ -515,8 +522,8 @@ export const ratesStats = [
 
 export const foodStats = [
   { label: "Gulf–India tanker freight", value: "+411%", sub: "$4.34/bbl in Aug vs pre-war (Frontline)" },
-  { label: "TTF gas (Europe)", value: "≈€50/MWh", sub: "Aug 19 · ≈$16.8/MMBtu" },
-  { label: "JKM gas (Asia)", value: "$23.17/MBtu", sub: "all-time high" },
+  { label: "TTF gas (Europe)", value: "€82/MWh", sub: "Sep 14 · above $28/MMBtu Sep 10 (JOGMEC) · highest since Dec 2022" },
+  { label: "JKM gas (Asia)", value: "$28.5/MMBtu", sub: "Sep 11 · high-$28s Sep 10 (JOGMEC) · highest in ~2.5 years" },
 ];
 
 // The lag chain: energy shock → food shock, 12–18 months. Dates are the midpoint of
@@ -535,8 +542,9 @@ export const foodLagBars = [
 // Two sources, both verified, never interpolated:
 //  * Jan 21 – Apr 24: EIA weekly averages of front-month futures (Bloomberg L.P.), from EIA's
 //    Natural Gas Weekly Update + the Apr 28, 2026 Today in Energy chart (id=67604). Filled markers.
-//  * May – Aug: assessed spot prices on the stated dates from Global LNG Hub weekly updates
-//    (ICIS/Platts assessments; ranges reported as midpoints). Hollow markers.
+//  * May – Sep: assessed prices on the stated dates from Global LNG Hub weekly updates
+//    (ICIS/Platts assessments of specific contracts, e.g. TTF October delivery; ranges reported
+//    as midpoints). Hollow markers. Sep 14 TTF is the one converted CFD quote (see note).
 // Pre-closure baseline = week of Feb 27 (EIA weekly averages): TTF 10.99, JKM 10.66.
 // The Apr 28 EIA TIE article states: TTF +35% and JKM +51% vs pre-closure as of Apr 24 —
 // which the series reproduces (14.80/10.99 = +34.6%, 16.02/10.66 = +50.3%).
@@ -570,7 +578,14 @@ export const gasTtf: GasPt[] = [
   { date: "2026-07-17", value: 19.2, assessed: true },
   { date: "2026-07-31", value: 19.9, assessed: true },
   { date: "2026-08-07", value: 18.8, assessed: true },
-  { date: "2026-08-19", value: 16.8, assessed: true, note: "≈€50/MWh (converted)" },
+  // Aug 19 "≈€50/MWh" point (16.8) removed Sep 14: refuted by the same source (Global LNG
+  // Hub: $20.8 Aug 14 → $22.6 Aug 21) and by Euronews (€65 on Aug 20). Replaced with the
+  // source's own USD/MBtu values (JOGMEC), no conversion.
+  { date: "2026-08-14", value: 20.8, assessed: true, note: "Global LNG Hub (JOGMEC)" },
+  { date: "2026-08-28", value: 22.9, assessed: true, note: "Global LNG Hub (JOGMEC)" },
+  { date: "2026-09-04", value: 24.5, assessed: true, note: "Global LNG Hub (JOGMEC)" },
+  { date: "2026-09-11", value: 27.0, assessed: true, note: "Global LNG Hub (JOGMEC) — highest since Dec 2022" },
+  { date: "2026-09-14", value: 27.8, assessed: true, note: "€81.98/MWh (TradingEconomics CFD) × EUR/USD 1.1557 — converted" },
 ];
 
 export const gasJkm: GasPt[] = [
@@ -603,14 +618,19 @@ export const gasJkm: GasPt[] = [
   { date: "2026-07-31", value: 21.2, assessed: true, note: "assessed: low-USD 21s" },
   { date: "2026-08-07", value: 21.2, assessed: true, note: "assessed: low-USD 21s" },
   { date: "2026-08-14", value: 21.8, assessed: true, note: "assessed: high-USD 21s" },
-  { date: "2026-08-19", value: 23.17, assessed: true, note: "all-time high" },
+  { date: "2026-08-19", value: 23.17, assessed: true, note: "assessed price, Aug 19" },
+  { date: "2026-08-21", value: 23.8, assessed: true, note: "assessed: high-USD 23s" },
+  { date: "2026-08-28", value: 24.5, assessed: true, note: "assessed: mid-USD 24s" },
+  { date: "2026-09-04", value: 25.5, assessed: true, note: "assessed: mid-USD 25s" },
+  { date: "2026-09-11", value: 28.5, assessed: true, note: "assessed: mid-USD 28s (record: high-USD 28s on Sep 10, per JOGMEC)" },
 ];
 
 export const gasPreClosure = { ttf: 10.99, jkm: 10.66 };
 
 // ---- US 10-year Treasury yield ----
 // Weekly Friday closes, FRED DGS10 (fetched 2026-09-10), plus Sep 9 (Wednesday, FRED) and
-// Sep 10 (Yahoo ^TNX daily — reconciles: Sep 9 Yahoo 4.837 ≈ FRED 4.83).
+// Sep 10 (Yahoo ^TNX daily — reconciles: Sep 9 Yahoo 4.837 ≈ FRED 4.83). Sep 11 and Sep 14
+// are session closes (Yahoo) — FRED hasn't posted them at update time.
 // Jun 19 missing from the source (holiday) — the gap is real, not interpolated.
 // Cross-verified: Sep 1 = 4.79 here vs "~4.78% on Tuesday" (Euronews Sep 1); Sep 9 4.83 =
 // "highest level since 2023" (CNBC Sep 9); 4.8% = "the high reached in January 2025" (CNBC Sep 7).
@@ -655,6 +675,8 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-09-04", value: 4.78 },
   { date: "2026-09-09", value: 4.83 },
   { date: "2026-09-10", value: 4.95, note: "FRED (was Yahoo 4.94; FRED posted Sep 11)" },
+  { date: "2026-09-11", value: 4.975, note: "session close (Yahoo) · intraday 4.992, highest since Oct 2023" },
+  { date: "2026-09-14", value: 4.961, note: "session close (Yahoo)" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)

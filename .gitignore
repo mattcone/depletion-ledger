@@ -12,3 +12,6 @@ src/content/
 .env
 *.log
 .DS_Store
+
+# local agent notes (per-project .pi/notes.md — not for public)
+.pi/

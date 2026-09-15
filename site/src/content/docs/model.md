@@ -71,9 +71,13 @@ These are the events being watched as of Sep 14:
 | Russia's Sep 30 fuel-ban decision; a widening gap between the EIA price outlook and market prices; or an adverse prediction-market result on Sep 14 or 30. | Could increase the odds that the corridor lapses. |
 | The Houthis blocking or attacking non-Saudi vessels in the Bab el-Mandeb, leaving both shipping routes closed. | Increases the odds that the corridor lapses. |
 
+The latest pipeline reports suggest repairs will take weeks. On Sep 14, the Associated Press cited unnamed officials who estimated 3–5 weeks to restore oil flows; other estimates put it at more than 6 weeks. Satellite images show crews replacing a section of pipe. These reports point to a longer disruption, but the odds remain at 10/40/50 while the model waits for official confirmation. An official assessment that repairs will take only days would instead reverse the Sep 11 change.
+
+The Houthis' territorial gains also need to be considered alongside shipping activity. As of Sep 14, they hold Mokha, Perim island, and the Hanish islands. About 13–17 vessels a day are still entering Bab el-Mandeb, and no non-Saudi vessel has been reported blocked or attacked there. The model's condition for raising the odds on that basis hasn't been met.
+
 A direct US strike on the Houthis would also trigger a review. The direction of that change would depend on the circumstances at the time.
 
-The gap between the EIA outlook and market prices takes longer to assess. The EIA still expects oil at about $90 in late 2026, while Brent settled at $104.61 on Sep 11. The model treats a gap above roughly $10–15 as a sign that the market may be assigning more than 40% odds to the corridor lapsing. The current gap is about $15, at the edge of that range.
+The gap between the EIA outlook and market prices takes longer to assess. The EIA still expects oil at about $90 in late 2026, while Brent closed at $106.20 on Sep 14. The model treats a gap above roughly $10–15 as a sign that the market may be assigning more than 40% odds to the corridor lapsing. The current gap is about $16, just above that range.
 
 The postponed Sep 14 talks are an example of news that didn't change the odds. Oman postponed the first meeting of Gulf foreign ministers and Iran during the war, with no new date announced. The Associated Press reported that Saudi Arabia objected to proposed changes to the Iran–Oman shipping agreement. Bahrain had also said it wouldn't attend.
 
