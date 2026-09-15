@@ -6,7 +6,8 @@ import TopNav from "../components/TopNav.astro";
 import {
   stats, brentYtd, brentMonthlyAvgs, wtiWeekly, gasolineYtd, gasolinePreCrisis,
   dieselYtd, dieselOldRecord, sprWeekly, sprPreWar, sprFloors, sprScenarios,
-  invSnapshot, branchWeights, branchTracks, watchList, cascade, billLedger,
+  invSnapshot, branchWeights, branchTracks, watchGroups, cascade, billLedger,
+
   sprDrawDeltas, sprDrawPace4w, sprFloor250Date, sprFloor180Date, sprLapse250Date, sprLapse180Date,
   DATA_AS_OF, CRISIS_DAY_1,
   russiaCapacityAnchors, russiaCurrentSpread, russiaSnapshot, russiaBanCascade,
@@ -17,6 +18,18 @@ import {
 // Crisis day number, computed from the data-as-of date (NOT the viewer's clock) so the
 // page is a stable snapshot: Sep 14 data = day 198, no matter when someone loads it.
 const dayNum = Math.round((Date.parse(DATA_AS_OF) - Date.parse(CRISIS_DAY_1)) / 86400000);
+
+// Watch list as flat ledger rows (date column + text). Tufte: structure from the date
+// column and whitespace, not boxes or shaded bands.
+const watchRows: { when: string; item: string; why: string; breakBefore: boolean }[] = [];
+for (const grp of watchGroups) {
+  for (const w of grp.items) {
+    watchRows.push({
+      when: grp.when, item: w.item, why: w.why,
+      breakBefore: watchRows.length > 0 && watchRows[watchRows.length - 1].when !== grp.when,
+    });
+  }
+}
 
 // SPR cavern gauge geometry (static data → precomputed)
 // Scale runs 60 → 750M so the all-time record (Dec 2009, 726.6M) fits in the bar.
@@ -928,12 +941,14 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <h2 class="text-xl font-bold tracking-tight">What to watch next</h2>
             <p class="mt-1 text-[13px] text-faint">Upcoming reports and decisions that could change the outlook.</p>
           </div>
-          <div class="border border-rule rounded-md">
-            {watchList.map((w, i) => (
-              <div class={`px-4 py-3 ${i > 0 ? "border-t border-rule/70" : ""}`}>
-                <p class="tabular font-mono text-xs text-crude">{w.date}</p>
-                <p class="mt-1 text-sm leading-snug text-ink/85">{w.item}</p>
-                <p class="mt-0.5 text-xs text-faint">{w.why}</p>
+          <div class="space-y-5">
+            {watchRows.map((w) => (
+              <div class="grid grid-cols-[110px_1fr] gap-x-5">
+                <p class="pt-px font-mono text-xs tabular text-faint">{w.when}</p>
+                <div>
+                  <p class="text-sm leading-snug text-ink/85">{w.item}</p>
+                  <p class="mt-0.5 text-xs text-faint">{w.why}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -949,14 +964,11 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
               from customs and inventory data. Allow for uncertainty of a week or two.
             </p>
           </div>
-          <div class="border border-rule rounded-md">
-            {cascade.map((c, i) => (
-              <div class={`px-4 py-3 ${i > 0 ? "border-t border-rule/70" : ""}`}>
-                <div class="flex items-baseline justify-between gap-3">
-                  <p class="font-medium text-ink">{c.region}</p>
-                  <p class="tabular shrink-0 font-mono text-xs text-alarm">{c.date}</p>
-                </div>
-                <p class="mt-0.5 text-xs leading-snug text-faint">{c.trigger}</p>
+          <div class="space-y-5">
+            {cascade.map((c) => (
+              <div class="grid grid-cols-[110px_1fr] gap-x-5">
+                <p class="pt-px font-mono text-xs tabular text-faint">{c.date}</p>
+                <p class="text-sm leading-snug text-ink/85"><span class="font-semibold text-ink">{c.region}</span> — {c.trigger}</p>
               </div>
             ))}
           </div>

@@ -442,18 +442,51 @@ export const globalRefining = [
 ];
 
 // ---------- Upcoming watch list ----------
-export const watchList = [
-  { date: "Any day", item: "An official repair estimate for the East–West pipeline. On Sep 14, the Associated Press reported that oil could start flowing again in 3–5 weeks; other estimates put it at more than 6 weeks. Satellite images show crews replacing a section of pipe. Prediction markets put the chance of a restart by Sep 30 at 67–85%.", why: "The standoff scenario depends on this bypass. An official restart or an assessment that repairs will take only days would reverse the Sep 11 change in odds. The reports so far suggest repairs will take weeks." },
-  { date: "Sep 16", item: "A verified count of vessels passing through Hormuz. Gen. Q. Daniel Wright says 10 million barrels per day are moving through the strait, but ship trackers show fewer than 10 vessels a day recently. The IMF's PortWatch recorded 6 on Sep 6, compared with about 85 per day before the crisis.", why: "The claimed volume is roughly half the pre-war flow of 20–23 million barrels per day. Ships with their tracking systems switched off could explain some of the difference, but that hasn't been verified. The next transit count will help assess the claim." },
-  { date: "Any day", item: "A new date for talks between Gulf foreign ministers and Iran. Oman postponed the Sep 14 meeting in Salalah and hasn't announced a new date. The Associated Press reported that Saudi Arabia objected to changes to the Iran–Oman shipping agreement. Bahrain won't attend until diplomatic relations with Iran resume.", why: "The meeting was meant to help reach a temporary agreement on shipping through Hormuz. Resuming talks could help restore tanker access. For now, fewer than 10 vessels per day are passing through the strait." },
-  { date: "Any day", item: "Shipping conditions after the Houthis captured Greater and Lesser Hanish on Sep 13–14. Hundreds of government-allied forces withdrew from the islands. The Houthis also hold Mokha, Perim island, and the Dhubab district. About 13–17 vessels a day are still entering Bab el-Mandeb.", why: "The model calls for higher odds of the corridor lapsing if the Houthis block or attack non-Saudi vessels, or if traffic falls to the levels seen in Hormuz. That would leave both routes effectively closed to general shipping." },
-  { date: "Week of Sep 14", item: "How banks respond to US sanctions on VTB. On Sep 14, the Treasury sanctioned the Russian bank for helping Iran move frozen assets and evade sanctions. Banks outside the US could also face sanctions if they continue dealing with VTB. Treasury is meeting with financial institutions during the week of Sep 14.", why: "VTB has thousands of branches and a substantial presence in India, Southeast Asia, and China. If other banks stop handling its payments, Iran could have fewer ways to receive oil revenue." },
-  { date: "Sep 16", item: "The Fed announces its rate decision. Futures markets put the chance of a 25-basis-point increase, from 3.50–3.75% to 3.75–4.00%, at about 86%. Polymarket puts it at 62%.", why: "August core consumer inflation exceeded expectations. The 2-year Treasury yield is at 4.63%, its highest since July 2024, and the 10-year briefly reached 4.99% on Sep 11, its highest since October 2023." },
-  { date: "Sep 16", item: "The EIA releases its weekly report for the week ending Sep 4. Watch whether US diesel stocks fall below 100M barrels and how quickly the SPR is being used.", why: "The report will help show whether supplies are tightening or recovering." },
-  { date: "Sep 30", item: "Russia's diesel export ban expires unless it's extended again. The US-led coalition is due to complete its withdrawal from Iraq, including Patriots leaving Erbil. Prediction-market bets settle, and Sweden's fuel-tax cut ends.", why: "Several decisions and deadlines fall in the same week, each with implications for supplies or prices." },
-  { date: "Oct 7", item: "The EIA publishes its monthly outlook, the first written after the tanker attacks, refinery strikes, and no-sailing zone.", why: "Watch whether the EIA changes its view that shipping remains constrained but open. Its outlook of about $90 for the second half of 2026 is roughly $16 below the latest Brent close of $106.20." },
-  { date: "Nov 3", item: "The US midterm elections. President Trump has said three times that the war will end just after the elections. He also says Iran is calling regularly to seek a deal.", why: "Watch whether negotiations and military activity support the administration's stated timeline." },
-  { date: "Nov 30", item: "Russia's jet-fuel export ban takes effect.", why: "The ban would reduce aviation fuel supplies as other reserves are already running low." },
+export type WatchItem = { item: string; why: string };
+// Grouped by timing: "Any day" = unscheduled triggers, the rest scheduled events.
+// Details (PortWatch counts, prediction-market ranges, yield levels) live in the logs.
+export const watchGroups: { when: string; items: WatchItem[] }[] = [
+  {
+    when: "Any day",
+    items: [
+      { item: "An official repair estimate for the East–West pipeline — AP cites 3–5 weeks; WSJ quotes analysts putting the outage at over 2.5 million barrels a day.", why: "The standoff scenario depends on this bypass. An assessment that repairs take only days would reverse the Sep 11 change in odds." },
+      { item: "A new date for the Gulf–Iran talks, postponed from Sep 14 in Salalah.", why: "Resuming the talks could help restore tanker access through Hormuz." },
+      { item: "Shipping conditions after the Houthis captured the Hanish islands (Sep 13–14) — 13–17 vessels a day are still entering Bab el-Mandeb.", why: "An attack on a non-Saudi vessel would push the model toward the corridor-lapsing scenario." },
+      { item: "How banks respond to the Sep 14 sanctions on Russia's VTB; Treasury is meeting with financial institutions this week.", why: "If banks stop handling VTB's payments, Iran loses channels for receiving oil revenue." },
+    ],
+  },
+  {
+    when: "Sep 16",
+    items: [
+      { item: "A verified count of vessels passing through Hormuz — Gen. Wright claims 10 million barrels a day; ship trackers show fewer than 10 vessels a day.", why: "Roughly half of the pre-war flow is unaccounted for. The next count will test the claim." },
+      { item: "The Fed's rate decision — futures put a 25-basis-point increase at about 86% (Polymarket, 62%).", why: "A hike would add borrowing-cost pressure on top of fuel prices." },
+      { item: "The EIA's weekly report for the week ending Sep 4 — US diesel stocks near 100M barrels, and the pace of SPR draws.", why: "The clearest weekly read on whether supplies are tightening or recovering." },
+    ],
+  },
+  {
+    when: "Sep 30",
+    items: [
+      { item: "Russia's diesel export ban expires unless extended; the US-led coalition completes its withdrawal from Iraq; prediction-market bets settle.", why: "Several deadlines in one week, each with supply or price implications." },
+    ],
+  },
+  {
+    when: "Oct 7",
+    items: [
+      { item: "The first EIA monthly outlook after the tanker attacks — its roughly $90 forecast for the second half is $16 below the latest Brent close.", why: "Watch whether its view that shipping remains constrained but open survives." },
+    ],
+  },
+  {
+    when: "Nov 3",
+    items: [
+      { item: "The US midterm elections — President Trump has said the war will end just after the elections.", why: "Watch whether fighting and diplomacy match the administration's stated timeline." },
+    ],
+  },
+  {
+    when: "Nov 30",
+    items: [
+      { item: "Russia's jet-fuel export ban takes effect.", why: "Aviation fuel supplies tighten further as the world's remaining stocks run low." },
+    ],
+  },
 ];
 
 // ---------- Breaking-points cascade (§11, compressed twice) ----------
