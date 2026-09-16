@@ -21,7 +21,7 @@ The model uses six types of published information. You can check the figures aga
 |---|---|---|
 | How much oil is in the SPR | US Energy Information Administration (EIA) | Every Wednesday |
 | Commercial oil stocks in the US and Europe | EIA and the reserve's operating agency (GEF) | Weekly |
-| How many tankers get through the Strait of Hormuz | PortWatch / Kpler, using satellite ship-tracking data | Weekly |
+| How many tankers get through the Strait of Hormuz | PortWatch / Kpler, using satellite ship-tracking data | Daily |
 | How much oil OPEC countries produce | OPEC | Monthly |
 | Refinery strikes and export bans in Russia and Saudi Arabia | Government statements, military announcements, and news reports | Daily |
 | Oil and fuel prices | Exchanges and AAA's US pump prices | Daily |
@@ -31,6 +31,10 @@ Rumors, anonymous reports, and private estimates are kept in the research notes 
 ## Three possible scenarios
 
 The model groups the possible outcomes into three scenarios and assigns each an estimated probability. As of Sep 16, the corridor-lapse scenario has the highest odds, at 55%. Here, *corridor* means an agreed shipping route that allows tankers to pass through the Strait of Hormuz.
+
+**These are shipping odds.** Each reserve path also assumes a steady withdrawal rate. Whether that rate can be sustained depends on government release decisions, contracts, and delivery schedules.
+
+**Withdrawals from the SPR could pause even if the crisis continues.** A supply shortage doesn't automatically trigger a release. Deliveries under the current program may be nearing completion. Once they end, the Department of Energy would need to arrange further releases for withdrawals to continue.
 
 | Scenario | Odds (Sep 16) | What happens | Effect on the reserve |
 |---|---|---|---|
@@ -48,14 +52,18 @@ You can see how the odds have changed over time in the dashboard's “Three poss
 
 The SPR stores oil in salt caverns. As oil is withdrawn, engineering limits affect how much can still be pumped and whether the caverns can be used safely. That means the reserve can become less useful well before it's empty.
 
-The model tracks four thresholds, also called *floors*. The dates below assume the withdrawal rate in the corridor-lapse scenario, currently the one with the highest odds.
+The model tracks four thresholds, also called *floors*. The dates below assume withdrawals continue at 1.35 million barrels a day from the Sep 11 level, as in the corridor-lapse path.
 
-| Floor | Level | What it means | Estimated date in this scenario |
+**Withdrawals could pause even if shipping remains disrupted.** You can use these dates to explore what happens at the assumed rate. The shipping probabilities don't tell you how likely the reserve is to reach these levels by those dates.
+
+| Floor | Level | What it means | Date at assumed withdrawal rate |
 |---|---|---|---|
 | 1 | About 300M barrels | Some caverns can no longer pump below this level. | **First report below this level: week ending Aug 7** |
 | 2 | 250M barrels | The operational minimum cited by the reserve's operators. | Around Oct 7, 2026 |
 | 3 | 180M barrels | The hard operating limit used in the model. | Around Nov 28, 2026 |
 | 4 | 70M barrels | The safe minimum stated by the US Department of Energy. The model stops withdrawals here. | Mid-February 2027 |
+
+Published contract totals suggest existing deliveries may be nearing completion, but their remaining volume and end date haven't been confirmed.
 
 As these limits reduce the reserve's ability to supply oil, the shortage has to be absorbed elsewhere. That can mean higher prices and less fuel available to consumers.
 
@@ -112,9 +120,9 @@ Four small Python programs handle the calculations. They use no external librari
 
 The scorecard records each prediction with a date and a probability. Once that date passes, the result is scored. Over time, this should show whether the estimates are becoming more reliable.
 
-The first batch of results is due by the end of September. It covers Russia's diesel export ban, two prediction markets on whether shipping through Hormuz returns to normal and whether a ceasefire begins by Sep 30, and the Fed's Sep 16 decision.
+The first predictions cover Russia's diesel export ban and two prediction markets on whether shipping through Hormuz returns to normal and whether a ceasefire begins by Sep 30. Those results are due by the end of September.
 
-On Sep 11, futures markets put the chance of a 25-basis-point rate increase at about 86%, compared with 62% on Polymarket.
+The scorecard also tracks predictions outside the oil model, including Fed rate decisions. As of September 11, futures markets gave a September 16 rate increase an 86% chance, and the increase happened. Our next prediction is a 60% chance of another rate increase at the October 27–28 meeting.
 
 ## What to keep in mind
 

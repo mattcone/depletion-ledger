@@ -21,7 +21,7 @@ const RATES = { holds: 0.45, standoff: 0.7, lapse: 1.35 } as const;
 const NAMES = { holds: "Corridor holds", standoff: "Standoff", lapse: "Corridor lapses" } as const;
 const topKey = (["holds", "standoff", "lapse"] as const).reduce((a, b) => (odds[b] > odds[a] ? b : a));
 const floorDate = (floor: number, rate: number) =>
-  new Date(Date.parse(last.date) + ((last.level - floor) / rate) * 86400000);
+  new Date(Date.parse(last.date) + Math.round((last.level - floor) / rate) * 86400000);
 const top250 = floorDate(250, RATES[topKey]);
 const top180 = floorDate(180, RATES[topKey]);
 const others = (["holds", "standoff", "lapse"] as const).filter((k) => k !== topKey);
@@ -43,14 +43,14 @@ const strip = [
     sub: "4-week average from EIA reports",
   },
   {
-    label: "Scenario with highest odds",
+    label: "Shipping scenario with highest odds",
     value: `${NAMES[topKey]} · ${odds[topKey]}%`,
     sub: others.map((k) => `${NAMES[k].toLowerCase()} ${odds[k]}%`).join(" · "),
   },
   {
-    label: "Estimated date at 250M barrels",
+    label: `250M at an assumed ${RATES[topKey]}M barrels/day`,
     value: fmtDate(top250),
-    sub: `the 250M floor · the 180M floor: ${fmtDate(top180)}`,
+    sub: "Assumes continuing releases; actual deliveries could pause.",
   },
 ];
 
@@ -58,9 +58,9 @@ const strip = [
 const glance = [
   { label: `Reserve (w/e ${weekEnding})`, value: `${last.level.toFixed(1)}M bbl` },
   { label: "Withdrawals, 4-week avg", value: `${sprDrawPace4w.toFixed(2)}M b/d` },
-  { label: "250M floor (leading scenario)", value: `≈ ${fmtDate(top250)}` },
-  { label: "180M floor (leading scenario)", value: `≈ ${fmtDate(top180)}` },
-  { label: `Odds (${odds.date})`, value: `${odds.holds} / ${odds.standoff} / ${odds.lapse}` },
+  { label: `250M at ${RATES[topKey]}M b/d`, value: `≈ ${fmtDate(top250)}` },
+  { label: `180M at ${RATES[topKey]}M b/d`, value: `≈ ${fmtDate(top180)}` },
+  { label: `Shipping odds (${odds.date})`, value: `${odds.holds} / ${odds.standoff} / ${odds.lapse}` },
 ];
 ---
 
@@ -111,9 +111,9 @@ const glance = [
         ))}
       </dl>
       <p class="mt-6 border-t border-rule pt-3 text-xs leading-relaxed text-faint">
-        The inputs come from published reports and ship-tracking data. The probabilities
-        are assigned using judgment, and the dates are calculated from each scenario's
-        assumptions. The technical specification records the formulas and sources.
+        Both reserve dates assume withdrawals continue at {RATES[topKey]} million barrels
+        a day. The shipping odds are assigned using judgment; they don't measure the
+        likelihood of these dates. The technical specification records the formulas and sources.
       </p>
     </aside>
   </div>

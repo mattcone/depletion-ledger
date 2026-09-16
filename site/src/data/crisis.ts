@@ -284,7 +284,7 @@ export const branchTracks = [
     border: "border-l-calm",
     weight: "10%",
     what: "Tankers can pass through Hormuz under an Iran–Oman agreement or with US escorts. Traffic gradually returns to normal over one to two quarters.",
-    path: "In this scenario, Brent moves toward $70–80 and reserve withdrawals slow to about 0.45M barrels per day. Stored oil lasts longer.",
+    path: "In this scenario, Brent moves toward $70–80. The reserve path assumes withdrawals of 0.45M barrels per day, so stored oil lasts longer if releases continue at that rate.",
   },
   {
     name: "Standoff",
@@ -292,7 +292,7 @@ export const branchTracks = [
     border: "border-l-crude",
     weight: "35%",
     what: "The war continues at its current intensity. Tanker attacks and shipping restrictions persist, some Iranian infrastructure remains offline, and the damaged Saudi bypass has no restart date. The strait remains partly open.",
-    path: "Brent stays in the $95–125 range, and reserve withdrawals run at about 0.70M barrels per day. Global stocks keep falling, with shortages developing later.",
+    path: "Brent stays in the $95–125 range. The reserve path assumes continuing withdrawals of 0.70M barrels per day. Global stocks keep falling, with shortages developing later.",
   },
   {
     name: "Corridor lapses",
@@ -300,7 +300,7 @@ export const branchTracks = [
     border: "border-l-alarm",
     weight: "55%",
     what: "The disruption becomes a sustained closure or the fighting escalates. Tanker losses rise, shipping restrictions remain, and the bypass, Abqaiq, and Jazan stay offline for months.",
-    path: "Brent rises above $130, and reserve withdrawals reach 1.35M barrels per day. Shortages spread from the US East Coast to Russia, Europe, China, and aviation fuel.",
+    path: "Brent rises above $130. The reserve path assumes continuing withdrawals of 1.35M barrels per day. Shortages spread from the US East Coast to Russia, Europe, China, and aviation fuel.",
   },
 ];
 
@@ -466,12 +466,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
       { item: "Shipping conditions after the Houthis captured the Hanish islands on Sep 13–14. The Houthis claim 85 vessels passed through Bab el-Mandeb in 72 hours. Missile and drone attacks on Saudi cities wounded 13 civilians on Sep 13–14.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes." },
       { item: "How banks respond to the Sep 14 sanctions on Russia's VTB; Treasury is meeting with financial institutions this week.", why: "If banks stop handling VTB's payments, Iran loses channels for receiving oil revenue." },
       { item: "How many ships are passing through Hormuz. Kpler/Reuters counted 7 vessels on Sep 14 (revised up from a preliminary count of 4) and 4 on Sep 15 — two in, two out, none a crude carrier or LNG tanker. A US official told Axios that an average of 40 ships a day transit under US guidance, exporting roughly 14 million barrels a day. Ship-tracking data shows far fewer.", why: "The official account and the tracking data give different pictures of shipping through Hormuz. A sustained drop below the current level would undercut the claimed volume." },
-    ],
-  },
-  {
-    when: "Sep 16",
-    items: [
-      { item: "The Fed's rate decision — futures put a 25-basis-point increase at about 86% (Polymarket, 62%).", why: "A hike would add borrowing-cost pressure on top of fuel prices." },
+      { item: "A new round of the SPR exchange program. About 133.6 million barrels of the announced 172-million-barrel program were awarded across five rounds (March–June). The June round awarded only 500,000 barrels of the 40 million offered. Existing deliveries may be nearing completion, but their remaining volume and end date haven't been confirmed. Companies must return the borrowed crude plus additional barrels under their contracts.", why: "New contracts and deliveries could increase withdrawals again. The amount awarded would show how much oil companies are willing to take under the offered terms." },
     ],
   },
   {
@@ -565,8 +560,8 @@ export const recessionOdds = [
 ];
 
 export const ratesStats = [
-  { label: "Fed funds, July FOMC", value: "3.50–3.75%", sub: "9-to-3 hold; officials 'see the need for a hike if inflation doesn't cool'" },
-  { label: "Odds of a September rate increase", value: "≈86%", sub: "futures markets, Sep 11 · up from about 72% Thursday after core CPI exceeded expectations · Polymarket: 62%" },
+  { label: "Fed's target rate, Sep 16", value: "3.75–4.00%", sub: "Up 0.25 percentage points in a 12-to-0 vote · statement: 'Inflation remains elevated. … The Committee will deliver price stability.'" },
+  { label: "Odds of a rate increase, Oct 27–28", value: "60%", sub: "Our estimate, published Sep 16 · 16 of 18 Fed officials projected another increase this year · we'll score this prediction after the October decision" },
   { label: "Aug PPI (BLS, Sep 10)", value: "5.4% YoY", sub: "+0.4% for the month · July revised to 4.8% annually · energy +4.2%, diesel +24.1% annually · 10-year yield highest since Oct 2023" },
 ];
 

@@ -329,7 +329,8 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The yield on 10-year US Treasury bonds ended the day at 4.996%.
-            Futures markets put the chance of a Fed rate increase on Sep 16 at roughly 86%.
+            On Sep 16, the Fed voted 12-to-0 to raise rates by a quarter of a percentage point,
+            to 3.75–4.00%. As of Sep 11, futures markets had put the chance of an increase at roughly 86%.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The gray line shows West Texas Intermediate (WTI), a US crude oil benchmark. Most WTI
@@ -423,18 +424,48 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           <h2 class="text-xl font-bold tracking-tight">The Strategic Petroleum Reserve is at its lowest level in 44 years</h2>
           <p class="font-mono text-[11px] text-faint">EIA weekly ending stocks, million bbl</p>
         </div>
-        <p class="mb-6 max-w-prose text-[13px] leading-relaxed text-ink/80">
-          The Strategic Petroleum Reserve (SPR) is the US government's emergency supply of crude
-          oil. It was created after the energy shortages of the 1970s. The reserve held 415.4 million
-          barrels when the war began. The latest report, for the week ending Sep 11, puts it at
-          285.0 million, down 0.4 million barrels in a week. Withdrawals slowed for a third straight week,
-          from 1.2 million the week before and 3.1 million the week before that.
-          Oil is being released to help make up for supplies that can't leave the Gulf. You can
-          use the withdrawal rate to see how quickly the emergency supply is being used.
-        </p>
+        <div class="mb-6 grid grid-cols-1 gap-x-28 gap-y-5 text-[13px] lg:grid-cols-[65ch_65ch]">
+          <p class="text-[13px] leading-relaxed text-ink/80">
+            The Strategic Petroleum Reserve (SPR) is the US government's emergency supply of crude
+            oil. It was created after the energy shortages of the 1970s. The reserve held 415.4 million
+            barrels when the war began. The latest report, for the week ending Sep 11, puts it at
+            285.0 million, down 0.4 million barrels in a week. Withdrawals slowed for a third straight week,
+            from 1.2 million the week before and 3.1 million the week before that.
+            Oil is being released to help make up for supplies that can't leave the Gulf. You can
+            use the withdrawal rate to see how quickly the emergency supply is being used.
+          </p>
+          <div>
+            <h3 class="flex items-center gap-2 text-[13px] font-bold leading-relaxed text-ink/70">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                class="h-[15px] w-[15px] shrink-0 text-ink/70"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+                />
+              </svg>
+              SPR withdrawals could pause even if the crisis continues
+            </h3>
+            <p id="sprChartAssumptions" class="mt-1.5 text-[13px] leading-relaxed text-ink/70">
+              The Department of Energy releases oil from the SPR through contracts and scheduled
+              deliveries. A supply shortage doesn't automatically trigger withdrawals.
+              The dashed lines start at the Sep 11 level and assume withdrawals continue at
+              0.45M, 0.70M, or 1.35M barrels a day. The latest reported week averaged about
+              60,000 barrels a day. The shipping odds don't tell you how likely the reserve
+              is to reach the projected levels by those dates.
+            </p>
+          </div>
+        </div>
         <!-- SPR chart (full width) -->
         <div class="relative h-96">
-            <canvas id="sprChart" role="img" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 285.0 million on Sep 11. Three dashed scenario paths to March 2027 at 0.45, 0.70, and 1.35 million barrels per day; floors at 300 (cavern, first reported below in the week ending Aug 7), 250 (GEF minimum), 180 (operable), 70 (DOE safe minimum)."></canvas>
+            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 285.0 million on Sep 11. Three illustrative paths to March 2027 assume continuing withdrawals at 0.45, 0.70, and 1.35 million barrels per day; model thresholds at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
             <div
               id="sprFloorTip"
               class="pointer-events-none absolute z-10 hidden max-w-[300px] border border-rule bg-[rgba(255,255,248,0.97)] px-3 py-2 text-[12px] leading-snug text-ink shadow-sm"
@@ -459,10 +490,6 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             of Energy's stated safe minimum. The model stops withdrawals at 70M.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The dashed lines show what happens if withdrawals continue at 0.45M, 0.70M, or 1.35M
-            barrels per day from the Sep 11 level. The estimates extend to about March 2027.
-          </p>
-          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Weekly withdrawals fell from 3.1 million to 1.2 million, then to
             0.4 million barrels in the week ending Sep 11. Diesel stocks rose for a second
             straight week, up 1.6 million barrels, according to the EIA's Sep 16 report.
@@ -472,8 +499,12 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       <section class="mt-12">
         <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
           <h2 class="text-xl font-bold tracking-tight">Three possible outcomes</h2>
-          <p class="font-mono text-[11px] text-faint">Estimated odds, updated when specified events occur.</p>
+          <p class="font-mono text-[11px] text-faint">Estimated shipping odds, updated when specified events occur.</p>
         </div>
+        <p class="mb-5 max-w-3xl text-sm leading-relaxed text-ink/80">
+          These odds describe what could happen to shipping. Each reserve path assumes a steady
+          withdrawal rate, which depends on government releases and deliveries continuing.
+        </p>
         <div class="space-y-3">
           {branchWeights.slice().reverse().map((b) => (
             <div>
@@ -648,18 +679,22 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <!-- Quadrant: 250M floor date, most likely path -->
             <div class="flex flex-col justify-between border border-rule p-5">
               <div>
-                <p class="text-xs text-faint">Estimated date at 250M barrels</p>
+                <p class="text-sm font-semibold leading-snug text-ink">250M barrels if withdrawals average 1.35M a day</p>
                 <p class="tabular mt-2 font-mono text-3xl font-semibold text-alarm">
                   ≈ {floorLapse250}<span class="ml-1 text-sm font-medium text-ink/60">2026</span>
                 </p>
-                <p class="mt-1.5 text-xs leading-relaxed text-faint">
-                  The corridor-lapse scenario has the highest odds, at 55% as of Sep 16. It assumes
-                  withdrawals of 1.35M barrels per day from the reported 285.0M barrels on Sep 11.
-                  The standoff scenario, at 35%, reaches the same threshold on {floor250}.
+                <p class="mt-2 text-sm font-medium leading-relaxed text-ink">
+                  This date assumes continuing releases. Withdrawals could pause.
+                </p>
+                <p class="mt-2 text-xs leading-relaxed text-ink/75">
+                  Starting from the reported 285.0M barrels on Sep 11, the corridor-lapse path
+                  uses 1.35M barrels a day. At the standoff path's assumed 0.70M a day,
+                  the same threshold would be reached on {floor250}.
                 </p>
               </div>
               <p class="border-t border-rule/70 pt-2 text-[11px] leading-relaxed text-faint">
-                Next floor — the 180M operable limit: ≈ {floorLapse180} on the lapse path, {floor180} on the standoff path.
+                At those same assumed rates, 180M barrels would be reached around {floorLapse180}
+                (1.35M a day) or {floor180} (0.70M a day).
               </p>
             </div>
           </div>
@@ -860,13 +895,18 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             </div>
           </div>
           <div>
-            <h3 class="text-lg font-bold tracking-tight">Markets expect the Fed to raise rates</h3>
+            <h3 class="text-lg font-bold tracking-tight">The Fed raised rates on Sep 16</h3>
             <p class="mt-2 max-w-prose text-[13px] leading-relaxed text-faint">
               The Federal Reserve can cut interest rates to support a slowing economy, but persistent
               inflation makes that harder. August producer prices rose 5.4% from a year earlier.
               Consumer inflation held at 3.4%, with energy up 16.3%, while core inflation eased to
-              2.4%. Markets expect a rate increase at the Sep 16 meeting. Higher borrowing costs
-              would add pressure as oil reserves are drawn down through the winter.
+              2.4%.
+            </p>
+            <p class="mt-3 max-w-prose text-[13px] leading-relaxed text-faint">
+              On Sep 16, the Fed voted 12-to-0 to raise rates by a quarter of a percentage point,
+              citing elevated inflation. According to the Wall Street Journal, 16 of the 18
+              officials projected at least one more increase this year. Higher borrowing costs
+              add to the pressure from rising energy prices.
             </p>
             <div class="mt-5 grid grid-cols-1 border border-rule sm:grid-cols-3">
               {
@@ -890,8 +930,8 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           <h3 class="text-lg font-bold tracking-tight">Borrowing costs and inflation</h3>
           <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
             You can see the wider effects in borrowing costs and everyday prices. Both are at
-            multi-year highs. Together, they help explain why the Fed is considering higher
-            interest rates even as the economy slows.
+            multi-year highs. In its Sep 16 rate decision, the Fed cited elevated inflation
+            and described the economy as growing at a solid pace.
           </p>
 
           <div class="mt-6 grid gap-10 lg:grid-cols-2">
@@ -2363,7 +2403,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       // tooltip when the cursor is within a few pixels of a line (below).
       const floorExplains: Record<number, string> = {
         300: "300M — the model's cavern-damage threshold. Below it, caverns can't safely be refilled after withdrawals. First report below this level: week ending Aug 7.",
-        250: "250M — operational minimum for sustained withdrawals. The leading scenario, corridor lapse, would reach it in early October. The standoff scenario would reach it in late October.",
+        250: "250M — the model's operational threshold. The dates assume continuing withdrawals: early October at 1.35M barrels a day, or late October at 0.70M. Actual deliveries could pause.",
         180: "180M — hard operable limit",
         70: "70M — the DOE's stated safe minimum: the draw stops here, it does not continue",
       };
