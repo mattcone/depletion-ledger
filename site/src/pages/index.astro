@@ -16,7 +16,7 @@ import {
 } from "../data/crisis";
 
 // Crisis day number, computed from the data-as-of date (NOT the viewer's clock) so the
-// page is a stable snapshot: Sep 15 data = day 199, no matter when someone loads it.
+// page is a stable snapshot: Sep 16 data = day 200, no matter when someone loads it.
 const dayNum = Math.round((Date.parse(DATA_AS_OF) - Date.parse(CRISIS_DAY_1)) / 86400000);
 
 // Watch list as flat ledger rows (date column + text). Tufte: structure from the date
@@ -225,32 +225,32 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       <div class="grid gap-10 lg:grid-cols-2">
         <div>
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">US gasoline prices are up 54%</h2>
+            <h2 class="text-xl font-bold tracking-tight">US gasoline prices are up 55%</h2>
             <p class="font-mono text-[11px] text-faint">EIA weekly, national</p>
           </div>
           <div class="h-72">
-            <canvas id="gasChart" role="img" aria-label="US gasoline, EIA weekly national average (AAA daily readings Sep 10 to 15): $2.81 in January, May peak $4.50, $4.33 on Sep 15. Reference line at the January pre-crisis $2.81."></canvas>
+            <canvas id="gasChart" role="img" aria-label="US gasoline, EIA weekly national average (AAA daily readings Sep 10 to 16): $2.81 in January, May peak $4.50, $4.37 on Sep 16. Reference line at the January pre-crisis $2.81."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The national average has risen from $2.81 in January to $4.33, an increase of 54%.
+            The national average has risen from $2.81 in January to $4.37, an increase of about 55%.
             Prices peaked at $4.50 in May. Every month since March has averaged above the levels
             seen before the crisis.
           </p>
         </div>
         <div>
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">US diesel prices are up 68%</h2>
+            <h2 class="text-xl font-bold tracking-tight">US diesel prices are up 70%</h2>
             <p class="font-mono text-[11px] text-faint">AAA national, sourced points</p>
           </div>
           <div class="h-72">
-            <canvas id="dieselChart" role="img" aria-label="US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $6.27 on Sep 15, a sixth straight record."></canvas>
+            <canvas id="dieselChart" role="img" aria-label="US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $6.31 on Sep 16, a seventh straight record."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Diesel cost $3.72 in the last week before the war, on Feb 27. By Sep 15, it had
-            reached $6.27, an increase of 68% and its sixth consecutive record. It passed the
+            Diesel cost $3.72 in the last week before the war, on Feb 27. By Sep 16, it had
+            reached $6.31, about 70% higher and its seventh record in a row. It passed the
             previous record of about $5.85, set in June 2022, on Sep 4.
-            This chart shows selected readings. You can see the daily Sep 3–15 readings
-            in the price spread chart below. Diesel prices have risen faster than gasoline prices
+            Both charts show selected readings. The price spread chart below includes daily observations
+            from Sep 3 to Sep 16. Diesel prices have risen faster than gasoline prices
             as supplies of refined fuel have tightened.
           </p>
         </div>
@@ -312,7 +312,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <p class="font-mono text-[11px] text-faint tabular">Brent: sourced points (EIA monthly avgs: Mar $103.0 · Apr $117.29 · Jul $83.76) · WTI: weekly (FRED)</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil, 2026 year to date: Brent at $76 before the closure, $126 intraday peak in March, $74 on Jun 30, a single-day jump to $108.03 on Sep 10, a closing price of $104.61 on Sep 11, $105.68 on Sep 14, and $108.50 on Sep 15; WTI weekly from about $58 in January to $102.93 on Sep 10, $100.05 on Sep 11, $101.39 on Sep 14, and $105.48 on Sep 15. Reference lines at $100 and the pre-crisis $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil, 2026 year to date: Brent at $76 before the closure, $126 intraday peak in March, $74 on Jun 30, a single-day jump to $108.03 on Sep 10, a closing price of $104.61 on Sep 11, $105.68 on Sep 14, and $108.75 on Sep 15 (corrected closing price); WTI weekly from about $58 in January to $102.93 on Sep 10, $100.05 on Sep 11, $101.39 on Sep 14, and $105.83 on Sep 15 (corrected closing price). Reference lines at $100 and the pre-crisis $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Brent rose from $76 before the closure to an intraday peak of $126 in March, then
@@ -321,7 +321,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             and settled at $104.61 on Sep 11.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Brent closed at $108.50 on Sep 15, and WTI closed at $105.48.
+            Brent closed at $108.75 on Sep 15, and WTI closed at $105.83.
             Before the shutdown, the East–West pipeline carried about 4 million barrels a day
             to Yanbu, Saudi Arabia's Red Sea port, according to Reuters. Stored oil there was
             estimated to cover five to seven days of exports. Reuters now reports that shipments from the port have stopped
@@ -344,7 +344,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <p class="font-mono text-[11px] text-faint tabular">Retail price less WTI, $/bbl · weekly (EIA/AAA − FRED).</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. Diesel rises from about $89 in January to $153.6 on Sep 6, narrows to $148 on Sep 10, peaks at $160.3 on Sep 14, and eases to $157.8 on Sep 15. Gasoline rises from about $59 in January to $76.3 on Sep 15, after falling to $52 in March. The diesel chart shows selected readings to keep nearby points legible."></canvas>
+            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. Diesel rises from about $89 in January to $153.6 on Sep 6, narrows to $148 on Sep 10, peaks at $160.3 on Sep 14, eases to $157.5 on Sep 15, and stands at $159.2 on Sep 16. Gasoline rises from about $59 in January to $77.6 on Sep 16, after falling to $52 in March. The diesel chart shows selected readings to keep nearby points legible."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             This chart subtracts the price of crude oil from the retail price of fuel, with both
@@ -353,15 +353,16 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Diesel's spread was about $89 in January. It briefly narrowed to $148 on Sep 10,
-            when crude prices rose faster than pump prices. It then peaked at $160.3 on Sep 14
-            before falling to $157.8 on Sep 15. Gasoline's spread has also widened, from about
-            $59 to $76.3.
+            when crude prices rose faster than pump prices. It then peaked at $160.3 on Sep 14,
+            fell to $157.5 on Sep 15, and stood at $159.2 on Sep 16. Gasoline's spread has also
+            widened, from about $59 to $77.6.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The calculation uses retail prices from EIA and AAA, minus WTI from FRED, with futures closes for
             Sep 10, 11, 14, and 15. The EIA's official <em>crack spread</em> uses wholesale fuel prices, so the
-            values differ. Eight fuel readings have no same-day WTI value; those use the nearest
-            trading day's price, within 1–2 days. No missing prices are estimated.
+            values differ. Eight of the plotted fuel readings have no same-day WTI price. For those readings, the chart uses
+            the nearest trading day's price, within 1–2 days. The Sep 16 readings use the Sep 15 close.
+            No missing prices are estimated.
           </p>
         </div>
       </div>
@@ -1751,7 +1752,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             { value: gasolinePreCrisis, text: "Jan $2.81 (pre-crisis)", color: "#3d6b64", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: gasolineYtd.length - 1, text: "Sep 15 · $4.33", ...endpoint },
+            { dataset: 0, index: gasolineYtd.length - 1, text: "Sep 16 · $4.37", ...endpoint },
             { dataset: 0, index: 18, text: "May peak $4.50", dy: -14, color: "#1c1b17" },
           ]),
         ],
@@ -1766,7 +1767,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       const gasXScale = {
         type: "linear" as const,
         min: 0,
-        max: 259,
+        max: 262,
         grid: { display: false },
         border: { display: true, color: "#d8d4c6", width: 0.5 },
         afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
@@ -1788,7 +1789,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       // Sep 15 (record). The daily Sep 3–15 points stay in dieselYtd for the stat card;
       // the crack chart below shows the full daily run on its own thinned view.
       const dieselView = dieselYtd.filter(
-        (p) => p.date < "2026-09-03" || p.date === "2026-09-04" || p.date === "2026-09-11" || p.date === "2026-09-14" || p.date === "2026-09-15",
+        (p) => p.date < "2026-09-03" || p.date === "2026-09-04" || p.date === "2026-09-11" || p.date === "2026-09-14" || p.date === "2026-09-15" || p.date === "2026-09-16",
       );
       new Chart(document.getElementById("dieselChart")!, {
         type: "line",
@@ -1818,7 +1819,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           maintainAspectRatio: false,
           interaction: { mode: "index", intersect: false },
           layout: { padding: { top: 18 } },
-          // max 6.4 = headroom above the 6.2694 record; ticks still step 0.5 to 6.2
+          // max 6.4 = headroom above the 6.3103 record; ticks still step 0.5 to 6.2
           scales: { y: yScale(3.2, 6.4, (v) => `$${v}`, 7), x: gasXScale },
           plugins: {
             tooltip: {
@@ -1839,7 +1840,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             { value: dieselOldRecord, text: "Jun 2022 record $5.85", color: "rgba(179,38,30,0.8)", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: dieselView.length - 1, text: "Sep 15 · $6.27 (record)", ...endpoint, color: "#b3261e" },
+            { dataset: 0, index: dieselView.length - 1, text: "Sep 16 · $6.31 (record)", ...endpoint, color: "#b3261e" },
           ]),
         ],
       });
@@ -1957,9 +1958,9 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         ],
       });
 
-      // Wider x-scale for the bonds/inflation charts: data runs to Sep 14 (day 257).
-      const moneyXScale = { ...gasXScale, max: 259 };
-      const mref = (val: number) => [{ x: 0, y: val }, { x: 257, y: val }];
+      // Wider x-scale for the bonds/inflation charts: data runs to Sep 15 (day 258).
+      const moneyXScale = { ...gasXScale, max: 262 };
+      const mref = (val: number) => [{ x: 0, y: val }, { x: 258, y: val }];
 
       // Inflation chart: monthly points fall at month-END, so month ticks must sit at
       // month-end too — gasXScale ticks at month-start, which reads one month ahead for
@@ -2057,11 +2058,11 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             { value: 76, text: "pre-crisis $76 (Feb 27)", color: "#3d6b64", align: "right" },
           ]),
           directLabels([
-            { dataset: 0, index: 16, text: "Sep 15 · $108.50 — Brent", ...endpoint },
+            { dataset: 0, index: 16, text: "Sep 15 · $108.75 — Brent", ...endpoint },
             { dataset: 0, index: 3, text: "peak $126 · Mar 18", dy: -16, color: "#1c1b17" },
             { dataset: 0, index: 6, text: "Jun 30 · $74", dy: 20, ...note },
             { dataset: 0, index: 1, text: "war began Feb 28", dx: 8, dy: 18, align: "left", ...note },
-            { dataset: 1, index: wtiWeekly.length - 1, text: "Sep 15 · $105.48 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a" },
+            { dataset: 1, index: wtiWeekly.length - 1, text: "Sep 15 · $105.83 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a" },
           ]),
         ],
       });
@@ -2069,9 +2070,10 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       // Crack spread: retail product price less WTI, $/bbl (weekly).
       // Derived arithmetic on verified series (EIA/AAA retail, FRED WTI) — not a sourced print.
       // Gaps where FRED has no WTI value: null + spanGaps false = line breaks, no interpolation.
-      // Nearest WTI within a few days (ties go to the later date): covers the six product
-      // dates with no same-day WTI — Jan 19→Jan 20, Feb 16→Feb 17, May 25→May 26,
-      // Sep 6→Sep 8, and the Sep 12–13 weekend AAA dailies → Sep 11 / Sep 14.
+      // Nearest WTI within a few days (ties go to the later date): covers the product dates
+      // with no same-day WTI — Jan 19→Jan 20, Feb 16→Feb 17, May 25→May 26,
+      // Sep 6→Sep 8, the Sep 12–13 weekend AAA dailies → Sep 11 / Sep 14, and
+      // Sep 16 → Sep 15 (no same-day close yet).
       // Observed values only, no interpolation.
       const wtiList = wtiWeekly.map((p) => ({ day: gd(p.date), value: p.value })).sort((a, b) => a.day - b.day);
       const nearestWti = (day: number) => {
@@ -2094,7 +2096,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       // Same treatment as dieselView above. The dropped points (Sep 4, Sep 9, Sep 11, Sep 12,
       // Sep 13) sit inside the visible segments, so the line's shape is unchanged.
       const dieCrackSrc = dieselYtd.filter(
-        (p) => p.date < "2026-09-03" || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-14", "2026-09-15"].includes(p.date)
+        (p) => p.date < "2026-09-03" || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-14", "2026-09-15", "2026-09-16"].includes(p.date)
       );
       const dieCrack = crackPts(dieCrackSrc);
       // Record label tracks the max, not a fixed offset from the end — new points keep landing.
@@ -2168,12 +2170,9 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             { dataset: 0, index: 0, text: "Jan · $89 — diesel", dx: 8, dy: 16, align: "left", color: "#8a867a" },
             { dataset: 1, index: 0, text: "Jan · $59 — gasoline", dx: 8, dy: -12, align: "left", color: "#8a867a" },
             { dataset: 1, index: 34, text: "Aug 31 · $84", dy: 16, align: "right", color: "#8a867a" },
+            // Single annotation: the record. A second label on the last point crowded the
+            // record label once the two separated; the caption carries the current value.
             { dataset: 0, index: dieRecIdx, text: `${fmt(dieCrack[dieRecIdx].date)} · $${Math.round(dieCrack[dieRecIdx].y)} — record`, dy: -16, color: "#b3261e" },
-            // Hidden while the record sits on the last point — the two labels would collide;
-            // the record label already carries that day's value.
-            ...(dieRecIdx === dieCrack.length - 1
-              ? []
-              : [{ dataset: 0, index: dieCrack.length - 1, text: `${fmt(dieCrack[dieCrack.length - 1].date)} · $${Math.round(dieCrack[dieCrack.length - 1].y)}`, ...endpoint, color: "#8a867a" }]),
           ]),
         ],
       });
@@ -2220,7 +2219,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             y: {
               type: "linear" as const,
               min: 3.9,
-              max: 5.0,
+              max: 5.05, // headroom so the 4.996 point isn't clipped at the top
               afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
                 scale.ticks = [4.0, 4.2, 4.4, 4.6, 4.8, 5.0].map((v) => ({ value: v }));
               },

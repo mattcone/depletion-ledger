@@ -63,7 +63,7 @@ The probabilities involve judgment. To keep that judgment consistent, **the odds
 
 For example, the odds changed after the corridor agreement was announced and ship-tracking data showed it wasn't working. The first missile strike on a base in a third country led to a Sep 9 change from 15/55/30 to 10/50/40. The pipeline suspension led to the Sep 11 change described above.
 
-These are the events being watched as of Sep 15:
+These are the events being watched as of Sep 16:
 
 | Event | Effect on the odds |
 |---|---|
@@ -83,7 +83,7 @@ The Houthis' territorial gains also need to be considered alongside shipping act
 
 A direct US strike on the Houthis would also trigger a review. The direction of that change would depend on the circumstances at the time.
 
-The gap between the EIA outlook and market prices takes longer to assess. The EIA still expects oil at about $90 in late 2026. Brent closed at $108.50 on Sep 15, about $19 above that forecast.
+The gap between the EIA outlook and market prices takes longer to assess. The EIA still expects oil at about $90 in late 2026. Brent closed at $108.75 on Sep 15, about $19 above that forecast.
 
 The model treats a gap above roughly $10–15 as a sign that the market may be assigning more than 40% odds to the corridor lapsing. The current gap is above that range.
 
