@@ -18,11 +18,18 @@ Modifiers (product-scarcity triggers, documented heuristic):
 
 Usage:
   draw_rate.py --brent 100.71 --spr 286.6 --spr-date 2026-08-28 \
-               [--asof 2026-09-09] [--padd1-days 12] [--lapse] [--json]
+               [--asof 2026-09-09] [--padd1-days 12] [--lapse] \
+               [--reported-pace 0.058] [--json]
 
 Note: the WPSR level is dated (week ending). With --asof, the script shows
 both the reported level and a level adjusted for elapsed draw at the selected
 rate, and computes the runway from the adjusted level.
+
+The band-pace runway is a SCENARIO (what the pace would be if DOE draws with
+the price), not a forecast of DOE behavior. Pass --reported-pace (the actual
+weekly withdrawal pace in M b/d, e.g. 0.058 for the w/e Sep 11 report) to also
+print the runway at the pace DOE is actually choosing -- the spread between
+the two is the size of DOE's discretion (see research/logs/2026-09-16.md).
 """
 import argparse
 import json
@@ -74,6 +81,9 @@ def main():
     ap.add_argument("--padd1-days", type=float, default=None,
                     help="PADD1 (East Coast) days-of-cover, for the modifier")
     ap.add_argument("--lapse", action="store_true", help="assume corridor-lapse pace")
+    ap.add_argument("--reported-pace", type=float, default=None,
+                    help="actual reported withdrawal pace, M b/d (e.g. 0.058) -- "
+                         "prints a second runway table at that pace")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
     a = ap.parse_args()
 
@@ -86,13 +96,31 @@ def main():
     elapsed_days = (asof - spr_date).days
     adj = a.spr - rate * elapsed_days  # level as of `asof` at the selected rate
 
-    rows = []
-    for floor, name in FLOORS:
-        if adj <= floor:
-            rows.append((floor, name, 0, asof, "already at/below floor"))
-        else:
-            days = (adj - floor) / rate
-            rows.append((floor, name, days, asof + timedelta(days=round(days)), ""))
+    def runway_rows(level):
+        out_rows = []
+        for floor, name in FLOORS:
+            if level <= floor:
+                out_rows.append((floor, name, 0, asof, "already at/below floor"))
+            else:
+                d = (level - floor) / rate
+                out_rows.append((floor, name, d, asof + timedelta(days=round(d)), ""))
+        return out_rows
+
+    rows = runway_rows(adj)
+
+    rep = None
+    if a.reported_pace is not None:
+        if a.reported_pace <= 0:
+            sys.exit("--reported-pace must be > 0 (M b/d)")
+        rep_level = a.spr - a.reported_pace * elapsed_days
+        rep_rows = []
+        for floor, name in FLOORS:
+            if rep_level <= floor:
+                rep_rows.append((floor, name, 0, asof, "already at/below floor"))
+            else:
+                d = (rep_level - floor) / a.reported_pace
+                rep_rows.append((floor, name, d, asof + timedelta(days=round(d)), ""))
+        rep = (rep_level, rep_rows)
 
     out = {
         "model": "step-function draw rate (Sep 9 WPSR calibration; bands + PADD1 modifier)",
@@ -108,7 +136,16 @@ def main():
             {"floor_m": f, "name": n, "days": round(d, 1), "date": str(dt), "note": note}
             for f, n, d, dt, note in rows
         ],
+        "note": "runway is a SCENARIO at the band pace (DOE drawing with the "
+                "price), not a forecast of the reported pace",
     }
+    if rep is not None:
+        out["reported_pace_mmbd"] = a.reported_pace
+        out["spr_adjusted_at_reported_pace_m"] = round(rep[0], 1)
+        out["runway_reported_pace"] = [
+            {"floor_m": f, "name": n, "days": round(d, 1), "date": str(dt), "note": note}
+            for f, n, d, dt, note in rep[1]
+        ]
 
     if a.json:
         print(json.dumps(out, indent=2))
@@ -122,12 +159,21 @@ def main():
               f"({elapsed_days}d at {rate:.2f}M b/d)")
     else:
         print(f"SPR: {a.spr:.1f}M (w/e {spr_date})")
-    print("Runway (from adjusted level):")
+    print(f"Runway at BAND pace ({rate:.2f}M b/d -- scenario: DOE draws with the price):")
     for f, n, d, dt, note in rows:
         if note:
             print(f"  {f:>5.0f}M  {n:<32} {note}")
         else:
             print(f"  {f:>5.0f}M  {n:<32} ~{d:5.0f} days  (~{dt.isoformat()})")
+    if rep is not None:
+        print(f"Runway at REPORTED pace ({a.reported_pace:.3f}M b/d -- actual DOE pace, "
+              f"level ~{rep[0]:.1f}M as of {asof}):")
+        for f, n, d, dt, note in rep[1]:
+            if note:
+                print(f"  {f:>5.0f}M  {n:<32} {note}")
+            else:
+                print(f"  {f:>5.0f}M  {n:<32} ~{d:5.0f} days  (~{dt.isoformat()})")
+        print("(The spread between the two tables is the size of DOE's discretion.)")
 
 
 if __name__ == "__main__":

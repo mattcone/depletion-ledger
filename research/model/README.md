@@ -19,6 +19,13 @@ python3 draw_rate.py --brent 100.71 --spr 286.6 --spr-date 2026-08-28 \
 python3 draw_rate.py --brent 110 --spr 286.6 --spr-date 2026-08-28 --lapse
 ```
 
+**v2.1 (Sep 16): `--reported-pace`.** The band-pace runway is a *scenario*
+(DOE drawing with the price), not a forecast — since Sep the reported DOE pace
+has run at ~1/12 of the band. Pass the actual weekly pace (M b/d, e.g.
+`--reported-pace 0.058`) to print a second runway table at the reported pace.
+The spread between the tables is the size of DOE's discretion — the number to
+quote when discussing floor dates (see research/logs/2026-09-16.md).
+
 **Sep 9 output:** 0.70M b/d band ($100–120) → 250M floor in ~40 days (~Oct 19),
 180M in ~140 days (~Jan 27). Lapse pace (1.35M) → 250M in ~15 days (~Sep 24).
 
@@ -54,6 +61,16 @@ python3 branch_filter.py update --prior 0.15,0.50,0.35 \
         --transits 10 --tankers 10 --brent 100.71
 ```
 
+**v2.2 (Sep 16): transit input is now the 3-day average of verified daily
+counts** (rounded), not a single day — single days get revised after the fact
+(Sep 14: 4 → 7). KNOWN LIMITATION (quantified Sep 16): the Poisson likelihoods
+(λ=2/10/20) act as a hard classifier at small counts — feeding 4 vs 6
+transits swings the 60-day lapse weight by ~25 pts (82.8 → 58.3 on identical
+other inputs). The window choice is a declared convention, not a fit; the
+AIS-dark question (UKMTO ~3:1 reported-vs-observed; UAE ships dark per Axios,
+Sep 16) means the counts may systematically undercount. Do not re-tune λ until
+the AIS-dark question resolves.
+
 **Sep 9 output:** state ≈ 0 / 99.4 / 0.6 → horizon **14.9 / 49.8 / 35.3**,
 vs the published judgment of 10 / 50 / 40. The gap was the documented v1
 limitation (see below); keep both numbers in the research log — the judgment
@@ -85,9 +102,23 @@ Calibration ledger (`calibration.csv`, same directory):
 
 ```
 python3 branch_filter.py add "Hormuz normal by Sep 30" 0.038 2026-09-30
-python3 branch_filter.py resolve 2026-09-30 0     # after it settles
+python3 branch_filter.py resolve 2026-09-30 0 --match "Hormuz"
 python3 branch_filter.py score                     # running Brier + open items
 ```
+
+**`resolve` requires `--match` when several predictions share a settle date**
+(v2.1, Sep 16). The Sep 30 settlement has three DIFFERENT predictions (Hormuz
+normal, ceasefire, Russia diesel ban) with likely different outcomes; the
+command refuses to stamp one outcome onto all of them. Match on a unique
+substring of the description.
+
+**A `--match` that hits SEVERAL rows is also refused by default** (Sep 16
+fix): a substring like `"Sep 30"` appears in all three Sep 30 descriptions —
+different events sharing text, not one event with two predictions. The
+command lists the matched rows and stops. Pass `--force` to resolve every
+matched row with the same outcome — legitimate only for several predictions
+of the SAME event (e.g. the Nov 15 filter row and the judgment row):
+`resolve 2026-11-15 1 --match "Corridor lapses" --force`.
 
 Seeded Sep 9 with 4 items (3 Polymarket lines + our Russia diesel-ban
 estimate); first settlement is Sep 30. After ~10 resolved items the Brier

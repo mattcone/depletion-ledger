@@ -191,6 +191,19 @@ then `./content.js` on the newest. Values are printed as bands ("high-USD 28s/MB
 - **So the workflow stands:** GLNGH/JOGMEC weekly post (free, assessed, predictable slug) as the
   primary; TE CFD pages only as a same-week spot check with a disclosed note.
 
+### WPSR table CSVs (verified Sep 16) — regional data without the workbook
+
+`https://ir.eia.gov/wpsr/tableN.csv` — the WPSR workbook tables as plain CSV.
+**Gotchas:** the URL 302-redirects (use `curl -sL`); encoding is **cp1252, not UTF-8**
+(0x96 en dashes). `table1.csv` = national supplies (SPR row: "Strategic Petroleum
+Reserve (SPR)"). **`table5.csv` = gasoline stocks by PADD, `table6.csv` = distillate
+stocks by PADD** — rows like `"East Coast (PADD 1)"` carry the week, prior week,
+**and the year-ago value WITH the percent change printed** (e.g. w/e Sep 11:
+PADD 1 distillate 21.583 vs 31.267 = −31.0%). Note the API lags the release: wstk
+(`WGTSTP11` PADD 1 total gasoline) and wiup (`WPULEUS3` utilization) still show the
+prior week on release morning — the CSVs are same-day, so use them for the
+PADD/utilization numbers and let the API catch up.
+
 ### Al Jazeera RSS (verified Sep 15)
 
 `curl -s -A "Mozilla/5.0" "https://www.aljazeera.com/xml/rss/all.xml"` — the ALL feed works;
