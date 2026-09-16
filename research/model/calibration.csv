@@ -3,3 +3,7 @@ published_date,description,prob,event_date,resolved,brier
 2026-09-09,Ceasefire by Sep 30 (Polymarket),0.1500,2026-09-30,,
 2026-09-09,Ceasefire by Dec 31 (Polymarket),0.5790,2026-12-31,,
 2026-09-09,Russia diesel ban ends Sep 30 (our: 60-70%),0.6500,2026-09-30,,
+2026-09-16,"Corridor lapses by Nov 15 - strait effectively closed, bypass shut (branch def; proxy: sustained ~0 verified transits) [filter v2.1, single-day transits, as published Sep 16 AM]",0.8280,2026-11-15,,
+2026-09-16,"Corridor lapses by Nov 15 - same event [published judgment 10/40/50, Sep 16]",0.5000,2026-11-15,,
+2026-09-16,"Corridor lapses by Nov 15 - same event [judgment reweighted 10/35/55, Sep 16 evening]",0.550,2026-11-15,,
+2026-09-11,"Fed hikes on Sep 16 (futures ~86% for +25bp, 62% Polymarket; as published on model card)",0.860,2026-09-16,,

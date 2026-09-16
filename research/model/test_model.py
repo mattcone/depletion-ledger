@@ -71,6 +71,26 @@ class TestDrawRate(unittest.TestCase):
         self.assertEqual((runway[250.0]["days"], runway[250.0]["date"]),
                          (15.1, "2026-09-24"))
 
+    def test_reported_pace_runway(self):
+        # v2.1 (Sep 16): second runway table at the actual DOE pace
+        out = run_json("draw_rate.py", "--brent", "108.75", "--spr", "284.957",
+                       "--spr-date", "2026-09-11", "--asof", "2026-09-16",
+                       "--reported-pace", "0.058")
+        runway = {r["floor_m"]: r for r in out["runway"]}
+        self.assertEqual((runway[250.0]["days"], runway[250.0]["date"]),
+                         (44.9, "2026-10-31"))
+        self.assertIn("SCENARIO", out["note"].upper())
+        self.assertEqual(out["spr_adjusted_at_reported_pace_m"], 284.7)
+        rep = {r["floor_m"]: r for r in out["runway_reported_pace"]}
+        self.assertEqual((rep[250.0]["days"], rep[250.0]["date"]),
+                         (597.7, "2028-05-06"))
+
+    def test_reported_pace_guard(self):
+        rc, _, err = run("draw_rate.py", "--brent", "105", "--spr", "285",
+                         "--spr-date", "2026-09-11", "--reported-pace", "0")
+        self.assertNotEqual(rc, 0)
+        self.assertIn("must be > 0", err)
+
 
 class TestElasticity(unittest.TestCase):
     def test_marginal_unchanged_by_log_form_switch(self):
@@ -138,6 +158,128 @@ class TestBranchFilter(unittest.TestCase):
         rc, _, err = run("branch_filter.py", "resolve", "2099-01-01", "1.0")
         self.assertNotEqual(rc, 0)
         self.assertIn("outcome must be 0 or 1", err)
+
+    def _temp_ledger(self, d):
+        path = os.path.join(d, "calibration.csv")
+        with open(path, "w") as f:
+            f.write("published_date,description,prob,event_date,resolved,brier\n")
+            f.write("2026-09-09,Hormuz normal by Sep 30,0.04,2026-09-30,,\n")
+            f.write("2026-09-09,Ceasefire by Sep 30,0.15,2026-09-30,,\n")
+        return path
+
+    def test_resolve_ambiguous_date_requires_match(self):
+        # two DIFFERENT predictions share the date: one outcome must not be
+        # stamped onto both (the real Sep 30 settlement has three)
+        with tempfile.TemporaryDirectory() as d:
+            path = self._temp_ledger(d)
+            saved = branch_filter.CALIBRATION
+            branch_filter.CALIBRATION = path
+            try:
+                with self.assertRaises(SystemExit) as cm:
+                    branch_filter.cmd_resolve(type("A", (), {
+                        "event_date": "2026-09-30", "outcome": "1",
+                        "match": None})())
+            finally:
+                branch_filter.CALIBRATION = saved
+        self.assertIn("--match", str(cm.exception))
+
+    def test_resolve_empty_match_rejected(self):
+        # '--match ""' would otherwise match every row and resolve them all
+        with tempfile.TemporaryDirectory() as d:
+            path = self._temp_ledger(d)
+            saved = branch_filter.CALIBRATION
+            branch_filter.CALIBRATION = path
+            try:
+                with self.assertRaises(SystemExit) as cm:
+                    branch_filter.cmd_resolve(type("A", (), {
+                        "event_date": "2026-09-30", "outcome": "1",
+                        "match": "   "})())
+            finally:
+                branch_filter.CALIBRATION = saved
+        self.assertIn("non-empty", str(cm.exception))
+
+    def test_resolve_match_batch_same_event(self):
+        # two rows describing the SAME event (like the Nov 15 filter/judgment
+        # pair) are both resolved by one matching call with --force --
+        # the intended use of a multi-row match
+        import contextlib, io
+        with tempfile.TemporaryDirectory() as d:
+            path = os.path.join(d, "calibration.csv")
+            with open(path, "w") as f:
+                f.write("published_date,description,prob,event_date,resolved,brier\n")
+                f.write("2026-09-16,Corridor lapses by Nov 15 [filter],0.83,2026-11-15,,\n")
+                f.write("2026-09-16,Corridor lapses by Nov 15 [judgment],0.50,2026-11-15,,\n")
+            saved = branch_filter.CALIBRATION
+            branch_filter.CALIBRATION = path
+            try:
+                with contextlib.redirect_stdout(io.StringIO()):
+                    branch_filter.cmd_resolve(type("A", (), {
+                        "event_date": "2026-11-15", "outcome": "1",
+                        "match": "Corridor", "force": True})())
+                rows = [r["resolved"] for r in branch_filter.load_rows()]
+            finally:
+                branch_filter.CALIBRATION = saved
+        self.assertEqual(rows, ["1", "1"])
+
+    def test_resolve_match_disambiguates(self):
+        import contextlib, io
+        with tempfile.TemporaryDirectory() as d:
+            path = self._temp_ledger(d)
+            saved = branch_filter.CALIBRATION
+            branch_filter.CALIBRATION = path
+            try:
+                with contextlib.redirect_stdout(io.StringIO()):
+                    branch_filter.cmd_resolve(type("A", (), {
+                        "event_date": "2026-09-30", "outcome": "1",
+                        "match": "Hormuz"})())
+                rows = {r["description"]: r["resolved"]
+                        for r in branch_filter.load_rows()}
+            finally:
+                branch_filter.CALIBRATION = saved
+        self.assertEqual(rows["Hormuz normal by Sep 30"], "1")
+        self.assertEqual(rows["Ceasefire by Sep 30"], "")
+
+    def test_resolve_multi_match_requires_force(self):
+        # a substring can hit UNRELATED events that merely share text: "Sep 30"
+        # matches both descriptions. Without --force this must be refused and
+        # nothing resolved.
+        import contextlib, io
+        with tempfile.TemporaryDirectory() as d:
+            path = self._temp_ledger(d)
+            saved = branch_filter.CALIBRATION
+            branch_filter.CALIBRATION = path
+            try:
+                with self.assertRaises(SystemExit) as cm:
+                    branch_filter.cmd_resolve(type("A", (), {
+                        "event_date": "2026-09-30", "outcome": "1",
+                        "match": "Sep 30", "force": False})())
+                rows = {r["description"]: r["resolved"]
+                        for r in branch_filter.load_rows()}
+            finally:
+                branch_filter.CALIBRATION = saved
+        self.assertIn("force", str(cm.exception).lower())
+        self.assertEqual(rows["Hormuz normal by Sep 30"], "")
+        self.assertEqual(rows["Ceasefire by Sep 30"], "")
+
+    def test_resolve_multi_match_force_resolves_all(self):
+        # with --force, every matched row takes the outcome (legitimate for
+        # several predictions of the SAME event, e.g. filter + judgment rows)
+        import contextlib, io
+        with tempfile.TemporaryDirectory() as d:
+            path = self._temp_ledger(d)
+            saved = branch_filter.CALIBRATION
+            branch_filter.CALIBRATION = path
+            try:
+                with contextlib.redirect_stdout(io.StringIO()):
+                    branch_filter.cmd_resolve(type("A", (), {
+                        "event_date": "2026-09-30", "outcome": "0",
+                        "match": "Sep 30", "force": True})())
+                rows = {r["description"]: r["resolved"]
+                        for r in branch_filter.load_rows()}
+            finally:
+                branch_filter.CALIBRATION = saved
+        self.assertEqual(rows["Hormuz normal by Sep 30"], "0")
+        self.assertEqual(rows["Ceasefire by Sep 30"], "0")
 
     def test_score_base_rate_comparator(self):
         # isolated temp ledger: 4 items, 2 outcomes (1,0,1,0) at p=0.5,0.5,0.2,0.8

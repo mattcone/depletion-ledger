@@ -24,8 +24,8 @@ export const stats = [
   { label: "Brent", value: "$108.75", sub: "Sep 15 close (corrected) · +43% vs pre-crisis ~$76" },
   { label: "US diesel (AAA)", value: "$6.31", sub: "Sep 16 · all-time record $6.3103 · seventh day in a row · +70% vs pre-war $3.72" },
   { label: "US gasoline (AAA)", value: "$4.37", sub: "Sep 16 · +14¢ in a week (AAA) · +55% vs Jan $2.81" },
-  { label: "SPR", value: "285.4M", sub: "Sep 4 · down 1.2M in a week · down 130.1M from pre-war 415.4M · lowest since Dec 1982" },
-  { label: "US diesel & heating oil", value: "106.3M", sub: "Sep 4 · up 2.1M in a week · 13% below 5-year average · East Coast stocks 28% below last year" },
+  { label: "SPR", value: "285.0M", sub: "Sep 11 · down 0.4M in a week · down 130.5M from pre-war 415.4M · lowest since Nov 1982" },
+  { label: "US diesel & heating oil", value: "107.9M", sub: "Sep 11 · up 1.6M in a week · 13.5% below last year · East Coast stocks 31% below last year" },
 ];
 
 // ---------- Brent, $/bbl — 2026 YTD (observed points) ----------
@@ -228,6 +228,7 @@ export const sprWeekly: { date: string; level: number }[] = [
   { date: "2026-08-21", level: 289.726 },
   { date: "2026-08-28", level: 286.604 },
   { date: "2026-09-04", level: 285.360 },
+  { date: "2026-09-11", level: 284.957 },
 ];
 export const sprPreWar = 415.441; // Feb 27, 2026 (EIA)
 export const sprFloors = [
@@ -251,26 +252,27 @@ export const sprDrawDeltas: { date: string; mmbbl: number }[] = sprWeekly
 // 4-week average draw pace, M b/d (smoothes weekly noise vs a single week)
 export const sprDrawPace4w = +(((sprWeekly[sprWeekly.length - 5].level - sprWeekly[sprWeekly.length - 1].level) / 28).toFixed(2));
 
-// Floor dates on the standoff path (40% since the Sep 11 reweight) at 0.70M b/d
-// from the last actual (285.360M, w/e Sep 4)
+// Floor dates on the standoff path (35% since the Sep 16 reweight) at 0.70M b/d
+// from the last actual (284.957M, w/e Sep 11)
 const STANDOFF_RATE = 0.7;
 const _anchorDate = Date.parse(sprWeekly[sprWeekly.length - 1].date);
 const _daysToFloor = (floor: number) => (sprWeekly[sprWeekly.length - 1].level - floor) / STANDOFF_RATE;
-export const sprFloor250Date = new Date(_anchorDate + _daysToFloor(250) * 86400000); // ≈ Oct 25 2026
-export const sprFloor180Date = new Date(_anchorDate + _daysToFloor(180) * 86400000); // ≈ Feb 1 2027
+// Math.round: 49.94 days must display as Oct 31, not truncate to Oct 30
+export const sprFloor250Date = new Date(_anchorDate + Math.round(_daysToFloor(250)) * 86400000); // ≈ Oct 31 2026
+export const sprFloor180Date = new Date(_anchorDate + Math.round(_daysToFloor(180)) * 86400000); // ≈ Feb 8 2027
 
 // Floor dates on the LAPSE path (top track since the Sep 11 ESPO reweight) at 1.35M b/d,
-// same reported-basis anchor (285.360M, w/e Sep 4)
+// same reported-basis anchor (284.957M, w/e Sep 11)
 const LAPSE_RATE = 1.35;
 const _daysToFloorLapse = (floor: number) => (sprWeekly[sprWeekly.length - 1].level - floor) / LAPSE_RATE;
-export const sprLapse250Date = new Date(_anchorDate + _daysToFloorLapse(250) * 86400000); // ≈ Sep 30 2026
-export const sprLapse180Date = new Date(_anchorDate + _daysToFloorLapse(180) * 86400000); // ≈ Nov 21 2026
+export const sprLapse250Date = new Date(_anchorDate + Math.round(_daysToFloorLapse(250)) * 86400000); // ≈ Oct 7 2026
+export const sprLapse180Date = new Date(_anchorDate + Math.round(_daysToFloorLapse(180)) * 86400000); // ≈ Nov 28 2026
 
-// ---------- Supply snapshot (EIA WPSR w/e Sep 4, released Sep 10 + STEO Sep 9) ----------
+// ---------- Supply snapshot (EIA WPSR w/e Sep 11, released Sep 16 + STEO Sep 9) ----------
 export const invSnapshot = [
-  { name: "SPR", value: "285.4M bbl", delta: "−130.1M (−31%) since pre-war 415.4M", flag: "Lowest since Dec 1982 · down 1.2M barrels in the week ending Sep 4" },
-  { name: "US diesel & heating oil", value: "106.3M bbl", delta: "Up 2.1M barrels in the week ending Sep 4; 13% below the 5-year average (EIA summary)", flag: "East Coast stocks are 28% below last year" },
-  { name: "US crude", value: "424.1M bbl", delta: "At the 5-year average (EIA summary, week ending Sep 4)", flag: "Refined fuels remain in shorter supply than crude oil" },
+  { name: "SPR", value: "285.0M bbl", delta: "−130.5M (−31%) since pre-war 415.4M", flag: "Lowest since Nov 1982 · down 0.4M barrels in the week ending Sep 11 — third straight week of slowing withdrawals" },
+  { name: "US diesel & heating oil", value: "107.9M bbl", delta: "Up 1.6M barrels in the week ending Sep 11 — the second weekly increase in a row; 13.5% below last year (EIA)", flag: "East Coast (PADD 1) stocks are 31% below last year" },
+  { name: "US crude", value: "423.4M bbl", delta: "Down 0.6M barrels in the week ending Sep 11 — EIA reported a decrease, while the American Petroleum Institute (API) had reported an increase", flag: "Refined fuels remain in shorter supply than crude oil" },
   { name: "Global inventories", value: "−400M bbl YTD", delta: "EIA estimate, Sep 9", flag: "falling through end of 2026" },
 ];
 
@@ -288,7 +290,7 @@ export const branchTracks = [
     name: "Standoff",
     bar: "bg-crude",
     border: "border-l-crude",
-    weight: "40%",
+    weight: "35%",
     what: "The war continues at its current intensity. Tanker attacks and shipping restrictions persist, some Iranian infrastructure remains offline, and the damaged Saudi bypass has no restart date. The strait remains partly open.",
     path: "Brent stays in the $95–125 range, and reserve withdrawals run at about 0.70M barrels per day. Global stocks keep falling, with shortages developing later.",
   },
@@ -296,7 +298,7 @@ export const branchTracks = [
     name: "Corridor lapses",
     bar: "bg-alarm",
     border: "border-l-alarm",
-    weight: "50%",
+    weight: "55%",
     what: "The disruption becomes a sustained closure or the fighting escalates. Tanker losses rise, shipping restrictions remain, and the bypass, Abqaiq, and Jazan stay offline for months.",
     path: "Brent rises above $130, and reserve withdrawals reach 1.35M barrels per day. Shortages spread from the US East Coast to Russia, Europe, China, and aviation fuel.",
   },
@@ -309,6 +311,7 @@ export const branchWeights = [
   { date: "Sep 7", holds: 15, standoff: 55, lapse: 30, note: "A shipping exclusion zone was imposed, and a base in a third country was hit for the first time." },
   { date: "Sep 9", holds: 10, standoff: 50, lapse: 40, note: "Tanker losses reached 10 per week, Brent passed $100, and Jazan was affected." },
   { date: "Sep 11", holds: 10, standoff: 40, lapse: 50, note: "The Saudi bypass pipeline was suspended, and the Houthis held the entire Red Sea coast. An official pipeline restart would return the odds to 10/50/40." },
+  { date: "Sep 16", holds: 10, standoff: 35, lapse: 55, note: "Oil loadings at Yanbu, the pipeline's export port, stopped while the pipeline remained shut. Oil could no longer leave through the Saudi bypass. In Libya, guards shut the Hamada–Zawiya pipeline, halting two oil fields." },
 ];
 
 // ---------- Research log (local-only files) ----------
@@ -396,7 +399,7 @@ export const demandDecline = [
 // Sourced values, never interpolated. EIA's definition: "Percent Utilization is
 // calculated as gross inputs divided by the latest reported monthly operable capacity."
 // 2026: avg 93.5% (n=36); above 95% every week since Jun 5; peak 98.0 (wk of Aug 28).
-// 2025 same Jan–Sep window: avg 90.8%, deeper winter maintenance dip (83.5, Jan 24).
+// 2025 same Jan–Sep window: avg 90.7%, deeper winter maintenance dip (83.5, Jan 24).
 // (For provenance, the mb/d view from STEO 4a CORIPUS, Jan–Aug: 2026 16.33 15.91 16.40
 // 16.14 16.79 17.20 17.16 17.31 · 2025 15.74 15.36 15.83 16.09 16.72 17.10 17.00 16.94.)
 export interface UtilPt { date: string; value: number }
@@ -419,6 +422,7 @@ export const usRefineryUtil2026: UtilPt[] = [
   { date: "2026-07-31", value: 96.5 }, { date: "2026-08-07", value: 96.2 },
   { date: "2026-08-14", value: 97.2 }, { date: "2026-08-21", value: 97.4 },
   { date: "2026-08-28", value: 98.0 }, { date: "2026-09-04", value: 97.8 },
+  { date: "2026-09-11", value: 96.8 },
 ];
 export const usRefineryUtil2025: UtilPt[] = [
   { date: "2025-01-03", value: 93.3 }, { date: "2025-01-10", value: 91.7 },
@@ -439,6 +443,7 @@ export const usRefineryUtil2025: UtilPt[] = [
   { date: "2025-08-01", value: 96.9 }, { date: "2025-08-08", value: 96.4 },
   { date: "2025-08-15", value: 96.6 }, { date: "2025-08-22", value: 94.6 },
   { date: "2025-08-29", value: 94.3 }, { date: "2025-09-05", value: 94.9 },
+  { date: "2025-09-12", value: 93.3 },
 ];
 
 // Global refining anchors — IEA Oil Market Report (runs: Sep 11 edition; Q3 cut: Aug 12)
@@ -460,14 +465,19 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
       { item: "A new date for the Gulf–Iran talks in Salalah, postponed from Sep 14. Iran says Saudi Arabia requested the delay because of events in Yemen.", why: "Resuming the talks could help restore tanker access through Hormuz." },
       { item: "Shipping conditions after the Houthis captured the Hanish islands on Sep 13–14. The Houthis claim 85 vessels passed through Bab el-Mandeb in 72 hours. Missile and drone attacks on Saudi cities wounded 13 civilians on Sep 13–14.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes." },
       { item: "How banks respond to the Sep 14 sanctions on Russia's VTB; Treasury is meeting with financial institutions this week.", why: "If banks stop handling VTB's payments, Iran loses channels for receiving oil revenue." },
+      { item: "How many ships are passing through Hormuz. Kpler/Reuters counted 7 vessels on Sep 14 (revised up from a preliminary count of 4) and 4 on Sep 15 — two in, two out, none a crude carrier or LNG tanker. A US official told Axios that an average of 40 ships a day transit under US guidance, exporting roughly 14 million barrels a day. Ship-tracking data shows far fewer.", why: "The official account and the tracking data give different pictures of shipping through Hormuz. A sustained drop below the current level would undercut the claimed volume." },
     ],
   },
   {
     when: "Sep 16",
     items: [
-      { item: "A verified count of vessels passing through Hormuz. Gen. Wright claims tankers are carrying 10 million barrels a day under Navy escort. Preliminary tracking shows four vessels on Sep 14, down from 14 a day a week earlier.", why: "The claimed volume is roughly half the pre-war flow. The next count will help assess whether shipping activity supports that claim." },
       { item: "The Fed's rate decision — futures put a 25-basis-point increase at about 86% (Polymarket, 62%).", why: "A hike would add borrowing-cost pressure on top of fuel prices." },
-      { item: "The EIA's report for the week ending Sep 11. Watch for another week of slower reserve withdrawals and rising diesel stocks. The previous report showed withdrawals of 1.2 million barrels, down about 60% in a week. Diesel stocks stood at 106.3 million barrels.", why: "The weekly figures help show whether supplies are tightening or recovering." },
+    ],
+  },
+  {
+    when: "Sep 23",
+    items: [
+      { item: "The EIA's report for the week ending Sep 18 — the first that partially covers the shutdown of Yanbu loadings. The last report showed a third straight week of slower SPR withdrawals (0.4M barrels) and a second weekly increase in diesel stocks. It doesn't yet show the pipeline shutdown's full effect.", why: "Watch for faster reserve withdrawals, a larger drop in commercial crude stocks, or falling diesel stocks. Those changes could show how the shutdown is affecting supplies. The Department of Energy could announce a change in withdrawals before the report." },
     ],
   },
   {
@@ -498,7 +508,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
 
 // ---------- Breaking-points cascade (§11, compressed twice) ----------
 export const cascade = [
-  { date: "Sep 14–21", region: "US East Coast", trigger: "Diesel and heating-oil stocks could fall below a month of supply. They are already 27% lower than last year." },
+  { date: "Sep 14–21", region: "US East Coast", trigger: "Diesel and heating-oil stocks could fall below a month of supply. They are already 31% lower than last year." },
   { date: "Sep 30", region: "Russia", trigger: "The diesel export ban expires. With more than 30% of refining capacity damaged, Russia may have little fuel available to export." },
   { date: "≈ mid-October", region: "China", trigger: "Commercial oil stocks could begin to fall faster than normal." },
   { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, a level that would put pressure on trading. If the strait closes fully, the estimate moves up to mid-October." },

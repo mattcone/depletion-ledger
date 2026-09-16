@@ -6,7 +6,7 @@ You can use it to explore what happens if shipping recovers, the current standof
 
 A quick note on units: oil is measured in **barrels**. One barrel holds about 42 US gallons, or 159 liters. **M b/d** means millions of barrels per day.
 
-The SPR held about 415 million barrels before the war. In the latest report, for the week ending Sep 4, it held 285.4 million.
+The SPR held about 415 million barrels before the war. In the latest report, for the week ending Sep 11, it held 285.0 million.
 
 ## Where the information comes from
 
@@ -25,15 +25,17 @@ Rumors, anonymous reports, and private estimates are kept in the research notes 
 
 ## Three possible scenarios
 
-The model groups the possible outcomes into three scenarios and assigns each an estimated probability. As of Sep 11, the corridor-lapse scenario has the highest odds, at 50%. Here, *corridor* means an agreed shipping route that allows tankers to pass through the Strait of Hormuz.
+The model groups the possible outcomes into three scenarios and assigns each an estimated probability. As of Sep 16, the corridor-lapse scenario has the highest odds, at 55%. Here, *corridor* means an agreed shipping route that allows tankers to pass through the Strait of Hormuz.
 
-| Scenario | Odds (Sep 11) | What happens | Effect on the reserve |
+| Scenario | Odds (Sep 16) | What happens | Effect on the reserve |
 |---|---|---|---|
 | The corridor holds | 10% | The shipping agreement works and tanker traffic returns to normal. | Assumes withdrawals of 0.45M b/d. |
-| The standoff continues | 40% | The corridor barely works, attacks continue, and the damaged Saudi bypass pipeline has no restart date. | At 0.70M b/d, the reserve would reach 250M barrels in late October. |
-| **The corridor lapses** | **50%** | The agreement breaks down or comes under attack, the strait is effectively closed, and the bypass stays shut. | At about 1.35M b/d, the reserve would reach 250M barrels around Sep 30 and 180M around Nov 21. |
+| The standoff continues | 35% | The corridor barely works, attacks continue, and the damaged Saudi bypass pipeline has no restart date. | At 0.70M b/d, the reserve would reach 250M barrels in late October. |
+| **The corridor lapses** | **55%** | The agreement breaks down or comes under attack, the strait is effectively closed, and the bypass stays shut. | At about 1.35M b/d, the reserve would reach 250M barrels around Oct 7 and 180M around Nov 28. |
 
-The odds changed from 10/50/40 to 10/40/50 on Sep 11, after Saudi Arabia suspended the East–West pipeline following attacks. That pipeline allowed some oil to bypass the strait, so its closure weakened the case for the standoff scenario. An official restart would return the odds to their previous values.
+The odds changed from 10/50/40 to 10/40/50 on Sep 11, after Saudi Arabia suspended the East–West pipeline following attacks. That pipeline allowed some oil to bypass the strait, so its closure weakened the case for the standoff scenario.
+
+The odds changed again on Sep 16, to 10/35/55. Oil loadings at Yanbu, the pipeline's export port, had stopped while the pipeline remained shut. Oil could no longer leave through that route.
 
 You can see how the odds have changed over time in the dashboard's “Three possible outcomes” section.
 
@@ -46,9 +48,9 @@ The model tracks four thresholds, also called *floors*. The dates below assume t
 | Floor | Level | What it means | Estimated date in this scenario |
 |---|---|---|---|
 | 1 | About 300M barrels | Some caverns can no longer pump below this level. | **First report below this level: week ending Aug 7** |
-| 2 | 250M barrels | The operational minimum cited by the reserve's operators. | Around Sep 30, 2026 |
-| 3 | 180M barrels | The hard operating limit used in the model. | Around Nov 21, 2026 |
-| 4 | 70M barrels | The safe minimum stated by the US Department of Energy. The model stops withdrawals here. | Early February 2027 |
+| 2 | 250M barrels | The operational minimum cited by the reserve's operators. | Around Oct 7, 2026 |
+| 3 | 180M barrels | The hard operating limit used in the model. | Around Nov 28, 2026 |
+| 4 | 70M barrels | The safe minimum stated by the US Department of Energy. The model stops withdrawals here. | Mid-February 2027 |
 
 As these limits reduce the reserve's ability to supply oil, the shortage has to be absorbed elsewhere. That can mean higher prices and less fuel available to consumers.
 
@@ -72,7 +74,7 @@ The latest pipeline reports suggest repairs will take weeks. On Sep 14, the Asso
 
 On Sep 15, Reuters reported that oil shipments from Yanbu, the port supplied by the pipeline, had been suspended. Aramco had also cancelled or delayed shipments to Europe scheduled for late September. Saudi officials haven't given a timetable for repairs.
 
-These reports suggest a longer disruption, but the odds remain at 10/40/50 while the model waits for official confirmation. An official assessment that repairs will take only days would reverse the Sep 11 change.
+These reports led to the Sep 16 change in odds to 10/35/55. A rapid resumption of Yanbu loadings would return the odds to 10/40/50. An official restart of the pipeline, or an assessment that repairs would take only days, would reverse both changes and return the odds to 10/50/40.
 
 The Houthis' territorial gains also need to be considered alongside shipping activity. As of Sep 14, they hold Mokha, Perim island, and the Hanish islands. About 13–17 vessels a day are still entering Bab el-Mandeb, and no non-Saudi vessel has been reported blocked or attacked there. The model's condition for raising the odds on that basis hasn't been met.
 
@@ -84,7 +86,7 @@ The model treats a gap above roughly $10–15 as a sign that the market may be a
 
 The postponed Sep 14 talks are an example of news that didn't change the odds. Oman postponed the first meeting of Gulf foreign ministers and Iran during the war, with no new date announced. The Associated Press reported that Saudi Arabia objected to proposed changes to the Iran–Oman shipping agreement. Bahrain had also said it wouldn't attend.
 
-The delay makes the timing of further talks uncertain, but it hasn't changed shipping conditions in the strait. That's why the model's odds haven't changed.
+The delay makes the timing of further talks uncertain, but it hasn't changed shipping conditions in the strait. That's why this delay didn't change the model's odds.
 
 Between these events, the odds stay the same. A quiet week alone isn't a reason to change them.
 
@@ -105,7 +107,9 @@ Four small Python programs handle the calculations. They use no external librari
 
 The scorecard records each prediction with a date and a probability. Once that date passes, the result is scored. Over time, this should show whether the estimates are becoming more reliable.
 
-The first batch of results is due by the end of September. It covers Russia's diesel export ban, a prediction market for the same outcome, and the Fed's Sep 16 decision. On Sep 11, futures markets put the chance of a 25-basis-point rate increase at about 86%, compared with 62% on Polymarket.
+The first batch of results is due by the end of September. It covers Russia's diesel export ban, two prediction markets on whether shipping through Hormuz returns to normal and whether a ceasefire begins by Sep 30, and the Fed's Sep 16 decision.
+
+On Sep 11, futures markets put the chance of a 25-basis-point rate increase at about 86%, compared with 62% on Polymarket.
 
 ## What to keep in mind
 

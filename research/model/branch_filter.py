@@ -21,6 +21,17 @@ news-frequency escalation index, STEO revision direction.
 
 STATE LIKELIHOODS (observations; defaults are author's judgment):
   transits/day (verified, Kpler) : Poisson  holds=20  standoff=10  lapse=2
+                                   v2.2 (Sep 16): feed the 3-day average of verified
+                                   daily counts (rounded), not a single day -- single
+                                   days get revised after the fact (Sep 14: 4 -> 7).
+                                   KNOWN BIAS: counts are AIS-derived; UKMTO logs a ~3:1
+                                   ratio of US-reported to AIS-observed transits and says
+                                   UAE-facilitated vessels run AIS-dark (Sep 16). If the
+                                   official volume claim (14M b/d, Axios) is real, the
+                                   transit evidence systematically undercounts -- the
+                                   lapse weight may be overstated by that gap. Do not
+                                   re-tune the Poisson lambdas until the AIS-dark question
+                                   is resolved by a week of counts.
   tanker losses/week (confirmed) : Poisson  holds=0.2 standoff=1.5 lapse=4
                                    weight 0.5 (leading indicator, weak ID)
   Brent level                    : Normal   holds=N(88,4) standoff=N(97,9)
@@ -34,7 +45,15 @@ Usage:
                           --tankers 10 --brent 100.71 \
                           --corridor-flow degraded
   branch_filter.py add "Hormuz normal by Sep 30" 0.038 2026-09-30
-  branch_filter.py resolve 2026-09-30 0
+  branch_filter.py resolve 2026-09-30 0 --match "Hormuz"   # --match is
+                                                  # required when several
+                                                  # predictions share the
+                                                  # settle date; a match
+                                                  # hitting SEVERAL rows is
+                                                  # refused unless --force
+                                                  # is passed (and only if
+                                                  # they are predictions of
+                                                  # the same event)
   branch_filter.py score
 """
 import argparse
@@ -199,18 +218,43 @@ def cmd_resolve(a):
         raise SystemExit("outcome must be 0 or 1")
     if outcome not in (0, 1):
         raise SystemExit("outcome must be 0 or 1")
+    if a.match is not None and not a.match.strip():
+        raise SystemExit("--match must be a non-empty substring")
     rows = load_rows()
-    hit = 0
-    for r in rows:
-        if r["event_date"] == a.event_date and not r["resolved"]:
-            p = float(r["prob"])
-            r["resolved"] = str(outcome)
-            r["brier"] = f"{(p - outcome) ** 2:.4f}"
-            hit += 1
-            print(f"resolved: {r['description']} p={p:.3f} outcome={outcome} "
-                  f"brier={(p - outcome) ** 2:.4f}")
-    if not hit:
-        raise SystemExit(f"no unresolved row with event_date={a.event_date}")
+    cands = [r for r in rows
+             if r["event_date"] == a.event_date and not r["resolved"]]
+    if a.match is not None:
+        m = a.match.strip().lower()
+        cands = [r for r in cands if m in r["description"].lower()]
+    if not cands:
+        raise SystemExit(f"no unresolved row with event_date={a.event_date}"
+                         + (f" matching '{a.match}'" if a.match else ""))
+    if len(cands) > 1 and (a.match is None or not a.force):
+        # Several DIFFERENT predictions can settle on the same date (e.g. the
+        # three Sep 30 items) with different outcomes -- resolving all of them
+        # with one outcome would corrupt the ledger. A --match substring can
+        # hit unrelated events that merely share text (e.g. "Sep 30" matches
+        # all three Sep 30 descriptions), so a multi-row match is refused
+        # unless the caller explicitly passes --force. A multi-row --force
+        # is legitimate for several predictions of ONE event (e.g. the filter
+        # and judgment rows for the same Nov 15 outcome).
+        if a.match is None:
+            why = f"share event_date={a.event_date}"
+            hint = "pass --match <substring> to pick which one to resolve"
+        else:
+            why = f"match '{a.match.strip()}'"
+            hint = ("use a more specific --match, or pass --force to resolve "
+                    "all of them (only if they are predictions of the SAME event)")
+        raise SystemExit(
+            f"{len(cands)} unresolved rows {why}; one outcome may not fit "
+            f"all of them. {hint}:\n  "
+            + "\n  ".join(r["description"] for r in cands))
+    for r in cands:
+        p = float(r["prob"])
+        r["resolved"] = str(outcome)
+        r["brier"] = f"{(p - outcome) ** 2:.4f}"
+        print(f"resolved: {r['description']} p={p:.3f} outcome={outcome} "
+              f"brier={(p - outcome) ** 2:.4f}")
     save_rows(rows)
     cmd_score(argparse.Namespace())
 
@@ -243,7 +287,8 @@ def main():
     u = sub.add_parser("update", help="Bayesian update of branch weights")
     u.add_argument("--prior", required=True, help="state prior, e.g. 0.15,0.50,0.35")
     u.add_argument("--transits", type=int, default=None,
-                   help="verified transits/day this week (Kpler)")
+                   help="verified transits/day -- 3-day average of verified daily "
+                        "counts (v2.2), rounded to nearest int (Kpler/Reuters)")
     u.add_argument("--tankers", type=int, default=None,
                    help="confirmed shipping losses this week (both sides)")
     u.add_argument("--brent", type=float, default=None, help="Brent level, $/bbl")
@@ -264,6 +309,15 @@ def main():
     r = sub.add_parser("resolve", help="mark predictions settled on a date")
     r.add_argument("event_date")
     r.add_argument("outcome", help="0 = did not happen, 1 = happened")
+    r.add_argument("--match", default=None,
+                   help="substring of the description, to pick one prediction "
+                        "when several share the settle date (required if "
+                        "ambiguous)")
+    r.add_argument("--force", action="store_true",
+                   help="resolve ALL rows matched by --match with the same "
+                        "outcome (default refuses: a substring can hit "
+                        "unrelated events). Only for several predictions of "
+                        "the SAME event.")
     r.set_defaults(fn=cmd_resolve)
 
     s = sub.add_parser("score", help="show running Brier score + open items")
