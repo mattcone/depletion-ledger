@@ -197,6 +197,16 @@ then `./content.js` on the newest. Values are printed as bands ("high-USD 28s/MB
 per-section feeds (`economy.xml`, `middle-east.xml`) return empty. ~25 items, ~12h window. Scan
 titles for oil/shipping/Iran/Russia/Yemen/rates; read any relevant miss with `./content.js`.
 
+### r/oil + r/energy RSS (verified Sep 15)
+
+`curl -s -A "Mozilla/5.0" "https://www.reddit.com/r/oil/.rss"` (and `r/energy/.rss`) — the Atom
+feeds return 200 even though the HTML/JSON routes are IP-blocked from this box (403 on every
+UA/header variant tested; r.jina.ai and redlib mirrors also blocked/bot-gated). 25 entries,
+~24h window. r/oil = industry/data (transit estimates, loadings); r/energy = broader policy/retail. Carries items the
+wires miss or lag (it surfaced the Sep 15 Yanbu port/refinery strike and the Yanbu loading
+suspension ahead of our sweeps). **LEADS ONLY** — verify every item against a primary source
+before logging or site use.
+
 ### FOMC calendar (verified Sep 15)
 
 `curl -s -A "Mozilla/5.0" "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"` —
