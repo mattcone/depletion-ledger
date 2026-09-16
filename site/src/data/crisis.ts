@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-09-15";
+export const DATA_AS_OF = "2026-09-16";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -21,9 +21,9 @@ export interface SeriesPoint {
 
 // ---------- Headline stats ----------
 export const stats = [
-  { label: "Brent", value: "$108.50", sub: "Sep 15 close · +43% vs pre-crisis ~$76" },
-  { label: "US diesel (AAA)", value: "$6.27", sub: "Sep 15 · new all-time record ($6.2694) — sixth straight · +68% vs pre-war $3.72" },
-  { label: "US gasoline (AAA)", value: "$4.33", sub: "Sep 15 · +18¢ in a week (AAA) · +54% vs Jan $2.81" },
+  { label: "Brent", value: "$108.75", sub: "Sep 15 close (corrected) · +43% vs pre-crisis ~$76" },
+  { label: "US diesel (AAA)", value: "$6.31", sub: "Sep 16 · all-time record $6.3103 · seventh day in a row · +70% vs pre-war $3.72" },
+  { label: "US gasoline (AAA)", value: "$4.37", sub: "Sep 16 · +14¢ in a week (AAA) · +55% vs Jan $2.81" },
   { label: "SPR", value: "285.4M", sub: "Sep 4 · down 1.2M in a week · down 130.1M from pre-war 415.4M · lowest since Dec 1982" },
   { label: "US diesel & heating oil", value: "106.3M", sub: "Sep 4 · up 2.1M in a week · 13% below 5-year average · East Coast stocks 28% below last year" },
 ];
@@ -46,7 +46,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-09-10", value: 108.03, note: "close +$6.82 in a day (Yahoo front-month; Convex cross-check)" },
   { date: "2026-09-11", value: 104.61, note: "settle −2.8% (CNBC)" },
   { date: "2026-09-14", value: 105.68, note: "closing price (Yahoo, corrected Sep 15)" },
-  { date: "2026-09-15", value: 108.50, note: "closing price (Yahoo front-month). Before the shutdown, the East–West pipeline carried about 4M barrels a day to Yanbu, according to Reuters. Stored oil at the port was estimated to cover 5–7 days of exports." },
+  { date: "2026-09-15", value: 108.75, note: "closing price (Yahoo front-month; corrected from $108.50). Before the shutdown, the East–West pipeline carried about 4M barrels a day to Yanbu, according to Reuters. Stored oil at the port was estimated to cover 5–7 days of exports." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -115,7 +115,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-09-10", value: 102.93 },
   { date: "2026-09-11", value: 100.05, note: "settle −2.4% (CNBC)" },
   { date: "2026-09-14", value: 101.39, note: "front-month futures close (Yahoo, corrected Sep 15; FRED not yet available)" },
-  { date: "2026-09-15", value: 105.48, note: "front-month futures close (Yahoo)" },
+  { date: "2026-09-15", value: 105.83, note: "front-month futures close (Yahoo; corrected from $105.48)" },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -163,6 +163,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-09-13", value: 4.3130, note: "AAA release Sep 13 (logged)" },
   { date: "2026-09-14", value: 4.3163, note: "AAA release Sep 14 (logged)" },
   { date: "2026-09-15", value: 4.3289, note: "AAA release, Sep 15" },
+  { date: "2026-09-16", value: 4.3672, note: "AAA release, Sep 16" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -185,6 +186,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-09-13", value: 6.2040, note: "AAA record — fourth straight, +30.7¢ in a week (AAA week-ago avg $5.8970)" },
   { date: "2026-09-14", value: 6.2301, note: "AAA record — fifth consecutive day" },
   { date: "2026-09-15", value: 6.2694, note: "AAA record — sixth consecutive day, up 36.8¢ from $5.9012 a week earlier" },
+  { date: "2026-09-16", value: 6.3103, note: "AAA record — seventh consecutive day, first above $6.30, up 36.8¢ from $5.9424 a week earlier" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 
