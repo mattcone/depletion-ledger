@@ -63,7 +63,7 @@ The probabilities involve judgment. To keep that judgment consistent, **the odds
 
 For example, the odds changed after the corridor agreement was announced and ship-tracking data showed it wasn't working. The first missile strike on a base in a third country led to a Sep 9 change from 15/55/30 to 10/50/40. The pipeline suspension led to the Sep 11 change described above.
 
-These are the events being watched as of Sep 14:
+These are the events being watched as of Sep 15:
 
 | Event | Effect on the odds |
 |---|---|
@@ -73,15 +73,19 @@ These are the events being watched as of Sep 14:
 | Russia's Sep 30 fuel-ban decision; a widening gap between the EIA price outlook and market prices; or an adverse prediction-market result on Sep 14 or 30. | Could increase the odds that the corridor lapses. |
 | The Houthis blocking or attacking non-Saudi vessels in the Bab el-Mandeb, leaving both shipping routes closed. | Increases the odds that the corridor lapses. |
 
-The latest pipeline reports suggest repairs will take weeks. On Sep 14, the Associated Press cited unnamed officials who estimated 3–5 weeks to restore oil flows; other estimates put it at more than 6 weeks. Satellite images show crews replacing a section of pipe. These reports point to a longer disruption, but the odds remain at 10/40/50 while the model waits for official confirmation. An official assessment that repairs will take only days would instead reverse the Sep 11 change.
+The latest pipeline reports suggest repairs will take weeks. On Sep 14, the Associated Press cited unnamed officials who estimated 3–5 weeks to restore oil flows. Other estimates put it at more than 6 weeks. Satellite images show crews replacing a section of pipe.
+
+On Sep 15, Reuters reported that oil shipments from Yanbu, the port supplied by the pipeline, had been suspended. Aramco had also cancelled or delayed shipments to Europe scheduled for late September. Saudi officials haven't given a timetable for repairs.
+
+These reports suggest a longer disruption, but the odds remain at 10/40/50 while the model waits for official confirmation. An official assessment that repairs will take only days would reverse the Sep 11 change.
 
 The Houthis' territorial gains also need to be considered alongside shipping activity. As of Sep 14, they hold Mokha, Perim island, and the Hanish islands. About 13–17 vessels a day are still entering Bab el-Mandeb, and no non-Saudi vessel has been reported blocked or attacked there. The model's condition for raising the odds on that basis hasn't been met.
 
 A direct US strike on the Houthis would also trigger a review. The direction of that change would depend on the circumstances at the time.
 
-The gap between the EIA outlook and market prices takes longer to assess. The EIA still expects oil at about $90 in late 2026. Brent's corrected closing price for Sep 14 was $105.68, a gap of about $16.
+The gap between the EIA outlook and market prices takes longer to assess. The EIA still expects oil at about $90 in late 2026. Brent closed at $108.50 on Sep 15, about $19 above that forecast.
 
-The model treats a gap above roughly $10–15 as a sign that the market may be assigning more than 40% odds to the corridor lapsing. The current gap is just above that range.
+The model treats a gap above roughly $10–15 as a sign that the market may be assigning more than 40% odds to the corridor lapsing. The current gap is above that range.
 
 The postponed Sep 14 talks are an example of news that didn't change the odds. Oman postponed the first meeting of Gulf foreign ministers and Iran during the war, with no new date announced. The Associated Press reported that Saudi Arabia objected to proposed changes to the Iran–Oman shipping agreement. Bahrain had also said it wouldn't attend.
 

@@ -308,11 +308,11 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       <div class="mt-12 grid gap-10 lg:grid-cols-2">
         <div class="min-w-0">
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">Brent and WTI prices are up about 40% and 52%</h2>
+            <h2 class="text-xl font-bold tracking-tight">Brent and WTI prices are up about 43% and 58%</h2>
             <p class="font-mono text-[11px] text-faint tabular">Brent: sourced points (EIA monthly avgs: Mar $103.0 · Apr $117.29 · Jul $83.76) · WTI: weekly (FRED)</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil, 2026 year to date: Brent at $76 before the closure, $126 intraday peak in March, $74 on Jun 30, a single-day jump to $108.03 on Sep 10, a settle of $104.61 on Sep 11, and a close of $105.68 on Sep 14; WTI weekly from about $58 in January to $102.93 on Sep 10, $100.05 on Sep 11, and $101.39 on Sep 14. Reference lines at $100 and the pre-crisis $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil, 2026 year to date: Brent at $76 before the closure, $126 intraday peak in March, $74 on Jun 30, a single-day jump to $108.03 on Sep 10, a closing price of $104.61 on Sep 11, $105.68 on Sep 14, and $108.50 on Sep 15; WTI weekly from about $58 in January to $102.93 on Sep 10, $100.05 on Sep 11, $101.39 on Sep 14, and $105.48 on Sep 15. Reference lines at $100 and the pre-crisis $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Brent rose from $76 before the closure to an intraday peak of $126 in March, then
@@ -321,14 +321,19 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             and settled at $104.61 on Sep 11.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Brent closed at $105.68 on Sep 14 after reaching $106.73 earlier in the day.
-            Prices rose after talks between Gulf foreign ministers and Iran were postponed.
-            Reuters also reported that stocks at Yanbu, Saudi Arabia's Red Sea port, could
-            support another five to seven days of exports if the East–West pipeline remains closed.
+            Brent closed at $108.50 on Sep 15, and WTI closed at $105.48.
+            Before the shutdown, the East–West pipeline carried about 4 million barrels a day
+            to Yanbu, Saudi Arabia's Red Sea port, according to Reuters. Stored oil there was
+            estimated to cover five to seven days of exports. Reuters now reports that shipments from the port have stopped
+            and that late-September cargoes to Europe have been cancelled.
+          </p>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            The yield on 10-year US Treasury bonds ended the day at 4.996%.
+            Futures markets put the chance of a Fed rate increase on Sep 16 at roughly 86%.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The gray line shows West Texas Intermediate (WTI), a US crude oil benchmark. Most WTI
-            readings come from FRED's weekly spot series; the Sep 10, 11, and 14 readings are futures closes.
+            readings come from FRED's weekly spot series; the Sep 10, 11, 14, and 15 readings are futures closes.
             WTI is also the crude price used in the fuel price spread chart beside this one.
             Hollow markers indicate a source's rounded estimate.
           </p>
@@ -339,17 +344,22 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <p class="font-mono text-[11px] text-faint tabular">Retail price less WTI, $/bbl · weekly (EIA/AAA − FRED).</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. Diesel rises from about $89 in January to $153.6 on Sep 6, narrows to $148 on Sep 10, and reaches $161.9 on Sep 15. Gasoline rises from about $59 in January to $80.4 on Sep 15, after falling to $52 in March. The diesel chart shows selected readings to keep nearby points legible."></canvas>
+            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. Diesel rises from about $89 in January to $153.6 on Sep 6, narrows to $148 on Sep 10, peaks at $160.3 on Sep 14, and eases to $157.8 on Sep 15. Gasoline rises from about $59 in January to $76.3 on Sep 15, after falling to $52 in March. The diesel chart shows selected readings to keep nearby points legible."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             This chart subtracts the price of crude oil from the retail price of fuel, with both
             expressed in dollars per barrel. The difference covers refining, transportation, and
             retailing. It helps explain why prices at the pump can keep rising even when crude gets cheaper.
-            Diesel's spread grew from about $89 in January to $161.9 on Sep 15. It briefly narrowed
-            to $148 on Sep 10, when crude prices rose faster than pump prices. Gasoline's spread
-            has also widened, from about $59 to $78–84.
-            This uses retail prices from EIA and AAA, minus WTI from FRED, with futures closes for
-            Sep 10, 11, and 14. The EIA's official <em>crack spread</em> uses wholesale fuel prices, so the
+          </p>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            Diesel's spread was about $89 in January. It briefly narrowed to $148 on Sep 10,
+            when crude prices rose faster than pump prices. It then peaked at $160.3 on Sep 14
+            before falling to $157.8 on Sep 15. Gasoline's spread has also widened, from about
+            $59 to $76.3.
+          </p>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            The calculation uses retail prices from EIA and AAA, minus WTI from FRED, with futures closes for
+            Sep 10, 11, 14, and 15. The EIA's official <em>crack spread</em> uses wholesale fuel prices, so the
             values differ. Eight fuel readings have no same-day WTI value; those use the nearest
             trading day's price, within 1–2 days. No missing prices are estimated.
           </p>
@@ -876,9 +886,9 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           <div class="mt-6 grid gap-10 lg:grid-cols-2">
             <div>
               <h3 class="text-lg font-bold tracking-tight">US 10-year Treasury yield</h3>
-              <p class="mt-2 font-mono text-[11px] text-faint">10-year US Treasury yield, % · chart through Sep 14 · weekly closes (FRED) · Sep 11 and 14: Yahoo closing values.</p>
+              <p class="mt-2 font-mono text-[11px] text-faint">10-year US Treasury yield, % · chart through Sep 15 · weekly closes (FRED) · Sep 11, 14, and 15: Yahoo closing values.</p>
               <div class="mt-4 h-72">
-                <canvas id="treasury10yChart" role="img" aria-label="US 10-year Treasury yield, 2026: 4.19% on Jan 2, falling to 3.97% on Feb 27 before the war, then rising to 4.44% by late March, 4.59% in mid-May, 4.69% in late July, 4.95% on Sep 10, and 4.975% on Sep 11. The chart ends at 4.961% on Sep 14. Reference lines mark the pre-war 3.97% and the January 2025 high of 4.8%."></canvas>
+                <canvas id="treasury10yChart" role="img" aria-label="US 10-year Treasury yield, 2026: 4.19% on Jan 2, falling to 3.97% on Feb 27 before the war, then rising to 4.44% by late March, 4.59% in mid-May, 4.69% in late July, 4.95% on Sep 10, 4.975% on Sep 11, 4.961% on Sep 14, and 4.996% on Sep 15. Reference lines mark the pre-war 3.97% and the January 2025 high of 4.8%."></canvas>
               </div>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 The 10-year Treasury yield is the rate the US government pays to borrow for a decade.
@@ -890,10 +900,10 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
               </p>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 The 10-year yield closed at 4.975% on Sep 11 after briefly reaching 4.992%,
-                its highest level since October 2023. It eased to 4.961% on Sep 14.
-                Al Jazeera reported that it reached 5.02% during trading on Sep 15, its highest
-                level since 2007, as traders anticipated a Federal Reserve rate increase.
-                That latest quote isn't plotted; the chart shows closing values through Sep 14.
+                its highest level since October 2023. It eased to 4.961% on Sep 14, then closed
+                at 4.996% on Sep 15, ahead of the Federal Reserve's Sep 16 decision.
+                Al Jazeera reported that it reached 5.02% during Sep 15 trading, its highest level
+                since 2007.
               </p>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 The 2-year yield was 4.63% on Sep 11, its highest since July 2024.
@@ -2047,11 +2057,11 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             { value: 76, text: "pre-crisis $76 (Feb 27)", color: "#3d6b64", align: "right" },
           ]),
           directLabels([
-            { dataset: 0, index: 15, text: "Sep 14 · $105.68 — Brent", ...endpoint },
+            { dataset: 0, index: 16, text: "Sep 15 · $108.50 — Brent", ...endpoint },
             { dataset: 0, index: 3, text: "peak $126 · Mar 18", dy: -16, color: "#1c1b17" },
             { dataset: 0, index: 6, text: "Jun 30 · $74", dy: 20, ...note },
             { dataset: 0, index: 1, text: "war began Feb 28", dx: 8, dy: 18, align: "left", ...note },
-            { dataset: 1, index: wtiWeekly.length - 1, text: "Sep 14 · $101.39 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a" },
+            { dataset: 1, index: wtiWeekly.length - 1, text: "Sep 15 · $105.48 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a" },
           ]),
         ],
       });
@@ -2244,7 +2254,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             { value: treasuryTestLevel, text: "4.8% — Jan 2025 high", color: "#8a867a", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: treasury10y.length - 1, text: "Sep 14 · 4.961%", ...endpoint, dy: 18, color: "#b3261e" },
+            { dataset: 0, index: treasury10y.length - 1, text: "Sep 15 · 4.996%", ...endpoint, dy: 18, color: "#b3261e" },
           ]),
         ],
       });

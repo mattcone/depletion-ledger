@@ -21,7 +21,7 @@ export interface SeriesPoint {
 
 // ---------- Headline stats ----------
 export const stats = [
-  { label: "Brent", value: "$105.68", sub: "Sep 14 close · +40% vs pre-crisis ~$76" },
+  { label: "Brent", value: "$108.50", sub: "Sep 15 close · +43% vs pre-crisis ~$76" },
   { label: "US diesel (AAA)", value: "$6.27", sub: "Sep 15 · new all-time record ($6.2694) — sixth straight · +68% vs pre-war $3.72" },
   { label: "US gasoline (AAA)", value: "$4.33", sub: "Sep 15 · +18¢ in a week (AAA) · +54% vs Jan $2.81" },
   { label: "SPR", value: "285.4M", sub: "Sep 4 · down 1.2M in a week · down 130.1M from pre-war 415.4M · lowest since Dec 1982" },
@@ -46,6 +46,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-09-10", value: 108.03, note: "close +$6.82 in a day (Yahoo front-month; Convex cross-check)" },
   { date: "2026-09-11", value: 104.61, note: "settle −2.8% (CNBC)" },
   { date: "2026-09-14", value: 105.68, note: "closing price (Yahoo, corrected Sep 15)" },
+  { date: "2026-09-15", value: 108.50, note: "closing price (Yahoo front-month). Before the shutdown, the East–West pipeline carried about 4M barrels a day to Yanbu, according to Reuters. Stored oil at the port was estimated to cover 5–7 days of exports." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -114,6 +115,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-09-10", value: 102.93 },
   { date: "2026-09-11", value: 100.05, note: "settle −2.4% (CNBC)" },
   { date: "2026-09-14", value: 101.39, note: "front-month futures close (Yahoo, corrected Sep 15; FRED not yet available)" },
+  { date: "2026-09-15", value: 105.48, note: "front-month futures close (Yahoo)" },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -452,7 +454,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "An official repair estimate for the East–West pipeline. AP reports 3–5 weeks. Analysts quoted by the Wall Street Journal estimate lost flow at more than 2.5 million barrels a day. Reuters reports that stocks at Yanbu, Saudi Arabia's Red Sea port, could support another five to seven days of exports.", why: "The standoff scenario depends on this bypass. An official assessment that repairs will take only days would reverse the Sep 11 change in odds." },
+      { item: "An official repair estimate for the East–West pipeline. AP reports 3–5 weeks; industry sources cited by Reuters estimate five to six weeks for full repairs. Saudi officials haven't given a timetable. Reuters reported on Sep 15 that shipments from Yanbu, the port supplied by the pipeline, had stopped. Aramco has also cancelled or delayed shipments to Europe scheduled for late September.", why: "The standoff scenario depends on this bypass. Rystad warns that prices could rise further if the disruption outlasts Yanbu's five to seven days of stored supplies. An official assessment that repairs will take only days would reverse the Sep 11 change in odds." },
       { item: "A new date for the Gulf–Iran talks in Salalah, postponed from Sep 14. Iran says Saudi Arabia requested the delay because of events in Yemen.", why: "Resuming the talks could help restore tanker access through Hormuz." },
       { item: "Shipping conditions after the Houthis captured the Hanish islands on Sep 13–14. The Houthis claim 85 vessels passed through Bab el-Mandeb in 72 hours. Missile and drone attacks on Saudi cities wounded 13 civilians on Sep 13–14.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes." },
       { item: "How banks respond to the Sep 14 sanctions on Russia's VTB; Treasury is meeting with financial institutions this week.", why: "If banks stop handling VTB's payments, Iran loses channels for receiving oil revenue." },
@@ -475,7 +477,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Oct 7",
     items: [
-      { item: "The first EIA monthly outlook after the tanker attacks — its roughly $90 forecast for the second half is $16 below the latest Brent close.", why: "Watch whether its view that shipping remains constrained but open survives." },
+      { item: "The EIA's first monthly outlook since the tanker attacks. Its oil price forecast of roughly $90 for the second half of the year is about $19 below Brent's latest closing price.", why: "Watch whether the EIA still expects shipping to continue despite restrictions." },
     ],
   },
   {
@@ -713,6 +715,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-09-10", value: 4.95, note: "FRED (was Yahoo 4.94; FRED posted Sep 11)" },
   { date: "2026-09-11", value: 4.975, note: "session close (Yahoo) · intraday 4.992, highest since Oct 2023" },
   { date: "2026-09-14", value: 4.961, note: "session close (Yahoo)" },
+  { date: "2026-09-15", value: 4.996, note: "session close (Yahoo) · pre-Fed (decision Sep 16, 14:00 ET)" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
