@@ -308,11 +308,11 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
       <div class="mt-12 grid gap-10 lg:grid-cols-2">
         <div class="min-w-0">
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">Brent and WTI prices are up about 43% and 58%</h2>
+            <h2 class="text-xl font-bold tracking-tight">Brent and WTI prices are up about 39% and 53%</h2>
             <p class="font-mono text-[11px] text-faint tabular">Brent: sourced points (EIA monthly avgs: Mar $103.0 · Apr $117.29 · Jul $83.76) · WTI: weekly (FRED)</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil, 2026 year to date: Brent at $76 before the closure, $126 intraday peak in March, $74 on Jun 30, a single-day jump to $108.03 on Sep 10, a closing price of $104.61 on Sep 11, $105.68 on Sep 14, and $108.75 on Sep 15 (corrected closing price); WTI weekly from about $58 in January to $102.93 on Sep 10, $100.05 on Sep 11, $101.39 on Sep 14, and $105.83 on Sep 15 (corrected closing price). Reference lines at $100 and the pre-crisis $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil, 2026 year to date: Brent at $76 before the closure, $126 intraday peak in March, $74 on Jun 30, a single-day jump to $108.03 on Sep 10, a closing price of $104.61 on Sep 11, $105.68 on Sep 14, $108.75 on Sep 15 (corrected closing price), and a settlement price of $105.83 on Sep 16; WTI weekly from about $58 in January to $102.93 on Sep 10, $100.05 on Sep 11, $101.39 on Sep 14, $105.83 on Sep 15 (corrected closing price), and $102.43 on Sep 16. Reference lines at $100 and the pre-crisis $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Brent rose from $76 before the closure to an intraday peak of $126 in March, then
@@ -321,20 +321,27 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             and settled at $104.61 on Sep 11.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Brent closed at $108.75 on Sep 15, and WTI closed at $105.83.
-            Before the shutdown, the East–West pipeline carried about 4 million barrels a day
+            Brent settled at $105.83 on Sep 16, down 2.7% from the previous close,
+            and WTI closed at $102.43, down 3.2%. Prices fell as the US energy secretary
+            called the East–West pipeline outage "brief and temporary," measured "in days."
+            Officials and independent analysts point to weeks; the kingdom has not
+            published a damage assessment or a repair schedule.
+          </p>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            Before the shutdown, the pipeline carried about 4 million barrels a day
             to Yanbu, Saudi Arabia's Red Sea port, according to Reuters. Stored oil there was
             estimated to cover five to seven days of exports. Reuters now reports that shipments from the port have stopped
             and that late-September cargoes to Europe have been cancelled.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The yield on 10-year US Treasury bonds ended the day at 4.996%.
-            On Sep 16, the Fed voted 12-to-0 to raise rates by a quarter of a percentage point,
-            to 3.75–4.00%. As of Sep 11, futures markets had put the chance of an increase at roughly 86%.
+            The yield on 10-year US Treasury bonds ended the day at 5.006%, closing above
+            5% for the first time since the war began. On Sep 16, the Fed voted 12-to-0 to raise rates by a quarter
+            of a percentage point, to 3.75–4.00%. As of Sep 11, futures markets had put the
+            chance of an increase at roughly 86%.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The gray line shows West Texas Intermediate (WTI), a US crude oil benchmark. Most WTI
-            readings come from FRED's weekly spot series; the Sep 10, 11, 14, and 15 readings are futures closes.
+            readings come from FRED's weekly spot series; the Sep 10, 11, 14, 15, and 16 readings are futures closes.
             WTI is also the crude price used in the fuel price spread chart beside this one.
             Hollow markers indicate a source's rounded estimate.
           </p>
@@ -345,7 +352,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <p class="font-mono text-[11px] text-faint tabular">Retail price less WTI, $/bbl · weekly (EIA/AAA − FRED).</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. Diesel rises from about $89 in January to $153.6 on Sep 6, narrows to $148 on Sep 10, peaks at $160.3 on Sep 14, eases to $157.5 on Sep 15, and stands at $159.2 on Sep 16. Gasoline rises from about $59 in January to $77.6 on Sep 16, after falling to $52 in March. The diesel chart shows selected readings to keep nearby points legible."></canvas>
+            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. Diesel rises from about $89 in January to $153.6 on Sep 6, narrows to $148 on Sep 10, peaks at $160.3 on Sep 14, eases to $157.5 on Sep 15, then rises to a new high of $162.6 on Sep 16. Gasoline rises from about $59 in January to $81.0 on Sep 16, after falling to $52 in March. The diesel chart shows selected readings to keep nearby points legible."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             This chart subtracts the price of crude oil from the retail price of fuel, with both
@@ -354,16 +361,16 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Diesel's spread was about $89 in January. It briefly narrowed to $148 on Sep 10,
-            when crude prices rose faster than pump prices. It then peaked at $160.3 on Sep 14,
-            fell to $157.5 on Sep 15, and stood at $159.2 on Sep 16. Gasoline's spread has also
-            widened, from about $59 to $77.6.
+            when crude prices rose faster than pump prices. It peaked at $160.3 on Sep 14,
+            fell to $157.5 on Sep 15, and rose to a new high of $162.6 on Sep 16. That day, crude prices fell
+            about 3% while the diesel pump price set another record. Gasoline's spread has also widened,
+            from about $59 to $81.0.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The calculation uses retail prices from EIA and AAA, minus WTI from FRED, with futures closes for
-            Sep 10, 11, 14, and 15. The EIA's official <em>crack spread</em> uses wholesale fuel prices, so the
-            values differ. Eight of the plotted fuel readings have no same-day WTI price. For those readings, the chart uses
-            the nearest trading day's price, within 1–2 days. The Sep 16 readings use the Sep 15 close.
-            No missing prices are estimated.
+            Sep 10, 11, 14, 15, and 16. The EIA's official <em>crack spread</em> uses wholesale fuel prices, so the
+            values differ. Six of the plotted fuel readings have no same-day WTI price. For those readings, the chart uses
+            the nearest trading day's price, within 1–2 days. No missing prices are estimated.
           </p>
         </div>
       </div>
@@ -418,6 +425,25 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             ))}
           </div>
         </div>
+
+        <!-- Commercial crude inventories: the supply-side ledger, above the SPR -->
+        <div class="mt-12 mb-4 flex flex-wrap items-baseline justify-between gap-2">
+          <h2 class="text-xl font-bold tracking-tight">US commercial crude stocks have recovered from their July low</h2>
+        </div>
+        <div class="mb-6 grid grid-cols-1 gap-x-28 gap-y-5 text-[13px] lg:grid-cols-[65ch_65ch]">
+          <p class="text-[13px] leading-relaxed text-ink/80">
+            These stocks exclude the Strategic Petroleum Reserve (SPR). They stood at 423.4 million
+            barrels on Sep 11, up from 404.5 million on Jul 24. That's 8.1 million barrels above the
+            same week last year and 1% above the five-year average, according to the EIA. SPR releases
+            have helped supply the commercial system this year. Moving that oil out of the reserve
+            doesn't increase the total amount stored across the two stockpiles.
+          </p>
+        </div>
+        <div class="relative h-72">
+          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus the same weeks in 2025: 2026 built from 419.1 million in early January to a peak of 465.7 million on Apr 17, were drawn to 404.5 million on Jul 24 — the lowest level since the war began and 22.2 million barrels below the same week in 2025 — rebuilt to 428.9 million on Aug 21, and stood at 423.4 million on Sep 11, 8.1 million barrels above the 2025 level of 415.4 million."></canvas>
+        </div>
+
+        <p class="mt-3 font-mono text-[11px] text-faint">EIA weekly ending stocks, excl. SPR, million bbl · the Jul 24 low sat 22.2M below the same week in 2025</p>
 
         <!-- Strategic Petroleum Reserve: the star of the Supply section -->
         <div class="mt-12 mb-4 flex flex-wrap items-baseline justify-between gap-2">
@@ -937,9 +963,9 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           <div class="mt-6 grid gap-10 lg:grid-cols-2">
             <div>
               <h3 class="text-lg font-bold tracking-tight">US 10-year Treasury yield</h3>
-              <p class="mt-2 font-mono text-[11px] text-faint">10-year US Treasury yield, % · chart through Sep 15 · weekly closes (FRED) · Sep 11, 14, and 15: Yahoo closing values.</p>
+              <p class="mt-2 font-mono text-[11px] text-faint">10-year US Treasury yield, % · chart through Sep 16 · weekly closes (FRED) · Sep 11, 14, 15, and 16: Yahoo closing values.</p>
               <div class="mt-4 h-72">
-                <canvas id="treasury10yChart" role="img" aria-label="US 10-year Treasury yield, 2026: 4.19% on Jan 2, falling to 3.97% on Feb 27 before the war, then rising to 4.44% by late March, 4.59% in mid-May, 4.69% in late July, 4.95% on Sep 10, 4.975% on Sep 11, 4.961% on Sep 14, and 4.996% on Sep 15. Reference lines mark the pre-war 3.97% and the January 2025 high of 4.8%."></canvas>
+                <canvas id="treasury10yChart" role="img" aria-label="US 10-year Treasury yield, 2026: 4.19% on Jan 2, falling to 3.97% on Feb 27 before the war, then rising to 4.44% by late March, 4.59% in mid-May, 4.69% in late July, 4.95% on Sep 10, 4.975% on Sep 11, 4.961% on Sep 14, 4.996% on Sep 15, and 5.006% on Sep 16. Reference lines mark the pre-war 3.97% and the January 2025 high of 4.8%."></canvas>
               </div>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 The 10-year Treasury yield is the rate the US government pays to borrow for a decade.
@@ -952,7 +978,8 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 The 10-year yield closed at 4.975% on Sep 11 after briefly reaching 4.992%,
                 its highest level since October 2023. It eased to 4.961% on Sep 14, then closed
-                at 4.996% on Sep 15, ahead of the Federal Reserve's Sep 16 decision.
+                at 4.996% on Sep 15, ahead of the Federal Reserve's 12-to-0 decision to raise
+                rates. On Sep 16, it closed at 5.006%, its first close above 5% since the war began.
                 Al Jazeera reported that it reached 5.02% during Sep 15 trading, its highest level
                 since 2007.
               </p>
@@ -1074,6 +1101,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         sprWeekly, sprFloors, sprScenarios, worldBalance,
         russiaCapacityAnchors, russiaCurrentSpread, recessionOdds, foodLagBars,
         usRefineryUtil2026, usRefineryUtil2025,
+        commercialCrude2026, commercialCrude2025,
         worldConsumption2025, worldConsumption2026,
       } from "../data/crisis";
 
@@ -1384,6 +1412,99 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
               { dataset: 0, index: u26.length - 1, text: "96.8", ...endpoint },
               { dataset: 1, index: 0, text: "2025", align: "left", dx: 10, dy: 16, ...endpoint, color: "#8a867a" },
               { dataset: 1, index: u25.length - 1, text: "93.3", ...endpoint, color: "#8a867a" },
+            ]),
+          ],
+        });
+      }
+
+      // US commercial crude inventories (excl. SPR): 2026 vs 2025, weekly (linear x = day of year)
+      {
+        const doy2 = (iso: string) => {
+          const [y, m, d] = iso.split("-").map(Number);
+          return Math.round((Date.UTC(y, m - 1, d) - Date.UTC(y, 0, 1)) / 864e5);
+        };
+        const cc26 = commercialCrude2026.map((p) => ({ x: doy2(p.date), y: p.value }));
+        const cc25 = commercialCrude2025.map((p) => ({ x: doy2(p.date), y: p.value }));
+        const ccMonthTicks = [0, 31, 59, 90, 120, 151, 181, 212, 243];
+        const ccMonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"];
+        new Chart(document.getElementById("commercialCrudeChart")!, {
+          type: "line",
+          data: {
+            datasets: [
+              {
+                label: "2026",
+                data: cc26,
+                borderColor: "#1c1b17",
+                borderWidth: 2,
+                tension: 0.15,
+                ...markers(cc26, "#1c1b17"),
+              },
+              {
+                label: "2025",
+                data: cc25,
+                borderColor: "#8a867a",
+                borderWidth: 1.5,
+                tension: 0.15,
+                pointRadius: 2,
+                pointBackgroundColor: "#8a867a",
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "nearest", axis: "x", intersect: false },
+            layout: { padding: { top: 18 } },
+            scales: {
+              y: yScale(390, 480, (v) => `${v}`, 20),
+              x: {
+                type: "linear" as const,
+                min: 0,
+                max: 262,
+                grid: { display: false },
+                border: { display: true, color: "#d8d4c6", width: 0.5 },
+                afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
+                  scale.ticks = ccMonthTicks.map((v) => ({ value: v }));
+                },
+                ticks: {
+                  color: "#8a867a",
+                  padding: 8,
+                  callback: (v: unknown) => {
+                    const i = ccMonthTicks.indexOf(Number(v));
+                    return i >= 0 ? ccMonthNames[i] : "";
+                  },
+                },
+              },
+            },
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  title: (items: { dataIndex: number; datasetIndex: number }[]) => {
+                    const pts = items[0].datasetIndex === 0 ? commercialCrude2026 : commercialCrude2025;
+                    return pts[items[0].dataIndex].date;
+                  },
+                  label: (ctx: { dataIndex: number }) =>
+                    ` ${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}M barrels`,
+                },
+              },
+            },
+          },
+          plugins: [
+            crosshair,
+            directLabels([
+              // Year labels live in the open upper-left / lower-left regions, well clear
+              // of the axis and of both lines: 2026 floats above the 2026 line (which
+              // stays ≤429 under it across the label's span), 2025 below the 2025 line
+              // (which stays ≥415 above it). The chart floor caps the downward offset.
+              // Values label the right end.
+              // NOTE: positional overrides must come AFTER the ...endpoint spread — the
+              // spread carries its own align/dx/dy and clobbers anything before it.
+              { dataset: 0, index: 0, text: "2026", ...endpoint, align: "left", dx: 40, dy: -44 },
+              { dataset: 0, index: cc26.length - 1, text: "423.4", ...endpoint, dy: -16 },
+              { dataset: 1, index: 0, text: "2025", ...endpoint, align: "left", dx: 40, dy: 30, color: "#8a867a" },
+              { dataset: 1, index: cc25.length - 1, text: "415.4", ...endpoint, color: "#8a867a" },
+              // Short form: the long YoY version clipped at 390px; the caption carries it.
+              { dataset: 0, index: 29, text: "Jul 24 low: 404.5M", align: "center", dy: 18, color: "#b3261e" },
             ]),
           ],
         });
@@ -2108,11 +2229,11 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             { value: 76, text: "pre-crisis $76 (Feb 27)", color: "#3d6b64", align: "right" },
           ]),
           directLabels([
-            { dataset: 0, index: 16, text: "Sep 15 · $108.75 — Brent", ...endpoint },
+            { dataset: 0, index: 17, text: "Sep 16 · $105.83 — Brent", ...endpoint },
             { dataset: 0, index: 3, text: "peak $126 · Mar 18", dy: -16, color: "#1c1b17" },
             { dataset: 0, index: 6, text: "Jun 30 · $74", dy: 20, ...note },
             { dataset: 0, index: 1, text: "war began Feb 28", dx: 8, dy: 18, align: "left", ...note },
-            { dataset: 1, index: wtiWeekly.length - 1, text: "Sep 15 · $105.83 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a" },
+            { dataset: 1, index: wtiWeekly.length - 1, text: "Sep 16 · $102.43 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a" },
           ]),
         ],
       });
@@ -2269,7 +2390,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             y: {
               type: "linear" as const,
               min: 3.9,
-              max: 5.05, // headroom so the 4.996 point isn't clipped at the top
+              max: 5.05, // headroom so the 5.006 point isn't clipped at the top
               afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
                 scale.ticks = [4.0, 4.2, 4.4, 4.6, 4.8, 5.0].map((v) => ({ value: v }));
               },
@@ -2303,7 +2424,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             { value: treasuryTestLevel, text: "4.8% — Jan 2025 high", color: "#8a867a", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: treasury10y.length - 1, text: "Sep 15 · 4.996%", ...endpoint, dy: 18, color: "#b3261e" },
+            { dataset: 0, index: treasury10y.length - 1, text: "Sep 16 · 5.006%", ...endpoint, dy: 18, color: "#b3261e" },
           ]),
         ],
       });

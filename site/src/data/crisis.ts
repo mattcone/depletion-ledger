@@ -21,7 +21,7 @@ export interface SeriesPoint {
 
 // ---------- Headline stats ----------
 export const stats = [
-  { label: "Brent", value: "$108.75", sub: "Sep 15 close (corrected) · +43% vs pre-crisis ~$76" },
+  { label: "Brent", value: "$105.83", sub: "Sep 16 settlement · −2.7% · +39% vs pre-crisis ~$76" },
   { label: "US diesel (AAA)", value: "$6.31", sub: "Sep 16 · all-time record $6.3103 · seventh day in a row · +70% vs pre-war $3.72" },
   { label: "US gasoline (AAA)", value: "$4.37", sub: "Sep 16 · +14¢ in a week (AAA) · +55% vs Jan $2.81" },
   { label: "SPR", value: "285.0M", sub: "Sep 11 · down 0.4M in a week · down 130.5M from pre-war 415.4M · lowest since Nov 1982" },
@@ -47,6 +47,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-09-11", value: 104.61, note: "settle −2.8% (CNBC)" },
   { date: "2026-09-14", value: 105.68, note: "closing price (Yahoo, corrected Sep 15)" },
   { date: "2026-09-15", value: 108.75, note: "closing price (Yahoo front-month; corrected from $108.50). Before the shutdown, the East–West pipeline carried about 4M barrels a day to Yanbu, according to Reuters. Stored oil at the port was estimated to cover 5–7 days of exports." },
+  { date: "2026-09-16", value: 105.83, note: "Settlement down 2.7% (CNBC). Prices fell as the US energy secretary called the pipeline outage 'brief and temporary,' 'measured in days.' Officials and analysts point to weeks; no official damage assessment or repair schedule has been published." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -116,6 +117,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-09-11", value: 100.05, note: "settle −2.4% (CNBC)" },
   { date: "2026-09-14", value: 101.39, note: "front-month futures close (Yahoo, corrected Sep 15; FRED not yet available)" },
   { date: "2026-09-15", value: 105.83, note: "front-month futures close (Yahoo; corrected from $105.48)" },
+  { date: "2026-09-16", value: 102.43, note: "front-month futures close (NYMEX 2pm ET; CNBC) · −3.2%" },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -229,6 +231,54 @@ export const sprWeekly: { date: string; level: number }[] = [
   { date: "2026-08-28", level: 286.604 },
   { date: "2026-09-04", level: 285.360 },
   { date: "2026-09-11", level: 284.957 },
+];
+// US commercial crude inventories, EXCLUDING the SPR (EIA WPSR, week ending Friday),
+// million barrels. Source: EIA API series WCESTUS1 ("U.S. Ending Stocks excluding SPR of
+// Crude Oil (Thousand Barrels)") — the API labels units "MBBL" but the values are THOUSANDS
+// of barrels (verified: w/e Sep 11 = 423,429 → 423.429M, matches WPSR Table 1). Related:
+// WCRSTUS1 = total INCLUDING SPR; WCSSTUS1 = the SPR itself.
+export const commercialCrude2026: { date: string; value: number }[] = [
+  { date: "2026-01-02", value: 419.056 }, { date: "2026-01-09", value: 422.447 },
+  { date: "2026-01-16", value: 426.049 }, { date: "2026-01-23", value: 423.754 },
+  { date: "2026-01-30", value: 420.299 }, { date: "2026-02-06", value: 428.829 },
+  { date: "2026-02-13", value: 419.815 }, { date: "2026-02-20", value: 435.804 },
+  { date: "2026-02-27", value: 439.279 }, { date: "2026-03-06", value: 443.103 },
+  { date: "2026-03-13", value: 449.259 }, { date: "2026-03-20", value: 456.185 },
+  { date: "2026-03-27", value: 461.636 }, { date: "2026-04-03", value: 464.717 },
+  { date: "2026-04-10", value: 463.804 }, { date: "2026-04-17", value: 465.729 },
+  { date: "2026-04-24", value: 459.495 }, { date: "2026-05-01", value: 457.182 },
+  { date: "2026-05-08", value: 452.876 }, { date: "2026-05-15", value: 445.013 },
+  { date: "2026-05-22", value: 441.686 }, { date: "2026-05-29", value: 433.712 },
+  { date: "2026-06-05", value: 426.485 }, { date: "2026-06-12", value: 418.222 },
+  { date: "2026-06-19", value: 412.134 }, { date: "2026-06-26", value: 408.359 },
+  { date: "2026-07-03", value: 411.357 }, { date: "2026-07-10", value: 409.665 },
+  { date: "2026-07-17", value: 411.675 }, { date: "2026-07-24", value: 404.508 },
+  { date: "2026-07-31", value: 406.987 }, { date: "2026-08-07", value: 424.410 },
+  { date: "2026-08-14", value: 428.815 }, { date: "2026-08-21", value: 428.910 },
+  { date: "2026-08-28", value: 424.460 }, { date: "2026-09-04", value: 424.069 },
+  { date: "2026-09-11", value: 423.429 },
+];
+// Same weeks in 2025 (each 2026 week matched to its nearest 2025 week-ending date).
+export const commercialCrude2025: { date: string; value: number }[] = [
+  { date: "2025-01-03", value: 414.642 }, { date: "2025-01-10", value: 412.680 },
+  { date: "2025-01-17", value: 411.663 }, { date: "2025-01-24", value: 415.126 },
+  { date: "2025-01-31", value: 423.790 }, { date: "2025-02-07", value: 427.860 },
+  { date: "2025-02-14", value: 432.493 }, { date: "2025-02-21", value: 430.161 },
+  { date: "2025-02-28", value: 433.775 }, { date: "2025-03-07", value: 435.223 },
+  { date: "2025-03-14", value: 436.968 }, { date: "2025-03-21", value: 433.627 },
+  { date: "2025-03-28", value: 439.792 }, { date: "2025-04-04", value: 442.345 },
+  { date: "2025-04-11", value: 442.860 }, { date: "2025-04-18", value: 443.104 },
+  { date: "2025-04-25", value: 440.408 }, { date: "2025-05-02", value: 438.376 },
+  { date: "2025-05-09", value: 441.830 }, { date: "2025-05-16", value: 443.158 },
+  { date: "2025-05-23", value: 440.363 }, { date: "2025-05-30", value: 436.059 },
+  { date: "2025-06-06", value: 432.415 }, { date: "2025-06-13", value: 420.942 },
+  { date: "2025-06-20", value: 415.106 }, { date: "2025-06-27", value: 418.951 },
+  { date: "2025-07-04", value: 426.021 }, { date: "2025-07-11", value: 422.162 },
+  { date: "2025-07-18", value: 418.993 }, { date: "2025-07-25", value: 426.691 },
+  { date: "2025-08-01", value: 423.662 }, { date: "2025-08-08", value: 426.698 },
+  { date: "2025-08-15", value: 420.684 }, { date: "2025-08-22", value: 418.292 },
+  { date: "2025-08-29", value: 420.707 }, { date: "2025-09-05", value: 424.646 },
+  { date: "2025-09-12", value: 415.361 },
 ];
 export const sprPreWar = 415.441; // Feb 27, 2026 (EIA)
 export const sprFloors = [
@@ -461,7 +511,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "An official repair estimate for the East–West pipeline. AP reports 3–5 weeks; industry sources cited by Reuters estimate five to six weeks for full repairs. Saudi officials haven't given a timetable. Reuters reported on Sep 15 that shipments from Yanbu, the port supplied by the pipeline, had stopped. Aramco has also cancelled or delayed shipments to Europe scheduled for late September.", why: "The standoff scenario depends on this bypass. Rystad warns that prices could rise further if the disruption outlasts Yanbu's five to seven days of stored supplies. An official assessment that repairs will take only days would reverse the Sep 11 change in odds." },
+      { item: "An official repair estimate for the East–West pipeline. AP reports 3–5 weeks; industry sources cited by Reuters estimate five to six weeks for full repairs; Saudi officials have told reporters 'multiple weeks,' but no official damage assessment or repair schedule has been published — and the US energy secretary has called the outage 'measured in days.' Reuters reported on Sep 15 that shipments from Yanbu, the port supplied by the pipeline, had stopped. Aramco has also cancelled or delayed shipments to Europe scheduled for late September.", why: "The standoff scenario depends on this bypass. Rystad warns that prices could rise further if the disruption outlasts Yanbu's five to seven days of stored supplies. An official assessment that repairs will take only days would reverse the Sep 11 change in odds." },
       { item: "A new date for the Gulf–Iran talks in Salalah, postponed from Sep 14. Iran says Saudi Arabia requested the delay because of events in Yemen.", why: "Resuming the talks could help restore tanker access through Hormuz." },
       { item: "Shipping conditions after the Houthis captured the Hanish islands on Sep 13–14. The Houthis claim 85 vessels passed through Bab el-Mandeb in 72 hours. Missile and drone attacks on Saudi cities wounded 13 civilians on Sep 13–14.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes." },
       { item: "How banks respond to the Sep 14 sanctions on Russia's VTB; Treasury is meeting with financial institutions this week.", why: "If banks stop handling VTB's payments, Iran loses channels for receiving oil revenue." },
@@ -723,6 +773,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-09-11", value: 4.975, note: "session close (Yahoo) · intraday 4.992, highest since Oct 2023" },
   { date: "2026-09-14", value: 4.961, note: "session close (Yahoo)" },
   { date: "2026-09-15", value: 4.996, note: "session close (Yahoo) · pre-Fed (decision Sep 16, 14:00 ET)" },
+  { date: "2026-09-16", value: 5.006, note: "session close (Yahoo) · first close above 5% of the war · post-hike" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
