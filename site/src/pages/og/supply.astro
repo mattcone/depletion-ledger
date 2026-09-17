@@ -99,7 +99,7 @@ const drawn = +(sprPreWar - last.level).toFixed(1);
         style="display: flex; justify-content: space-between; font-size: 12.5px; margin-top: 14px;"
       >
         <span>
-          {last.level.toFixed(1)}M barrels as of {fmt(last.date)} · down {drawn}M from {sprPreWar}M before the war
+          {last.level.toFixed(1)}M barrels as of {fmt(last.date)} · down {drawn}M from {sprPreWar.toFixed(1)}M before the war
         </span>
         <span>depletion.org</span>
       </div>

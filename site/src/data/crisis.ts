@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-09-16";
+export const DATA_AS_OF = "2026-09-17";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -21,9 +21,9 @@ export interface SeriesPoint {
 
 // ---------- Headline stats ----------
 export const stats = [
-  { label: "Brent", value: "$105.83", sub: "Sep 16 settlement · −2.7% · +39% vs pre-crisis ~$76" },
-  { label: "US diesel (AAA)", value: "$6.31", sub: "Sep 16 · all-time record $6.3103 · seventh day in a row · +70% vs pre-war $3.72" },
-  { label: "US gasoline (AAA)", value: "$4.37", sub: "Sep 16 · +14¢ in a week (AAA) · +55% vs Jan $2.81" },
+  { label: "Brent", value: "$105.83", sub: "Sep 16 settlement · −2.7% vs. prior close $108.75 (Sep 15) · +39% vs pre-crisis ~$76" },
+  { label: "US diesel (AAA)", value: "$6.40", sub: "Sep 17 · all-time record $6.3956 · eighth day in a row · +72% vs pre-war $3.72" },
+  { label: "US gasoline (AAA)", value: "$4.44", sub: "Sep 17 · +16¢ in a week (AAA) · +58% vs Jan $2.81" },
   { label: "SPR", value: "285.0M", sub: "Sep 11 · down 0.4M in a week · down 130.5M from pre-war 415.4M · lowest since Nov 1982" },
   { label: "US diesel & heating oil", value: "107.9M", sub: "Sep 11 · up 1.6M in a week · 13.5% below last year · East Coast stocks 31% below last year" },
 ];
@@ -166,6 +166,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-09-14", value: 4.3163, note: "AAA release Sep 14 (logged)" },
   { date: "2026-09-15", value: 4.3289, note: "AAA release, Sep 15" },
   { date: "2026-09-16", value: 4.3672, note: "AAA release, Sep 16" },
+  { date: "2026-09-17", value: 4.4386, note: "AAA release, Sep 17" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -189,6 +190,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-09-14", value: 6.2301, note: "AAA record — fifth consecutive day" },
   { date: "2026-09-15", value: 6.2694, note: "AAA record — sixth consecutive day, up 36.8¢ from $5.9012 a week earlier" },
   { date: "2026-09-16", value: 6.3103, note: "AAA record — seventh consecutive day, first above $6.30, up 36.8¢ from $5.9424 a week earlier" },
+  { date: "2026-09-17", value: 6.3956, note: "AAA record — eighth consecutive day, up 41.8¢ from $5.9773 a week earlier" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 
@@ -394,7 +396,7 @@ export const worldBalance = [
 // sections), except the demand-destruction line: IEA OMR, Sep 11 edition
 export const billLedger = [
   { name: "Global commercial stocks", value: "−400M bbl", note: "year-to-date · EIA est. (Sep 9)" },
-  { name: "US Strategic Petroleum Reserve", value: "−129M bbl", note: "since Feb 28 · EIA" },
+  { name: "US Strategic Petroleum Reserve", value: "−130.5M bbl", note: "since Feb 28 · EIA" },
   { name: "IEA coordinated release", value: "400M bbl", note: "pulled from 32 countries · IEA" },
   { name: "China commercial stockpiles", value: "~2–3M b/d", note: "withdrawals inferred from customs data · official SPR untouched" },
   { name: "Decline in oil demand", value: "−2.5M b/d", note: "full-year 2026, cut from −1.6 in the August edition · IEA OMR, Sep 11" },
@@ -511,18 +513,19 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "An official repair estimate for the East–West pipeline. AP reports 3–5 weeks; industry sources cited by Reuters estimate five to six weeks for full repairs; Saudi officials have told reporters 'multiple weeks,' but no official damage assessment or repair schedule has been published — and the US energy secretary has called the outage 'measured in days.' Reuters reported on Sep 15 that shipments from Yanbu, the port supplied by the pipeline, had stopped. Aramco has also cancelled or delayed shipments to Europe scheduled for late September.", why: "The standoff scenario depends on this bypass. Rystad warns that prices could rise further if the disruption outlasts Yanbu's five to seven days of stored supplies. An official assessment that repairs will take only days would reverse the Sep 11 change in odds." },
-      { item: "A new date for the Gulf–Iran talks in Salalah, postponed from Sep 14. Iran says Saudi Arabia requested the delay because of events in Yemen.", why: "Resuming the talks could help restore tanker access through Hormuz." },
-      { item: "Shipping conditions after the Houthis captured the Hanish islands on Sep 13–14. The Houthis claim 85 vessels passed through Bab el-Mandeb in 72 hours. Missile and drone attacks on Saudi cities wounded 13 civilians on Sep 13–14.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes." },
-      { item: "How banks respond to the Sep 14 sanctions on Russia's VTB; Treasury is meeting with financial institutions this week.", why: "If banks stop handling VTB's payments, Iran loses channels for receiving oil revenue." },
-      { item: "How many ships are passing through Hormuz. Kpler/Reuters counted 7 vessels on Sep 14 (revised up from a preliminary count of 4) and 4 on Sep 15 — two in, two out, none a crude carrier or LNG tanker. A US official told Axios that an average of 40 ships a day transit under US guidance, exporting roughly 14 million barrels a day. Ship-tracking data shows far fewer.", why: "The official account and the tracking data give different pictures of shipping through Hormuz. A sustained drop below the current level would undercut the claimed volume." },
-      { item: "A new round of the SPR exchange program. About 133.6 million barrels of the announced 172-million-barrel program were awarded across five rounds (March–June). The June round awarded only 500,000 barrels of the 40 million offered. Existing deliveries may be nearing completion, but their remaining volume and end date haven't been confirmed. Companies must return the borrowed crude plus additional barrels under their contracts.", why: "New contracts and deliveries could increase withdrawals again. The amount awarded would show how much oil companies are willing to take under the offered terms." },
+      { item: "An official repair estimate for the East–West pipeline.", why: "The standoff scenario depends on this bypass. An official assessment that repairs will take only days would reverse the Sep 11 change in odds." },
+      { item: "A new date for the Gulf–Iran talks in Salalah, postponed from Sep 14.", why: "Resuming the talks could help restore tanker access through Hormuz." },
+      { item: "Whether attacks in Bab el-Mandeb spread to non-Saudi vessels.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes." },
+      { item: "How banks respond to the Sep 14 sanctions on Russia's VTB.", why: "If banks stop handling VTB's payments, Iran loses channels for receiving oil revenue." },
+      { item: "Whether US–Houthi talks lead to an easing of the blockade of Saudi ships.", why: "That would help shipping through Bab el-Mandeb and support the standoff scenario." },
+      { item: "Whether ship-tracking data supports US claims about traffic through Hormuz.", why: "Trackers and US officials report different levels of traffic. A sustained drop in crossings would undercut the claimed oil volume." },
+      { item: "New SPR exchange contracts and delivery schedules.", why: "Existing deliveries may be nearing completion, but the end date isn't confirmed. New deliveries could increase withdrawals." },
     ],
   },
   {
     when: "Sep 23",
     items: [
-      { item: "The EIA's report for the week ending Sep 18 — the first that partially covers the shutdown of Yanbu loadings. The last report showed a third straight week of slower SPR withdrawals (0.4M barrels) and a second weekly increase in diesel stocks. It doesn't yet show the pipeline shutdown's full effect.", why: "Watch for faster reserve withdrawals, a larger drop in commercial crude stocks, or falling diesel stocks. Those changes could show how the shutdown is affecting supplies. The Department of Energy could announce a change in withdrawals before the report." },
+      { item: "The EIA's report for the week ending Sep 18, the first to partially cover the shutdown of Yanbu loadings.", why: "Watch for faster SPR withdrawals, lower commercial crude stocks, or falling diesel stocks." },
     ],
   },
   {
@@ -534,19 +537,19 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Oct 7",
     items: [
-      { item: "The EIA's first monthly outlook since the tanker attacks. Its oil price forecast of roughly $90 for the second half of the year is about $19 below Brent's latest closing price.", why: "Watch whether the EIA still expects shipping to continue despite restrictions." },
+      { item: "The EIA's next monthly oil outlook.", why: "Watch whether the EIA still expects shipping to continue despite restrictions." },
     ],
   },
   {
     when: "Nov 3",
     items: [
-      { item: "The US midterm elections — President Trump has said the war will end just after the elections.", why: "Watch whether fighting and diplomacy match the administration's stated timeline." },
+      { item: "The US midterm elections. President Trump has said the war will end just afterward.", why: "Watch whether fighting and diplomacy match the administration's stated timeline." },
     ],
   },
   {
     when: "Nov 30",
     items: [
-      { item: "Russia's jet-fuel export ban takes effect.", why: "Aviation fuel supplies tighten further as the world's remaining stocks run low." },
+      { item: "Russia's jet-fuel export ban takes effect.", why: "The ban further restricts aviation fuel supplies." },
     ],
   },
 ];

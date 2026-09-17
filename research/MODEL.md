@@ -78,7 +78,7 @@ These are the events being watched as of Sep 16:
 | Russia's Sep 30 fuel-ban decision; a widening gap between the EIA price outlook and market prices; or an adverse prediction-market result on Sep 14 or 30. | Could increase the odds that the corridor lapses. |
 | The Houthis blocking or attacking non-Saudi vessels in the Bab el-Mandeb, leaving both shipping routes closed. | Increases the odds that the corridor lapses. |
 
-The latest pipeline reports suggest repairs will take weeks. On Sep 14, the Associated Press cited unnamed officials who estimated 3–5 weeks to restore oil flows. Other estimates put it at more than 6 weeks. Satellite images show crews replacing a section of pipe.
+Reports give different timelines for restoring oil flows. On Sep 14, the Associated Press cited unnamed officials who estimated 3–5 weeks. On Sep 16, Bloomberg cited a person familiar with the matter who said Aramco was working around the damaged section. The aim was to restore roughly half the pipeline's capacity within days and full operation in about six weeks. Other estimates put repairs at more than 6 weeks. Satellite images show crews replacing a section of pipe.
 
 On Sep 15, Reuters reported that oil shipments from Yanbu, the port supplied by the pipeline, had been suspended. Aramco had also cancelled or delayed shipments to Europe scheduled for late September. Saudi officials have told reporters repairs will take weeks, but haven't published a damage assessment or a repair timetable; the US energy secretary has called the outage "measured in days."
 
