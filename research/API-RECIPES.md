@@ -165,7 +165,9 @@ Series-ID gotchas (all hit Sep 15): BLS monthly CPI is `CUUR0000SA0` (all items)
 the HOUSING series (per BLS's series-report page), not an annual average; PPI final demand is `WPUFD4` — `PCUACO`/`PPIACO`/`WPUACO` all 404
 (`PPIACO` is FRED's, not BLS's). EIA: data routes must END in `/data/`; explore the tree by
 querying a parent WITHOUT `/data/` (returns its `routes`); series IDs are route-specific
-(`WPUSTCR1` 404s on wstk — the crude series there is `WCRSTUS1`).
+(`WPUSTCR1` 404s on wstk — and wstk's crude trio is SPR-dependent: commercial-only is
+`WCESTUS1`, total-incl-SPR is `WCRSTUS1`; see the wstk section below, and note the "MBBL"
+unit label lies).
 
 ### Natural gas (TTF / JKM) — Global LNG Hub / JOGMEC weekly (verified Sep 15)
 
@@ -190,6 +192,21 @@ then `./content.js` on the newest. Values are printed as bands ("high-USD 28s/MB
 - **Paid/enterprise if it ever matters:** ICE EOD JQ/NA futures (licensed), Bloomberg/Refinitiv.
 - **So the workflow stands:** GLNGH/JOGMEC weekly post (free, assessed, predictable slug) as the
   primary; TE CFD pages only as a same-week spot check with a disclosed note.
+
+### wstk crude-inventory series (verified Sep 16) — the commercial-crude chart
+
+`/v2/petroleum/stoc/wstk/data/` carries three US total crude series (use `start=`/`end=`
+date params — NOT `startyear`; the route rejects them):
+
+- **`WCESTUS1`** — US ending stocks **EXCLUDING SPR** (the site's commercial-crude chart,
+  `commercialCrude2026` in crisis.ts).
+- `WCRSTUS1` — US ending stocks **INCLUDING SPR** (WCESTUS1 + the SPR).
+- `WCSSTUS1` — the **SPR itself** (weekly history — a possible cross-check for sprWeekly,
+  though the WPSR workbook remains the ingestion source).
+
+**Unit gotcha (hit Sep 16):** the API metadata labels the units "MBBL" but the values are
+THOUSANDS of barrels (w/e Sep 11: 423,429 → 423.429M, matches WPSR Table 1 exactly). Divide
+by 1000. Series pages: eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=<ID>&f=W.
 
 ### WPSR table CSVs (verified Sep 16) — regional data without the workbook
 

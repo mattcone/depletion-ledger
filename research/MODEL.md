@@ -80,7 +80,7 @@ These are the events being watched as of Sep 16:
 
 The latest pipeline reports suggest repairs will take weeks. On Sep 14, the Associated Press cited unnamed officials who estimated 3–5 weeks to restore oil flows. Other estimates put it at more than 6 weeks. Satellite images show crews replacing a section of pipe.
 
-On Sep 15, Reuters reported that oil shipments from Yanbu, the port supplied by the pipeline, had been suspended. Aramco had also cancelled or delayed shipments to Europe scheduled for late September. Saudi officials haven't given a timetable for repairs.
+On Sep 15, Reuters reported that oil shipments from Yanbu, the port supplied by the pipeline, had been suspended. Aramco had also cancelled or delayed shipments to Europe scheduled for late September. Saudi officials have told reporters repairs will take weeks, but haven't published a damage assessment or a repair timetable; the US energy secretary has called the outage "measured in days."
 
 These reports led to the Sep 16 change in odds to 10/35/55. A rapid resumption of Yanbu loadings would return the odds to 10/40/50. An official restart of the pipeline, or an assessment that repairs would take only days, would reverse both changes and return the odds to 10/50/40.
 
@@ -88,7 +88,7 @@ The Houthis' territorial gains also need to be considered alongside shipping act
 
 A direct US strike on the Houthis would also trigger a review. The direction of that change would depend on the circumstances at the time.
 
-The gap between the EIA outlook and market prices takes longer to assess. The EIA still expects oil at about $90 in late 2026. Brent closed at $108.75 on Sep 15, about $19 above that forecast.
+The gap between the EIA outlook and market prices takes longer to assess. The EIA still expects oil at about $90 in late 2026. Brent settled at $105.83 on Sep 16, about $16 above that forecast.
 
 The model treats a gap above roughly $10–15 as a sign that the market may be assigning more than 40% odds to the corridor lapsing. The current gap is above that range.
 
