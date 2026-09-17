@@ -344,7 +344,7 @@ export const branchTracks = [
     border: "border-l-crude",
     weight: "35%",
     what: "The war continues at its current intensity. Tanker attacks and shipping restrictions persist, some Iranian infrastructure remains offline, and the damaged Saudi bypass has no restart date. The strait remains partly open.",
-    path: "Brent stays in the $95–125 range. The reserve path assumes continuing withdrawals of 0.70M barrels per day. Global stocks keep falling, with shortages developing later.",
+    path: "Brent stays in the $100–120 range. The reserve path assumes continuing withdrawals of 0.70M barrels per day. Global stocks keep falling, with shortages developing later.",
   },
   {
     name: "Corridor lapses",
@@ -535,7 +535,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     ],
   },
   {
-    when: "Oct 7",
+    when: "Oct 6",
     items: [
       { item: "The EIA's next monthly oil outlook.", why: "Watch whether the EIA still expects shipping to continue despite restrictions." },
     ],
@@ -549,7 +549,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Nov 30",
     items: [
-      { item: "Russia's jet-fuel export ban takes effect.", why: "The ban further restricts aviation fuel supplies." },
+      { item: "Russia's jet-fuel export ban is due to end (it has been in force since Jun 1).", why: "Ending it would return Russian jet fuel to export markets, easing the tight global supply. Watch for an extension announcement — Russia has extended its other fuel bans." },
     ],
   },
 ];
@@ -561,7 +561,7 @@ export const cascade = [
   { date: "≈ mid-October", region: "China", trigger: "Commercial oil stocks could begin to fall faster than normal." },
   { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, a level that would put pressure on trading. If the strait closes fully, the estimate moves up to mid-October." },
   { date: "≈ late October", region: "Europe, at the pump", trigger: "Shortages could reach consumers, with price increases putting pressure on governments." },
-  { date: "Nov 10–30", region: "Air travel", trigger: "Russia's jet-fuel export ban begins Nov 30. The world's remaining stocks amount to about 26 days of flying." },
+  { date: "Nov 10–30", region: "Air travel", trigger: "Russia's jet-fuel export ban, in force since Jun 1, is due to end Nov 30. An extension would keep those export restrictions in place." },
 ];
 
 // ---------- Russia front (verified anchors only — report §7B + research logs) ----------

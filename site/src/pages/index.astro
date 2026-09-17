@@ -41,7 +41,7 @@ const g = sprFloors.map((f) => ({ ...f, y: y(f.level) }));
 const hist = [
   { level: 726.6, label: "727 · 2009", tip: "727 — Dec 2009 · all-time peak (EIA monthly series)" },
   { level: 591.7, label: "592 · 1995", tip: "592 — 1995 · mid-90s plateau (EIA)" },
-  { level: 270.5, label: "270 · 1982", tip: "270.5 — wk ending Aug 20, 1982 · record low, until this crisis (EIA)" },
+  { level: 270.5, label: "270 · 1982", tip: "270.5 — wk ending Aug 20, 1982 · the Aug 1982 level (EIA)" },
 ].map((h) => ({ ...h, y: y(h.level) }));
 
 // SPR drawdown sparkline (last 16 weeks) — Tufte: no axes, dots at max/min
@@ -560,13 +560,13 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           <h2 class="mb-4 text-xl font-bold tracking-tight">The stockpile, in context</h2>
           <p class="mb-4 text-[13px] leading-relaxed text-faint">
             This chart puts the current reserve in perspective. It held 727 million barrels at
-            its December 2009 peak and 270.5 million at the previous low in August 1982. It
+            its December 2009 peak and 270.5 million in August 1982. It
             held 285.0 million on Sep 11. The green line marks the level before the war. In the model,
             withdrawals stop at the 70 million barrel floor.
           </p>
           <figure class="relative mx-auto w-full max-w-[280px]">
-          <svg id="sprGauge" viewBox="0 0 320 470" role="img" aria-label="SPR level gauge on a scale from 60 to 750 million barrels. Now 285.0, down from 415.4 pre-war. Grey historical markers: 727 all-time peak in December 2009, 592 in the mid-1990s, and 270.5 in August 1982 — the previous record low, now breached. Red dashed lines mark the floors at 300, 250, 180, and 70. Hover any line for details.">
-            <!-- historical anchors (EIA all-time record) -->
+          <svg id="sprGauge" viewBox="0 0 320 470" role="img" aria-label="SPR level gauge on a scale from 60 to 750 million barrels. Now 285.0, down from 415.4 pre-war. Grey historical markers: 727 all-time peak in December 2009, 592 in the mid-1990s, and 270.5, the August 1982 level. Red dashed lines mark the floors at 300, 250, 180, and 70. Hover any line for details.">
+            <!-- historical anchors (EIA historical series) -->
             {hist.map((h) => (
               <g>
                 <line x1="88" x2="96" y1={h.y} y2={h.y} stroke="#8a867a" stroke-width="1" />
@@ -806,8 +806,8 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
               <h3 class="text-sm font-bold tracking-tight">The export ban calendar</h3>
               <p class="mt-1 text-[13px] leading-relaxed text-ink/70">
                 Russia's export restrictions leave less fuel available to other countries during the
-                heating season. Sep 30 is the next deadline for the diesel export ban, and the jet-fuel
-                export ban is scheduled to take effect on Nov 30. Damaged refineries also leave Russia
+                heating season. The diesel export ban expires on Sep 30, and the jet-fuel export ban,
+                in force since Jun 1, ends on Nov 30. Damaged refineries also leave Russia
                 with less fuel for its own gas stations and military as winter approaches.
               </p>
               <div class="mt-3 border border-rule rounded-md">

@@ -89,7 +89,7 @@ On Sep 15, Reuters reported that oil shipments from Yanbu, the port supplied by 
 
 These reports led to the Sep 16 change in odds to 10/35/55. A rapid resumption of Yanbu loadings would return the odds to 10/40/50. An official restart of the pipeline, or an assessment that repairs would take only days, would reverse both changes and return the odds to 10/50/40.
 
-The Houthis' territorial gains also need to be considered alongside shipping activity. As of Sep 14, they hold Mokha, Perim island, and the Hanish islands. About 13–17 vessels a day are still entering Bab el-Mandeb, and no non-Saudi vessel has been reported blocked or attacked there. The model's condition for raising the odds on that basis hasn't been met.
+The Houthis' territorial gains also need to be considered alongside shipping activity. As of Sep 14, they hold Mokha, Perim island, and the Hanish islands. Kpler's preliminary counts — which exclude vessels with tracking signals switched off — put total Bab el-Mandeb crossings at 24 on Sep 15 and 21 on Sep 16, and no non-Saudi vessel has been reported blocked or attacked there. The model's condition for raising the odds on that basis hasn't been met.
 
 A direct US strike on the Houthis would also trigger a review. The direction of that change would depend on the circumstances at the time.
 
