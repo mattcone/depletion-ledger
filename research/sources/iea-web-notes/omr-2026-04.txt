@@ -1,0 +1,39 @@
+LIMITED RESEARCH EXTRACT — NOT A COMPLETE VERBATIM TRANSCRIPTION
+Source: https://www.iea.org/reports/oil-market-report-april-2026
+Publication date: 14 April 2026
+Reader: web reader. All four requested HTML pages loaded; no 403 encountered.
+Copyright limitation: complete non-CC text and most source sentences are omitted. JSON quote=null means omitted, not inaccessible. Quoted excerpts are flagged. The JSON records selected inventory figures, not every number in the report.
+
+HTML coverage:
+Accessible: report description, highlights, narrative overview (Disruptions mount), inline OPEC+ production table, methodology links and footer.
+No separately headed Executive Summary is exposed.
+Executive Summary (standalone HTML section): [section not accessible]
+Supply (standalone HTML section): [section not accessible]
+Demand (standalone HTML section): [section not accessible]
+Inventories (standalone HTML section): [section not accessible]
+Refining (standalone HTML section): [section not accessible]
+Prices (standalone HTML section): [section not accessible]
+No edition-specific chart/key-data hyperlink is exposed. These HTML pages are summaries with an inline table, not the full reports.
+
+Inventory findings (factual summary):
+No explicit cumulative stock draw since February is stated. The webpage's 360 mb and 440 mb figures concern supply losses, not inventory draws. PDF: February global stock level 8 185 mb; OECD commercial stocks 2 795 mb, covering 64.1 days.
+
+Short exact excerpts:
+"Global observed oil inventories fell by 85 mb in March,"
+
+Linked report:
+https://iea.blob.core.windows.net/assets/515f3128-df1a-4d6c-beb4-fd91d2434bef/-14APR2026_OilMarketReport_Free_version1.pdf
+The PDF contains Demand, Supply, Refining, Stocks and Prices sections. Inventory passages were read; selected facts are in the JSON. Full PDF transcription omitted for copyright.
+67-page abridged free PDF; additional subscriber data tables excluded.
+
+Methodology PDF:
+https://iea.blob.core.windows.net/assets/b6542edd-41b7-4a11-988f-4ffbc0a28e3b/IEARefineryMarginMethodologyAugust2024.pdf
+
+Generic data/statistics navigation links (not edition-specific):
+https://www.iea.org/data-and-statistics/data-explorers
+https://www.iea.org/data-and-statistics/data-sets
+https://www.iea.org/data-and-statistics/charts
+https://www.iea.org/data-and-statistics
+
+Numbers use their printed precision. Positive draw magnitudes retain the source's number; the series name specifies direction. Negative rates are retained where printed. No cumulative total was calculated. PDF facts have a separate source_url and printed page number.
+

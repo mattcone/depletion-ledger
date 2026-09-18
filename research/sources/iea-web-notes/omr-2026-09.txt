@@ -1,0 +1,25 @@
+RESEARCH NOTES ONLY — NOT A FULL PAGE-TEXT EXTRACTION
+Source: https://www.iea.org/reports/oil-market-report-september-2026
+Publication date: 11 September 2026.
+The web reader loaded the public page without a 403. It did not expose raw HTML, so no .html file was saved. Full copyrighted page text is not reproduced.
+
+Inventory figures, in page order (paraphrased; mb = million barrels):
+- August 2026: global observed inventories changed by -95 mb; cumulative decline since February: 507 mb, averaging 2.8 mb/day.
+- August 2026: oil on water changed by -65 mb amid renewed attacks on Middle Eastern tanker traffic.
+- August 2026: non-OECD inventories changed by -52 mb, with China leading; OECD stocks changed by +23 mb. Commercial accumulation exceeded a government-stock draw of 19 mb.
+- The commentary repeats the cumulative decline of 507 mb and average draw of 2.8 mb/day.
+- Exact excerpt: "August alone saw stocks fall by a steep 95 mb, or 3.1 mb/d."
+
+No days-of-forward-demand figures or inventory chart axis/label data appeared in the reader output. Embedded HTML data could not be inspected.
+Access: public highlights and commentary; full report and tables offered through a paid subscription. Not the complete report.
+No direct report-specific table/data download URL was exposed. The Download PDF control resolved to the report page itself.
+
+General data navigation links:
+https://www.iea.org/data-and-statistics/data-explorers
+https://www.iea.org/data-and-statistics/data-sets
+https://www.iea.org/policies
+https://www.iea.org/data-and-statistics/charts
+https://www.iea.org/data-and-statistics
+
+Linked methodology PDF (not an inventory data download):
+https://iea.blob.core.windows.net/assets/b6542edd-41b7-4a11-988f-4ffbc0a28e3b/IEARefineryMarginMethodologyAugust2024.pdf

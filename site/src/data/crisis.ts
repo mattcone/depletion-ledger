@@ -289,13 +289,7 @@ export const sprFloors = [
   { level: 180, name: "hard-operable 180M" },
   { level: 70, name: "DOE stated safe minimum 70M" },
 ];
-export const sprScenarios = [
-  { rate: 0.45, name: "corridor holds · 0.45M b/d" },
-  { rate: 0.7, name: "standoff $100–120 · 0.70M b/d" },
-  { rate: 1.35, name: "corridor lapse · 1.35M b/d" },
-];
-
-// ---------- SPR drawdown pace + floor dates (computed from sprWeekly) ----------
+// ---------- SPR drawdown pace (computed from sprWeekly) ----------
 // Weekly draw, M bbl (positive = drawn), oldest → newest
 export const sprDrawDeltas: { date: string; mmbbl: number }[] = sprWeekly
   .slice(1)
@@ -303,22 +297,6 @@ export const sprDrawDeltas: { date: string; mmbbl: number }[] = sprWeekly
 
 // 4-week average draw pace, M b/d (smoothes weekly noise vs a single week)
 export const sprDrawPace4w = +(((sprWeekly[sprWeekly.length - 5].level - sprWeekly[sprWeekly.length - 1].level) / 28).toFixed(2));
-
-// Floor dates on the standoff path (35% since the Sep 16 reweight) at 0.70M b/d
-// from the last actual (284.957M, w/e Sep 11)
-const STANDOFF_RATE = 0.7;
-const _anchorDate = Date.parse(sprWeekly[sprWeekly.length - 1].date);
-const _daysToFloor = (floor: number) => (sprWeekly[sprWeekly.length - 1].level - floor) / STANDOFF_RATE;
-// Math.round: 49.94 days must display as Oct 31, not truncate to Oct 30
-export const sprFloor250Date = new Date(_anchorDate + Math.round(_daysToFloor(250)) * 86400000); // ≈ Oct 31 2026
-export const sprFloor180Date = new Date(_anchorDate + Math.round(_daysToFloor(180)) * 86400000); // ≈ Feb 8 2027
-
-// Floor dates on the LAPSE path (top track since the Sep 11 ESPO reweight) at 1.35M b/d,
-// same reported-basis anchor (284.957M, w/e Sep 11)
-const LAPSE_RATE = 1.35;
-const _daysToFloorLapse = (floor: number) => (sprWeekly[sprWeekly.length - 1].level - floor) / LAPSE_RATE;
-export const sprLapse250Date = new Date(_anchorDate + Math.round(_daysToFloorLapse(250)) * 86400000); // ≈ Oct 7 2026
-export const sprLapse180Date = new Date(_anchorDate + Math.round(_daysToFloorLapse(180)) * 86400000); // ≈ Nov 28 2026
 
 // ---------- Supply snapshot (EIA WPSR w/e Sep 11, released Sep 16 + STEO Sep 9) ----------
 export const invSnapshot = [
@@ -336,7 +314,7 @@ export const branchTracks = [
     border: "border-l-calm",
     weight: "10%",
     what: "Tankers can pass through Hormuz under an Iran–Oman agreement or with US escorts. Traffic gradually returns to normal over one to two quarters.",
-    path: "In this scenario, Brent moves toward $70–80. The reserve path assumes withdrawals of 0.45M barrels per day, so stored oil lasts longer if releases continue at that rate.",
+    path: "In this scenario, Brent moves toward $70–80.",
   },
   {
     name: "Standoff",
@@ -344,7 +322,7 @@ export const branchTracks = [
     border: "border-l-crude",
     weight: "35%",
     what: "The war continues at its current intensity. Tanker attacks and shipping restrictions persist, some Iranian infrastructure remains offline, and the damaged Saudi bypass has no restart date. The strait remains partly open.",
-    path: "Brent stays in the $100–120 range. The reserve path assumes continuing withdrawals of 0.70M barrels per day. Global stocks keep falling, with shortages developing later.",
+    path: "Brent stays in the $100–120 range. Global stocks keep falling, with shortages developing later.",
   },
   {
     name: "Corridor lapses",
@@ -352,7 +330,7 @@ export const branchTracks = [
     border: "border-l-alarm",
     weight: "55%",
     what: "The disruption becomes a sustained closure or the fighting escalates. Tanker losses rise, shipping restrictions remain, and the bypass, Abqaiq, and Jazan stay offline for months.",
-    path: "Brent rises above $130. The reserve path assumes continuing withdrawals of 1.35M barrels per day. Shortages spread from the US East Coast to Russia, Europe, China, and aviation fuel.",
+    path: "Brent rises above $130. Shortages spread from the US East Coast to Russia, Europe, China, and aviation fuel.",
   },
 ];
 

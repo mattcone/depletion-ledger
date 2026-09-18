@@ -1,0 +1,15 @@
+{
+ "edition": "FIXTURE \u2014 synthetic values, not a real publication (validation only)",
+ "source_url": "fixture",
+ "outcomes": {
+  "2026-09": {
+   "monthly_mb": -120.0,
+   "cumulative_mb": -627.0
+  },
+  "2026-10": {
+   "monthly_mb": -50.0,
+   "cumulative_mb": -677.0
+  }
+ },
+ "published_date": "2026-10-12"
+}

@@ -1,0 +1,51 @@
+IEA Oil Market Report PDF URL investigation: July–September 2026
+Only observed URLs will be recorded. No GUID guessing; no curl.
+Status: Investigation started.
+
+Method 1: Web reader opened all three report pages successfully.
+July Download PDF (reader link 10) navigated to https://www.iea.org/reports/oil-market-report-july-2026
+August Download PDF (reader link 10) navigated to https://www.iea.org/reports/oil-market-report-august-2026
+September Download PDF (reader link 10) navigated to https://www.iea.org/reports/oil-market-report-september-2026
+No blob URL exposed by these clicks. Raw href is not exposed by this reader.
+No 'free version' text found on any of the three pages. All three expose subscription/purchase-licence UI.
+July methodology link (not the monthly report): https://iea.blob.core.windows.net/assets/48f400bb-e9eb-4415-a35a-682b9fe7673a/IEA_Refinery_Margin_Methodology_June_2026.pdf
+
+Raw HTML inspection with Python urllib (no curl):
+[
+  {
+    "month": "july",
+    "error": "<urlopen error [Errno -3] Temporary failure in name resolution>"
+  },
+  {
+    "month": "august",
+    "error": "<urlopen error [Errno -3] Temporary failure in name resolution>"
+  },
+  {
+    "month": "september",
+    "error": "<urlopen error [Errno -3] Temporary failure in name resolution>"
+  }
+]
+
+Method 2: Blob/PDF/download links exposed by the web reader.
+July: https://iea.blob.core.windows.net/assets/48f400bb-e9eb-4415-a35a-682b9fe7673a/IEA_Refinery_Margin_Methodology_June_2026.pdf
+August: https://iea.blob.core.windows.net/assets/48f400bb-e9eb-4415-a35a-682b9fe7673a/IEA_Refinery_Margin_Methodology_June_2026.pdf
+September: https://iea.blob.core.windows.net/assets/b6542edd-41b7-4a11-988f-4ffbc0a28e3b/IEARefineryMarginMethodologyAugust2024.pdf
+These are methodology documents, NOT the requested monthly reports. Reader clicks confirmed both are PDFs (12 pages and 10 pages, respectively).
+The reader exposes numbered links but no complete raw-href export. These are all matching URLs identified in its page output. Raw HTML retrieval could not verify completeness because local DNS failed.
+
+Method 3: Searches completed.
+Exact quoted filename stems: '-10JUL2026_OilMarketReport', '-12AUG2026_OilMarketReport', '-11SEP2026_OilMarketReport': no results.
+Each date token plus 'OilMarketReport' and 'publicversion': no results.
+Domain-restricted searches for each month with '2026' and 'Oil Market Report': returned older reports, no requested edition.
+Additional searches for '10JULY2026' + 'OilMarketReport', '11SEPT2026' + 'OilMarketReport', 'OilMarketReport_publicversion' + '2026', and July 2026 OMR + 'free version': no target-edition PDF URL found.
+Exact publicversion filename searches: '-10JUL2026_OilMarketReport_publicversion.pdf', '-12AUG2026_OilMarketReport_publicversion.pdf', '-11SEP2026_OilMarketReport_publicversion.pdf': no results.
+
+FINAL PER-EDITION FINDINGS
+July 2026: No direct monthly-report PDF URL found. No free PDF available through the observed public-page links; existence of an unlinked free PDF remains unverified.
+August 2026: No direct monthly-report PDF URL found. No free PDF available through the observed public-page links; existence of an unlinked free PDF remains unverified.
+September 2026: No direct monthly-report PDF URL found. No free PDF available through the observed public-page links; existence of an unlinked free PDF remains unverified.
+
+What worked: Web-reader page opens and methodology-link clicks.
+What did not yield the requested URLs: Download PDF clicks (same-page navigation), exact filename and publicversion searches, broader blob-domain searches.
+Limitation: No JavaScript-capable browser/raw-link export available in the web reader. Python urllib attempts failed at DNS resolution for all three pages, so raw hrefs could not be inspected. The reader navigation destinations above are observed, not claims about the literal href attribute.
+No GUIDs were fabricated. No curl used. All files written during this investigation are under /tmp/iea-fetch/.

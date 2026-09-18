@@ -5,10 +5,10 @@ import SiteMeta from "../components/SiteMeta.astro";
 import TopNav from "../components/TopNav.astro";
 import {
   stats, brentYtd, brentMonthlyAvgs, wtiWeekly, gasolineYtd, gasolinePreCrisis,
-  dieselYtd, dieselOldRecord, sprWeekly, sprPreWar, sprFloors, sprScenarios,
+  dieselYtd, dieselOldRecord, sprWeekly, sprPreWar, sprFloors,
   invSnapshot, branchWeights, branchTracks, watchGroups, cascade, billLedger,
 
-  sprDrawDeltas, sprDrawPace4w, sprFloor250Date, sprFloor180Date, sprLapse250Date, sprLapse180Date,
+  sprDrawDeltas, sprDrawPace4w,
   DATA_AS_OF, CRISIS_DAY_1,
   russiaCapacityAnchors, russiaCurrentSpread, russiaSnapshot, russiaBanCascade,
   globalRefining, demandDecline,
@@ -18,6 +18,102 @@ import {
 // Crisis day number, computed from the data-as-of date (NOT the viewer's clock) so the
 // page is a stable snapshot: Sep 17 data = day 201, no matter when someone loads it.
 const dayNum = Math.round((Date.parse(DATA_AS_OF) - Date.parse(CRISIS_DAY_1)) / 86400000);
+
+// ── World oil stocks panels (below the flip chart) ─────────────────────────────
+// Every computed number in the panel copy/captions is derived from the data file,
+// not re-typed — re-typed arithmetic already produced one wrong residual.
+import worldStocksData from "../data/world-stocks.json";
+const wsMb = worldStocksData.series.oecd_onland_mb.points;
+const wsChanges = worldStocksData.series.global_observed_month_change_mb.points;
+const wsCum = worldStocksData.series.global_observed_cumulative_mb.points.filter((p) => p.value !== null);
+const wsBand = worldStocksData.annotations.seasonal_band_2021_2025.by_month as Record<string, number[]>;
+const wsMbFirst = wsMb[0];
+const wsMbLast = wsMb[wsMb.length - 1];
+const wsBarSum = wsChanges.reduce((s, p) => s + p.value, 0);   // −445
+const wsCumLast = wsCum[wsCum.length - 1];                     // −507 (through Aug)
+const wsGap = Math.abs(wsBarSum - wsCumLast.value);            // 62
+const monthFull = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const wsChangeList = wsChanges.map((p) => {
+  const m = monthFull[parseInt(p.period.slice(5), 10) - 1];
+  const pre = p.status === "reported_preliminary" ? " (preliminary)" : "";
+  return `${p.value > 0 ? "+" : ""}${p.value} in ${m}${pre}`;
+}).join(", ");
+const wsCumList = wsCum.map((p) => `${p.value} through ${monthFull[parseInt(p.period.slice(5), 10) - 1]}`).join(", ");
+const wsBelowBandMonths = wsMb
+  .filter((p) => p.period.startsWith("2026") && wsBand[p.period.slice(5)] && p.value < wsBand[p.period.slice(5)][0])
+  .map((p) => monthFull[parseInt(p.period.slice(5), 10) - 1]);
+// Pre-rendered strings for the templates (Astro's {{ }} parser dislikes method calls).
+const wsBelowBandStr = wsBelowBandMonths.join(" and ");
+const wsMbFirstStr = wsMbFirst.value.toLocaleString();
+const wsMbLastStr = wsMbLast.value.toLocaleString();
+const wsBarSumStr = String(wsBarSum);
+const wsCumLastStr = String(wsCumLast.value);
+const wsGapStr = String(wsGap);
+// aria-labels are built in the frontmatter: expressions don't expand inside quoted attributes.
+// Every figure in the aria text is derived from the data file, not re-typed.
+const wsDec22 = wsMb.find((p) => p.period === "2022-12")?.value ?? 0;
+const ws2325 = wsMb.filter((p) => p.period >= "2023-01" && p.period <= "2025-12");
+const ws2325Lo = Math.min(...ws2325.map((p) => p.value));
+const ws2325Hi = Math.max(...ws2325.map((p) => p.value));
+const wsPanelAAria = `OECD on-land oil stocks, commercial plus government-controlled, million barrels. The EIA's monthly levels from ${wsMbFirst.value.toLocaleString()} in January 2021, falling to ${wsDec22.toLocaleString()} by December 2022, then holding between ${ws2325Lo.toLocaleString()} and ${ws2325Hi.toLocaleString()} across 2023 to 2025, then dropping to ${wsMbLastStr} by May 2026 — the lowest month in the series. The shaded band is the same calendar month's range over 2021 to 2025, extended across 2026; ${wsBelowBandStr} 2026 fall below it. A dashed line marks the start of the war, February 28, 2026.`;
+const wsPanelDaysAria = `Line chart in days of forward demand: the IEA's quarter-end OECD stocks, from 102 days in March 2021 down to 86 days at the end of June 2022 — the lowest the free editions cover (third quarter 2020 onward) — ending at 91 days in the first quarter of 2026, a hollow point because it is computed from the IEA's forecast demand. A dashed line marks the start of the war, February 28, 2026.`;
+// Forecast paths come from the forecast records — the stored targets are the source of truth,
+// so the copy, the chart, and the record can never drift apart.
+const wsEiaRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === "steo-2026-09-global-observed");
+const wsPersRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === "persistence-2026-09-global-observed");
+// Phase 3: the three conditional scenario records + their scenario colors from the
+// assumptions file (the names and colors live there, not in the chart code).
+import worldStocksAssumptions from "../data/world-stocks-assumptions.json";
+const wsScenarioMeta: Record<string, { color: string; odds: string; name: string }> = Object.fromEntries(
+  (worldStocksAssumptions as any).scenarios.map((s: any) => [s.id, { color: s.color, odds: s.odds_sept_16, name: s.name }])
+);
+// Active scenario version: the newest version date among the scenario records
+// (record_id = scenario-<sid>-<YYYY-MM-DD>-global-observed). The same rule is used
+// by the chart code below and by research/scoring/regen-scenarios.py (checker +
+// table generator). Older versions stay in the data for scoring; the page — copy,
+// captions, aria, and plotted lines — always uses the active version.
+const wsScenarioVersion = (worldStocksData as any).forecast_records
+  .filter((r: any) => typeof r.record_id === "string" && r.record_id.startsWith("scenario-"))
+  .reduce((max: string, r: any) => {
+    const m = r.record_id.match(/-(\d{4}-\d{2}-\d{2})-global-observed$/);
+    return m && m[1] > max ? m[1] : max;
+  }, "");
+const wsScHoldsRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === `scenario-corridor-holds-${wsScenarioVersion}-global-observed`);
+const wsScStandoffRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === `scenario-standoff-${wsScenarioVersion}-global-observed`);
+const wsScLapseRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === `scenario-corridor-lapses-${wsScenarioVersion}-global-observed`);
+const wsPersF = worldStocksData.series.persistence_baseline_mb.points;
+// The copy's anchor comes from the SAVED record, not the latest observation: when the
+// observation is revised or extended (e.g. September publishes), the description of the
+// forecast's fixed starting point must not move with it.
+const wsFcAnchorRec = wsEiaRec.anchor;
+const wsFcAnchorStr = String(wsFcAnchorRec.value_mb);
+const wsFcAnchorMonthStr = new Date(wsFcAnchorRec.period + "-15T12:00:00").toLocaleDateString("en-US", { month: "long", year: "numeric" });
+// The aria's observed range is derived from the observations themselves.
+const wsObsPeriods = worldStocksData.series.global_observed_month_change_mb.points.map((p) => p.period).sort();
+const wsObsMonth = (ym: string) => new Date(ym + "-15T12:00:00").toLocaleDateString("en-US", { month: "long", year: "numeric" });
+const wsObsRangeStr = `${wsObsMonth(wsObsPeriods[0])} to ${wsObsMonth(wsObsPeriods[wsObsPeriods.length - 1])}`;
+const wsEiaCumArr = wsEiaRec.targets.map((t: any) => t.target_cumulative_mb);
+const wsPersCumArr = wsPersRec.targets.map((t: any) => t.target_cumulative_mb);
+const wsEiaDec26 = wsEiaCumArr[3];
+const wsEiaDec27 = wsEiaCumArr[15];
+const wsPersDec27 = wsPersCumArr[15];
+const wsPersMonthly = wsPersF[0].value;
+// Scenario endpoints come from the records' final stored targets — the lapse record's final
+// target is its validity horizon (Feb 2027), so the month name is derived, not re-typed.
+const wsScHoldsEnd = wsScHoldsRec.targets[wsScHoldsRec.targets.length - 1];
+const wsScStandoffEnd = wsScStandoffRec.targets[wsScStandoffRec.targets.length - 1];
+const wsScLapseEnd = wsScLapseRec.targets[wsScLapseRec.targets.length - 1];
+const wsLapseEndMonthStr = wsObsMonth(wsScLapseEnd.period);
+const wsSigned = (v: number) => `${v > 0 ? "+" : "−"}${Math.abs(Math.round(v)).toLocaleString()}`;
+const wsEiaDec26Str = wsSigned(wsEiaDec26);
+const wsEiaDec27Str = wsSigned(wsEiaDec27);
+const wsPersDec27Str = wsSigned(wsPersDec27);
+const wsPersMonthlyStr = `−${Math.abs(wsPersMonthly).toFixed(1)}`;
+const wsHoldsEndStr = wsSigned(wsScHoldsEnd.target_cumulative_mb);
+const wsStandoffEndStr = wsSigned(wsScStandoffEnd.target_cumulative_mb);
+const wsLapseEndStr = wsSigned(wsScLapseEnd.target_cumulative_mb);
+const wsScOddsStr = `${wsScenarioMeta["corridor-holds"].odds} / ${wsScenarioMeta["standoff"].odds} / ${wsScenarioMeta["corridor-lapses"].odds}`;
+const wsPanelBAria = `Change in global observed oil stocks — the stocks covered by the IEA's global inventory estimates — in million barrels. Bars show each month's change as published, ${wsObsRangeStr}: ${wsChangeList}. Dots show the cumulative totals the IEA published in separate editions since the end of February 2026: ${wsCumList}. The zero line is the end-of-February level. The bars sum to ${wsBarSumStr}, not ${wsCumLastStr} — the figures come from different editions and are not reconciled; both are shown as published. Two forecast paths extend the axis to December 2027 from the ${wsFcAnchorStr} anchor recorded at the end of ${wsFcAnchorMonthStr}: the EIA Short-Term Energy Outlook (released September 9, 2026) balance-implied world inventory change, reaching ${wsEiaDec26Str} by December 2026 and ${wsEiaDec27Str} by December 2027; and a persistence baseline repeating ${wsPersMonthlyStr} million barrels per month, reaching ${wsPersDec27Str} by December 2027. Both paths are global — the pool of this panel, not the OECD series in Panel A — and the EIA path is a balance on EIA's broader world coverage, not a forecast of the IEA's observed stocks. The IEA's free September 2026 summary publishes no quarterly balance path, so no IEA forecast line is shown. Three colored conditional model paths branch from the same anchor, each a documented monthly adjustment of the EIA baseline (assumptions published in the data file and on the model page): corridor holds (${wsScenarioMeta["corridor-holds"].odds} odds, crisis model, Sep 16) reaches ${wsHoldsEndStr} by December 2027; standoff (${wsScenarioMeta["standoff"].odds}) reaches ${wsStandoffEndStr} by December 2027; corridor lapses (${wsScenarioMeta["corridor-lapses"].odds}) reaches ${wsLapseEndStr} by ${wsLapseEndMonthStr}, where the path ends at its stated validity horizon. The scenarios are conditional futures, not bands around a forecast, and none assumes government stock releases as a loss.`;
 
 // Watch list as flat ledger rows (date column + text). Tufte: structure from the date
 // column and whitespace, not boxes or shaded bands.
@@ -65,14 +161,6 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
   day: "numeric",
 });
 
-// Floor dates, formatted
-// UTC so the date is deterministic regardless of the build machine's timezone/DST
-const fmtFloor = (d: Date) => d.toLocaleDateString("en-US", { timeZone: "UTC", month: "short", day: "numeric" });
-const floor250 = fmtFloor(sprFloor250Date); // "Oct 31" (standoff path)
-const floor180 = `${fmtFloor(sprFloor180Date)}, ${sprFloor180Date.getFullYear()}`;
-const floorLapse250 = fmtFloor(sprLapse250Date); // "Oct 7" (lapse path — top track since Sep 11)
-const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYear()}`;
-
 ---
 
 <!doctype html>
@@ -84,11 +172,11 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta
       name="description"
-      content={`Track the 2026 oil supply crisis with charts of fuel prices, oil reserves, and effects on the economy. Explore how long stored oil could last under three scenarios. Day ${dayNum}, data as of ${dataAsOf}.`}
+      content={`Track the 2026 oil supply crisis with charts of fuel prices, oil reserves, and effects on the economy. Day ${dayNum}, data as of ${dataAsOf}.`}
     />
     <SiteMeta
       title="The Depletion Ledger — The Oil Supply Crisis"
-      description={`Track the 2026 oil supply crisis with charts of fuel prices, oil reserves, and effects on the economy. Explore how long stored oil could last under three scenarios. Day ${dayNum}, data as of ${dataAsOf}.`}
+      description={`Track the 2026 oil supply crisis with charts of fuel prices, oil reserves, and effects on the economy. Day ${dayNum}, data as of ${dataAsOf}.`}
       url="/"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -125,8 +213,9 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             <p>
               The Depletion Ledger tracks oil supplies, fuel prices, and how the shortage affects
               people and businesses. You can use the charts below to see what's changed and explore
-              three ways the crisis could unfold. The model estimates how long stored oil could last
-              in each case, and keeps a record of its predictions so you can see how they hold up.
+              three ways the crisis could unfold. The model assigns odds to each one, tracks the
+              emergency reserve, and keeps a record of its predictions so you can see how they
+              hold up.
             </p>
           </div>
           <p class="mt-4 font-mono text-xs text-faint tabular">
@@ -358,8 +447,8 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           <h2 class="text-2xl font-bold tracking-tight">Supply</h2>
           <p class="mt-3 max-w-3xl text-[13px] leading-relaxed text-ink/70">
             When the world uses more oil than it produces, the difference comes out of storage.
-            These charts show how much oil has been withdrawn, how much is left, and how long the
-            US emergency reserve could last under each of the model's three scenarios.
+            These charts show how much oil has been withdrawn, how much is left, and where the
+            US emergency reserve stands against its operating thresholds.
           </p>
         </div>
 
@@ -384,6 +473,84 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           (Jan–Aug actuals; the EIA's forecast tail is not shown) · the physical loss peaked at 11.2M b/d of Gulf
           shut-in in May — demand destruction and non-Gulf supply absorbed most of it · the IEA's observed-inventories count: 507 mb drawn since February —
           2.8 mb/d on average, 95 mb of it in August alone.
+        </p>
+
+        <!-- Panel A: OECD commercial stocks (levels) -->
+        <div class="mt-12 mb-3">
+          <h2 class="text-xl font-bold tracking-tight">Where OECD oil stocks stand</h2>
+          <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
+            Countries in the OECD — the US, Canada, Mexico, Japan, Korea, Australia, and most of
+            Western Europe — hold on-land stocks of crude and products as a buffer against supply
+            disruption, in tanks, depots, and caverns, held by commercial operators and by
+            governments alike. China isn't a member, so its stockpiles don't count here.
+          </p>
+          <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
+            May 2026, the latest month, is the lowest in the EIA's series back to January 2021,
+            and in { wsBelowBandStr } 2026 the level sat below the bottom of the band — the
+            range the same calendar month took over 2021–2025. The inset shows the IEA's
+            quarter-end stocks in days of forward demand; the lowest, 86 days at end-June 2022,
+            is the lowest quarter-end the free editions cover (third quarter 2020 onward) — a
+            reference point, not a physical floor.
+          </p>
+        </div>
+        <div class="h-80 sm:h-[400px]">
+          <canvas id="oecdStocksChart" role="img" aria-label={ wsPanelAAria }></canvas>
+        </div>
+        <div class="mt-4 h-40 sm:h-44">
+          <canvas id="oecdDaysChart" role="img" aria-label={ wsPanelDaysAria }></canvas>
+        </div>
+        <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+          OECD on-land oil stocks (commercial + government-controlled), million barrels. Main: EIA international dataset, monthly, Jan 2021–May 2026; band: same-calendar-month range, 2021–2025, extended across 2026. Inset: IEA Oil Market Report Table 5 quarter-ends in days of forward demand — how long the stocks would last at the coming quarter's pace of use; latest edition per point, dated in tooltips; end-Q1 2026 (hollow) is computed from the IEA's forecast demand. The IEA's Table 4 publishes commercial-only stocks monthly, but each edition covers just the last five months, so a full commercial-only history would take many editions to assemble. War begins Feb 28, 2026.
+        </p>
+
+        <!-- Panel B: cumulative change in global observed stocks -->
+        <div class="mt-12 mb-3">
+          <h2 class="text-xl font-bold tracking-tight">How the global observed stock count is moving</h2>
+          <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
+            The IEA also keeps a wider count: the stocks covered by its global inventory
+            estimates — commercial and government stocks on land, plus the oil on tankers and in
+            transit, across the countries it reports on. Since the war began in late February it
+            has reported the change month by month: the bars are each month as published, the
+            dots the cumulative totals, the zero line the end-of-February level.
+          </p>
+          <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
+            You'll notice the bars don't add up to the last dot. That's not an error in the
+            chart: each monthly figure and each cumulative total comes from a different edition
+            of the report, and editions revise earlier months. The bars sum to { wsBarSumStr } and the
+            latest published cumulative is { wsCumLastStr }; we show both, as published, and
+            don't reconcile the gap.
+          </p>
+          <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
+            Past the reported months, five paths run on the same axis, all anchored at the { wsFcAnchorStr } cumulative
+            recorded at the end of { wsFcAnchorMonthStr }. The gray dashed line is the EIA Short-Term Energy
+            Outlook (Sep 9, 2026 release): world production
+            minus consumption, implying inventory change through December 2027. The dotted line
+            is a persistence baseline — the June–August 2026 average
+            ({ wsPersMonthlyStr } mb a month) repeated, a comparison
+            device, not a forecast. Both are global — this panel's pool, not Panel A's OECD series —
+            and the EIA balance covers a wider pool than the IEA's observed stocks.
+          </p>
+          <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
+            The three colored paths are conditional scenarios built by adjusting the same EIA
+            baseline month by month; every adjustment, its reasoning, and the scoring rules are
+            published on <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/model/">the model page</a>. They carry the crisis
+            model's Sep 16 odds — corridor holds { wsScenarioMeta["corridor-holds"].odds },
+            standoff { wsScenarioMeta["standoff"].odds }, corridor lapses { wsScenarioMeta["corridor-lapses"].odds } —
+            how likely each future was judged on that date, not what the chart predicts. They are
+            not bands: three different futures, each scored later against whatever the IEA
+            actually reports. The corridor-lapses path ends in { wsLapseEndMonthStr }, at its stated
+            validity horizon — this version's assumptions are carried only that far — and it is not
+            stopped because it crosses any historical low. None of the paths counts government
+            stock releases as a loss: a release moves barrels between holders, not out of the total.
+            All five paths track the combined crude + products balance; they don't separate crude
+            from usable fuel, so they can't test a fuel-shortage story.
+          </p>
+        </div>
+        <div class="h-80 sm:h-[380px]">
+          <canvas id="globalObservedChart" role="img" aria-label={ wsPanelBAria }></canvas>
+        </div>
+        <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+          Global observed oil stocks (the stocks covered by the IEA's global inventory estimates; on land + on water), change in million barrels. Bars: monthly change as published in each month's OMR edition (editions of Apr–Sep 2026; April's first report of −117 was revised to −74; the May bar is preliminary, drawn hollow). Dots: the cumulative total since end-Feb 2026, as published in separate editions (May, Aug, Sep 2026; the May edition's PDF prints 246 for Mar–Apr where its web page says 250 — the web figure is plotted). Bars sum to { wsBarSumStr } mb ({ wsChangeList }); latest published cumulative { wsCumLastStr } mb — different editions, not reconciled. Forecast paths (hollow markers, from the { wsFcAnchorStr } anchor recorded for { wsFcAnchorMonthStr }): dashed = EIA STEO balance-implied world inventory change, Sep 9, 2026 release, { wsEiaDec26Str } mb by Dec 2026, { wsEiaDec27Str } mb by Dec 2027; dotted = persistence baseline at { wsPersMonthlyStr } mb/month, { wsPersDec27Str } mb by Dec 2027. Colored scenario paths (thin, hollow markers, from the same anchor; full assumptions in world-stocks-assumptions.json): solid = corridor holds, { wsHoldsEndStr } mb by Dec 2027; short-dashed = standoff, { wsStandoffEndStr } mb by Dec 2027; long-dashed = corridor lapses, { wsLapseEndStr } mb by { wsLapseEndMonthStr } — the path ends at its stated validity horizon, not at a historical low. The IEA's free Sep 2026 summary publishes no quarterly balance path, so no IEA forecast line is drawn (its full edition is expected to become public around Dec 11, 2026, under the IEA's three-month public delay). Methodology, assumptions, and scoring: the model page.
         </p>
 
         <div class="mt-12 grid gap-8 lg:grid-cols-[300px_1fr]">
@@ -457,17 +624,16 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             </h3>
             <p id="sprChartAssumptions" class="mt-1.5 text-[13px] leading-relaxed text-ink/70">
               The Department of Energy releases oil from the SPR through contracts and scheduled
-              deliveries. A supply shortage doesn't automatically trigger withdrawals.
-              The dashed lines start at the Sep 11 level and assume withdrawals continue at
-              0.45M, 0.70M, or 1.35M barrels a day. The latest reported week averaged about
-              60,000 barrels a day. The shipping odds don't tell you how likely the reserve
-              is to reach the projected levels by those dates.
+              deliveries. A supply shortage doesn't automatically trigger withdrawals, and once
+              the current program's deliveries end, DOE would have to arrange further releases
+              for withdrawals to continue. The latest reported week averaged about 60,000
+              barrels a day, so the pace can change with each release decision.
             </p>
           </div>
         </div>
         <!-- SPR chart (full width) -->
         <div class="relative h-96">
-            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 285.0 million on Sep 11. Three illustrative paths to March 2027 assume continuing withdrawals at 0.45, 0.70, and 1.35 million barrels per day; model thresholds at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
+            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 285.0 million on Sep 11. Model thresholds at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
             <div
               id="sprFloorTip"
               class="pointer-events-none absolute z-10 hidden max-w-[300px] border border-rule bg-[rgba(255,255,248,0.97)] px-3 py-2 text-[12px] leading-snug text-ink shadow-sm"
@@ -504,8 +670,9 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           <p class="font-mono text-[11px] text-faint">Estimated shipping odds, updated when specified events occur.</p>
         </div>
         <p class="mb-5 max-w-3xl text-sm leading-relaxed text-ink/80">
-          These odds describe what could happen to shipping. Each reserve path assumes a steady
-          withdrawal rate, which depends on government releases and deliveries continuing.
+          These odds describe what could happen to shipping. They don't set a pace for the
+          reserve — withdrawals depend on government release decisions, contracts, and delivery
+          schedules.
         </p>
         <div class="space-y-3">
           {branchWeights.slice().reverse().map((b) => (
@@ -628,8 +795,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             Large withdrawals began on Apr 3, when the reserve held 413.3 million barrels.
             They reached about 1.2 million barrels per day in May. In the week ending Sep 11,
             withdrawals totaled about 0.4 million barrels, or roughly 60,000 a day. Weekly withdrawals
-            slowed for a third straight week, from 3.1M to 1.2M to 0.4M barrels. The daily rate
-            is far below the 0.45 million barrels assumed in the corridor-holds scenario.
+            slowed for a third straight week, from 3.1M to 1.2M to 0.4M barrels.
           </p>
           <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
             US diesel and heating-oil stocks were 13.5% below a year earlier on Sep 11,
@@ -653,7 +819,7 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         <div>
           <h2 class="mb-4 text-xl font-bold tracking-tight">How quickly the reserve is shrinking</h2>
           <p class="mb-4 text-[13px] leading-relaxed text-faint">
-            The latest withdrawal rate and estimated dates for reaching the reserve thresholds,
+            The latest withdrawal rate and the distance to the reserve thresholds,
             using the EIA's Sep 16 report for the week ending Sep 11.
           </p>
           <div class="space-y-6">
@@ -678,25 +844,26 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
               </div>
             </div>
 
-            <!-- Quadrant: 250M floor date, most likely path -->
+            <!-- Quadrant: distance to the reserve thresholds (no projected dates) -->
             <div class="flex flex-col justify-between border border-rule p-5">
               <div>
-                <p class="text-sm font-semibold leading-snug text-ink">250M barrels if withdrawals average 1.35M a day</p>
+                <p class="text-sm font-semibold leading-snug text-ink">Distance to the reserve thresholds</p>
                 <p class="tabular mt-2 font-mono text-3xl font-semibold text-alarm">
-                  ≈ {floorLapse250}<span class="ml-1 text-sm font-medium text-ink/60">2026</span>
-                </p>
-                <p class="mt-2 text-sm font-medium leading-relaxed text-ink">
-                  This date assumes continuing releases. Withdrawals could pause.
+                  35.0<span class="ml-1 text-sm font-medium text-ink/60">M barrels to 250M</span>
                 </p>
                 <p class="mt-2 text-xs leading-relaxed text-ink/75">
-                  Starting from the reported 285.0M barrels on Sep 11, the corridor-lapse path
-                  uses 1.35M barrels a day. At the standoff path's assumed 0.70M a day,
-                  the same threshold would be reached on {floor250}.
+                  Measured from the reported 285.0M barrels on Sep 11. 250M is the operational
+                  minimum cited by the reserve's operators; 180M is the hard operating limit
+                  (105.0M away).
+                </p>
+                <p class="mt-2 text-sm font-medium leading-relaxed text-ink">
+                  There's no projected date. Withdrawals run through DOE contracts and
+                  scheduled deliveries, and they could pause.
                 </p>
               </div>
               <p class="border-t border-rule/70 pt-2 text-[11px] leading-relaxed text-faint">
-                At those same assumed rates, 180M barrels would be reached around {floorLapse180}
-                (1.35M a day) or {floor180} (0.70M a day).
+                The first report below the 300M cavern threshold was for the week ending Aug 7,
+                at 298.7M barrels.
               </p>
             </div>
           </div>
@@ -1074,12 +1241,18 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         brentYtd, wtiWeekly, gasolineYtd, gasolinePreCrisis, dieselYtd, dieselOldRecord,
         gasTtf, gasJkm, gasPreClosure,
         treasury10y, treasuryPreWar, treasuryTestLevel, cpiYtd, ppiYtd, fedCpiTarget,
-        sprWeekly, sprFloors, sprScenarios, worldBalance,
+        sprWeekly, sprFloors, worldBalance,
         russiaCapacityAnchors, russiaCurrentSpread, recessionOdds, foodLagBars,
         usRefineryUtil2026, usRefineryUtil2025,
         commercialCrude2026, commercialCrude2025,
         worldConsumption2025, worldConsumption2026,
       } from "../data/crisis";
+      // World stocks panels: provenance per point lives in this file (see research/world-stocks-research.md)
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      import ws from "../data/world-stocks.json";
+      // Scenario colors/names live in the assumptions file (single source for both).
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      import worldStocksAssumptions from "../data/world-stocks-assumptions.json";
 
       // ---- Tufte chart treatment (tufte-data-viz skill) ----
       // No legends (direct labels), no gridlines (hover crosshair), no animation,
@@ -1104,11 +1277,12 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         border: { display: true, color: "#d8d4c6", width: 0.5 },
         ticks: { color: "#8a867a", padding: 8 },
       };
-      const yScale = (min: number, max: number, fmtTick: (v: unknown) => string, limit?: number) => ({
+      const yScale = (min: number, max: number, fmtTick: (v: unknown) => string, limit?: number, title?: string) => ({
         min, max,
         grid: { display: false },
         border: { display: false },
         ticks: { color: "#8a867a", padding: 8, maxTicksLimit: limit, callback: fmtTick },
+        ...(title ? { title: { display: true, text: title, color: "#8a867a", font: { size: 10 } } } : {}),
       });
 
       // Hover crosshair — replaces permanent gridlines
@@ -2497,31 +2671,17 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         ],
       });
 
-      // SPR: full 2026 weekly actuals + scenario paths + floors
+      // SPR: full 2026 weekly actuals + reserve-threshold (floor) lines
       // Plain-language explanations for the four red floor lines — shown in an HTML
       // tooltip when the cursor is within a few pixels of a line (below).
       const floorExplains: Record<number, string> = {
         300: "300M — the model's cavern-damage threshold. Below it, caverns can't safely be refilled after withdrawals. First report below this level: week ending Aug 7.",
-        250: "250M — the model's operational threshold. The dates assume continuing withdrawals: early October at 1.35M barrels a day, or late October at 0.70M. Actual deliveries could pause.",
+        250: "250M — the operational minimum cited by the reserve's operators. No projected date: withdrawals run through DOE contracts and scheduled deliveries, and they could pause.",
         180: "180M — hard operable limit",
         70: "70M — the DOE's stated safe minimum: the draw stops here, it does not continue",
       };
-      // Projected week-ending dates: derive from the last reported week (so a new WPSR
-      // shifts them automatically) and format in UTC at noon so the label is identical
-      // in every viewer's timezone.
-      const futureWeeks: string[] = [];
-      const _lastWeekEnd = Date.parse(sprWeekly[sprWeekly.length - 1].date + "T12:00:00Z");
-      for (let w = 1; w <= 26; w++) {
-        const d = new Date(_lastWeekEnd + w * 7 * 86400000);
-        futureWeeks.push(d.toLocaleDateString("en-US", { timeZone: "UTC", month: "short", day: "numeric" }));
-      }
-      const sprLabels = [...sprWeekly.map((p) => fmt(p.date)), ...futureWeeks];
+      const sprLabels = sprWeekly.map((p) => fmt(p.date));
       const anchorIdx = sprWeekly.length - 1;
-      // Scenario paths are clamped at the 70M DOE floor — the draw stops there, it does not continue.
-      const scenarioLine = (rate: number) =>
-        sprLabels.map((_, i) =>
-          i <= anchorIdx ? (i === anchorIdx ? sprWeekly[anchorIdx].level : null) : Math.max(70, sprWeekly[anchorIdx].level - rate * 7 * (i - anchorIdx))
-        );
       const sprChart = new Chart(document.getElementById("sprChart")!, {
         type: "line",
         data: {
@@ -2529,22 +2689,13 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           datasets: [
             {
               label: "Actual (EIA weekly)",
-              data: [...sprWeekly.map((p) => p.level), ...sprLabels.slice(anchorIdx + 1).map(() => null)],
+              data: sprWeekly.map((p) => p.level),
               borderColor: "#1c1b17",
               borderWidth: 2,
               pointRadius: 0,
               tension: 0.1,
               spanGaps: false,
             },
-            ...sprScenarios.map((s, i) => ({
-              label: s.name,
-              data: scenarioLine(s.rate),
-              borderColor: ["#3d6b64", "#b4690e", "#b3261e"][i],
-              borderDash: [5, 4],
-              borderWidth: 1.5,
-              pointRadius: 0,
-              spanGaps: false,
-            })),
             ...sprFloors.map((f) => ({
               label: f.name,
               data: sprLabels.map(() => f.level),
@@ -2565,16 +2716,10 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
           scales: { y: yScale(60, 430, (v) => `${v}M`, 8), x: { ...xScale, ticks: { ...xScale.ticks, maxTicksLimit: 10 } } },
           plugins: {
             tooltip: {
-              // Actuals in the past; projected levels on the scenario paths in the future.
-              // (mode: "index" — hovering any week column lists every live line there; the
-              // scenario datasets are null before the anchor, so past weeks show the actual only.)
               // The red floor lines carry their own hover message (the #sprFloorTip div, below).
-              filter: (item) => item.datasetIndex < 4,
+              filter: (item) => item.datasetIndex === 0,
               callbacks: {
-                label: (ctx) =>
-                  ctx.datasetIndex === 0
-                    ? ` ${ctx.parsed.y.toFixed(1)}M bbl (EIA weekly)`
-                    : ` ${ctx.parsed.y.toFixed(1)}M bbl (projected — ${sprScenarios[ctx.datasetIndex - 1].name})`,
+                label: (ctx) => ` ${ctx.parsed.y.toFixed(1)}M bbl (EIA weekly)`,
               },
             },
           },
@@ -2589,12 +2734,8 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
             { value: 70, text: "70 · DOE floor", color: "rgba(179,38,30,0.6)", align: "left" },
           ]),
           directLabels([
-            // Actuals endpoint (the anchor where scenarios begin)
+            // Actuals endpoint
             { dataset: 0, index: anchorIdx, text: "285.0M · Sep 11", align: "right", dx: -12, dy: 16, font: "600 11.5px Georgia, serif" },
-            // Scenario paths labeled at their ~March 2027 endpoints
-            { dataset: 1, index: sprLabels.length - 1, text: "holds → 203M", align: "right", dx: -10, dy: 0, font: "11.5px Georgia, serif", color: "#3d6b64" },
-            { dataset: 2, index: sprLabels.length - 1, text: "standoff → 158M", align: "right", dx: -10, dy: 0, font: "11.5px Georgia, serif", color: "#b4690e" },
-            { dataset: 3, index: sprLabels.length - 1, text: "lapse → 70M floor", align: "right", dx: -10, dy: -14, font: "11.5px Georgia, serif", color: "#b3261e" },
           ]),
         ],
       });
@@ -2639,10 +2780,541 @@ const floorLapse180 = `${fmtFloor(sprLapse180Date)}, ${sprLapse180Date.getFullYe
         canvas.addEventListener("mouseleave", () => tip.classList.add("hidden"));
       }
 
+      // Panel A: OECD on-land stocks (commercial + government-controlled) — EIA monthly
+      // levels (mb, left axis) + IEA quarter-end days of forward demand (right axis) +
+      // same-calendar-month 2021–2025 range (extended across 2026). Reported observations
+      // except the end-Q1 2026 days value (computed from forecast demand → hollow). The
+      // x-axis ends where the data ends (May 2026); later months were unavailable in the
+      // sources retrieved.
+      {
+        const months: string[] = ws.series.oecd_onland_mb.points.map((p) => p.period);
+        const mbVals: number[] = ws.series.oecd_onland_mb.points.map((p) => p.value);
+        const band = ws.annotations.seasonal_band_2021_2025.by_month as Record<string, [number, number]>;
+        const bandAt = (i: number): [number, number] | null => {
+          const y = Number(months[i].slice(0, 4));
+          // The band is the same calendar month's 2021–2025 range; it is applied to the
+          // 2026 months too, because that's where the comparison matters most.
+          return y >= 2021 && y <= 2026 ? band[months[i].slice(5)] : null;
+        };
+        const bandUpper = months.map((_, i) => bandAt(i)?.[1] ?? null);
+        const bandLower = months.map((_, i) => bandAt(i)?.[0] ?? null);
+        // IEA quarter-ends map onto month-end labels (Mar/Jun/Sep/Dec); 2020Q3–Q4 predate the axis.
+        const daysPts = ws.series.oecd_days_cover_quarterly.points;
+        const daysVals: (number | null)[] = months.map(() => null);
+        for (const p of daysPts) {
+          const i = months.indexOf(p.period.slice(0, 7));
+          if (i >= 0) daysVals[i] = p.value;
+        }
+        // Keyed by YYYY-MM (the axis labels) — the stored periods are full YYYY-MM-DD.
+        const daysIdxByPeriod = new Map(daysPts.map((p, i) => [p.period.slice(0, 7), i] as const));
+        const q1_2026_i = months.indexOf("2026-03"); // the days point computed from forecast demand
+        const warIdx = months.indexOf("2026-02");
+        const warLine = {
+          id: "warLine",
+          afterDatasetsDraw(chart: Chart) {
+            const x = chart.scales.x.getPixelForValue(warIdx);
+            const { top, bottom } = chart.chartArea;
+            const { ctx } = chart;
+            ctx.save();
+            ctx.strokeStyle = "rgba(179,38,30,0.45)";
+            ctx.setLineDash([4, 4]);
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(x, top);
+            ctx.lineTo(x, bottom);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.fillStyle = "#b3261e";
+            ctx.font = "italic 10.5px Georgia, serif";
+            // Left of the line so the text stays inside the canvas at narrow widths.
+            ctx.textAlign = "right";
+            ctx.fillText("War begins", x - 6, top + 10);
+            ctx.restore();
+          },
+        };
+        const mLabel = (m: string) =>
+          new Date(m + "-15T12:00:00").toLocaleDateString("en-US", { month: "short", year: "2-digit" });
+        new Chart(document.getElementById("oecdStocksChart")!, {
+          type: "line",
+          data: {
+            labels: months,
+            datasets: [
+              {
+                label: "2021–2025 range (upper)",
+                data: bandUpper,
+                borderColor: "rgba(0,0,0,0)",
+                borderWidth: 0,
+                pointRadius: 0,
+              },
+              {
+                label: "2021–2025 range",
+                data: bandLower,
+                borderColor: "rgba(0,0,0,0)",
+                borderWidth: 0,
+                pointRadius: 0,
+                fill: { target: 0, color: "rgba(180,105,14,0.08)" },
+              },
+              {
+                label: "OECD on-land stocks (mb)",
+                data: mbVals,
+                borderColor: "#1c1b17",
+                borderWidth: 2,
+                pointRadius: 2,
+                pointBackgroundColor: "#1c1b17",
+                tension: 0.1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "index", axis: "x", intersect: false },
+            layout: { padding: { top: 18, right: 8 } },
+            scales: {
+              y: yScale(3750, 4650, (v) => `${v}`, 5, "million barrels"),
+              x: {
+                grid: { display: false },
+                border: { display: true, color: "#d8d4c6", width: 0.5 },
+                ticks: {
+                  color: "#8a867a",
+                  padding: 8,
+                  maxTicksLimit: 8,
+                  autoSkip: false,
+                  callback: (_v: unknown, i: number) => (Number(months[i].slice(5)) === 1 ? mLabel(months[i]) : ""),
+                },
+              },
+            },
+            plugins: {
+              tooltip: {
+                filter: (item) => item.datasetIndex >= 2,
+                callbacks: {
+                  title: (items) => {
+                    const m = months[items[0].dataIndex];
+                    return new Date(m + "-15T12:00:00").toLocaleDateString("en-US", { month: "long", year: "numeric" });
+                  },
+                  label: (ctx) => ` On-land stocks: ${Number(ctx.parsed.y).toLocaleString()} mb (EIA monthly, retrieved Sep 17 2026)`,
+                },
+              },
+            },
+          },
+          plugins: [
+            crosshair,
+            warLine,
+            directLabels([
+              { dataset: 2, index: mbVals.length - 1, text: `${mbVals[mbVals.length - 1].toLocaleString()} — lowest since Jan 2021`, align: "right", dx: -8, dy: 18 },
+            ]),
+          ],
+        });
+
+        // Inset: IEA quarter-end stocks in days of forward demand. A separate chart keeps
+        // its labels off the million-barrel chart (they collided on the dual axis at
+        // narrow widths). The end-Q1 2026 value is computed from the IEA's forecast demand
+        // (Table 5 footnotes) — hollow per the estimate convention.
+        new Chart(document.getElementById("oecdDaysChart")!, {
+          type: "line",
+          data: {
+            labels: months,
+            datasets: [
+              {
+                label: "Days of forward demand (IEA, quarter-ends)",
+                data: daysVals,
+                borderColor: "#3d6b64",
+                borderWidth: 1.5,
+                pointRadius: 3,
+                pointBackgroundColor: daysVals.map((_, i) => (i === q1_2026_i ? "#f2f1ec" : "#3d6b64")),
+                pointBorderColor: "#3d6b64",
+                spanGaps: false,
+                tension: 0.1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "index", axis: "x", intersect: false },
+            layout: { padding: { top: 16, right: 8 } },
+            scales: {
+              y: yScale(80, 112, (v) => `${v}`, 4, "days"),
+              x: {
+                grid: { display: false },
+                border: { display: true, color: "#d8d4c6", width: 0.5 },
+                ticks: {
+                  color: "#8a867a",
+                  padding: 8,
+                  maxTicksLimit: 8,
+                  autoSkip: false,
+                  callback: (_v: unknown, i: number) => (Number(months[i].slice(5)) === 1 ? mLabel(months[i]) : ""),
+                },
+              },
+            },
+            plugins: {
+              tooltip: {
+                filter: (item) => item.parsed.y != null,
+                callbacks: {
+                  title: (items) => {
+                    const m = months[items[0].dataIndex];
+                    return new Date(m + "-15T12:00:00").toLocaleDateString("en-US", { month: "long", year: "numeric" });
+                  },
+                  label: (ctx) => {
+                    const pt = daysPts[daysIdxByPeriod.get(months[ctx.dataIndex])];
+                    if (!pt) return null;
+                    const flag = pt.status === "derived" ? " — computed from IEA forecast demand" : "";
+                    return ` Days of forward demand: ${pt.value}${flag} (${pt.published})`;
+                  },
+                },
+              },
+            },
+          },
+          plugins: [
+            crosshair,
+            warLine,
+            directLabels([
+              { dataset: 0, index: months.indexOf("2021-06"), text: "days of demand — IEA quarter-ends", align: "left", dx: 6, dy: -14, color: "#3d6b64" },
+              { dataset: 0, index: months.indexOf("2022-06"), text: "86 days — lowest, 2020Q3–2026Q1", align: "center", dy: -18, color: "#3d6b64" },
+              { dataset: 0, index: q1_2026_i, text: "91 (end-Q1 2026, forecast demand)", align: "right", dx: -8, dy: 18, color: "#3d6b64" },
+            ]),
+          ],
+        });
+      }
+
+      // Panel B: change in the stocks covered by the IEA's global inventory estimates,
+      // since end-Feb 2026. Bars = each month's change as published (May is preliminary →
+      // hollow). Dots = the published cumulative totals, plotted as isolated markers — the
+      // IEA published none for May/June, so no line is drawn through unobserved months. The
+      // bars do NOT sum to the latest cumulative (the figures come from different editions);
+      // that's recorded in the data file, not hidden, and not reconciled.
+      // Phase 2: the axis extends to Dec 2027 with two forecast paths — the EIA STEO
+      // balance-implied world inventory change (dashed) and a persistence baseline (dotted),
+      // both anchored at the last published cumulative (end-Aug 2026). Thin gray lines with
+      // hollow markers: the forecasts are never styled more prominently than reported values.
+      {
+        const chg = ws.series.global_observed_month_change_mb.points;
+        const cumAll = ws.series.global_observed_cumulative_mb.points.filter((p) => p.value !== null);
+        const eiaRec = (ws as any).forecast_records.find((r: any) => r.record_id === "steo-2026-09-global-observed");
+        const persRec = (ws as any).forecast_records.find((r: any) => r.record_id === "persistence-2026-09-global-observed");
+        // Phase 3 scenario records + colors (from the assumptions file's scenario list).
+        const scColor = (id: string) => (worldStocksAssumptions as any).scenarios.find((s: any) => s.id === id)?.color ?? "#8a867a";
+        const scName = (id: string) => (worldStocksAssumptions as any).scenarios.find((s: any) => s.id === id)?.name ?? id;
+        // Active scenario version — same rule as the page frontmatter and the drift
+        // checker: the newest version date among the scenario record ids.
+        const activeVersion = (ws as any).forecast_records
+          .filter((r: any) => typeof r.record_id === "string" && r.record_id.startsWith("scenario-"))
+          .reduce((max: string, r: any) => {
+            const m = r.record_id.match(/-(\d{4}-\d{2}-\d{2})-global-observed$/);
+            return m && m[1] > max ? m[1] : max;
+          }, "");
+        const scHoldsRec = (ws as any).forecast_records.find((r: any) => r.record_id === `scenario-corridor-holds-${activeVersion}-global-observed`);
+        const scStandoffRec = (ws as any).forecast_records.find((r: any) => r.record_id === `scenario-standoff-${activeVersion}-global-observed`);
+        const scLapseRec = (ws as any).forecast_records.find((r: any) => r.record_id === `scenario-corridor-lapses-${activeVersion}-global-observed`);
+        // Axis: the union of observed months, published cumulative months, the records'
+        // anchors, and every forecast target month — sorted and unique. A new observation
+        // (e.g. Sep 2026) extends the axis in place instead of duplicating a month or
+        // shifting a forecast under the wrong label.
+        const axisSet = new Set<string>();
+        for (const p of chg) axisSet.add(p.period);
+        for (const p of cumAll) axisSet.add(p.period);
+        for (const rec of [eiaRec, persRec, scHoldsRec, scStandoffRec, scLapseRec]) {
+          axisSet.add(rec.anchor.period);
+          for (const t of rec.targets) axisSet.add(t.period);
+        }
+        const labelsB = [...axisSet].sort();
+        const axisIdx = (m: string) => labelsB.indexOf(m);
+        const chgByPeriod = new Map(chg.map((p) => [p.period, p] as const));
+        const cumByPeriod = new Map(cumAll.map((p) => [p.period, p] as const));
+        // Every observation is matched to the axis by period — never by array position.
+        const bars: (number | null)[] = labelsB.map((m) => chgByPeriod.get(m)?.value ?? null);
+        const prelimPeriod = chg.find((p) => p.status === "reported_preliminary")?.period;
+        const prelimIdx = prelimPeriod ? axisIdx(prelimPeriod) : -1;
+        const cumVals: (number | null)[] = labelsB.map((m) => cumByPeriod.get(m)?.value ?? null);
+        // Forecast paths from the records (the stored targets are the source of truth):
+        // each target on its own period, the anchor on the record's STORED anchor
+        // period and value — never "the last cumulative point", so a revised or newly
+        // published observation can never move the path.
+        const fcLine = (rec: any): (number | null)[] =>
+          labelsB.map((m) => {
+            const t = rec.targets.find((t: any) => t.period === m);
+            if (t) return t.target_cumulative_mb;
+            if (m === rec.anchor.period) return rec.anchor.value_mb;
+            return null;
+          });
+        const eiaLine = fcLine(eiaRec);
+        const persLine = fcLine(persRec);
+        const holdsLine = fcLine(scHoldsRec);
+        const standoffLine = fcLine(scStandoffRec);
+        const lapseLine = fcLine(scLapseRec);
+        // Divider position by date: between the last observed month and the next one.
+        const lastObserved = labelsB.filter((m) => chgByPeriod.has(m)).pop();
+        const boundaryIdx = lastObserved ? axisIdx(lastObserved) : -1;
+        // On narrow screens the reported bars compress into the left of the axis and
+        // their value labels would collide, so the per-bar labels are omitted there; the caption
+        // lists all six monthly values and the tooltip still reports them on tap.
+        const isNarrow = (document.getElementById("globalObservedChart")?.clientWidth ?? 600) < 560;
+        const signFmt = (v: number) => `${v > 0 ? "+" : "−"}${Math.abs(Math.round(v)).toLocaleString()}`;
+        // Vertical divider between the reported and projected regions (positioned by date).
+        const reportedBoundary = {
+          id: "reportedBoundary",
+          afterDatasetsDraw(chart: Chart) {
+            if (boundaryIdx < 0 || boundaryIdx >= labelsB.length - 1) return;
+            const { ctx, chartArea, scales } = chart;
+            const x = (scales.x.getPixelForValue(boundaryIdx) + scales.x.getPixelForValue(boundaryIdx + 1)) / 2;
+            ctx.save();
+            ctx.strokeStyle = "rgba(28,27,23,0.35)";
+            ctx.lineWidth = 1;
+            ctx.setLineDash([4, 4]);
+            ctx.beginPath();
+            ctx.moveTo(x, chartArea.top);
+            ctx.lineTo(x, chartArea.bottom);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.font = "10px Georgia, serif";
+            ctx.fillStyle = "#8a867a";
+            ctx.textBaseline = "top";
+            ctx.textAlign = "right";
+            ctx.fillText("reported", x - 6, chartArea.top + 4);
+            ctx.textAlign = "left";
+            ctx.fillText("projected", x + 6, chartArea.top + 4);
+            ctx.restore();
+          },
+        };
+        new Chart(document.getElementById("globalObservedChart")!, {
+          type: "bar",
+          data: {
+            labels: labelsB,
+            datasets: [
+              {
+                type: "line" as const,
+                label: "End-Feb 2026 level",
+                data: labelsB.map(() => 0),
+                borderColor: "#8a867a",
+                borderWidth: 1,
+                pointRadius: 0,
+                fill: false,
+              },
+              {
+                type: "bar" as const,
+                label: "Monthly change (mb)",
+                data: bars,
+                // May is preliminary per the June 2026 edition → hollow (lighter fill, outline).
+                backgroundColor: bars.map((v, i) =>
+                  v === null ? "transparent" : i === prelimIdx ? "rgba(179,38,30,0.25)" : (v >= 0 ? "rgba(61,107,100,0.75)" : "rgba(179,38,30,0.6)")),
+                borderColor: bars.map((_, i) => (i === prelimIdx ? "#b3261e" : "rgba(0,0,0,0)")),
+                borderWidth: 1,
+                barPercentage: 0.55,
+                categoryPercentage: 0.85,
+              },
+              {
+                type: "line" as const,
+                label: "Cumulative published (mb)",
+                data: cumVals,
+                // Isolated markers: no line, because there is no cumulative observation for
+                // May or June — connecting them would draw a line through unobserved months.
+                showLine: false,
+                pointRadius: 5,
+                pointHoverRadius: 5,
+                pointBackgroundColor: "#1c1b17",
+                pointBorderColor: "#1c1b17",
+              },
+              {
+                type: "line" as const,
+                label: "EIA STEO balance-implied (mb)",
+                data: eiaLine,
+                borderColor: "#6b675c",
+                borderWidth: 1.5,
+                borderDash: [7, 4],
+                pointRadius: 2.5,
+                pointHoverRadius: 4,
+                pointBackgroundColor: "#faf9f5",
+                pointBorderColor: "#6b675c",
+                pointBorderWidth: 1,
+                tension: 0,
+              },
+              {
+                type: "line" as const,
+                label: "Persistence baseline (mb)",
+                data: persLine,
+                borderColor: "#a39d8f",
+                borderWidth: 1.2,
+                borderDash: [2, 3],
+                pointRadius: 2,
+                pointHoverRadius: 3.5,
+                pointBackgroundColor: "#faf9f5",
+                pointBorderColor: "#a39d8f",
+                pointBorderWidth: 1,
+                tension: 0,
+              },
+              // Phase 3 conditional scenarios: the site's scenario colors, thin lines with
+              // hollow markers — model paths, never styled above the reported values.
+              // Distinguishable patterns, not color alone: solid / short dash / long dash.
+              {
+                type: "line" as const,
+                label: `Corridor holds (mb)`,
+                data: holdsLine,
+                borderColor: scColor("corridor-holds"),
+                borderWidth: 1.2,
+                pointRadius: 2,
+                pointHoverRadius: 3.5,
+                pointBackgroundColor: "#faf9f5",
+                pointBorderColor: scColor("corridor-holds"),
+                pointBorderWidth: 1,
+                tension: 0,
+              },
+              {
+                type: "line" as const,
+                label: `Standoff (mb)`,
+                data: standoffLine,
+                borderColor: scColor("standoff"),
+                borderWidth: 1.2,
+                borderDash: [5, 3],
+                pointRadius: 2,
+                pointHoverRadius: 3.5,
+                pointBackgroundColor: "#faf9f5",
+                pointBorderColor: scColor("standoff"),
+                pointBorderWidth: 1,
+                tension: 0,
+              },
+              {
+                type: "line" as const,
+                label: `Corridor lapses (mb)`,
+                data: lapseLine,
+                borderColor: scColor("corridor-lapses"),
+                borderWidth: 1.2,
+                borderDash: [10, 4],
+                pointRadius: 2,
+                pointHoverRadius: 3.5,
+                pointBackgroundColor: "#faf9f5",
+                pointBorderColor: scColor("corridor-lapses"),
+                pointBorderWidth: 1,
+                tension: 0,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "index", axis: "x", intersect: false },
+            layout: { padding: { top: 18 } },
+            scales: {
+              y: yScale(-2200, 1400, (v) => `${v}`, 6, "million barrels"),
+              x: {
+                grid: { display: false },
+                border: { display: true, color: "#d8d4c6", width: 0.5 },
+                ticks: {
+                  color: "#8a867a",
+                  padding: 8,
+                  autoSkip: false,
+                  callback: (_v: unknown, i: number) => {
+                    const m = labelsB[i];
+                    const mm = Number(m.slice(5));
+                    if (mm === 1) return `Jan ’${m.slice(2, 4)}`;
+                    if (mm === 4 || mm === 7 || mm === 10)
+                      return new Date(m + "-15T12:00:00").toLocaleDateString("en-US", { month: "short" });
+                    return "";
+                  },
+                },
+              },
+            },
+            plugins: {
+              tooltip: {
+                filter: (item) => item.datasetIndex !== 0 && item.parsed.y !== null,
+                callbacks: {
+                  title: (items) =>
+                    new Date(labelsB[items[0].dataIndex] + "-15T12:00:00").toLocaleDateString("en-US", {
+                      month: "long",
+                      year: "numeric",
+                    }),
+                  label: (ctx) => {
+                    if (ctx.datasetIndex === 1) {
+                      const pt = chgByPeriod.get(labelsB[ctx.dataIndex]);
+                      if (!pt) return null;
+                      const pre = pt.status === "reported_preliminary" ? " (preliminary)" : "";
+                      return ` Monthly change: ${pt.value > 0 ? "+" : ""}${pt.value} mb${pre} (${pt.published})`;
+                    }
+                    if (ctx.parsed.y === null) return null;
+                    if (ctx.datasetIndex === 3)
+                      return ` EIA STEO balance-implied (Sep 9, 2026 release): ${signFmt(ctx.parsed.y)} mb since end-Feb 2026`;
+                    if (ctx.datasetIndex === 4)
+                      return ` Persistence baseline (Jun–Aug 2026 average, repeated): ${signFmt(ctx.parsed.y)} mb since end-Feb 2026`;
+                    if (ctx.datasetIndex >= 5) {
+                      const sid = ["corridor-holds", "standoff", "corridor-lapses"][ctx.datasetIndex - 5];
+                      return ` ${scName(sid)} (model scenario, v2026-09-17, over the Sep 9 EIA baseline): ${signFmt(ctx.parsed.y)} mb since end-Feb 2026`;
+                    }
+                    const pt = cumByPeriod.get(labelsB[ctx.dataIndex]);
+                    if (!pt) return null;
+                    return ` Cumulative since end-Feb: ${pt.value} mb (as published; ${pt.published})`;
+                  },
+                },
+              },
+            },
+          },
+          plugins: [
+            crosshair,
+            reportedBoundary,
+            refLabels([{ value: 0, text: "0 — the end-Feb 2026 level", color: "#8a867a", align: "right" }]),
+            directLabels([
+              ...(isNarrow
+                ? []
+                : chg.map((p) => ({
+                    dataset: 1,
+                    index: axisIdx(p.period),
+                    text: `${p.value >= 0 ? "+" : "−"}${Math.abs(p.value)}`,
+                    dx: 0,
+                    dy: p.value >= 0 ? -12 : 14,
+                    font: "11px Georgia, serif",
+                    color: p.value >= 0 ? "#3d6b64" : "#b3261e",
+                  }))),
+              // Cumulative dots: value only — the x-axis carries the month, the caption the
+              // editions. Right-aligned near the right edge so they stay on the canvas at 390px.
+              ...cumAll.map((p, ci) => {
+                const i = axisIdx(p.period);
+                return {
+                  dataset: 2,
+                  index: i,
+                  text: `${p.value < 0 ? "−" : ""}${Math.abs(p.value)}`,
+                  align: (i >= 4 ? "right" : "left") as "right" | "left",
+                  dx: i >= 4 ? -6 : 6,
+                  // Stagger vertically: with the extended axis the dots are close in
+                  // pixels and equal offsets would collide (Jul/Aug 2026 at 390px).
+                  dy: 18 + (ci % 2) * 20,
+                };
+              }),
+              // Forecast path endpoints — values computed from the data file, never re-typed,
+              // positioned by period, not index.
+              ...(() => {
+                const out: { dataset: number; index: number; text: string; dy: number; color: string; font: string; align?: "right" | "left"; dx?: number }[] = [];
+                const eiaDec26 = eiaRec.targets.find((t: any) => t.period === "2026-12");
+                if (eiaDec26)
+                  out.push({ dataset: 3, index: axisIdx("2026-12"), text: `${signFmt(eiaDec26.target_cumulative_mb)} — EIA (Dec 2026)`, dy: 18, color: "#6b675c", font: "10.5px Georgia, serif" });
+                const eiaEnd = eiaRec.targets[eiaRec.targets.length - 1].period;
+                out.push({ dataset: 3, index: axisIdx(eiaEnd), text: `${signFmt(eiaLine[axisIdx(eiaEnd)]!)} — EIA balance-implied`, align: "right" as "right" | "left", dx: -4, dy: 16, color: "#6b675c", font: "10.5px Georgia, serif" });
+                const persEnd = persRec.targets[persRec.targets.length - 1].period;
+                // Below its point: above would collide with the standoff label (the two
+                // endpoints are ~400 mb apart — 27px at 390px width).
+                out.push({ dataset: 4, index: axisIdx(persEnd), text: `${signFmt(persLine[axisIdx(persEnd)]!)} — persistence (Jun–Aug avg)`, align: "right" as "right" | "left", dx: -4, dy: 18, color: "#a39d8f", font: "10.5px Georgia, serif" });
+                // Scenario endpoints: holds above (top of the right-edge stack), standoff
+                // below, lapse at its validity horizon (mid-chart, Feb 2027). All values
+                // read from the records' stored final targets.
+                const holdsEndP = scHoldsRec.targets[scHoldsRec.targets.length - 1].period;
+                out.push({ dataset: 5, index: axisIdx(holdsEndP), text: `${signFmt(holdsLine[axisIdx(holdsEndP)]!)} — corridor holds`, align: "right" as "right" | "left", dx: -4, dy: -14, color: scColor("corridor-holds"), font: "10.5px Georgia, serif" });
+                const standEndP = scStandoffRec.targets[scStandoffRec.targets.length - 1].period;
+                out.push({ dataset: 6, index: axisIdx(standEndP), text: `${signFmt(standoffLine[axisIdx(standEndP)]!)} — standoff`, align: "right" as "right" | "left", dx: -4, dy: 18, color: scColor("standoff"), font: "10.5px Georgia, serif" });
+                const lapseEndP = scLapseRec.targets[scLapseRec.targets.length - 1].period;
+                // Short text: at 390px the endpoint sits mid-chart and a long right-aligned
+                // label would clip the left edge. The horizon explanation is in the caption.
+                out.push({ dataset: 7, index: axisIdx(lapseEndP), text: `${signFmt(lapseLine[axisIdx(lapseEndP)]!)} — corridor lapses`, align: "right" as "right" | "left", dx: -4, dy: -14, color: scColor("corridor-lapses"), font: "10.5px Georgia, serif" });
+                return out;
+              })(),
+            ]),
+          ],
+        });
+      }
+
       // Register chart instances for QA/debug scripts (harmless in production)
       for (const id of ["brentChart", "gasChart", "dieselChart", "gasTtfChart", "gasJkmChart", "treasury10yChart", "cpiChart"]) {
         (window as any).__charts[id] = Chart.getChart(document.getElementById(id)!);
       }
+      (window as any).__charts["oecdStocksChart"] = Chart.getChart(document.getElementById("oecdStocksChart")!);
+      (window as any).__charts["oecdDaysChart"] = Chart.getChart(document.getElementById("oecdDaysChart")!);
+      (window as any).__charts["globalObservedChart"] = Chart.getChart(document.getElementById("globalObservedChart")!);
     </script>
   </body>
 </html>

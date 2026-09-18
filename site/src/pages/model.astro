@@ -15,20 +15,17 @@ const { Content } = await render(entry);
 
 const last = sprWeekly[sprWeekly.length - 1];
 const odds = branchWeights[branchWeights.length - 1];
-// The strip and glance rail always follow the TOP track (lapse since the Sep 11
-// reweight); if a future reweight changes it, these follow automatically.
-const RATES = { holds: 0.45, standoff: 0.7, lapse: 1.35 } as const;
 const NAMES = { holds: "Corridor holds", standoff: "Standoff", lapse: "Corridor lapses" } as const;
 const topKey = (["holds", "standoff", "lapse"] as const).reduce((a, b) => (odds[b] > odds[a] ? b : a));
-const floorDate = (floor: number, rate: number) =>
-  new Date(Date.parse(last.date) + Math.round((last.level - floor) / rate) * 86400000);
-const top250 = floorDate(250, RATES[topKey]);
-const top180 = floorDate(180, RATES[topKey]);
 const others = (["holds", "standoff", "lapse"] as const).filter((k) => k !== topKey);
 const fmtDate = (d: Date) =>
   d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 const asOf = fmtDate(new Date(`${DATA_AS_OF}T00:00:00Z`));
 const weekEnding = fmtDate(new Date(`${last.date}T00:00:00Z`)).replace(", 2026", "");
+// Distances to the reserve thresholds, from the last reported level (no projected dates:
+// withdrawals run through DOE contracts and scheduled deliveries and can pause).
+const to250 = (last.level - 250).toFixed(1);
+const to180 = (last.level - 180).toFixed(1);
 
 // Stat strip — same structure and type as the dashboard's.
 const strip = [
@@ -48,9 +45,9 @@ const strip = [
     sub: others.map((k) => `${NAMES[k].toLowerCase()} ${odds[k]}%`).join(" · "),
   },
   {
-    label: `250M at an assumed ${RATES[topKey]}M barrels/day`,
-    value: fmtDate(top250),
-    sub: "Assumes continuing releases; actual deliveries could pause.",
+    label: "Distance to the 250M threshold",
+    value: `${to250}M bbl`,
+    sub: `${to180}M bbl to the 180M limit · no projected dates — withdrawals could pause.`,
   },
 ];
 
@@ -58,8 +55,8 @@ const strip = [
 const glance = [
   { label: `Reserve (w/e ${weekEnding})`, value: `${last.level.toFixed(1)}M bbl` },
   { label: "Withdrawals, 4-week avg", value: `${sprDrawPace4w.toFixed(2)}M b/d` },
-  { label: `250M at ${RATES[topKey]}M b/d`, value: `≈ ${fmtDate(top250)}` },
-  { label: `180M at ${RATES[topKey]}M b/d`, value: `≈ ${fmtDate(top180)}` },
+  { label: `To 250M (GEF minimum)`, value: `${to250}M bbl` },
+  { label: `To 180M (operable limit)`, value: `${to180}M bbl` },
   { label: `Shipping odds (${odds.date})`, value: `${odds.holds} / ${odds.standoff} / ${odds.lapse}` },
 ];
 ---
@@ -74,8 +71,9 @@ const glance = [
       How the model works
     </h1>
     <p class="mt-4 max-w-3xl text-[15px] leading-relaxed text-ink/80">
-      How long could stored oil last if the crisis continues? This model explores three
-      possible scenarios and updates the estimates each week with official data. Here's
+      What happens to shipping if the crisis continues? This model assigns odds to three
+      scenarios and updates them with official data. It also tracks the emergency reserve:
+      the reported level, the withdrawal pace, and the distance to each threshold. Here's
       where the numbers come from, how the odds are assigned, and what you should keep
       in mind when reading the results.
     </p>
@@ -93,8 +91,11 @@ const glance = [
   </section>
 
   <!-- Body: prose + sticky marginalia rail -->
-  <div class="grid gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-14">
-    <article class="prose-oil">
+  <!-- minmax(0,1fr) on the mobile track + min-w-0 on the article: wide tables scroll
+       inside their own block (global.css .prose-oil table {display:block; overflow-x:auto})
+       instead of stretching the document past the viewport. -->
+  <div class="grid grid-cols-[minmax(0,1fr)] gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-14">
+    <article class="prose-oil min-w-0">
       <Content />
     </article>
 
@@ -111,9 +112,9 @@ const glance = [
         ))}
       </dl>
       <p class="mt-6 border-t border-rule pt-3 text-xs leading-relaxed text-faint">
-        Both reserve dates assume withdrawals continue at {RATES[topKey]} million barrels
-        a day. The shipping odds are assigned using judgment; they don't measure the
-        likelihood of these dates. The technical specification records the formulas and sources.
+        The shipping odds are assigned using judgment; they don't set a pace for the
+        reserve. How quickly the reserve shrinks depends on release decisions, contracts,
+        and delivery schedules. The technical specification records the formulas and sources.
       </p>
     </aside>
   </div>
