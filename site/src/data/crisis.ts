@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-09-17";
+export const DATA_AS_OF = "2026-09-18";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -21,9 +21,9 @@ export interface SeriesPoint {
 
 // ---------- Headline stats ----------
 export const stats = [
-  { label: "Brent", value: "$105.83", sub: "Sep 16 settlement · −2.7% vs. prior close $108.75 (Sep 15) · +39% vs pre-crisis ~$76" },
-  { label: "US diesel (AAA)", value: "$6.40", sub: "Sep 17 · all-time record $6.3956 · eighth day in a row · +72% vs pre-war $3.72" },
-  { label: "US gasoline (AAA)", value: "$4.44", sub: "Sep 17 · +16¢ in a week (AAA) · +58% vs Jan $2.81" },
+  { label: "Brent", value: "$104.82", sub: "Sep 17 settlement · −1.0% vs. prior close $105.83 (Sep 16) · +38% vs pre-crisis ~$76" },
+  { label: "US diesel (AAA)", value: "$6.45", sub: "Sep 18 · all-time high $6.4476 · ninth consecutive daily record · +73% vs pre-war $3.72" },
+  { label: "US gasoline (AAA)", value: "$4.47", sub: "Sep 18 · +17¢ in a week (AAA) · +59% vs Jan $2.81" },
   { label: "SPR", value: "285.0M", sub: "Sep 11 · down 0.4M in a week · down 130.5M from pre-war 415.4M · lowest since Nov 1982" },
   { label: "US diesel & heating oil", value: "107.9M", sub: "Sep 11 · up 1.6M in a week · 13.5% below last year · East Coast stocks 31% below last year" },
 ];
@@ -48,6 +48,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-09-14", value: 105.68, note: "closing price (Yahoo, corrected Sep 15)" },
   { date: "2026-09-15", value: 108.75, note: "closing price (Yahoo front-month; corrected from $108.50). Before the shutdown, the East–West pipeline carried about 4M barrels a day to Yanbu, according to Reuters. Stored oil at the port was estimated to cover 5–7 days of exports." },
   { date: "2026-09-16", value: 105.83, note: "Settlement down 2.7% (CNBC). Prices fell as the US energy secretary called the pipeline outage 'brief and temporary,' 'measured in days.' Officials and analysts point to weeks; no official damage assessment or repair schedule has been published." },
+  { date: "2026-09-17", value: 104.82, note: "settlement (Yahoo front-month; −1.0% vs Sep 16). A second straight down session in the settlement series as Saudi bypass hopes — the 20M-barrel ship-to-ship sale and pipeline repair targets — eased disruption fears (Reuters/CNBC; CNBC framed it as the 'third day')." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -118,6 +119,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-09-14", value: 101.39, note: "front-month futures close (Yahoo, corrected Sep 15; FRED not yet available)" },
   { date: "2026-09-15", value: 105.83, note: "front-month futures close (Yahoo; corrected from $105.48)" },
   { date: "2026-09-16", value: 102.43, note: "front-month futures close (NYMEX 2pm ET; CNBC) · −3.2%" },
+  { date: "2026-09-17", value: 101.91, note: "front-month futures close (Yahoo) · −0.5%" },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -167,6 +169,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-09-15", value: 4.3289, note: "AAA release, Sep 15" },
   { date: "2026-09-16", value: 4.3672, note: "AAA release, Sep 16" },
   { date: "2026-09-17", value: 4.4386, note: "AAA release, Sep 17" },
+  { date: "2026-09-18", value: 4.4687, note: "AAA release, Sep 18" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -190,7 +193,8 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-09-14", value: 6.2301, note: "AAA record" },
   { date: "2026-09-15", value: 6.2694, note: "AAA record" },
   { date: "2026-09-16", value: 6.3103, note: "AAA record" },
-  { date: "2026-09-17", value: 6.3956, note: "AAA record — eighth consecutive day, up 41.8¢ from $5.9773 a week earlier" },
+  { date: "2026-09-17", value: 6.3956, note: "AAA record" },
+  { date: "2026-09-18", value: 6.4476, note: "AAA record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 
@@ -491,12 +495,12 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "An official repair estimate for the East–West pipeline.", why: "The standoff scenario depends on this bypass. An official assessment that repairs will take only days would reverse the Sep 11 change in odds." },
-      { item: "A new date for the Gulf–Iran talks in Salalah, postponed from Sep 14.", why: "Resuming the talks could help restore tanker access through Hormuz." },
+      { item: "An official repair estimate for the East–West pipeline. Bloomberg cites a person familiar with the matter who says Riyadh aims to restore about half its capacity within days and full capacity in six weeks. No official timetable has been published.", why: "The standoff scenario depends on this bypass. An official assessment that repairs will take only days would reverse the Sep 11 change in odds." },
+      { item: "A date for the next round of talks. Iran's foreign minister, Araghchi, is in Beijing. Iran says it has agreed with Oman on a plan to reopen the strait, but Oman hasn't confirmed it.", why: "Resuming the talks could help restore tanker access through Hormuz." },
       { item: "Whether attacks in Bab el-Mandeb spread to non-Saudi vessels.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes." },
       { item: "How banks respond to the Sep 14 sanctions on Russia's VTB.", why: "If banks stop handling VTB's payments, Iran loses channels for receiving oil revenue." },
       { item: "Whether US–Houthi talks lead to an easing of the blockade of Saudi ships.", why: "That would help shipping through Bab el-Mandeb and support the standoff scenario." },
-      { item: "Whether ship-tracking data supports US claims about traffic through Hormuz.", why: "Trackers and US officials report different levels of traffic. A sustained drop in crossings would undercut the claimed oil volume." },
+      { item: "Ship traffic through Hormuz. Kpler counted 7 crossings on Sep 14, 12 on Sep 15 (revised from 4), and 3 on Sep 16. Windward counted 12 on Sep 16, including three unidentified large crude tankers detected only in satellite images.", why: "Trackers and US officials report different levels of traffic. A sustained drop in crossings would undercut the claimed oil volume." },
       { item: "New SPR exchange contracts and delivery schedules.", why: "Existing deliveries may be nearing completion, but the end date isn't confirmed. New deliveries could increase withdrawals." },
     ],
   },
@@ -755,6 +759,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-09-14", value: 4.961, note: "session close (Yahoo)" },
   { date: "2026-09-15", value: 4.996, note: "session close (Yahoo) · pre-Fed (decision Sep 16, 14:00 ET)" },
   { date: "2026-09-16", value: 5.006, note: "session close (Yahoo) · first close above 5% of the war · post-hike" },
+  { date: "2026-09-17", value: 4.947, note: "session close (Yahoo) · back below 5%" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
