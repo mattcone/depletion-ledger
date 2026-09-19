@@ -88,9 +88,9 @@ The Houthis' territorial gains also need to be considered alongside shipping act
 
 A direct US strike on the Houthis would also trigger a review. The direction of that change would depend on the circumstances at the time.
 
-The gap between the EIA outlook and market prices takes longer to assess. The EIA still expects oil at about $90 in late 2026. Brent's front-month contract settled at $104.82 on Sep 17, about $15 higher. That compares a contract for near-term delivery with a forecast for later in the year.
+The gap between the EIA outlook and market prices takes longer to assess. The EIA still expects oil at about $90 in late 2026. Brent's front-month contract settled at $103.87 on Sep 18, about $14 higher. That compares a contract for near-term delivery with a forecast for later in the year.
 
-The model treats a gap above roughly $10–15 as a sign that the market may be assigning more than 40% odds to the corridor lapsing. At the Sep 17 settlement, the gap is within that range. This comparison alone doesn't change the scenario odds.
+The model treats a gap above roughly $10–15 as a sign that the market may be assigning more than 40% odds to the corridor lapsing. At that settlement, the gap is within that range. This comparison alone doesn't change the scenario odds.
 
 The postponed Sep 14 talks are an example of news that didn't change the odds. Oman postponed the first meeting of Gulf foreign ministers and Iran during the war, with no new date announced. The Associated Press reported that Saudi Arabia objected to proposed changes to the Iran–Oman shipping agreement. Bahrain had also said it wouldn't attend.
 
