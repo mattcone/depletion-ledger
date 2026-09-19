@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-09-18";
+export const DATA_AS_OF = "2026-09-19";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -17,13 +17,14 @@ export interface SeriesPoint {
   value: number;
   approx?: boolean; // source gave a rounded estimate
   note?: string;
+  tip?: string; // short tooltip-only label; the tooltip shows tip when set, else note
 }
 
 // ---------- Headline stats ----------
 export const stats = [
-  { label: "Brent", value: "$104.82", sub: "Sep 17 settlement · −1.0% vs. prior close $105.83 (Sep 16) · +38% vs pre-crisis ~$76" },
-  { label: "US diesel (AAA)", value: "$6.45", sub: "Sep 18 · all-time high $6.4476 · ninth consecutive daily record · +73% vs pre-war $3.72" },
-  { label: "US gasoline (AAA)", value: "$4.47", sub: "Sep 18 · +17¢ in a week (AAA) · +59% vs Jan $2.81" },
+  { label: "Brent", value: "$103.87", sub: "Sep 18 settlement · −0.9% vs. prior close $104.82 (Sep 17) · +37% vs pre-crisis ~$76" },
+  { label: "US diesel (AAA)", value: "$6.49", sub: "Sep 19 · all-time high $6.4866 · tenth consecutive daily record · +74% vs pre-war $3.72" },
+  { label: "US gasoline (AAA)", value: "$4.48", sub: "Sep 19 · +16.5¢ in a week (AAA) · +59% vs Jan $2.81" },
   { label: "SPR", value: "285.0M", sub: "Sep 11 · down 0.4M in a week · down 130.5M from pre-war 415.4M · lowest since Nov 1982" },
   { label: "US diesel & heating oil", value: "107.9M", sub: "Sep 11 · up 1.6M in a week · 13.5% below last year · East Coast stocks 31% below last year" },
 ];
@@ -46,9 +47,10 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-09-10", value: 108.03, note: "close +$6.82 in a day (Yahoo front-month; Convex cross-check)" },
   { date: "2026-09-11", value: 104.61, note: "settle −2.8% (CNBC)" },
   { date: "2026-09-14", value: 105.68, note: "closing price (Yahoo, corrected Sep 15)" },
-  { date: "2026-09-15", value: 108.75, note: "closing price (Yahoo front-month; corrected from $108.50). Before the shutdown, the East–West pipeline carried about 4M barrels a day to Yanbu, according to Reuters. Stored oil at the port was estimated to cover 5–7 days of exports." },
-  { date: "2026-09-16", value: 105.83, note: "Settlement down 2.7% (CNBC). Prices fell as the US energy secretary called the pipeline outage 'brief and temporary,' 'measured in days.' Officials and analysts point to weeks; no official damage assessment or repair schedule has been published." },
-  { date: "2026-09-17", value: 104.82, note: "settlement (Yahoo front-month; −1.0% vs Sep 16). A second straight down session in the settlement series as Saudi bypass hopes — the 20M-barrel ship-to-ship sale and pipeline repair targets — eased disruption fears (Reuters/CNBC; CNBC framed it as the 'third day')." },
+  { date: "2026-09-15", value: 108.75, tip: "closing price (Yahoo front-month; corrected from $108.50)", note: "closing price (Yahoo front-month; corrected from $108.50). Before the shutdown, the East–West pipeline carried about 4M barrels a day to Yanbu, according to Reuters. Stored oil at the port was estimated to cover 5–7 days of exports." },
+  { date: "2026-09-16", value: 105.83, tip: "settlement · down 2.7% (CNBC)", note: "Settlement down 2.7% (CNBC). Prices fell as the US energy secretary called the pipeline outage 'brief and temporary,' 'measured in days.' Officials and analysts point to weeks; no official damage assessment or repair schedule has been published." },
+  { date: "2026-09-17", value: 104.82, tip: "settlement · down 1.0% (Yahoo front-month)", note: "settlement (Yahoo front-month; −1.0% vs Sep 16). A second straight down session in the settlement series as Saudi bypass hopes — the 20M-barrel ship-to-ship sale and pipeline repair targets — eased disruption fears (Reuters/CNBC; CNBC framed it as the 'third day')." },
+  { date: "2026-09-18", value: 103.87, tip: "settlement · down 0.9% (Yahoo front-month; also reported by CNBC)", note: "settlement (Yahoo front-month; −0.9% vs Sep 17; CNBC concurs). A third straight down session; the week finished roughly flat. JPMorgan: Middle East flows averaged ~17M b/d over 10 days, and satellite imagery shows ~2.8M b/d moving through Hormuz over six days. Rapidan: the pipeline outage will constrain Saudi exports through at least the end of September." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -120,6 +122,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-09-15", value: 105.83, note: "front-month futures close (Yahoo; corrected from $105.48)" },
   { date: "2026-09-16", value: 102.43, note: "front-month futures close (NYMEX 2pm ET; CNBC) · −3.2%" },
   { date: "2026-09-17", value: 101.91, note: "front-month futures close (Yahoo) · −0.5%" },
+  { date: "2026-09-18", value: 100.3, note: "front-month futures close (Yahoo; CNBC concurs) · −1.6%" },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -170,6 +173,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-09-16", value: 4.3672, note: "AAA release, Sep 16" },
   { date: "2026-09-17", value: 4.4386, note: "AAA release, Sep 17" },
   { date: "2026-09-18", value: 4.4687, note: "AAA release, Sep 18" },
+  { date: "2026-09-19", value: 4.4759, note: "AAA release, Sep 19" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -195,6 +199,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-09-16", value: 6.3103, note: "AAA record" },
   { date: "2026-09-17", value: 6.3956, note: "AAA record" },
   { date: "2026-09-18", value: 6.4476, note: "AAA record" },
+  { date: "2026-09-19", value: 6.4866, note: "AAA record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 
@@ -522,7 +527,9 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
       { item: "Whether attacks in Bab el-Mandeb spread to non-Saudi vessels.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes." },
       { item: "How banks respond to the Sep 14 sanctions on Russia's VTB.", why: "If banks stop handling VTB's payments, Iran loses channels for receiving oil revenue." },
       { item: "Whether US–Houthi talks lead to an easing of the blockade of Saudi ships.", why: "That would help shipping through Bab el-Mandeb and support the standoff scenario." },
-      { item: "Ship traffic through Hormuz. Kpler counted 7 crossings on Sep 14, 12 on Sep 15 (revised from 4), and 3 on Sep 16. Windward counted 12 on Sep 16, including three unidentified large crude tankers detected only in satellite images.", why: "Trackers and US officials report different levels of traffic. A sustained drop in crossings would undercut the claimed oil volume." },
+      { item: "Ship traffic through Hormuz. Kpler counted 7 crossings on Sep 14, 12 on Sep 15, 6 on Sep 16 (revised from 3), and a preliminary 4 on Sep 17: 3 entering and 1 leaving, against a 10-day average of about 16. Kpler also counted 5 loaded ships carrying Saudi petroleum products out of the Red Sea over the past seven days.", why: "The site uses independent tracker counts. On Sep 19, US Central Command claimed it had escorted more than 2,000 ships carrying about 1 billion barrels in total. Independent trackers report much lower figures, so the site doesn't use that claim as data. The Red Sea count helps track shipping along Saudi Arabia's bypass route." },
+      { item: "The Yemen front has reached the capital. Houthi strikes on Sep 19 set a fire at the fuel storage depot at King Khalid International Airport in Riyadh (Reuters imagery); Saudi Arabia issued its first air-raid alerts for Riyadh since the escalation (BBC); Riyadh has not commented. The Houthis also claim (Sep 16) a shootdown of a Saudi F-15 over Marib with a locally built missile — BBC has verified wreckage video, no Saudi confirmation.", why: "The first Houthi fire on the capital. A confirmed F-15 kill, or a Saudi/US response to the Riyadh strike, would be a new escalation marker in the war's most active theater." },
+      { item: "The Saudi-led Red Sea naval coalition. Saudi Arabia hosted a multinational meeting on Sep 19 to secure the Red Sea, the Gulf of Aden, and Bab el-Mandeb. The US also lifted the sanctions it had placed on Eritrea's military and ruling party, citing regional interests in the Red Sea.", why: "Both moves point at the second chokepoint. A naval operation against the Houthis there would be a new phase of the war." },
       { item: "New SPR exchange contracts and delivery schedules.", why: "Existing deliveries may be nearing completion, but the end date isn't confirmed. New deliveries could increase withdrawals." },
     ],
   },
@@ -782,6 +789,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-09-15", value: 4.996, note: "session close (Yahoo) · pre-Fed (decision Sep 16, 14:00 ET)" },
   { date: "2026-09-16", value: 5.006, note: "session close (Yahoo) · first close above 5% of the war · post-hike" },
   { date: "2026-09-17", value: 4.947, note: "session close (Yahoo) · back below 5%" },
+  { date: "2026-09-18", value: 4.998, note: "session close (Yahoo) · just below 5%" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
