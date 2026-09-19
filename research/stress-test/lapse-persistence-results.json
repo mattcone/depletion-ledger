@@ -1,0 +1,970 @@
+{
+ "meta": {
+  "title": "Corridor-lapses persistence stress test",
+  "kind": "accumulated-deficit stress test \u2014 NOT a feasible inventory forecast",
+  "generated_utc": "2026-09-18T20:00:19Z",
+  "workbook": {
+   "path": "research/sources/eia-steo-2026-09-17.xlsx",
+   "sha256": "c06a15243b0d972045ecc59cf9376885f68c7c306c581de5d01e6b8ac1a236c5"
+  },
+  "assumptions_snapshot": {
+   "path": "research/sources/world-stocks-assumptions-v2026-09-17.json",
+   "sha256": "256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d"
+  },
+  "record_id": "scenario-corridor-lapses-2026-09-17-global-observed",
+  "anchor": {
+   "period": "2026-08",
+   "value_mb": -507.0
+  },
+  "extension_start": {
+   "period": "2027-02",
+   "cumulative_mb": -2050.5414468099993,
+   "source": "issued record's stored Feb-2027 target"
+  },
+  "extension_months": [
+   "2027-03",
+   "2027-04",
+   "2027-05",
+   "2027-06",
+   "2027-07",
+   "2027-08",
+   "2027-09",
+   "2027-10",
+   "2027-11",
+   "2027-12"
+  ],
+  "total_disruption_assumption_mb_d": 16.217,
+  "total_disruption_label": "Assumed total shut-in 16.217 mb/d = 13.5 (scenario incremental) + 2.717 (EIA 1Q27 average baseline shut-in). Derived from a quarter average \u2014 not a measured Feb-2027 disruption. Production formula: reference = EIA baseline production (STEO Table 3a, EIA central outlook) + assumed baseline shut-in; scenario = reference - 16.217 (i.e. EIA production minus 13.5 Mar-Jun 2027 and minus 16.217 from Jul 2027 under the primary schedule).",
+  "baseline_shutin_label": "EIA publishes no shut-in volumes past 1Q27; narrative: most shut-in 'largely restored in 2H27'. The public narrative does not specify this monthly schedule. For this test (simplification, not source-derived): 2.717 through June 2027, 0.0 from July 2027. SENSITIVITY (p2_aprilzero_*): assumed restoration moved to April 2027 \u2014 endpoints ~247 mb BELOW the primary (a larger accumulated deficit), more than the C0/C1 gap.",
+  "baseline_is_central_outlook": "The EIA STEO baseline is NOT a no-war counterfactual: it is EIA's central outlook, which already includes EIA's own disruption and recovery assumptions. Stated assumptions: https://www.eia.gov/outlooks/steo/",
+  "names": {
+   "p1_fixed_adjustment_c0": "Fixed adjustment (demand -5 vs baseline)",
+   "p2_fixed_total_disruption_c0": "Fixed total disruption ~16.2 mb/d (demand -5 vs baseline)",
+   "p3_fixed_production_c0": "Fixed production at Feb-2027 level (demand -5 vs baseline)",
+   "p1_fixed_adjustment_c1": "Fixed adjustment (demand fixed at Feb level)",
+   "p2_fixed_total_disruption_c1": "Fixed total disruption ~16.2 mb/d (demand fixed at Feb level)",
+   "p3_fixed_production_c1": "Fixed production at Feb-2027 level (demand fixed at Feb level)",
+   "p2_aprilzero_c0": "Sensitivity: P2, baseline shut-in zeroed from Apr 2027 (demand -5 vs baseline)",
+   "p2_aprilzero_c1": "Sensitivity: P2, baseline shut-in zeroed from Apr 2027 (demand fixed at Feb level)"
+  },
+  "variant_definitions": {
+   "p1": "Fixed adjustment: Feb-2027 production adjustment (-13.5 mb/d) retained against the recovering EIA baseline; scenario production recovers with the baseline (total shut-in falls from ~16.2 to 13.5).",
+   "p2": "Fixed total disruption: assumed total shut-in held at 16.217 mb/d. Scenario production = (EIA baseline production + assumed baseline shut-in) - 16.217, i.e. EIA production minus 13.5 while the assumed shut-in is 2.717 and minus 16.217 once it is 0. Primary schedule: shut-in 2.717 through June 2027, 0 from July (a test simplification; the EIA narrative does not specify the monthly schedule). Sensitivity p2_aprilzero_*: assumed restoration moved to April 2027 \u2014 endpoints ~247 mb BELOW the primary (a larger accumulated deficit).",
+   "p3": "Fixed production: scenario production held at its Feb-2027 level (baseline P Feb 2027 - 13.5); implied incremental shut-in deepens as the baseline recovers.",
+   "c0": "Fixed adjustment: demand stays 5 mb/d below the recovering EIA baseline (published convention extended).",
+   "c1": "Fixed actual demand: consumption held at its Feb-2027 level (baseline C Feb 2027 - 5). C1 is NOT uniformly lower demand than C0: the baseline dips below its Feb level in Mar-May 2027, so C0 demand is LOWER then and C1 (higher consumption) has the LARGER deficits in Mar-May; from June C0 demand exceeds C1 and C0 has the larger deficits. Net over the extension C0 adds 188.8 mb more to the accumulated deficit \u2014 the cumulative baseline-consumption recovery above the Feb level."
+  }
+ },
+ "stem": [
+  {
+   "period": "2026-08",
+   "cumulative_mb": -507.0
+  },
+  {
+   "period": "2026-09",
+   "cumulative_mb": -740.9146182599998
+  },
+  {
+   "period": "2026-10",
+   "cumulative_mb": -1002.2521435099995
+  },
+  {
+   "period": "2026-11",
+   "cumulative_mb": -1316.3814079099993
+  },
+  {
+   "period": "2026-12",
+   "cumulative_mb": -1679.8870151399992
+  },
+  {
+   "period": "2027-01",
+   "cumulative_mb": -1863.1280861299992
+  },
+  {
+   "period": "2027-02",
+   "cumulative_mb": -2050.5414468099993
+  }
+ ],
+ "variants": {
+  "p1_fixed_adjustment_c0": [
+   {
+    "period": "2027-03",
+    "scenario_prod_mb_d": 94.49539241,
+    "scenario_cons_mb_d": 98.4752443,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -123.37540859000019,
+    "cumulative_mb": -2173.9168553999993
+   },
+   {
+    "period": "2027-04",
+    "scenario_prod_mb_d": 96.08959878,
+    "scenario_cons_mb_d": 99.35575432,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -97.98466619999999,
+    "cumulative_mb": -2271.9015215999993
+   },
+   {
+    "period": "2027-05",
+    "scenario_prod_mb_d": 96.7451089,
+    "scenario_cons_mb_d": 99.51504736,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -85.86809225999974,
+    "cumulative_mb": -2357.769613859999
+   },
+   {
+    "period": "2027-06",
+    "scenario_prod_mb_d": 96.79337332,
+    "scenario_cons_mb_d": 101.11986691,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -129.79480769999995,
+    "cumulative_mb": -2487.564421559999
+   },
+   {
+    "period": "2027-07",
+    "scenario_prod_mb_d": 97.45543378,
+    "scenario_cons_mb_d": 100.82667443,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -104.50846014999969,
+    "cumulative_mb": -2592.072881709999
+   },
+   {
+    "period": "2027-08",
+    "scenario_prod_mb_d": 97.57065037,
+    "scenario_cons_mb_d": 100.73817555,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -98.19328057999995,
+    "cumulative_mb": -2690.2661622899986
+   },
+   {
+    "period": "2027-09",
+    "scenario_prod_mb_d": 97.59311596,
+    "scenario_cons_mb_d": 100.87298098,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -98.39595059999965,
+    "cumulative_mb": -2788.6621128899983
+   },
+   {
+    "period": "2027-10",
+    "scenario_prod_mb_d": 98.18006728,
+    "scenario_cons_mb_d": 99.71172345,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -47.48134126999972,
+    "cumulative_mb": -2836.143454159998
+   },
+   {
+    "period": "2027-11",
+    "scenario_prod_mb_d": 98.64012475,
+    "scenario_cons_mb_d": 100.49247741,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -55.570579800000246,
+    "cumulative_mb": -2891.7140339599982
+   },
+   {
+    "period": "2027-12",
+    "scenario_prod_mb_d": 98.32312315,
+    "scenario_cons_mb_d": 101.66938223,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -103.73403147999987,
+    "cumulative_mb": -2995.448065439998
+   }
+  ],
+  "p1_fixed_adjustment_c1": [
+   {
+    "period": "2027-03",
+    "scenario_prod_mb_d": 94.49539241,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -3.8169558000000023,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -160.04977879000012,
+    "cumulative_mb": -2210.5912255999992
+   },
+   {
+    "period": "2027-04",
+    "scenario_prod_mb_d": 96.08959878,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -4.697465820000005,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -107.06069159999984,
+    "cumulative_mb": -2317.651917199999
+   },
+   {
+    "period": "2027-05",
+    "scenario_prod_mb_d": 96.7451089,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -4.856758859999999,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -90.30856759999976,
+    "cumulative_mb": -2407.9604847999985
+   },
+   {
+    "period": "2027-06",
+    "scenario_prod_mb_d": 96.79337332,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -6.461578410000001,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -85.94745539999991,
+    "cumulative_mb": -2493.9079401999984
+   },
+   {
+    "period": "2027-07",
+    "scenario_prod_mb_d": 97.45543378,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -6.1683859299999995,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -68.28849631999971,
+    "cumulative_mb": -2562.1964365199983
+   },
+   {
+    "period": "2027-08",
+    "scenario_prod_mb_d": 97.57065037,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -6.079887049999996,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -64.71678203000006,
+    "cumulative_mb": -2626.9132185499984
+   },
+   {
+    "period": "2027-09",
+    "scenario_prod_mb_d": 97.59311596,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -6.2146924799999965,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -61.955176199999755,
+    "cumulative_mb": -2688.868394749998
+   },
+   {
+    "period": "2027-10",
+    "scenario_prod_mb_d": 98.18006728,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -5.053434949999996,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -45.824857819999835,
+    "cumulative_mb": -2734.693252569998
+   },
+   {
+    "period": "2027-11",
+    "scenario_prod_mb_d": 98.64012475,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -5.834188910000009,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -30.54491249999998,
+    "cumulative_mb": -2765.238165069998
+   },
+   {
+    "period": "2027-12",
+    "scenario_prod_mb_d": 98.32312315,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -13.5,
+    "delta_c_mb_d": -7.011093729999999,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -41.390125849999905,
+    "cumulative_mb": -2806.628290919998
+   }
+  ],
+  "p2_fixed_total_disruption_c0": [
+   {
+    "period": "2027-03",
+    "scenario_prod_mb_d": 94.49539241,
+    "scenario_cons_mb_d": 98.4752443,
+    "delta_p_mb_d": -13.499999999999998,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -123.37540859000019,
+    "cumulative_mb": -2173.9168553999993
+   },
+   {
+    "period": "2027-04",
+    "scenario_prod_mb_d": 96.08959878,
+    "scenario_cons_mb_d": 99.35575432,
+    "delta_p_mb_d": -13.499999999999998,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -97.98466619999999,
+    "cumulative_mb": -2271.9015215999993
+   },
+   {
+    "period": "2027-05",
+    "scenario_prod_mb_d": 96.7451089,
+    "scenario_cons_mb_d": 99.51504736,
+    "delta_p_mb_d": -13.499999999999998,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -85.86809225999974,
+    "cumulative_mb": -2357.769613859999
+   },
+   {
+    "period": "2027-06",
+    "scenario_prod_mb_d": 96.79337332,
+    "scenario_cons_mb_d": 101.11986691,
+    "delta_p_mb_d": -13.499999999999998,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -129.79480769999995,
+    "cumulative_mb": -2487.564421559999
+   },
+   {
+    "period": "2027-07",
+    "scenario_prod_mb_d": 94.73843378000001,
+    "scenario_cons_mb_d": 100.82667443,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -188.73546014999965,
+    "cumulative_mb": -2676.2998817099988
+   },
+   {
+    "period": "2027-08",
+    "scenario_prod_mb_d": 94.85365037,
+    "scenario_cons_mb_d": 100.73817555,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -182.4202805799999,
+    "cumulative_mb": -2858.720162289999
+   },
+   {
+    "period": "2027-09",
+    "scenario_prod_mb_d": 94.87611596,
+    "scenario_cons_mb_d": 100.87298098,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -179.9059505999996,
+    "cumulative_mb": -3038.6261128899982
+   },
+   {
+    "period": "2027-10",
+    "scenario_prod_mb_d": 95.46306728,
+    "scenario_cons_mb_d": 99.71172345,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -131.70834126999966,
+    "cumulative_mb": -3170.334454159998
+   },
+   {
+    "period": "2027-11",
+    "scenario_prod_mb_d": 95.92312475,
+    "scenario_cons_mb_d": 100.49247741,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -137.0805798000002,
+    "cumulative_mb": -3307.4150339599983
+   },
+   {
+    "period": "2027-12",
+    "scenario_prod_mb_d": 95.60612315,
+    "scenario_cons_mb_d": 101.66938223,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -187.96103147999983,
+    "cumulative_mb": -3495.376065439998
+   }
+  ],
+  "p2_fixed_total_disruption_c1": [
+   {
+    "period": "2027-03",
+    "scenario_prod_mb_d": 94.49539241,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -13.499999999999998,
+    "delta_c_mb_d": -3.8169558000000023,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -160.04977879000012,
+    "cumulative_mb": -2210.5912255999992
+   },
+   {
+    "period": "2027-04",
+    "scenario_prod_mb_d": 96.08959878,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -13.499999999999998,
+    "delta_c_mb_d": -4.697465820000005,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -107.06069159999984,
+    "cumulative_mb": -2317.651917199999
+   },
+   {
+    "period": "2027-05",
+    "scenario_prod_mb_d": 96.7451089,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -13.499999999999998,
+    "delta_c_mb_d": -4.856758859999999,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -90.30856759999976,
+    "cumulative_mb": -2407.9604847999985
+   },
+   {
+    "period": "2027-06",
+    "scenario_prod_mb_d": 96.79337332,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -13.499999999999998,
+    "delta_c_mb_d": -6.461578410000001,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -85.94745539999991,
+    "cumulative_mb": -2493.9079401999984
+   },
+   {
+    "period": "2027-07",
+    "scenario_prod_mb_d": 94.73843378000001,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -6.1683859299999995,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -152.51549631999967,
+    "cumulative_mb": -2646.423436519998
+   },
+   {
+    "period": "2027-08",
+    "scenario_prod_mb_d": 94.85365037,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -6.079887049999996,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -148.94378203000002,
+    "cumulative_mb": -2795.367218549998
+   },
+   {
+    "period": "2027-09",
+    "scenario_prod_mb_d": 94.87611596,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -6.2146924799999965,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -143.46517619999972,
+    "cumulative_mb": -2938.832394749998
+   },
+   {
+    "period": "2027-10",
+    "scenario_prod_mb_d": 95.46306728,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.053434949999996,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -130.05185781999978,
+    "cumulative_mb": -3068.884252569998
+   },
+   {
+    "period": "2027-11",
+    "scenario_prod_mb_d": 95.92312475,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.834188910000009,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -112.05491249999994,
+    "cumulative_mb": -3180.9391650699977
+   },
+   {
+    "period": "2027-12",
+    "scenario_prod_mb_d": 95.60612315,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -7.011093729999999,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -125.61712584999987,
+    "cumulative_mb": -3306.5562909199975
+   }
+  ],
+  "p3_fixed_production_c0": [
+   {
+    "period": "2027-03",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 98.4752443,
+    "delta_p_mb_d": -15.030438219999994,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -170.81899341,
+    "cumulative_mb": -2221.3604402199994
+   },
+   {
+    "period": "2027-04",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 99.35575432,
+    "delta_p_mb_d": -16.624644590000003,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -191.72400390000007,
+    "cumulative_mb": -2413.0844441199997
+   },
+   {
+    "period": "2027-05",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 99.51504736,
+    "delta_p_mb_d": -17.280154710000005,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -203.0528882699999,
+    "cumulative_mb": -2616.1373323899998
+   },
+   {
+    "period": "2027-06",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 101.11986691,
+    "delta_p_mb_d": -17.32841913,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -244.64738159999996,
+    "cumulative_mb": -2860.7847139899995
+   },
+   {
+    "period": "2027-07",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 100.82667443,
+    "delta_p_mb_d": -17.990479590000007,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -243.7133274399999,
+    "cumulative_mb": -3104.4980414299994
+   },
+   {
+    "period": "2027-08",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 100.73817555,
+    "delta_p_mb_d": -18.105696179999995,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -240.96986215999982,
+    "cumulative_mb": -3345.467903589999
+   },
+   {
+    "period": "2027-09",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 100.87298098,
+    "delta_p_mb_d": -18.128161770000006,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -237.24080369999982,
+    "cumulative_mb": -3582.708707289999
+   },
+   {
+    "period": "2027-10",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 99.71172345,
+    "delta_p_mb_d": -18.715113090000003,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -209.1498470599998,
+    "cumulative_mb": -3791.858554349999
+   },
+   {
+    "period": "2027-11",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 100.49247741,
+    "delta_p_mb_d": -19.175170559999998,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -225.82569660000019,
+    "cumulative_mb": -4017.6842509499993
+   },
+   {
+    "period": "2027-12",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 101.66938223,
+    "delta_p_mb_d": -18.85816896,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -269.8372692399999,
+    "cumulative_mb": -4287.521520189999
+   }
+  ],
+  "p3_fixed_production_c1": [
+   {
+    "period": "2027-03",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -15.030438219999994,
+    "delta_c_mb_d": -3.8169558000000023,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -207.4933636099999,
+    "cumulative_mb": -2258.0348104199993
+   },
+   {
+    "period": "2027-04",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -16.624644590000003,
+    "delta_c_mb_d": -4.697465820000005,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -200.80002929999992,
+    "cumulative_mb": -2458.8348397199993
+   },
+   {
+    "period": "2027-05",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -17.280154710000005,
+    "delta_c_mb_d": -4.856758859999999,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -207.4933636099999,
+    "cumulative_mb": -2666.3282033299993
+   },
+   {
+    "period": "2027-06",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -17.32841913,
+    "delta_c_mb_d": -6.461578410000001,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -200.80002929999992,
+    "cumulative_mb": -2867.1282326299993
+   },
+   {
+    "period": "2027-07",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -17.990479590000007,
+    "delta_c_mb_d": -6.1683859299999995,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -207.4933636099999,
+    "cumulative_mb": -3074.6215962399992
+   },
+   {
+    "period": "2027-08",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -18.105696179999995,
+    "delta_c_mb_d": -6.079887049999996,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -207.4933636099999,
+    "cumulative_mb": -3282.114959849999
+   },
+   {
+    "period": "2027-09",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -18.128161770000006,
+    "delta_c_mb_d": -6.2146924799999965,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -200.80002929999992,
+    "cumulative_mb": -3482.914989149999
+   },
+   {
+    "period": "2027-10",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -18.715113090000003,
+    "delta_c_mb_d": -5.053434949999996,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -207.4933636099999,
+    "cumulative_mb": -3690.408352759999
+   },
+   {
+    "period": "2027-11",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -19.175170559999998,
+    "delta_c_mb_d": -5.834188910000009,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -200.80002929999992,
+    "cumulative_mb": -3891.208382059999
+   },
+   {
+    "period": "2027-12",
+    "scenario_prod_mb_d": 92.96495419,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -18.85816896,
+    "delta_c_mb_d": -7.011093729999999,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -207.4933636099999,
+    "cumulative_mb": -4098.701745669999
+   }
+  ],
+  "p2_aprilzero_c0": [
+   {
+    "period": "2027-03",
+    "scenario_prod_mb_d": 94.49539241,
+    "scenario_cons_mb_d": 98.4752443,
+    "delta_p_mb_d": -13.499999999999998,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -123.37540859000019,
+    "cumulative_mb": -2173.9168553999993
+   },
+   {
+    "period": "2027-04",
+    "scenario_prod_mb_d": 93.37259878,
+    "scenario_cons_mb_d": 99.35575432,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -179.49466619999995,
+    "cumulative_mb": -2353.411521599999
+   },
+   {
+    "period": "2027-05",
+    "scenario_prod_mb_d": 94.0281089,
+    "scenario_cons_mb_d": 99.51504736,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -170.09509225999972,
+    "cumulative_mb": -2523.5066138599987
+   },
+   {
+    "period": "2027-06",
+    "scenario_prod_mb_d": 94.07637332,
+    "scenario_cons_mb_d": 101.11986691,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -211.3048076999999,
+    "cumulative_mb": -2734.8114215599985
+   },
+   {
+    "period": "2027-07",
+    "scenario_prod_mb_d": 94.73843378000001,
+    "scenario_cons_mb_d": 100.82667443,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -188.73546014999965,
+    "cumulative_mb": -2923.546881709998
+   },
+   {
+    "period": "2027-08",
+    "scenario_prod_mb_d": 94.85365037,
+    "scenario_cons_mb_d": 100.73817555,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -182.4202805799999,
+    "cumulative_mb": -3105.967162289998
+   },
+   {
+    "period": "2027-09",
+    "scenario_prod_mb_d": 94.87611596,
+    "scenario_cons_mb_d": 100.87298098,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -179.9059505999996,
+    "cumulative_mb": -3285.8731128899976
+   },
+   {
+    "period": "2027-10",
+    "scenario_prod_mb_d": 95.46306728,
+    "scenario_cons_mb_d": 99.71172345,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -131.70834126999966,
+    "cumulative_mb": -3417.5814541599975
+   },
+   {
+    "period": "2027-11",
+    "scenario_prod_mb_d": 95.92312475,
+    "scenario_cons_mb_d": 100.49247741,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -137.0805798000002,
+    "cumulative_mb": -3554.6620339599976
+   },
+   {
+    "period": "2027-12",
+    "scenario_prod_mb_d": 95.60612315,
+    "scenario_cons_mb_d": 101.66938223,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.0,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -187.96103147999983,
+    "cumulative_mb": -3742.6230654399974
+   }
+  ],
+  "p2_aprilzero_c1": [
+   {
+    "period": "2027-03",
+    "scenario_prod_mb_d": 94.49539241,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -13.499999999999998,
+    "delta_c_mb_d": -3.8169558000000023,
+    "baseline_shutin_mb_d": 2.717,
+    "monthly_mb": -160.04977879000012,
+    "cumulative_mb": -2210.5912255999992
+   },
+   {
+    "period": "2027-04",
+    "scenario_prod_mb_d": 93.37259878,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -4.697465820000005,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -188.5706915999998,
+    "cumulative_mb": -2399.161917199999
+   },
+   {
+    "period": "2027-05",
+    "scenario_prod_mb_d": 94.0281089,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -4.856758859999999,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -174.53556759999972,
+    "cumulative_mb": -2573.697484799999
+   },
+   {
+    "period": "2027-06",
+    "scenario_prod_mb_d": 94.07637332,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -6.461578410000001,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -167.45745539999987,
+    "cumulative_mb": -2741.154940199999
+   },
+   {
+    "period": "2027-07",
+    "scenario_prod_mb_d": 94.73843378000001,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -6.1683859299999995,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -152.51549631999967,
+    "cumulative_mb": -2893.670436519999
+   },
+   {
+    "period": "2027-08",
+    "scenario_prod_mb_d": 94.85365037,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -6.079887049999996,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -148.94378203000002,
+    "cumulative_mb": -3042.614218549999
+   },
+   {
+    "period": "2027-09",
+    "scenario_prod_mb_d": 94.87611596,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -6.2146924799999965,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -143.46517619999972,
+    "cumulative_mb": -3186.0793947499988
+   },
+   {
+    "period": "2027-10",
+    "scenario_prod_mb_d": 95.46306728,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.053434949999996,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -130.05185781999978,
+    "cumulative_mb": -3316.1312525699987
+   },
+   {
+    "period": "2027-11",
+    "scenario_prod_mb_d": 95.92312475,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -5.834188910000009,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -112.05491249999994,
+    "cumulative_mb": -3428.1861650699984
+   },
+   {
+    "period": "2027-12",
+    "scenario_prod_mb_d": 95.60612315,
+    "scenario_cons_mb_d": 99.6582885,
+    "delta_p_mb_d": -16.217,
+    "delta_c_mb_d": -7.011093729999999,
+    "baseline_shutin_mb_d": 0.0,
+    "monthly_mb": -125.61712584999987,
+    "cumulative_mb": -3553.8032909199983
+   }
+  ]
+ },
+ "baseline_ref": [
+  {
+   "period": "2027-03",
+   "monthly_mb": 140.12459140999982,
+   "cumulative_mb": -1910.4168553999996
+  },
+  {
+   "period": "2027-04",
+   "monthly_mb": 157.0153338,
+   "cumulative_mb": -1753.4015215999996
+  },
+  {
+   "period": "2027-05",
+   "monthly_mb": 177.63190774000026,
+   "cumulative_mb": -1575.7696138599993
+  },
+  {
+   "period": "2027-06",
+   "monthly_mb": 125.20519230000005,
+   "cumulative_mb": -1450.5644215599991
+  },
+  {
+   "period": "2027-07",
+   "monthly_mb": 158.99153985000032,
+   "cumulative_mb": -1291.572881709999
+  },
+  {
+   "period": "2027-08",
+   "monthly_mb": 165.30671942000004,
+   "cumulative_mb": -1126.2661622899989
+  },
+  {
+   "period": "2027-09",
+   "monthly_mb": 156.60404940000035,
+   "cumulative_mb": -969.6621128899985
+  },
+  {
+   "period": "2027-10",
+   "monthly_mb": 216.01865873000028,
+   "cumulative_mb": -753.6434541599982
+  },
+  {
+   "period": "2027-11",
+   "monthly_mb": 199.42942019999975,
+   "cumulative_mb": -554.2140339599985
+  },
+  {
+   "period": "2027-12",
+   "monthly_mb": 159.76596852000011,
+   "cumulative_mb": -394.44806543999835
+  }
+ ],
+ "endpoints_dec_2027": {
+  "p1_fixed_adjustment_c0": -2995.448065439998,
+  "p1_fixed_adjustment_c1": -2806.628290919998,
+  "p2_fixed_total_disruption_c0": -3495.376065439998,
+  "p2_fixed_total_disruption_c1": -3306.5562909199975,
+  "p3_fixed_production_c0": -4287.521520189999,
+  "p3_fixed_production_c1": -4098.701745669999,
+  "p2_aprilzero_c0": -3742.6230654399974,
+  "p2_aprilzero_c1": -3553.8032909199983,
+  "baseline_ref": -394.44806543999835,
+  "published_feb_2027": -2050.5414468099993
+ }
+}

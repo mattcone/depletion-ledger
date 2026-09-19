@@ -25,7 +25,9 @@ export default defineConfig({
   integrations: [
     sitemap({
       // /og/supply is a share-card render source, not a page. (page is a full URL.)
-      filter: (page) => !page.includes("/og/"),
+      // /research/lapse-persistence is a labeled research preview — noindex'd,
+      // and kept out of the sitemap so it is not part of the published surface.
+      filter: (page) => !page.includes("/og/") && !page.includes("/research/lapse-persistence"),
     }),
   ],
   vite: {

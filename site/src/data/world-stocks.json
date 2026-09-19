@@ -1,6 +1,6 @@
 {
- "generated": "2026-09-17",
- "generated_by": "World stocks panels, Phase 1 + Phase 2 (benchmarks, persistence baseline, forecast records) \u2014 see research/world-stocks-research.md",
+ "generated": "2026-09-18",
+ "generated_by": "World stocks panels, Phase 1 + Phase 2 (benchmarks, persistence baseline, forecast records) + Phase 3 scenarios v2026-09-17; corridor-lapses extended to Dec 2027 as conditional version v2026-09-18 (fixed-total-disruption reading, P2+C0). See research/world-stocks-research.md and research/stress-test/.",
  "conventions": {
   "sign": "positive = stocks increased; negative = stocks decreased",
   "status": {
@@ -1776,160 +1776,160 @@
     "period": "2026-09",
     "value": -113.91461825999983,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2026-10",
     "value": -59.837525249999715,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2026-11",
     "value": -80.12926439999987,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2026-12",
     "value": -103.10560722999968,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-01",
     "value": -12.741070989999969,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-02",
     "value": -61.413360679999926,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-03",
     "value": -14.875408590000191,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-04",
     "value": -25.984666199999822,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-05",
     "value": -14.56809225999983,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-06",
     "value": -48.794807699999865,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-07",
     "value": -27.008460149999692,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-08",
     "value": 7.206719420000226,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-09",
     "value": 18.60404940000052,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-10",
     "value": 70.3186587300002,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-11",
     "value": 61.429420199999925,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-12",
     "value": 41.96596852000022,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    }
   ],
@@ -1938,160 +1938,160 @@
     "period": "2026-09",
     "value": -136.41461825999983,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2026-10",
     "value": -52.087525249999715,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2026-11",
     "value": -6.629264399999784,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2026-12",
     "value": 16.244392770000147,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-01",
     "value": 134.50892901000003,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-02",
     "value": 85.58663932000007,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-03",
     "value": 163.37459140999982,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-04",
     "value": 172.0153338,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-05",
     "value": 177.63190774000026,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-06",
     "value": 125.20519230000005,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-07",
     "value": 158.99153985000032,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-08",
     "value": 165.30671942000004,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-09",
     "value": 156.60404940000035,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-10",
     "value": 216.01865873000028,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-11",
     "value": 199.42942019999975,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-12",
     "value": 159.76596852000011,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    }
   ],
@@ -2100,60 +2100,160 @@
     "period": "2026-09",
     "value": -233.91461825999983,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2026-10",
     "value": -261.3375252499997,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2026-11",
     "value": -314.1292643999998,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2026-12",
     "value": -363.50560722999984,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-01",
     "value": -183.24107098999997,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    },
    {
     "period": "2027-02",
     "value": -187.41336067999993,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-17",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
     "source_url": null,
-    "published": "computed 17 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-17",
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
+    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+   },
+   {
+    "period": "2027-03",
+    "value": -123.37540859000019,
+    "status": "model-projection",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_url": null,
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
+    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+   },
+   {
+    "period": "2027-04",
+    "value": -97.98466619999999,
+    "status": "model-projection",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_url": null,
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
+    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+   },
+   {
+    "period": "2027-05",
+    "value": -85.86809225999974,
+    "status": "model-projection",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_url": null,
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
+    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+   },
+   {
+    "period": "2027-06",
+    "value": -129.79480769999995,
+    "status": "model-projection",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_url": null,
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
+    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+   },
+   {
+    "period": "2027-07",
+    "value": -188.73546014999965,
+    "status": "model-projection",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_url": null,
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
+    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+   },
+   {
+    "period": "2027-08",
+    "value": -182.4202805799999,
+    "status": "model-projection",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_url": null,
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
+    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+   },
+   {
+    "period": "2027-09",
+    "value": -179.9059505999996,
+    "status": "model-projection",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_url": null,
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
+    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+   },
+   {
+    "period": "2027-10",
+    "value": -131.70834126999966,
+    "status": "model-projection",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_url": null,
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
+    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+   },
+   {
+    "period": "2027-11",
+    "value": -137.0805798000002,
+    "status": "model-projection",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_url": null,
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
+    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+   },
+   {
+    "period": "2027-12",
+    "value": -187.96103147999983,
+    "status": "model-projection",
+    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_url": null,
+    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-18",
     "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
    }
   ]
@@ -3727,6 +3827,1028 @@
     "sha256": "256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d",
     "note": "frozen at issue \u2014 this record validates only against this snapshot"
    }
+  },
+  {
+   "record_id": "scenario-corridor-holds-2026-09-18-global-observed",
+   "type": "model-projection",
+   "scenario": "Corridor holds",
+   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026), world balance + documented scenario adjustments \u2014 assumptions version 2026-09-18, sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9",
+   "issued": "2026-09-18",
+   "issued_before_outcome": true,
+   "model_version": "world-stocks phase 3 (v2026-09-18)",
+   "scope": "global \u2014 scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
+   "anchor": {
+    "period": "2026-08",
+    "value_mb": -507
+   },
+   "anchor_observation": {
+    "series": "global_observed_cumulative_mb",
+    "period": "2026-08",
+    "value_mb": -507,
+    "edition": "IEA OMR, 11 Sep 2026 (web report page; no public PDF URL found)"
+   },
+   "assumptions_ref": {
+    "path": "research/sources/world-stocks-assumptions-v2026-09-18.json",
+    "sha256": "eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9",
+    "note": "frozen at issue \u2014 this record validates only against this snapshot"
+   },
+   "targets": [
+    {
+     "period": "2026-09",
+     "target_monthly_mb": -136.41461825999983,
+     "target_cumulative_mb": -643.4146182599998,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-10",
+     "target_monthly_mb": -52.087525249999715,
+     "target_cumulative_mb": -695.5021435099995,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-11",
+     "target_monthly_mb": -6.629264399999784,
+     "target_cumulative_mb": -702.1314079099993,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-12",
+     "target_monthly_mb": 16.244392770000147,
+     "target_cumulative_mb": -685.8870151399992,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-01",
+     "target_monthly_mb": 134.50892901000003,
+     "target_cumulative_mb": -551.3780861299992,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-02",
+     "target_monthly_mb": 85.58663932000007,
+     "target_cumulative_mb": -465.7914468099992,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-03",
+     "target_monthly_mb": 163.37459140999982,
+     "target_cumulative_mb": -302.41685539999935,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-04",
+     "target_monthly_mb": 172.0153338,
+     "target_cumulative_mb": -130.40152159999934,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-05",
+     "target_monthly_mb": 177.63190774000026,
+     "target_cumulative_mb": 47.23038614000092,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-06",
+     "target_monthly_mb": 125.20519230000005,
+     "target_cumulative_mb": 172.43557844000097,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-07",
+     "target_monthly_mb": 158.99153985000032,
+     "target_cumulative_mb": 331.4271182900013,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-08",
+     "target_monthly_mb": 165.30671942000004,
+     "target_cumulative_mb": 496.73383771000135,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-09",
+     "target_monthly_mb": 156.60404940000035,
+     "target_cumulative_mb": 653.3378871100017,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-10",
+     "target_monthly_mb": 216.01865873000028,
+     "target_cumulative_mb": 869.356545840002,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-11",
+     "target_monthly_mb": 199.42942019999975,
+     "target_cumulative_mb": 1068.7859660400018,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-12",
+     "target_monthly_mb": 159.76596852000011,
+     "target_cumulative_mb": 1228.5519345600019,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    }
+   ],
+   "outcome_status": "open",
+   "outcome_policy": "score against outcome_first_release only \u2014 the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
+   "issued_at": "2026-09-18T20:24:25Z",
+   "issued_at_note": "UTC, taken at issuance. Scenario assumptions are analyst judgment over the EIA baseline; a changed assumption set issues a NEW dated record \u2014 this one is frozen.",
+   "endpoint": {
+    "period": "2027-12",
+    "cumulative_mb": 1228.5519345600019
+   },
+   "assumptions": "scenario adjustments in the assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-18.json (sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9) (mutable copy: site/src/data/world-stocks-assumptions.json): monthly change = ((baseline P + \u0394P) \u2212 (baseline C + \u0394C)) \u00d7 calendar days; site sign convention"
+  },
+  {
+   "record_id": "scenario-standoff-2026-09-18-global-observed",
+   "type": "model-projection",
+   "scenario": "Standoff",
+   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026), world balance + documented scenario adjustments \u2014 assumptions version 2026-09-18, sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9",
+   "issued": "2026-09-18",
+   "issued_before_outcome": true,
+   "model_version": "world-stocks phase 3 (v2026-09-18)",
+   "scope": "global \u2014 scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
+   "anchor": {
+    "period": "2026-08",
+    "value_mb": -507
+   },
+   "anchor_observation": {
+    "series": "global_observed_cumulative_mb",
+    "period": "2026-08",
+    "value_mb": -507,
+    "edition": "IEA OMR, 11 Sep 2026 (web report page; no public PDF URL found)"
+   },
+   "assumptions_ref": {
+    "path": "research/sources/world-stocks-assumptions-v2026-09-18.json",
+    "sha256": "eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9",
+    "note": "frozen at issue \u2014 this record validates only against this snapshot"
+   },
+   "targets": [
+    {
+     "period": "2026-09",
+     "target_monthly_mb": -113.91461825999983,
+     "target_cumulative_mb": -620.9146182599998,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-10",
+     "target_monthly_mb": -59.837525249999715,
+     "target_cumulative_mb": -680.7521435099995,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-11",
+     "target_monthly_mb": -80.12926439999987,
+     "target_cumulative_mb": -760.8814079099994,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-12",
+     "target_monthly_mb": -103.10560722999968,
+     "target_cumulative_mb": -863.9870151399991,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-01",
+     "target_monthly_mb": -12.741070989999969,
+     "target_cumulative_mb": -876.7280861299992,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-02",
+     "target_monthly_mb": -61.413360679999926,
+     "target_cumulative_mb": -938.141446809999,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-03",
+     "target_monthly_mb": -14.875408590000191,
+     "target_cumulative_mb": -953.0168553999993,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-04",
+     "target_monthly_mb": -25.984666199999822,
+     "target_cumulative_mb": -979.001521599999,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-05",
+     "target_monthly_mb": -14.56809225999983,
+     "target_cumulative_mb": -993.5696138599989,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-06",
+     "target_monthly_mb": -48.794807699999865,
+     "target_cumulative_mb": -1042.3644215599988,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-07",
+     "target_monthly_mb": -27.008460149999692,
+     "target_cumulative_mb": -1069.3728817099986,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-08",
+     "target_monthly_mb": 7.206719420000226,
+     "target_cumulative_mb": -1062.1661622899985,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-09",
+     "target_monthly_mb": 18.60404940000052,
+     "target_cumulative_mb": -1043.562112889998,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-10",
+     "target_monthly_mb": 70.3186587300002,
+     "target_cumulative_mb": -973.2434541599978,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-11",
+     "target_monthly_mb": 61.429420199999925,
+     "target_cumulative_mb": -911.8140339599979,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-12",
+     "target_monthly_mb": 41.96596852000022,
+     "target_cumulative_mb": -869.8480654399978,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    }
+   ],
+   "outcome_status": "open",
+   "outcome_policy": "score against outcome_first_release only \u2014 the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
+   "issued_at": "2026-09-18T20:24:25Z",
+   "issued_at_note": "UTC, taken at issuance. Scenario assumptions are analyst judgment over the EIA baseline; a changed assumption set issues a NEW dated record \u2014 this one is frozen.",
+   "endpoint": {
+    "period": "2027-12",
+    "cumulative_mb": -869.8480654399978
+   },
+   "assumptions": "scenario adjustments in the assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-18.json (sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9) (mutable copy: site/src/data/world-stocks-assumptions.json): monthly change = ((baseline P + \u0394P) \u2212 (baseline C + \u0394C)) \u00d7 calendar days; site sign convention"
+  },
+  {
+   "record_id": "scenario-corridor-lapses-2026-09-18-global-observed",
+   "type": "model-projection",
+   "scenario": "Corridor lapses",
+   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026), world balance + documented scenario adjustments \u2014 assumptions version 2026-09-18, sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9",
+   "issued": "2026-09-18",
+   "issued_before_outcome": true,
+   "model_version": "world-stocks phase 3 (v2026-09-18)",
+   "scope": "global \u2014 scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
+   "anchor": {
+    "period": "2026-08",
+    "value_mb": -507
+   },
+   "anchor_observation": {
+    "series": "global_observed_cumulative_mb",
+    "period": "2026-08",
+    "value_mb": -507,
+    "edition": "IEA OMR, 11 Sep 2026 (web report page; no public PDF URL found)"
+   },
+   "assumptions_ref": {
+    "path": "research/sources/world-stocks-assumptions-v2026-09-18.json",
+    "sha256": "eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9",
+    "note": "frozen at issue \u2014 this record validates only against this snapshot"
+   },
+   "targets": [
+    {
+     "period": "2026-09",
+     "target_monthly_mb": -233.91461825999983,
+     "target_cumulative_mb": -740.9146182599998,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-10",
+     "target_monthly_mb": -261.3375252499997,
+     "target_cumulative_mb": -1002.2521435099995,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-11",
+     "target_monthly_mb": -314.1292643999998,
+     "target_cumulative_mb": -1316.3814079099993,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-12",
+     "target_monthly_mb": -363.50560722999984,
+     "target_cumulative_mb": -1679.8870151399992,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-01",
+     "target_monthly_mb": -183.24107098999997,
+     "target_cumulative_mb": -1863.1280861299992,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-02",
+     "target_monthly_mb": -187.41336067999993,
+     "target_cumulative_mb": -2050.5414468099993,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-03",
+     "target_monthly_mb": -123.37540859000019,
+     "target_cumulative_mb": -2173.9168553999993,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-04",
+     "target_monthly_mb": -97.98466619999999,
+     "target_cumulative_mb": -2271.9015215999993,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-05",
+     "target_monthly_mb": -85.86809225999974,
+     "target_cumulative_mb": -2357.769613859999,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-06",
+     "target_monthly_mb": -129.79480769999995,
+     "target_cumulative_mb": -2487.564421559999,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-07",
+     "target_monthly_mb": -188.73546014999965,
+     "target_cumulative_mb": -2676.2998817099988,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-08",
+     "target_monthly_mb": -182.4202805799999,
+     "target_cumulative_mb": -2858.720162289999,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-09",
+     "target_monthly_mb": -179.9059505999996,
+     "target_cumulative_mb": -3038.6261128899982,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-10",
+     "target_monthly_mb": -131.70834126999966,
+     "target_cumulative_mb": -3170.334454159998,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-11",
+     "target_monthly_mb": -137.0805798000002,
+     "target_cumulative_mb": -3307.4150339599983,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-12",
+     "target_monthly_mb": -187.96103147999983,
+     "target_cumulative_mb": -3495.376065439998,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    }
+   ],
+   "outcome_status": "open",
+   "outcome_policy": "score against outcome_first_release only \u2014 the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
+   "issued_at": "2026-09-18T20:24:25Z",
+   "issued_at_note": "UTC, taken at issuance. Scenario assumptions are analyst judgment over the EIA baseline; a changed assumption set issues a NEW dated record \u2014 this one is frozen.",
+   "endpoint": {
+    "period": "2027-12",
+    "cumulative_mb": -3495.376065439998
+   },
+   "assumptions": "scenario adjustments in the assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-18.json (sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9) (mutable copy: site/src/data/world-stocks-assumptions.json): monthly change = ((baseline P + \u0394P) \u2212 (baseline C + \u0394C)) \u00d7 calendar days; site sign convention",
+   "validity_horizon": "2027-12",
+   "validity_note": "2027-12 \u2014 Extended (v2026-09-18) under the fixed-total-disruption persistence reading: the assumed total Gulf shut-in is held at 16.217 mb/d (13.5 scenario increment + 2.717, the EIA's published 1Q27 average baseline shut-in), so the production adjustment equals the assumed baseline shut-in minus 16.217 (\u221213.5 while it is 2.717, Mar\u2013Jun 2027; \u221216.217 once it is 0, Jul\u2013Dec 2027); demand stays \u22125 mb/d below the EIA baseline (the scenario's existing H1-2027 convention, carried flat). The post-1Q27 baseline shut-in schedule (2.717 through Jun 2027, 0 from Jul) is a stated test simplification, not a source-derived schedule. The Sep 2026 \u2013 Feb 2027 targets are verbatim from the issued v2026-09-17 record, whose assumptions were carried only to February 2027. The Mar 2027 \u2013 Dec 2027 extension is conditional \u2014 an 'if the closure persists' path, not a central forecast; the range across the other persistence readings (research page) is a spread of assumptions, not a confidence interval."
   }
  ]
 }

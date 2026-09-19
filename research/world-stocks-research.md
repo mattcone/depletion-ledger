@@ -415,3 +415,65 @@ Considered for Panel A; no supported model allocates the global monthly change t
 
 ## QA (Phase 3)
 Playwright @1440 + @390: zero console errors; all 8 datasets with expected non-null counts (lapses 7 = anchor + 6 targets; others 17); per-draw-call fillText box QA (textAlign captured at draw time): zero data-label overlaps, zero data labels outside canvas. Tick-label boxes are a known false positive of the naive interceptor (transform not applied) — the same ticks passed transform-aware QA in Phase 2.
+
+# Phase 3b — corridor-lapses extended to Dec 2027, issued as v2026-09-18 (2026-09-18)
+
+## What was done
+The corridor-lapses scenario was extended from its 2027-02 validity horizon (v2026-09-17) through
+2027-12 under the fixed-total-disruption persistence reading (P2 in the offline stress test) with
+the scenario's existing demand convention (C0: −5 mb/d below the EIA baseline, carried flat).
+Issued as new dated records `scenario-*-2026-09-18-global-observed` (all three scenarios, so the
+displayed version is a complete one; holds/standoff targets are numerically identical to v2026-09-17).
+The v2026-09-17 records and snapshots are untouched — versions coexist, each validates against its
+own frozen inputs.
+
+## The extension, precisely
+- Sep 2026 – Feb 2027 targets are **verbatim** from the issued v2026-09-17 record (verified
+  bit-identical).
+- Mar 2027 – Dec 2027: production adjustment = assumed baseline shut-in − 16.217 (−13.5 while the
+  assumed baseline shut-in is 2.717, Mar–Jun 2027; −16.217 once it is 0, Jul–Dec 2027); demand
+  adjustment −5.0. Verified bit-identical to the stress test's `p2_fixed_total_disruption_c0`
+  cumulative series (research/stress-test/lapse-persistence-results.json).
+- Endpoint: **−3,495.4 mb by Dec 2027** (−2,050.5 by Feb 2027). Implied withdrawal beyond the
+  anchor ≈ 2,990 mb ≈ 1.9× the end-Feb figure — feasibility note updated accordingly.
+- The post-1Q27 baseline shut-in schedule (2.717 through Jun 2027, 0 from Jul) is a stated test
+  simplification, not source-derived (EIA says "largely restored in 2H27" without a monthly
+  schedule). Apr-2027-zero variant: −3,742.6 (247 mb lower). Other readings (P1, P3, C1) remain
+  unissued research on /research/lapse-persistence; their spread is a spread of assumptions, not a
+  confidence interval — stated in the copy on the supply page, the model page, and the research page.
+- The extension is labeled a **conditional scenario** ("if the closure persists"), not a central
+  forecast, on the supply page, model page, and research page.
+
+## Files
+- `research/sources/world-stocks-assumptions-v2026-09-18.json` (sha256
+  eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9) — new dated snapshot;
+  holds/standoff unchanged from v2026-09-17; working copy `site/src/data/world-stocks-assumptions.json`
+  synced.
+- `site/src/data/world-stocks.json` — 3 records appended; the three scenario series replaced with
+  the current version's (lapses now 16 points; per-point provenance updated to the v2026-09-18
+  snapshot).
+- `research/MODEL.md` — lapse table regenerated to 16 rows (`--emit-tables`); corridor-lapses
+  narrative rewritten for the conditional extension; sensitivity section extended with the
+  restoration-timing variant.
+- `site/src/pages/index.astro` — y range (−2200, 1400) → (−3800, 1400); tooltip version now
+  derived (`v${activeVersion}`, was hardcoded v2026-09-17); copy/caption/aria carry the
+  conditional label, the 16.2 mb/d fixed-total framing, the research-page link, and the
+  not-a-confidence-interval wording; endpoint label moved with the record (right edge, Dec 2027).
+- `site/src/pages/research/lapse-persistence.astro` — banner + copy now state that the primary
+  variant (P2 + C0) underlies the issued v2026-09-18 conditional scenario; v2026-09-17 records
+  unchanged; remaining variants unissued.
+- `research/scoring/regen-scenarios.py` — selftest updated: the synthetic second-version
+  simulation now issues from the CURRENT (newest) version and uses a synthetic version date
+  strictly after every real version (the old simulation assumed a single real version). All
+  corruptions still fail; all legitimate changes still pass. `--check` and `--selftest` PASS.
+- `site/qa-lapse-stress.mjs` — extended: research-page issued-note/not-a-CI/caption checks (banner
+  is text-transform:uppercase → case-insensitive compare; innerText wraps → whitespace-normalized);
+  public-page checks for the conditional copy, research-page link, dynamic tooltip, 17-point lapse
+  line, y min −3800, and the six right-edge endpoint labels (transform-aware, in-canvas, no
+  overlaps).
+
+## QA / deploy
+Playwright @1440 + @390 on staging: zero console errors on both pages; 56/56 checks PASS; zero
+label overlaps; research page still noindex + excluded from sitemap. Staging version
+`debe1841` (assets identical to `22b54823`, 2026-09-18). Production NOT touched —
+staging-only per the task.

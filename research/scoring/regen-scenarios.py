@@ -395,8 +395,14 @@ def selftest():
     try:
         d = json.load(open(DATA))
         versions = versions_in(d)
-        snap_path = next(iter(versions))                      # the single current snapshot path
+        # The CURRENT (newest) version's snapshot is the one the displayed artifacts are
+        # built from; the selftest stages THAT one into tmp and leaves any older real
+        # versions pointing at their (untouched) repo files, so multi-version coexistence
+        # is exercised against the real older records.
+        snap_path = next(p for p, v in versions.items() if v["version"] == current_version(versions))
         snap_abs = repo_path(snap_path)
+        # Synthetic version date, strictly after every real version date in the data file.
+        SYN_VER = "2026-10-15"
 
         def stage():
             """Fresh temp stage: data copy (pointing its snapshot at tmp), MODEL.md, snapshot."""
@@ -450,17 +456,21 @@ def selftest():
         print("selftest: old observation revised -> PASSES (anchors frozen at issue)")
 
         def two_versions():
-            """The documented issuance workflow: a second dated snapshot + appended records."""
+            """The documented issuance workflow: a dated snapshot + appended records,
+            issued FROM THE CURRENT VERSION (only that version's records are cloned —
+            older real versions stay exactly as they are and keep their own refs)."""
             dd = json.load(open(dp))
             s = json.load(open(f"{tmp}/snapshot.json"))
             s["description"] = "second version (selftest) — same numbers, new date"
             json.dump(s, open(f"{tmp}/snapshot2.json", "w"))
             sha2 = sha256(f"{tmp}/snapshot2.json")
-            src = next(r for r in dd["forecast_records"] if "scenario" in r["record_id"])
-            for rec in list(r for r in dd["forecast_records"] if "scenario" in r["record_id"]):
+            for rec in list(r for r in dd["forecast_records"]
+                            if "scenario" in r["record_id"]
+                            and (r.get("assumptions_ref") or {}).get("path") == f"{tmp}/snapshot.json"):
                 new = json.loads(json.dumps(rec))
-                new["record_id"] = rec["record_id"].replace("-2026-09-17-", "-2026-10-15-")
-                new["issued"] = "2026-10-15"
+                new["record_id"] = re.sub(r"-(\d{4}-\d{2}-\d{2})-global-observed$", f"-{SYN_VER}-global-observed",
+                                          rec["record_id"])
+                new["issued"] = SYN_VER
                 new["assumptions_ref"] = {"path": f"{tmp}/snapshot2.json", "sha256": sha2}
                 dd["forecast_records"].append(new)
             json.dump(dd, open(dp, "w"))
@@ -485,7 +495,7 @@ def selftest():
             json.dump(s, open(f"{tmp}/snapshot-adv.json", "w"))
             r = subprocess.run([sys.executable, __file__, "--emit-records",
                                 "--assumptions", f"{tmp}/snapshot-adv.json",
-                                "--new-version", "2026-09-18", "--data", dp],
+                                "--new-version", SYN_VER, "--data", dp],
                                capture_output=True, text=True)
             if r.returncode != 0:
                 fail(["selftest: --emit-records failed with an advanced anchor:", r.stdout, r.stderr])
