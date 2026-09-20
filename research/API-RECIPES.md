@@ -129,6 +129,7 @@ curl -sG "https://api.eia.gov/v2/petroleum/pnp/wiup/data/" \
    `--data-urlencode`).
 3. **Facet values are case-sensitive** — copy them verbatim from the facet endpoint.
 4. `start`/`end` are `YYYY-MM-DD`; `frequency`, `period`, `offset`, `limit` also supported.
+5. **`startyear` requires `endyear`** (v2, hit Sep 20): "endyear: If a startyear is specified then an endyear must be specified too." The landing-check calls above use neither — keep it that way. And the `data[0]=…` query breaks curl's glob parser: always `-sG` + `--data-urlencode` (the form above), never a bare quoted URL.
 
 ### Landing checks ("has the report landed?" — verified Sep 15, corrected Sep 15 evening)
 
@@ -314,6 +315,19 @@ last completed session; if it's mid-session, the last bar is the live, not-yet-s
 **Site convention:** keep the FRED weekly series pure; add the latest day as a single
 *disclosed* Yahoo point (`wtiWeekly` Sep 10 = 102.93 front-month close; `treasury10y`
 Sep 10 = 4.94). When FRED posts the next morning, the point can be swapped to the FRED value.
+
+**Front-month roll gotcha (hit live, Sep 20):** the `BZ=F`/`CL=F` continuous series
+**re-anchors to the new front month at the roll bar** — when the roll happened at the
+Sep 18 session, a re-pull on Sep 20 showed the Sep 18 bar at $99.29 (Dec Brent) /
+$96.08 (Dec WTI) while Sep 14–17 were unchanged and the news settles for Sep 18 were
+Nov $103.87 / Oct $100.30 (CNBC, MarketScreener, oilprice "Brent Nov 2026"). A ~$4
+"gap" at the next point is the roll (Nov/Oct–Dec basis in a backwardated curve), NOT a
+price move. Before appending any crude point: compare the last bar against the
+news-reported settle of that session; on a mismatch, the series rolled — keep the
+news settle's contract for continuity, disclose the roll in the series note, and check
+the runtime crack (retail × 42 − nearest WTI) for an artifact step. The specific
+contract months are NOT in the v8 `meta` (contractType comes back None) — resolve it
+against news settles (CNBC/MarketScreener close wires) or oilprice.com/futures/*.
 
 **AAA retail (gas/diesel):** no API — `gasprices.aaa.com` is JS-rendered (curl gets a
 bot-filtered page). Use the brave-search skill's `content.js https://gasprices.aaa.com/`:
