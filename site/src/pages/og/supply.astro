@@ -1,28 +1,89 @@
 ---
-// Share card source page: the supply (SPR) chart as a 1200x630 Open Graph image.
+// Share card source page: the "How oil in storage could change through 2027"
+// scenario chart as a 1200x630 Open Graph image.
 // NOT a site page — excluded from the sitemap and robots. scripts/make-og.mjs
 // renders this route with headless Chrome to /og-supply.png after each build.
 // Keep it self-contained: fixed size, no animation, no tooltips, fonts via the
 // same Google Fonts link as the site (headless Chrome loads them fine).
-import { sprWeekly, sprPreWar, DATA_AS_OF, CRISIS_DAY_1 } from "../../data/crisis.ts";
+//
+// Data: the SAME forecast records the dashboard's Panel B draws
+// (src/data/world-stocks.json), rebased to the shared anchor exactly like the
+// dashboard (displayed = stored − stored anchor; records are never modified).
+// Scenario names/colors come from world-stocks-assumptions.json, same as the
+// dashboard. Updated 2026-09-19: replaced the old SPR card (the user wants
+// the world-inventories scenario graph on the share card).
+import { DATA_AS_OF, CRISIS_DAY_1 } from "../../data/crisis.ts";
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+import ws from "../../data/world-stocks.json";
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+import worldStocksAssumptions from "../../data/world-stocks-assumptions.json";
 
 const dayNum = Math.round(
   (Date.parse(DATA_AS_OF) - Date.parse(CRISIS_DAY_1)) / 86400000
 );
-const last = sprWeekly[sprWeekly.length - 1];
-const fmt = (iso: string) =>
-  new Date(iso + "T12:00:00").toLocaleDateString("en-US", {
-    timeZone: "UTC",
-    month: "short",
-    day: "numeric",
-  });
 const asOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", {
   timeZone: "UTC",
   month: "long",
   day: "numeric",
   year: "numeric",
 });
-const drawn = +(sprPreWar - last.level).toFixed(1);
+
+// ---- Same record selection + rebasing as the dashboard's Panel B ----
+const records = (ws as any).forecast_records;
+const activeVersion = records
+  .filter((r: any) => typeof r.record_id === "string" && r.record_id.startsWith("scenario-"))
+  .reduce((max: string, r: any) => {
+    const m = r.record_id.match(/-(\d{4}-\d{2}-\d{2})-global-observed$/);
+    return m && m[1] > max ? m[1] : max;
+  }, "");
+const byId = (id: string) => records.find((r: any) => r.record_id === id);
+const recHolds = byId(`scenario-corridor-holds-${activeVersion}-global-observed`);
+const recStandoff = byId(`scenario-standoff-${activeVersion}-global-observed`);
+const recLapses = byId(`scenario-corridor-lapses-${activeVersion}-global-observed`);
+const recEia = byId("steo-2026-09-global-observed");
+if (!recHolds || !recStandoff || !recLapses || !recEia)
+  throw new Error("og card: missing a forecast record");
+
+const anchor = recHolds.anchor;
+for (const r of [recStandoff, recLapses, recEia])
+  if (r.anchor.period !== anchor.period || r.anchor.value_mb !== anchor.value_mb)
+    throw new Error("og card: records disagree on the anchor");
+const rebase = (v: number) => v - anchor.value_mb;
+
+const axisSet = new Set<string>();
+for (const r of [recHolds, recStandoff, recLapses, recEia]) {
+  axisSet.add(r.anchor.period);
+  for (const t of r.targets) axisSet.add(t.period);
+}
+const labels = [...axisSet].sort();
+const line = (rec: any): (number | null)[] =>
+  labels.map((m) => {
+    const t = rec.targets.find((t: any) => t.period === m);
+    if (t) return rebase(t.target_cumulative_mb);
+    if (m === rec.anchor.period) return 0;
+    return null;
+  });
+const holdsLine = line(recHolds);
+const standoffLine = line(recStandoff);
+const lapsesLine = line(recLapses);
+
+const scMeta = (id: string) => (worldStocksAssumptions as any).scenarios.find((s: any) => s.id === id);
+const scColor = (id: string) => scMeta(id)?.color ?? "#8a867a";
+
+const anchorMonthStr = new Date(anchor.period + "-15T12:00:00").toLocaleDateString("en-US", {
+  month: "long",
+  year: "numeric",
+});
+const signFmt = (v: number) => `${v > 0 ? "+" : "−"}${Math.abs(Math.round(v)).toLocaleString()}`;
+const end = (l: (number | null)[]) => l[labels.length - 1] as number;
+const holdsEnd = end(holdsLine);
+const standoffEnd = end(standoffLine);
+const lapsesEnd = end(lapsesLine);
+const eiaEnd = end(line(recEia));
+const endMonthStr = new Date(labels[labels.length - 1] + "-15T12:00:00").toLocaleDateString("en-US", {
+  month: "long",
+  year: "numeric",
+});
 ---
 
 <!doctype html>
@@ -55,145 +116,185 @@ const drawn = +(sprPreWar - last.level).toFixed(1);
       .faint {
         color: #8a867a;
       }
-      .swatch {
-        display: inline-block;
-        width: 20px;
-        border-top-width: 2px;
-        margin-right: 6px;
-        transform: translateY(-3px);
-      }
     </style>
   </head>
   <body>
     <div
-      style="width: 1200px; height: 630px; box-sizing: border-box; padding: 48px 64px 40px; display: flex; flex-direction: column;"
+      style="width: 1200px; height: 630px; box-sizing: border-box; padding: 44px 64px 36px; display: flex; flex-direction: column;"
     >
       <div class="mono faint" style="font-size: 12.5px; letter-spacing: 0.14em;">
         THE DEPLETION LEDGER · HORMUZ & RED SEA · DAY {dayNum}
       </div>
-      <h1 style="margin: 12px 0 0; font-size: 40px; line-height: 1.05; font-weight: 800; letter-spacing: -0.02em;">
-        The emergency oil reserve is shrinking
+      <h1 style="margin: 10px 0 0; font-size: 38px; line-height: 1.05; font-weight: 800; letter-spacing: -0.02em;">
+        How oil in storage could change through 2027
       </h1>
-      <p class="faint" style="margin: 10px 0 0; font-size: 15px;">
-        US Strategic Petroleum Reserve, million barrels. Solid line: EIA reports. Dotted lines:
-        reserve thresholds. Updated {asOf}.
+      <p class="faint" style="margin: 8px 0 0; font-size: 14.5px;">
+        Change in global oil inventories since {anchorMonthStr}, in million barrels. Zero means
+        unchanged since then — not empty storage. Scenarios adjust the EIA's September 9 forecast.
+        Updated {asOf}.
       </p>
 
-      <div
-        class="mono faint"
-        style="margin-top: 18px; font-size: 12px; display: flex; gap: 28px; align-items: center;"
-      >
-        <span><span class="swatch" style="border-top-style: solid; border-top-color: #1c1b17;"></span>actual (EIA weekly)</span>
-        <span><span class="swatch" style="border-top-style: dotted; border-top-color: rgba(179,38,30,0.55);"></span>reserve thresholds</span>
-      </div>
-
-      <div style="position: relative; flex: 1; margin-top: 8px;">
+      <div style="position: relative; flex: 1; margin-top: 16px;">
         <canvas id="card"></canvas>
       </div>
 
       <div
         class="mono faint"
-        style="display: flex; justify-content: space-between; font-size: 12.5px; margin-top: 14px;"
+        style="display: flex; justify-content: space-between; font-size: 12.5px; margin-top: 12px;"
       >
         <span>
-          {last.level.toFixed(1)}M barrels as of {fmt(last.date)} · down {drawn}M from {sprPreWar.toFixed(1)}M before the war
+          {endMonthStr}: {signFmt(holdsEnd)} <span style="color:{scColor('corridor-holds')}">holds</span> · {signFmt(standoffEnd)} <span style="color:{scColor('standoff')}">standoff</span> · {signFmt(lapsesEnd)} <span style="color:{scColor('corridor-lapses')}">lapses</span> · EIA forecast {signFmt(eiaEnd)} (million barrels)
         </span>
         <span>depletion.org</span>
       </div>
-    </div>
 
-    <script>
-      import Chart from "chart.js/auto";
-      import { sprWeekly } from "../../data/crisis.ts";
+      <script>
+        import Chart from "chart.js/auto";
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        import ws from "../../data/world-stocks.json";
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        import worldStocksAssumptions from "../../data/world-stocks-assumptions.json";
 
-      const fmt = (iso: string) =>
-        new Date(iso + "T12:00:00").toLocaleDateString("en-US", {
-          timeZone: "UTC",
-          month: "short",
-          day: "numeric",
+        // Same record selection + rebasing as the frontmatter (for the legend/footer)
+        // and the dashboard's Panel B.
+        const records = (ws as any).forecast_records;
+        const activeVersion = records
+          .filter((r: any) => typeof r.record_id === "string" && r.record_id.startsWith("scenario-"))
+          .reduce((max: string, r: any) => {
+            const m = r.record_id.match(/-(\d{4}-\d{2}-\d{2})-global-observed$/);
+            return m && m[1] > max ? m[1] : max;
+          }, "");
+        const byId = (id: string) => records.find((r: any) => r.record_id === id);
+        const recHolds = byId(`scenario-corridor-holds-${activeVersion}-global-observed`);
+        const recStandoff = byId(`scenario-standoff-${activeVersion}-global-observed`);
+        const recLapses = byId(`scenario-corridor-lapses-${activeVersion}-global-observed`);
+        const anchor = recHolds.anchor;
+        const rebase = (v: number) => v - anchor.value_mb;
+        const axisSet = new Set<string>();
+        for (const r of [recHolds, recStandoff, recLapses]) {
+          axisSet.add(r.anchor.period);
+          for (const t of r.targets) axisSet.add(t.period);
+        }
+        const labels = [...axisSet].sort();
+        const line = (rec: any): (number | null)[] =>
+          labels.map((m) => {
+            const t = rec.targets.find((t: any) => t.period === m);
+            if (t) return rebase(t.target_cumulative_mb);
+            if (m === rec.anchor.period) return 0;
+            return null;
+          });
+        const holdsLine = line(recHolds);
+        const standoffLine = line(recStandoff);
+        const lapsesLine = line(recLapses);
+        const scMeta = (id: string) =>
+          (worldStocksAssumptions as any).scenarios.find((s: any) => s.id === id);
+        const colors = {
+          holds: scMeta("corridor-holds")?.color ?? "#8a867a",
+          standoff: scMeta("standoff")?.color ?? "#8a867a",
+          lapses: scMeta("corridor-lapses")?.color ?? "#8a867a",
+        };
+        const anchorMonth = new Date(anchor.period + "-15T12:00:00").toLocaleDateString("en-US", {
+          month: "long",
+          year: "numeric",
         });
-      const labels = sprWeekly.map((p) => fmt(p.date));
-      const anchorIdx = sprWeekly.length - 1;
-      const anchorLevel = sprWeekly[anchorIdx].level;
 
-      const directLabels = {
-        id: "directLabels",
-        afterDatasetsDraw(chart: Chart) {
-          const { ctx } = chart;
-          const x = chart.scales.x;
-          const y = chart.scales.y;
-          // floor lines: label at the left edge
-          const floors = [250, 180];
-          ctx.save();
-          ctx.font = "500 11.5px 'IBM Plex Mono', monospace";
-          ctx.fillStyle = "rgba(179,38,30,0.75)";
-          for (const f of floors) {
-            ctx.fillText(
-              f === 250 ? "250M · GEF withdrawal threshold" : "180M · operating limit",
-              x.getPixelForValue(1) + 6,
-              y.getPixelForValue(f) - 6
-            );
-          }
-          ctx.restore();
-        },
-      };
-
-      new Chart(document.getElementById("card")!, {
-        type: "line",
-        data: {
-          labels,
-          datasets: [
-            {
-              data: sprWeekly.map((p) => p.level),
-              borderColor: "#1c1b17",
-              borderWidth: 2.5,
-              pointRadius: 0,
-              tension: 0.1,
-              spanGaps: false,
-            },
-            ...[250, 180].map((f) => ({
-              data: labels.map(() => f),
-              borderColor: "rgba(179,38,30,0.35)",
-              borderDash: [2, 5],
-              borderWidth: 1,
-              pointRadius: 0,
-            })),
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          animation: false, // deterministic screenshots
-          events: [], // no interaction on a card
-          scales: {
-            y: {
-              min: 140,
-              max: 420,
-              grid: { display: false },
-              border: { display: false },
-              ticks: {
-                color: "#8a867a",
-                padding: 8,
-                stepSize: 50,
-                font: { family: "'IBM Plex Mono', monospace", size: 11.5 },
-                callback: (v: unknown) => `${v}M`,
-              },
-            },
-            x: {
-              grid: { display: false },
-              border: { color: "#d8d4c6" },
-              ticks: {
-                color: "#8a867a",
-                padding: 6,
-                maxTicksLimit: 8,
-                font: { family: "'IBM Plex Mono', monospace", size: 11.5 },
-              },
-            },
+        // Zero reference line with its label (the zero's meaning lives on the chart,
+        // like the dashboard's Panel B)
+        const refLabels = {
+          id: "refLabels",
+          afterDatasetsDraw(chart: Chart) {
+            const { ctx, chartArea, scales } = chart;
+            const y = scales.y.getPixelForValue(0);
+            if (y < chartArea.top + 8 || y > chartArea.bottom - 6) return;
+            ctx.save();
+            ctx.font = "11px Georgia, serif";
+            ctx.fillStyle = "#8a867a";
+            ctx.textBaseline = "bottom";
+            ctx.textAlign = "right";
+            ctx.fillText(`0 — no change since ${anchorMonth}`, chartArea.right - 6, y - 3);
+            ctx.restore();
           },
-          plugins: { tooltip: { enabled: false }, legend: { display: false } },
-        },
-        plugins: [directLabels],
-      });
-    </script>
+        };
+
+        const scenarioDs = (
+          data: (number | null)[],
+          color: string,
+          dash: number[] | undefined
+        ) => ({
+          type: "line" as const,
+          data,
+          borderColor: color,
+          borderWidth: 2.2,
+          ...(dash ? { borderDash: dash } : {}),
+          pointRadius: 0,
+          tension: 0,
+        });
+
+        new Chart(document.getElementById("card")!, {
+          type: "line",
+          data: {
+            labels,
+            datasets: [
+              // Zero baseline (the "no change" reference), like Panel B's first dataset
+              {
+                type: "line" as const,
+                data: labels.map(() => 0),
+                borderColor: "#8a867a",
+                borderWidth: 1,
+                pointRadius: 0,
+              },
+              scenarioDs(holdsLine, colors.holds, undefined),
+              scenarioDs(standoffLine, colors.standoff, [5, 3]),
+              scenarioDs(lapsesLine, colors.lapses, [10, 4]),
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: false, // deterministic screenshots
+            events: [], // no interaction on a card
+            layout: { padding: { top: 14, right: 12, bottom: 4 } },
+            scales: {
+              y: {
+                min: -3600,
+                max: 2100,
+                grid: { display: false },
+                border: { display: false },
+                ticks: {
+                  color: "#8a867a",
+                  padding: 8,
+                  stepSize: 1500,
+                  font: { family: "'IBM Plex Mono', monospace", size: 12 },
+                  callback: (v: unknown) => `${v}`,
+                },
+              },
+              x: {
+                grid: { display: false },
+                border: { color: "#d8d4c6" },
+                ticks: {
+                  color: "#8a867a",
+                  padding: 6,
+                  autoSkip: false,
+                  font: { family: "'IBM Plex Mono', monospace", size: 11.5 },
+                  callback: (_v: unknown, i: number) => {
+                    const m = labels[i];
+                    const mm = Number(m.slice(5));
+                    if (i === 0 || i === labels.length - 1)
+                      return `${new Date(m + "-15T12:00:00").toLocaleDateString("en-US", { month: "short" })} ’${m.slice(2, 4)}`;
+                    if (mm !== 1 && mm !== 4 && mm !== 7 && mm !== 10) return "";
+                    if (i <= 2 || labels.length - 1 - i <= 1) return "";
+                    return mm === 1
+                      ? `Jan ’${m.slice(2, 4)}`
+                      : new Date(m + "-15T12:00:00").toLocaleDateString("en-US", { month: "short" });
+                  },
+                },
+              },
+            },
+            plugins: { tooltip: { enabled: false }, legend: { display: false } },
+          },
+          plugins: [refLabels],
+        });
+      </script>
+    </div>
   </body>
 </html>
