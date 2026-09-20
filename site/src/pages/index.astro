@@ -44,7 +44,6 @@ const ws2325 = wsMb.filter((p) => p.period >= "2023-01" && p.period <= "2025-12"
 const ws2325Lo = Math.min(...ws2325.map((p) => p.value));
 const ws2325Hi = Math.max(...ws2325.map((p) => p.value));
 const wsPanelAAria = `OECD on-land oil stocks, commercial plus government-controlled, million barrels. The EIA's monthly levels from ${wsMbFirst.value.toLocaleString()} in January 2021, falling to ${wsDec22.toLocaleString()} by December 2022, then holding between ${ws2325Lo.toLocaleString()} and ${ws2325Hi.toLocaleString()} across 2023 to 2025, then dropping to ${wsMbLastStr} by May 2026 — the lowest month in the series. The shaded band is the same calendar month's range over 2021 to 2025, extended across 2026; ${wsBelowBandStr} 2026 fall below it. A dashed line marks the start of the war, February 28, 2026.`;
-const wsPanelDaysAria = `Line chart in days of forward demand: the IEA's quarter-end OECD stocks, from 102 days in March 2021 down to 86 days at the end of June 2022 — the lowest the free editions cover (third quarter 2020 onward) — ending at 91 days in the first quarter of 2026, a hollow point because it is computed from the IEA's forecast demand. A dashed line marks the start of the war, February 28, 2026.`;
 // Forecast paths come from the forecast records — the stored targets are the source of truth,
 // so the copy, the chart, and the record can never drift apart.
 const wsEiaRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === "steo-2026-09-global-observed");
@@ -99,7 +98,7 @@ const wsHoldsEndMonthStr = wsMonthStr(wsScHoldsEnd.period);
 const wsEiaEndStr = wsSigned(wsRebase(wsEiaEnd.target_cumulative_mb));
 const wsPersEndStr = wsSigned(wsRebase(wsPersEnd.target_cumulative_mb));
 const wsPersMonthlyStr = `−${Math.abs(wsPersMonthly).toFixed(1)}`;
-const wsPanelBAria = `Line chart of the change in global oil inventories since ${wsFcAnchorMonthStr}, in million barrels, rebased so the ${wsFcAnchorMonthStr} reported level is zero — zero means inventories unchanged since that month, not empty storage. Three scenario paths, each a documented monthly adjustment of the Sep 9, 2026 EIA baseline (assumptions on the model page): corridor holds (solid) reaches ${wsHoldsEndStr} by ${wsHoldsEndMonthStr}; standoff (dashed) reaches ${wsStandoffEndStr}; corridor lapses (long dashed) reaches ${wsLapseEndStr} by ${wsLapseEndMonthStr}, where the path ends at its stated validity horizon. Two optional overlays, off by default: the EIA Short-Term Energy Outlook (Sep 9, 2026 release) balance-implied world change, ${wsEiaEndStr} by ${wsMonthStr(wsEiaEnd.period)}; and the recent trend, which repeats the June–August 2026 average monthly change (${wsPersMonthlyStr} million barrels a month), ${wsPersEndStr} by ${wsMonthStr(wsPersEnd.period)}. All paths track the combined crude and products balance, and none counts government stock releases as a loss.`;
+const wsPanelBAria = `Line chart of the change in global oil inventories since ${wsFcAnchorMonthStr}, in million barrels, starting at zero in ${wsFcAnchorMonthStr} — zero means inventories unchanged since that month, not empty storage. Three scenarios adjust the Sep 9, 2026 EIA production and consumption forecast, using assumptions explained on the model page: corridor holds (solid) reaches ${wsHoldsEndStr} by ${wsHoldsEndMonthStr}; standoff (dashed) reaches ${wsStandoffEndStr}; corridor lapses (long dashed) reaches ${wsLapseEndStr} by ${wsLapseEndMonthStr}, the final month calculated. Two optional comparisons, hidden until selected: the EIA Short-Term Energy Outlook (Sep 9, 2026 release) world stock change calculated from production minus consumption, ${wsEiaEndStr} by ${wsMonthStr(wsEiaEnd.period)}; and the recent trend, which repeats the June–August 2026 average monthly change (${wsPersMonthlyStr} million barrels a month), ${wsPersEndStr} by ${wsMonthStr(wsPersEnd.period)}. All lines combine crude oil and refined fuels, and none counts government stock releases as a loss.`;
 
 // Watch list as flat ledger rows (date column + text). Tufte: structure from the date
 // column and whitespace, not boxes or shaded bands.
@@ -199,9 +198,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             <p>
               The Depletion Ledger tracks oil supplies, fuel prices, and how the shortage affects
               people and businesses. You can use the charts below to see what's changed and explore
-              three ways the crisis could unfold. The model assigns odds to each one, tracks the
-              emergency reserve, and keeps a record of its predictions so you can see how they
-              hold up.
+              three possible outcomes. We estimate the chance of each one and how it could change
+              the amount of oil in storage. We save the predictions so you can check them against
+              what happens.
             </p>
           </div>
           <p class="mt-4 font-mono text-xs text-faint tabular">
@@ -266,7 +265,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             <line x1="162" y1="252" x2="144" y2="237" stroke="#b3261e" stroke-width="0.75" opacity="0.6" />
           </svg>
           <figcaption class="mt-2 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-            <span class="block">Hormuz: preliminary Kpler counts, which exclude vessels with tracking signals off — 3 on Sep 16, 12 on Sep 15 (revised up from a preliminary 4), and 7 on Sep 14 · 14 over Sep 12–13 (7/day; The National) · 102 for the week ending Sep 3 (Lloyd&#39;s List) · more than 130/day before the crisis.</span>
+            <span class="block">Hormuz: preliminary Kpler counts, which exclude vessels with tracking signals off — 6 on Sep 16 (revised from 3), 12 on Sep 15 (revised up from a preliminary 4), and 7 on Sep 14 · 14 over Sep 12–13 (7/day; The National) · 102 for the week ending Sep 3 (Lloyd&#39;s List) · more than 130/day before the crisis.</span>
             <span class="mt-1 block">Bab el-Mandeb: the Houthis held Mokha, Perim, and the Hanish islands as of Sep 14. On Sep 15, they claimed 85 vessels had passed through the strait in 72 hours. Kpler counted 21 crossings on Sep 16, 24 on Sep 15.</span>
           </figcaption>
         </figure>
@@ -293,7 +292,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             These charts show how oil, gasoline, diesel, and natural gas prices have changed.
             Brent is a widely used benchmark for the price of crude oil. The gasoline and diesel
             charts use US national averages; the natural gas charts cover Europe and Asia.
-            Every plotted value comes from a source. Missing readings are left out.
+            The captions explain where the readings come from. We leave gaps where data is missing.
           </p>
         </div>
       <!-- US fuels YTD -->
@@ -315,7 +314,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
         <div>
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
             <h2 class="text-xl font-bold tracking-tight">US diesel prices are up 74%</h2>
-            <p class="font-mono text-[11px] text-faint">AAA national, sourced points</p>
+            <p class="font-mono text-[11px] text-faint">AAA national average, selected dates</p>
           </div>
           <div class="h-72">
             <canvas id="dieselChart" role="img" aria-label="US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $6.49 on Sep 19, a tenth straight record."></canvas>
@@ -334,7 +333,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           <div>
             <div class="mb-4">
               <h2 class="text-xl font-bold tracking-tight">Natural gas prices in Europe are up about 153%</h2>
-              <p class="mt-2 font-mono text-[11px] text-faint">TTF, $/MMBtu · filled: EIA weekly futures avgs (Jan–Apr) · hollow: individual contract quotes (May–Sep) · different instruments — a trend, not one series</p>
+              <p class="mt-2 font-mono text-[11px] text-faint">TTF, dollars per million British thermal units ($/MMBtu). Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: individual contract quotes (May–Sep). The two sources measure different contracts, so compare the overall trend with care.</p>
             </div>
             <div class="h-72">
               <canvas id="gasTtfChart" role="img" aria-label="TTF, Europe's gas benchmark, 2026 year to date: $12.40 in January, $11.00 before the closure, spiking to a three-year high of $18.89 on Mar 20, easing to $14.10 after the June ceasefire, $19.90 on Jul 31, then trading above $28 on Sep 10, $27.00 on Sep 11, and about $27.80 on Sep 14 — the highest levels since December 2022. Reference line at the pre-closure week's $10.99."></canvas>
@@ -345,19 +344,19 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
               the highest levels since December 2022.
               That's roughly 153% above the price before the strait closed. The Sep 14 value is
               converted from €81.98 per megawatt-hour to the dollar units used in this chart.
-              Prices have risen as unplanned maintenance at Norway's Asgard and Troll fields and
-              tanker attacks put pressure on supplies.
+              Unplanned maintenance at Norway's Asgard and Troll fields and tanker attacks have
+              reduced supplies as prices have risen.
               </p>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
               By January 20, European gas storage had fallen to 48%, compared with a five-year
-              average of 63%. Running that low left Europe buying liquefied natural gas (LNG) for
-              immediate delivery during the season the strait closed.
+              average of 63%. With less gas in storage, Europe was buying liquefied natural gas (LNG)
+              for immediate delivery during the season when the strait closed.
             </p>
           </div>
           <div>
             <div class="mb-4">
               <h2 class="text-xl font-bold tracking-tight">Natural gas prices in Asia are up about 167%</h2>
-              <p class="mt-2 font-mono text-[11px] text-faint">JKM, $/MMBtu · filled: EIA weekly futures avgs (Jan–Apr) · hollow: assessed spot (May–Sep) · different instruments — a trend, not one series</p>
+              <p class="mt-2 font-mono text-[11px] text-faint">JKM, $/MMBtu. Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: estimated spot prices (May–Sep). Futures and spot prices measure different delivery periods, so compare the overall trend with care.</p>
             </div>
             <div class="h-72">
               <canvas id="gasJkmChart" role="img" aria-label="JKM, Asia's LNG benchmark, 2026 year to date: $10.66 before the closure, spiking to $20.67 on Mar 20, easing to $15.20 on Jun 26, then climbing to $24.50 on Aug 28, the high-$28s on Sep 10 — its highest level in about two and a half years — and about $28.50 on Sep 11. Reference line at the pre-closure week's $10.66."></canvas>
@@ -369,8 +368,8 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
               (JOGMEC). Damaged production units at Qatar's Ras Laffan complex — about 17%
               of the country's LNG export capacity — are expected to be offline for 3–5 years,
               forcing Asian buyers to look elsewhere for supplies.
-              With little gas in storage, the region is particularly sensitive to changes in supply
-              and weather.
+              With little gas in storage, the region has less to fall back on when supplies are
+              disrupted or the weather increases demand.
             </p>
           </div>
         </div>
@@ -381,7 +380,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
         <div class="min-w-0">
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
             <h2 class="text-xl font-bold tracking-tight">Brent and WTI prices are up about 37% and 50%</h2>
-            <p class="font-mono text-[11px] text-faint tabular">Brent: sourced points (EIA monthly avgs: Mar $103.0 · Apr $117.29 · Jul $83.76) · WTI: weekly (FRED)</p>
+            <p class="font-mono text-[11px] text-faint tabular">Brent: selected readings (EIA monthly averages: Mar $103.0 · Apr $117.29 · Jul $83.76). WTI: weekly readings from FRED, plus recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
             <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent rises from about $76 before the war to $103.87 on Sep 18, after a $126 intraday peak in March. WTI closes at $100.30 on Sep 18. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
@@ -392,15 +391,16 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             which is also used in the fuel price spread chart beside this one.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Brent shows selected observations, including March's intraday peak and July's monthly
-            average. Most WTI readings come from FRED's weekly spot series. The readings for
-            Sep 10–11 and Sep 14–18 are futures closes. Hollow markers indicate a source's rounded estimate.
+            The Brent line includes selected readings, such as March's intraday peak and July's
+            monthly average. Most WTI readings are weekly spot prices from the Federal Reserve's
+            FRED database. Sep 10–11 and Sep 14–18 use futures closing prices. Hollow dots mark
+            rounded estimates from the sources.
           </p>
         </div>
         <div class="min-w-0">
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">The diesel price spread is up about 94%</h2>
-            <p class="font-mono text-[11px] text-faint tabular">Retail price less WTI, $/bbl · weekly (EIA/AAA − FRED).</p>
+            <h2 class="text-xl font-bold tracking-tight">The gap between diesel and crude prices has nearly doubled</h2>
+            <p class="font-mono text-[11px] text-faint tabular">Retail fuel price minus WTI, dollars per barrel. EIA/AAA fuel prices; FRED and recent futures closes for WTI.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
             <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. Diesel rises from about $89 in January to $172.1 on Sep 19, its highest plotted value, with a temporary narrowing to $148 on Sep 10. Gasoline rises from about $59 in January to $87.7 on Sep 19. The diesel chart shows selected readings to keep nearby points legible."></canvas>
@@ -411,10 +411,10 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             retailing. It helps explain why prices at the pump can keep rising even when crude gets cheaper.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Diesel's spread rose from about $89 in January to $172.1 on Sep 19, its highest
-            plotted value. It briefly narrowed to $148 on Sep 10, when crude prices rose faster
-            than pump prices.
-            Gasoline's spread has also widened, from about $59 to $87.7.
+            The diesel–crude price gap rose from about $89 in January to $172.1 on Sep 19, an increase of
+            about 94% and its highest plotted value. It briefly narrowed to $148 on Sep 10,
+            when crude prices rose faster than pump prices.
+            The gasoline–crude gap has also widened, from about $59 to $87.7.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The calculation uses retail prices from EIA and AAA, minus WTI from FRED, with futures closes for
@@ -432,8 +432,8 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           <h2 class="text-2xl font-bold tracking-tight">Supply</h2>
           <p class="mt-3 max-w-3xl text-[13px] leading-relaxed text-ink/70">
             When the world uses more oil than it produces, the difference comes out of storage.
-            These charts show how much oil has been withdrawn, how much is left, and where the
-            US emergency reserve stands against its operating thresholds.
+            These charts show changes in stored oil, how stocks could rise or fall under different
+            scenarios, and how much oil remains in the US emergency reserve.
           </p>
         </div>
 
@@ -442,7 +442,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           <h2 class="text-xl font-bold tracking-tight">The world is using more oil than it produces</h2>
           <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
             Before the war, the world produced about 4 million more barrels of oil per day than
-            it used. Since the war began, it has had to draw on stored oil every month.
+            it used. Since the war began, it has needed stored oil every month.
             The IEA's latest report estimates a full-year supply loss of 5.7 million barrels per day,
             about 6% of the world's oil, and expects Middle East oil flows to remain below normal
             until 2027. Global production fell to 100.1 million barrels per day in August, with more
@@ -451,82 +451,14 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           </p>
         </div>
         <div class="h-80 sm:h-[400px]">
-          <canvas id="flipChart" role="img" aria-label="World oil balance, million barrels per day, January to August 2026 actuals: a 3.5 to 4.2 surplus in January and February, then net withdrawals every month after the war began on February 28 — 5.2 in March, the worst month, easing to 0.1 in July and back to 4.1 in August. The zero line marks the flip: above it the world built inventories, below it the world ran on reserves."></canvas>
+          <canvas id="flipChart" role="img" aria-label="World oil balance, million barrels per day, January to August 2026 actuals: a 3.5 to 4.2 surplus in January and February, then net withdrawals every month after the war began on February 28 — 5.2 in March, the worst month, easing to 0.1 in July and back to 4.1 in August. Above zero, production exceeded consumption and stocks grew. Below zero, consumption exceeded production and stocks fell."></canvas>
         </div>
         <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-          World oil balance, million b/d — production minus consumption, EIA STEO Table 3a, reported months
-          (Jan–Aug actuals; the EIA's forecast tail is not shown) · the physical loss peaked at 11.2M b/d of Gulf
-          shut-in in May — demand destruction and non-Gulf supply absorbed most of it · the IEA's observed-inventories count: 507 mb drawn since February —
-          2.8 mb/d on average, 95 mb of it in August alone.
-        </p>
-
-        <!-- Panel A: OECD commercial stocks (levels) -->
-        <div class="mt-12 mb-3">
-          <h2 class="text-xl font-bold tracking-tight">Where OECD oil stocks stand</h2>
-          <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
-            Countries in the OECD — the US, Canada, Mexico, Japan, Korea, Australia, and most of
-            Western Europe — hold on-land stocks of crude and products as a buffer against supply
-            disruption, in tanks, depots, and caverns, held by commercial operators and by
-            governments alike. China isn't a member, so its stockpiles don't count here.
-          </p>
-          <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
-            May 2026, the latest month, is the lowest in the EIA's series back to January 2021,
-            and in { wsBelowBandStr } 2026 the level sat below the bottom of the band — the
-            range the same calendar month took over 2021–2025. The inset shows the IEA's
-            quarter-end stocks in days of forward demand; the lowest, 86 days at end-June 2022,
-            is the lowest quarter-end the free editions cover (third quarter 2020 onward) — a
-            reference point, not a physical floor.
-          </p>
-        </div>
-        <div class="h-80 sm:h-[400px]">
-          <canvas id="oecdStocksChart" role="img" aria-label={ wsPanelAAria }></canvas>
-        </div>
-        <div class="mt-4 h-40 sm:h-44">
-          <canvas id="oecdDaysChart" role="img" aria-label={ wsPanelDaysAria }></canvas>
-        </div>
-        <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-          OECD on-land oil stocks (commercial + government-controlled), million barrels. Main: EIA international dataset, monthly, Jan 2021–May 2026; band: same-calendar-month range, 2021–2025, extended across 2026. Inset: IEA Oil Market Report Table 5 quarter-ends in days of forward demand — how long the stocks would last at the coming quarter's pace of use; latest edition per point, dated in tooltips; end-Q1 2026 (hollow) is computed from the IEA's forecast demand. The IEA's Table 4 publishes commercial-only stocks monthly, but each edition covers just the last five months, so a full commercial-only history would take many editions to assemble. War begins Feb 28, 2026.
-        </p>
-
-        <!-- Panel B: change in global inventories under the three scenarios, rebased to the
-             shared anchor (0 = the anchor month's reported level). -->
-        <div class="mt-12 mb-3">
-          <h2 class="text-xl font-bold tracking-tight">How oil inventories could change</h2>
-          <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
-            These paths show the change in inventories under three supply and demand
-            scenarios. Each starts from the same reported inventory estimate. Changes in
-            shipping, production, or consumption could alter the outcome.
-          </p>
-          <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
-            Every path starts at zero in { wsFcAnchorMonthStr }, the most recent reported
-            estimate; each point is the change in inventories since that month. Zero means
-            unchanged since then, not empty storage. The scenarios are documented monthly
-            adjustments of the Sep 9, 2026 EIA baseline — every adjustment, its reasoning, and
-            the scoring rules are on <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/model/">the model page</a>. The corridor-lapses extension from
-            March 2027 is conditional, not a central forecast.
-          </p>
-        </div>
-        <div class="h-80 sm:h-[380px]">
-          <canvas id="globalObservedChart" role="img" aria-label={ wsPanelBAria }></canvas>
-        </div>
-        <div class="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2">
-          <label class="flex cursor-pointer select-none items-center gap-2 text-sm text-ink/90">
-            <input type="checkbox" id="toggleEia" class="h-4 w-4 cursor-pointer accent-[#6b675c]" />
-            EIA forecast
-          </label>
-          <label class="flex cursor-pointer select-none items-center gap-2 text-sm text-ink/90">
-            <input type="checkbox" id="toggleTrend" class="h-4 w-4 cursor-pointer accent-[#a39d8f]" />
-            Recent trend
-          </label>
-        </div>
-        <p class="mt-1 max-w-prose text-xs leading-relaxed text-faint">
-          EIA forecast is the balance implied by the Sep 9, 2026 Short-Term Energy Outlook
-          release. Recent trend repeats the June–August 2026 average monthly change
-          ({ wsPersMonthlyStr } mb a month). Both start from the same { wsFcAnchorMonthStr } anchor as
-          the scenarios.
-        </p>
-        <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-          Change since { wsFcAnchorMonthStr }, in million barrels. Scenario paths adjust the EIA's September outlook; the optional EIA line uses that outlook unchanged. Recent trend repeats the IEA's June–August average inventory change. The EIA balance and IEA observations cover different inventory pools. Assumptions and scoring: <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/model/">the model page</a>. Alternative assumptions: <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/research/lapse-persistence">the research page</a>.
+          World production minus consumption, million barrels/day. EIA Short-Term Energy Outlook (STEO),
+          Table 3a, January–August 2026; forecasts aren't shown. Gulf production outages peaked at
+          11.2 million barrels/day in May; lower consumption and supply from elsewhere offset much of the loss.
+          Separately, the IEA estimates that observed stocks fell by 507 million barrels since February,
+          an average of 2.8 million barrels/day, including 95 million barrels in August.
         </p>
 
         <div class="mt-12 grid gap-8 lg:grid-cols-[300px_1fr]">
@@ -545,110 +477,86 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           </div>
         </div>
 
-        <!-- Commercial crude inventories: the supply-side ledger, above the SPR -->
-        <div class="mt-12 mb-4 flex flex-wrap items-baseline justify-between gap-2">
-          <h2 class="text-xl font-bold tracking-tight">US commercial crude stocks have recovered from their July low</h2>
-        </div>
-        <div class="mb-6 grid grid-cols-1 gap-x-28 gap-y-5 text-[13px] lg:grid-cols-[65ch_65ch]">
-          <p class="text-[13px] leading-relaxed text-ink/80">
-            These stocks exclude the Strategic Petroleum Reserve (SPR). They stood at 423.4 million
-            barrels on Sep 11, up from 404.5 million on Jul 24. That's 8.1 million barrels above the
-            same week last year and 1% above the five-year average, according to the EIA. SPR releases
-            have helped supply the commercial system this year. Moving that oil out of the reserve
-            doesn't increase the total amount stored across the two stockpiles.
+        <!-- Panel A: OECD commercial stocks (levels) -->
+        <div class="mt-12 mb-3">
+          <h2 class="text-xl font-bold tracking-tight">Oil stocks in OECD countries fell to a five-year low in May</h2>
+          <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
+            The Organisation for Economic Co-operation and Development (OECD) includes the US,
+            Canada, Mexico, Japan, Korea, Australia, and much of Western Europe. This chart shows
+            crude oil and refined fuels stored on land by companies and governments in those
+            member countries. These stocks help make up for interruptions in supply.
+            China isn't an OECD member, so its stockpiles aren't included.
+          </p>
+          <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
+            In May 2026, the latest month shown, stocks were at their lowest in the EIA data
+            since January 2021. The shaded band shows the range for each calendar month from
+            2021 through 2025. Stocks fell below that range in { wsBelowBandStr } 2026.
           </p>
         </div>
-        <div class="relative h-72">
-          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus the same weeks in 2025: 2026 built from 419.1 million in early January to a peak of 465.7 million on Apr 17, were drawn to 404.5 million on Jul 24 — the lowest level since the war began and 22.2 million barrels below the same week in 2025 — rebuilt to 428.9 million on Aug 21, and stood at 423.4 million on Sep 11, 8.1 million barrels above the 2025 level of 415.4 million."></canvas>
+        <div class="h-80 sm:h-[400px]">
+          <canvas id="oecdStocksChart" role="img" aria-label={ wsPanelAAria }></canvas>
         </div>
+        <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+          Company and government oil stocks held on land. EIA international data,
+          monthly, January 2021–May 2026, in million barrels. Shaded range: 2021–2025.
+          The vertical line marks the start of the war on February 28, 2026.
+        </p>
 
-        <p class="mt-3 font-mono text-[11px] text-faint">EIA weekly ending stocks, excl. SPR, million bbl · the Jul 24 low sat 22.2M below the same week in 2025</p>
-
-        <!-- Strategic Petroleum Reserve: the star of the Supply section -->
-        <div class="mt-12 mb-4 flex flex-wrap items-baseline justify-between gap-2">
-          <h2 class="text-xl font-bold tracking-tight">The Strategic Petroleum Reserve is at its lowest level in 44 years</h2>
-          <p class="font-mono text-[11px] text-faint">EIA weekly ending stocks, million bbl</p>
+        <!-- Panel B: change in global inventories under the three scenarios, rebased to the
+             shared anchor (0 = the anchor month's reported level). -->
+        <div class="mt-12 mb-3">
+          <h2 class="text-xl font-bold tracking-tight">How oil in storage could change through 2027</h2>
+          <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
+            The three lines show how oil in storage could change if shipping recovers,
+            the standoff continues, or the corridor closes. For each scenario, we make assumptions
+            about how much oil the world produces and uses.
+          </p>
+          <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
+            Each line starts at zero in { wsFcAnchorMonthStr }.
+            Values below zero mean less oil in storage than in that month; values above zero
+            mean more. Zero means no change, not empty storage.
+          </p>
+          <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
+            These projections depend on those assumptions. They don't account for further cuts
+            in oil use as stocks fall.
+            You can read the assumptions and see how we check the predictions on <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/model/">the model page</a>.
+          </p>
         </div>
-        <div class="mb-6 grid grid-cols-1 gap-x-28 gap-y-5 text-[13px] lg:grid-cols-[65ch_65ch]">
-          <p class="text-[13px] leading-relaxed text-ink/80">
-            The Strategic Petroleum Reserve (SPR) is the US government's emergency supply of crude
-            oil. It was created after the energy shortages of the 1970s. The reserve held 415.4 million
-            barrels when the war began. The latest report, for the week ending Sep 11, puts it at
-            285.0 million, down 0.4 million barrels in a week. Withdrawals slowed for a third straight week,
-            from 1.2 million the week before and 3.1 million the week before that.
-            Oil is being released to help make up for supplies that can't leave the Gulf. You can
-            use the withdrawal rate to see how quickly the emergency supply is being used.
-          </p>
-          <div>
-            <h3 class="flex items-center gap-2 text-[13px] font-bold leading-relaxed text-ink/70">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-                class="h-[15px] w-[15px] shrink-0 text-ink/70"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
-                />
-              </svg>
-              SPR withdrawals could pause even if the crisis continues
-            </h3>
-            <p id="sprChartAssumptions" class="mt-1.5 text-[13px] leading-relaxed text-ink/70">
-              The Department of Energy releases oil from the SPR through contracts and scheduled
-              deliveries. A supply shortage doesn't automatically trigger withdrawals, and once
-              the current program's deliveries end, DOE would have to arrange further releases
-              for withdrawals to continue. The latest reported week averaged about 60,000
-              barrels a day, so the pace can change with each release decision.
-            </p>
-          </div>
+        <div class="h-80 sm:h-[380px]">
+          <canvas id="globalObservedChart" role="img" aria-label={ wsPanelBAria }></canvas>
         </div>
-        <!-- SPR chart (full width) -->
-        <div class="relative h-96">
-            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 285.0 million on Sep 11. Model thresholds at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
-            <div
-              id="sprFloorTip"
-              class="pointer-events-none absolute z-10 hidden max-w-[300px] border border-rule bg-[rgba(255,255,248,0.97)] px-3 py-2 text-[12px] leading-snug text-ink shadow-sm"
-              style="font-family: Georgia, serif"
-            ></div>
-          </div>
-          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The red lines mark the model's reserve thresholds, or <em>floors</em>. At about <span class="font-semibold text-ink">300M</span> barrels, some caverns risk damage and
-            can't safely be refilled after a withdrawal. The first report below that threshold
-            was for the week ending Aug 7, at 298.7 million barrels.
-          </p>
-          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            In its Sep 16 report, the EIA said commercial crude stocks fell 0.6 million barrels. The American
-            Petroleum Institute (API) had reported an increase for that week. Diesel
-            stocks rose for a second straight week, to 107.9 million barrels, but East Coast stocks
-            are still 31% below last year.
-          </p>
-          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The other floors are <span class="font-semibold text-ink">250M</span>, the GEF minimum
-            for sustained withdrawals; <span class="font-semibold text-ink">180M</span>, the hard
-            operating limit; and <span class="font-semibold text-ink">70M</span>, the Department
-            of Energy's stated safe minimum. The model stops withdrawals at 70M.
-          </p>
-          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Weekly withdrawals fell from 3.1 million to 1.2 million, then to
-            0.4 million barrels in the week ending Sep 11. Diesel stocks rose for a second
-            straight week, up 1.6 million barrels, according to the EIA's Sep 16 report.
-          </p>
+        <div class="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2">
+          <label class="flex cursor-pointer select-none items-center gap-2 text-sm text-ink/90">
+            <input type="checkbox" id="toggleEia" class="h-4 w-4 cursor-pointer accent-[#6b675c]" />
+            EIA forecast
+          </label>
+          <label class="flex cursor-pointer select-none items-center gap-2 text-sm text-ink/90">
+            <input type="checkbox" id="toggleTrend" class="h-4 w-4 cursor-pointer accent-[#a39d8f]" />
+            Recent trend
+          </label>
+        </div>
+        <p class="mt-1 max-w-prose text-xs leading-relaxed text-faint">
+          Select a comparison to see the EIA's September 9 forecast or what would happen if the
+          June–August 2026 trend continued ({ wsPersMonthlyStr } million barrels a month).
+          Both use the same starting point as the scenarios.
+        </p>
+        <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+          Change since { wsFcAnchorMonthStr }, in million barrels. We adjust production and
+          consumption from the EIA's September 9 outlook for each scenario. The EIA comparison
+          uses that forecast without our adjustments. Recent trend repeats IEA-reported changes.
+          The two agencies' figures cover different sets of oil stocks.
+        </p>
 
       <!-- Likely outcomes -->
       <section class="mt-12">
         <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-          <h2 class="text-xl font-bold tracking-tight">Three possible outcomes</h2>
-          <p class="font-mono text-[11px] text-faint">Estimated shipping odds, updated when specified events occur.</p>
+          <h2 class="text-xl font-bold tracking-tight">The model's odds for each outcome</h2>
+          <p class="font-mono text-[11px] text-faint">Our estimates, updated when events meet the rules on the model page.</p>
         </div>
         <p class="mb-5 max-w-3xl text-sm leading-relaxed text-ink/80">
-          These odds describe what could happen to shipping. They don't set a pace for the
-          reserve — withdrawals depend on government release decisions, contracts, and delivery
-          schedules.
+          The bars show our estimated chance of each outcome and how those estimates have changed.
+          The colors match the three lines above. A higher percentage means we think that outcome
+          is more likely. It doesn't tell you how accurate the storage projection will be.
         </p>
         <div class="space-y-3">
           {branchWeights.slice().reverse().map((b) => (
@@ -687,22 +595,116 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
 
         <!-- How the weights work — full mechanism moved to the model page (Sep 11 pass) -->
         <p class="mt-8 max-w-4xl text-[13px] leading-relaxed text-ink/75">
-          These odds are based on judgment. They change when specified events occur, such as a
-          pipeline restarting or a shipping agreement breaking down. A quiet week alone doesn't
-          change them. You can read the rules and the events being watched on <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/model/">the model page</a>.
+          We use judgment to assign these odds and set rules in advance for changing them.
+          A pipeline restarting or a shipping agreement breaking down could prompt a change;
+          a quiet week alone wouldn't. You can read the rules and see what we're watching on <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/model/">the model page</a>.
         </p>
       </section>
+
+        <!-- Commercial crude inventories: the supply-side ledger, above the SPR -->
+        <div class="mt-12 mb-4 flex flex-wrap items-baseline justify-between gap-2">
+          <h2 class="text-xl font-bold tracking-tight">US commercial crude stocks have recovered from their July low</h2>
+        </div>
+        <div class="mb-6 max-w-[65ch] text-[13px]">
+          <p class="text-[13px] leading-relaxed text-ink/80">
+            These stocks exclude the Strategic Petroleum Reserve (SPR). They stood at 423.4 million
+            barrels on Sep 11, up from 404.5 million on Jul 24. That's 8.1 million barrels above the
+            same week last year and 1% above the five-year average, according to the EIA. SPR releases
+            have helped supply commercial oil users this year. Moving oil from the reserve to
+            commercial storage leaves the combined amount unchanged.
+          </p>
+        </div>
+        <div class="relative h-72">
+          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus the same weeks in 2025: 2026 stocks rose from 419.1 million in early January to a peak of 465.7 million on Apr 17, fell to 404.5 million on Jul 24 — the lowest level since the war began and 22.2 million barrels below the same week in 2025 — rose again to 428.9 million on Aug 21, and stood at 423.4 million on Sep 11, 8.1 million barrels above the 2025 level of 415.4 million."></canvas>
+        </div>
+
+        <p class="mt-3 font-mono text-[11px] text-faint">EIA weekly stocks, excluding the SPR, in million barrels. The Jul 24 low was 22.2M below the same week in 2025.</p>
+
+        <!-- Strategic Petroleum Reserve: the star of the Supply section -->
+        <div class="mt-12 mb-4 flex flex-wrap items-baseline justify-between gap-2">
+          <h2 class="text-xl font-bold tracking-tight">The Strategic Petroleum Reserve is at its lowest level in 44 years</h2>
+          <p class="font-mono text-[11px] text-faint">EIA weekly ending stocks, million bbl</p>
+        </div>
+        <div class="mb-6 grid grid-cols-1 gap-x-14 gap-y-5 text-[13px] lg:grid-cols-2">
+          <p class="text-[13px] leading-relaxed text-ink/80">
+            The Strategic Petroleum Reserve (SPR) is the US government's emergency supply of crude
+            oil. It was created after the energy shortages of the 1970s. The reserve held 415.4 million
+            barrels when the war began. The latest report, for the week ending Sep 11, puts it at
+            285.0 million, down 0.4 million barrels in a week. Withdrawals slowed for a third straight week,
+            from 1.2 million the week before and 3.1 million the week before that.
+            Oil is being released to help make up for supplies that can't leave the Gulf. You can
+            use the withdrawal rate to see how quickly the emergency supply is being used.
+          </p>
+          <div>
+            <h3 class="flex items-center gap-2 text-[13px] font-bold leading-relaxed text-ink/70">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                class="h-[15px] w-[15px] shrink-0 text-ink/70"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+                />
+              </svg>
+              SPR withdrawals could pause even if the crisis continues
+            </h3>
+            <p id="sprChartAssumptions" class="mt-1.5 text-[13px] leading-relaxed text-ink/70">
+              The Department of Energy releases oil from the SPR through contracts and scheduled
+              deliveries. A supply shortage doesn't automatically trigger withdrawals, and once
+              the current program's deliveries end, DOE would have to arrange further releases
+              for withdrawals to continue. The latest reported week averaged about 60,000
+              barrels a day. The pace can change with each release decision.
+            </p>
+          </div>
+        </div>
+        <!-- SPR chart (full width) -->
+        <div class="relative h-96">
+            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 285.0 million on Sep 11. Model thresholds at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
+            <div
+              id="sprFloorTip"
+              class="pointer-events-none absolute z-10 hidden max-w-[300px] border border-rule bg-[rgba(255,255,248,0.97)] px-3 py-2 text-[12px] leading-snug text-ink shadow-sm"
+              style="font-family: Georgia, serif"
+            ></div>
+          </div>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            The red lines mark the model's reserve thresholds, or <em>floors</em>. At about <span class="font-semibold text-ink">300M</span> barrels, some caverns risk damage and
+            can't safely be refilled after a withdrawal. The first report below that threshold
+            was for the week ending Aug 7, at 298.7 million barrels.
+          </p>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            In its Sep 16 report, the EIA said commercial crude stocks fell 0.6 million barrels. The American
+            Petroleum Institute (API) had reported an increase for that week. Diesel
+            stocks rose for a second straight week, to 107.9 million barrels, but East Coast stocks
+            are still 31% below last year.
+          </p>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            The other floors are <span class="font-semibold text-ink">250M</span>, the GEF minimum
+            for sustained withdrawals; <span class="font-semibold text-ink">180M</span>, the hard
+            operating limit; and <span class="font-semibold text-ink">70M</span>, the Department
+            of Energy's stated safe minimum.
+          </p>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+            Diesel stocks increased by 1.6 million barrels that week, according to the EIA's
+            Sep 16 report.
+          </p>
+
+
 
         <!-- Cavern gauge + supply snapshot + drawdown clock: one row -->
         <div class="mt-12 grid items-start gap-10 lg:grid-cols-3">
         <!-- SPR cavern gauge -->
         <div>
-          <h2 class="mb-4 text-xl font-bold tracking-tight">The stockpile, in context</h2>
+          <h2 class="mb-4 text-xl font-bold tracking-tight">How the reserve compares with past levels</h2>
           <p class="mb-4 text-[13px] leading-relaxed text-faint">
-            This chart puts the current reserve in perspective. It held 727 million barrels at
-            its December 2009 peak and 270.5 million in August 1982. It
-            held 285.0 million on Sep 11. The green line marks the level before the war. In the model,
-            withdrawals stop at the 70 million barrel floor.
+            The reserve held 727 million barrels at its December 2009 peak and 270.5 million
+            in August 1982, compared with 285.0 million on Sep 11. The green line marks the
+            level before the war.
           </p>
           <figure class="relative mx-auto w-full max-w-[280px]">
           <svg id="sprGauge" viewBox="0 0 320 470" role="img" aria-label="SPR level gauge on a scale from 60 to 750 million barrels. Now 285.0, down from 415.4 pre-war. Grey historical markers: 727 all-time peak in December 2009, 592 in the mid-1990s, and 270.5, the August 1982 level. Red dashed lines mark the floors at 300, 250, 180, and 70. Hover any line for details.">
@@ -795,8 +797,8 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
         <div>
           <h2 class="mb-4 text-xl font-bold tracking-tight">How quickly the reserve is shrinking</h2>
           <p class="mb-4 text-[13px] leading-relaxed text-faint">
-            The latest withdrawal rate and the distance to the reserve thresholds,
-            using the EIA's Sep 16 report for the week ending Sep 11.
+            The latest withdrawal rate, using the EIA's Sep 16 report
+            for the week ending Sep 11.
           </p>
           <div class="space-y-6">
             <!-- Quadrant: current SPR drawdown rate -->
@@ -820,28 +822,6 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
               </div>
             </div>
 
-            <!-- Quadrant: distance to the reserve thresholds (no projected dates) -->
-            <div class="flex flex-col justify-between border border-rule p-5">
-              <div>
-                <p class="text-sm font-semibold leading-snug text-ink">Distance to the reserve thresholds</p>
-                <p class="tabular mt-2 font-mono text-3xl font-semibold text-alarm">
-                  35.0<span class="ml-1 text-sm font-medium text-ink/60">M barrels to 250M</span>
-                </p>
-                <p class="mt-2 text-xs leading-relaxed text-ink/75">
-                  Measured from the reported 285.0M barrels on Sep 11. 250M is the operational
-                  minimum cited by the reserve's operators; 180M is the hard operating limit
-                  (105.0M away).
-                </p>
-                <p class="mt-2 text-sm font-medium leading-relaxed text-ink">
-                  There's no projected date. Withdrawals run through DOE contracts and
-                  scheduled deliveries, and they could pause.
-                </p>
-              </div>
-              <p class="border-t border-rule/70 pt-2 text-[11px] leading-relaxed text-faint">
-                The first report below the 300M cavern threshold was for the week ending Aug 7,
-                at 298.7M barrels.
-              </p>
-            </div>
           </div>
         </div>
         </div>
@@ -867,13 +847,13 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           <div class="lg:col-span-2">
             <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
               <h2 class="text-xl font-bold tracking-tight">US refineries have run above 95% of capacity since June</h2>
-              <p class="font-mono text-[11px] text-faint">Utilization, % of operable capacity, weekly.</p>
+              <p class="font-mono text-[11px] text-faint">Share of available refinery capacity in use, weekly.</p>
             </div>
             <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
               US refineries have operated above 95% of their available capacity every week since
               Jun 5, reaching 98.0% in the week ending Aug 28 and easing to 96.8% in the week
-              ending Sep 11. Across the January–September weeks shown, utilization averaged 90.7%
-              in 2025 and 93.6% in 2026.
+              ending Sep 11. Across the January–September weeks shown, refineries used an average
+              of 90.7% of their capacity in 2025 and 93.6% in 2026.
               Fuel exports also reached a record 8 million barrels per day in August, according to
               OPEC. US plants are working close to capacity, but shortages in Europe, Asia, and
               Russia continue to put pressure on fuel supplies.
@@ -882,9 +862,10 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
               <canvas id="refineryChart" role="img" aria-label="US refinery utilization, percent of operable capacity, weekly: 2026 above 2025 from spring onward — a dip to 88.6 percent in late February, then a steady climb from 95.3 on Jun 5 to a 98.0 peak on Aug 28, easing to 96.8 on Sep 11; the same period in 2025 ranged from 83.5 to 96.9."></canvas>
             </div>
             <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-              EIA Weekly Petroleum Status Report (WPULEUS3), week ending Friday · utilization = gross inputs ÷ latest reported
-              operable capacity (EIA's definition) · 2025 line = same Jan–Sep window · in mb/d: runs 16.3–17.3 (STEO 4a),
-              above 2025 in every month · see the fuel price spread chart in Prices for the effect on costs.
+              EIA Weekly Petroleum Status Report (WPULEUS3), weeks ending Friday. Utilization is the
+              amount processed divided by available capacity. Both lines cover the same Jan–Sep period.
+              Monthly processing volumes were 16.3–17.3 million barrels/day (STEO Table 4a), above 2025
+              in every month. The fuel price gap chart in Prices shows how fuel and crude prices compare.
             </p>
           </div>
           <div>
@@ -911,7 +892,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
         <div class="mt-12">
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
             <h2 class="text-xl font-bold tracking-tight">Estimates put Russia's lost refining capacity at 20–54%</h2>
-            <p class="font-mono text-[11px] text-faint">estimated capacity remaining, % of pre-strike</p>
+            <p class="font-mono text-[11px] text-faint">Estimated capacity remaining, as a share of capacity before the strikes</p>
           </div>
           <div class="relative h-96">
             <canvas id="russiaChart" role="img" aria-label="Estimated remaining Russian refining capacity, September 2024 to September 2026: flat at 100 percent until strikes began in August 2025, about 75 percent by April 2026, about 70 percent by August 29, with current estimates spread between 46 and 80 percent remaining."></canvas>
@@ -926,7 +907,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           </p>
           <div class="mt-8 grid gap-10 lg:grid-cols-2">
             <div>
-              <h3 class="text-sm font-bold tracking-tight">Russia snapshot</h3>
+              <h3 class="text-sm font-bold tracking-tight">Russian refinery outages and fuel shortages</h3>
               <div class="mt-3 border border-rule rounded-md">
                 {
                   russiaSnapshot.map((r, i) => (
@@ -943,7 +924,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
               </div>
             </div>
             <div>
-              <h3 class="text-sm font-bold tracking-tight">The export ban calendar</h3>
+              <h3 class="text-sm font-bold tracking-tight">When Russia’s export bans expire</h3>
               <p class="mt-1 text-[13px] leading-relaxed text-ink/70">
                 Russia's export restrictions leave less fuel available to other countries during the
                 heating season. The diesel export ban expires on Sep 30, and the jet-fuel export ban,
@@ -978,8 +959,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           <p class="mt-3 max-w-3xl text-[13px] leading-relaxed text-ink/70">
             Higher energy costs affect more than your fuel bill. They can slow business activity,
             keep inflation high, and eventually make food more expensive. People and businesses
-            also use less oil when they can no longer afford it. Economists call this <em>demand destruction</em>. The charts below show that decline alongside recession
-            estimates, interest rates, and the possible effects on food prices.
+            also use less oil when they can no longer afford it. Economists call this <em>demand
+            destruction</em>. Below, you can compare oil use with last year's levels and see the
+            latest recession estimates, interest rates, and possible effects on food prices.
           </p>
         </div>
 
@@ -987,7 +969,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
         <div class="grid gap-10 lg:grid-cols-3">
           <div class="lg:col-span-2">
             <h3 class="text-lg font-bold tracking-tight">World oil use fell about 4% in May compared with last year</h3>
-            <p class="mt-2 font-mono text-[11px] text-faint">World petroleum & liquid fuels consumption, mb/d · monthly (EIA STEO, Sep 9 release) · Jan – Aug, 2026 vs 2025.</p>
+            <p class="mt-2 font-mono text-[11px] text-faint">World oil and other liquid fuel use, million barrels/day. EIA STEO, Sep 9 release; January–August, 2026 vs 2025.</p>
             <div class="mt-4 h-72">
               <canvas id="demandChart" role="img" aria-label="World petroleum consumption, 2026 versus the same months of 2025, in million barrels per day: in line with last year through March, then falling away — 99.2 in May, 4.3 below the prior year, 101.8 in July, 3.6 below — recovering to 103.7 in August, within 0.8 of the year earlier."></canvas>
             </div>
@@ -1000,13 +982,13 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
               ease from 5.3 million in Q2 to 3.4 million in Q3 and 2.0 million in Q4, followed by a
               2.6 million barrel per day recovery in 2027. The losses are concentrated in fuels such
               as diesel and in raw materials used to make chemicals, especially in Asia.
-              These estimates aren't universally agreed on. OPEC expects demand to grow by 0.4 million
-              barrels per day in 2026, a difference of 2.9 million between the two forecasts.
+              OPEC expects a different result: demand growth of 0.4 million barrels per day in
+              2026. That's a difference of 2.9 million between the two forecasts.
             </p>
             <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-              EIA STEO Table 3e (Sep 9 2026, forecast completed Sep 3) · Jan–Aug 2026 are actuals in
-              that release · world/regional values are EIA estimates (apparent consumption, incl.
-              refinery fuel & bunkering) · Sep 2026 onward is forecast, not shown.
+              EIA STEO Table 3e, Sep 9 2026; forecast completed Sep 3. The release lists Jan–Aug
+              as historical data, though world and regional consumption figures are estimates.
+              They include fuel used by refineries and ships. Forecasts from Sep 2026 onward aren't shown.
             </p>
           </div>
           <div>
@@ -1042,8 +1024,8 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           <div>
             <h3 class="text-lg font-bold tracking-tight">The Fed raised rates on Sep 16</h3>
             <p class="mt-2 max-w-prose text-[13px] leading-relaxed text-faint">
-              The Federal Reserve can cut interest rates to support a slowing economy, but persistent
-              inflation makes that harder. August producer prices rose 5.4% from a year earlier.
+              The Federal Reserve can cut interest rates to help a slowing economy, but inflation
+              makes that harder when prices are still rising too quickly. August producer prices rose 5.4% from a year earlier.
               Consumer inflation held at 3.4%, with energy up 16.3%, while core inflation eased to
               2.4%.
             </p>
@@ -1074,9 +1056,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
         <div class="mt-12">
           <h3 class="text-lg font-bold tracking-tight">Borrowing costs and inflation</h3>
           <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
-            You can see the wider effects in borrowing costs and everyday prices. Both are at
-            multi-year highs. In its Sep 16 rate decision, the Fed cited elevated inflation
-            and described the economy as growing at a solid pace.
+            Borrowing costs and everyday prices are both at multi-year highs. In its Sep 16
+            rate decision, the Fed said inflation remained high and the economy was growing
+            at a solid pace.
           </p>
 
           <div class="mt-6 grid gap-10 lg:grid-cols-2">
@@ -1110,18 +1092,18 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
               <h3 class="text-lg font-bold tracking-tight">US producer prices are rising faster than consumer prices</h3>
               <p class="mt-2 font-mono text-[11px] text-faint">CPI (retail, amber) + PPI final demand (wholesale, blue) · % year-over-year · monthly (BLS) · Jan – Aug.</p>
               <div class="mt-4 h-72">
-                <canvas id="cpiChart" role="img" aria-label="US price inflation, 2026, percent year-over-year: consumer prices (CPI) 2.39 in January and 2.41 in February before the war, jumping to 3.3 in March and 3.8 in April, peaking at 4.2 in May, easing to 3.4 in July and holding at 3.4 in August (energy up 16.3% for the year did the work); wholesale prices (PPI) rising from 3.1 in January to a May peak of 5.9, at 5.4 in August. Reference line at the Fed's 2 percent target."></canvas>
+                <canvas id="cpiChart" role="img" aria-label="US price inflation, 2026, percent year-over-year: consumer prices (CPI) 2.39 in January and 2.41 in February before the war, jumping to 3.3 in March and 3.8 in April, peaking at 4.2 in May, easing to 3.4 in July and holding at 3.4 in August (energy prices were up 16.3% from a year earlier); wholesale prices (PPI) rising from 3.1 in January to a May peak of 5.9, at 5.4 in August. Reference line at the Fed's 2 percent target."></canvas>
               </div>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 Consumer inflation rose from about 2.4% to 4.2% in three months as fuel became more
                 expensive. It eased to 3.4% in July and stayed there in August. Prices rose 0.4% in
                 August alone, with gasoline's 3.9% increase accounting for more than a third of that rise.
-                Core inflation, which excludes food and energy, eased from 2.5% to 2.4% over the year,
+                The annual rate of core inflation, which excludes food and energy, eased from 2.5% to 2.4%,
                 although its 0.3% monthly increase was above expectations.
                 Producer prices rose faster, peaking at 5.9% in May and increasing 5.4% in August
                 compared with a year earlier. July's reading was revised to 4.8%. Energy explains
-                much of the increase, with diesel up 24.1%. These costs can reach businesses before
-                they show up in household spending (BLS, Sep 10–11).
+                much of the increase, with diesel up 24.1%. Businesses can face these higher costs
+                before consumers see them in prices (BLS, Sep 10–11).
               </p>
             </div>
           </div>
@@ -1135,8 +1117,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             take more than a year to reach your grocery bill.
           </p>
           <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
-            The timeline uses the 2007–08 and 2022 shocks to illustrate when those costs could
-            reach food prices. It's a rough historical comparison, not a forecast from this model.
+            The timeline uses delays seen after energy prices rose in 2007–08 and 2022 to show
+            when food prices could rise. It's a rough comparison with those periods, not a
+            forecast from this model.
           </p>
           <div class="mt-5 grid grid-cols-1 border border-rule sm:grid-cols-3">
             {
@@ -1154,9 +1137,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           </div>
           <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
             Higher energy prices can raise freight and fertilizer costs, affect planting and
-            harvests, and eventually raise food prices. The bars show approximate windows based
-            on the 2007–08 and 2022 shocks. Food prices could remain under pressure after oil
-            reserves have reached the model's thresholds.
+            harvests, and eventually raise food prices. The bars show approximate periods based
+            on the 2007–08 and 2022 price increases. The effects on food prices can take more
+            than a year to appear.
           </p>
         </div>
       </section>
@@ -1188,9 +1171,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           <div class="mb-4">
             <h2 class="text-xl font-bold tracking-tight">Where shortages could appear next</h2>
             <p class="mt-1 text-[13px] text-faint">
-              These are estimates of where shortages could become more severe if the crisis
-              continues. The first two dates use published stock levels; the others are inferred
-              from customs and inventory data. Allow for uncertainty of a week or two.
+              These estimates show where shortages could worsen if the crisis continues.
+              The first two dates use published stock levels; the others are estimated from
+              customs and inventory data. The timing could be a week or two earlier or later.
             </p>
           </div>
           <div class="space-y-5">
@@ -1281,7 +1264,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
       // Direct labels at specific data points (replaces legends)
       const directLabels = (specs: {
         dataset: number; index: number; text: string;
-        dx?: number; dy?: number; align?: CanvasTextAlign;
+        dx?: number; dy?: number | ((chart: Chart) => number); align?: CanvasTextAlign;
         color?: string; font?: string;
       }[]) => ({
         id: "directLabels",
@@ -1296,7 +1279,8 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             ctx.fillStyle = s.color || "#1c1b17";
             ctx.textAlign = s.align || "center";
             ctx.textBaseline = "middle";
-            ctx.fillText(s.text, el.x + (s.dx ?? 0), el.y + (s.dy ?? -14));
+            const dy = typeof s.dy === "function" ? s.dy(chart) : (s.dy ?? -14);
+            ctx.fillText(s.text, el.x + (s.dx ?? 0), el.y + dy);
             ctx.restore();
           }
         },
@@ -1801,7 +1785,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
                   label: (ctx) =>
                     ctx.datasetIndex === 0
                       ? ` ${russiaCapacityAnchors[ctx.dataIndex].label}`
-                      : ` estimates now: ${russiaCurrentSpread.low}–${russiaCurrentSpread.high}% remaining (spread of sources)`,
+                      : ` Current estimates: ${russiaCurrentSpread.low}–${russiaCurrentSpread.high}% remaining (sources disagree)`,
                 },
               },
             },
@@ -2408,7 +2392,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
         data: {
           datasets: [
             {
-              label: "Diesel less WTI",
+              label: "Diesel minus WTI",
               data: dieCrack,
               borderColor: "#b3261e",
               borderWidth: 1.75,
@@ -2417,7 +2401,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
               ...markers(dieCrack.map(() => ({ approx: false })), "#b3261e"),
             },
             {
-              label: "Gasoline less WTI",
+              label: "Gasoline minus WTI",
               data: gasCrack,
               borderColor: "#8a867a",
               borderWidth: 1.5,
@@ -2633,7 +2617,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
                 label: (ctx: { dataIndex: number; dataset: { label: string } }) => {
                   const isPpi = ctx.dataset.label === "US PPI YoY";
                   const p = (isPpi ? ppiYtd : cpiYtd)[ctx.dataIndex];
-                  return ` ${ctx.dataset.label}: ${p.value.toFixed(isPpi ? 1 : 2)}% YoY — BLS`;
+                  return ` ${isPpi ? "Producer prices" : "Consumer prices"}: ${p.value.toFixed(isPpi ? 1 : 2)}% above a year earlier — BLS`;
                 },
               },
             },
@@ -2764,11 +2748,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
       }
 
       // Panel A: OECD on-land stocks (commercial + government-controlled) — EIA monthly
-      // levels (mb, left axis) + IEA quarter-end days of forward demand (right axis) +
-      // same-calendar-month 2021–2025 range (extended across 2026). Reported observations
-      // except the end-Q1 2026 days value (computed from forecast demand → hollow). The
-      // x-axis ends where the data ends (May 2026); later months were unavailable in the
-      // sources retrieved.
+      // levels (mb) + same-calendar-month 2021–2025 range (extended across 2026).
+      // Reported observations. The x-axis ends where the data ends (May 2026); later
+      // months were unavailable in the sources retrieved.
       {
         const months: string[] = ws.series.oecd_onland_mb.points.map((p) => p.period);
         const mbVals: number[] = ws.series.oecd_onland_mb.points.map((p) => p.value);
@@ -2781,16 +2763,6 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
         };
         const bandUpper = months.map((_, i) => bandAt(i)?.[1] ?? null);
         const bandLower = months.map((_, i) => bandAt(i)?.[0] ?? null);
-        // IEA quarter-ends map onto month-end labels (Mar/Jun/Sep/Dec); 2020Q3–Q4 predate the axis.
-        const daysPts = ws.series.oecd_days_cover_quarterly.points;
-        const daysVals: (number | null)[] = months.map(() => null);
-        for (const p of daysPts) {
-          const i = months.indexOf(p.period.slice(0, 7));
-          if (i >= 0) daysVals[i] = p.value;
-        }
-        // Keyed by YYYY-MM (the axis labels) — the stored periods are full YYYY-MM-DD.
-        const daysIdxByPeriod = new Map(daysPts.map((p, i) => [p.period.slice(0, 7), i] as const));
-        const q1_2026_i = months.indexOf("2026-03"); // the days point computed from forecast demand
         const warIdx = months.indexOf("2026-02");
         const warLine = {
           id: "warLine",
@@ -2884,80 +2856,14 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             crosshair,
             warLine,
             directLabels([
+              // Inside the band on desktop; below the band's bottom edge on narrow screens,
+              // where the 65-month line is dense and the in-band label reads as clutter.
+              { dataset: 1, index: 1, text: "2021–2025 range", align: "left", dx: 4, dy: (chart) => (chart.width < 500 ? 12 : -31), color: "#8a6a1f" },
               { dataset: 2, index: mbVals.length - 1, text: `${mbVals[mbVals.length - 1].toLocaleString()} — lowest since Jan 2021`, align: "right", dx: -8, dy: 18 },
             ]),
           ],
         });
 
-        // Inset: IEA quarter-end stocks in days of forward demand. A separate chart keeps
-        // its labels off the million-barrel chart (they collided on the dual axis at
-        // narrow widths). The end-Q1 2026 value is computed from the IEA's forecast demand
-        // (Table 5 footnotes) — hollow per the estimate convention.
-        new Chart(document.getElementById("oecdDaysChart")!, {
-          type: "line",
-          data: {
-            labels: months,
-            datasets: [
-              {
-                label: "Days of forward demand (IEA, quarter-ends)",
-                data: daysVals,
-                borderColor: "#3d6b64",
-                borderWidth: 1.5,
-                pointRadius: 3,
-                pointBackgroundColor: daysVals.map((_, i) => (i === q1_2026_i ? "#f2f1ec" : "#3d6b64")),
-                pointBorderColor: "#3d6b64",
-                spanGaps: false,
-                tension: 0.1,
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: { mode: "index", axis: "x", intersect: false },
-            layout: { padding: { top: 16, right: 8 } },
-            scales: {
-              y: yScale(80, 112, (v) => `${v}`, 4, "days"),
-              x: {
-                grid: { display: false },
-                border: { display: true, color: "#d8d4c6", width: 0.5 },
-                ticks: {
-                  color: "#8a867a",
-                  padding: 8,
-                  maxTicksLimit: 8,
-                  autoSkip: false,
-                  callback: (_v: unknown, i: number) => (Number(months[i].slice(5)) === 1 ? mLabel(months[i]) : ""),
-                },
-              },
-            },
-            plugins: {
-              tooltip: {
-                filter: (item) => item.parsed.y != null,
-                callbacks: {
-                  title: (items) => {
-                    const m = months[items[0].dataIndex];
-                    return new Date(m + "-15T12:00:00").toLocaleDateString("en-US", { month: "long", year: "numeric" });
-                  },
-                  label: (ctx) => {
-                    const pt = daysPts[daysIdxByPeriod.get(months[ctx.dataIndex])];
-                    if (!pt) return null;
-                    const flag = pt.status === "derived" ? " — computed from IEA forecast demand" : "";
-                    return ` Days of forward demand: ${pt.value}${flag} (${pt.published})`;
-                  },
-                },
-              },
-            },
-          },
-          plugins: [
-            crosshair,
-            warLine,
-            directLabels([
-              { dataset: 0, index: months.indexOf("2021-06"), text: "days of demand — IEA quarter-ends", align: "left", dx: 6, dy: -14, color: "#3d6b64" },
-              { dataset: 0, index: months.indexOf("2022-06"), text: "86 days — lowest, 2020Q3–2026Q1", align: "center", dy: -18, color: "#3d6b64" },
-              { dataset: 0, index: q1_2026_i, text: "91 (end-Q1 2026, forecast demand)", align: "right", dx: -8, dy: 18, color: "#3d6b64" },
-            ]),
-          ],
-        });
       }
 
       // Panel B: the change in global inventories under the three scenarios, rebased to the
@@ -3083,7 +2989,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
               // thinner, lighter, smaller markers. Same dash identities as before.
               {
                 type: "line" as const,
-                label: `EIA STEO balance-implied (mb since ${anchorMonthShort})`,
+                label: `EIA forecast (mb since ${anchorMonthShort})`,
                 data: eiaLine,
                 borderColor: "rgba(107,103,92,0.55)",
                 borderWidth: 1,
@@ -3162,10 +3068,10 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
                     if (ctx.parsed.y === null) return null;
                     if (ctx.datasetIndex >= 1 && ctx.datasetIndex <= 3) {
                       const sid = ["corridor-holds", "standoff", "corridor-lapses"][ctx.datasetIndex - 1];
-                      return ` ${scName(sid)} (model scenario, v${activeVersion}, over the Sep 9 EIA baseline): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
+                      return ` ${scName(sid)} (scenario published ${activeVersion}; adjusts the Sep 9 EIA forecast): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
                     }
                     if (ctx.datasetIndex === 4)
-                      return ` EIA STEO balance-implied (Sep 9, 2026 release): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
+                      return ` EIA forecast (production minus consumption, Sep 9, 2026 release): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
                     if (ctx.datasetIndex === 5)
                       return ` Recent trend (Jun–Aug 2026 average, repeated): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
                     return null;
@@ -3195,7 +3101,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
                 if (eiaDec26)
                   out.push({ dataset: 4, index: axisIdx("2026-12"), text: `${signFmt(eiaLine[axisIdx("2026-12")]!)} — EIA (Dec 2026)`, dy: 18, color: "#8a867a", font: "10.5px Georgia, serif" });
                 const eiaEnd = eiaRec.targets[eiaRec.targets.length - 1].period;
-                out.push({ dataset: 4, index: axisIdx(eiaEnd), text: `${signFmt(eiaLine[axisIdx(eiaEnd)]!)} — EIA balance-implied`, align: "right" as "right" | "left", dx: -4, dy: 16, color: "#8a867a", font: "10.5px Georgia, serif" });
+                out.push({ dataset: 4, index: axisIdx(eiaEnd), text: `${signFmt(eiaLine[axisIdx(eiaEnd)]!)} — EIA forecast`, align: "right" as "right" | "left", dx: -4, dy: 16, color: "#8a867a", font: "10.5px Georgia, serif" });
                 const persEnd = persRec.targets[persRec.targets.length - 1].period;
                 out.push({ dataset: 5, index: axisIdx(persEnd), text: `${signFmt(persLine[axisIdx(persEnd)]!)} — recent trend`, align: "right" as "right" | "left", dx: -4, dy: 18, color: "#8a867a", font: "10.5px Georgia, serif" });
                 return out;
@@ -3223,7 +3129,6 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
         (window as any).__charts[id] = Chart.getChart(document.getElementById(id)!);
       }
       (window as any).__charts["oecdStocksChart"] = Chart.getChart(document.getElementById("oecdStocksChart")!);
-      (window as any).__charts["oecdDaysChart"] = Chart.getChart(document.getElementById("oecdDaysChart")!);
       (window as any).__charts["globalObservedChart"] = Chart.getChart(document.getElementById("globalObservedChart")!);
     </script>
   </body>

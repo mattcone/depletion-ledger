@@ -1,0 +1,620 @@
+---
+// Research page — NOT built or published — parked here (outside src/pages) on 2026-09-19 at the user's direction; the dashboard links were removed. Restoring = move back to src/pages/research/ (imports are depth-unchanged).
+// The standoff scenario's 2027 production rise (v2026-09-18) was a chosen
+// shape with no physical story. This page settled the redefinition
+// (A: no net Gulf recovery, explicit non-Gulf growth) and quantified the
+// alternative (sensitivity B: explicit half-rate Gulf workaround recovery),
+// deriving the baseline adjustments from the intended production paths.
+// A has since been ISSUED as the v2026-09-19 standoff record; the
+// superseded v2026-09-18 record is preserved for scoring. B is NOT issued.
+// Every number in the copy/tables below is derived from the results JSON —
+// the script research/stress-test/standoff-recovery.py is the single writer
+// of the data file.
+import "../../styles/global.css";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteMeta from "../../components/SiteMeta.astro";
+import TopNav from "../../components/TopNav.astro";
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+import results from "../../data/standoff-recovery.json";
+
+const meta = results.meta;
+const months = results.months as string[];
+const issued = results.issued;
+const candidate = results.candidate;
+const variant = results.variant;
+const superseded = results.superseded;
+const baseRef = results.baseline_balance;
+const anchor = meta.anchor;
+const mech = meta.mechanism;
+const cand = meta.candidate_a;
+
+// ---- x-axis: Aug 2026 .. Dec 2027 (17 points; forecasts start at index 1) ----
+const SHORT = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const FULL = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const ym: [number, number][] = [];
+ym.push([2026, 8]);
+for (const p of months) ym.push([parseInt(p.slice(0, 4), 10), parseInt(p.slice(5), 10)]);
+const xLabels = ym.map(([y, m], i) =>
+  SHORT[m - 1] + (i === 0 || m === 1 ? ` '${String(y).slice(2)}` : ""));
+const xFull = ym.map(([y, m]) => `${FULL[m - 1]} ${y}`);
+
+// ---- display helpers (round only for display; JSON keeps full precision) ----
+const fmtMb = (v: number) => (v < 0 ? "\u2212" : "+") + Math.round(Math.abs(v)).toLocaleString("en-US");
+const fmtMb1 = (v: number) => (v < 0 ? "\u2212" : "+") + Math.abs(v).toFixed(1);
+
+// ---- derived figures for the copy ----
+const issuedEnd = meta.issued_record.endpoint_cumulative_mb;       // = A (v2026-09-19)
+const supEnd = meta.superseded_record.endpoint_cumulative_mb;      // v2026-09-18
+const varEnd = meta.variant_endpoint_cumulative_mb;                // B
+const gulfValue = meta.gulf_sensitivity_value_mb;
+const baseEnd = baseRef[baseRef.length - 1].cumulative_mb;
+
+// First month each path's balance turns positive (data-driven copy).
+// issued/superseded are 17 rows (anchor + 16); candidate/variant are 16 rows (no anchor).
+const firstPositive = (rows: { monthly_mb: number | null }[]) =>
+  rows.findIndex((r) => (r.monthly_mb ?? 0) > 0);
+const supPosIdx = firstPositive(superseded);    // 12 -> xFull[12] = Aug 2027
+const varPosIdx = firstPositive(variant);       // 13 -> xFull[14] = Oct 2027
+
+const monthRows = candidate.map((row, i) => ({
+  label: `${SHORT[parseInt(row.period.slice(5), 10) - 1]} ${row.period.slice(0, 4)}`,
+  aP: row.intended_prod_mb_d,
+  bP: variant[i].intended_prod_mb_d,
+  baseP: row.baseline_prod_mb_d,
+  dPA: row.delta_p_mb_d,
+  dPB: variant[i].delta_p_mb_d,
+  scenC: row.scenario_cons_mb_d,
+  aCum: row.cumulative_mb,
+  bCum: variant[i].cumulative_mb,
+  supCum: superseded[1 + i].cumulative_mb,
+}));
+const signed = (v: number, dp = 2) => (v < 0 ? "\u2212" : "+") + Math.abs(v).toFixed(dp);
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Depletion Ledger — Standoff: the no-net-Gulf-recovery definition</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta
+      name="description"
+      content="The standoff scenario redefined — no net Gulf recovery, explicit non-Gulf growth — issued as v2026-09-19, with the half-rate Gulf-recovery alternative quantified as sensitivity B. Research page."
+    />
+    <SiteMeta
+      title="The Depletion Ledger — Standoff: the no-net-Gulf-recovery definition"
+      description="The standoff scenario redefined — no net Gulf recovery, explicit non-Gulf growth — issued as v2026-09-19, with the half-rate Gulf-recovery alternative quantified as sensitivity B. Research page."
+      url="/research/standoff-recovery"
+    />
+    <!-- Research preview: not part of the published forecast surface. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <TopNav current="research" />
+
+    <header class="border-b border-rule py-10">
+      <p class="mb-2 text-[13px] font-semibold uppercase tracking-wider text-ink/60">
+        Research page &middot; unlisted public page (noindex, not in nav or sitemap) &middot; A issued as the v2026-09-19 standoff record &middot; B is unissued (sensitivity only)
+      </p>
+      <h1 class="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
+        Standoff: what &ldquo;the situation persists&rdquo; means for production
+      </h1>
+      <p class="mt-3 max-w-prose text-[15px] leading-relaxed text-ink/80">
+        The <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/">supply page&rsquo;s</a>
+        standoff path (v2026-09-18) described its 2027 production rise as a
+        chosen shape. A reader asked the right question: <em>while the
+        standoff continues, what physically returns that production?</em>
+        This page settled the definition first and then calculated. The
+        redefinition <strong>A</strong> &mdash; no net Gulf recovery, Gulf
+        supply held at the assumed starting level, with non-Gulf growth and
+        the demand convention stated as explicit assumptions &mdash; is now
+        the published scenario (v2026-09-19). <strong>B</strong> is kept on
+        this page as the sensitivity: the same story plus an explicit
+        half-rate Gulf workaround recovery, so readers can see what the
+        assumed improvement is worth. B is <em>not</em> a published scenario.
+        The superseded v2026-09-18 record is preserved for scoring.
+      </p>
+    </header>
+
+    <main class="py-10">
+      <!-- The definition -->
+      <h2 class="max-w-4xl text-[1.35rem] font-bold leading-snug">
+        The standoff definition: &ldquo;no net Gulf recovery&rdquo; &mdash;
+        a scenario choice, stated as one
+      </h2>
+      <blockquote class="mt-4 border-l-4 border-crude pl-4 max-w-prose text-[15px] leading-relaxed text-ink/90">
+        <p class="mb-2"><strong>Standoff (the redefinition, issued v2026-09-19):</strong> fighting continues and the bypass stays closed. Gulf supply does not materially improve &mdash; it is held at the assumed starting level ({cand.level_2026_mb_d.toFixed(1)} mb/d world, flat through end-2026), with no recovery from reopened routes or from restoring disrupted facilities. Production outside the Gulf grows at an explicit assumed rate (+0.5 mb/d per quarter through 2027). Consumption follows the issued demand convention.</p>
+        <p>&ldquo;No net Gulf recovery&rdquo; is <strong>our scenario choice, not an established fact</strong>. It is a transparent assumption &mdash; it does not claim A is more likely than B, only that &ldquo;standoff&rdquo; means the Gulf does not materially improve while the conflict persists. B quantifies the alternative.</p>
+      </blockquote>
+      <p class="mt-4 max-w-prose text-[15px] leading-relaxed text-ink/80">
+        <strong>Where the level is anchored:</strong> the assumed
+        starting level of this comparison &mdash; {cand.level_2026_mb_d.toFixed(1)}
+        mb/d world, held flat through end-2026. It is a documented
+        assumption, not an observation: the workaround ramp &mdash; the
+        increased Suez shipments, ship-to-ship transfers, and alternative
+        routes the EIA cites &mdash; offsets the September events (the
+        East&ndash;West pipeline suspension on the 11th, the halt of
+        loadings at Yanbu on the 16th), so nothing new returns in 2026, and
+        A holds the level into 2027. To be
+        explicit about what the anchor is <em>not</em>: the EIA
+        baseline&rsquo;s Sep&ndash;Nov 2026 values (e.g., Saudi 9.65
+        &rarr; 10.05 &rarr; 10.38 mb/d) are the baseline&rsquo;s
+        <em>forecasts</em> for months that have not passed &mdash; today is
+        19 Sep 2026 &mdash; so they do not establish today&rsquo;s
+        production level, and A does not treat that ramp as already in
+        motion.
+      </p>
+      <p class="mt-3 max-w-prose text-[15px] leading-relaxed text-ink/80">
+        <strong>The demand clause, stated accurately:</strong> A and B use
+        the issued standoff&rsquo;s own demand convention verbatim
+        (read from the record&rsquo;s frozen assumptions snapshot)
+        &mdash; consumption below the EIA baseline, &minus;0.5 mb/d
+        through 2026, &minus;1.0 in H1 2027, easing to &minus;0.5 in
+        H2 2027. It is a fixed convention: it does <em>not</em> model demand
+        destruction progressively deepening as inventories draw down.
+        Keeping demand identical across the paths means every difference on
+        this page is a supply assumption.
+      </p>
+
+      <!-- Headline -->
+      <h2 class="mt-10 max-w-4xl text-[1.35rem] font-bold leading-snug">
+        Under the redefined standoff, the accumulated balance reaches
+        {fmtMb(issuedEnd)} mb by December 2027 &mdash; versus
+        {fmtMb1(supEnd)} mb on the superseded path; an explicit half-rate
+        Gulf recovery (B) is worth {fmtMb(gulfValue)} mb of the gap
+      </h2>
+      <p class="mt-3 max-w-prose text-[15px] leading-relaxed text-ink/80">
+        The two scenario paths &mdash; the issued standoff and sensitivity
+        B &mdash; start from the same anchor (the IEA&rsquo;s reported
+        {fmtMb1(anchor.value_mb)} mb cumulative change at the end of August
+        2026) and use the same demand
+        convention. The light gray line is the EIA&rsquo;s own central
+        outlook carried from the same anchor, for reference &mdash; it does
+        <em>not</em> use the scenario&rsquo;s demand convention; it is the
+        EIA baseline as published, including the EIA&rsquo;s own disruption
+        and recovery assumptions.
+      </p>
+
+      <!-- The mechanisms -->
+      <h3 class="mt-10 text-lg font-bold">What returns, what doesn&rsquo;t &mdash; stated per mechanism</h3>
+      <div class="mt-3 overflow-x-auto">
+        <table class="w-full min-w-[760px] border-collapse text-[13.5px]">
+          <thead>
+            <tr class="border-b-2 border-ink/70 text-left">
+              <th class="py-2 pr-4 font-semibold">Mechanism</th>
+              <th class="py-2 pr-4 font-semibold">Returns by Dec 2027</th>
+              <th class="py-2 pr-4 font-semibold">Quarterly pace (cumulative by quarter-end, mb/d)</th>
+              <th class="py-2 font-semibold">Why</th>
+            </tr>
+          </thead>
+          <tbody class="dtbl align-top">
+            <tr>
+              <td class="font-semibold">Gulf (bypass and disrupted facilities)</td>
+              <td class="text-ink/50">0</td>
+              <td class="text-ink/50">&mdash;</td>
+              <td><strong>A:</strong> no net recovery &mdash; the East&ndash;West (Petroline) pipeline&rsquo;s ~4 mb/d flow does not restart (no restart date in the scenario definition; with Yanbu loadings halted the bypass cannot move barrels even when partially repaired), and disrupted facilities are not restored. Held at the assumed starting level. <strong>B adds:</strong> partial recovery via the EIA&rsquo;s stated workaround routes (increased Suez shipments, ship-to-ship, alternative routes) at about half the baseline&rsquo;s own 2027 Gulf restoration rate.</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Non-Gulf normal growth</td>
+              <td>+2.0 mb/d</td>
+              <td>+0.5 / +1.0 / +1.5 / +2.0</td>
+              <td>US, Brazil, Guyana, Canada, and non-Gulf OPEC additions continue while the Gulf is constrained &mdash; under A or B. <strong>A chosen assumption:</strong> the +0.5-per-quarter growth pace is ours. The pre-war world level (~108 mb/d in H2 2025) is context, not the rate.</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Attack-maintenance shut-ins</td>
+              <td class="text-ink/50">&mdash;</td>
+              <td class="text-ink/50">&mdash;</td>
+              <td>Continue for the duration in both paths (the war continues at current intensity).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 max-w-prose text-[15px] leading-relaxed text-ink/80">
+        In B, the Gulf mechanism is +{mech.dec_2027_rise_mb_d.toFixed(1)} mb/d
+        minus the +2.0 growth &mdash; i.e., +2.5 mb/d by December 2027
+        (quarter-end cumulative +0.5 / +1.0 / +2.0 / +2.5). The baseline&rsquo;s
+        {mech.baseline_2027_rise_mb_d.toFixed(1)} mb/d 2027 production rise is
+        what the frozen workbook shows; how it is split
+        ({mech.baseline_2027_rise_split_judgment_mb_d.non_gulf.toFixed(1)}
+        growth /
+        {mech.baseline_2027_rise_split_judgment_mb_d.gulf_restoration.toFixed(1)}
+        Gulf restoration) and how much of the Gulf part is taken (about
+        half) are this page&rsquo;s choices, not the EIA&rsquo;s. B&rsquo;s
+        December 2027 level is {mech.dec_2027_level_mb_d.toFixed(1)} mb/d
+        (A&rsquo;s is {cand.dec_2027_level_mb_d.toFixed(1)}). In December
+        2027 the paths run {cand.dec_2027_gap_vs_baseline_mb_d.toFixed(1)}
+        (A) and {mech.dec_2027_gap_vs_baseline_mb_d.toFixed(1)} (B) mb/d
+        below the EIA baseline.
+      </p>
+
+      <!-- How the adjustments are derived -->
+      <h3 class="mt-10 text-lg font-bold">How the adjustments are derived</h3>
+      <p class="mt-2 max-w-prose text-[15px] leading-relaxed text-ink/80">
+        The monthly production adjustment is not chosen. It is
+        <em>intended production minus the frozen EIA baseline</em>, for each
+        month: &Delta;P(m) = intended(m) &minus; baseline(m). The intended
+        path is the input; the adjustments are the output. That is the
+        difference from the previously issued path (v2026-09-18), where the
+        2027 adjustments were the input and the shape of the resulting
+        production path was whatever the arithmetic gave. The table below
+        shows both sides, for A and B, for every month.
+      </p>
+
+      <!-- Chart -->
+      <div class="chart-wrap relative mt-8 h-[380px] sm:h-[440px]">
+        <canvas id="standoffRecoveryChart"
+          role="img"
+          aria-label="Line chart comparing the issued standoff path (no net Gulf recovery), sensitivity B (half-rate Gulf recovery, unissued), and the EIA baseline balance, from the August 2026 anchor through December 2027."></canvas>
+      </div>
+      <p class="mt-2 max-w-4xl text-[13px] leading-relaxed text-ink/60">
+        Ink (solid): the issued standoff path (v2026-09-19) &mdash; no net
+        Gulf recovery, as stored in the published record. Purple (dashed):
+        sensitivity B &mdash; the same story plus the explicit half-rate
+        Gulf workaround recovery (unissued). Light gray: the EIA STEO
+        monthly balance carried from the same anchor &mdash; EIA&rsquo;s
+        central outlook, including its own disruption and recovery
+        assumptions, not a no-war counterfactual. All lines start from the
+        IEA&rsquo;s reported August 2026 cumulative change. Units: mb,
+        cumulative change from end February 2026.
+      </p>
+
+      <!-- Monthly table -->
+      <h3 class="mt-10 text-lg font-bold">Monthly values, September 2026 &ndash; December 2027</h3>
+      <p class="mt-1 text-[13px] text-ink/60">
+        Intended P: the production path from the mechanisms above (mb/d) for
+        A and B. Baseline P: the frozen EIA STEO world production. &Delta;P:
+        the derived production adjustment (intended &minus; baseline).
+        Scenario C: the issued demand convention applied to the baseline
+        consumption (identical for A and B). Cumulatives in mb.
+      </p>
+      <div class="mt-3 overflow-x-auto">
+        <table class="w-full min-w-[1040px] border-collapse text-right text-[13px] tabular-nums">
+          <thead>
+            <tr class="border-b-2 border-ink/70 text-left">
+              <th class="py-2 pr-4 font-semibold">Month</th>
+              <th class="py-2 pr-4 font-semibold">Intended P (A)</th>
+              <th class="py-2 pr-4 font-semibold">Intended P (B)</th>
+              <th class="py-2 pr-4 font-semibold">Baseline P</th>
+              <th class="py-2 pr-4 font-semibold">&Delta;P (A, derived)</th>
+              <th class="py-2 pr-4 font-semibold">&Delta;P (B, derived)</th>
+              <th class="py-2 pr-4 font-semibold">Scenario C</th>
+              <th class="py-2 pr-4 font-semibold">A cumulative (issued)</th>
+              <th class="py-2 pr-4 font-semibold">B cumulative</th>
+              <th class="py-2 font-semibold">Superseded cumulative (v2026-09-18)</th>
+            </tr>
+          </thead>
+          <tbody class="dtbl">
+            {monthRows.map((r) => (
+              <tr class="border-b border-rule">
+                <td class="text-left font-medium">{r.label}</td>
+                <td>{r.aP.toFixed(1)}</td>
+                <td>{r.bP.toFixed(1)}</td>
+                <td>{r.baseP.toFixed(2)}</td>
+                <td>{signed(r.dPA)}</td>
+                <td>{signed(r.dPB)}</td>
+                <td>{r.scenC.toFixed(2)}</td>
+                <td>{fmtMb(r.aCum)}</td>
+                <td>{fmtMb(r.bCum)}</td>
+                <td class="text-ink/50">{fmtMb(r.supCum)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Endpoints -->
+      <h3 class="mt-10 text-lg font-bold">December 2027 endpoints</h3>
+      <div class="mt-3 overflow-x-auto">
+        <table class="w-full min-w-[640px] border-collapse text-right text-[13.5px] tabular-nums">
+          <thead>
+            <tr class="border-b-2 border-ink/70 text-left">
+              <th class="py-2 pr-4 font-semibold">Path</th>
+              <th class="py-2 pr-4 font-semibold">Dec 2027 (mb)</th>
+              <th class="py-2 pr-4 font-semibold">vs issued</th>
+              <th class="py-2 font-semibold">Dec 2027 gap vs baseline (mb/d)</th>
+            </tr>
+          </thead>
+          <tbody class="dtbl">
+            <tr class="border-b border-rule">
+              <td class="text-left">Issued standoff (v2026-09-19, stored target) &mdash; no net Gulf recovery</td>
+              <td>{fmtMb1(issuedEnd)}</td>
+              <td>&mdash;</td>
+              <td>{cand.dec_2027_gap_vs_baseline_mb_d.toFixed(2)}</td>
+            </tr>
+            <tr class="border-b border-rule">
+              <td class="text-left">Sensitivity B &mdash; the issued path + half-rate Gulf recovery (unissued)</td>
+              <td>{fmtMb1(varEnd)}</td>
+              <td>{fmtMb(varEnd - issuedEnd)}</td>
+              <td>{mech.dec_2027_gap_vs_baseline_mb_d.toFixed(2)}</td>
+            </tr>
+            <tr class="border-b border-rule">
+              <td class="text-left text-ink/50">Superseded standoff (v2026-09-18, preserved for scoring)</td>
+              <td class="text-ink/50">{fmtMb1(supEnd)}</td>
+              <td class="text-ink/50">{fmtMb(supEnd - issuedEnd)}</td>
+              <td class="text-ink/50">{mech.issued_dec_2027_gap_vs_baseline_mb_d.toFixed(2)}</td>
+            </tr>
+            <tr class="border-b border-rule">
+              <td class="text-left text-ink/50">EIA STEO balance (from the same anchor)</td>
+              <td class="text-ink/50">{fmtMb1(baseEnd)}</td>
+              <td class="text-ink/50">{fmtMb(baseEnd - issuedEnd)}</td>
+              <td class="text-ink/50">0.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 max-w-prose text-[15px] leading-relaxed text-ink/80">
+        The spread is entirely in how much production comes back. In
+        December 2027 the issued path ends
+        {cand.dec_2027_gap_vs_baseline_mb_d.toFixed(1)} mb/d below the EIA
+        baseline (the Petroline&rsquo;s ~4 mb/d, the attack-maintenance
+        residue, and no Gulf restoration); B ends
+        {mech.dec_2027_gap_vs_baseline_mb_d.toFixed(1)} mb/d below it; the
+        superseded path ended {mech.issued_dec_2027_gap_vs_baseline_mb_d.toFixed(1)}
+        mb/d below it. The B &minus; A gap, {fmtMb(gulfValue)} mb, is the
+        value of the assumed Gulf recovery &mdash; the script checks it
+        equals the sum of the monthly Gulf mechanism times days. The
+        monthly balance tells the same story: on the superseded path the
+        balance first turns positive in {xFull[supPosIdx]} and stays
+        positive from there; on the issued path it never turns positive
+        inside the 16-month horizon (December 2027 is still
+        {fmtMb1(candidate[candidate.length - 1].monthly_mb)} mb for the
+        month); under B it first turns positive in {xFull[varPosIdx + 1]}
+        &mdash; and only marginally,
+        {fmtMb1(variant[varPosIdx].monthly_mb)} mb that month &mdash; before
+        going negative again in December 2027.
+      </p>
+
+      <!-- Caveats -->
+      <h3 class="mt-10 text-lg font-bold">Labels and caveats</h3>
+      <ul class="mt-3 max-w-prose list-disc space-y-2 pl-5 text-[15px] leading-relaxed text-ink/80">
+        <li>
+          <strong>Issuance status.</strong> A is the issued standoff record
+          (v2026-09-19): the ink line on the chart and the A columns in the
+          tables are the record&rsquo;s stored targets, carried verbatim,
+          and the script asserts an independent recomputation matches the
+          record exactly. The superseded v2026-09-18 record is preserved
+          unchanged for scoring, not overwritten. B is <em>not</em> issued
+          &mdash; it is a research-page sensitivity only.
+        </li>
+        <li>
+          <strong>&ldquo;No net Gulf recovery&rdquo; is a scenario choice,
+          not an established fact.</strong> The issued definition says the
+          Gulf does not materially improve while the conflict persists;
+          B shows what a stated half-rate improvement would be worth. A was
+          chosen for the published definition because it is the reading a
+          reader can check against the data without taking an unexplained
+          ramp on faith.
+        </li>
+        <li>
+          The magnitudes (+2.0 non-Gulf growth and its +0.5-per-quarter
+          pace, B&rsquo;s +2.5 Gulf restoration, the ~2.0/~4.9 split of the
+          baseline&rsquo;s 2027 rise, the quarterly paces) are
+          <strong>chosen assumptions, not estimates from a source</strong>.
+          The cited sources support the mechanisms &mdash; the EIA&rsquo;s
+          stated workaround routes, the Rystad/CNBC Petroline estimate, the
+          scenario definition&rsquo;s no-restart-date &mdash; and the frozen
+          workbook supplies the baseline&rsquo;s 2027 rise; the growth pace,
+          the split, and the half-rate are choices made for this
+          comparison. The assumptions don&rsquo;t need to be precisely
+          predictable; they need to be checkable, and the table above shows
+          every step from story to adjustment to cumulative.
+        </li>
+        <li>
+          <strong>The demand clause is a fixed convention, stated as
+          one.</strong> It assumes consumption below the EIA baseline
+          (&minus;0.5 through 2026, &minus;1.0 in H1 2027, &minus;0.5 in
+          H2 2027). It does not model demand destruction deepening as
+          inventories draw down; if that were added, A&rsquo;s path would
+          improve relative to the one shown. Keeping demand identical across
+          the paths is what makes the differences here purely supply
+          assumptions.
+        </li>
+        <li>
+          The EIA baseline is EIA&rsquo;s central outlook, frozen at the Sep
+          9, 2026 STEO &mdash; not a no-war counterfactual: it already
+          includes EIA&rsquo;s own disruption and recovery assumptions
+          (stated assumptions:
+          <a href="https://www.eia.gov/outlooks/steo/" class="underline">eia.gov/outlooks/steo</a>).
+          The adjustments are incremental relative to the baseline&rsquo;s
+          own shut-in schedule; nothing is subtracted twice.
+        </li>
+        <li>
+          Like the published panel, this is a balance identity, not a stock
+          forecast: it does not solve whether accessible inventory,
+          withdrawals, or demand response would bend the path before the
+          horizon, and no inventory constraint is applied.
+        </li>
+        <li>
+          The watchlist on the supply page already names the event that
+          would most directly test the issued definition: an official
+          repair estimate and restart timetable for the East&ndash;West
+          pipeline. A restart that returns most of the ~4 mb/d inside 2027
+          moves the issued path toward B and then toward the EIA baseline.
+        </li>
+      </ul>
+
+      <!-- Provenance -->
+      <h3 class="mt-10 text-lg font-bold">Provenance</h3>
+      <ul class="mt-3 max-w-prose list-disc space-y-2 pl-5 text-[13.5px] leading-relaxed text-ink/70">
+        <li>
+          Computation: <code>python3
+          research/stress-test/standoff-recovery.py</code> (offline; reuses
+          the published pipeline&rsquo;s workbook loader,
+          <code>research/scoring/regen-scenarios.py</code>). Single writer of
+          the data file.
+        </li>
+        <li>
+          EIA STEO workbook <code>research/sources/eia-steo-2026-09-17.xlsx</code>
+          (sha256 {meta.workbook.sha256.slice(0, 16)}&hellip;).
+        </li>
+        <li>
+          Assumptions snapshot {meta.assumptions_snapshot.path}
+          (sha256 {meta.assumptions_snapshot.sha256.slice(0, 16)}&hellip;).
+        </li>
+        <li>
+          Issued record {meta.issued_record.record_id} &mdash; anchor
+          {anchor.period} {fmtMb1(anchor.value_mb)} mb (IEA OMR Sep 11, 2026
+          web), stored December 2027 target {fmtMb1(issuedEnd)} mb.
+          Superseded record {meta.superseded_record.record_id} (stored
+          December 2027 target {fmtMb1(supEnd)} mb) &mdash; preserved
+          unchanged for scoring.
+        </li>
+        <li>
+          Generated {meta.generated_utc}. Site data copy:
+          <code>site/src/data/standoff-recovery.json</code> (written by the
+          script; do not hand-edit).
+        </li>
+      </ul>
+    </main>
+
+    <SiteFooter />
+  </div>
+  </body>
+
+  <script>
+    import Chart from "chart.js/auto";
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    import results from "../../data/standoff-recovery.json";
+
+    (window as any).__charts = (window as any).__charts || {};
+    // Debug handles for QA scripts (harmless in production)
+    (window as any).__standoffRecoveryData = results;
+    Chart.defaults.font.family = "Georgia, 'Times New Roman', serif";
+    Chart.defaults.font.size = 11;
+    Chart.defaults.color = "#8a867a";
+    Chart.defaults.animation = false;
+    Chart.defaults.plugins.legend.display = false;
+    Chart.defaults.plugins.tooltip.backgroundColor = "rgba(255,255,248,0.97)";
+    Chart.defaults.plugins.tooltip.titleColor = "#6b675c";
+    Chart.defaults.plugins.tooltip.bodyColor = "#1c1b17";
+    Chart.defaults.plugins.tooltip.borderWidth = 0;
+    Chart.defaults.plugins.tooltip.cornerRadius = 2;
+    Chart.defaults.plugins.tooltip.padding = 8;
+    Chart.defaults.plugins.tooltip.displayColors = false;
+
+    const months = results.months as string[];
+    const SHORT = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const FULL = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const ym: [number, number][] = [[2026, 8]];
+    for (const p of months) ym.push([parseInt(p.slice(0, 4), 10), parseInt(p.slice(5), 10)]);
+    const xLabels = ym.map(([y, m], i) =>
+      SHORT[m - 1] + (i === 0 || m === 1 ? ` '${String(y).slice(2)}` : ""));
+    const xFull = ym.map(([y, m]) => `${FULL[m - 1]} ${y}`);
+
+    // All three lines start at the shared August 2026 anchor. The issued
+    // record (v2026-09-19) IS candidate A: the script asserts the
+    // independent recomputation matches the record, so one line is drawn.
+    const anchorMb = results.meta.anchor.value_mb as number;
+    const issuedSeries: (number | null)[] = results.issued.map((s: any) => s.cumulative_mb);
+    const varSeries: (number | null)[] = [anchorMb, ...results.variant.map((s: any) => s.cumulative_mb)];
+    const baseSeries: (number | null)[] = results.baseline_balance.map((s: any) => s.cumulative_mb);
+
+    const fmt = (v: number) => (v < 0 ? "\u2212" : "+") + Math.round(Math.abs(v)).toLocaleString("en-US");
+    const varEnd = results.variant[results.variant.length - 1].cumulative_mb as number;
+    const issuedEnd = results.issued[results.issued.length - 1].cumulative_mb as number;
+    const baseEnd = results.baseline_balance[results.baseline_balance.length - 1].cumulative_mb as number;
+
+    // Datasets: order = draw order (later on top).
+    const datasets = [
+      { label: "EIA STEO monthly balance (from the same anchor)", data: baseSeries,
+        borderColor: "#b5b1a6", borderWidth: 1.2, pointRadius: 0, tension: 0 },
+      { label: "Sensitivity B: the issued path + half-rate Gulf recovery (unissued)", data: varSeries,
+        borderColor: "#6b4fa0", borderWidth: 1.6, borderDash: [6, 4], pointRadius: 0, tension: 0 },
+      { label: "Issued standoff (v2026-09-19): no net Gulf recovery", data: issuedSeries,
+        borderColor: "#1c1b17", borderWidth: 2.2, pointRadius: 0, tension: 0 },
+    ];
+
+    // The endpoint labels need horizontal room; on narrow screens the plot
+    // area wins and the labels are dropped (the table below carries the
+    // values, and the tooltip is available).
+    const NARROW_PX = 640;
+
+    // Direct labels at the Dec 2027 endpoints (no legend)
+    const decIdx = 16;
+    const labelSpecs = [
+      { dataset: 0, text: `EIA STEO balance ${fmt(baseEnd)}`, color: "#7a766a" },
+      { dataset: 1, text: `sensitivity B ${fmt(varEnd)}`, color: "#59407f" },
+      { dataset: 2, text: `issued standoff ${fmt(issuedEnd)}`, color: "#1c1b17" },
+    ];
+    const directLabels = {
+      id: "directLabels",
+      afterDatasetsDraw(chart: Chart) {
+        if (chart.chartArea.width < 380) {
+          chart.canvas.setAttribute("data-qa-labels", "skipped-narrow");
+          return; // no room for labels
+        }
+        const { ctx } = chart;
+        let drawn = 0;
+        for (const s of labelSpecs) {
+          const el = chart.getDatasetMeta(s.dataset).data[decIdx];
+          if (!el) continue;
+          ctx.save();
+          ctx.font = "italic 11.5px Georgia, serif";
+          ctx.fillStyle = s.color;
+          ctx.textAlign = "left";
+          ctx.textBaseline = "middle";
+          ctx.fillText(s.text, el.x + 8, el.y);
+          ctx.restore();
+          drawn++;
+        }
+        // QA handle: positive confirmation the plugin actually ran
+        chart.canvas.setAttribute("data-qa-labels", `drawn-${drawn}`);
+      },
+    };
+
+    const chart = new Chart(document.getElementById("standoffRecoveryChart") as HTMLCanvasElement, {
+      type: "line",
+      data: { labels: xLabels, datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            top: 6,
+            // scriptable: 190 for endpoint labels on wide screens, 12 on
+            // narrow ones (the fixed 190 once left ~49px of plot at 320px)
+            right: (ctx: any) => (ctx.chart.width >= NARROW_PX ? 190 : 12),
+          },
+        },
+        interaction: { mode: "index", intersect: false },
+        scales: {
+          x: {
+            grid: { display: false },
+            border: { display: true, color: "#d8d4c6", width: 0.5 },
+            ticks: { color: "#8a867a", padding: 8, maxTicksLimit: 9, autoSkip: true },
+          },
+          y: {
+            position: "left",
+            grid: { color: "#e8e5da" },
+            border: { display: false },
+            ticks: {
+              color: "#8a867a",
+              padding: 6,
+              maxTicksLimit: 8,
+              callback: (v: any) => (v < 0 ? "\u2212" : "+") + Math.abs(v).toLocaleString("en-US"),
+            },
+            min: -2000,
+            max: 1200,
+          },
+        },
+      },
+    // Custom plugins go in the TOP-LEVEL plugins array; options.plugins only
+    // configures built-in plugins, so directLabels was silently ignored there.
+    plugins: [directLabels],
+    });
+    // QA handle: the plot-area width after layout (regression check for the
+    // narrow-screen squeeze; the 190px label padding once left ~49px at 320px).
+    requestAnimationFrame(() => {
+      const w = Math.round(chart.chartArea.width);
+      (window as any).__standoffRecoveryPlotWidth = w;
+      chart.canvas.setAttribute("data-qa-plot-width", String(w));
+    });
+    (window as any).__charts.standoffRecoveryChart = chart;
+  </script>
+</html>

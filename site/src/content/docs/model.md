@@ -1,149 +1,73 @@
 ---
 title: "How the Model Works"
-description: "Learn how the Depletion Ledger assigns odds to three shipping scenarios, tracks the emergency reserve, and keeps a record of its predictions."
+description: "How the Depletion Ledger models changes in global oil storage: three shipping scenarios, their assumptions, and how the predictions are checked."
 ---
+
+> **Why we changed the model.** Earlier versions projected withdrawals from the US Strategic Petroleum Reserve (SPR) as if it would automatically make up for missing supply. That was our mistake. SPR releases depend on government decisions, contracts, and delivery schedules. We've removed those projections. The model now uses oil production and consumption to calculate how storage could change worldwide. We still track the SPR's reported levels.
 
 ## What the model tells you
 
-When oil supplies are disrupted, countries can use stored oil to make up the difference. But those supplies won't last forever. This model does two things. First, it assigns odds to three possible outcomes for shipping through the Strait of Hormuz and the Red Sea. Second, it tracks the US Strategic Petroleum Reserve (SPR): the reported level, the withdrawal pace, and the distance to each engineering threshold.
+The model asks how oil in storage could change if shipping recovers, the standoff continues, or the disruption gets worse. For each outcome, we make assumptions about how much oil the world produces and uses. If consumption exceeds production, the difference has to come from storage. If production exceeds consumption, stocks can build.
 
-You can use it to see what happens if shipping recovers, the current standoff continues, or the disruption gets worse. The odds are updated every week as new official data becomes available. They are assigned probabilities for alternative shipping outcomes, not a single forecast — and the model keeps a record of past odds so you can see how they held up.
+Each line shows what would happen if that scenario's assumptions held. We start with published data and an agency forecast, which we call the *baseline*, then adjust it for each scenario. We haven't fitted the lines to past changes in storage during this crisis, and we don't yet know how accurate they'll be.
 
-The model doesn't project when the reserve will reach each threshold. Withdrawals from the SPR come through Department of Energy contracts and scheduled deliveries, so the pace depends on release decisions, not on which shipping scenario plays out.
+The model covers crude oil and refined fuels around the world. It doesn't tell you how much usable fuel can reach a particular country or when the world would run out. That also depends on whether refineries can process the available crude, whether fuel can be transported, and whether stored oil can be released.
 
-A quick note on units: oil is measured in **barrels**. One barrel holds about 42 US gallons, or 159 liters. **M b/d** means millions of barrels per day.
+## How to read the chart
 
-The SPR held about 415 million barrels before the war. In the latest report, for the week ending Sep 11, it held 285.0 million.
+On the dashboard, all three lines start at **zero in August 2026**. Values below zero mean less oil in storage than in August; values above zero mean more. A rising line shows stocks rebuilding, even if they're still below the August level. Zero doesn't mean empty tanks.
 
-## Where the information comes from
+The detailed tables below count changes since the end of February 2026. They start with the International Energy Agency's (IEA) reported loss of **507 million barrels by the end of August**. The “cumulative” column adds each month's change to that running total. The dashboard removes the loss through August from the displayed figures, so you can see what happens after that month.
 
-The model uses six types of published information. You can check the figures against the reports and sources listed here.
+The IEA's reported total includes oil held by governments and companies, as well as oil on ships. The projections use production and consumption figures from the US Energy Information Administration (EIA), which cover more than the stocks the IEA tracks. We use the same starting point to compare the lines, but the agencies' figures still measure different things.
 
-| What it tells us | Who publishes it | How often |
-|---|---|---|
-| How much oil is in the SPR | US Energy Information Administration (EIA) | Every Wednesday |
-| Commercial oil stocks in the US and Europe | EIA and the reserve's operating agency (GEF) | Weekly |
-| How many tankers get through the Strait of Hormuz | PortWatch / Kpler, using satellite ship-tracking data | Daily |
-| How much oil OPEC countries produce | OPEC | Monthly |
-| Refinery strikes and export bans in Russia and Saudi Arabia | Government statements, military announcements, and news reports | Daily |
-| Oil and fuel prices | Exchanges and AAA's US pump prices | Daily |
+Oil is measured in **barrels**. One barrel holds about 42 US gallons, or 159 liters. **M b/d** means millions of barrels per day.
 
-Rumors, anonymous reports, and private estimates are kept in the research notes as unverified information. They aren't used in the calculations.
+## How the paths are calculated
 
-## Three possible scenarios
+The baseline is the EIA's **Short-Term Energy Outlook (STEO), released September 9, 2026**. It forecasts monthly world production and consumption through December 2027. For each scenario, we adjust those figures using the assumptions explained below.
 
-The model groups the possible outcomes into three scenarios and assigns each an estimated probability. As of Sep 16, the corridor-lapse scenario has the highest odds, at 55%. Here, *corridor* means an agreed shipping route that allows tankers to pass through the Strait of Hormuz.
+For each month:
 
-**These are shipping odds.** They don't set a pace for the reserve. Withdrawals from the SPR come through Department of Energy contracts and scheduled deliveries, so how quickly the reserve shrinks depends on release decisions, not on which shipping scenario plays out.
+1. Add the scenario's production adjustment to EIA production.
+2. Add the scenario's consumption adjustment to EIA consumption.
+3. Subtract consumption from production and multiply by the number of days in the month. Add that change to the previous month's total.
 
-**Withdrawals from the SPR could pause even if the crisis continues.** A supply shortage doesn't automatically trigger a release. Deliveries under the current program may be nearing completion. Once they end, the Department of Energy would need to arrange further releases for withdrawals to continue.
+The EIA forecast already assumes some Gulf production resumes. Each scenario's adjustments need to account for that recovery. We also avoid subtracting a production loss that's already included in the EIA forecast.
+
+Moving oil from a government reserve to commercial storage leaves the combined amount unchanged. We don't count that transfer as new production or as a loss from global storage.
+
+<details>
+<summary>What the EIA baseline assumes</summary>
+
+The September outlook expects Middle East production to rise as more oil passes through Hormuz and alternative routes. It estimates that disruptions prevented production of 6.7 million barrels a day in August. It expects that lost production to average 6.2 million in the third quarter, 5.7 million in the fourth, and 2.7 million in the first quarter of 2027. Most of the affected production is expected to resume in the second half of 2027.
+
+The outlook was published before the East–West pipeline was suspended on September 11 and loadings at Yanbu stopped on September 16. Our scenario assumptions account for those events and the recovery already included in the EIA forecast.
+
+The September 19 assumptions file lists the saved EIA workbook, source excerpts, and model inputs. See [Calculation files and checks](#how-we-check-the-predictions) below.
+
+</details>
+
+## What each scenario assumes
+
+A *corridor* is an agreed shipping route through the Strait of Hormuz. We assign probabilities to three possible outcomes and calculate how storage could change under each one. **The percentages show how likely we consider each outcome.** They don't change the calculations for each line or tell you how accurate its numbers will be.
 
 | Scenario | Odds (Sep 16) | What happens |
 |---|---|---|
 | The corridor holds | 10% | The shipping agreement works and tanker traffic returns to normal. |
 | The standoff continues | 35% | The corridor barely works, attacks continue, and the damaged Saudi bypass pipeline has no restart date. |
-| **The corridor lapses** | **55%** | The agreement breaks down or comes under attack, the strait is effectively closed, and the bypass stays shut. |
+| The corridor lapses | 55% | The agreement breaks down or comes under attack, the strait is effectively closed, and the bypass stays shut. |
 
-The odds changed from 10/50/40 to 10/40/50 on Sep 11, after Saudi Arabia suspended the East–West pipeline following attacks. That pipeline allowed some oil to bypass the strait, so its closure weakened the case for the standoff scenario.
+The assumptions below were published on September 19. You can expand each table to see the monthly calculations. **P** means production, **C** means consumption, and **Δ** means an adjustment to the EIA baseline. Daily figures are in millions of barrels per day; cumulative figures show the total change in millions of barrels since the end of February 2026. We round the figures for display, so they may not add up exactly.
 
-The odds changed again on Sep 16, to 10/35/55. Oil loadings at Yanbu, the pipeline's export port, had stopped while the pipeline remained shut. Oil could no longer leave through that route.
+### The corridor holds
 
-You can see how the odds have changed over time in the dashboard's “Three possible outcomes” section.
+In this scenario, tanker traffic returns to normal over one to two quarters. Production recovers roughly a quarter earlier than the EIA expects. We add as much as 2 million barrels a day to the EIA forecast in December 2026, then reduce that addition to zero by May 2027 as the EIA's forecast production catches up.
 
-## Why the reserve has four thresholds
+We assume consumption is 0.25 million barrels a day above the EIA forecast through March 2027, then follows it. Under these assumptions, stocks begin rebuilding in December 2026. By December 2027, storage is **1,228.6 million barrels above its end-of-February 2026 level**, about 250 million above the EIA projection.
 
-The SPR stores oil in salt caverns. As oil is withdrawn, engineering limits affect how much can still be pumped and whether the caverns can be used safely. That means the reserve can become less useful well before it's empty.
-
-The model tracks four thresholds, also called *floors*. The thresholds describe what happens to the reserve at a given level. They aren't dates: withdrawals run through DOE contracts and scheduled deliveries and can pause, so the pace changes with each release decision, and the model shows no projected dates for reaching them.
-
-| Floor | Level | What it means |
-|---|---|---|
-| 1 | About 300M barrels | Some caverns can no longer pump below this level. **First report below this level: week ending Aug 7** |
-| 2 | 250M barrels | The operational minimum cited by the reserve's operators. |
-| 3 | 180M barrels | The hard operating limit used in the model. |
-| 4 | 70M barrels | The safe minimum stated by the US Department of Energy. The model stops withdrawals here. |
-
-Published contract totals suggest existing deliveries may be nearing completion, but their remaining volume and end date haven't been confirmed.
-
-As these limits reduce the reserve's ability to supply oil, the shortage has to be absorbed elsewhere. That can mean higher prices and less fuel available to consumers.
-
-## How the odds change
-
-The probabilities involve judgment. To keep that judgment consistent, **the odds change only when an event specified in advance changes the supply or shipping situation**. Weekly fluctuations in prices or tanker traffic can change the estimated dates without changing the odds.
-
-For example, the odds changed after the corridor agreement was announced and ship-tracking data showed it wasn't working. The first missile strike on a base in a third country led to a Sep 9 change from 15/55/30 to 10/50/40. The pipeline suspension led to the Sep 11 change described above.
-
-These are the events being watched as of Sep 16:
-
-| Event | Effect on the odds |
-|---|---|
-| A verified reopening, supported by an IMO filing and tanker traffic at or above 40% of the 85-per-day baseline for two consecutive weeks, or a durable ceasefire. | Increases the odds that the corridor holds. |
-| An official restart of the East–West bypass pipeline, or an assessment that it can be repaired within days. | Returns the odds to the standoff scenario's previous values, reversing the Sep 11 change. |
-| Tanker losses above about 15 per week; delays restarting Jazan or Abqaiq; the pipeline remaining suspended past the Sep 16 report; or a damage assessment calling for weeks of repairs. | Increases the odds that the corridor lapses. |
-| Russia's Sep 30 fuel-ban decision; a widening gap between the EIA price outlook and market prices; or an adverse prediction-market result on Sep 14 or 30. | Could increase the odds that the corridor lapses. |
-| The Houthis blocking or attacking non-Saudi vessels in the Bab el-Mandeb, leaving both shipping routes closed. | Increases the odds that the corridor lapses. |
-
-Reports give different timelines for restoring oil flows. On Sep 14, the Associated Press cited unnamed officials who estimated 3–5 weeks. On Sep 16, Bloomberg cited a person familiar with the matter who said Aramco was working around the damaged section. The aim was to restore roughly half the pipeline's capacity within days and full operation in about six weeks. Other estimates put repairs at more than 6 weeks. Satellite images show crews replacing a section of pipe.
-
-On Sep 15, Reuters reported that oil shipments from Yanbu, the port supplied by the pipeline, had been suspended. Aramco had also cancelled or delayed shipments to Europe scheduled for late September. Saudi officials have told reporters repairs will take weeks, but haven't published a damage assessment or a repair timetable; the US energy secretary has called the outage "measured in days."
-
-These reports led to the Sep 16 change in odds to 10/35/55. A rapid resumption of Yanbu loadings would return the odds to 10/40/50. An official restart of the pipeline, or an assessment that repairs would take only days, would reverse both changes and return the odds to 10/50/40.
-
-The Houthis' territorial gains also need to be considered alongside shipping activity. As of Sep 14, they hold Mokha, Perim island, and the Hanish islands. Kpler's preliminary counts — which exclude vessels with tracking signals switched off — put total Bab el-Mandeb crossings at 24 on Sep 15 and 21 on Sep 16, and no non-Saudi vessel has been reported blocked or attacked there. The model's condition for raising the odds on that basis hasn't been met.
-
-A direct US strike on the Houthis would also trigger a review. The direction of that change would depend on the circumstances at the time.
-
-The gap between the EIA outlook and market prices takes longer to assess. The EIA still expects oil at about $90 in late 2026. Brent's front-month contract settled at $103.87 on Sep 18, about $14 higher. That compares a contract for near-term delivery with a forecast for later in the year.
-
-The model treats a gap above roughly $10–15 as a sign that the market may be assigning more than 40% odds to the corridor lapsing. At that settlement, the gap is within that range. This comparison alone doesn't change the scenario odds.
-
-The postponed Sep 14 talks are an example of news that didn't change the odds. Oman postponed the first meeting of Gulf foreign ministers and Iran during the war, with no new date announced. The Associated Press reported that Saudi Arabia objected to proposed changes to the Iran–Oman shipping agreement. Bahrain had also said it wouldn't attend.
-
-The delay makes the timing of further talks uncertain, but it hasn't changed shipping conditions in the strait. That's why this delay didn't change the model's odds.
-
-Between these events, the odds stay the same. A quiet week alone isn't a reason to change them.
-
-## How the calculations are checked
-
-The three probabilities are assigned using judgment and the rules above. The calculations then track the reported reserve level, the weekly withdrawal pace, and the distance to each threshold. For example, the model uses statistical distributions to account for variation in tanker traffic and demand.
-
-A separate statistical check uses the same public data to produce its own scenario weights. Those results are published with each update so they can be compared with the assigned odds. They don't set the probabilities you see on the dashboard.
-
-Four small Python programs handle the calculations. They use no external libraries, so the code is straightforward to inspect and run.
-
-| Program | What it does | When it runs |
-|---|---|---|
-| Reserve calculator | Estimates the withdrawal pace from Brent price bands and works out runway tables — scenarios, not forecasts. An internal tool; it doesn't drive the published charts. | Every Wednesday, with the EIA report |
-| Price and demand check | Estimates how higher prices reduce demand, so the same effect isn't counted twice. | Monthly, with new price data |
-| Odds cross-check | Uses tanker traffic, tanker losses, and Brent prices to check the assigned odds. | Each daily update |
-| Scorecard | Compares past predictions with what actually happened. | Whenever a prediction comes due |
-
-The scorecard records each prediction with a date and a probability. Once that date passes, the result is scored. Over time, this should show whether the estimates are becoming more reliable.
-
-The first predictions cover Russia's diesel export ban and two prediction markets on whether shipping through Hormuz returns to normal and whether a ceasefire begins by Sep 30. Those results are due by the end of September.
-
-The scorecard also tracks predictions outside the oil model, including Fed rate decisions. As of September 11, futures markets gave a September 16 rate increase an 86% chance, and the increase happened. Our next prediction is a 60% chance of another rate increase at the October 27–28 meeting.
-
-## Comparing stock paths with what the IEA reports
-
-The supply page carries two comparisons that work differently from the scorecard. The scorecard assigns a probability and scores whether it hit. These two publish a continuous value each month and score how far off it was, in absolute error, in million barrels — the monthly change and the cumulative total are scored separately.
-
-- **The EIA path** is the balance in the EIA's Short-Term Energy Outlook released on September 9, 2026: world production minus consumption, which implies how world inventories change each month.
-- **The persistence baseline** is a comparison device, not a forecast: it repeats the June–August 2026 average of the IEA's own reported monthly changes (−143 ÷ 3 million barrels per month), as if nothing changed.
-
-Both start at the observed cumulative change of −507 million barrels at the end of August 2026. Each month the IEA publishes a new figure, the monthly change and the cumulative total are compared against the published paths. The result as first published stays fixed. If a later edition revises it, the revision is recorded separately, and the score is always computed against the first release, so later edits to history cannot move a score.
-
-One caveat: the EIA's balance and the IEA's observed stocks do not cover exactly the same pool. The EIA's world balance is broader, so part of any gap between the two is a difference in coverage, not just accuracy.
-
-## The scenario paths: what they assume and how they're calculated
-
-The three colored paths on the supply page (corridor holds, standoff, corridor lapses) are conditional model projections. Each is the EIA baseline from the September 9 outlook, adjusted month by month. The adjustments are analyst judgment — a documented choice, not a reported figure. The full assumptions for the currently displayed version live in the dated snapshot `research/sources/world-stocks-assumptions-v2026-09-18.json` (each forecast record references its own snapshot by path + sha256 — the corridor-lapses records issued on Sep 17 reference the v2026-09-17 snapshot; the working copy is `site/src/data/world-stocks-assumptions.json`), and every number on the page is computed from them, not re-typed — the checked-in scripts that do the computing and drift-checking are described at the end of this section.
-
-**The baseline.** The EIA Short-Term Energy Outlook released September 9, 2026 is the only release that publishes a month-by-month world production and consumption forecast across the full horizon, with an explicit, quantified war-disruption schedule. The EIA's own words: production in the Middle East "will rise in the coming months because of gradually increasing flows through the Strait of Hormuz and the use of alternative routes"; shut-in production averaged 6.7 million barrels per day in August, forecast at 6.2 for the third quarter, 5.7 for the fourth, 2.7 for the first quarter of 2027, with most shut-in production "largely restored in 2H27." Two supply events landed after the baseline date — the East–West pipeline suspension (Sep 11, roughly 4 mb/d) and the halt of loadings at Yanbu (Sep 16). The scenario adjustments are incremental relative to the baseline's own shut-in path, so an event already inside the baseline is never subtracted twice.
-
-**The arithmetic.** For each month: scenario production = baseline production + the production adjustment; scenario consumption = baseline consumption + the consumption adjustment; the daily stock change = scenario production − scenario consumption; the cumulative change = the previous month's cumulative + daily change × the days in the month. Positive means stocks increased. All paths start from the observed cumulative change of −507 million barrels at the end of August 2026. Government stock releases have zero direct contribution to the combined global stock change — a release moves barrels between holders, not out of the aggregate — so no path counts one as production or as a loss.
-
-### Corridor holds
+<details>
+<summary>Monthly calculations: corridor holds</summary>
 
 <!-- SCENARIO_TABLE:BEGIN corridor-holds -->
 | Month | Baseline P | ΔP | Scenario P | Baseline C | ΔC | Scenario C | Daily balance | Days | Cumulative |
@@ -166,34 +90,69 @@ The three colored paths on the supply page (corridor holds, standoff, corridor l
 | Dec 2027 | 111.82 | +0.00 | 111.82 | 106.67 | +0.00 | 106.67 | +5.15 | 31 | +1,228.6 |
 <!-- SCENARIO_TABLE:END corridor-holds -->
 
-Traffic normalizing over one to two quarters puts the recovery roughly one quarter ahead of the EIA's own schedule, capped so scenario production never exceeds the pre-war trend plus normal growth. Slightly lower prices ($70–80 against the baseline's $77 falling to $67) add a small +0.25 mb/d of demand support through Q1 2027. Endpoint: **+1,228.6** by December 2027, about 250 mb above the EIA path.
+</details>
 
-### Standoff
+### The standoff continues
+
+In this scenario, fighting continues and the bypass stays closed. **We assume Gulf production stays at the same level.** We set world production at 100.5 million barrels a day through the end of 2026, assuming alternative shipping routes make up for the September disruptions. That's a level we've chosen for the scenario, not a reported figure.
+
+For 2027, we assume production outside the Gulf increases by 0.5 million barrels a day each quarter. World production reaches 102.5 million barrels a day in December, 9.3 million below the EIA forecast.
+
+We set consumption below the EIA forecast by 0.5 million barrels a day through 2026, 1.0 million in the first half of 2027, and 0.5 million in the second half. Those reductions are fixed in advance. The model doesn't reduce consumption further as stocks fall.
+
+Consumption exceeds production in every month of this scenario. By December 2027, storage is **1,832.6 million barrels below its end-of-February 2026 level**.
+
+<details>
+<summary>Monthly calculations: standoff</summary>
 
 <!-- SCENARIO_TABLE:BEGIN standoff -->
 | Month | Baseline P | ΔP | Scenario P | Baseline C | ΔC | Scenario C | Daily balance | Days | Cumulative |
 |---|---|---|---|---|---|---|---|---|---|
-| Sep 2026 | 99.41 | +0.50 | 99.91 | 104.21 | -0.50 | 103.71 | -3.80 | 30 | -620.9 |
-| Oct 2026 | 100.56 | +0.00 | 100.56 | 102.99 | -0.50 | 102.49 | -1.93 | 31 | -680.8 |
-| Nov 2026 | 102.27 | -1.70 | 100.57 | 103.74 | -0.50 | 103.24 | -2.67 | 30 | -760.9 |
-| Dec 2026 | 103.64 | -2.60 | 101.04 | 104.86 | -0.50 | 104.36 | -3.33 | 31 | -864.0 |
-| Jan 2027 | 104.96 | -4.00 | 100.96 | 102.38 | -1.00 | 101.38 | -0.41 | 31 | -876.7 |
-| Feb 2027 | 106.46 | -5.00 | 101.46 | 104.66 | -1.00 | 103.66 | -2.19 | 28 | -938.1 |
-| Mar 2027 | 108.00 | -6.00 | 102.00 | 103.48 | -1.00 | 102.48 | -0.48 | 31 | -953.0 |
-| Apr 2027 | 109.59 | -7.10 | 102.49 | 104.36 | -1.00 | 103.36 | -0.87 | 30 | -979.0 |
-| May 2027 | 110.25 | -7.20 | 103.05 | 104.52 | -1.00 | 103.52 | -0.47 | 31 | -993.6 |
-| Jun 2027 | 110.29 | -6.80 | 103.49 | 106.12 | -1.00 | 105.12 | -1.63 | 30 | -1,042.4 |
-| Jul 2027 | 110.96 | -6.50 | 104.46 | 105.83 | -0.50 | 105.33 | -0.87 | 31 | -1,069.4 |
-| Aug 2027 | 111.07 | -5.60 | 105.47 | 105.74 | -0.50 | 105.24 | +0.23 | 31 | -1,062.2 |
-| Sep 2027 | 111.09 | -5.10 | 105.99 | 105.87 | -0.50 | 105.37 | +0.62 | 30 | -1,043.6 |
-| Oct 2027 | 111.68 | -5.20 | 106.48 | 104.71 | -0.50 | 104.21 | +2.27 | 31 | -973.2 |
-| Nov 2027 | 112.14 | -5.10 | 107.04 | 105.49 | -0.50 | 104.99 | +2.05 | 30 | -911.8 |
-| Dec 2027 | 111.82 | -4.30 | 107.52 | 106.67 | -0.50 | 106.17 | +1.35 | 31 | -869.8 |
+| Sep 2026 | 99.41 | +1.09 | 100.50 | 104.21 | -0.50 | 103.71 | -3.21 | 30 | -603.3 |
+| Oct 2026 | 100.56 | -0.06 | 100.50 | 102.99 | -0.50 | 102.49 | -1.99 | 31 | -664.9 |
+| Nov 2026 | 102.27 | -1.77 | 100.50 | 103.74 | -0.50 | 103.24 | -2.74 | 30 | -747.0 |
+| Dec 2026 | 103.64 | -3.14 | 100.50 | 104.86 | -0.50 | 104.36 | -3.86 | 31 | -866.8 |
+| Jan 2027 | 104.96 | -4.30 | 100.67 | 102.38 | -1.00 | 101.38 | -0.71 | 31 | -888.8 |
+| Feb 2027 | 106.46 | -5.63 | 100.83 | 104.66 | -1.00 | 103.66 | -2.82 | 28 | -967.9 |
+| Mar 2027 | 108.00 | -7.00 | 101.00 | 103.48 | -1.00 | 102.48 | -1.48 | 31 | -1,013.6 |
+| Apr 2027 | 109.59 | -8.42 | 101.17 | 104.36 | -1.00 | 103.36 | -2.19 | 30 | -1,079.3 |
+| May 2027 | 110.25 | -8.91 | 101.33 | 104.52 | -1.00 | 103.52 | -2.18 | 31 | -1,146.9 |
+| Jun 2027 | 110.29 | -8.79 | 101.50 | 106.12 | -1.00 | 105.12 | -3.62 | 30 | -1,255.5 |
+| Jul 2027 | 110.96 | -9.29 | 101.67 | 105.83 | -0.50 | 105.33 | -3.66 | 31 | -1,369.0 |
+| Aug 2027 | 111.07 | -9.24 | 101.83 | 105.74 | -0.50 | 105.24 | -3.40 | 31 | -1,474.5 |
+| Sep 2027 | 111.09 | -9.09 | 102.00 | 105.87 | -0.50 | 105.37 | -3.37 | 30 | -1,575.7 |
+| Oct 2027 | 111.68 | -9.51 | 102.17 | 104.71 | -0.50 | 104.21 | -2.05 | 31 | -1,639.1 |
+| Nov 2027 | 112.14 | -9.81 | 102.33 | 105.49 | -0.50 | 104.99 | -2.66 | 30 | -1,718.9 |
+| Dec 2027 | 111.82 | -9.32 | 102.50 | 106.67 | -0.50 | 106.17 | -3.67 | 31 | -1,832.6 |
 <!-- SCENARIO_TABLE:END standoff -->
 
-Production holds near the current level through end-2026 (about 99.9–101.0 mb/d), then rises by about 6.5 mb/d over 2027 — calendar-weighted quarterly means of 101.5, 103.0, 105.3, 107.0 — to about 107.5 by December, still below the baseline in every month of 2027 (the baseline reaches 111.8 in December on its full-restoration-by-2H27 schedule). The demand adjustment (−0.5 through 2026, −1.0 in H1 2027, −0.5 in H2 2027) is judgment, set deliberately well below the crisis model's level-elasticity estimate — the log form at $100–120 against a $67 baseline gives roughly −2 to −3 mb/d even at the lowest elasticity — because price passes through to demand with a lag, and only part of the full level effect lands inside the forecast window. The residual −4.3 mb/d by December 2027 is also judgment: the part of the ~4 mb/d East–West pipeline flow loss (Rystad via CNBC, Sep 11 2026) not already offset by the baseline's own alternative-route and storage assumptions, plus attack-maintenance shut-ins if the war is still running. The 4 mb/d figure is a transport flow, not a measured production loss; neither the conversion nor its persistence through December is source-derived. Endpoint: **−869.8** by December 2027, about 1,850 mb below the EIA path.
+</details>
 
-### Corridor lapses
+<details>
+<summary>Why the standoff path changed</summary>
+
+The earlier version assumed production would rise in 2027 without clearly explaining how that supply would return while the standoff continued. On September 19, we replaced that assumption with the ones above. The December 2027 total is now about 963 million barrels lower than the previous projection of −869.8 million. We've kept the earlier predictions unchanged so we can check them against what happens.
+
+**Correction (September 19):** Our explanation of the standoff assumptions got three things wrong:
+
+- The EIA's September 9 forecast couldn't account for the September 11–16 disruptions. We assume alternative routes make up for them; the EIA didn't establish that.
+- Production isn't below the EIA forecast in every month. It's 1.09 million barrels a day above it in September 2026 and 0.06 million below it in October, then stays below it.
+- The three scenarios use different consumption assumptions, not identical ones.
+
+We've corrected the explanation without changing the calculations. We've kept the original saved record unchanged so readers can check what we published.
+
+</details>
+
+### The corridor lapses
+
+In this scenario, the shipping agreement fails and the disruption continues. More production is lost than the EIA forecast assumes. By early 2027, we assume the disruption prevents production of about 16.2 million barrels a day in the Gulf.
+
+We keep that production loss unchanged through December 2027. As more Gulf production returns in the EIA forecast, we subtract more from it to represent a continued closure. We set consumption 3 million barrels a day below the EIA forecast through 2026 and 5 million below it throughout 2027.
+
+By December 2027, storage is **3,495.4 million barrels below its end-of-February 2026 level**. That would require about 2,990 million barrels of additional withdrawals after August. We don't know whether that much oil could be withdrawn. The line adds up the monthly shortages; it doesn't show whether enough oil would be available to cover them through December 2027.
+
+<details>
+<summary>Monthly calculations: corridor lapses</summary>
 
 <!-- SCENARIO_TABLE:BEGIN corridor-lapses -->
 | Month | Baseline P | ΔP | Scenario P | Baseline C | ΔC | Scenario C | Daily balance | Days | Cumulative |
@@ -216,34 +175,109 @@ Production holds near the current level through end-2026 (about 99.9–101.0 mb/
 | Dec 2027 | 111.82 | -16.22 | 95.61 | 106.67 | -5.00 | 101.67 | -6.06 | 31 | -3,495.4 |
 <!-- SCENARIO_TABLE:END corridor-lapses -->
 
-The closure removes the flows the baseline still expects to gradually return. The baseline's September shut-in is not itself published; it is implied at about 7.0 mb/d from the published July (5.0) and August (6.7) actuals and the 3Q26 average (6.2 = (Jul+Aug+Sep)/3). The incremental shut-in therefore grows from +6 mb/d in September 2026 (about 13.0 total) to +13.5 by Q1 2027 (about 16.2 total); total implied Gulf shut-ins stay below the 25.2 mb/d of pre-war production of the seven Hormuz-dependent countries in the EIA's own shut-in table, leaving room for domestic use, overland routes, and unverified dark flows. Brent above $130: the crisis model's level elasticity against the baseline's price level spans roughly −2.5 to −6 mb/d, and the chosen −3.0 (H2 2026) / −5.0 (Q1 2027) are judgment within that band, ramped with the assumed price path rather than derived from it.
+</details>
 
-**The conditional extension through December 2027 (v2026-09-18).** The September 2026 – February 2027 targets above are verbatim from the version issued on Sep 17, whose assumptions were deliberately carried only that far: a sustained full closure beyond about six months was outside that projection's range (there is no historical precedent at this scale to condition on), so the path ended at its stated validity horizon of February 2027 — not because it crossed any historical low. This version extends it through December 2027 as a **conditional scenario** — an "if the closure persists" path, not a central forecast — under the fixed-total-disruption persistence reading: the assumed total Gulf shut-in is held at **16.217 mb/d** (13.5 scenario increment + 2.717, the EIA's published 1Q27 average baseline shut-in). The monthly production adjustment is the assumed baseline shut-in minus 16.217 — −13.5 while the assumed baseline shut-in is 2.717 (Mar–Jun 2027), −16.217 once it is 0 (Jul–Dec 2027) — so the scenario's total disruption stays constant while the baseline's own shut-in tapers; holding the *adjustment* constant instead, or holding scenario production flat, gives materially different totals (the research page). The post-1Q27 baseline shut-in schedule (2.717 through June 2027, 0 from July) is a stated test simplification, not a source-derived schedule: the EIA says most shut-in production is "largely restored in 2H27" without a monthly schedule, and an April-2027-zero variant is on the research page. Demand stays −5 mb/d below the EIA baseline — the scenario's existing H1-2027 convention, carried flat and deliberately well below the level-elasticity estimate — and a no-further-demand-response variant is on the research page. The other persistence readings (fixed adjustment; flat scenario production) and both demand regimes are on the [research page](/research/lapse-persistence); their spread is a spread of assumptions, **not a confidence interval** around this path. Endpoint: **−3,495.4** by December 2027 (−2,050.5 by February 2027, the v2026-09-17 endpoint).
+<details>
+<summary>How the extended closure is calculated</summary>
 
-**Feasibility.** The implied cumulative withdrawal by end-February (about 1,540 mb beyond the anchor) is a large share of reported OECD on-land stocks; the December 2027 extension deepens it to about 2,990 mb beyond the anchor (roughly 1.9×). Whether either is physically achievable depends on the accessible starting inventory, which is not known. The path is a balance identity, not a stock forecast: it does not solve whether stocks, withdrawals, or demand response would bend the path before the horizon. It is not clamped, and it is not physically validated by the available inventory evidence.
+The version published on September 17 stopped at February 2027, with a total change of −2,050.5 million barrels. On September 18, we extended the calculation through December 2027. The monthly predictions through February stayed the same.
 
-**Sensitivity.** For the published adjustments, the production term dominates the demand term in magnitude. Holding demand fixed: ±2 mb/d on the standoff's 2027 production level moves its December 2027 endpoint by about ±730 mb (2 mb/d × the 365 days of 2027; over the forecast's September–December 2026 interval alone, ±244 mb), while a ±1 mb/d demand nudge is worth about ∓180 mb per half-year — a statement about the sizes of the published adjustments, not a general ordering of the terms. For the corridor-lapses path, the closure horizon dominates the endpoint level: a variant in which the closure ends in November 2026 and the EIA baseline resumes (production and demand adjustments both back to zero) lands at about **−1,224** by February 2027 instead of **−2,051** — an 827 mb gap at the *same* endpoint, not the 734 mb that comparing the path's own November value (−1,316) with its February value would suggest, because the post-reopening baseline balance partly recovers (December −38, January +80, February +51). The variant is a sensitivity computation, not a published scenario: it has no validity horizon of its own and no odds. For the extension, the restoration-timing assumption moves the December 2027 endpoint too: with the assumed baseline shut-in reaching zero in April 2027 rather than July, the endpoint is **−3,742.6** — 247 mb *lower* (a larger accumulated withdrawal), because holding the total shut-in fixed means the scenario's production runs 2.717 mb/d below the primary reading in each of April–June 2027, when the assumed baseline shut-in tapers to zero. That variant is likewise a sensitivity, not a published scenario (research page).
+We assume the Gulf loses 16.217 million barrels a day of production in total. That includes the 2.717 million loss already in the EIA's first-quarter forecast, plus the scenario's additional 13.5 million. For March–June, we keep the loss attributed to the EIA baseline at 2.717 million, then set it to zero from July. We chose that monthly schedule to do the calculation. The EIA describes a recovery in the second half of 2027 but doesn't publish this schedule.
 
-**How the scenarios are scored.** Like the EIA and persistence paths, each scenario is frozen at issue: the stored targets cannot move when new observations publish. The scoring procedure is checked in at `research/scoring/score-forecasts.py` and validated with a synthetic fixture (`outcomes-fixture.json` — clearly labeled, not a real publication): when an OMR edition publishes a figure for a target month, the edition and source URL are recorded in an `outcomes-YYYY-MM.json` file, and the script reports each record's monthly and cumulative errors separately, in absolute million barrels. The first-published figure fills `outcome_first_release` (frozen afterwards); later editions update only `outcome_latest`. On identical months, the script also prints each path's cumulative error next to the persistence baseline's. Three limits on reading the results. First, the persistence comparison is a skill-versus-naive-benchmark reference, not a test of the scenario assumptions. Second, the scenarios are conditional futures — each says "if X" — so a scenario that did not occur is not an unconditional point forecast and its error is not interchangeable with the others'. Third, these comparisons show how closely each published path matched the reported stock change and the persistence baseline; they do **not** identify which production or demand assumption was wrong — the observed combined balance cannot distinguish the two, and different combinations of production and demand errors produce the same net change — and selecting the closest scenario after seeing the outcome is not evidence of predictive skill. The coverage caveat applies: the paths are EIA-world balances (or a flat repeat of the observed average) scored against the IEA's observed pool.
+We therefore subtract 13.5 million barrels a day from EIA production through June and 16.217 million from July. If we kept subtracting the same amount, the scenario would gradually recover along with the EIA forecast, even though we meant to model a continued closure.
 
-**Regeneration and drift check.** The tables above, the scenario series in the data file, and the record targets are all produced by one checked-in script, `research/scoring/regen-scenarios.py`, from the archived EIA workbook and the assumptions snapshot. Each scenario record carries a structured reference to the exact dated snapshot it was issued from (path + sha256) and a frozen record of the observation its anchor was taken from; a record is validated only against its own frozen inputs, so a new or a revised observation never invalidates an issued record. `--check` (optionally `--check --version YYYY-MM-DD` for one version) verifies that every version's records match a fresh recomputation from their own snapshot + workbook — hashes included — and that the displayed series and tables match the newest version, which is the one currently shown on the dashboard. A built-in `--selftest` proves the check fails on deliberate corruption (a table cell, a series value, a target, either of two versions' snapshots, an anchor) and passes on legitimate change (a new observation, a revised observation, two coexisting versions, and an issuance from a genuinely advanced anchor). Run `--check` before any publish. `--emit-tables` regenerates the tables above in place (byte-identical when nothing has drifted). If the assumptions genuinely change, the issuance workflow is manual: archive the new assumptions file as a dated snapshot under `research/sources/`, run `--emit-records` (prints the new series + record JSON with its own dated record ids, its own snapshot reference, and an anchor stamped from the current observation — changing nothing), review the output, append the records, and — because the new version becomes the displayed one — replace the three scenario series and run `--emit-tables`. Older records and their snapshots stay in place for scoring. Published records are never mutated. Two chronology rules bind issuance and validation: the forecast months run from the month AFTER the record's stored anchor through the scenario's validity horizon (the anchor's observed total already includes the anchor month's draw — a target at or before the anchor is rejected), and the assumptions file must explicitly cover every forecast month. The dashboard shares this selection: its copy, captions, accessibility text, and plotted lines all use the newest version's records (record ids carry the version date), so appending a new version is what moves the dashboard — never a change to the old records.
+</details>
 
-**What these paths do not test.** The paths model the combined global stock balance (crude + products). They do not separately compute crude stocks, product stocks, refinery throughput, or fuel-price pass-through. Crude stocks can build while usable fuel stays scarce if refineries cannot process the crude, so agreement or disagreement between these paths and the reported combined totals does not confirm or refute a fuel-shortage hypothesis. Resolving that distinction needs a products-level model, which is out of scope for this page.
+## What the model leaves out
 
-**What is deliberately not on the page.** An OECD historical-reference crossing date ("stocks fall below every month in the reference period") was considered for Panel A and omitted: allocating a global monthly change to OECD stocks with a consistent product coverage and three months of forward demand per point is not supported by the free sources, and guessing the allocation would be fabricating the comparison. Revisit when a free source publishes the OECD split.
+**People could use less oil than we assume.** Higher prices, rationing, or a slower economy could bring consumption closer to production. Each scenario already assumes some change in consumption, but the model doesn't calculate further reductions as stocks fall. This matters most if the closure lasts a long time.
 
-## What to keep in mind
+**Stored oil isn't all usable fuel.** Crude stocks can rise while diesel becomes scarce if refineries can't process the available crude. The model counts crude and refined fuels together. It doesn't calculate how much fuel refineries can make or how much can reach the people who need it.
 
-- **The odds don't set the reserve's pace.** How quickly the reserve shrinks depends on release decisions, contracts, and delivery schedules, not on which shipping scenario plays out.
-- **The model was built with a coding agent.** It wasn't developed by an energy analyst. If you're relying on a figure, check the underlying EIA, IEA, OPEC, or IMO report.
-- **The data arrives with a delay.** The core reports are weekly, and the model can be up to two weeks behind events.
-- **Shortages can reach people before the reserve reaches a threshold.** For example, governments could introduce rationing earlier.
-- **Three scenarios can't cover everything.** Events may develop in ways the model doesn't account for.
+**We can't say when the world would run out.** We don't know how much of the oil in storage can be withdrawn, and some is needed to keep pipelines and other facilities operating. The SPR's operating limits apply to that reserve. They don't tell us the minimum amount the world needs in storage, and neither does a past low in one group of countries.
 
-## When the model is updated
+**Three scenarios can't cover everything.** The war could develop in ways we haven't considered. We built the model with help from an AI coding tool. It wasn't developed by an energy analyst, and we've made the sources and calculations public so you can check them.
 
-- **Every Wednesday:** The EIA report provides new SPR and US inventory figures. The dashboard and estimated dates are updated together.
-- **Monthly:** OPEC production figures and the EIA price outlook are reviewed.
-- **Daily:** Tanker traffic, strikes, and export bans are recorded. The odds change only when the specified events occur.
+<details>
+<summary>How much the assumptions can change the result</summary>
 
-To see the latest figures and compare the scenarios, return to the [dashboard](/).
+- Changing standoff production by 2 million barrels a day throughout 2027 changes the year-end total by 730 million barrels, if consumption stays the same. A 1 million barrel daily change in consumption moves the total in the opposite direction by about 180 million barrels over half a year.
+- Ending the closure after November 2026 and returning both production and consumption to the EIA baseline gives about −1,224 million barrels by February 2027, compared with −2,051 million under continued closure. That's an 827 million barrel difference at the same date.
+- If we assume production in the EIA baseline fully recovers in April rather than July, the continued-closure calculation gives −3,742.6 million barrels by December 2027, about 247 million lower. To keep the scenario's total production loss unchanged, we then have to subtract more from the baseline during April–June.
+
+These examples show how much the result changes when we change an assumption. We haven't assigned probabilities to them.
+
+</details>
+
+## How the odds change
+
+We assign the odds using judgment. To keep our decisions consistent, we list the events that would prompt a change in advance. The odds change when one of those events affects supply or shipping. A quiet week or a price move alone isn't enough.
+
+The September 11 pipeline suspension moved the odds from 10/50/40 to 10/40/50. The September 16 update, after Yanbu loadings stopped, moved them to 10/35/55. The dashboard shows the history in “The model's odds for each outcome.”
+
+<details>
+<summary>Events that would prompt a change</summary>
+
+These rules were recorded as of September 16:
+
+| Event | Effect on the odds |
+|---|---|
+| A verified reopening, supported by an International Maritime Organization (IMO) filing and tanker traffic at or above 40% of the 85-per-day baseline for two consecutive weeks, or a durable ceasefire. | Increases the odds that the corridor holds. |
+| A rapid resumption of Yanbu loadings. | Returns the odds to 10/40/50. |
+| An official restart of the East–West pipeline, or an assessment that repairs would take only days. | Reverses both September changes, returning the odds to 10/50/40. |
+| Tanker losses above about 15 per week; delays restarting Jazan or Abqaiq; the pipeline remaining suspended past the September 16 report; or a damage assessment calling for weeks of repairs. | Increases the odds that the corridor lapses. |
+| Russia's September 30 fuel-ban decision; a widening gap between the EIA price outlook and market prices; or an adverse prediction-market result on September 14 or 30. | Could increase the odds that the corridor lapses. |
+| The Houthis blocking or attacking non-Saudi vessels in the Bab el-Mandeb, leaving both shipping routes closed. | Increases the odds that the corridor lapses. |
+
+A direct US strike on the Houthis would also prompt us to review the odds. How we'd change them would depend on what happened. The dated [research logs](https://github.com/mattcone/depletion-ledger/tree/main/research/logs) explain each decision, including cases where reports disagreed or the news didn't change the odds.
+
+</details>
+
+## How we check the predictions
+
+You can compare the scenarios with the **EIA forecast**, without our adjustments, or with **Recent trend** on the dashboard. Recent trend repeats the average of the IEA's June–August monthly changes: −143 million barrels divided by three, or about −47.7 million each month. It shows what would happen if that pace continued. This simple comparison is also called a *persistence baseline*.
+
+We save each prediction before the result is known. As the IEA reports new figures, we check how far off each prediction was, in millions of barrels. We score the monthly change and the running total separately, using the first figure the IEA publishes for each. If the IEA later revises a figure, we record the revision and keep the original score.
+
+Comparing errors over the same months helps us see whether the model does better than simply repeating the recent trend. Each scenario assumes different events, though. Picking whichever line came closest after seeing the result doesn't show that we could predict it in advance.
+
+A change in total storage also can't tell us whether we got production or consumption wrong. Errors in the two can cancel each other out. And because the EIA and IEA measure different things, part of the difference may come from their data rather than the model.
+
+The separate scorecard checks predictions about whether an event happens by a given date, such as a shipping recovery or an export-ban decision. Getting those predictions right doesn't tell us whether the storage calculations are accurate.
+
+<details>
+<summary>Calculation files and checks</summary>
+
+The file `research/sources/world-stocks-assumptions-v2026-09-19.json` contains the assumptions used for the current chart. Each older prediction has its own saved assumptions, EIA workbook, and reported starting value. We keep those records unchanged when we update the model or receive new data.
+
+`research/scoring/regen-scenarios.py` calculates the monthly tables, chart lines, and saved predictions from the same inputs. Its `--check` command recalculates every version using its saved inputs. It also checks that the displayed tables and lines match the newest version. The script's tests check that it catches altered records and accepts valid updates.
+
+When we change the assumptions, we save a new dated copy along with new predictions. We keep the previous predictions so we can score them later. `research/scoring/score-forecasts.py` compares each prediction with the first reported result and records revisions separately. The example data used to test the script is made up, not observed.
+
+The source files, scripts, and update instructions are in the [repository](https://github.com/mattcone/depletion-ledger).
+
+</details>
+
+## Where the data comes from
+
+| Information | Source | Publication schedule |
+|---|---|---|
+| World production and consumption forecasts | EIA Short-Term Energy Outlook | Monthly |
+| Company and government oil stocks in OECD countries | EIA international data | Monthly |
+| Observed global stock changes and commercial stocks in OECD countries | IEA Oil Market Report | Monthly; public detail varies by release |
+| US commercial stocks, SPR levels, and refinery activity | EIA weekly petroleum reports | Weekly |
+| Oil production by OPEC countries | OPEC | Monthly |
+| Tanker traffic, attacks, and shipping restrictions | PortWatch, Kpler, official statements, and dated news reports | Reviewed daily |
+| Oil and fuel prices | Exchanges and AAA | Daily |
+
+OECD stands for the Organisation for Economic Co-operation and Development. Its member countries hold only some of the world's oil stocks. The source notes tell you which figures are reported, estimated, or assumed for the model. We keep unverified reports in the research notes.
+
+We update the US inventory charts with the weekly EIA report. The monthly EIA and IEA reports give us new forecasts and observations to check against the global projections. When we change the assumptions, we publish a new version and keep the earlier predictions for scoring. Daily shipping news can change the odds when it meets the rules above.
+
+## Where the SPR fits now
+
+The dashboard still shows how much oil is in the SPR and how quickly it's being withdrawn. Those figures track what's happened to the reserve. They don't set the pace of withdrawals in the global scenarios.
+
+**SPR withdrawals could pause even if the crisis continues.** A supply shortage doesn't automatically trigger a release. Oil leaves the reserve through Department of Energy contracts and scheduled deliveries, so the current pace might not continue. That's why we no longer project dates for reaching the reserve's operating limits.
+
+Return to the [dashboard](/) to compare the paths and see the latest reported figures.

@@ -3,9 +3,6 @@ import { getEntry, render } from "astro:content";
 import ArticleShell from "../components/ArticleShell.astro";
 import {
   DATA_AS_OF,
-  sprWeekly,
-  sprDrawPace4w,
-  sprPreWar,
   branchWeights,
 } from "../data/crisis.ts";
 
@@ -13,51 +10,20 @@ const entry = await getEntry("docs", "model");
 if (!entry) throw new Error("model entry missing");
 const { Content } = await render(entry);
 
-const last = sprWeekly[sprWeekly.length - 1];
 const odds = branchWeights[branchWeights.length - 1];
-const NAMES = { holds: "Corridor holds", standoff: "Standoff", lapse: "Corridor lapses" } as const;
-const topKey = (["holds", "standoff", "lapse"] as const).reduce((a, b) => (odds[b] > odds[a] ? b : a));
-const others = (["holds", "standoff", "lapse"] as const).filter((k) => k !== topKey);
 const fmtDate = (d: Date) =>
   d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 const asOf = fmtDate(new Date(`${DATA_AS_OF}T00:00:00Z`));
-const weekEnding = fmtDate(new Date(`${last.date}T00:00:00Z`)).replace(", 2026", "");
-// Distances to the reserve thresholds, from the last reported level (no projected dates:
-// withdrawals run through DOE contracts and scheduled deliveries and can pause).
-const to250 = (last.level - 250).toFixed(1);
-const to180 = (last.level - 180).toFixed(1);
-
-// Stat strip — same structure and type as the dashboard's.
-const strip = [
-  {
-    label: "The reserve now",
-    value: `${last.level.toFixed(1)}M bbl`,
-    sub: `down from ${sprPreWar}M pre-war · EIA, w/e ${weekEnding}`,
-  },
-  {
-    label: "Daily withdrawals",
-    value: `${sprDrawPace4w.toFixed(2)}M b/d`,
-    sub: "4-week average from EIA reports",
-  },
-  {
-    label: "Shipping scenario with highest odds",
-    value: `${NAMES[topKey]} · ${odds[topKey]}%`,
-    sub: others.map((k) => `${NAMES[k].toLowerCase()} ${odds[k]}%`).join(" · "),
-  },
-  {
-    label: "Distance to the 250M threshold",
-    value: `${to250}M bbl`,
-    sub: `${to180}M bbl to the 180M limit · no projected dates — withdrawals could pause.`,
-  },
-];
-
-// Sticky marginalia rail (Tufte): direct label → value pairs, no box.
-const glance = [
-  { label: `Reserve (w/e ${weekEnding})`, value: `${last.level.toFixed(1)}M bbl` },
-  { label: "Withdrawals, 4-week avg", value: `${sprDrawPace4w.toFixed(2)}M b/d` },
-  { label: `To 250M (GEF minimum)`, value: `${to250}M bbl` },
-  { label: `To 180M (operable limit)`, value: `${to180}M bbl` },
-  { label: `Shipping odds (${odds.date})`, value: `${odds.holds} / ${odds.standoff} / ${odds.lapse}` },
+const sections = [
+  ["what-the-model-tells-you", "What the model tells you"],
+  ["how-to-read-the-chart", "How to read the chart"],
+  ["how-the-paths-are-calculated", "How the paths are calculated"],
+  ["what-each-scenario-assumes", "Scenario assumptions"],
+  ["what-the-model-leaves-out", "What the model leaves out"],
+  ["how-the-odds-change", "How the odds change"],
+  ["how-we-check-the-predictions", "Checking the predictions"],
+  ["where-the-data-comes-from", "Data sources"],
+  ["where-the-spr-fits-now", "Where the SPR fits now"],
 ];
 ---
 
@@ -71,52 +37,84 @@ const glance = [
       How the model works
     </h1>
     <p class="mt-4 max-w-3xl text-[15px] leading-relaxed text-ink/80">
-      What happens to shipping if the crisis continues? This model assigns odds to three
-      scenarios and updates them with official data. It also tracks the emergency reserve:
-      the reported level, the withdrawal pace, and the distance to each threshold. Here's
-      where the numbers come from, how the odds are assigned, and what you should keep
-      in mind when reading the results.
+      How could the world's oil stocks change if shipping recovers, the standoff
+      continues, or the disruption gets worse? Here's what goes into each scenario,
+      where we make assumptions, and how we check the results.
     </p>
   </header>
-
-  <!-- Stat strip (same structure as the dashboard) -->
-  <section class="grid grid-cols-2 border-x border-b border-rule lg:grid-cols-4" aria-label="Model at a glance">
-    {strip.map((s, i) => (
-      <div class={`px-4 py-4 ${i % 2 === 1 ? "border-l border-rule" : ""} lg:[&:not(:first-child)]:border-l lg:border-rule`}>
-        <p class="text-xs text-faint">{s.label}</p>
-        <p class="tabular mt-1 font-mono text-xl font-semibold text-ink">{s.value}</p>
-        <p class="mt-1 text-[11px] leading-snug text-faint">{s.sub}</p>
-      </div>
-    ))}
-  </section>
 
   <!-- Body: prose + sticky marginalia rail -->
   <!-- minmax(0,1fr) on the mobile track + min-w-0 on the article: wide tables scroll
        inside their own block (global.css .prose-oil table {display:block; overflow-x:auto})
        instead of stretching the document past the viewport. -->
   <div class="grid grid-cols-[minmax(0,1fr)] gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-14">
-    <article class="prose-oil min-w-0">
+    <article class="prose-oil model-copy min-w-0">
       <Content />
     </article>
 
-    <aside class="self-start text-sm lg:sticky lg:top-8">
-      <p class="border-b border-rule pb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-faint">
-        At a glance
+    <aside class="hidden self-start text-sm lg:sticky lg:top-8 lg:block">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.12em] text-faint">
+        On this page
       </p>
-      <dl class="mt-4 space-y-3">
-        {glance.map((g) => (
+      <nav aria-label="Model sections" class="mt-4">
+        <ul class="space-y-2">
+          {sections.map(([id, label]) => (
+            <li><a class="text-[13px] text-ink/70 hover:text-ink hover:underline" href={`#${id}`}>{label}</a></li>
+          ))}
+        </ul>
+      </nav>
+      <p class="mt-6 text-xs text-faint">Scenario probabilities · {odds.date}</p>
+      <dl class="mt-3 space-y-3">
+        {[["Corridor holds", odds.holds], ["Standoff", odds.standoff], ["Corridor lapses", odds.lapse]].map(([label, value]) => (
           <div class="flex items-baseline justify-between gap-3">
-            <dt class="text-[13px] leading-snug text-ink/70">{g.label}</dt>
-            <dd class="tabular whitespace-nowrap font-mono text-[13px] font-semibold text-ink">{g.value}</dd>
+            <dt class="text-[13px] leading-snug text-ink/70">{label}</dt>
+            <dd class="tabular whitespace-nowrap font-mono text-[13px] font-semibold text-ink">{value}%</dd>
           </div>
         ))}
       </dl>
-      <p class="mt-6 border-t border-rule pt-3 text-xs leading-relaxed text-faint">
-        The shipping odds are assigned using judgment; they don't set a pace for the
-        reserve. How quickly the reserve shrinks depends on release decisions, contracts,
-        and delivery schedules. The technical specification records the formulas and sources.
+      <p class="mt-6 text-xs leading-relaxed text-faint">
+        These percentages show how likely we consider each outcome. They don't tell
+        you how accurate the storage figures will be.
       </p>
     </aside>
   </div>
 
 </ArticleShell>
+
+<style>
+  .model-copy :global(> blockquote:first-child) {
+    margin: 0 0 2rem;
+    padding: 1rem 1.25rem;
+    border-left-color: var(--color-crude);
+    background: var(--color-paper-deep);
+    color: var(--color-ink);
+  }
+
+  .model-copy :global(details) {
+    padding: 0.5rem 0;
+  }
+
+  .model-copy :global(summary) {
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .model-copy :global(summary:focus-visible) {
+    outline: 2px solid var(--color-crude);
+    outline-offset: 4px;
+  }
+
+  .model-copy :global(details > * + *) {
+    margin-top: 1em;
+  }
+
+  .model-copy :global(h2) {
+    border-top: none;
+    padding-top: 0;
+    scroll-margin-top: 1rem;
+  }
+
+  .model-copy :global(code) {
+    overflow-wrap: anywhere;
+  }
+</style>

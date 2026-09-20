@@ -10,13 +10,13 @@ stocks). All data lives in `site/src/data/world-stocks.json` with per-point prov
   publish commercial-only stocks monthly but only a 5-month window per edition — Table 4, so a
   full commercial-only history takes many editions to assemble; the page says so):
   - main line: EIA international dataset (activityId=5), monthly, Jan 2021–May 2026 (65 points)
-  - inset: IEA Oil Market Report Table 5 quarter-ends, days of forward demand,
-    Mar 2021–Mar 2026 (21 points; 2020Q3–Q4 exist in the data file but predate the
-    axis). The end-Q1 2026 value is HOLLOW: Table 5 footnotes 2–3 (Jun 2026 ed) state days of
-    forward demand = stock level ÷ forward-quarter average daily demand, and the End-March-2026
-    forward-demand figure is an IEA Secretariat forecast. (Originally a second series on a dual
-    axis; moved to a separate inset chart in the round-2 review because the coverage labels
-    collided at narrow widths.)
+  - (inset removed 2026-09-19 — reviewer found the "days of forward demand" inset unclear and
+    unnecessary: the main chart's "lowest since Jan 2021" message already covers it, and the
+    inset's latest point (end-Q1 2026, 91 days, computed from IEA forecast demand) was OLDER
+    than the main chart's (May 2026). The `oecd_days_cover_quarterly` series, the
+    `days_historical_low` annotation, and the chart code were removed from the data file and
+    the page. IEA Table 5 still publishes the days figure — see research/IEA-DATA-ACCESS.md —
+    it just isn't plotted.)
   - shaded band: 2021–2025 min–max per calendar month (EIA series), extended across the 2026
     months — it is the same calendar month's historical range, not a claim of seasonal cause.
     April and May 2026 fall below the band's bottom.

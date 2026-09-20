@@ -38,7 +38,7 @@ writeFileSync(
   withFrontmatter(md, {
     title: "How the Model Works",
     description:
-      "Learn how the Depletion Ledger assigns odds to three shipping scenarios, tracks the emergency reserve, and keeps a record of its predictions.",
+      "How the Depletion Ledger models changes in global oil storage: three shipping scenarios, their assumptions, and how the predictions are checked.",
   })
 );
 console.log("docs: MODEL.md -> src/content/docs/model.md");

@@ -1,16 +1,16 @@
 {
- "generated": "2026-09-18",
- "generated_by": "World stocks panels, Phase 1 + Phase 2 (benchmarks, persistence baseline, forecast records) + Phase 3 scenarios v2026-09-17; corridor-lapses extended to Dec 2027 as conditional version v2026-09-18 (fixed-total-disruption reading, P2+C0). See research/world-stocks-research.md and research/stress-test/.",
+ "generated": "2026-09-19",
+ "generated_by": "World stocks panels, Phase 1 + Phase 2 (benchmarks, persistence baseline, forecast records) + Phase 3 scenarios v2026-09-17; corridor-lapses extended to Dec 2027 as conditional version v2026-09-18 (fixed-total-disruption reading, P2+C0); standoff redefined as candidate A (no net Gulf recovery; research page /research/standoff-recovery) as version v2026-09-19 — the v2026-09-17/18 records are preserved for scoring. See research/world-stocks-research.md and research/stress-test/.",
  "conventions": {
   "sign": "positive = stocks increased; negative = stocks decreased",
   "status": {
    "reported": "a direct observation published by the source (filled marker)",
    "reported_preliminary": "published, but the source flags the underlying data as preliminary (hollow marker, flagged in tooltip)",
-   "derived": "published value computed by the source from forecast inputs, e.g. days of forward demand using forecast demand (hollow marker, flagged in tooltip)",
-   "agency-projection": "a projection published by a source agency, stated as such (thin gray dashed line, hollow markers \u2014 never styled more prominently than reported values)",
+   "derived": "published value computed by the source from forecast inputs (hollow marker, flagged in tooltip)",
+   "agency-projection": "a projection published by a source agency, stated as such (thin gray dashed line, hollow markers — never styled more prominently than reported values)",
    "model-projection": "a projection produced by the site's own model (not yet in use; Phase 3)"
   },
-  "missing": "missing periods are absent or explicit null \u2014 never interpolated; lines do not span unobserved periods",
+  "missing": "missing periods are absent or explicit null — never interpolated; lines do not span unobserved periods",
   "vintages": "the IEA revises values between OMR editions; each point names the edition it came from; tooltips show the edition date"
  },
  "series": {
@@ -685,7 +685,7 @@
    ]
   },
   "oecd_onland_mb_quarterly_iea": {
-   "name": "OECD on-land oil stocks \u2014 IEA survey, quarter-ends (industry + government-controlled)",
+   "name": "OECD on-land oil stocks — IEA survey, quarter-ends (industry + government-controlled)",
    "unit": "million barrels",
    "cadence": "quarterly (quarter-end)",
    "points": [
@@ -697,7 +697,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/3c169b3b-9a7c-4467-9029-d2b76caddc6c/-19JAN2022_OilMarketReport.pdf",
      "published": "IEA OMR, 19 Jan 2022",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition."
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition."
     },
     {
      "period": "2020-12-31",
@@ -707,7 +707,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/3c169b3b-9a7c-4467-9029-d2b76caddc6c/-19JAN2022_OilMarketReport.pdf",
      "published": "IEA OMR, 19 Jan 2022",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition."
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition."
     },
     {
      "period": "2021-03-31",
@@ -717,7 +717,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/d54cfc69-ed0f-44ed-b1fe-ad63b2259456/-13JULY2022_OilMarketReport.pdf",
      "published": "IEA OMR, 13 Jul 2022",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4467.1 (earlier vintage)"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4467.1 (earlier vintage)"
     },
     {
      "period": "2021-06-30",
@@ -727,7 +727,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/d54cfc69-ed0f-44ed-b1fe-ad63b2259456/-13JULY2022_OilMarketReport.pdf",
      "published": "IEA OMR, 13 Jul 2022",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4402.4 (earlier vintage)"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4402.4 (earlier vintage)"
     },
     {
      "period": "2021-09-30",
@@ -737,7 +737,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/6b994ae3-17fe-4a44-8bb8-eb1217cc4604/-18JAN2023_OilMarketReport.pdf",
      "published": "IEA OMR, 18 Jan 2023",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4272.0 / 4267.8 (earlier vintages)"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4272.0 / 4267.8 (earlier vintages)"
     },
     {
      "period": "2021-12-31",
@@ -747,7 +747,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/6b994ae3-17fe-4a44-8bb8-eb1217cc4604/-18JAN2023_OilMarketReport.pdf",
      "published": "IEA OMR, 18 Jan 2023",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4131.4 (earlier vintage)"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4131.4 (earlier vintage)"
     },
     {
      "period": "2022-03-31",
@@ -757,7 +757,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/6b994ae3-17fe-4a44-8bb8-eb1217cc4604/-18JAN2023_OilMarketReport.pdf",
      "published": "IEA OMR, 18 Jan 2023",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4059.7 (earlier vintage)"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4059.7 (earlier vintage)"
     },
     {
      "period": "2022-06-30",
@@ -767,7 +767,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/6b994ae3-17fe-4a44-8bb8-eb1217cc4604/-18JAN2023_OilMarketReport.pdf",
      "published": "IEA OMR, 18 Jan 2023",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. lowest days of forward demand in the 2020Q3\u20132026Q1 period"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition."
     },
     {
      "period": "2022-09-30",
@@ -777,7 +777,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/41426881-fad3-496b-9a5c-8e58f45fa45a/-18JAN2024_OilMarketReport.pdf",
      "published": "IEA OMR, 18 Jan 2024",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 3991.1 (earlier vintage)"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 3991.1 (earlier vintage)"
     },
     {
      "period": "2022-12-31",
@@ -787,7 +787,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/41426881-fad3-496b-9a5c-8e58f45fa45a/-18JAN2024_OilMarketReport.pdf",
      "published": "IEA OMR, 18 Jan 2024",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition."
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition."
     },
     {
      "period": "2023-03-31",
@@ -797,7 +797,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/2e551e09-0409-4a19-955e-71e75a407c2d/OMR_JULY_2024.pdf",
      "published": "IEA OMR, 11 Jul 2024",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. lowest stock level in the 2020Q3\u20132026Q1 period (Jan 2024 ed vintage: 3975.7); revised from 3975.7"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. lowest stock level in the 2020Q3–2026Q1 period (Jan 2024 ed vintage: 3975.7); revised from 3975.7"
     },
     {
      "period": "2023-06-30",
@@ -807,7 +807,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/2e551e09-0409-4a19-955e-71e75a407c2d/OMR_JULY_2024.pdf",
      "published": "IEA OMR, 11 Jul 2024",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 3998.2 (earlier vintage)"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 3998.2 (earlier vintage)"
     },
     {
      "period": "2023-09-30",
@@ -817,7 +817,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/2e551e09-0409-4a19-955e-71e75a407c2d/OMR_JULY_2024.pdf",
      "published": "IEA OMR, 11 Jul 2024",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4034.3 (earlier vintage)"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4034.3 (earlier vintage)"
     },
     {
      "period": "2023-12-31",
@@ -827,7 +827,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/974066b7-5471-44d6-9576-85138a563256/-13FEB2025_OilMarketReport.pdf",
      "published": "IEA OMR, 13 Feb 2025",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 3984.4 (earlier vintage)"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 3984.4 (earlier vintage)"
     },
     {
      "period": "2024-03-31",
@@ -837,7 +837,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/974066b7-5471-44d6-9576-85138a563256/-13FEB2025_OilMarketReport.pdf",
      "published": "IEA OMR, 13 Feb 2025",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 3976.4 (earlier vintage)"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 3976.4 (earlier vintage)"
     },
     {
      "period": "2024-06-30",
@@ -847,7 +847,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/5b83d00c-8d10-4187-8800-3b364362a25f/-13AUG2025__OilMarketReport.pdf",
      "published": "IEA OMR, 13 Aug 2025",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4072.2 (earlier vintage)"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4072.2 (earlier vintage)"
     },
     {
      "period": "2024-09-30",
@@ -857,7 +857,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/7665303f-2a12-43a5-a79c-76b0576c88c6/-14OCT2025__OilMarketReport.pdf",
      "published": "IEA OMR, 14 Oct 2025",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4047.9 (earlier vintage)"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4047.9 (earlier vintage)"
     },
     {
      "period": "2024-12-31",
@@ -867,7 +867,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/7665303f-2a12-43a5-a79c-76b0576c88c6/-14OCT2025__OilMarketReport.pdf",
      "published": "IEA OMR, 14 Oct 2025",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 3980.0 (earlier vintage)"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 3980.0 (earlier vintage)"
     },
     {
      "period": "2025-03-31",
@@ -877,7 +877,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/db7a9af0-7a97-49a5-af56-6732b08d6225/-13MAY2026__OilMarketReport.pdf",
      "published": "IEA OMR, 13 May 2026",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. Oct 2025 ed vintage: 3995.9"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. Oct 2025 ed vintage: 3995.9"
     },
     {
      "period": "2025-06-30",
@@ -887,7 +887,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. Oct 2025 ed vintage: 4030.8"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. Oct 2025 ed vintage: 4030.8"
     },
     {
      "period": "2025-09-30",
@@ -897,7 +897,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition."
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition."
     },
     {
      "period": "2025-12-31",
@@ -907,7 +907,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4075.3 (May 2026 ed)"
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4075.3 (May 2026 ed)"
     },
     {
      "period": "2026-03-31",
@@ -917,250 +917,12 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4035.6 (May 2026 ed)"
-    }
-   ]
-  },
-  "oecd_days_cover_quarterly": {
-   "name": "OECD stocks, days of forward demand \u2014 IEA survey, quarter-ends",
-   "unit": "days",
-   "cadence": "quarterly (quarter-end)",
-   "note": "days = stock level \u00f7 forward-quarter average daily demand (IEA Table 5 footnote). The 2026Q1 value uses the IEA's forecast demand (footnotes 2\u20133, Jun 2026 ed) and is marked derived.",
-   "points": [
-    {
-     "period": "2020-09-30",
-     "value": 111,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/3c169b3b-9a7c-4467-9029-d2b76caddc6c/-19JAN2022_OilMarketReport.pdf",
-     "published": "IEA OMR, 19 Jan 2022",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition."
-    },
-    {
-     "period": "2020-12-31",
-     "value": 109,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/3c169b3b-9a7c-4467-9029-d2b76caddc6c/-19JAN2022_OilMarketReport.pdf",
-     "published": "IEA OMR, 19 Jan 2022",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition."
-    },
-    {
-     "period": "2021-03-31",
-     "value": 102,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/d54cfc69-ed0f-44ed-b1fe-ad63b2259456/-13JULY2022_OilMarketReport.pdf",
-     "published": "IEA OMR, 13 Jul 2022",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4467.1 (earlier vintage)"
-    },
-    {
-     "period": "2021-06-30",
-     "value": 97,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/d54cfc69-ed0f-44ed-b1fe-ad63b2259456/-13JULY2022_OilMarketReport.pdf",
-     "published": "IEA OMR, 13 Jul 2022",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4402.4 (earlier vintage)"
-    },
-    {
-     "period": "2021-09-30",
-     "value": 92,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/6b994ae3-17fe-4a44-8bb8-eb1217cc4604/-18JAN2023_OilMarketReport.pdf",
-     "published": "IEA OMR, 18 Jan 2023",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4272.0 / 4267.8 (earlier vintages)"
-    },
-    {
-     "period": "2021-12-31",
-     "value": 90,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/6b994ae3-17fe-4a44-8bb8-eb1217cc4604/-18JAN2023_OilMarketReport.pdf",
-     "published": "IEA OMR, 18 Jan 2023",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4131.4 (earlier vintage)"
-    },
-    {
-     "period": "2022-03-31",
-     "value": 90,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/6b994ae3-17fe-4a44-8bb8-eb1217cc4604/-18JAN2023_OilMarketReport.pdf",
-     "published": "IEA OMR, 18 Jan 2023",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4059.7 (earlier vintage)"
-    },
-    {
-     "period": "2022-06-30",
-     "value": 86,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/6b994ae3-17fe-4a44-8bb8-eb1217cc4604/-18JAN2023_OilMarketReport.pdf",
-     "published": "IEA OMR, 18 Jan 2023",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. lowest days of forward demand in the 2020Q3\u20132026Q1 period"
-    },
-    {
-     "period": "2022-09-30",
-     "value": 87,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/41426881-fad3-496b-9a5c-8e58f45fa45a/-18JAN2024_OilMarketReport.pdf",
-     "published": "IEA OMR, 18 Jan 2024",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 3991.1 (earlier vintage)"
-    },
-    {
-     "period": "2022-12-31",
-     "value": 88,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/41426881-fad3-496b-9a5c-8e58f45fa45a/-18JAN2024_OilMarketReport.pdf",
-     "published": "IEA OMR, 18 Jan 2024",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition."
-    },
-    {
-     "period": "2023-03-31",
-     "value": 87,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/2e551e09-0409-4a19-955e-71e75a407c2d/OMR_JULY_2024.pdf",
-     "published": "IEA OMR, 11 Jul 2024",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. lowest stock level in the 2020Q3\u20132026Q1 period (Jan 2024 ed vintage: 3975.7); revised from 3975.7"
-    },
-    {
-     "period": "2023-06-30",
-     "value": 87,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/2e551e09-0409-4a19-955e-71e75a407c2d/OMR_JULY_2024.pdf",
-     "published": "IEA OMR, 11 Jul 2024",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 3998.2 (earlier vintage)"
-    },
-    {
-     "period": "2023-09-30",
-     "value": 88,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/2e551e09-0409-4a19-955e-71e75a407c2d/OMR_JULY_2024.pdf",
-     "published": "IEA OMR, 11 Jul 2024",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4034.3 (earlier vintage)"
-    },
-    {
-     "period": "2023-12-31",
-     "value": 89,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/974066b7-5471-44d6-9576-85138a563256/-13FEB2025_OilMarketReport.pdf",
-     "published": "IEA OMR, 13 Feb 2025",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 3984.4 (earlier vintage)"
-    },
-    {
-     "period": "2024-03-31",
-     "value": 87,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/974066b7-5471-44d6-9576-85138a563256/-13FEB2025_OilMarketReport.pdf",
-     "published": "IEA OMR, 13 Feb 2025",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 3976.4 (earlier vintage)"
-    },
-    {
-     "period": "2024-06-30",
-     "value": 88,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/5b83d00c-8d10-4187-8800-3b364362a25f/-13AUG2025__OilMarketReport.pdf",
-     "published": "IEA OMR, 13 Aug 2025",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4072.2 (earlier vintage)"
-    },
-    {
-     "period": "2024-09-30",
-     "value": 87,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/7665303f-2a12-43a5-a79c-76b0576c88c6/-14OCT2025__OilMarketReport.pdf",
-     "published": "IEA OMR, 14 Oct 2025",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4047.9 (earlier vintage)"
-    },
-    {
-     "period": "2024-12-31",
-     "value": 89,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/7665303f-2a12-43a5-a79c-76b0576c88c6/-14OCT2025__OilMarketReport.pdf",
-     "published": "IEA OMR, 14 Oct 2025",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 3980.0 (earlier vintage)"
-    },
-    {
-     "period": "2025-03-31",
-     "value": 87,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/db7a9af0-7a97-49a5-af56-6732b08d6225/-13MAY2026__OilMarketReport.pdf",
-     "published": "IEA OMR, 13 May 2026",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. Oct 2025 ed vintage: 3995.9"
-    },
-    {
-     "period": "2025-06-30",
-     "value": 87,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
-     "published": "IEA OMR, 17 Jun 2026",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. Oct 2025 ed vintage: 4030.8"
-    },
-    {
-     "period": "2025-09-30",
-     "value": 89,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
-     "published": "IEA OMR, 17 Jun 2026",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition."
-    },
-    {
-     "period": "2025-12-31",
-     "value": 89,
-     "status": "reported",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
-     "published": "IEA OMR, 17 Jun 2026",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4075.3 (May 2026 ed)"
-    },
-    {
-     "period": "2026-03-31",
-     "value": 91,
-     "status": "derived",
-     "source_id": "iea-omr-table5",
-     "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
-     "published": "IEA OMR, 17 Jun 2026",
-     "retrieved": "2026-09-17",
-     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values \u2014 the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4035.6 (May 2026 ed) Table 5 footnotes 2\u20133 (Jun 2026 ed): days of forward demand = stock level \u00f7 forward-quarter average daily demand; the End-March-2026 forward-demand figure is an IEA Secretariat FORECAST \u2014 this point is a published value computed from forecast demand, not a direct measurement."
+     "note": "IEA Oil Market Report Table 5, 'Total Stocks on Land in OECD Countries', TOTAL ON LAND row (industry + government-controlled, per the table's footnote 1). QUARTER-END values — the table's five columns are quarter-ends, not months (verified: Table 4 industry + government rows sum to the Table 5 value per quarter-end; headers recovered from rotated PDF text). Vintages are revised between editions; each point records its latest available edition. revised from 4035.6 (May 2026 ed)"
     }
    ]
   },
   "oecd_industry_mb_quarterly": {
-   "name": "OECD industry (commercial) oil stocks only, quarter-ends \u2014 not the plotted series",
+   "name": "OECD industry (commercial) oil stocks only, quarter-ends — not the plotted series",
    "unit": "million barrels",
    "cadence": "quarterly (quarter-end)",
    "note": "Recorded for scope transparency. The free editions DO publish commercial-only stocks monthly, but Table 4 of each edition covers only the last five months plus the same month of prior years (Jun 2026 ed: Dec2025-Apr2026 + Apr2023/24/25), so a complete 2021-2026 commercial-only series requires assembling ~15 editions. Panel A therefore plots the full on-land series, which is available complete from one source, and says so.",
@@ -1173,7 +935,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "Industry (commercial) stocks only \u2014 the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
+     "note": "Industry (commercial) stocks only — the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
     },
     {
      "period": "2023-06-30",
@@ -1183,7 +945,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "Industry (commercial) stocks only \u2014 the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
+     "note": "Industry (commercial) stocks only — the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
     },
     {
      "period": "2023-09-30",
@@ -1193,7 +955,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "Industry (commercial) stocks only \u2014 the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
+     "note": "Industry (commercial) stocks only — the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
     },
     {
      "period": "2023-12-31",
@@ -1203,7 +965,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "Industry (commercial) stocks only \u2014 the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
+     "note": "Industry (commercial) stocks only — the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
     },
     {
      "period": "2024-03-31",
@@ -1213,7 +975,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "Industry (commercial) stocks only \u2014 the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
+     "note": "Industry (commercial) stocks only — the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
     },
     {
      "period": "2024-06-30",
@@ -1223,7 +985,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "Industry (commercial) stocks only \u2014 the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
+     "note": "Industry (commercial) stocks only — the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
     },
     {
      "period": "2024-09-30",
@@ -1233,7 +995,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "Industry (commercial) stocks only \u2014 the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
+     "note": "Industry (commercial) stocks only — the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
     },
     {
      "period": "2024-12-31",
@@ -1243,7 +1005,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "Industry (commercial) stocks only \u2014 the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
+     "note": "Industry (commercial) stocks only — the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
     },
     {
      "period": "2025-03-31",
@@ -1253,7 +1015,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "Industry (commercial) stocks only \u2014 the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
+     "note": "Industry (commercial) stocks only — the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
     },
     {
      "period": "2025-06-30",
@@ -1263,7 +1025,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "Industry (commercial) stocks only \u2014 the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
+     "note": "Industry (commercial) stocks only — the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
     },
     {
      "period": "2025-09-30",
@@ -1273,7 +1035,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "Industry (commercial) stocks only \u2014 the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
+     "note": "Industry (commercial) stocks only — the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
     },
     {
      "period": "2025-12-31",
@@ -1283,7 +1045,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "Industry (commercial) stocks only \u2014 the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
+     "note": "Industry (commercial) stocks only — the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
     },
     {
      "period": "2026-03-31",
@@ -1293,7 +1055,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "Industry (commercial) stocks only \u2014 the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
+     "note": "Industry (commercial) stocks only — the 'Industry' total of the closing-stocks table under Table 5, Jun 2026 ed. NOT the plotted series (free sources do not publish this monthly); recorded so the commercial-only scope is on the record. Single vintage (Jun 2026 ed)."
     }
    ]
   },
@@ -1320,7 +1082,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "June 2026 ed PDF (revised). The May 2026 ed had reported \u2212117 ('by a further 117 mb in April'); the revision is recorded, not averaged."
+     "note": "June 2026 ed PDF (revised). The May 2026 ed had reported −117 ('by a further 117 mb in April'); the revision is recorded, not averaged."
     },
     {
      "period": "2026-05",
@@ -1330,7 +1092,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
      "published": "IEA OMR, 17 Jun 2026",
      "retrieved": "2026-09-17",
-     "note": "June 2026 ed, explicitly PRELIMINARY: 'a sizeable draw of 143 mb (\u22124.6 mb/d) in May, according to preliminary data.' Plotted with the hollow/preliminary marker."
+     "note": "June 2026 ed, explicitly PRELIMINARY: 'a sizeable draw of 143 mb (−4.6 mb/d) in May, according to preliminary data.' Plotted with the hollow/preliminary marker."
     },
     {
      "period": "2026-06",
@@ -1360,7 +1122,7 @@
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
      "published": "IEA OMR, 11 Sep 2026 (web report page; no public PDF URL found)",
      "retrieved": "2026-09-17",
-     "note": "September 2026 ed web page (3.1 mb/d). Components Aug: oil on water \u221265, non-OECD \u221252, OECD +23."
+     "note": "September 2026 ed web page (3.1 mb/d). Components Aug: oil on water −65, non-OECD −52, OECD +23."
     }
    ]
   },
@@ -1378,7 +1140,7 @@
      "source_url": "https://www.iea.org/reports/oil-market-report-may-2026",
      "published": "IEA OMR, 13 May 2026 (web report page)",
      "retrieved": "2026-09-17",
-     "note": "May 2026 ed web narrative: cumulative March\u2013April draw 250 mb (4 mb/d). The same edition's PDF stocks table prints 246 mb \u2014 both published values recorded; the web figure is the one plotted."
+     "note": "May 2026 ed web narrative: cumulative March–April draw 250 mb (4 mb/d). The same edition's PDF stocks table prints 246 mb — both published values recorded; the web figure is the one plotted."
     },
     {
      "period": "2026-04",
@@ -1388,7 +1150,7 @@
      "source_url": "https://iea.blob.core.windows.net/assets/db7a9af0-7a97-49a5-af56-6732b08d6225/-13MAY2026__OilMarketReport.pdf",
      "published": "IEA OMR, 13 May 2026",
      "retrieved": "2026-09-17",
-     "note": "Same edition, PDF stocks table: 246 mb. NOT plotted (duplicate period) \u2014 kept so both published values are on record."
+     "note": "Same edition, PDF stocks table: 246 mb. NOT plotted (duplicate period) — kept so both published values are on record."
     },
     {
      "period": "2026-07",
@@ -1398,7 +1160,7 @@
      "source_url": "https://www.iea.org/reports/oil-market-report-august-2026",
      "published": "IEA OMR, 12 Aug 2026 (web report page; no public PDF URL found)",
      "retrieved": "2026-09-17",
-     "note": "August 2026 ed: cumulative end-Feb \u2192 end-Jul \u2212410 mb (2.7 mb/d)."
+     "note": "August 2026 ed: cumulative end-Feb → end-Jul −410 mb (2.7 mb/d)."
     },
     {
      "period": "2026-08",
@@ -1408,23 +1170,23 @@
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
      "published": "IEA OMR, 11 Sep 2026 (web report page; no public PDF URL found)",
      "retrieved": "2026-09-17",
-     "note": "September 2026 ed: cumulative since Feb \u2212507 mb (2.8 mb/d avg)."
+     "note": "September 2026 ed: cumulative since Feb −507 mb (2.8 mb/d avg)."
     }
    ],
    "residual_check": {
     "sum_of_latest_monthly_changes_mar_aug_mb": -445,
     "published_cumulative_mar_aug_mb": -507,
     "residual_mb": -62,
-    "explanation": "The monthly points and the cumulative totals come from different editions, and editions revise earlier months (April: \u2212117 \u2192 \u221274), so the latest-vintage monthly points do not sum to the latest published cumulative. Revisions are a likely contributor but the full \u221262 mb residual is NOT reconciled; both sets are shown as published."
+    "explanation": "The monthly points and the cumulative totals come from different editions, and editions revise earlier months (April: −117 → −74), so the latest-vintage monthly points do not sum to the latest published cumulative. Revisions are a likely contributor but the full −62 mb residual is NOT reconciled; both sets are shown as published."
    }
   },
   "eia_steo_world_inv_change_mb": {
-   "name": "World oil inventory change implied by EIA STEO production minus consumption (Sep 2026\u2013Dec 2027)",
+   "name": "World oil inventory change implied by EIA STEO production minus consumption (Sep 2026–Dec 2027)",
    "unit": "million barrels",
    "cadence": "monthly (agency projection)",
    "query": {
     "source": "EIA Short-Term Energy Outlook, released 9 Sep 2026 (workbook generated 3 Sep 2026)",
-    "workbook_url": "https://www.eia.gov/outlooks/steo/xls/STEO_m.xlsx (moving URL \u2014 always the latest release)",
+    "workbook_url": "https://www.eia.gov/outlooks/steo/xls/STEO_m.xlsx (moving URL — always the latest release)",
     "workbook_sha256": "c06a15243b0d972045ecc59cf9376885f68c7c306c581de5d01e6b8ac1a236c5",
     "sheet": "Table 3a (3atab): World Total, crude oil and other liquids",
     "series_ids": {
@@ -1433,8 +1195,8 @@
      "published_inventory_net_withdrawals": "t3_stchange_world",
      "oecd_commercial_eop": "pasc_oecd_t3"
     },
-    "rule": "monthly change = (World Production \u2212 World Consumption) x calendar days in month, from STEO Table 3a (series papr_world / patc_world, mb/d), at full workbook precision \u2014 intermediate values are NOT rounded; rounding happens only for display. Sign convention verified: EIA's published t3_stchange_world row equals the exact negation of (Production \u2212 Consumption) to <1e-8 mb/d for all 16 months.",
-    "horizon": "Sep 2026 \u2013 Dec 2027: the full published forecast horizon of this STEO edition for Table 3a; not extended",
+    "rule": "monthly change = (World Production − World Consumption) x calendar days in month, from STEO Table 3a (series papr_world / patc_world, mb/d), at full workbook precision — intermediate values are NOT rounded; rounding happens only for display. Sign convention verified: EIA's published t3_stchange_world row equals the exact negation of (Production − Consumption) to <1e-8 mb/d for all 16 months.",
+    "horizon": "Sep 2026 – Dec 2027: the full published forecast horizon of this STEO edition for Table 3a; not extended",
     "archive": "research/sources/eia-steo-2026-09-17.xlsx (sha256 c06a15243b0d972045ecc59cf9376885f68c7c306c581de5d01e6b8ac1a236c5; external review independently verified the live URL against this checksum)"
    },
    "points": [
@@ -1601,11 +1363,11 @@
    ]
   },
   "persistence_baseline_mb": {
-   "name": "Persistence baseline: mean of the last three comparable reported monthly global-observed changes, repeated (Sep 2026\u2013Dec 2027)",
+   "name": "Persistence baseline: mean of the last three comparable reported monthly global-observed changes, repeated (Sep 2026–Dec 2027)",
    "unit": "million barrels",
    "cadence": "monthly (baseline, not a forecast)",
    "query": {
-    "rule": "mean of the last three comparable reported monthly changes in global observed stocks \u2014 Jun 2026 +21, Jul 2026 \u221269, Aug 2026 \u221295 mb (May excluded: reported_preliminary) = \u2212143/3 = \u221247.6667 mb/month, repeated unchanged through Dec 2027. Values are stored at full recurring precision; rounding happens only for display.",
+    "rule": "mean of the last three comparable reported monthly changes in global observed stocks — Jun 2026 +21, Jul 2026 −69, Aug 2026 −95 mb (May excluded: reported_preliminary) = −143/3 = −47.6667 mb/month, repeated unchanged through Dec 2027. Values are stored at full recurring precision; rounding happens only for display.",
     "purpose": "mechanical no-information comparison baseline per the Phase 2 spec; not an agency or model projection"
    },
    "points": [
@@ -1615,9 +1377,9 @@
      "status": "derived",
      "source_id": "persistence-jun-aug-2026",
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
-     "published": "computed 17 Sep 2026 from reported Jun\u2013Aug 2026 OMR figures",
+     "published": "computed 17 Sep 2026 from reported Jun–Aug 2026 OMR figures",
      "retrieved": "2026-09-17",
-     "note": "recurring value \u2212143/3 mb/month (Jun +21, Jul \u221269, Aug \u221295); full precision \u2014 round only for display"
+     "note": "recurring value −143/3 mb/month (Jun +21, Jul −69, Aug −95); full precision — round only for display"
     },
     {
      "period": "2026-10",
@@ -1625,9 +1387,9 @@
      "status": "derived",
      "source_id": "persistence-jun-aug-2026",
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
-     "published": "computed 17 Sep 2026 from reported Jun\u2013Aug 2026 OMR figures",
+     "published": "computed 17 Sep 2026 from reported Jun–Aug 2026 OMR figures",
      "retrieved": "2026-09-17",
-     "note": "recurring value \u2212143/3 mb/month (Jun +21, Jul \u221269, Aug \u221295); full precision \u2014 round only for display"
+     "note": "recurring value −143/3 mb/month (Jun +21, Jul −69, Aug −95); full precision — round only for display"
     },
     {
      "period": "2026-11",
@@ -1635,9 +1397,9 @@
      "status": "derived",
      "source_id": "persistence-jun-aug-2026",
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
-     "published": "computed 17 Sep 2026 from reported Jun\u2013Aug 2026 OMR figures",
+     "published": "computed 17 Sep 2026 from reported Jun–Aug 2026 OMR figures",
      "retrieved": "2026-09-17",
-     "note": "recurring value \u2212143/3 mb/month (Jun +21, Jul \u221269, Aug \u221295); full precision \u2014 round only for display"
+     "note": "recurring value −143/3 mb/month (Jun +21, Jul −69, Aug −95); full precision — round only for display"
     },
     {
      "period": "2026-12",
@@ -1645,9 +1407,9 @@
      "status": "derived",
      "source_id": "persistence-jun-aug-2026",
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
-     "published": "computed 17 Sep 2026 from reported Jun\u2013Aug 2026 OMR figures",
+     "published": "computed 17 Sep 2026 from reported Jun–Aug 2026 OMR figures",
      "retrieved": "2026-09-17",
-     "note": "recurring value \u2212143/3 mb/month (Jun +21, Jul \u221269, Aug \u221295); full precision \u2014 round only for display"
+     "note": "recurring value −143/3 mb/month (Jun +21, Jul −69, Aug −95); full precision — round only for display"
     },
     {
      "period": "2027-01",
@@ -1655,9 +1417,9 @@
      "status": "derived",
      "source_id": "persistence-jun-aug-2026",
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
-     "published": "computed 17 Sep 2026 from reported Jun\u2013Aug 2026 OMR figures",
+     "published": "computed 17 Sep 2026 from reported Jun–Aug 2026 OMR figures",
      "retrieved": "2026-09-17",
-     "note": "recurring value \u2212143/3 mb/month (Jun +21, Jul \u221269, Aug \u221295); full precision \u2014 round only for display"
+     "note": "recurring value −143/3 mb/month (Jun +21, Jul −69, Aug −95); full precision — round only for display"
     },
     {
      "period": "2027-02",
@@ -1665,9 +1427,9 @@
      "status": "derived",
      "source_id": "persistence-jun-aug-2026",
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
-     "published": "computed 17 Sep 2026 from reported Jun\u2013Aug 2026 OMR figures",
+     "published": "computed 17 Sep 2026 from reported Jun–Aug 2026 OMR figures",
      "retrieved": "2026-09-17",
-     "note": "recurring value \u2212143/3 mb/month (Jun +21, Jul \u221269, Aug \u221295); full precision \u2014 round only for display"
+     "note": "recurring value −143/3 mb/month (Jun +21, Jul −69, Aug −95); full precision — round only for display"
     },
     {
      "period": "2027-03",
@@ -1675,9 +1437,9 @@
      "status": "derived",
      "source_id": "persistence-jun-aug-2026",
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
-     "published": "computed 17 Sep 2026 from reported Jun\u2013Aug 2026 OMR figures",
+     "published": "computed 17 Sep 2026 from reported Jun–Aug 2026 OMR figures",
      "retrieved": "2026-09-17",
-     "note": "recurring value \u2212143/3 mb/month (Jun +21, Jul \u221269, Aug \u221295); full precision \u2014 round only for display"
+     "note": "recurring value −143/3 mb/month (Jun +21, Jul −69, Aug −95); full precision — round only for display"
     },
     {
      "period": "2027-04",
@@ -1685,9 +1447,9 @@
      "status": "derived",
      "source_id": "persistence-jun-aug-2026",
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
-     "published": "computed 17 Sep 2026 from reported Jun\u2013Aug 2026 OMR figures",
+     "published": "computed 17 Sep 2026 from reported Jun–Aug 2026 OMR figures",
      "retrieved": "2026-09-17",
-     "note": "recurring value \u2212143/3 mb/month (Jun +21, Jul \u221269, Aug \u221295); full precision \u2014 round only for display"
+     "note": "recurring value −143/3 mb/month (Jun +21, Jul −69, Aug −95); full precision — round only for display"
     },
     {
      "period": "2027-05",
@@ -1695,9 +1457,9 @@
      "status": "derived",
      "source_id": "persistence-jun-aug-2026",
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
-     "published": "computed 17 Sep 2026 from reported Jun\u2013Aug 2026 OMR figures",
+     "published": "computed 17 Sep 2026 from reported Jun–Aug 2026 OMR figures",
      "retrieved": "2026-09-17",
-     "note": "recurring value \u2212143/3 mb/month (Jun +21, Jul \u221269, Aug \u221295); full precision \u2014 round only for display"
+     "note": "recurring value −143/3 mb/month (Jun +21, Jul −69, Aug −95); full precision — round only for display"
     },
     {
      "period": "2027-06",
@@ -1705,9 +1467,9 @@
      "status": "derived",
      "source_id": "persistence-jun-aug-2026",
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
-     "published": "computed 17 Sep 2026 from reported Jun\u2013Aug 2026 OMR figures",
+     "published": "computed 17 Sep 2026 from reported Jun–Aug 2026 OMR figures",
      "retrieved": "2026-09-17",
-     "note": "recurring value \u2212143/3 mb/month (Jun +21, Jul \u221269, Aug \u221295); full precision \u2014 round only for display"
+     "note": "recurring value −143/3 mb/month (Jun +21, Jul −69, Aug −95); full precision — round only for display"
     },
     {
      "period": "2027-07",
@@ -1715,9 +1477,9 @@
      "status": "derived",
      "source_id": "persistence-jun-aug-2026",
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
-     "published": "computed 17 Sep 2026 from reported Jun\u2013Aug 2026 OMR figures",
+     "published": "computed 17 Sep 2026 from reported Jun–Aug 2026 OMR figures",
      "retrieved": "2026-09-17",
-     "note": "recurring value \u2212143/3 mb/month (Jun +21, Jul \u221269, Aug \u221295); full precision \u2014 round only for display"
+     "note": "recurring value −143/3 mb/month (Jun +21, Jul −69, Aug −95); full precision — round only for display"
     },
     {
      "period": "2027-08",
@@ -1725,9 +1487,9 @@
      "status": "derived",
      "source_id": "persistence-jun-aug-2026",
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
-     "published": "computed 17 Sep 2026 from reported Jun\u2013Aug 2026 OMR figures",
+     "published": "computed 17 Sep 2026 from reported Jun–Aug 2026 OMR figures",
      "retrieved": "2026-09-17",
-     "note": "recurring value \u2212143/3 mb/month (Jun +21, Jul \u221269, Aug \u221295); full precision \u2014 round only for display"
+     "note": "recurring value −143/3 mb/month (Jun +21, Jul −69, Aug −95); full precision — round only for display"
     },
     {
      "period": "2027-09",
@@ -1735,9 +1497,9 @@
      "status": "derived",
      "source_id": "persistence-jun-aug-2026",
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
-     "published": "computed 17 Sep 2026 from reported Jun\u2013Aug 2026 OMR figures",
+     "published": "computed 17 Sep 2026 from reported Jun–Aug 2026 OMR figures",
      "retrieved": "2026-09-17",
-     "note": "recurring value \u2212143/3 mb/month (Jun +21, Jul \u221269, Aug \u221295); full precision \u2014 round only for display"
+     "note": "recurring value −143/3 mb/month (Jun +21, Jul −69, Aug −95); full precision — round only for display"
     },
     {
      "period": "2027-10",
@@ -1745,9 +1507,9 @@
      "status": "derived",
      "source_id": "persistence-jun-aug-2026",
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
-     "published": "computed 17 Sep 2026 from reported Jun\u2013Aug 2026 OMR figures",
+     "published": "computed 17 Sep 2026 from reported Jun–Aug 2026 OMR figures",
      "retrieved": "2026-09-17",
-     "note": "recurring value \u2212143/3 mb/month (Jun +21, Jul \u221269, Aug \u221295); full precision \u2014 round only for display"
+     "note": "recurring value −143/3 mb/month (Jun +21, Jul −69, Aug −95); full precision — round only for display"
     },
     {
      "period": "2027-11",
@@ -1755,9 +1517,9 @@
      "status": "derived",
      "source_id": "persistence-jun-aug-2026",
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
-     "published": "computed 17 Sep 2026 from reported Jun\u2013Aug 2026 OMR figures",
+     "published": "computed 17 Sep 2026 from reported Jun–Aug 2026 OMR figures",
      "retrieved": "2026-09-17",
-     "note": "recurring value \u2212143/3 mb/month (Jun +21, Jul \u221269, Aug \u221295); full precision \u2014 round only for display"
+     "note": "recurring value −143/3 mb/month (Jun +21, Jul −69, Aug −95); full precision — round only for display"
     },
     {
      "period": "2027-12",
@@ -1765,172 +1527,172 @@
      "status": "derived",
      "source_id": "persistence-jun-aug-2026",
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
-     "published": "computed 17 Sep 2026 from reported Jun\u2013Aug 2026 OMR figures",
+     "published": "computed 17 Sep 2026 from reported Jun–Aug 2026 OMR figures",
      "retrieved": "2026-09-17",
-     "note": "recurring value \u2212143/3 mb/month (Jun +21, Jul \u221269, Aug \u221295); full precision \u2014 round only for display"
+     "note": "recurring value −143/3 mb/month (Jun +21, Jul −69, Aug −95); full precision — round only for display"
     }
    ]
   },
   "scenario_standoff_monthly_mb": [
    {
     "period": "2026-09",
-    "value": -113.91461825999983,
+    "value": -96.31088969999979,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2026-10",
-    "value": -59.837525249999715,
+    "value": -61.60321859999982,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2026-11",
-    "value": -80.12926439999987,
+    "value": -82.11851969999984,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2026-12",
-    "value": -103.10560722999968,
+    "value": -119.76847798999978,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-01",
-    "value": -12.741070989999969,
+    "value": -21.974677359999717,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-02",
-    "value": -61.413360679999926,
+    "value": -79.0996780000001,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-03",
-    "value": -14.875408590000191,
+    "value": -45.7325733,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-04",
-    "value": -25.984666199999822,
+    "value": -65.6716295999999,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-05",
-    "value": -14.56809225999983,
+    "value": -67.63416816000009,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-06",
-    "value": -48.794807699999865,
+    "value": -108.59600729999997,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-07",
-    "value": -27.008460149999692,
+    "value": -113.45920732999973,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-08",
-    "value": 7.206719420000226,
+    "value": -105.55114205,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-09",
-    "value": 18.60404940000052,
+    "value": -101.18942939999982,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-10",
-    "value": 70.3186587300002,
+    "value": -63.39572694999963,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-11",
-    "value": 61.429420199999925,
+    "value": -79.77532230000037,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-12",
-    "value": 41.96596852000022,
+    "value": -113.75084912999989,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    }
   ],
   "scenario_corridor_holds_monthly_mb": [
@@ -1938,161 +1700,161 @@
     "period": "2026-09",
     "value": -136.41461825999983,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2026-10",
     "value": -52.087525249999715,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2026-11",
     "value": -6.629264399999784,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2026-12",
     "value": 16.244392770000147,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-01",
     "value": 134.50892901000003,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-02",
     "value": 85.58663932000007,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-03",
     "value": 163.37459140999982,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-04",
     "value": 172.0153338,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-05",
     "value": 177.63190774000026,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-06",
     "value": 125.20519230000005,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-07",
     "value": 158.99153985000032,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-08",
     "value": 165.30671942000004,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-09",
     "value": 156.60404940000035,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-10",
     "value": 216.01865873000028,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-11",
     "value": 199.42942019999975,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-12",
     "value": 159.76596852000011,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    }
   ],
   "scenario_corridor_lapses_monthly_mb": [
@@ -2100,161 +1862,161 @@
     "period": "2026-09",
     "value": -233.91461825999983,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2026-10",
     "value": -261.3375252499997,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2026-11",
     "value": -314.1292643999998,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2026-12",
     "value": -363.50560722999984,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-01",
     "value": -183.24107098999997,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-02",
     "value": -187.41336067999993,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-03",
     "value": -123.37540859000019,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-04",
     "value": -97.98466619999999,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-05",
     "value": -85.86809225999974,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-06",
     "value": -129.79480769999995,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-07",
     "value": -188.73546014999965,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-08",
     "value": -182.4202805799999,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-09",
     "value": -179.9059505999996,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-10",
     "value": -131.70834126999966,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-11",
     "value": -137.0805798000002,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    },
    {
     "period": "2027-12",
     "value": -187.96103147999983,
     "status": "model-projection",
-    "source_id": "world-stocks-assumptions-v2026-09-18",
+    "source_id": "world-stocks-assumptions-v2026-09-19",
     "source_url": null,
-    "published": "computed 18 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
-    "retrieved": "2026-09-18",
-    "note": "(scenario production \u2212 scenario consumption) \u00d7 days, workbook precision \u2014 round only for display"
+    "published": "computed 19 Sep 2026 from the EIA STEO 2026-09-09 baseline plus scenario adjustments (site/src/data/world-stocks-assumptions.json)",
+    "retrieved": "2026-09-19",
+    "note": "(scenario production − scenario consumption) × days, workbook precision — round only for display"
    }
   ]
  },
@@ -2263,31 +2025,24 @@
    "date": "2026-02-28",
    "label": "War begins (Feb 28, 2026)"
   },
-  "days_historical_low": {
-   "series": "oecd_days_cover_quarterly",
-   "value": 86,
-   "period": "2022-06-30",
-   "label": "Lowest available observation, 2020Q3\u20132026Q1",
-   "note": "Reference point from the period the IEA's free PDFs cover \u2014 not a physical floor. It concerns total on-land stocks, not commercial stocks alone."
-  },
   "mb_historical_low_eia_monthly": {
    "series": "oecd_onland_mb",
    "value": 3854.1,
    "period": "2026-05",
-   "label": "Lowest month in the EIA monthly series (Jan 2021\u2013May 2026)",
+   "label": "Lowest month in the EIA monthly series (Jan 2021–May 2026)",
    "note": "The latest reported level is the lowest in the available monthly series."
   },
   "mb_historical_low_iea_quarterly": {
    "series": "oecd_onland_mb_quarterly_iea",
    "value": 3976.0,
    "period": "2023-03-31",
-   "label": "Lowest quarter-end, 2020Q3\u20132026Q1 (IEA survey)",
+   "label": "Lowest quarter-end, 2020Q3–2026Q1 (IEA survey)",
    "note": "Quarterly series; the EIA monthly series runs below this level from 2026."
   },
   "seasonal_band_2021_2025": {
    "series": "oecd_onland_mb",
    "unit": "million barrels",
-   "note": "Min/max per calendar month, Jan 2021\u2013Dec 2025, EIA series. Reference shading (the same calendar month's historical range), applied to 2026 months as well; not a claim of seasonal cause.",
+   "note": "Min/max per calendar month, Jan 2021–Dec 2025, EIA series. Reference shading (the same calendar month's historical range), applied to 2026 months as well; not a claim of seasonal cause.",
    "by_month": {
     "01": [
      3963.2,
@@ -2348,7 +2103,7 @@
    "type": "agency-projection",
    "agency": "EIA",
    "release": "STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026)",
-   "scope": "global \u2014 EIA world total, all liquids, balance-implied (production \u2212 consumption). Anchored to the IEA's cumulative observed level for visual comparison only; EIA's coverage is broader than the IEA's observed pool, and a balance-implied path is not a forecast of IEA observed stocks. Scores against the IEA series must carry that coverage mismatch.",
+   "scope": "global — EIA world total, all liquids, balance-implied (production − consumption). Anchored to the IEA's cumulative observed level for visual comparison only; EIA's coverage is broader than the IEA's observed pool, and a balance-implied path is not a forecast of IEA observed stocks. Scores against the IEA series must carry that coverage mismatch.",
    "anchor": {
     "period": "2026-08",
     "value_mb": -507,
@@ -2661,11 +2416,11 @@
     }
    ],
    "model_version": "world-stocks phase 2",
-   "assumptions": "monthly change = (papr_world \u2212 patc_world) \u00d7 calendar days; site sign convention",
-   "outcome_status": "open \u2014 the first scoreable outcome (Sep 2026) had not been published as of the 2026-09-17 issue date; the Oct 2026 OMR publishes it. Append outcomes to the first target, then the next, as editions publish.",
-   "outcome_policy": "score against outcome_first_release only \u2014 the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
+   "assumptions": "monthly change = (papr_world − patc_world) × calendar days; site sign convention",
+   "outcome_status": "open — the first scoreable outcome (Sep 2026) had not been published as of the 2026-09-17 issue date; the Oct 2026 OMR publishes it. Append outcomes to the first target, then the next, as editions publish.",
+   "outcome_policy": "score against outcome_first_release only — the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
    "issued_at": null,
-   "issued_at_note": "issue time was not captured for this version \u2014 2026-09-17 is the calendar date the site shipped with these targets; the exact finalization time is unknown. Forecast versions finalized after this one must record a timezone-aware issued_at timestamp at finalization.",
+   "issued_at_note": "issue time was not captured for this version — 2026-09-17 is the calendar date the site shipped with these targets; the exact finalization time is unknown. Forecast versions finalized after this one must record a timezone-aware issued_at timestamp at finalization.",
    "anchor_observation": {
     "series": "global_observed_cumulative_mb",
     "period": "2026-08",
@@ -2680,7 +2435,7 @@
    "type": "persistence-baseline",
    "agency": null,
    "release": "computed 17 Sep 2026",
-   "scope": "global observed stocks (same pool as the IEA series) \u2014 a mechanical baseline, not an agency or model projection",
+   "scope": "global observed stocks (same pool as the IEA series) — a mechanical baseline, not an agency or model projection",
    "anchor": {
     "period": "2026-08",
     "value_mb": -507,
@@ -2993,11 +2748,11 @@
     }
    ],
    "model_version": "world-stocks phase 2",
-   "assumptions": "mean of the last three comparable reported monthly changes (Jun +21, Jul \u221269, Aug \u221295 mb) = \u221247.7 mb/month, repeated",
-   "outcome_status": "open \u2014 the first scoreable outcome (Sep 2026) had not been published as of the 2026-09-17 issue date; the Oct 2026 OMR publishes it. Append outcomes to the first target, then the next, as editions publish.",
-   "outcome_policy": "score against outcome_first_release only \u2014 the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
+   "assumptions": "mean of the last three comparable reported monthly changes (Jun +21, Jul −69, Aug −95 mb) = −47.7 mb/month, repeated",
+   "outcome_status": "open — the first scoreable outcome (Sep 2026) had not been published as of the 2026-09-17 issue date; the Oct 2026 OMR publishes it. Append outcomes to the first target, then the next, as editions publish.",
+   "outcome_policy": "score against outcome_first_release only — the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
    "issued_at": null,
-   "issued_at_note": "issue time was not captured for this version \u2014 2026-09-17 is the calendar date the site shipped with these targets; the exact finalization time is unknown. Forecast versions finalized after this one must record a timezone-aware issued_at timestamp at finalization.",
+   "issued_at_note": "issue time was not captured for this version — 2026-09-17 is the calendar date the site shipped with these targets; the exact finalization time is unknown. Forecast versions finalized after this one must record a timezone-aware issued_at timestamp at finalization.",
    "anchor_observation": {
     "series": "global_observed_cumulative_mb",
     "period": "2026-08",
@@ -3011,8 +2766,8 @@
    "issued_before_outcome": true,
    "type": "model-projection",
    "scenario": "Corridor holds",
-   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026) \u2014 corridor-holds adjustments per assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-17.json (sha256 256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d)",
-   "scope": "global \u2014 scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
+   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026) — corridor-holds adjustments per assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-17.json (sha256 256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d)",
+   "scope": "global — scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
    "anchor": {
     "period": "2026-08",
     "value_mb": -507.0,
@@ -3325,9 +3080,9 @@
     }
    ],
    "model_version": "world-stocks phase 3 (v2026-09-17)",
-   "assumptions": "scenario adjustments in the assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-17.json (sha256 256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d) (mutable copy: site/src/data/world-stocks-assumptions.json): monthly change = ((baseline P + \u0394P) \u2212 (baseline C + \u0394C)) \u00d7 calendar days; site sign convention",
-   "outcome_status": "open \u2014 the first scoreable outcome (Sep 2026) had not been published as of the 2026-09-17 issue date; the Oct 2026 OMR publishes it. Append outcomes to the first target, then the next, as editions publish.",
-   "outcome_policy": "score against outcome_first_release only \u2014 the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
+   "assumptions": "scenario adjustments in the assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-17.json (sha256 256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d) (mutable copy: site/src/data/world-stocks-assumptions.json): monthly change = ((baseline P + ΔP) − (baseline C + ΔC)) × calendar days; site sign convention",
+   "outcome_status": "open — the first scoreable outcome (Sep 2026) had not been published as of the 2026-09-17 issue date; the Oct 2026 OMR publishes it. Append outcomes to the first target, then the next, as editions publish.",
+   "outcome_policy": "score against outcome_first_release only — the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
    "issued_at": "2026-09-18T01:57:50Z",
    "issued_at_note": "finalized 2026-09-18T01:57:50Z (17 Sep 2026 US Pacific), when the corrected assumptions snapshot was archived; first staged the same evening (Pacific)",
    "anchor_observation": {
@@ -3339,7 +3094,7 @@
    "assumptions_ref": {
     "path": "research/sources/world-stocks-assumptions-v2026-09-17.json",
     "sha256": "256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d",
-    "note": "frozen at issue \u2014 this record validates only against this snapshot"
+    "note": "frozen at issue — this record validates only against this snapshot"
    }
   },
   {
@@ -3348,8 +3103,8 @@
    "issued_before_outcome": true,
    "type": "model-projection",
    "scenario": "Standoff",
-   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026) \u2014 standoff adjustments per assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-17.json (sha256 256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d)",
-   "scope": "global \u2014 scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
+   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026) — standoff adjustments per assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-17.json (sha256 256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d)",
+   "scope": "global — scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
    "anchor": {
     "period": "2026-08",
     "value_mb": -507.0,
@@ -3662,9 +3417,9 @@
     }
    ],
    "model_version": "world-stocks phase 3 (v2026-09-17)",
-   "assumptions": "scenario adjustments in the assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-17.json (sha256 256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d) (mutable copy: site/src/data/world-stocks-assumptions.json): monthly change = ((baseline P + \u0394P) \u2212 (baseline C + \u0394C)) \u00d7 calendar days; site sign convention",
-   "outcome_status": "open \u2014 the first scoreable outcome (Sep 2026) had not been published as of the 2026-09-17 issue date; the Oct 2026 OMR publishes it. Append outcomes to the first target, then the next, as editions publish.",
-   "outcome_policy": "score against outcome_first_release only \u2014 the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
+   "assumptions": "scenario adjustments in the assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-17.json (sha256 256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d) (mutable copy: site/src/data/world-stocks-assumptions.json): monthly change = ((baseline P + ΔP) − (baseline C + ΔC)) × calendar days; site sign convention",
+   "outcome_status": "open — the first scoreable outcome (Sep 2026) had not been published as of the 2026-09-17 issue date; the Oct 2026 OMR publishes it. Append outcomes to the first target, then the next, as editions publish.",
+   "outcome_policy": "score against outcome_first_release only — the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
    "issued_at": "2026-09-18T01:57:50Z",
    "issued_at_note": "finalized 2026-09-18T01:57:50Z (17 Sep 2026 US Pacific), when the corrected assumptions snapshot was archived; first staged the same evening (Pacific)",
    "anchor_observation": {
@@ -3676,7 +3431,7 @@
    "assumptions_ref": {
     "path": "research/sources/world-stocks-assumptions-v2026-09-17.json",
     "sha256": "256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d",
-    "note": "frozen at issue \u2014 this record validates only against this snapshot"
+    "note": "frozen at issue — this record validates only against this snapshot"
    }
   },
   {
@@ -3685,8 +3440,8 @@
    "issued_before_outcome": true,
    "type": "model-projection",
    "scenario": "Corridor lapses",
-   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026) \u2014 corridor-lapses adjustments per assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-17.json (sha256 256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d)",
-   "scope": "global \u2014 scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
+   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026) — corridor-lapses adjustments per assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-17.json (sha256 256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d)",
+   "scope": "global — scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
    "anchor": {
     "period": "2026-08",
     "value_mb": -507.0,
@@ -3809,13 +3564,13 @@
     }
    ],
    "model_version": "world-stocks phase 3 (v2026-09-17)",
-   "assumptions": "scenario adjustments in the assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-17.json (sha256 256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d) (mutable copy: site/src/data/world-stocks-assumptions.json): monthly change = ((baseline P + \u0394P) \u2212 (baseline C + \u0394C)) \u00d7 calendar days; site sign convention",
-   "outcome_status": "open \u2014 the first scoreable outcome (Sep 2026) had not been published as of the 2026-09-17 issue date; the Oct 2026 OMR publishes it. Append outcomes to the first target, then the next, as editions publish.",
-   "outcome_policy": "score against outcome_first_release only \u2014 the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
+   "assumptions": "scenario adjustments in the assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-17.json (sha256 256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d) (mutable copy: site/src/data/world-stocks-assumptions.json): monthly change = ((baseline P + ΔP) − (baseline C + ΔC)) × calendar days; site sign convention",
+   "outcome_status": "open — the first scoreable outcome (Sep 2026) had not been published as of the 2026-09-17 issue date; the Oct 2026 OMR publishes it. Append outcomes to the first target, then the next, as editions publish.",
+   "outcome_policy": "score against outcome_first_release only — the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
    "issued_at": "2026-09-18T01:57:50Z",
    "issued_at_note": "finalized 2026-09-18T01:57:50Z (17 Sep 2026 US Pacific), when the corrected assumptions snapshot was archived; first staged the same evening (Pacific)",
    "validity_horizon": "2027-02",
-   "validity_note": "2027-02 \u2014 This version's assumptions are carried only to February 2027: a sustained full closure beyond about six months is outside this projection's range, and extending the path would require re-modeling production, demand response, and accessible inventory. The path ends at its stated validity horizon and is deliberately not extended; it is not stopped because it crosses any historical low.",
+   "validity_note": "2027-02 — This version's assumptions are carried only to February 2027: a sustained full closure beyond about six months is outside this projection's range, and extending the path would require re-modeling production, demand response, and accessible inventory. The path ends at its stated validity horizon and is deliberately not extended; it is not stopped because it crosses any historical low.",
    "anchor_observation": {
     "series": "global_observed_cumulative_mb",
     "period": "2026-08",
@@ -3825,18 +3580,18 @@
    "assumptions_ref": {
     "path": "research/sources/world-stocks-assumptions-v2026-09-17.json",
     "sha256": "256827d87bd021790fdfe4a331c2ce6f990f0070baf5c3a7603a1b1a514a753d",
-    "note": "frozen at issue \u2014 this record validates only against this snapshot"
+    "note": "frozen at issue — this record validates only against this snapshot"
    }
   },
   {
    "record_id": "scenario-corridor-holds-2026-09-18-global-observed",
    "type": "model-projection",
    "scenario": "Corridor holds",
-   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026), world balance + documented scenario adjustments \u2014 assumptions version 2026-09-18, sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9",
+   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026), world balance + documented scenario adjustments — assumptions version 2026-09-18, sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9",
    "issued": "2026-09-18",
    "issued_before_outcome": true,
    "model_version": "world-stocks phase 3 (v2026-09-18)",
-   "scope": "global \u2014 scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
+   "scope": "global — scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
    "anchor": {
     "period": "2026-08",
     "value_mb": -507
@@ -3850,7 +3605,7 @@
    "assumptions_ref": {
     "path": "research/sources/world-stocks-assumptions-v2026-09-18.json",
     "sha256": "eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9",
-    "note": "frozen at issue \u2014 this record validates only against this snapshot"
+    "note": "frozen at issue — this record validates only against this snapshot"
    },
    "targets": [
     {
@@ -4159,24 +3914,24 @@
     }
    ],
    "outcome_status": "open",
-   "outcome_policy": "score against outcome_first_release only \u2014 the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
+   "outcome_policy": "score against outcome_first_release only — the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
    "issued_at": "2026-09-18T20:24:25Z",
-   "issued_at_note": "UTC, taken at issuance. Scenario assumptions are analyst judgment over the EIA baseline; a changed assumption set issues a NEW dated record \u2014 this one is frozen.",
+   "issued_at_note": "UTC, taken at issuance. Scenario assumptions are analyst judgment over the EIA baseline; a changed assumption set issues a NEW dated record — this one is frozen.",
    "endpoint": {
     "period": "2027-12",
     "cumulative_mb": 1228.5519345600019
    },
-   "assumptions": "scenario adjustments in the assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-18.json (sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9) (mutable copy: site/src/data/world-stocks-assumptions.json): monthly change = ((baseline P + \u0394P) \u2212 (baseline C + \u0394C)) \u00d7 calendar days; site sign convention"
+   "assumptions": "scenario adjustments in the assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-18.json (sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9) (mutable copy: site/src/data/world-stocks-assumptions.json): monthly change = ((baseline P + ΔP) − (baseline C + ΔC)) × calendar days; site sign convention"
   },
   {
    "record_id": "scenario-standoff-2026-09-18-global-observed",
    "type": "model-projection",
    "scenario": "Standoff",
-   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026), world balance + documented scenario adjustments \u2014 assumptions version 2026-09-18, sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9",
+   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026), world balance + documented scenario adjustments — assumptions version 2026-09-18, sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9",
    "issued": "2026-09-18",
    "issued_before_outcome": true,
    "model_version": "world-stocks phase 3 (v2026-09-18)",
-   "scope": "global \u2014 scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
+   "scope": "global — scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
    "anchor": {
     "period": "2026-08",
     "value_mb": -507
@@ -4190,7 +3945,7 @@
    "assumptions_ref": {
     "path": "research/sources/world-stocks-assumptions-v2026-09-18.json",
     "sha256": "eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9",
-    "note": "frozen at issue \u2014 this record validates only against this snapshot"
+    "note": "frozen at issue — this record validates only against this snapshot"
    },
    "targets": [
     {
@@ -4499,24 +4254,24 @@
     }
    ],
    "outcome_status": "open",
-   "outcome_policy": "score against outcome_first_release only \u2014 the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
+   "outcome_policy": "score against outcome_first_release only — the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
    "issued_at": "2026-09-18T20:24:25Z",
-   "issued_at_note": "UTC, taken at issuance. Scenario assumptions are analyst judgment over the EIA baseline; a changed assumption set issues a NEW dated record \u2014 this one is frozen.",
+   "issued_at_note": "UTC, taken at issuance. Scenario assumptions are analyst judgment over the EIA baseline; a changed assumption set issues a NEW dated record — this one is frozen.",
    "endpoint": {
     "period": "2027-12",
     "cumulative_mb": -869.8480654399978
    },
-   "assumptions": "scenario adjustments in the assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-18.json (sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9) (mutable copy: site/src/data/world-stocks-assumptions.json): monthly change = ((baseline P + \u0394P) \u2212 (baseline C + \u0394C)) \u00d7 calendar days; site sign convention"
+   "assumptions": "scenario adjustments in the assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-18.json (sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9) (mutable copy: site/src/data/world-stocks-assumptions.json): monthly change = ((baseline P + ΔP) − (baseline C + ΔC)) × calendar days; site sign convention"
   },
   {
    "record_id": "scenario-corridor-lapses-2026-09-18-global-observed",
    "type": "model-projection",
    "scenario": "Corridor lapses",
-   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026), world balance + documented scenario adjustments \u2014 assumptions version 2026-09-18, sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9",
+   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026), world balance + documented scenario adjustments — assumptions version 2026-09-18, sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9",
    "issued": "2026-09-18",
    "issued_before_outcome": true,
    "model_version": "world-stocks phase 3 (v2026-09-18)",
-   "scope": "global \u2014 scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
+   "scope": "global — scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
    "anchor": {
     "period": "2026-08",
     "value_mb": -507
@@ -4530,7 +4285,7 @@
    "assumptions_ref": {
     "path": "research/sources/world-stocks-assumptions-v2026-09-18.json",
     "sha256": "eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9",
-    "note": "frozen at issue \u2014 this record validates only against this snapshot"
+    "note": "frozen at issue — this record validates only against this snapshot"
    },
    "targets": [
     {
@@ -4839,16 +4594,1033 @@
     }
    ],
    "outcome_status": "open",
-   "outcome_policy": "score against outcome_first_release only \u2014 the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
+   "outcome_policy": "score against outcome_first_release only — the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
    "issued_at": "2026-09-18T20:24:25Z",
-   "issued_at_note": "UTC, taken at issuance. Scenario assumptions are analyst judgment over the EIA baseline; a changed assumption set issues a NEW dated record \u2014 this one is frozen.",
+   "issued_at_note": "UTC, taken at issuance. Scenario assumptions are analyst judgment over the EIA baseline; a changed assumption set issues a NEW dated record — this one is frozen.",
    "endpoint": {
     "period": "2027-12",
     "cumulative_mb": -3495.376065439998
    },
-   "assumptions": "scenario adjustments in the assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-18.json (sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9) (mutable copy: site/src/data/world-stocks-assumptions.json): monthly change = ((baseline P + \u0394P) \u2212 (baseline C + \u0394C)) \u00d7 calendar days; site sign convention",
+   "assumptions": "scenario adjustments in the assumptions snapshot research/sources/world-stocks-assumptions-v2026-09-18.json (sha256 eaf3e2524c32d597436e096068df5526be71f664bf771602418f0b804ce744c9) (mutable copy: site/src/data/world-stocks-assumptions.json): monthly change = ((baseline P + ΔP) − (baseline C + ΔC)) × calendar days; site sign convention",
    "validity_horizon": "2027-12",
-   "validity_note": "2027-12 \u2014 Extended (v2026-09-18) under the fixed-total-disruption persistence reading: the assumed total Gulf shut-in is held at 16.217 mb/d (13.5 scenario increment + 2.717, the EIA's published 1Q27 average baseline shut-in), so the production adjustment equals the assumed baseline shut-in minus 16.217 (\u221213.5 while it is 2.717, Mar\u2013Jun 2027; \u221216.217 once it is 0, Jul\u2013Dec 2027); demand stays \u22125 mb/d below the EIA baseline (the scenario's existing H1-2027 convention, carried flat). The post-1Q27 baseline shut-in schedule (2.717 through Jun 2027, 0 from Jul) is a stated test simplification, not a source-derived schedule. The Sep 2026 \u2013 Feb 2027 targets are verbatim from the issued v2026-09-17 record, whose assumptions were carried only to February 2027. The Mar 2027 \u2013 Dec 2027 extension is conditional \u2014 an 'if the closure persists' path, not a central forecast; the range across the other persistence readings (research page) is a spread of assumptions, not a confidence interval."
+   "validity_note": "2027-12 — Extended (v2026-09-18) under the fixed-total-disruption persistence reading: the assumed total Gulf shut-in is held at 16.217 mb/d (13.5 scenario increment + 2.717, the EIA's published 1Q27 average baseline shut-in), so the production adjustment equals the assumed baseline shut-in minus 16.217 (−13.5 while it is 2.717, Mar–Jun 2027; −16.217 once it is 0, Jul–Dec 2027); demand stays −5 mb/d below the EIA baseline (the scenario's existing H1-2027 convention, carried flat). The post-1Q27 baseline shut-in schedule (2.717 through Jun 2027, 0 from Jul) is a stated test simplification, not a source-derived schedule. The Sep 2026 – Feb 2027 targets are verbatim from the issued v2026-09-17 record, whose assumptions were carried only to February 2027. The Mar 2027 – Dec 2027 extension is conditional — an 'if the closure persists' path, not a central forecast; the range across the other persistence readings (research page) is a spread of assumptions, not a confidence interval."
+  },
+  {
+   "record_id": "scenario-corridor-holds-2026-09-19-global-observed",
+   "type": "model-projection",
+   "scenario": "Corridor holds",
+   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026), world balance + documented scenario adjustments — assumptions version 2026-09-19, sha256 b64759d796e0396fbad5012d8fd822059acf2b3b19499a4f2cefd3ca1f3c4ca2",
+   "issued": "2026-09-19",
+   "issued_before_outcome": true,
+   "model_version": "world-stocks phase 3 (v2026-09-19)",
+   "scope": "global — scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
+   "anchor": {
+    "period": "2026-08",
+    "value_mb": -507
+   },
+   "anchor_observation": {
+    "series": "global_observed_cumulative_mb",
+    "period": "2026-08",
+    "value_mb": -507,
+    "edition": "IEA OMR, 11 Sep 2026 (web report page; no public PDF URL found)"
+   },
+   "assumptions_ref": {
+    "path": "research/sources/world-stocks-assumptions-v2026-09-19.json",
+    "sha256": "b64759d796e0396fbad5012d8fd822059acf2b3b19499a4f2cefd3ca1f3c4ca2",
+    "note": "frozen at issue — this record validates only against this snapshot"
+   },
+   "targets": [
+    {
+     "period": "2026-09",
+     "target_monthly_mb": -136.41461825999983,
+     "target_cumulative_mb": -643.4146182599998,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-10",
+     "target_monthly_mb": -52.087525249999715,
+     "target_cumulative_mb": -695.5021435099995,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-11",
+     "target_monthly_mb": -6.629264399999784,
+     "target_cumulative_mb": -702.1314079099993,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-12",
+     "target_monthly_mb": 16.244392770000147,
+     "target_cumulative_mb": -685.8870151399992,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-01",
+     "target_monthly_mb": 134.50892901000003,
+     "target_cumulative_mb": -551.3780861299992,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-02",
+     "target_monthly_mb": 85.58663932000007,
+     "target_cumulative_mb": -465.7914468099992,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-03",
+     "target_monthly_mb": 163.37459140999982,
+     "target_cumulative_mb": -302.41685539999935,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-04",
+     "target_monthly_mb": 172.0153338,
+     "target_cumulative_mb": -130.40152159999934,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-05",
+     "target_monthly_mb": 177.63190774000026,
+     "target_cumulative_mb": 47.23038614000092,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-06",
+     "target_monthly_mb": 125.20519230000005,
+     "target_cumulative_mb": 172.43557844000097,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-07",
+     "target_monthly_mb": 158.99153985000032,
+     "target_cumulative_mb": 331.4271182900013,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-08",
+     "target_monthly_mb": 165.30671942000004,
+     "target_cumulative_mb": 496.73383771000135,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-09",
+     "target_monthly_mb": 156.60404940000035,
+     "target_cumulative_mb": 653.3378871100017,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-10",
+     "target_monthly_mb": 216.01865873000028,
+     "target_cumulative_mb": 869.356545840002,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-11",
+     "target_monthly_mb": 199.42942019999975,
+     "target_cumulative_mb": 1068.7859660400018,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-12",
+     "target_monthly_mb": 159.76596852000011,
+     "target_cumulative_mb": 1228.5519345600019,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    }
+   ],
+   "outcome_status": "open",
+   "outcome_policy": "score against outcome_first_release only — the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
+   "issued_at": "2026-09-19T18:45:10Z",
+   "issued_at_note": "UTC, taken at issuance. Scenario assumptions are analyst judgment over the EIA baseline; a changed assumption set issues a NEW dated record — this one is frozen.",
+   "endpoint": {
+    "period": "2027-12",
+    "cumulative_mb": 1228.5519345600019
+   }
+  },
+  {
+   "record_id": "scenario-standoff-2026-09-19-global-observed",
+   "type": "model-projection",
+   "scenario": "Standoff",
+   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026), world balance + documented scenario adjustments — assumptions version 2026-09-19, sha256 b64759d796e0396fbad5012d8fd822059acf2b3b19499a4f2cefd3ca1f3c4ca2",
+   "issued": "2026-09-19",
+   "issued_before_outcome": true,
+   "model_version": "world-stocks phase 3 (v2026-09-19)",
+   "scope": "global — scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
+   "anchor": {
+    "period": "2026-08",
+    "value_mb": -507
+   },
+   "anchor_observation": {
+    "series": "global_observed_cumulative_mb",
+    "period": "2026-08",
+    "value_mb": -507,
+    "edition": "IEA OMR, 11 Sep 2026 (web report page; no public PDF URL found)"
+   },
+   "assumptions_ref": {
+    "path": "research/sources/world-stocks-assumptions-v2026-09-19.json",
+    "sha256": "b64759d796e0396fbad5012d8fd822059acf2b3b19499a4f2cefd3ca1f3c4ca2",
+    "note": "frozen at issue — this record validates only against this snapshot"
+   },
+   "targets": [
+    {
+     "period": "2026-09",
+     "target_monthly_mb": -96.31088969999979,
+     "target_cumulative_mb": -603.3108896999997,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-10",
+     "target_monthly_mb": -61.60321859999982,
+     "target_cumulative_mb": -664.9141082999995,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-11",
+     "target_monthly_mb": -82.11851969999984,
+     "target_cumulative_mb": -747.0326279999994,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-12",
+     "target_monthly_mb": -119.76847798999978,
+     "target_cumulative_mb": -866.8011059899991,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-01",
+     "target_monthly_mb": -21.974677359999717,
+     "target_cumulative_mb": -888.7757833499988,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-02",
+     "target_monthly_mb": -79.0996780000001,
+     "target_cumulative_mb": -967.8754613499989,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-03",
+     "target_monthly_mb": -45.7325733,
+     "target_cumulative_mb": -1013.6080346499989,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-04",
+     "target_monthly_mb": -65.6716295999999,
+     "target_cumulative_mb": -1079.2796642499989,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-05",
+     "target_monthly_mb": -67.63416816000009,
+     "target_cumulative_mb": -1146.913832409999,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-06",
+     "target_monthly_mb": -108.59600729999997,
+     "target_cumulative_mb": -1255.509839709999,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-07",
+     "target_monthly_mb": -113.45920732999973,
+     "target_cumulative_mb": -1368.9690470399987,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-08",
+     "target_monthly_mb": -105.55114205,
+     "target_cumulative_mb": -1474.5201890899987,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-09",
+     "target_monthly_mb": -101.18942939999982,
+     "target_cumulative_mb": -1575.7096184899985,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-10",
+     "target_monthly_mb": -63.39572694999963,
+     "target_cumulative_mb": -1639.1053454399982,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-11",
+     "target_monthly_mb": -79.77532230000037,
+     "target_cumulative_mb": -1718.8806677399987,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-12",
+     "target_monthly_mb": -113.75084912999989,
+     "target_cumulative_mb": -1832.6315168699984,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    }
+   ],
+   "outcome_status": "open",
+   "outcome_policy": "score against outcome_first_release only — the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
+   "issued_at": "2026-09-19T18:45:10Z",
+   "issued_at_note": "UTC, taken at issuance. Scenario assumptions are analyst judgment over the EIA baseline; a changed assumption set issues a NEW dated record — this one is frozen.",
+   "endpoint": {
+    "period": "2027-12",
+    "cumulative_mb": -1832.6315168699984
+   }
+  },
+  {
+   "record_id": "scenario-corridor-lapses-2026-09-19-global-observed",
+   "type": "model-projection",
+   "scenario": "Corridor lapses",
+   "baseline": "EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026), world balance + documented scenario adjustments — assumptions version 2026-09-19, sha256 b64759d796e0396fbad5012d8fd822059acf2b3b19499a4f2cefd3ca1f3c4ca2",
+   "issued": "2026-09-19",
+   "issued_before_outcome": true,
+   "model_version": "world-stocks phase 3 (v2026-09-19)",
+   "scope": "global — scenario path over the EIA STEO world total (all liquids, balance-implied). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
+   "anchor": {
+    "period": "2026-08",
+    "value_mb": -507
+   },
+   "anchor_observation": {
+    "series": "global_observed_cumulative_mb",
+    "period": "2026-08",
+    "value_mb": -507,
+    "edition": "IEA OMR, 11 Sep 2026 (web report page; no public PDF URL found)"
+   },
+   "assumptions_ref": {
+    "path": "research/sources/world-stocks-assumptions-v2026-09-19.json",
+    "sha256": "b64759d796e0396fbad5012d8fd822059acf2b3b19499a4f2cefd3ca1f3c4ca2",
+    "note": "frozen at issue — this record validates only against this snapshot"
+   },
+   "targets": [
+    {
+     "period": "2026-09",
+     "target_monthly_mb": -233.91461825999983,
+     "target_cumulative_mb": -740.9146182599998,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-10",
+     "target_monthly_mb": -261.3375252499997,
+     "target_cumulative_mb": -1002.2521435099995,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-11",
+     "target_monthly_mb": -314.1292643999998,
+     "target_cumulative_mb": -1316.3814079099993,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-12",
+     "target_monthly_mb": -363.50560722999984,
+     "target_cumulative_mb": -1679.8870151399992,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-01",
+     "target_monthly_mb": -183.24107098999997,
+     "target_cumulative_mb": -1863.1280861299992,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-02",
+     "target_monthly_mb": -187.41336067999993,
+     "target_cumulative_mb": -2050.5414468099993,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-03",
+     "target_monthly_mb": -123.37540859000019,
+     "target_cumulative_mb": -2173.9168553999993,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-04",
+     "target_monthly_mb": -97.98466619999999,
+     "target_cumulative_mb": -2271.9015215999993,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-05",
+     "target_monthly_mb": -85.86809225999974,
+     "target_cumulative_mb": -2357.769613859999,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-06",
+     "target_monthly_mb": -129.79480769999995,
+     "target_cumulative_mb": -2487.564421559999,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-07",
+     "target_monthly_mb": -188.73546014999965,
+     "target_cumulative_mb": -2676.2998817099988,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-08",
+     "target_monthly_mb": -182.4202805799999,
+     "target_cumulative_mb": -2858.720162289999,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-09",
+     "target_monthly_mb": -179.9059505999996,
+     "target_cumulative_mb": -3038.6261128899982,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-10",
+     "target_monthly_mb": -131.70834126999966,
+     "target_cumulative_mb": -3170.334454159998,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-11",
+     "target_monthly_mb": -137.0805798000002,
+     "target_cumulative_mb": -3307.4150339599983,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-12",
+     "target_monthly_mb": -187.96103147999983,
+     "target_cumulative_mb": -3495.376065439998,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    }
+   ],
+   "outcome_status": "open",
+   "outcome_policy": "score against outcome_first_release only — the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
+   "issued_at": "2026-09-19T18:45:10Z",
+   "issued_at_note": "UTC, taken at issuance. Scenario assumptions are analyst judgment over the EIA baseline; a changed assumption set issues a NEW dated record — this one is frozen.",
+   "endpoint": {
+    "period": "2027-12",
+    "cumulative_mb": -3495.376065439998
+   }
   }
  ]
 }
