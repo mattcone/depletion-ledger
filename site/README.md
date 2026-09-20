@@ -40,14 +40,18 @@ running.
 
 ## Share card (og:image)
 
-Every deploy re-renders **`og-supply.png`** — the supply/SPR chart as a 1200×630
-share card (2x for high-DPI previews). Source: `src/pages/og/supply.astro` (a
-render-only route, excluded from the sitemap and robots); renderer:
-`scripts/make-og.mjs` (headless Chrome — set `CHROME_BIN` if yours lives
-elsewhere). The card's data comes from `src/data/crisis.ts`, so it updates with
-the daily cadence; the PNG is committed to `public/` so a bare `npm run build`
-keeps the last good card. Both pages' Open Graph / Twitter tags live in
-`src/components/SiteMeta.astro`.
+Every deploy re-renders **`og-supply.png`** — the "How oil in storage could
+change through 2027" scenario chart as a 1200×630 share card (2x for
+high-DPI previews). Source: `src/pages/og/supply.astro` (a render-only route,
+excluded from the sitemap and robots); renderer: `scripts/make-og.mjs`
+(headless Chrome — set `CHROME_BIN` if yours lives elsewhere). The card draws
+the SAME forecast records as the dashboard's Panel B (`src/data/world-stocks.json`,
+rebased to the shared anchor) with scenario colors from
+`world-stocks-assumptions.json`, so it updates with the issuance cadence. The
+PNG is committed to `public/` so a bare `npm run build` keeps the last good
+card. (History: the card used to be the SPR drawdown chart; it was re-pointed
+to the scenario chart on 2026-09-19 at the user's request.) Both pages' Open
+Graph / Twitter tags live in `src/components/SiteMeta.astro`.
 
 ## Pages
 

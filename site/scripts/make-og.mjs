@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 // Render the /og/supply share-card page to og-supply.png with headless Chrome.
+// 2026-09-19: the card was re-pointed to the world-inventories scenario chart
+// (og/supply.astro was rewritten), so this renderer is ACTIVE again — it
+// matches the committed card.
 //
 // Run AFTER `npm run build` (deploy does this automatically):
 //   node scripts/make-og.mjs
