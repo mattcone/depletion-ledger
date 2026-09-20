@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-09-19";
+export const DATA_AS_OF = "2026-09-20";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -23,8 +23,8 @@ export interface SeriesPoint {
 // ---------- Headline stats ----------
 export const stats = [
   { label: "Brent", value: "$103.87", sub: "Sep 18 settlement · −0.9% vs. prior close $104.82 (Sep 17) · +37% vs pre-crisis ~$76" },
-  { label: "US diesel (AAA)", value: "$6.49", sub: "Sep 19 · all-time high $6.4866 · tenth consecutive daily record · +74% vs pre-war $3.72" },
-  { label: "US gasoline (AAA)", value: "$4.48", sub: "Sep 19 · +16.5¢ in a week (AAA) · +59% vs Jan $2.81" },
+  { label: "US diesel (AAA)", value: "$6.51", sub: "Sep 20 · all-time high $6.5050 · eleventh consecutive daily record · first above $6.50 · +75% vs pre-war $3.72" },
+  { label: "US gasoline (AAA)", value: "$4.48", sub: "Sep 20 · +16.3¢ in a week (AAA) · +59% vs Jan $2.81" },
   { label: "SPR", value: "285.0M", sub: "Sep 11 · down 0.4M in a week · down 130.5M from pre-war 415.4M · lowest since Nov 1982" },
   { label: "US diesel & heating oil", value: "107.9M", sub: "Sep 11 · up 1.6M in a week · 13.5% below last year · East Coast stocks 31% below last year" },
 ];
@@ -174,6 +174,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-09-17", value: 4.4386, note: "AAA release, Sep 17" },
   { date: "2026-09-18", value: 4.4687, note: "AAA release, Sep 18" },
   { date: "2026-09-19", value: 4.4759, note: "AAA release, Sep 19" },
+  { date: "2026-09-20", value: 4.4761, note: "AAA release, Sep 20" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -200,6 +201,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-09-17", value: 6.3956, note: "AAA record" },
   { date: "2026-09-18", value: 6.4476, note: "AAA record" },
   { date: "2026-09-19", value: 6.4866, note: "AAA record" },
+  { date: "2026-09-20", value: 6.505, note: "AAA record — first above $6.50" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 
@@ -505,9 +507,9 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
       { item: "Whether attacks in Bab el-Mandeb spread to non-Saudi vessels.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes." },
       { item: "How banks respond to the Sep 14 sanctions on Russia's VTB.", why: "If banks stop handling VTB's payments, Iran would have fewer ways to receive payments for oil." },
       { item: "Whether US–Houthi talks lead to an easing of the blockade of Saudi ships.", why: "That would help ships pass through Bab el-Mandeb and make the standoff scenario more likely." },
-      { item: "Ship traffic through Hormuz. Kpler counted 7 crossings on Sep 14, 12 on Sep 15, 6 on Sep 16 (revised from 3), and a preliminary 4 on Sep 17: 3 entering and 1 leaving, against a 10-day average of about 16. Kpler also counted 5 loaded ships carrying Saudi petroleum products out of the Red Sea over the past seven days.", why: "The site uses independent tracker counts. On Sep 19, US Central Command claimed it had escorted more than 2,000 ships carrying about 1 billion barrels in total. Independent trackers report much lower figures, so the site doesn't use that claim as data. The Red Sea count helps track shipping along Saudi Arabia's bypass route." },
-      { item: "Saudi Arabia's response to Houthi attacks on Riyadh. Sep 19 strikes set fire to the fuel depot at King Khalid International Airport (Reuters imagery). Saudi Arabia issued its first air-raid alerts for Riyadh since the fighting intensified (BBC), but hasn't commented on the strikes. The Houthis also claimed on Sep 16 that they shot down a Saudi F-15 over Marib with a locally built missile. The BBC verified wreckage video; Saudi Arabia hasn't confirmed the loss.", why: "These were the first Houthi strikes on the capital. Confirmation of the F-15 loss or a Saudi or US response would mean the fighting has worsened." },
-      { item: "The Saudi-led Red Sea naval coalition. Saudi Arabia hosted a multinational meeting on Sep 19 to secure the Red Sea, the Gulf of Aden, and Bab el-Mandeb. The US also lifted the sanctions it had placed on Eritrea's military and ruling party, citing regional interests in the Red Sea.", why: "Watch whether the coalition launches a naval operation against the Houthis in the Red Sea." },
+      { item: "Ship traffic through Hormuz. Kpler counted 7 crossings on Sep 14, 12 on Sep 15, 6 on Sep 16 (revised from 3), and a preliminary 4 on Sep 17: 3 entering and 1 leaving, against a 10-day average of about 16. Windward counted 12 on Sep 16 using satellite images and ship-tracking signals. Kpler also counted 5 loaded ships carrying Saudi petroleum products out of the Red Sea over the past seven days.", why: "The site uses independent tracker counts. On Sep 19, US Central Command claimed it had escorted more than 2,000 ships carrying about 1 billion barrels in total. Independent trackers report much lower figures, so the site doesn't use that claim as data. The Red Sea count helps track shipping along Saudi Arabia's bypass route." },
+      { item: "Saudi Arabia's response to Houthi attacks on Riyadh. Saudi Arabia confirmed on Sep 19 that the Houthis tried to strike the capital with a ballistic missile (AP). The strikes set fire to the fuel depot at King Khalid International Airport (Reuters imagery), and Riyadh issued its first air-raid alerts since the fighting intensified (BBC). An analyst interviewed by Al Jazeera expected a large response coordinated with Saudi Arabia's coalition partners. The Houthis also claimed on Sep 16 that they shot down a Saudi F-15 over Marib with a locally built missile. The BBC verified wreckage video; Saudi Arabia hasn't confirmed the loss.", why: "These were the first Houthi strikes on the capital. Confirmation of the F-15 loss or a Saudi or US military response would mean the fighting has worsened." },
+      { item: "Whether the Saudi-led Red Sea coalition takes military action. Saudi Arabia hosted a multinational meeting on Sep 19 to secure the Red Sea, the Gulf of Aden, and Bab el-Mandeb. Turkey's foreign minister said on Sep 19 that Turkey is ready to meet Saudi defense needs. The US also lifted sanctions on Eritrea's military and ruling party, citing regional interests in the Red Sea.", why: "Watch whether the coalition launches a naval operation against the Houthis, and whether Turkey's offer leads to military action under the defense pact Saudi Arabia, Turkey, and Pakistan signed in Mecca in August." },
       { item: "New SPR exchange contracts and delivery schedules.", why: "Existing deliveries may be nearing completion, but the end date isn't confirmed. New deliveries could increase withdrawals." },
     ],
   },
@@ -609,8 +611,8 @@ export const ratesStats = [
 
 export const foodStats = [
   { label: "Gulf–India tanker shipping costs", value: "+411%", sub: "$4.34/bbl in Aug vs pre-war (Frontline)" },
-  { label: "TTF gas (Europe)", value: "€82/MWh", sub: "Sep 14 · above $28/MMBtu Sep 10 (JOGMEC) · highest since Dec 2022" },
-  { label: "JKM gas (Asia)", value: "$28.5/MMBtu", sub: "Sep 11 · high-$28s Sep 10 (JOGMEC) · highest in ~2.5 years" },
+  { label: "TTF gas (Europe)", value: "€80/MWh", sub: "Sep 18 · Trading Economics CFD quote · $26.7/MMBtu" },
+  { label: "JKM gas (Asia)", value: "$27.5/MMBtu", sub: "Sep 18 · Trading Economics CFD quote" },
 ];
 
 // The lag chain: energy shock → food shock, 12–18 months. Dates are the midpoint of
@@ -631,7 +633,8 @@ export const foodLagBars = [
 //    Natural Gas Weekly Update + the Apr 28, 2026 Today in Energy chart (id=67604). Filled markers.
 //  * May – Sep: assessed prices on the stated dates from Global LNG Hub weekly updates
 //    (ICIS/Platts assessments of specific contracts, e.g. TTF October delivery; ranges reported
-//    as midpoints). Hollow markers. Sep 14 TTF is the one converted CFD quote (see note).
+//    as midpoints). Hollow markers. CFD spot checks (disclosed in notes): Sep 14 TTF,
+//    Sep 18 TTF (€→$ converted), Sep 18 JKM. JOGMEC's weekly assessments remain the primary.
 // Pre-closure baseline = week of Feb 27 (EIA weekly averages): TTF 10.99, JKM 10.66.
 // The Apr 28 EIA TIE article states: TTF +35% and JKM +51% vs pre-closure as of Apr 24 —
 // which the series reproduces (14.80/10.99 = +34.6%, 16.02/10.66 = +50.3%).
@@ -673,6 +676,7 @@ export const gasTtf: GasPt[] = [
   { date: "2026-09-04", value: 24.5, assessed: true, note: "Global LNG Hub (JOGMEC)" },
   { date: "2026-09-11", value: 27.0, assessed: true, note: "Global LNG Hub (JOGMEC) — highest since Dec 2022" },
   { date: "2026-09-14", value: 27.8, assessed: true, note: "€81.98/MWh (TradingEconomics CFD) × EUR/USD 1.1557 — converted" },
+  { date: "2026-09-18", value: 26.7, assessed: true, note: "€79.52/MWh (TradingEconomics CFD, Sep 18 close) × EUR/USD 1.1460 (ECB reference) — converted" },
 ];
 
 export const gasJkm: GasPt[] = [
@@ -710,6 +714,7 @@ export const gasJkm: GasPt[] = [
   { date: "2026-08-28", value: 24.5, assessed: true, note: "assessed: mid-USD 24s" },
   { date: "2026-09-04", value: 25.5, assessed: true, note: "assessed: mid-USD 25s" },
   { date: "2026-09-11", value: 28.5, assessed: true, note: "assessed: mid-USD 28s (record: high-USD 28s on Sep 10, per JOGMEC)" },
+  { date: "2026-09-18", value: 27.51, assessed: true, note: "Trading Economics CFD (Sep 18) — a financial-market quote, not a JOGMEC spot price assessment" },
 ];
 
 export const gasPreClosure = { ttf: 10.99, jkm: 10.66 };
