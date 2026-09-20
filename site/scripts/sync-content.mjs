@@ -38,7 +38,7 @@ writeFileSync(
   withFrontmatter(md, {
     title: "How the Model Works",
     description:
-      "Learn how the Depletion Ledger estimates how long stored oil could last, where the data comes from, and how to read the three scenarios and their odds.",
+      "How the Depletion Ledger models changes in global oil storage: three shipping scenarios, their assumptions, and how the predictions are checked.",
   })
 );
 console.log("docs: MODEL.md -> src/content/docs/model.md");

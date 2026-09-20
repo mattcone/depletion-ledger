@@ -1,0 +1,643 @@
+---
+// Research preview — NOT built or published — parked here (outside src/pages) on 2026-09-19 at the user's direction; the dashboard links were removed. Restoring = move back to src/pages/research/ (imports are depth-unchanged).
+// Accumulated-deficit stress tests extending the issued corridor-lapses path
+// (v2026-09-17, ends at its stated 2027-02 validity horizon) through Dec 2027.
+// Every number in the copy/tables below is derived from the results JSON —
+// the script research/stress-test/lapse-persistence-stress.py is the single
+// writer of the data file.
+import "../../styles/global.css";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteMeta from "../../components/SiteMeta.astro";
+import TopNav from "../../components/TopNav.astro";
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+import results from "../../data/lapse-stress.json";
+
+const meta = results.meta;
+const stem = results.stem;
+const variants = results.variants;
+const baseRef = results.baseline_ref;
+const anchor = meta.anchor;
+const febStart = meta.extension_start;
+
+// ---- x-axis: Aug 2026 .. Dec 2027 (17 months; extension starts at index 6) ----
+const SHORT = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const FULL = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const ym: [number, number][] = [];
+for (let m = 8; m <= 12; m++) ym.push([2026, m]);
+for (let m = 1; m <= 12; m++) ym.push([2027, m]);
+const xLabels = ym.map(([y, m], i) =>
+  SHORT[m - 1] + (i === 0 || m === 1 ? ` '${String(y).slice(2)}` : ""));
+const xFull = ym.map(([y, m]) => `${FULL[m - 1]} ${y}`);
+
+// ---- series arrays (17 slots; null outside each series' range) ----
+const stemSeries: (number | null)[] = new Array(17).fill(null);
+stem.forEach((s, i) => { stemSeries[i] = s.cumulative_mb; });
+const extSeries = (pts: { cumulative_mb: number }[]) => {
+  const arr: (number | null)[] = new Array(17).fill(null);
+  arr[6] = febStart.cumulative_mb;
+  pts.forEach((p, i) => { arr[7 + i] = p.cumulative_mb; });
+  return arr;
+};
+const P = (k: string) => variants[k as keyof typeof variants];
+
+// ---- display helpers (round only for display; JSON keeps full precision) ----
+const fmtMb = (v: number) => (v < 0 ? "\u2212" : "+") + Math.round(Math.abs(v)).toLocaleString("en-US");
+const fmtMb1 = (v: number) => (v < 0 ? "\u2212" : "+") + Math.abs(v).toFixed(1);
+const toNearest100 = (v: number) => Math.round(Math.abs(v) / 100) * 100;
+
+// ---- derived figures for the copy ----
+const febEnd = febStart.cumulative_mb;                    // −2,050.5 (stored target)
+const p1c0 = P("p1_fixed_adjustment_c0"), p1c1 = P("p1_fixed_adjustment_c1");
+const p2c0 = P("p2_fixed_total_disruption_c0"), p2c1 = P("p2_fixed_total_disruption_c1");
+const p3c0 = P("p3_fixed_production_c0"), p3c1 = P("p3_fixed_production_c1");
+const endOf = (v: { cumulative_mb: number }[]) => v[v.length - 1].cumulative_mb;
+const ends = {
+  p1c0: endOf(p1c0), p1c1: endOf(p1c1),
+  p2c0: endOf(p2c0), p2c1: endOf(p2c1),
+  p3c0: endOf(p3c0), p3c1: endOf(p3c1),
+  p2a0: endOf(P("p2_aprilzero_c0")), p2a1: endOf(P("p2_aprilzero_c1")),
+  base: endOf(baseRef),
+};
+const p2ShutinShift = Math.abs(ends.p2a0 - ends.p2c0);   // 247.2 mb (Apr-zero vs Jul-zero)
+// EIA baseline's own consumption (C0 demand + 5), for the demand-crossing copy
+const baseC = (i: number) => p1c0[i].scenario_cons_mb_d + 5.0;
+const allEnds = [ends.p1c0, ends.p1c1, ends.p2c0, ends.p2c1, ends.p3c0, ends.p3c1];
+const loEnd = Math.min(...allEnds);                       // −4,287.5
+const hiEnd = Math.max(...allEnds);                       // −2,806.6
+const extraLo = hiEnd - febEnd;                           // −756 (least added)
+const extraHi = loEnd - febEnd;                           // −2,237 (most added)
+const febBeyondAnchor = febEnd - anchor.value_mb;         // −1,543.5 (note: ≈1,544)
+const beyondLo = Math.abs(hiEnd - anchor.value_mb) / Math.abs(febBeyondAnchor);  // ≈1.5
+const beyondHi = Math.abs(loEnd - anchor.value_mb) / Math.abs(febBeyondAnchor);  // ≈2.5
+const febScenP = p3c0[0].scenario_prod_mb_d;              // 92.97 (P3 holds it flat)
+const febScenC = p1c1[0].scenario_cons_mb_d;              // 99.66 (C1 holds it flat)
+const febBaseC = febScenC + 5.0;                        // 104.66 (EIA baseline C, Feb 2027)
+const p1Pdec = p1c0[9].scenario_prod_mb_d;                // 98.32
+const p2Pdec = p2c0[9].scenario_prod_mb_d;                // 95.61
+const p3AdjDec = p3c0[9].delta_p_mb_d;                    // −18.86 implied
+const c0dec = p1c0[9].scenario_cons_mb_d;                 // 101.67
+const ccGap = ends.p1c0 - ends.p1c1;                      // −188.8 (same for all variants)
+const baseRebuild = ends.base - febEnd;                   // +1,656.1
+const basePdec = p2c0[9].scenario_prod_mb_d - p2c0[9].delta_p_mb_d;      // 111.82
+const titleLo = toNearest100(loEnd);                      // 4,300
+const titleHi = toNearest100(hiEnd);                      // 2,800
+
+const endRows = [
+  { name: "P1 \u00b7 fixed adjustment (C0)", v: ends.p1c0, ref: false },
+  { name: `P2 \u00b7 fixed total disruption \u2248${meta.total_disruption_assumption_mb_d.toFixed(1)} (C0)`, v: ends.p2c0, ref: false },
+  { name: "P3 \u00b7 fixed production (C0)", v: ends.p3c0, ref: false },
+  { name: "P1 \u00b7 fixed adjustment (C1, demand at Feb level)", v: ends.p1c1, ref: false },
+  { name: "P2 \u00b7 fixed total disruption (C1)", v: ends.p2c1, ref: false },
+  { name: "P3 \u00b7 fixed production (C1)", v: ends.p3c1, ref: false },
+  { name: "Sensitivity \u00b7 P2, baseline shut-in zeroed from Apr (C0)", v: ends.p2a0, ref: false },
+  { name: "Sensitivity \u00b7 P2, baseline shut-in zeroed from Apr (C1)", v: ends.p2a1, ref: false },
+  { name: "EIA STEO monthly balance (from the Feb 2027 scenario cumulative)", v: ends.base, ref: false },
+  { name: "Issued path, Feb 2027 (reference)", v: febEnd, ref: true },
+];
+const monthRows = p1c0.map((row, i) => ({
+  label: `${SHORT[parseInt(row.period.slice(5), 10) - 1]} ${row.period.slice(0, 4)}`,
+  p1P: row.scenario_prod_mb_d,
+  p2P: p2c0[i].scenario_prod_mb_d,
+  p3P: p3c0[i].scenario_prod_mb_d,
+  c0: row.scenario_cons_mb_d,
+  c1: p1c1[i].scenario_cons_mb_d,
+  cum: [
+    p1c0[i].cumulative_mb, p2c0[i].cumulative_mb, p3c0[i].cumulative_mb,
+    p1c1[i].cumulative_mb, p2c1[i].cumulative_mb, p3c1[i].cumulative_mb,
+    baseRef[i].cumulative_mb,
+  ],
+}));
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Depletion Ledger — Corridor-Lapses Persistence Stress Test</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta
+      name="description"
+      content="Research preview: accumulated-deficit stress tests extending the corridor-lapses path from February 2027 to December 2027 under three persistence variants."
+    />
+    <SiteMeta
+      title="The Depletion Ledger — Corridor-Lapses Persistence Stress Test"
+      description="Research preview: accumulated-deficit stress tests extending the corridor-lapses path from February 2027 to December 2027 under three persistence variants."
+      url="/research/lapse-persistence"
+    />
+    <!-- Research preview: not part of the published forecast surface. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <TopNav current="research" />
+
+    <header class="border-b border-rule py-10">
+      <p class="mb-2 text-[13px] font-semibold uppercase tracking-wider text-ink/60">
+        Research preview &middot; unlisted public page (noindex, not in nav or sitemap) &middot; primary variant issued Sep 18 as the v2026-09-18 conditional scenario
+      </p>
+      <h1 class="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
+        Corridor-lapses persistence stress test
+      </h1>
+      <p class="mt-3 max-w-prose text-[15px] leading-relaxed text-ink/80">
+        Accumulated-deficit stress tests, not forecasts: they measure how large the
+        accumulated balance becomes if each set of flows continues. They do not assert
+        that draws of this size are physically achievable. The v2026-09-17 forecast
+        records are unchanged; the primary variant (P2 + C0) underlies the
+        corridor-lapses extension issued Sep 18 as version v2026-09-18, which the
+        <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/">supply page</a> now plots as a conditional scenario.
+      </p>
+    </header>
+
+    <main class="py-10">
+      <h2 class="max-w-4xl text-[1.35rem] font-bold leading-snug">
+        These flow assumptions imply an accumulated balance of
+        −{titleLo.toLocaleString("en-US")} to −{titleHi.toLocaleString("en-US")} mb by
+        December 2027, depending on what is held fixed
+      </h2>
+      <p class="mt-3 max-w-prose text-[15px] leading-relaxed text-ink/80">
+        The published corridor-lapses path (issued Sep 17, 2026) ends at its stated
+        validity horizon, February 2027, at {fmtMb1(febEnd)} mb. The version issued Sep 18
+        (v2026-09-18) extends that path ten further months, through December 2027, under
+        the primary reading shown here (P2 + C0); this page shows the full variant grid
+        behind that choice &mdash; three production-persistence variants, each crossed with two
+        demand regimes, on the frozen EIA STEO baseline (EIA&rsquo;s central outlook, which
+        already includes EIA&rsquo;s own disruption and recovery assumptions). The extension
+        lines are accumulated P&ndash;C balances computed from those flow assumptions
+        &mdash; model projections, not established global observed stock trajectories. The red
+        stem is the issued Sep 17 path; the dashed vertical line marks where that record
+        ends and the stress tests begin.
+      </p>
+
+      <!-- What each line holds fixed -->
+      <h3 class="mt-10 text-lg font-bold">What each line holds fixed</h3>
+      <div class="mt-3 overflow-x-auto">
+        <table class="w-full min-w-[760px] border-collapse text-[13.5px]">
+          <thead>
+            <tr class="border-b-2 border-ink/70 text-left">
+              <th class="py-2 pr-4 font-semibold">Line</th>
+              <th class="py-2 pr-4 font-semibold">Held fixed</th>
+              <th class="py-2 pr-4 font-semibold">Monthly production adjustment (vs baseline)</th>
+              <th class="py-2 font-semibold">Demand</th>
+            </tr>
+          </thead>
+          <tbody class="dtbl align-top">
+            <tr>
+              <td class="font-semibold">P1 &middot; fixed adjustment</td>
+              <td>The Feb-2027 production adjustment (−13.5 mb/d), against the recovering EIA baseline. Scenario production recovers with the baseline.</td>
+              <td>−13.5 every month</td>
+              <td>solid = C0, dashed = C1</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">P2 &middot; fixed total disruption</td>
+              <td>The assumed total shut-in of {meta.total_disruption_assumption_mb_d.toFixed(3)} mb/d (13.5 scenario incremental + 2.717 EIA 1Q27 average baseline shut-in). Baseline shut-in 2.717 through June 2027, 0 from July &mdash; a test simplification; the EIA narrative does not specify the monthly schedule.</td>
+              <td>−13.5 Mar&ndash;Jun 2027; −{meta.total_disruption_assumption_mb_d.toFixed(3)} Jul&ndash;Dec 2027 (derived)</td>
+              <td>solid = C0, dashed = C1</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">P2 sensitivity &middot; shut-in zeroed from Apr</td>
+              <td>The same 16.217 total, but the assumed restoration is moved to April 2027: endpoints {p2ShutinShift.toFixed(0)} mb below the primary (a larger accumulated deficit). Shown in the tables and copy, not charted.</td>
+              <td>−13.5 in Mar 2027; −{meta.total_disruption_assumption_mb_d.toFixed(3)} from Apr 2027 (derived)</td>
+              <td>C0 / C1 as above</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">P3 &middot; fixed production</td>
+              <td>Scenario production at its Feb-2027 level ({febScenP.toFixed(2)} mb/d).</td>
+              <td>deepens from −13.5 as the baseline recovers</td>
+              <td>solid = C0, dashed = C1</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">C0 (solid) / C1 (dashed)</td>
+              <td>C0: demand stays 5 mb/d below the recovering baseline (published convention). C1: actual demand held at its Feb-2027 level ({febScenC.toFixed(2)} mb/d).</td>
+              <td>&mdash;</td>
+              <td>as stated</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Chart -->
+      <div class="chart-wrap relative mt-8 h-[380px] sm:h-[440px]">
+        <canvas id="lapseStressChart"
+          role="img"
+          aria-label="Line chart of the issued corridor-lapses path and stress-test extensions through December 2027."></canvas>
+      </div>
+      <p class="mt-2 max-w-4xl text-[13px] leading-relaxed text-ink/60">
+        Red: corridor-lapses path issued Sep 17, ending at its stated February 2027
+        validity horizon; the Sep 18 version (v2026-09-18, supply page) extends it
+        along the P2 + C0 line. Solid lines: production variants with demand 5 mb/d below the EIA
+        baseline (the published convention, C0). Dashed lines: the same production
+        variants with actual demand held at its February 2027 level (C1). Light gray:
+        the EIA STEO monthly balance carried from the February 2027 scenario
+        cumulative &mdash; EIA&rsquo;s own central outlook (including its disruption and
+        recovery assumptions), not EIA&rsquo;s cumulative forecast from its own anchor.
+        The extension lines are accumulated P&ndash;C balances under each set of flow
+        assumptions, not established global observed stock trajectories. The red line
+        is the issued corridor-lapses projection, starting from the IEA&rsquo;s August 2026
+        anchor; the stress tests continue from its February 2027 endpoint. Units: mb,
+        cumulative change from end February 2026.
+      </p>
+
+      <!-- Monthly table -->
+      <h3 class="mt-10 text-lg font-bold">Monthly values, March&ndash;December 2027</h3>
+      <p class="mt-1 text-[13px] text-ink/60">
+        P columns: scenario production (mb/d) under P1/P2/P3. C columns: scenario
+        consumption (mb/d) under C0/C1 (independent of the production variant).
+        Cum columns: cumulative balance (mb), starting from the issued
+        February 2027 value.
+      </p>
+      <div class="mt-3 overflow-x-auto">
+        <table class="w-full min-w-[980px] border-collapse text-right text-[13px] tabular-nums">
+          <thead>
+            <tr class="border-b-2 border-ink/70 text-left">
+              <th class="py-2 pr-4 font-semibold">Month</th>
+              <th class="py-2 pr-4 font-semibold">P1 P</th>
+              <th class="py-2 pr-4 font-semibold">P2 P</th>
+              <th class="py-2 pr-4 font-semibold">P3 P</th>
+              <th class="py-2 pr-4 font-semibold">C0</th>
+              <th class="py-2 pr-4 font-semibold">C1</th>
+              <th class="py-2 pr-4 font-semibold">P1C0</th>
+              <th class="py-2 pr-4 font-semibold">P2C0</th>
+              <th class="py-2 pr-4 font-semibold">P3C0</th>
+              <th class="py-2 pr-4 font-semibold">P1C1</th>
+              <th class="py-2 pr-4 font-semibold">P2C1</th>
+              <th class="py-2 pr-4 font-semibold">P3C1</th>
+              <th class="py-2 font-semibold">EIA base</th>
+            </tr>
+          </thead>
+          <tbody class="dtbl">
+            {monthRows.map((r) => (
+              <tr class="border-b border-rule">
+                <td class="text-left font-medium">{r.label}</td>
+                <td>{r.p1P.toFixed(2)}</td>
+                <td>{r.p2P.toFixed(2)}</td>
+                <td>{r.p3P.toFixed(2)}</td>
+                <td>{r.c0.toFixed(2)}</td>
+                <td>{r.c1.toFixed(2)}</td>
+                <td>{fmtMb(r.cum[0])}</td>
+                <td>{fmtMb(r.cum[1])}</td>
+                <td>{fmtMb(r.cum[2])}</td>
+                <td>{fmtMb(r.cum[3])}</td>
+                <td>{fmtMb(r.cum[4])}</td>
+                <td>{fmtMb(r.cum[5])}</td>
+                <td class="text-ink/50">{fmtMb(r.cum[6])}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Endpoints -->
+      <h3 class="mt-10 text-lg font-bold">December 2027 endpoints</h3>
+      <div class="mt-3 overflow-x-auto">
+        <table class="w-full min-w-[560px] border-collapse text-right text-[13.5px] tabular-nums">
+          <thead>
+            <tr class="border-b-2 border-ink/70 text-left">
+              <th class="py-2 pr-4 font-semibold">Line</th>
+              <th class="py-2 pr-4 font-semibold">Dec 2027 (mb)</th>
+              <th class="py-2 font-semibold">Added since Feb 2027 (mb)</th>
+            </tr>
+          </thead>
+          <tbody class="dtbl">
+            {endRows.map((r) => (
+              <tr class="border-b border-rule">
+                <td class="text-left">{r.name}</td>
+                <td>{fmtMb1(r.v)}</td>
+                <td>{r.ref ? "—" : fmtMb(r.v - febEnd)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 max-w-prose text-[15px] leading-relaxed text-ink/80">
+        Ten months beyond the issued endpoint add {fmtMb(extraLo)} to {fmtMb(extraHi)} mb.
+        The cumulative implied withdrawal beyond the August 2026 anchor ({fmtMb1(anchor.value_mb)} mb)
+        reaches {(Math.round(Math.abs(hiEnd - anchor.value_mb) / 10) * 10).toLocaleString("en-US")}–{(Math.round(Math.abs(loEnd - anchor.value_mb) / 10) * 10).toLocaleString("en-US")} mb &mdash;
+        {beyondLo.toFixed(1)}&times; to {beyondHi.toFixed(1)}&times; the ≈1,544 mb through
+        February 2027 that the issued record&rsquo;s feasibility note already flags as not
+        validated against accessible inventory.
+      </p>
+
+      <!-- What physically differs -->
+      <h3 class="mt-10 text-lg font-bold">What physically differs between the variants</h3>
+      <div class="mt-3 max-w-prose space-y-4 text-[15px] leading-relaxed text-ink/80">
+        <p>
+          <strong>P1 (fixed adjustment).</strong> Holding February&rsquo;s adjustment fixed means
+          scenario production recovers with the baseline: {febScenP.toFixed(2)} mb/d in
+          February 2027 to {p1Pdec.toFixed(2)} mb/d in December. Total shut-in falls from
+          ≈16.2 to 13.5 mb/d as the baseline heals. This is the published convention
+          extended mechanically &mdash; a world with a permanent partial loss, not a sustained
+          closure.
+        </p>
+        <p>
+          <strong>P2 (fixed total disruption).</strong> The formula: reference production =
+          EIA baseline production + assumed baseline shut-in; scenario production =
+          reference &minus; 16.217. So the implied cut from EIA production is 13.5 while
+          the assumed shut-in is still 2.717 (March&ndash;June 2027) and 16.217 once it is
+          zero (from July): {p2Pdec.toFixed(2)} mb/d in December, against a baseline of
+          {basePdec.toFixed(2)}. This is the &ldquo;the closure persists&rdquo; reading &mdash; the
+          shut-in held at a level, not at an adjustment. The 16.217 mb/d total is an
+          assumption derived from EIA&rsquo;s 1Q27 average shut-in, not a measured February
+          2027 disruption, and the monthly shut-in schedule is a test simplification:
+          the public narrative does not specify it. Moving the assumed restoration to
+          April instead of July (the p2_aprilzero sensitivity) increases the
+          accumulated deficit by {p2ShutinShift.toFixed(0)} mb &mdash; more than the entire
+          C0&ndash;C1 consumption difference.
+        </p>
+        <p>
+          <strong>P3 (fixed production).</strong> Holding production flat keeps the scenario at
+          {febScenP.toFixed(2)} mb/d while the baseline recovers to {basePdec.toFixed(2)} mb/d, so the
+          implied incremental shut-in deepens from 13.5 toward {Math.abs(p3AdjDec).toFixed(1)} mb/d and
+          the scenario falls further behind EIA&rsquo;s own production path every month. The
+          largest accumulated deficit of the three production variants.
+        </p>
+        <p>
+          <strong>The demand side crosses; it does not rank.</strong> Fixed actual demand (C1,
+          dashed) is not uniformly higher or lower than C0. The EIA baseline&rsquo;s own
+          consumption dips below its February 2027 level ({febBaseC.toFixed(2)} mb/d) in
+          March&ndash;May 2027 ({baseC(0).toFixed(2)}/{baseC(1).toFixed(2)}/{baseC(2).toFixed(2)} mb/d), so C0&rsquo;s demand
+          (baseline minus 5: {(baseC(0) - 5).toFixed(2)}/{(baseC(1) - 5).toFixed(2)}/{(baseC(2) - 5).toFixed(2)} mb/d) sits below C1&rsquo;s fixed
+          {febScenC.toFixed(2)} mb/d and <strong>C1 produces the larger deficits in
+          March&ndash;May</strong>; from June the baseline is back above the February level
+          ({baseC(3).toFixed(2)} mb/d) and C0&rsquo;s demand exceeds C1&rsquo;s, so <strong>C0 produces the
+          larger deficits from June onward</strong>. Over the full extension, C0 adds
+          {Math.abs(ccGap).toFixed(0)} mb more to the accumulated deficit for every production
+          variant, by construction &mdash; the cumulative baseline-consumption recovery
+          above the February 2027 level.
+        </p>
+      </div>
+
+      <!-- Labels and caveats -->
+      <h3 class="mt-10 text-lg font-bold">Labels and caveats</h3>
+      <ul class="mt-3 max-w-prose list-disc space-y-2 pl-5 text-[15px] leading-relaxed text-ink/80">
+        <li>
+          The extension lines are accumulated balances computed from each set of flow
+          assumptions &mdash; model projections continuing from the issued path&rsquo;s February
+          2027 cumulative. They are not established global observed stock
+          trajectories, and no inventory constraint is applied.
+        </li>
+        <li>
+          The issued record&rsquo;s feasibility note already flags the ≈1,544 mb
+          implied withdrawal through February 2027 as not validated against accessible
+          starting inventory; the December 2027 endpoints here are
+          {beyondLo.toFixed(1)}&ndash;{beyondHi.toFixed(1)}&times; that level.
+        </li>
+        <li>
+          The {meta.total_disruption_assumption_mb_d.toFixed(3)} mb/d total disruption in P2 is an
+          assumption: 13.5 (scenario incremental) + 2.717 (EIA&rsquo;s published 1Q27 average
+          baseline shut-in). EIA publishes no shut-in volumes past 1Q27; its narrative
+          says most shut-in production &ldquo;will be largely restored in 2H27.&rdquo; The public
+          narrative does not specify this monthly shut-in schedule. For this test we
+          assume (simplification, not source-derived) 2.717 mb/d through June 2027 and
+          zero from July 2027. The sensitivity moves the assumed restoration to April,
+          increasing the accumulated deficit by {p2ShutinShift.toFixed(0)} mb &mdash; more than
+          the C0&ndash;C1 consumption gap ({Math.abs(ccGap).toFixed(0)} mb).
+        </li>
+        <li>
+          The EIA baseline is EIA&rsquo;s central outlook, frozen at the Sep 9, 2026 STEO
+          &mdash; not a no-war counterfactual: it already includes EIA&rsquo;s own disruption
+          and recovery assumptions (stated assumptions:
+          <a href="https://www.eia.gov/outlooks/steo/" class="underline">eia.gov/outlooks/steo</a>).
+          EIA&rsquo;s updates track that central outlook and do not condition on the
+          closure; a new STEO would move these paths the same way it moves the
+          published panel.
+        </li>
+        <li>
+          No double counting: the variants&rsquo; adjustments are incremental relative to the
+          baseline&rsquo;s own shut-in schedule; the baseline&rsquo;s recovery is not re-subtracted.
+        </li>
+        <li>
+          No separate China adjustment is included; China remains part of the EIA world
+          totals. A country-level allocation branch is a separate, not-yet-started
+          experiment.
+        </li>
+        <li>
+          The v2026-09-17 records are unchanged by this page. The primary variant
+          (P2 + C0) underlies the corridor-lapses extension issued Sep 18 (v2026-09-18),
+          shown on the <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/">supply page</a> as a conditional
+          scenario; the other variants and the restoration-timing sensitivity remain
+          unissued research, and the spread across them is a spread of assumptions,
+          not a confidence interval.
+        </li>
+      </ul>
+
+      <!-- Provenance -->
+      <h3 class="mt-10 text-lg font-bold">Provenance</h3>
+      <ul class="mt-3 max-w-prose list-disc space-y-2 pl-5 text-[13.5px] leading-relaxed text-ink/70">
+        <li>
+          Computation: <code>python3 research/stress-test/lapse-persistence-stress.py</code>
+          (offline; reuses the published pipeline&rsquo;s workbook loader,
+          <code>research/scoring/regen-scenarios.py</code>). Single writer of the data file.
+        </li>
+        <li>
+          EIA STEO workbook <code>research/sources/eia-steo-2026-09-17.xlsx</code>
+          (sha256 {meta.workbook.sha256.slice(0, 16)}&hellip;).
+        </li>
+        <li>
+          Assumptions snapshot {meta.assumptions_snapshot.path}
+          (sha256 {meta.assumptions_snapshot.sha256.slice(0, 16)}&hellip;).
+        </li>
+        <li>
+          Issued record {meta.record_id} &mdash; anchor {meta.anchor.period}
+          {fmtMb1(meta.anchor.value_mb)} mb (IEA OMR Sep 11, 2026 web), stored
+          February 2027 target {fmtMb1(febEnd)} mb.
+        </li>
+        <li>Generated {meta.generated_utc}. Site data copy:
+          <code>site/src/data/lapse-stress.json</code> (written by the script; do not
+          hand-edit).</li>
+      </ul>
+    </main>
+
+    <SiteFooter />
+  </div>
+
+  <script>
+    import Chart from "chart.js/auto";
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    import results from "../../data/lapse-stress.json";
+
+    (window as any).__charts = (window as any).__charts || {};
+    // Debug handles for QA scripts (harmless in production)
+    (window as any).__lapseData = {
+      variants: results.variants,
+      baseline_ref: results.baseline_ref,
+    };
+    Chart.defaults.font.family = "Georgia, 'Times New Roman', serif";
+    Chart.defaults.font.size = 11;
+    Chart.defaults.color = "#8a867a";
+    Chart.defaults.animation = false;
+    Chart.defaults.plugins.legend.display = false;
+    Chart.defaults.plugins.tooltip.backgroundColor = "rgba(255,255,248,0.97)";
+    Chart.defaults.plugins.tooltip.titleColor = "#6b675c";
+    Chart.defaults.plugins.tooltip.bodyColor = "#1c1b17";
+    Chart.defaults.plugins.tooltip.borderWidth = 0;
+    Chart.defaults.plugins.tooltip.cornerRadius = 2;
+    Chart.defaults.plugins.tooltip.padding = 8;
+    Chart.defaults.plugins.tooltip.displayColors = false;
+
+    const meta = results.meta;
+    const stem = results.stem;
+    const variants = results.variants;
+    const baseRef = results.baseline_ref;
+    const febStart = meta.extension_start;
+
+    const SHORT = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const FULL = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const ym: [number, number][] = [];
+    for (let m = 8; m <= 12; m++) ym.push([2026, m]);
+    for (let m = 1; m <= 12; m++) ym.push([2027, m]);
+    const xLabels = ym.map(([y, m], i) =>
+      SHORT[m - 1] + (i === 0 || m === 1 ? ` '${String(y).slice(2)}` : ""));
+    const xFull = ym.map(([y, m]) => `${FULL[m - 1]} ${y}`);
+
+    const stemSeries: (number | null)[] = new Array(17).fill(null);
+    stem.forEach((s, i) => { stemSeries[i] = s.cumulative_mb; });
+    const extSeries = (k: string) => {
+      const pts = variants[k as keyof typeof variants];
+      const arr: (number | null)[] = new Array(17).fill(null);
+      arr[6] = febStart.cumulative_mb;
+      pts.forEach((p: { cumulative_mb: number }, i: number) => { arr[7 + i] = p.cumulative_mb; });
+      return arr;
+    };
+    const baseSeries: (number | null)[] = new Array(17).fill(null);
+    baseSeries[6] = febStart.cumulative_mb;
+    baseRef.forEach((p, i) => { baseSeries[7 + i] = p.cumulative_mb; });
+
+    const decIdx = 16;
+    const fmt = (v: number) => (v < 0 ? "\u2212" : "") + Math.round(Math.abs(v)).toLocaleString("en-US");
+    const end = (k: string) => {
+      const pts = variants[k as keyof typeof variants];
+      return pts[pts.length - 1].cumulative_mb;
+    };
+    const baseEnd = baseRef[baseRef.length - 1].cumulative_mb;
+
+    // Datasets: order = draw order (later on top).
+    const datasets = [
+      { label: "EIA STEO monthly balance (from the Feb 2027 scenario cumulative)", data: baseSeries,
+        borderColor: "#b5b1a6", borderWidth: 1.2, pointRadius: 0, tension: 0 },
+      { label: "P1 fixed adjustment (C1: demand at Feb level)", data: extSeries("p1_fixed_adjustment_c1"),
+        borderColor: "#8a867a", borderWidth: 1.2, borderDash: [4, 3], pointRadius: 0, tension: 0 },
+      { label: "P2 fixed total disruption (C1)", data: extSeries("p2_fixed_total_disruption_c1"),
+        borderColor: "#b4690e", borderWidth: 1.2, borderDash: [4, 3], pointRadius: 0, tension: 0 },
+      { label: "P3 fixed production (C1)", data: extSeries("p3_fixed_production_c1"),
+        borderColor: "#3d6b64", borderWidth: 1.2, borderDash: [4, 3], pointRadius: 0, tension: 0 },
+      { label: "Issued corridor-lapses path (v2026-09-17)", data: stemSeries,
+        borderColor: "#b3261e", borderWidth: 2, pointRadius: 0, tension: 0 },
+      { label: "P1 fixed adjustment (C0)", data: extSeries("p1_fixed_adjustment_c0"),
+        borderColor: "#8a867a", borderWidth: 1.6, pointRadius: 0, tension: 0 },
+      { label: "P2 fixed total disruption ~16.2 mb/d (C0)", data: extSeries("p2_fixed_total_disruption_c0"),
+        borderColor: "#b4690e", borderWidth: 1.6, pointRadius: 0, tension: 0 },
+      { label: "P3 fixed production (C0)", data: extSeries("p3_fixed_production_c0"),
+        borderColor: "#3d6b64", borderWidth: 1.6, pointRadius: 0, tension: 0 },
+    ];
+
+    // Vertical marker at the issued path's end (Feb 2027 = index 6)
+    const branchMarker = {
+      id: "branchMarker",
+      afterDatasetsDraw(chart: Chart) {
+        const el = chart.getDatasetMeta(4).data[6];
+        if (!el) return;
+        const { ctx, chartArea } = chart;
+        ctx.save();
+        ctx.strokeStyle = "rgba(179,38,30,0.4)";
+        ctx.lineWidth = 1;
+        ctx.setLineDash([3, 3]);
+        ctx.beginPath();
+        ctx.moveTo(el.x, chartArea.top + 14);
+        ctx.lineTo(el.x, chartArea.bottom);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.font = "italic 10.5px Georgia, serif";
+        ctx.fillStyle = "#b3261e";
+        // bottom-right of the line: top of plot collides with the top y tick
+        // and bottom-left with the bottom y tick on narrow viewports
+        ctx.textAlign = "left";
+        ctx.textBaseline = "bottom";
+        ctx.fillText("issued path ends \u00b7 Feb 2027", el.x + 5, chartArea.bottom - 4);
+        ctx.restore();
+      },
+    };
+
+    // Direct labels at the Dec 2027 endpoints (no legend)
+    const labelSpecs: { dataset: number; text: string; color: string }[] = [
+      { dataset: 0, text: `EIA STEO balance ${fmt(baseEnd)}`, color: "#7a766a" },
+      { dataset: 5, text: `fixed adjustment ${fmt(end("p1_fixed_adjustment_c0"))}`, color: "#5f5c52" },
+      { dataset: 6, text: `fixed total disruption ${fmt(end("p2_fixed_total_disruption_c0"))}`, color: "#8a5210" },
+      { dataset: 7, text: `fixed production ${fmt(end("p3_fixed_production_c0"))}`, color: "#2f544e" },
+    ];
+    const directLabels = {
+      id: "directLabels",
+      afterDatasetsDraw(chart: Chart) {
+        const { ctx } = chart;
+        for (const s of labelSpecs) {
+          const el = chart.getDatasetMeta(s.dataset).data[decIdx];
+          if (!el) continue;
+          ctx.save();
+          ctx.font = "italic 11.5px Georgia, serif";
+          ctx.fillStyle = s.color;
+          ctx.textAlign = "left";
+          ctx.textBaseline = "middle";
+          ctx.fillText(s.text, el.x + 8, el.y);
+          ctx.restore();
+        }
+      },
+    };
+
+    const chart = new Chart(document.getElementById("lapseStressChart") as HTMLCanvasElement, {
+      type: "line",
+      data: { labels: xLabels, datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: { padding: { right: 170, top: 6 } },
+        interaction: { mode: "index", intersect: false },
+        scales: {
+          x: {
+            grid: { display: false },
+            border: { display: true, color: "#d8d4c6", width: 0.5 },
+            ticks: { color: "#8a867a", padding: 8, maxTicksLimit: 9, autoSkip: true },
+          },
+          y: {
+            min: -4700,
+            max: 200,
+            grid: { display: false },
+            border: { display: false },
+            ticks: {
+              color: "#8a867a", padding: 8, stepSize: 1000,
+              callback: (v) => fmt(Number(v)),
+            },
+          },
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              title: (items) => xFull[items[0].dataIndex],
+              label: (item) => ` ${item.dataset.label}: ${fmt(item.parsed.y)} mb`,
+            },
+          },
+        },
+      },
+      plugins: [branchMarker, directLabels],
+    });
+    // Full accessible description (Astro 7 does not expand expressions in
+    // attributes, so it is set here from the data).
+    chart.canvas.setAttribute("aria-label",
+      `Line chart. Issued corridor-lapses path from ${fmt(results.meta.anchor.value_mb)} mb in ` +
+      `August 2026 to ${fmt(febStart.cumulative_mb)} mb in February 2027, where ${fmt(febStart.cumulative_mb)} mb is the ` +
+      `issued record's stored February 2027 target. Six stress-test extensions to December 2027, ` +
+      `each an accumulated P−C balance under one set of flow assumptions (not observed stock ` +
+      `trajectories): fixed adjustment ends at ${fmt(end("p1_fixed_adjustment_c0"))} mb with demand 5 mb/d ` +
+      `below the EIA baseline (C0) and ${fmt(end("p1_fixed_adjustment_c1"))} mb with demand held at the ` +
+      `February level (C1); fixed total disruption ends at ${fmt(end("p2_fixed_total_disruption_c0"))} and ` +
+      `${fmt(end("p2_fixed_total_disruption_c1"))} mb; fixed production ends at ${fmt(end("p3_fixed_production_c0"))} and ` +
+      `${fmt(end("p3_fixed_production_c1"))} mb. The EIA STEO monthly balance carried from the February ` +
+      `2027 scenario cumulative ends at ${fmt(baseEnd)} mb.`);
+    (window as any).__lapseChartAria = chart.canvas.getAttribute("aria-label");
+    (window as any).__charts.lapseStressChart = chart;
+  </script>
+  </body>
+</html>

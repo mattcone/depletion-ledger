@@ -1,0 +1,177 @@
+{
+ "version": "v2026-09-18",
+ "issued": "2026-09-18",
+ "issued_at": "2026-09-18T20:23:42Z",
+ "issued_at_note": "UTC, recorded at finalization of this version.",
+ "description": "Scenario assumptions for the three conditional global-observed-stock paths on the supply page. Each scenario is a monthly adjustment (mb/d) applied to the dated baseline below. All adjustments are analyst judgment supported by the stated evidence — a source link does not make an assumed number a reported fact. v2026-09-18 extends the corridor-lapses scenario from its 2027-02 validity horizon (v2026-09-17) through 2027-12 under the fixed-total-disruption persistence reading (P2 in the offline stress test, research/stress-test/) with the scenario's existing demand convention (C0); corridor-holds and standoff are unchanged from v2026-09-17.",
+ "baseline": {
+  "source": "EIA Short-Term Energy Outlook (STEO), released 9 Sep 2026 (workbook generated 3 Sep 2026)",
+  "archive": "research/sources/eia-steo-2026-09-17.xlsx (sha256 c06a15243b0d972045ecc59cf9376885f68c7c306c581de5d01e6b8ac1a236c5); narrative: research/sources/steo-2026-09.pdf (56 pp, 'September 2026' cover)",
+  "workbook_url": "https://www.eia.gov/outlooks/steo/xls/STEO_m.xlsx (moving URL — always the latest release)",
+  "series": {
+   "production_mb_d": "papr_world (Table 3a, World total)",
+   "consumption_mb_d": "patc_world (Table 3a, World total)"
+  },
+  "choice_rationale": "The STEO is the only release that publishes a month-by-month world production/consumption forecast across the full Sep 2026–Dec 2027 horizon plus an explicit, quantified war-disruption schedule (the shut-in table below). The IEA's free summaries publish no monthly balance path, so the IEA remains an independent benchmark elsewhere, not a scenario baseline.",
+  "stated_assumptions": [
+   "Global oil market assumptions: 'We forecast oil production in the Middle East will rise in the coming months because of gradually increasing flows through the Strait of Hormuz and the use of alternative routes out of the region… we assume some constraints to exporting oil from the Middle East will persist through the end of the year, which keeps crude oil production in the region below pre-conflict averages until the second quarter of 2027.'",
+   "Shut-in schedule (EIA's own Table 1, kb/d — the 'Production' column is labeled Feb-26; the table has no February shut-in column): Mar–June-26 average shut-in 9,435; Jul-26 4,980; narrative: 'crude oil production shut-ins averaged 6.7 million b/d in August, up from 5.0 million b/d in July' (Aug-26 6,720); published quarterly forecasts: 3Q26 6,230; 'we assume that oil flows from the Middle East remain constrained through the fourth quarter of 2026 (4Q26), leading to shut-in production volumes averaging 5.7 million b/d during that quarter' (table: 5,663); 1Q27 2,717; recovery: 'We expect oil flows out of the Middle East will gradually increase as shippers continue to find workarounds …' (quoted fragment — the sentence continues past a page break).",
+   "Price path (baseline): Brent $91/b average in Aug 2026; falling to $77/b by 2Q27; 'most shut-in oil production will be largely restored in 2H27 and that global oil inventories will again start building', prices to $67/b in 2H27."
+  ],
+  "disruption_events_after_baseline_date": "The baseline (9 Sep 2026) predates two further supply events: the Saudi East–West pipeline (Petroline) suspension (11 Sep; Rystad/CNBC: ~4 mb/d loss) and the halt of loadings at Yanbu (16 Sep). No scenario adjustment below re-subtracts pre-war production: adjustments are incremental relative to the baseline's own shut-in path, so an event already inside the baseline is never subtracted twice. The baseline itself already embeds evolving workarounds (the EIA notes increased Suez Canal shipments and ship-to-ship transfers in the Gulf), so any scenario loss attributed to the bypass is net of those, not on top of them."
+ },
+ "evidence": {
+  "hormuz_flows": "Verified transit counts 3–29/day (crisis model, Sep 16); claimed 8.6–10 mb/d dark flows unverified; a US official claimed ~40 ships/day (~14 mb/d) under US guidance, untested against AIS. Site discipline: model on the verified floor.",
+  "gulf_production_ceiling": "The EIA shut-in table's 'Production' column totals 25.2 mb/d across the seven Hormuz-dependent countries (Kuwait 2.56, UAE 3.60, Iran 3.39, Iraq 4.40, Qatar 0.56, Bahrain 0.19, Saudi 10.50) — the hard ceiling on any closure-related shut-in.",
+  "demand_elasticity": "Crisis model's elasticity tool (research/model/elasticity.py): level form −D·ε·ln(P/P₀) with ε=0.05/0.10/0.15, plus a marginal per-$5 view (−0.25/−0.51/−0.76 mb/d from $101.39 — a local, first-order figure). The scenario demand adjustments are documented analyst judgments anchored to the level band, not values derived from either view — see each scenario's rationale.",
+  "refineries": "Jazan is a refining complex (products); Abqaiq is an oil-processing and crude-stabilization facility (crude, condensate, NGLs) — its outage is not purely a products constraint. Neither outage is added as a separate crude loss on top of the baseline: the baseline's own shut-in schedule already reflects current damage, and the scenario production adjustments are incremental, so automatically stacking a facility outage on top would double-count. These outages tighten usable fuel supply while the crude+products stock balance may still move either way; the aggregate chart tracks the stock balance, not fuel availability."
+ },
+ "accounting": {
+  "rules": [
+   "scenario production = baseline production + production adjustment",
+   "scenario consumption = baseline consumption + consumption adjustment",
+   "daily stock change = scenario production − scenario consumption",
+   "cumulative change = previous cumulative change + daily stock change × days in month",
+   "All values mb/d and months of calendar days; sign convention: positive = stocks increased. The anchor is the record's stored 2026-08 cumulative (−507 mb, IEA observed).",
+   "Government stock releases have zero direct contribution to combined global stock change — they move barrels between holders, not out of the aggregate. No release is counted as production or as a loss."
+  ]
+ },
+ "scenarios": [
+  {
+   "id": "corridor-holds",
+   "name": "Corridor holds",
+   "color": "#3d6b64",
+   "odds_sept_16": "10%",
+   "definition": "The shipping agreement works and tanker traffic returns to normal over one to two quarters (crisis model, Sep 16 odds table). Brent moves toward $70–80.",
+   "production_adjustment_mb_d": {
+    "2026-09": 0.5,
+    "2026-10": 1.0,
+    "2026-11": 1.5,
+    "2026-12": 2.0,
+    "2027-01": 2.0,
+    "2027-02": 1.5,
+    "2027-03": 1.0,
+    "2027-04": 0.5,
+    "2027-05": 0.0,
+    "2027-06": 0.0,
+    "2027-07": 0.0,
+    "2027-08": 0.0,
+    "2027-09": 0.0,
+    "2027-10": 0.0,
+    "2027-11": 0.0,
+    "2027-12": 0.0
+   },
+   "consumption_adjustment_mb_d": {
+    "2026-09": 0.25,
+    "2026-10": 0.25,
+    "2026-11": 0.25,
+    "2026-12": 0.25,
+    "2027-01": 0.25,
+    "2027-02": 0.25,
+    "2027-03": 0.25,
+    "2027-04": 0.0,
+    "2027-05": 0.0,
+    "2027-06": 0.0,
+    "2027-07": 0.0,
+    "2027-08": 0.0,
+    "2027-09": 0.0,
+    "2027-10": 0.0,
+    "2027-11": 0.0,
+    "2027-12": 0.0
+   },
+   "rationale": "Traffic normalizing over one to two quarters puts the recovery roughly one quarter ahead of the EIA's own schedule (shut-ins 6.2 avg 3Q26 → 5.7 4Q26 → 2.7 1Q27 → restored 2H27): up to +2 mb/d in H1 2027, tapering to zero once the baseline itself has recovered. Capped so scenario production never exceeds the pre-war trend (~108 mb/d H2 2025) plus normal growth. The +0.25 mb/d demand support through Q1 2027 is a small judgment consistent with prices running modestly below the baseline's ($70–80 vs its $77→$67) — not an elasticity derivation.",
+   "validity_horizon": "2027-12 (full baseline horizon)"
+  },
+  {
+   "id": "standoff",
+   "name": "Standoff",
+   "color": "#b4690e",
+   "odds_sept_16": "35%",
+   "definition": "The war continues at current intensity: tanker attacks persist, the damaged Saudi bypass has no restart date, the strait remains partly open (crisis model, Sep 16). Brent stays $100–120.",
+   "production_adjustment_mb_d": {
+    "2026-09": 0.5,
+    "2026-10": 0.0,
+    "2026-11": -1.7,
+    "2026-12": -2.6,
+    "2027-01": -4.0,
+    "2027-02": -5.0,
+    "2027-03": -6.0,
+    "2027-04": -7.1,
+    "2027-05": -7.2,
+    "2027-06": -6.8,
+    "2027-07": -6.5,
+    "2027-08": -5.6,
+    "2027-09": -5.1,
+    "2027-10": -5.2,
+    "2027-11": -5.1,
+    "2027-12": -4.3
+   },
+   "consumption_adjustment_mb_d": {
+    "2026-09": -0.5,
+    "2026-10": -0.5,
+    "2026-11": -0.5,
+    "2026-12": -0.5,
+    "2027-01": -1.0,
+    "2027-02": -1.0,
+    "2027-03": -1.0,
+    "2027-04": -1.0,
+    "2027-05": -1.0,
+    "2027-06": -1.0,
+    "2027-07": -0.5,
+    "2027-08": -0.5,
+    "2027-09": -0.5,
+    "2027-10": -0.5,
+    "2027-11": -0.5,
+    "2027-12": -0.5
+   },
+   "rationale": "Scenario production holds near the current level through end-2026 (~99.9–101.0 mb/d), then rises by roughly 1.6 mb/d per quarter to ~107.5 by Dec 2027 — still below the baseline in every month of 2027 (the baseline reaches ~111.8 by December on its full-restoration-by-2H27 schedule). The adjustment is the difference between that flat-then-slow path and the baseline: +0.5 in Sep 2026 (analyst judgment — the baseline's implied September shut-in is ~7.0 mb/d, derived below, i.e. above the August actual of 6.7, so the standoff keeps disruption near the August peak), deepening to about −7.2 by May 2027, tapering to −4.3 by Dec 2027 as the baseline's own 2H27 restoration begins. The demand adjustment (−0.5 in 2026, −1.0 in H1 2027, −0.5 in H2 2027) is analyst judgment, set deliberately well below the crisis model's level-elasticity estimate: the log form −D·ε·ln(P/P₀) at $100–120 against a $67 baseline gives roughly −2 to −3 mb/d even at the lowest ε=0.05. Price passes through to demand with a lag, and only part of the full level effect lands inside the forecast window; the adjustment is not a value derived from the elasticity formula. The residual −4.3 by Dec 2027 is analyst judgment: the part of the ~4 mb/d East–West pipeline flow loss (Rystad via CNBC, 11 Sep 2026) not already offset by the baseline's own alternative-route and storage assumptions, plus attack-maintenance shut-ins if the war is still running. The 4 mb/d figure is a transport flow, not a measured production loss; the conversion to a net production adjustment, and its persistence through Dec 2027, are judgment, not a source-derived physical loss.",
+   "validity_horizon": "2027-12 (full baseline horizon)"
+  },
+  {
+   "id": "corridor-lapses",
+   "name": "Corridor lapses",
+   "color": "#b3261e",
+   "odds_sept_16": "55%",
+   "definition": "The agreement breaks down or comes under attack: the strait is effectively closed and the bypass, Abqaiq, and Jazan stay offline for months (crisis model, Sep 16). Brent rises above $130.",
+   "production_adjustment_mb_d": {
+    "2026-09": -6.0,
+    "2026-10": -9.0,
+    "2026-11": -12.0,
+    "2026-12": -13.5,
+    "2027-01": -13.5,
+    "2027-02": -13.5,
+    "2027-03": -13.5,
+    "2027-04": -13.5,
+    "2027-05": -13.5,
+    "2027-06": -13.5,
+    "2027-07": -16.217,
+    "2027-08": -16.217,
+    "2027-09": -16.217,
+    "2027-10": -16.217,
+    "2027-11": -16.217,
+    "2027-12": -16.217
+   },
+   "consumption_adjustment_mb_d": {
+    "2026-09": -3.0,
+    "2026-10": -3.0,
+    "2026-11": -3.0,
+    "2026-12": -3.0,
+    "2027-01": -5.0,
+    "2027-02": -5.0,
+    "2027-03": -5.0,
+    "2027-04": -5.0,
+    "2027-05": -5.0,
+    "2027-06": -5.0,
+    "2027-07": -5.0,
+    "2027-08": -5.0,
+    "2027-09": -5.0,
+    "2027-10": -5.0,
+    "2027-11": -5.0,
+    "2027-12": -5.0
+   },
+   "rationale": "Closure removes the flows the baseline still expects to gradually return. The baseline's September shut-in is not itself published: it is implied at ~7.0 mb/d from the published July (5.0) and August (6.7) actuals and the 3Q26 average (6.2 = (Jul+Aug+Sep)/3, so Sep ≈ 3×6.2 − 5.0 − 6.7). The incremental shut-in therefore grows from +6 mb/d in Sep 2026 (baseline ~7.0 → ~13.0) to +13.5 (baseline 1Q27 avg 2.7 → ~16.2) by Q1 2027. Total implied Gulf shut-ins stay below the 25.2 mb/d of pre-war production of the seven Hormuz-dependent countries in the EIA's own table, leaving room for domestic use, overland routes, and unverified dark flows. Brent above $130: the crisis model's level elasticity (ε=0.05–0.10) evaluated against the baseline's price level (a $30–60 premium) spans roughly −2.5 to −6 mb/d; the chosen −3.0 (H2 2026) and −5.0 (Q1 2027) are judgment within that band, ramped with the assumed price path rather than derived from it. Extension through Dec 2027 (v2026-09-18, conditional): the fixed-total-disruption persistence reading — the total Gulf shut-in is held at 16.217 mb/d (13.5 scenario increment + 2.717, the EIA's published 1Q27 average baseline shut-in), so the monthly production adjustment equals the assumed baseline shut-in minus 16.217: −13.5 while the assumed baseline shut-in is 2.717 (Mar–Jun 2027) and −16.217 once it is 0 (Jul–Dec 2027). The post-1Q27 baseline shut-in schedule (2.717 through June 2027, 0 from July) is a stated test simplification, not a source-derived schedule — the EIA narrative says 'largely restored in 2H27' without a monthly schedule; an April-2027-zero variant is on the research page. Demand stays −5 mb/d below the EIA baseline (the scenario's existing H1-2027 convention, carried flat; a no-further-demand-response variant is on the research page). The extension is a conditional 'if the closure persists' path, not a central forecast; the range across the other persistence readings is a spread of assumptions, not a confidence interval. Offline derivation: research/stress-test/lapse-persistence-stress.py (results: research/stress-test/lapse-persistence-results.json); preview page /research/lapse-persistence.",
+   "validity_horizon": "2027-12 — Extended (v2026-09-18) under the fixed-total-disruption persistence reading (assumed total shut-in 16.217 mb/d; demand at −5 mb/d below the EIA baseline). The Sep 2026 – Feb 2027 targets are verbatim from the issued v2026-09-17 record, whose assumptions were carried only to February 2027. The Mar 2027 – Dec 2027 extension is conditional: it is an 'if the closure persists' path, not a central forecast. The post-1Q27 baseline shut-in schedule is a stated test simplification.",
+   "feasibility_note": "The implied cumulative withdrawal by end-Feb 2027 (≈1,544 mb beyond the anchor) is on the order of a large share of reported OECD on-land stocks. The Dec 2027 extension deepens the implied withdrawal to ≈2,990 mb beyond the anchor (about 1.9× the end-Feb figure). Whether either is physically achievable depends on the accessible starting inventory, which is not known; the path is not clamped, and this projection is not physically validated by the available inventory evidence. The path is a balance identity, not a stock forecast: it does not solve whether stocks, withdrawals, or demand response would bend the path before the horizon."
+  }
+ ]
+}

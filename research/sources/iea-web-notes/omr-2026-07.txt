@@ -1,0 +1,39 @@
+LIMITED RESEARCH EXTRACT — NOT A COMPLETE VERBATIM TRANSCRIPTION
+Source: https://www.iea.org/reports/oil-market-report-july-2026
+Publication date: 10 July 2026
+Reader: web reader. All four requested HTML pages loaded; no 403 encountered.
+Copyright limitation: complete non-CC text and most source sentences are omitted. JSON quote=null means omitted, not inaccessible. Quoted excerpts are flagged. The JSON records selected inventory figures, not every number in the report.
+
+HTML coverage:
+Accessible: report description, highlights, narrative overview (Not strait forward), inline OPEC+ production table, methodology links and footer.
+No separately headed Executive Summary is exposed.
+Executive Summary (standalone HTML section): [section not accessible]
+Supply (standalone HTML section): [section not accessible]
+Demand (standalone HTML section): [section not accessible]
+Inventories (standalone HTML section): [section not accessible]
+Refining (standalone HTML section): [section not accessible]
+Prices (standalone HTML section): [section not accessible]
+No edition-specific chart/key-data hyperlink is exposed. These HTML pages are summaries with an inline table, not the full reports.
+
+Inventory findings (factual summary):
+No cumulative-since-February figure, OECD commercial level, forward-demand cover, or absolute global stock level is shown. Oil on water increased 117 mb while onshore inventories drew some 96 mb. Download PDF resolves to the same webpage; no PDF URL was exposed.
+
+Short exact excerpts:
+"Global observed oil inventories rose for the first time in four months in June, by 21 mb,"
+
+Linked report:
+https://www.iea.org/reports/oil-market-report-july-2026
+PDF: [section not accessible]
+The Download PDF control returned the same HTML page.
+
+Methodology PDF:
+https://iea.blob.core.windows.net/assets/48f400bb-e9eb-4415-a35a-682b9fe7673a/IEA_Refinery_Margin_Methodology_June_2026.pdf
+
+Generic data/statistics navigation links (not edition-specific):
+https://www.iea.org/data-and-statistics/data-explorers
+https://www.iea.org/data-and-statistics/data-sets
+https://www.iea.org/data-and-statistics/charts
+https://www.iea.org/data-and-statistics
+
+Numbers use their printed precision. Positive draw magnitudes retain the source's number; the series name specifies direction. Negative rates are retained where printed. No cumulative total was calculated. PDF facts have a separate source_url and printed page number.
+
