@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-09-20";
+export const DATA_AS_OF = "2026-09-21";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -23,8 +23,8 @@ export interface SeriesPoint {
 // ---------- Headline stats ----------
 export const stats = [
   { label: "Brent", value: "$103.87", sub: "Sep 18 settlement · −0.9% vs. prior close $104.82 (Sep 17) · +37% vs pre-crisis ~$76" },
-  { label: "US diesel (AAA)", value: "$6.51", sub: "Sep 20 · all-time high $6.5050 · eleventh consecutive daily record · first above $6.50 · +75% vs pre-war $3.72" },
-  { label: "US gasoline (AAA)", value: "$4.48", sub: "Sep 20 · +16.3¢ in a week (AAA) · +59% vs Jan $2.81" },
+  { label: "US diesel (AAA)", value: "$6.51", sub: "Sep 21 · all-time high $6.5107 · +75% vs pre-war $3.72" },
+  { label: "US gasoline (AAA)", value: "$4.48", sub: "Sep 21 · +16.2¢ in a week (AAA) · +59% vs Jan $2.81" },
   { label: "SPR", value: "285.0M", sub: "Sep 11 · down 0.4M in a week · down 130.5M from pre-war 415.4M · lowest since Nov 1982" },
   { label: "US diesel & heating oil", value: "107.9M", sub: "Sep 11 · up 1.6M in a week · 13.5% below last year · East Coast stocks 31% below last year" },
 ];
@@ -175,6 +175,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-09-18", value: 4.4687, note: "AAA release, Sep 18" },
   { date: "2026-09-19", value: 4.4759, note: "AAA release, Sep 19" },
   { date: "2026-09-20", value: 4.4761, note: "AAA release, Sep 20" },
+  { date: "2026-09-21", value: 4.4786, note: "AAA release, Sep 21" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -202,6 +203,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-09-18", value: 6.4476, note: "AAA record" },
   { date: "2026-09-19", value: 6.4866, note: "AAA record" },
   { date: "2026-09-20", value: 6.505, note: "AAA record — first above $6.50" },
+  { date: "2026-09-21", value: 6.5107, note: "AAA record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 
@@ -502,12 +504,12 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "An official repair timetable for the East–West pipeline. An unnamed Bloomberg source says Riyadh aims to restore about half its capacity within days and full capacity in six weeks. No official timetable has been published.", why: "An official estimate of repairs taking only days would reverse the Sep 11 change in odds." },
-      { item: "A date for the next round of talks. Iran's foreign minister, Araghchi, is in Beijing. Iran says it has agreed with Oman on a plan to reopen the strait, but Oman hasn't confirmed it.", why: "Resuming the talks could help restore tanker access through Hormuz." },
+      { item: "An official repair timetable for the East–West pipeline. An unnamed Bloomberg source says Riyadh aims to restore about half its capacity within days and full capacity in six weeks. No official timetable has been published. Bloomberg reported on Sep 18 that at least two European customers will receive no Saudi crude under their long-term contracts in October.", why: "An official estimate of repairs taking only days would reverse the Sep 11 change in odds." },
+      { item: "Whether the US and Iran meet at the UN General Assembly this week. Trump said he would “probably” be open to meeting Iranian President Pezeshkian. Iran's foreign minister left for New York on Sep 20, with a stop in Qatar, which is mediating. Qatar says the two sides are exchanging messages. Iran's military also warned on Sep 20 that the US was preparing new strikes and threatened to retaliate.", why: "Talks could help reopen the strait. Renewed strikes could make that harder." },
       { item: "Whether attacks in Bab el-Mandeb spread to non-Saudi vessels.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes." },
       { item: "How banks respond to the Sep 14 sanctions on Russia's VTB.", why: "If banks stop handling VTB's payments, Iran would have fewer ways to receive payments for oil." },
       { item: "Whether US–Houthi talks lead to an easing of the blockade of Saudi ships.", why: "That would help ships pass through Bab el-Mandeb and make the standoff scenario more likely." },
-      { item: "Ship traffic through Hormuz. Kpler counted 7 crossings on Sep 14, 12 on Sep 15, 6 on Sep 16 (revised from 3), and a preliminary 4 on Sep 17: 3 entering and 1 leaving, against a 10-day average of about 16. Windward counted 12 on Sep 16 using satellite images and ship-tracking signals. Kpler also counted 5 loaded ships carrying Saudi petroleum products out of the Red Sea over the past seven days.", why: "The site uses independent tracker counts. On Sep 19, US Central Command claimed it had escorted more than 2,000 ships carrying about 1 billion barrels in total. Independent trackers report much lower figures, so the site doesn't use that claim as data. The Red Sea count helps track shipping along Saudi Arabia's bypass route." },
+      { item: "Ship traffic through Hormuz. Kpler counted 7 crossings on Sep 14, 12 on Sep 15, 6 on Sep 16 (revised from 3), and a preliminary 4 on Sep 17: 3 entering and 1 leaving, against a 10-day average of about 16. Reuters reported 12 tracked commodity vessels crossing over Sep 19–20, compared with 35 the previous weekend, citing preliminary Kpler data. Ships travelling with their tracking signals off aren't included. Windward counted 12 on Sep 16 using satellite images and ship-tracking signals. Kpler also counted 5 loaded ships carrying Saudi petroleum products out of the Red Sea over the past seven days.", why: "The site uses independent tracker counts. On Sep 19, US Central Command claimed it had escorted more than 2,000 ships carrying about 1 billion barrels in total. Independent trackers report much lower figures, so the site doesn't use that claim as data. The Red Sea count helps track shipping along Saudi Arabia's bypass route." },
       { item: "Saudi Arabia's response to Houthi attacks on Riyadh. Saudi Arabia confirmed on Sep 19 that the Houthis tried to strike the capital with a ballistic missile (AP). The strikes set fire to the fuel depot at King Khalid International Airport (Reuters imagery), and Riyadh issued its first air-raid alerts since the fighting intensified (BBC). An analyst interviewed by Al Jazeera expected a large response coordinated with Saudi Arabia's coalition partners. The Houthis also claimed on Sep 16 that they shot down a Saudi F-15 over Marib with a locally built missile. The BBC verified wreckage video; Saudi Arabia hasn't confirmed the loss.", why: "These were the first Houthi strikes on the capital. Confirmation of the F-15 loss or a Saudi or US military response would mean the fighting has worsened." },
       { item: "Whether the Saudi-led Red Sea coalition takes military action. Saudi Arabia hosted a multinational meeting on Sep 19 to secure the Red Sea, the Gulf of Aden, and Bab el-Mandeb. Turkey's foreign minister said on Sep 19 that Turkey is ready to meet Saudi defense needs. The US also lifted sanctions on Eritrea's military and ruling party, citing regional interests in the Red Sea.", why: "Watch whether the coalition launches a naval operation against the Houthis, and whether Turkey's offer leads to military action under the defense pact Saudi Arabia, Turkey, and Pakistan signed in Mecca in August." },
       { item: "New SPR exchange contracts and delivery schedules.", why: "Existing deliveries may be nearing completion, but the end date isn't confirmed. New deliveries could increase withdrawals." },

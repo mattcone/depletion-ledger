@@ -130,6 +130,8 @@ curl -sG "https://api.eia.gov/v2/petroleum/pnp/wiup/data/" \
 3. **Facet values are case-sensitive** — copy them verbatim from the facet endpoint.
 4. `start`/`end` are `YYYY-MM-DD`; `frequency`, `period`, `offset`, `limit` also supported.
 5. **`startyear` requires `endyear`** (v2, hit Sep 20): "endyear: If a startyear is specified then an endyear must be specified too." The landing-check calls above use neither — keep it that way. And the `data[0]=…` query breaks curl's glob parser: always `-sG` + `--data-urlencode` (the form above), never a bare quoted URL.
+6. **The `seriesid/` compat route is dead** (checked Sep 20): `/v2/seriesid/WDIEXUS2` and `/v2/seriesid/WGTSTUS1` both 404 "not valid" — even for IDs that exist. Use route discovery (step 1 above) instead. The FAQ's "complete legacy ID" hint (e.g. `PET.WDIEXUS2.W`) doesn't help; the route just 404s.
+7. **dnav individual history pages can be STALE** (hit Sep 20): `LeafHandler.ashx?n=PET&s=WDIEXUS2&f=W` (and its `hist_xls/*.xls` download) stopped at Feb 2026. The summary dnav pages (e.g. `pet_sum_sndw_dcus_nus_w.htm`) ARE current. For live weekly data use the v2 API, not dnav.
 
 ### Landing checks ("has the report landed?" — verified Sep 15, corrected Sep 15 evening)
 
@@ -222,21 +224,83 @@ PADD 1 distillate 21.583 vs 31.267 = −31.0%). Note the API lags the release: w
 prior week on release morning — the CSVs are same-day, so use them for the
 PADD/utilization numbers and let the API catch up.
 
+### EIA `petroleum/move/wkly` — weekly US product flows (verified Sep 20, diesel-dashboard research)
+
+The long-missing live source for weekly US refined-product trade. Route discovery: step 1 of
+the pattern above (`/v2/petroleum/` → `move`), then `/v2/petroleum/move/` → `wkly`.
+
+```bash
+curl -sG "https://api.eia.gov/v2/petroleum/move/wkly/data/" \
+  --data-urlencode "api_key=$KEY" --data-urlencode "data[0]=value" \
+  --data-urlencode "facets[series][]=WDIEXUS2" \
+  --data-urlencode "sort[0][column]=period" --data-urlencode "sort[0][direction]=desc" \
+  --data-urlencode "length=3"
+# → 2026-09-11: 1614 · 2026-09-04: 1556 · 2026-08-28: 1735 (kb/d, week ending Fri,
+#   released Wed with the WPSR — cross-checked against eia.gov dnav summary page
+#   pet_sum_sndw_dcus_nus_w.htm and WPSR table9.pdf; all three agree)
+```
+
+Series (all kb/d): `WDIEXUS2` distillate exports · `WDIIMUS2` imports · `WDIRPUS2` refiner &
+blender net production · `WDIUPUS2` product supplied. "Total distillate" = diesel + heating
+oil (EIA definition — disclose on any chart). Values are WPSR estimates.
+2024–25 baseline for exports: min 851, max 1,853, avg 1,281 (104 wks); 2026 peak so far
+1,935 (w/e Aug 7). Winter dip is seasonal (heating season) — compare same-weeks-last-year.
+Full 2026 series + design notes: `research/diesel-dashboard-ideas.md`.
+
+### JODI secondary data — country-level monthly refined products (verified Sep 20)
+
+```bash
+curl -fsSL -A "Mozilla/5.0" -o jodi_sec_2026.csv \
+  "https://www.jodidata.org/_resources/files/downloads/oil-data/annual-csv/secondary/secondaryyear2026.csv"
+# ~11 MB. Prior years: .../secondary/2025.csv (naming: "secondaryyear<Y>.csv" for the
+# CURRENT year only; plain "<Y>.csv" for complete prior years — found on
+# https://www.jodidata.org/oil/database/data-downloads.aspx; codex's guessed
+# "2026.csv" 404s). No API key needed. Plain CSV, one row per country×product×flow×month.
+```
+
+Filters for diesel exports: `ENERGY_PRODUCT=GASDIES`, `FLOW_BREAKDOWN=TOTEXPSB` (total
+seaborne exports), `UNIT_MEASURE=KBD`, `REF_AREA` = ISO country code (KW, AE, IQ, SA, RU, US…).
+`OBS_VALUE` in kb/d; "-" = not reported (keep missing, never zero-fill). `ASSESSMENT_CODE`:
+1 comparable, 2 caution, 3 unassessed, 4 under verification. Cadence: publishes ~the 20th
+for the month two prior (Aug 20, 2026 → June data; next Sep 22, 2026). **Coverage (verified
+Jan–Jun 2026): US (ac1), Kuwait (ac3), Saudi (ac3) report; UAE, Iraq, Russia do NOT report
+GASDIES/TOTEXPSB at all** (rows exist, all dashes). Diesel exports Feb→Jun 2026: US
+1,123→1,466, Kuwait 320→160, Saudi 848→486.
+
+### EIA daily wholesale ULSD spot prices (verified Sep 20, diesel-modeling research)
+
+Free, no key — the missing ingredient for a REAL diesel crack (42·W − C) instead of the
+retail-minus-crude spread. Two pages, same layout:
+
+- Gulf Coast: `https://www.eia.gov/dnav/pet/hist/EER_EPD2DXL0_PF4_RGC_DPGD.htm`
+- New York Harbor: `https://www.eia.gov/dnav/pet/hist/EER_EPD2DXL0_PF4_Y35NY_DPGD.htm`
+
+$ per gallon, posted weekdays only. Layout: weekly rows `"YYYY Mmm-D to Mmm-D"` with FIVE
+daily cells (Mon–Fri; blanks on holidays), 20+ years of history. Parse: rows with
+`<td class='B6'>` label + `<td class='B3'>` values; `html.unescape`, drop `&nbsp;`. A
+weekly value must be a labeled average of the available days (or use matched single days) —
+never silently. These are EIA's posted spot assessments (their own survey), so they are
+sourced observations, not computations. Full context: `diesel-modeling-research.md`.
+
 ### Al Jazeera RSS (verified Sep 15)
 
 `curl -s -A "Mozilla/5.0" "https://www.aljazeera.com/xml/rss/all.xml"` — the ALL feed works;
 per-section feeds (`economy.xml`, `middle-east.xml`) return empty. ~25 items, ~12h window. Scan
 titles for oil/shipping/Iran/Russia/Yemen/rates; read any relevant miss with `./content.js`.
 
-### r/oil + r/energy RSS (verified Sep 15)
+### r/oil + r/energy RSS (verified Sep 15; URL corrected Sep 21)
 
-`curl -s -A "Mozilla/5.0" "https://www.reddit.com/r/oil/.rss"` (and `r/energy/.rss`) — the Atom
-feeds return 200 even though the HTML/JSON routes are IP-blocked from this box (403 on every
-UA/header variant tested; r.jina.ai and redlib mirrors also blocked/bot-gated). 25 entries,
-~24h window. r/oil = industry/data (transit estimates, loadings); r/energy = broader policy/retail. Carries items the
-wires miss or lag (it surfaced the Sep 15 Yanbu port/refinery strike and the Yanbu loading
-suspension ahead of our sweeps). **LEADS ONLY** — verify every item against a primary source
-before logging or site use.
+`curl -s -A "Mozilla/5.0" "https://www.reddit.com/r/oil/new.rss"` (and `r/energy/new.rss`) —
+the Atom feeds return 200 even though the HTML/JSON routes are IP-blocked from this box (403
+on every UA/header variant tested; r.jina.ai and redlib mirrors also blocked/bot-gated).
+**URL gotcha (found the hard way Sep 21): the working form has NO slash before `.rss`** —
+`/r/oil/new.rss`, not `/r/oil/new/.rss` (and the bare `/r/oil/.rss` started 403-ing on Sep 21
+after working Sep 15–20). If a feed 403s or returns 0 bytes, retry with a different UA after
+a few seconds — the blocking is intermittent. 25 entries, ~24h window. r/oil = industry/data
+(transit estimates, loadings); r/energy = broader policy/retail. Carries items the wires miss
+or lag (it surfaced the Sep 15 Yanbu port/refinery strike and the Yanbu loading suspension
+ahead of our sweeps). **LEADS ONLY** — verify every item against a primary source before
+logging or site use.
 
 ### FOMC calendar (verified Sep 15)
 
