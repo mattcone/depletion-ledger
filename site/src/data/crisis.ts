@@ -22,7 +22,7 @@ export interface SeriesPoint {
 
 // ---------- Headline stats ----------
 export const stats = [
-  { label: "Brent", value: "$103.87", sub: "Sep 18 settlement · −0.9% vs. prior close $104.82 (Sep 17) · +37% vs pre-crisis ~$76" },
+  { label: "Brent", value: "$100.34", sub: "Sep 21 settlement · −3.4% vs. prior close $103.87 (Sep 18) · +32% vs pre-crisis ~$76" },
   { label: "US diesel (AAA)", value: "$6.51", sub: "Sep 21 · all-time high $6.5107 · +75% vs pre-war $3.72" },
   { label: "US gasoline (AAA)", value: "$4.48", sub: "Sep 21 · +16.2¢ in a week (AAA) · +59% vs Jan $2.81" },
   { label: "SPR", value: "285.0M", sub: "Sep 11 · down 0.4M in a week · down 130.5M from pre-war 415.4M · lowest since Nov 1982" },
@@ -51,6 +51,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-09-16", value: 105.83, tip: "settlement · down 2.7% (CNBC)", note: "Settlement down 2.7% (CNBC). Prices fell as the US energy secretary called the pipeline outage 'brief and temporary,' 'measured in days.' Officials and analysts point to weeks; no official damage assessment or repair schedule has been published." },
   { date: "2026-09-17", value: 104.82, tip: "settlement · down 1.0% (Yahoo front-month)", note: "settlement (Yahoo front-month; −1.0% vs Sep 16). A second straight down session in the settlement series as Saudi bypass hopes — the 20M-barrel ship-to-ship sale and pipeline repair targets — eased disruption fears (Reuters/CNBC; CNBC framed it as the 'third day')." },
   { date: "2026-09-18", value: 103.87, tip: "settlement · down 0.9% (Yahoo front-month; also reported by CNBC)", note: "settlement (Yahoo front-month; −0.9% vs Sep 17; CNBC concurs). A third straight down session; the week finished roughly flat. JPMorgan: Middle East flows averaged ~17M b/d over 10 days, and satellite imagery shows ~2.8M b/d moving through Hormuz over six days. Rapidan: the pipeline outage will constrain Saudi exports through at least the end of September." },
+  { date: "2026-09-21", value: 100.34, tip: "settlement · down 3.4% (Reuters)", note: "settlement (Reuters, November contract; −3.4% vs Sep 18). A fourth straight down session and the lowest since Sep 9. Both presidents arrived in New York for the UN General Assembly; no meeting between them has been confirmed. Saudi Arabia is again shipping oil through the strait (WSJ: ~2.4M b/d over the past two weeks, per Kpler)." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -123,6 +124,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-09-16", value: 102.43, note: "front-month futures close (NYMEX 2pm ET; CNBC) · −3.2%" },
   { date: "2026-09-17", value: 101.91, note: "front-month futures close (Yahoo) · −0.5%" },
   { date: "2026-09-18", value: 100.3, note: "front-month futures close (Yahoo; CNBC concurs) · −1.6%" },
+  { date: "2026-09-21", value: 95.78, note: "settlement (Reuters, October contract — its final trading day) · −4.5%" },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -504,14 +506,14 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "An official repair timetable for the East–West pipeline. An unnamed Bloomberg source says Riyadh aims to restore about half its capacity within days and full capacity in six weeks. No official timetable has been published. Bloomberg reported on Sep 18 that at least two European customers will receive no Saudi crude under their long-term contracts in October.", why: "An official estimate of repairs taking only days would reverse the Sep 11 change in odds." },
-      { item: "Whether the US and Iran meet at the UN General Assembly this week. Trump said he would “probably” be open to meeting Iranian President Pezeshkian. Iran's foreign minister left for New York on Sep 20, with a stop in Qatar, which is mediating. Qatar says the two sides are exchanging messages. Iran's military also warned on Sep 20 that the US was preparing new strikes and threatened to retaliate.", why: "Talks could help reopen the strait. Renewed strikes could make that harder." },
+      { item: "An official repair timetable for the East–West pipeline. An unnamed Bloomberg source says Saudi Arabia aims to restore half its capacity within days and full capacity in six weeks. No official timetable has been published. In the meantime, Saudi Arabia is shipping more oil from its Gulf terminals: Vortexa reports average loadings of about 3.7M barrels a day since Sep 12, up from 2.9M earlier in the month. Red Sea loadings fell to zero from 3.9M barrels a day on Sep 1–11.", why: "An official estimate of repairs taking only days would reverse the Sep 11 change in odds. Watch how much oil Saudi Arabia can ship through the strait while the pipeline is out of service." },
+      { item: "Whether the US and Iran meet at the UN General Assembly this week. Both presidents arrived in New York on Sep 21, but no meeting between them has been confirmed. Iran's military warned on Sep 20 that the US was preparing new strikes and threatened to retaliate.", why: "Talks could help reopen the strait. Renewed strikes could make that harder." },
       { item: "Whether attacks in Bab el-Mandeb spread to non-Saudi vessels.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes." },
       { item: "How banks respond to the Sep 14 sanctions on Russia's VTB.", why: "If banks stop handling VTB's payments, Iran would have fewer ways to receive payments for oil." },
       { item: "Whether US–Houthi talks lead to an easing of the blockade of Saudi ships.", why: "That would help ships pass through Bab el-Mandeb and make the standoff scenario more likely." },
-      { item: "Ship traffic through Hormuz. Kpler counted 7 crossings on Sep 14, 12 on Sep 15, 6 on Sep 16 (revised from 3), and a preliminary 4 on Sep 17: 3 entering and 1 leaving, against a 10-day average of about 16. Reuters reported 12 tracked commodity vessels crossing over Sep 19–20, compared with 35 the previous weekend, citing preliminary Kpler data. Ships travelling with their tracking signals off aren't included. Windward counted 12 on Sep 16 using satellite images and ship-tracking signals. Kpler also counted 5 loaded ships carrying Saudi petroleum products out of the Red Sea over the past seven days.", why: "The site uses independent tracker counts. On Sep 19, US Central Command claimed it had escorted more than 2,000 ships carrying about 1 billion barrels in total. Independent trackers report much lower figures, so the site doesn't use that claim as data. The Red Sea count helps track shipping along Saudi Arabia's bypass route." },
+      { item: "Ship traffic through Hormuz. Reuters reported a preliminary Kpler count of 17 tracked commodity vessels crossing on Sep 19–20, down from 37 the previous weekend. Kpler also reported that 22 tankers carried 42M barrels of crude through the strait in the week of Sep 13. On Sep 21, UKMTO reported that a projectile struck a tanker entering the strait, injuring two crew members, and debris hit a second vessel.", why: "Watch whether more ships can pass safely. These counts don't include ships with their tracking signals off. The site uses independent tracker counts; it doesn't use US Central Command's much higher claimed totals as data." },
       { item: "Saudi Arabia's response to Houthi attacks on Riyadh. Saudi Arabia confirmed on Sep 19 that the Houthis tried to strike the capital with a ballistic missile (AP). The strikes set fire to the fuel depot at King Khalid International Airport (Reuters imagery), and Riyadh issued its first air-raid alerts since the fighting intensified (BBC). An analyst interviewed by Al Jazeera expected a large response coordinated with Saudi Arabia's coalition partners. The Houthis also claimed on Sep 16 that they shot down a Saudi F-15 over Marib with a locally built missile. The BBC verified wreckage video; Saudi Arabia hasn't confirmed the loss.", why: "These were the first Houthi strikes on the capital. Confirmation of the F-15 loss or a Saudi or US military response would mean the fighting has worsened." },
-      { item: "Whether the Saudi-led Red Sea coalition takes military action. Saudi Arabia hosted a multinational meeting on Sep 19 to secure the Red Sea, the Gulf of Aden, and Bab el-Mandeb. Turkey's foreign minister said on Sep 19 that Turkey is ready to meet Saudi defense needs. The US also lifted sanctions on Eritrea's military and ruling party, citing regional interests in the Red Sea.", why: "Watch whether the coalition launches a naval operation against the Houthis, and whether Turkey's offer leads to military action under the defense pact Saudi Arabia, Turkey, and Pakistan signed in Mecca in August." },
+      { item: "Whether the Saudi-led Red Sea coalition takes military action. Saudi Arabia hosted a meeting on Sep 19 to secure the Red Sea, the Gulf of Aden, and Bab el-Mandeb. Turkey offered defense support, and the US lifted sanctions on Eritrea's military and ruling party. The UK agreed on Sep 21 to provide one refuelling aircraft for a limited period to help Saudi jets defend against Houthi drones and missiles (Al Jazeera). The UK says this support does not cover strikes on the Houthis.", why: "Watch whether the coalition launches a naval operation, Turkey's offer leads to military action, or the UK's role expands." },
       { item: "New SPR exchange contracts and delivery schedules.", why: "Existing deliveries may be nearing completion, but the end date isn't confirmed. New deliveries could increase withdrawals." },
     ],
   },
@@ -519,6 +521,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     when: "Sep 23",
     items: [
       { item: "The EIA report for the week ending Sep 18, which includes the first days after loadings at Yanbu stopped.", why: "Watch for faster SPR withdrawals, lower commercial crude stocks, or falling diesel stocks." },
+      { item: "The Trump–Xi summit in Washington. Xi's state visit is scheduled for Sep 23–25, with trade, AI, and sanctions on the agenda. It follows a new US law authorizing tariffs of up to 100% on countries buying Russian oil and gas, and pressure on China to cut purchases of Iranian crude.", why: "Watch for agreements affecting oil purchases or trade. Better trade relations could increase demand for oil; exemptions from sanctions could make it easier to buy Russian crude." },
     ],
   },
   {
@@ -775,6 +778,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-09-16", value: 5.006, note: "session close (Yahoo) · first close above 5% of the war · post-hike" },
   { date: "2026-09-17", value: 4.947, note: "session close (Yahoo) · back below 5%" },
   { date: "2026-09-18", value: 4.998, note: "session close (Yahoo) · just below 5%" },
+  { date: "2026-09-21", value: 4.96, note: "session close (Yahoo) · below 5%" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
