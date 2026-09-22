@@ -506,28 +506,25 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "An official repair timetable for the East–West pipeline. An unnamed Bloomberg source says Saudi Arabia aims to restore half its capacity within days and full capacity in six weeks. No official timetable has been published. In the meantime, Saudi Arabia is shipping more oil from its Gulf terminals: Vortexa reports average loadings of about 3.7M barrels a day since Sep 12, up from 2.9M earlier in the month. Red Sea loadings fell to zero from 3.9M barrels a day on Sep 1–11.", why: "An official estimate of repairs taking only days would reverse the Sep 11 change in odds. Watch how much oil Saudi Arabia can ship through the strait while the pipeline is out of service." },
-      { item: "Whether the US and Iran meet at the UN General Assembly this week. Both presidents arrived in New York on Sep 21, but no meeting between them has been confirmed. Iran's military warned on Sep 20 that the US was preparing new strikes and threatened to retaliate.", why: "Talks could help reopen the strait. Renewed strikes could make that harder." },
+      { item: "An official repair timetable for the East–West pipeline. An unnamed Bloomberg source says Saudi Arabia aims to restore half its capacity within days and full capacity in six weeks. In the meantime, Vortexa reports that Saudi Gulf terminals have loaded an average of about 3.7M barrels a day since Sep 12, up from 2.9M earlier in the month. Saudi Red Sea loadings fell to zero.", why: "An official estimate of repairs taking only days would reverse the Sep 11 change in odds." },
+      { item: "Whether the US and Iran meet at the UN General Assembly this week. Both presidents arrived in New York on Sep 21, but no meeting between them has been confirmed. Iran's military warned on Sep 20 that the US was preparing new strikes.", why: "Talks could help reopen the strait. Renewed strikes could make that harder." },
       { item: "Whether attacks in Bab el-Mandeb spread to non-Saudi vessels.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes." },
-      { item: "How banks respond to the Sep 14 sanctions on Russia's VTB.", why: "If banks stop handling VTB's payments, Iran would have fewer ways to receive payments for oil." },
-      { item: "Whether US–Houthi talks lead to an easing of the blockade of Saudi ships.", why: "That would help ships pass through Bab el-Mandeb and make the standoff scenario more likely." },
-      { item: "Ship traffic through Hormuz. Reuters reported a preliminary Kpler count of 17 tracked commodity vessels crossing on Sep 19–20, down from 37 the previous weekend. Kpler also reported that 22 tankers carried 42M barrels of crude through the strait in the week of Sep 13. On Sep 21, UKMTO reported that a projectile struck a tanker entering the strait, injuring two crew members, and debris hit a second vessel.", why: "Watch whether more ships can pass safely. These counts don't include ships with their tracking signals off. The site uses independent tracker counts; it doesn't use US Central Command's much higher claimed totals as data." },
-      { item: "Saudi Arabia's response to Houthi attacks on Riyadh. Saudi Arabia confirmed on Sep 19 that the Houthis tried to strike the capital with a ballistic missile (AP). The strikes set fire to the fuel depot at King Khalid International Airport (Reuters imagery), and Riyadh issued its first air-raid alerts since the fighting intensified (BBC). An analyst interviewed by Al Jazeera expected a large response coordinated with Saudi Arabia's coalition partners. The Houthis also claimed on Sep 16 that they shot down a Saudi F-15 over Marib with a locally built missile. The BBC verified wreckage video; Saudi Arabia hasn't confirmed the loss.", why: "These were the first Houthi strikes on the capital. Confirmation of the F-15 loss or a Saudi or US military response would mean the fighting has worsened." },
-      { item: "Whether the Saudi-led Red Sea coalition takes military action. Saudi Arabia hosted a meeting on Sep 19 to secure the Red Sea, the Gulf of Aden, and Bab el-Mandeb. Turkey offered defense support, and the US lifted sanctions on Eritrea's military and ruling party. The UK agreed on Sep 21 to provide one refuelling aircraft for a limited period to help Saudi jets defend against Houthi drones and missiles (Al Jazeera). The UK says this support does not cover strikes on the Houthis.", why: "Watch whether the coalition launches a naval operation, Turkey's offer leads to military action, or the UK's role expands." },
-      { item: "New SPR exchange contracts and delivery schedules.", why: "Existing deliveries may be nearing completion, but the end date isn't confirmed. New deliveries could increase withdrawals." },
+      { item: "Ship traffic through Hormuz. Reuters reported a preliminary Kpler count of 17 tracked commodity vessels crossing on Sep 19–20, down from 37 the previous weekend. Kpler also reported that 22 tankers carried 42M barrels of crude through the strait in the week of Sep 13. On Sep 21, UKMTO reported that a projectile struck a tanker entering the strait, injuring two crew members, and debris hit a second vessel.", why: "Watch whether more ships can pass safely. These counts come from independent trackers and exclude ships with their tracking signals off. The site doesn't use US Central Command's higher claimed totals as data." },
+      { item: "Saudi Arabia's response to Houthi attacks on Riyadh. Saudi Arabia confirmed on Sep 19 that the Houthis tried to strike the capital with a ballistic missile (AP). Reuters imagery showed a fire at a fuel depot at King Khalid International Airport. The BBC reported Riyadh's first air-raid alerts since fighting with the Houthis intensified. The Houthis also claimed on Sep 16 that they shot down a Saudi F-15 over Marib; the BBC verified footage of the wreckage, but Saudi Arabia hasn't confirmed the loss.", why: "Confirmation of the F-15 loss or a Saudi military response would mean the fighting has worsened." },
+      { item: "Whether the Saudi-led Red Sea coalition takes military action. Saudi Arabia hosted a meeting on Sep 19 to secure the Red Sea, the Gulf of Aden, and Bab el-Mandeb. Turkey offered defense support, and the UK agreed on Sep 21 to provide one refuelling aircraft for a limited period to help Saudi jets defend against Houthi drones and missiles. The UK says this support does not cover strikes on the Houthis.", why: "A coalition naval operation or an expanded UK role would mean the fighting has worsened." },
     ],
   },
   {
     when: "Sep 23",
     items: [
       { item: "The EIA report for the week ending Sep 18, which includes the first days after loadings at Yanbu stopped.", why: "Watch for faster SPR withdrawals, lower commercial crude stocks, or falling diesel stocks." },
-      { item: "The Trump–Xi summit in Washington. Xi's state visit is scheduled for Sep 23–25, with trade, AI, and sanctions on the agenda. It follows a new US law authorizing tariffs of up to 100% on countries buying Russian oil and gas, and pressure on China to cut purchases of Iranian crude.", why: "Watch for agreements affecting oil purchases or trade. Better trade relations could increase demand for oil; exemptions from sanctions could make it easier to buy Russian crude." },
+      { item: "The Trump–Xi summit in Washington. Xi's state visit is scheduled for Sep 23–25. It follows a new US law authorizing tariffs of up to 100% on countries buying Russian oil and gas, and pressure on China to cut purchases of Iranian crude.", why: "Watch for agreements affecting oil purchases or trade. Better trade relations could increase demand for oil; exemptions from sanctions could make it easier to buy Russian crude." },
     ],
   },
   {
     when: "Sep 30",
     items: [
-      { item: "Russia's diesel export ban expires unless extended; the US-led coalition completes its withdrawal from Iraq; prediction-market bets settle.", why: "Each deadline could affect oil supplies or prices." },
+      { item: "The US-led coalition is scheduled to complete its withdrawal from Iraq.", why: "The withdrawal changes security for Iraq, a major Gulf exporter." },
     ],
   },
   {
@@ -536,23 +533,11 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
       { item: "The EIA's next monthly oil outlook.", why: "Watch whether the EIA still expects shipping to continue despite restrictions." },
     ],
   },
-  {
-    when: "Nov 3",
-    items: [
-      { item: "The US midterm elections. President Trump has said the war will end just afterward.", why: "Watch whether fighting and diplomacy match the administration's stated timeline." },
-    ],
-  },
-  {
-    when: "Nov 30",
-    items: [
-      { item: "Russia's jet-fuel export ban is due to end (it has been in force since Jun 1).", why: "Ending the ban would make Russian jet fuel available to other countries again. Watch for an extension; Russia has extended its other fuel bans." },
-    ],
-  },
 ];
 
 // ---------- Breaking-points cascade (§11, compressed twice) ----------
 export const cascade = [
-  { date: "Sep 14–21", region: "US East Coast", trigger: "Diesel and heating-oil stocks could fall below a month of supply. They are already 31% lower than last year." },
+  { date: "Sep 23", region: "US East Coast", trigger: "US diesel and heating-oil stocks covered about a month of consumption on Sep 11. East Coast stocks were 31% below last year. The Sep 23 EIA report, covering the week ending Sep 18, will let us check whether national coverage has fallen below a month." },
   { date: "Sep 30", region: "Russia", trigger: "The diesel export ban expires. With more than 30% of refining capacity damaged, Russia may have little fuel available to export." },
   { date: "≈ mid-October", region: "China", trigger: "Commercial oil stocks could begin to fall faster than normal." },
   { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, making it harder for traders to find supplies. If the strait closes fully, this could happen by mid-October." },
