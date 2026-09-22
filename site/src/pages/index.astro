@@ -2499,7 +2499,18 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
         ],
       });
 
-      // US 10-year Treasury yield (weekly FRED closes)
+      // US 10-year Treasury yield (weekly FRED closes + Yahoo session closes Sep 10–21).
+      // Same dot-thinning as the diesel chart: the line draws the full weekly + daily
+      // series, so the path keeps its movement; the dots are thinned to the story beats
+      // — pre-Sep 10 points, Sep 11 (pre-hike run-up, intraday 4.992, highest since
+      // Oct 2023), Sep 16 (5.006, first close above 5% of the war), and the newest
+      // point (Sep 21, under its endpoint label) — because the other daily dots in
+      // the final 11 days would bunch into ~30px at the right edge. treasuryView is
+      // the dot-keep set, not the data.
+      const treasuryView = treasury10y.filter(
+        (p) => p.date < "2026-09-10" || p.date === "2026-09-11" || p.date === "2026-09-16" || p.date === "2026-09-21",
+      );
+      const treasuryDotKeep = new Set(treasuryView.map((p) => p.date));
       new Chart(document.getElementById("treasury10yChart")!, {
         type: "line",
         data: {
@@ -2510,7 +2521,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
               borderColor: "#3d6b64",
               borderWidth: 1.75,
               tension: 0.15,
-              ...markers(treasury10y.map(() => ({ approx: false })), "#3d6b64"),
+              ...markersKeep(treasury10y, treasuryDotKeep, "#3d6b64"),
             },
             {
               label: "pre-war (Feb 27)",
