@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-09-21";
+export const DATA_AS_OF = "2026-09-22";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -23,8 +23,8 @@ export interface SeriesPoint {
 // ---------- Headline stats ----------
 export const stats = [
   { label: "Brent", value: "$100.34", sub: "Sep 21 settlement · −3.4% vs. prior close $103.87 (Sep 18) · +32% vs pre-crisis ~$76" },
-  { label: "US diesel (AAA)", value: "$6.51", sub: "Sep 21 · all-time high $6.5107 · +75% vs pre-war $3.72" },
-  { label: "US gasoline (AAA)", value: "$4.48", sub: "Sep 21 · +16.2¢ in a week (AAA) · +59% vs Jan $2.81" },
+  { label: "US diesel (AAA)", value: "$6.53", sub: "Sep 22 · all-time high $6.5276 · +75% vs pre-war $3.72" },
+  { label: "US gasoline (AAA)", value: "$4.48", sub: "Sep 22 · +14.6¢ in a week (AAA) · +59% vs Jan $2.81" },
   { label: "SPR", value: "285.0M", sub: "Sep 11 · down 0.4M in a week · down 130.5M from pre-war 415.4M · lowest since Nov 1982" },
   { label: "US diesel & heating oil", value: "107.9M", sub: "Sep 11 · up 1.6M in a week · 13.5% below last year · East Coast stocks 31% below last year" },
 ];
@@ -178,6 +178,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-09-19", value: 4.4759, note: "AAA release, Sep 19" },
   { date: "2026-09-20", value: 4.4761, note: "AAA release, Sep 20" },
   { date: "2026-09-21", value: 4.4786, note: "AAA release, Sep 21" },
+  { date: "2026-09-22", value: 4.4750, note: "AAA release, Sep 22" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -206,6 +207,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-09-19", value: 6.4866, note: "AAA record" },
   { date: "2026-09-20", value: 6.505, note: "AAA record — first above $6.50" },
   { date: "2026-09-21", value: 6.5107, note: "AAA record" },
+  { date: "2026-09-22", value: 6.5276, note: "AAA record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 
@@ -335,15 +337,15 @@ export const branchTracks = [
     name: "Standoff",
     bar: "bg-crude",
     border: "border-l-crude",
-    weight: "35%",
-    what: "Fighting continues at the current level. Tanker attacks and shipping restrictions continue, some Iranian facilities remain out of service, and the damaged Saudi bypass has no reopening date. The strait stays partly open.",
+    weight: "40%",
+    what: "Fighting continues at the current level. Tanker attacks and shipping restrictions continue, some Iranian facilities remain out of service, and the damaged Saudi bypass operates at a reduced rate. The strait stays partly open.",
     path: "Brent stays in the $100–120 range. Oil stocks keep falling through 2027. We assume Gulf production stays at the same level.",
   },
   {
     name: "Corridor lapses",
     bar: "bg-alarm",
     border: "border-l-alarm",
-    weight: "55%",
+    weight: "50%",
     what: "The shipping route closes for a prolonged period or the fighting gets worse. More tankers are lost, shipping restrictions remain, and the bypass, Abqaiq, and Jazan stay out of service for months.",
     path: "Brent rises above $130. Shortages spread from the US East Coast to Russia, Europe, China, and aviation fuel.",
   },
@@ -357,6 +359,7 @@ export const branchWeights = [
   { date: "Sep 9", holds: 10, standoff: 50, lapse: 40, note: "Tanker losses reached 10 per week, Brent passed $100, and Jazan was affected." },
   { date: "Sep 11", holds: 10, standoff: 40, lapse: 50, note: "The Saudi bypass pipeline was suspended, and the Houthis held the entire Red Sea coast. An official pipeline restart would return the odds to 10/50/40." },
   { date: "Sep 16", holds: 10, standoff: 35, lapse: 55, note: "Oil loadings at Yanbu, the pipeline's export port, stopped while the pipeline remained shut. Oil could no longer leave through the Saudi bypass. In Libya, guards shut the Hamada–Zawiya pipeline, halting two oil fields." },
+  { date: "Sep 22", holds: 10, standoff: 40, lapse: 50, note: "Reuters reported that the bypass pipeline had restarted at a reduced rate, with the first cargo at Yanbu scheduled to load on Sep 22. We moved the odds back toward standoff on that report." },
 ];
 
 // ---------- Research log (local-only files) ----------
