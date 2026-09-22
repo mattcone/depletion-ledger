@@ -16,7 +16,7 @@ import {
 } from "../data/crisis";
 
 // Crisis day number, computed from the data-as-of date (NOT the viewer's clock) so the
-// page is a stable snapshot: Sep 21 data = day 205, no matter when someone loads it.
+// page is a stable snapshot: Sep 22 data = day 206, no matter when someone loads it.
 const dayNum = Math.round((Date.parse(DATA_AS_OF) - Date.parse(CRISIS_DAY_1)) / 86400000);
 
 // ── World oil stocks panels (below the flip chart) ─────────────────────────────
@@ -303,7 +303,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             <p class="font-mono text-[11px] text-faint">EIA weekly and AAA daily national averages</p>
           </div>
           <div class="h-72">
-            <canvas id="gasChart" role="img" aria-label="US gasoline, EIA weekly national average (AAA daily readings Sep 10 to 21): $2.81 in January, May peak $4.50, $4.48 on Sep 21. Reference line at the January pre-crisis $2.81."></canvas>
+            <canvas id="gasChart" role="img" aria-label="US gasoline, EIA weekly national average (AAA daily readings Sep 10 to 22): $2.81 in January, May peak $4.50, $4.48 on Sep 22. Reference line at the January pre-crisis $2.81."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The national average has risen from $2.81 in January to $4.48, an increase of about 59%.
@@ -317,11 +317,11 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             <p class="font-mono text-[11px] text-faint">AAA national average · dots on selected dates</p>
           </div>
           <div class="h-72">
-            <canvas id="dieselChart" role="img" aria-label="US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $6.51 on Sep 21."></canvas>
+            <canvas id="dieselChart" role="img" aria-label="US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $6.53 on Sep 22."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Diesel cost $3.72 in the last week before the war, on Feb 27. By Sep 21, it had
-            reached another record of $6.51, about 75% higher. It passed the previous record of
+            Diesel cost $3.72 in the last week before the war, on Feb 27. By Sep 22, it had
+            reached another record of $6.53, about 75% higher. It passed the previous record of
             about $5.85, set in June 2022, on Sep 4.
           </p>
         </div>
@@ -408,7 +408,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             <p class="font-mono text-[11px] text-faint tabular">Retail fuel price minus WTI, dollars per barrel. EIA/AAA fuel prices; FRED and recent futures closes for WTI.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. Diesel rises from about $89 in January to $177.7 on Sep 21, its highest plotted value, with a temporary narrowing to $148 on Sep 10. Gasoline rises from about $59 in January to $92.3 on Sep 21. Both lines show every reading; the dots mark selected dates to keep nearby points legible."></canvas>
+            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. Diesel rises from about $89 in January to $178.4 on Sep 22, its highest plotted value, with a temporary narrowing to $148 on Sep 10. Gasoline rises from about $59 in January to $92.2 on Sep 22. Both lines show every reading; the dots mark selected dates to keep nearby points legible."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             This chart subtracts the price of crude oil from the retail price of fuel, with both
@@ -416,17 +416,18 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             retailing. It helps explain why prices at the pump can keep rising even when crude gets cheaper.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The gap between diesel and crude prices rose from about $89 in January to $177.7 on
-            Sep 21, roughly doubling to its highest value on the chart. It briefly narrowed to $148 on Sep 10,
+            The gap between diesel and crude prices rose from about $89 in January to $178.4 on
+            Sep 22, roughly doubling to its highest value on the chart. It briefly narrowed to $148 on Sep 10,
             when crude prices rose faster than pump prices.
-            The gasoline–crude gap has also widened, from about $59 to $92.3.
+            The gasoline–crude gap has also widened, from about $59 to $92.2.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The calculation uses retail prices from EIA and AAA, minus WTI from FRED, with futures closes for
             Sep 10–11 and Sep 14–21. The EIA's official <em>crack spread</em> uses wholesale fuel prices, so the
             values differ. Some readings fall on days with no same-day WTI price; the chart pairs those with the
-            nearest available trading day's price, within 1–3 days. The Sep 21 readings use the Sep 21 WTI
-            settlement. No missing prices are estimated.
+            nearest available trading day's price, within 1–3 days. The Sep 21 and Sep 22 readings
+            both use the Sep 21 WTI settlement, the latest available when this page was updated.
+            No missing prices are estimated.
           </p>
         </div>
       </div>
@@ -2045,7 +2046,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             { value: gasolinePreCrisis, text: "Jan $2.81 (pre-crisis)", color: "#3d6b64", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: gasolineYtd.length - 1, text: "Sep 21 · $4.48", ...endpoint },
+            { dataset: 0, index: gasolineYtd.length - 1, text: "Sep 22 · $4.48", ...endpoint },
             { dataset: 0, index: 18, text: "May peak $4.50", dy: -14, color: "#1c1b17" },
           ]),
         ],
@@ -2060,7 +2061,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
       const gasXScale = {
         type: "linear" as const,
         min: 0,
-        max: 268, // was 262; data now runs to Sep 21 (doy 264), needs label headroom
+        max: 268, // was 262; data now runs to Sep 22 (doy 265), needs label headroom
         grid: { display: false },
         border: { display: true, color: "#d8d4c6", width: 0.5 },
         afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
@@ -2113,8 +2114,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           maintainAspectRatio: false,
           interaction: { mode: "index", intersect: false },
           layout: { padding: { top: 18 } },
-          // max 6.6 = headroom above the 6.4866 record; ticks still step 0.5 to 6.2
-          scales: { y: yScale(3.2, 6.6, (v) => `$${v}`, 7), x: gasXScale },
+          // max 6.9 = headroom above the 6.5276 record so the endpoint label (drawn
+          // 18px above the point) clears the top edge; ticks step 0.5 to 6.7
+          scales: { y: yScale(3.2, 6.9, (v) => `$${v}`, 8), x: gasXScale },
           plugins: {
             tooltip: {
               filter: (item: { datasetIndex: number }) => item.datasetIndex === 0,
@@ -2134,7 +2136,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             { value: dieselOldRecord, text: "Jun 2022 record $5.85", color: "rgba(179,38,30,0.8)", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: dieselYtd.length - 1, text: "Sep 21 · $6.51 (record)", ...endpoint, color: "#b3261e" },
+            { dataset: 0, index: dieselYtd.length - 1, text: "Sep 22 · $6.53 (record)", ...endpoint, color: "#b3261e" },
           ]),
         ],
       });
@@ -2384,6 +2386,8 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
       // Sep 19 (Saturday) and Sep 20 (Sunday) pair with the Sep 18 settle — the weekend
       // convention for the Sep 12–13 AAA dailies. Sep 21 (Monday) pairs with its same-day
       // WTI settlement (95.78, October contract, its final trading day; Reuters).
+      // Sep 22 (AAA morning release) pairs with the Sep 21 settlement — the nearest
+      // trading day at build time; the Sep 22 settlement lands later the same day.
       // Data note (Sep 21 evening): the Sep 18 pass observed the Yahoo front-month bars at 99.29 /
       // 96.08 (read as a December-contract roll); a later pull shows the same bars at the
       // news-reported Nov/Oct settles (103.87 / 100.30). The observation was a transient
@@ -2419,8 +2423,8 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
       );
       const dieDotKeep = new Set(dieCrackSrc.map((p) => p.date));
       const gasDotKeep = new Set(gasCrackSrc.map((p) => p.date));
-      const dieCrack = crackPts(dieselYtd.filter((p) => p.date < "2026-09-22"));
-      const gasCrack = crackPts(gasolineYtd.filter((p) => p.date < "2026-09-22"));
+      const dieCrack = crackPts(dieselYtd.filter((p) => p.date < "2026-09-23"));
+      const gasCrack = crackPts(gasolineYtd.filter((p) => p.date < "2026-09-23"));
       // Record label tracks the max, not a fixed offset from the end — new points keep landing.
       const dieRecIdx = dieCrack.reduce((mi, p, i, a) => ((p.y ?? -1) > (a[mi].y ?? -1) ? i : mi), 0);
       new Chart(document.getElementById("crackChart")!, {
@@ -2458,8 +2462,8 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             y: {
               type: "linear" as const,
               min: 40,
-              // headroom above the 177.7 record (Sep 21) so its label clears the top edge
-              max: 182,
+              // headroom above the 178.4 record (Sep 22) so its label clears the top edge
+              max: 185,
               afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
                 scale.ticks = [40, 60, 80, 100, 120, 140, 160].map((v) => ({ value: v }));
               },

@@ -8,3 +8,4 @@ published_date,description,prob,event_date,resolved,brier
 2026-09-16,"Corridor lapses by Nov 15 - same event [judgment reweighted 10/35/55, Sep 16 evening]",0.550,2026-11-15,,
 2026-09-11,"Fed hikes on Sep 16 (futures ~86% for +25bp, 62% Polymarket; as published on model card)",0.860,2026-09-16,1,0.0196
 2026-09-16,"Fed hikes again (any size) at next FOMC (Oct 27-28, 2026)",0.6000,2026-10-28,,
+2026-09-22,"Corridor lapses by Nov 15 - same event [judgment reweighted 10/40/50 (Sep 16 reversion fired: ESPO pipeline restarted, first Yanbu cargo), Sep 22]",0.5000,2026-11-15,,

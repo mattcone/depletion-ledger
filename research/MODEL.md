@@ -37,7 +37,7 @@ Moving oil from a government reserve to commercial storage leaves the combined a
 
 The September outlook expects Middle East production to rise as more oil passes through Hormuz and alternative routes. It estimates that disruptions prevented production of 6.7 million barrels a day in August. It expects that lost production to average 6.2 million in the third quarter, 5.7 million in the fourth, and 2.7 million in the first quarter of 2027. Most of the affected production is expected to resume in the second half of 2027.
 
-The outlook was published before the East–West pipeline was suspended on September 11 and loadings at Yanbu stopped on September 16. Our scenario assumptions account for those events and the recovery already included in the EIA forecast.
+The outlook was published before the East–West pipeline was suspended on September 11 and loadings at Yanbu stopped on September 16. Our scenario assumptions account for those events and the recovery already included in the EIA forecast. Reuters reported on September 22 that the pipeline had restarted at a reduced rate. We haven't updated the storage projections to reflect that report.
 
 The September 19 assumptions file lists the saved EIA workbook, source excerpts, and model inputs. See [Calculation files and checks](#how-we-check-the-predictions) below.
 
@@ -47,11 +47,11 @@ The September 19 assumptions file lists the saved EIA workbook, source excerpts,
 
 A *corridor* is an agreed shipping route through the Strait of Hormuz. We assign probabilities to three possible outcomes and calculate how storage could change under each one. **The percentages show how likely we consider each outcome.** They don't change the calculations for each line or tell you how accurate its numbers will be.
 
-| Scenario | Odds (Sep 16) | What happens |
+| Scenario | Odds (Sep 22) | What happens |
 |---|---|---|
 | The corridor holds | 10% | The shipping agreement works and tanker traffic returns to normal. |
-| The standoff continues | 35% | The corridor barely works, attacks continue, and the damaged Saudi bypass pipeline has no restart date. |
-| The corridor lapses | 55% | The agreement breaks down or comes under attack, the strait is effectively closed, and the bypass stays shut. |
+| The standoff continues | 40% | The corridor barely works, attacks continue, and the damaged Saudi bypass pipeline operates at a reduced rate. |
+| The corridor lapses | 50% | The agreement breaks down or comes under attack, the strait is effectively closed, and the bypass stays shut. |
 
 The assumptions below were published on September 19. You can expand each table to see the monthly calculations. **P** means production, **C** means consumption, and **Δ** means an adjustment to the EIA baseline. Daily figures are in millions of barrels per day; cumulative figures show the total change in millions of barrels since the end of February 2026. We round the figures for display, so they may not add up exactly.
 
@@ -89,7 +89,7 @@ We assume consumption is 0.25 million barrels a day above the EIA forecast throu
 
 ### The standoff continues
 
-In this scenario, fighting continues and the bypass stays closed. **We assume Gulf production stays at the same level.** We set world production at 100.5 million barrels a day through the end of 2026, assuming alternative shipping routes make up for the September disruptions. That's a level we've chosen for the scenario, not a reported figure.
+In this scenario, fighting continues and the bypass carries much less oil than before the shutdown. **We assume Gulf production stays at the same level.** We set world production at 100.5 million barrels a day through the end of 2026, assuming alternative shipping routes make up for the September disruptions. That's a level we've chosen for the scenario, not a reported figure.
 
 For 2027, we assume production outside the Gulf increases by 0.5 million barrels a day each quarter. World production reaches 102.5 million barrels a day in December, 9.3 million below the EIA forecast.
 
@@ -208,12 +208,12 @@ These examples show how much the result changes when we change an assumption. We
 
 We assign the odds using judgment. To keep our decisions consistent, we list the events that would prompt a change in advance. The odds change when one of those events affects supply or shipping. A quiet week or a price move alone isn't enough.
 
-The September 11 pipeline suspension moved the odds from 10/50/40 to 10/40/50. The September 16 update, after Yanbu loadings stopped, moved them to 10/35/55. The dashboard shows the history in “The model's odds for each outcome.”
+The September 11 pipeline suspension moved the odds from 10/50/40 to 10/40/50. The September 16 update, after Yanbu loadings stopped, moved them to 10/35/55. We returned the odds to 10/40/50 on September 22, after Reuters reported that the pipeline had restarted and the first cargo at Yanbu was scheduled to load that day. The dashboard shows the history in “The model's odds for each outcome.”
 
 <details>
 <summary>Events that would prompt a change</summary>
 
-These rules were recorded as of September 16:
+These rules were recorded as of September 16; the Yanbu rule was applied on September 22:
 
 | Event | Effect on the odds |
 |---|---|
