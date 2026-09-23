@@ -154,6 +154,12 @@ curl -sG "https://api.eia.gov/v2/petroleum/stoc/wstk/data/" \
 #   report CSVs: https://ir.eia.gov/wpsr/table1.csv (Table 1 incl. the SPR row); archive
 #   pages: /petroleum/supply/weekly/archive/2026/<release-date>/ . Newest period past the week
 #   in our records ⇒ new print — fetch table1.csv for the SPR level (not in the v2 API).
+#   NOTE (Sep 23): the wstk API still lags on release morning (showed the prior week ~1h
+#   after the 10:30 ET release) — the summary.txt + table CSVs (302-redirect; curl -sL,
+#   cp1252) are same-day and are the ingestion source. The report page moved to
+#   /petroleum/supply/weekly/ (old /petroleum/wpsr/ 404s), and the full-report PDF
+#   (wpsrall.pdf) was DISCONTINUED effective the Sep 23, 2026 release — the URL serves a
+#   1-page "discontinued" notice; the CSVs are now the only table source.
 
 # BLS CPI and PPI (monthly, released on DIFFERENT days — Aug 2026: PPI Sep 10, CPI Sep 11;
 # check each separately). Params are startyear/endyear + registrationkey (verified Sep 15).

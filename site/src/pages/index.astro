@@ -596,16 +596,17 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
         </div>
         <div class="mb-6 max-w-[65ch] text-[13px]">
           <p class="text-[13px] leading-relaxed text-ink/80">
-            These stocks exclude the Strategic Petroleum Reserve (SPR). They stood at 423.4 million
-            barrels on Sep 11, up from 404.5 million on Jul 24. The EIA's Sep 16 report shows
-            a weekly decline of 0.6 million barrels, but stocks were still 8.1 million barrels above
-            the same week last year and 1% above the five-year average. SPR releases
+            These stocks exclude the Strategic Petroleum Reserve (SPR). They stood at 426.4 million
+            barrels on Sep 18, up from 404.5 million on Jul 24. The EIA's Sep 23 report shows
+            a weekly build of 3.0 million barrels after three straight draws — crude imports
+            fell 1.2 million barrels a day — and stocks were 11.6 million barrels above
+            the same week last year and 2% above the five-year average. SPR releases
             have helped supply commercial oil users this year. Moving oil from the reserve to
             commercial storage leaves the combined amount unchanged.
           </p>
         </div>
         <div class="relative h-72">
-          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus the same weeks in 2025: 2026 stocks rose from 419.1 million in early January to a peak of 465.7 million on Apr 17, fell to 404.5 million on Jul 24 — the lowest level since the war began and 22.2 million barrels below the same week in 2025 — rose again to 428.9 million on Aug 21, and stood at 423.4 million on Sep 11, 8.1 million barrels above the 2025 level of 415.4 million."></canvas>
+          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus the same weeks in 2025: 2026 stocks rose from 419.1 million in early January to a peak of 465.7 million on Apr 17, fell to 404.5 million on Jul 24 — the lowest level since the war began and 22.2 million barrels below the same week in 2025 — rose again to 428.9 million on Aug 21, eased over the next three weeks, and stood at 426.4 million on Sep 18, 11.6 million barrels above the 2025 level of 414.8 million."></canvas>
         </div>
 
         <p class="mt-3 font-mono text-[11px] text-faint">EIA weekly stocks, excluding the SPR, in million barrels. The Jul 24 low was 22.2M below the same week in 2025.</p>
@@ -619,9 +620,10 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           <p class="text-[13px] leading-relaxed text-ink/80">
             The Strategic Petroleum Reserve (SPR) is the US government's emergency supply of crude
             oil. It was created after the energy shortages of the 1970s. The reserve held 415.4 million
-            barrels when the war began. The latest report, for the week ending Sep 11, puts it at
-            285.0 million, down 0.4 million barrels in a week. Withdrawals slowed for a third straight week,
-            from 1.2 million the week before and 3.1 million the week before that.
+            barrels when the war began. The latest report, for the week ending Sep 18, puts it at
+            284.6 million, down 0.4 million barrels in a week — the same pace as the week before.
+            Withdrawals had fallen sharply over the three weeks before that, from 3.1 million
+            to 1.2 million to 0.4 million barrels.
             For comparison, the reserve peaked at 727 million barrels in December 2009
             and stood at 270.5 million in August 1982. The releases help make up for
             supplies that can't leave the Gulf.
@@ -649,14 +651,14 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
               The Department of Energy releases oil from the SPR through contracts and scheduled
               deliveries. A supply shortage doesn't automatically trigger withdrawals. Once
               the current program's deliveries end, DOE would have to arrange further releases
-              for withdrawals to continue. The latest reported week averaged about 60,000
+              for withdrawals to continue. The latest reported week averaged about 58,000
               barrels a day. The pace can change with each release decision.
             </p>
           </div>
         </div>
         <!-- SPR chart (full width) -->
         <div class="relative h-96">
-            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 285.0 million on Sep 11. Model thresholds at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
+            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 284.6 million on Sep 18. Model thresholds at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
             <div
               id="sprFloorTip"
               class="pointer-events-none absolute z-10 hidden max-w-[300px] border border-rule bg-[rgba(255,255,248,0.97)] px-3 py-2 text-[12px] leading-snug text-ink shadow-sm"
@@ -706,20 +708,22 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
         <div class="mt-12 grid gap-10 lg:grid-cols-3">
           <div class="lg:col-span-2">
             <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-              <h2 class="text-xl font-bold tracking-tight">US refineries have run above 95% of capacity since June</h2>
+              <h2 class="text-xl font-bold tracking-tight">US refinery utilization slipped below 95% last week</h2>
               <p class="font-mono text-[11px] text-faint">Share of available refinery capacity in use, weekly.</p>
             </div>
             <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
-              US refineries have operated above 95% of their available capacity every week since
-              Jun 5, reaching 98.0% in the week ending Aug 28 and easing to 96.8% in the week
-              ending Sep 11. Across the January–September weeks shown, refineries used an average
-              of 90.7% of their capacity in 2025 and 93.6% in 2026.
+              US refineries operated above 95% of their available capacity every week from
+              Jun 5 through Sep 11, reaching 98.0% in the week ending Aug 28, then slipped
+              to 94.0% in the week ending Sep 18 — the first week below 95% since late May,
+              and a decline of 519,000 barrels a day in processing. Across the January–September
+              weeks shown, refineries used an average of 90.7% of their capacity in 2025
+              and 93.6% in 2026.
               Fuel exports also reached a record 8 million barrels per day in August, according to
               OPEC. US plants are working close to capacity, but shortages in Europe, Asia, and
               Russia continue to put pressure on fuel supplies.
             </p>
             <div class="relative h-96">
-              <canvas id="refineryChart" role="img" aria-label="US refinery utilization, percent of operable capacity, weekly: 2026 above 2025 from spring onward — a dip to 88.6 percent in late February, then a steady climb from 95.3 on Jun 5 to a 98.0 peak on Aug 28, easing to 96.8 on Sep 11; the same period in 2025 ranged from 83.5 to 96.9."></canvas>
+              <canvas id="refineryChart" role="img" aria-label="US refinery utilization, percent of operable capacity, weekly: 2026 above 2025 from spring onward — a dip to 88.6 percent in late February, then a steady climb from 95.3 on Jun 5 to a 98.0 peak on Aug 28, easing to 96.8 on Sep 11 and slipping to 94.0 on Sep 18, below 95% for the first time since late May; the same period in 2025 ranged from 83.5 to 96.9."></canvas>
             </div>
             <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
               EIA Weekly Petroleum Status Report (WPULEUS3), weeks ending Friday. Utilization is the
@@ -1386,9 +1390,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             crosshair,
             directLabels([
               { dataset: 0, index: 0, text: "2026", align: "left", dx: 10, dy: -10, ...endpoint },
-              { dataset: 0, index: u26.length - 1, text: "96.8", ...endpoint },
+              { dataset: 0, index: u26.length - 1, text: "94.0", ...endpoint },
               { dataset: 1, index: 0, text: "2025", align: "left", dx: 10, dy: 16, ...endpoint, color: "#8a867a" },
-              { dataset: 1, index: u25.length - 1, text: "93.3", ...endpoint, color: "#8a867a" },
+              { dataset: 1, index: u25.length - 1, text: "93.0", ...endpoint, color: "#8a867a" },
             ]),
           ],
         });
@@ -1477,9 +1481,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
               // NOTE: positional overrides must come AFTER the ...endpoint spread — the
               // spread carries its own align/dx/dy and clobbers anything before it.
               { dataset: 0, index: 0, text: "2026", ...endpoint, align: "left", dx: 40, dy: -44 },
-              { dataset: 0, index: cc26.length - 1, text: "423.4", ...endpoint, dy: -16 },
+              { dataset: 0, index: cc26.length - 1, text: "426.4", ...endpoint, dy: -16 },
               { dataset: 1, index: 0, text: "2025", ...endpoint, align: "left", dx: 40, dy: 30, color: "#8a867a" },
-              { dataset: 1, index: cc25.length - 1, text: "415.4", ...endpoint, color: "#8a867a" },
+              { dataset: 1, index: cc25.length - 1, text: "414.8", ...endpoint, color: "#8a867a" },
               // Short form: the long YoY version clipped at 390px; the caption carries it.
               { dataset: 0, index: 29, text: "Jul 24 low: 404.5M", align: "center", dy: 18, color: "#b3261e" },
             ]),
@@ -2610,7 +2614,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           ]),
           directLabels([
             // Actuals endpoint
-            { dataset: 0, index: anchorIdx, text: "285.0M · Sep 11", align: "right", dx: -12, dy: 16, font: "600 11.5px Georgia, serif" },
+            { dataset: 0, index: anchorIdx, text: "284.6M · Sep 18", align: "right", dx: -12, dy: 16, font: "600 11.5px Georgia, serif" },
           ]),
         ],
       });
