@@ -239,7 +239,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             <line x1="162" y1="252" x2="144" y2="237" stroke="#b3261e" stroke-width="0.75" opacity="0.6" />
           </svg>
           <figcaption class="mt-2 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-            <span class="block">Hormuz: preliminary Kpler counts (via Reuters), excluding vessels with tracking signals off — 4 on Sep 21 and 3 on Sep 22. The Sep 22 count was roughly 80% below the 10-day average of about 15 · 17 over Sep 19–20, down from 37 the previous weekend · 6 on Sep 16 (revised from 3) and 12 on Sep 15 · more than 130/day before the crisis.</span>
+            <span class="block">Hormuz: preliminary Kpler counts (via Reuters), excluding vessels with tracking signals off — 4 on Sep 21 and 3 on Sep 22. The Sep 22 count was roughly 80% below the 10-day average of about 15 · 17 over Sep 19–20, down from 37 the previous weekend · 6 on Sep 16 (revised from 3) and 12 on Sep 15 · more than 130/day before the crisis · Kpler: confirmed transits averaged 6.98M barrels a day over the seven days to Sep 20 — about 38% of the 18.3M pre-crisis baseline (a volume measure; the counts above are vessel crossings).</span>
             <span class="mt-1 block">Bab el-Mandeb: the Houthis held Mokha, Perim, and the Hanish islands as of Sep 14. On Sep 15, they claimed 85 vessels had passed through the strait in 72 hours. Kpler counted 21 crossings on Sep 16, 24 on Sep 15, and 22 on Sep 22 (10-day average ~26).</span>
           </figcaption>
         </figure>
@@ -309,19 +309,20 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
         <div class="grid gap-10 lg:grid-cols-2">
           <div>
             <div class="mb-4">
-              <h2 class="text-xl font-bold tracking-tight">Natural gas prices in Europe are up about 143%</h2>
+              <h2 class="text-xl font-bold tracking-tight">Natural gas prices in Europe are up about 120%</h2>
               <p class="mt-2 font-mono text-[11px] text-faint">TTF, dollars per million British thermal units ($/MMBtu). Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: individual contract prices and Trading Economics quotes (May–Sep). Contracts and delivery periods differ, so comparisons are approximate.</p>
             </div>
             <div class="h-72">
-              <canvas id="gasTtfChart" role="img" aria-label="TTF, Europe's gas benchmark, 2026 year to date: $12.40 in January, $11.00 before the closure, spiking to a three-year high of $18.89 on Mar 20, easing to $14.10 after the June ceasefire, $19.90 on Jul 31, then trading above $28 on Sep 10, its highest level since December 2022, and $27.00 on Sep 11. Trading Economics quotes: about $27.80 on Sep 14 and $26.70 on Sep 18. Reference line at the pre-closure week's $10.99."></canvas>
+              <canvas id="gasTtfChart" role="img" aria-label="TTF, Europe's gas benchmark, 2026 year to date: $12.40 in January, $11.00 before the closure, spiking to a three-year high of $18.89 on Mar 20, easing to $14.10 after the June ceasefire, $19.90 on Jul 31, then trading above $28 on Sep 10, its highest level since December 2022, and $27.00 on Sep 11. Market quotes: about $27.80 on Sep 14, $26.70 on Sep 18, and $24.20 on Sep 22. Reference line at the pre-closure week's $10.99."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
               TTF is the benchmark used to track natural gas prices in Europe. It traded above
               $28 on Sep 10, its highest level since December 2022, before easing to $27.00 on
-              Sep 11. The latest Trading Economics quote was about $26.70 on Sep 18, roughly
-              143% above the price before the strait closed. Its Sep 14 and Sep 18 quotes
-              (€81.98 and €79.52 per megawatt-hour) are converted to the dollar units used here.
-              They come from contracts for difference (CFDs), financial contracts that track gas prices.
+              Sep 11. Prices have since eased: the latest quote was about $24.20 on Sep 22
+              (€72.10 per megawatt-hour), still about 120% above the price before the strait
+              closed. Its Sep 14, Sep 18, and Sep 22 quotes (€81.98, €79.52, and €72.10 per
+              megawatt-hour) are converted to the dollar units used here. They come from market
+              quotes, including contracts for difference (CFDs), financial contracts that track gas prices.
               Unplanned maintenance at Norway's Asgard and Troll fields and tanker attacks have
               reduced supplies as prices have risen.
               </p>
@@ -759,14 +760,15 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             <p class="font-mono text-[11px] text-faint">Estimated capacity remaining, as a share of capacity before the strikes</p>
           </div>
           <div class="relative h-96">
-            <canvas id="russiaChart" role="img" aria-label="Estimated remaining Russian refining capacity, September 2024 to September 2026: flat at 100 percent until strikes began in August 2025, about 75 percent by April 2026, about 70 percent by August 29, with current estimates spread between 46 and 80 percent remaining."></canvas>
+            <canvas id="russiaChart" role="img" aria-label="Estimated remaining Russian refining capacity, September 2024 to September 2026: flat at 100 percent until strikes began in August 2025, about 75 percent by April 2026, about 70 percent by August 29, with current estimates (as of Sep 21) spread between 46 and 80 percent remaining."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Strikes on Russian refineries are reducing the amount of fuel available to other
             countries. The chart shows about 75% of capacity remaining by mid-April and about
             70% by Aug 29, according to the Moscow Times. The red bar shows how much current
-            estimates differ: Ukraine's General Staff puts the capacity lost at 42.74%, Russian
-            Forbes at 54%, and the IEA at more than 20%. You can compare these estimates with
+            estimates differ: Ukraine's General Staff puts the capacity lost at more than 45%
+            of designed capacity as of Sep 21, Russian Forbes at 54% (Sep 9), and the IEA at
+            more than 20%. You can compare these estimates with
             the reported outages and export restrictions below.
           </p>
           <div class="mt-8 grid gap-10 lg:grid-cols-2">
@@ -1670,7 +1672,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
               { dataset: 0, index: 1, text: "strikes begin (Aug 2025)", align: "right", dx: -8, dy: 16, ...note },
               { dataset: 0, index: 2, text: "~75% (Apr 2026)", dy: 22, ...note },
               { dataset: 0, index: 3, text: "~70% (Aug 29)", align: "right", dx: -10, dy: 30, ...note },
-              { dataset: 1, index: 1, text: "Sep 9: 46–80%", align: "left", dx: 10, dy: -68, color: "#b3261e" },
+              { dataset: 1, index: 1, text: "Sep 21: 46–80%", align: "left", dx: 10, dy: -68, color: "#b3261e" },
             ]),
           ],
         });
@@ -2065,7 +2067,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           directLabels([
             { dataset: 0, index: 6, text: "Mar 20 · $18.9 — three-yr high", dy: -14, color: "#1c1b17" },
             { dataset: 0, index: 21, text: "Jun 19 · $14.1 — ceasefire", align: "right", dy: 48, color: "#8a867a" },
-            { dataset: 0, index: gasTtf.length - 1, text: "Sep 18 · ≈$26.7", ...endpoint, color: "#b3261e" },
+            { dataset: 0, index: gasTtf.length - 1, text: "Sep 22 · ≈$24.2", ...endpoint, color: "#b3261e" },
           ]),
         ],
       });
