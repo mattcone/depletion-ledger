@@ -299,30 +299,12 @@ export const commercialCrude2025: { date: string; value: number }[] = [
   { date: "2025-08-29", value: 420.707 }, { date: "2025-09-05", value: 424.646 },
   { date: "2025-09-12", value: 415.361 },
 ];
-export const sprPreWar = 415.441; // Feb 27, 2026 (EIA)
 export const sprFloors = [
   { level: 300, name: "Cavern damage risk: about 300M barrels (first report below: week ending Aug 7)" },
   { level: 250, name: "GEF operating minimum: 250M barrels" },
   { level: 180, name: "Operating limit: 180M barrels" },
   { level: 70, name: "DOE stated safe minimum: 70M barrels" },
 ];
-// ---------- SPR drawdown pace (computed from sprWeekly) ----------
-// Weekly draw, M bbl (positive = drawn), oldest → newest
-export const sprDrawDeltas: { date: string; mmbbl: number }[] = sprWeekly
-  .slice(1)
-  .map((p, i) => ({ date: p.date, mmbbl: +(sprWeekly[i].level - p.level).toFixed(2) }));
-
-// 4-week average draw pace, M b/d (smoothes weekly noise vs a single week)
-export const sprDrawPace4w = +(((sprWeekly[sprWeekly.length - 5].level - sprWeekly[sprWeekly.length - 1].level) / 28).toFixed(2));
-
-// ---------- Supply snapshot (EIA WPSR w/e Sep 11, released Sep 16 + STEO Sep 9) ----------
-export const invSnapshot = [
-  { name: "SPR", value: "285.0M bbl", delta: "−130.5M (−31%) since pre-war 415.4M", flag: "Lowest since Nov 1982 · down 0.4M barrels in the week ending Sep 11 — third straight week of slowing withdrawals" },
-  { name: "US diesel & heating oil", value: "107.9M bbl", delta: "Up 1.6M barrels in the week ending Sep 11 — the second weekly increase in a row; 13.5% below last year (EIA)", flag: "East Coast (PADD 1) stocks are 31% below last year" },
-  { name: "US crude", value: "423.4M bbl", delta: "Down 0.6M barrels in the week ending Sep 11 — EIA reported a decrease, while the American Petroleum Institute (API) had reported an increase", flag: "Refined fuels remain in shorter supply than crude oil" },
-  { name: "Global inventories", value: "−400M bbl YTD", delta: "EIA estimate, Sep 9", flag: "EIA expects stocks to keep falling through the end of 2026" },
-];
-
 // ---------- Branch weights: the three tracks ----------
 export const branchTracks = [
   {
@@ -386,17 +368,6 @@ export const worldBalance = [
   { date: "2026-06-15", value: -2.6 },
   { date: "2026-07-15", value: -0.1 },
   { date: "2026-08-15", value: -4.1 },
-];
-
-// The bill, paid in reserves — every figure from the Sep 9 EIA report (verified
-// sections), except the demand-destruction line: IEA OMR, Sep 11 edition
-export const billLedger = [
-  { name: "Global commercial stocks", value: "−400M bbl", note: "year-to-date · EIA est. (Sep 9)" },
-  { name: "US Strategic Petroleum Reserve", value: "−130.5M bbl", note: "since Feb 28 · EIA" },
-  { name: "IEA coordinated release", value: "400M bbl", note: "released from 32 countries · IEA" },
-  { name: "China commercial stockpiles", value: "~2–3M b/d", note: "withdrawals inferred from customs data · official SPR untouched" },
-  { name: "Decline in oil demand", value: "−2.5M b/d", note: "2026 forecast, revised from −1.6 in the August report · IEA OMR, Sep 11" },
-  { name: "Remaining supply shortfall", value: "−1.8M b/d", note: "Q3 2026 forecast — supply below demand · IEA OMR, Aug 12" },
 ];
 
 // ---------- Demand destruction: world petroleum consumption (mb/d, monthly) ----------
@@ -561,7 +532,7 @@ export const russiaCapacityAnchors = [
 // → capacity REMAINING: 46%–80%
 export const russiaCurrentSpread = { date: "2026-09-09", low: 46, high: 80 };
 
-// Snapshot card rows (name / value / delta / flag) — same shape as invSnapshot
+// Snapshot card rows (name / value / delta / flag)
 export const russiaSnapshot = [
   { name: "Capacity out of service", value: ">30%", delta: "Aug 29, Moscow Times — up from ~25% in April", flag: "Early September estimates of capacity offline: 42.7% (Ukraine's General Staff) to 54% (Forbes)" },
   { name: "Strikes in August", value: "21+", delta: "record month, near-daily (Bloomberg, Aug 29)", flag: "" },

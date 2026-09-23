@@ -3,12 +3,12 @@ import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteMeta from "../components/SiteMeta.astro";
 import TopNav from "../components/TopNav.astro";
+import ShippingRoutes from "../components/ShippingRoutes.astro";
+import SupplyFlow from "../components/SupplyFlow.astro";
 import {
   stats, brentYtd, brentMonthlyAvgs, wtiWeekly, gasolineYtd, gasolinePreCrisis,
-  dieselYtd, dieselOldRecord, sprWeekly, sprPreWar, sprFloors,
-  invSnapshot, branchWeights, branchTracks, watchGroups, cascade, billLedger,
-
-  sprDrawDeltas, sprDrawPace4w,
+  dieselYtd, dieselOldRecord, sprWeekly, sprFloors,
+  branchWeights, branchTracks, watchGroups, cascade,
   DATA_AS_OF, CRISIS_DAY_1,
   russiaCapacityAnchors, russiaCurrentSpread, russiaSnapshot, russiaBanCascade,
   globalRefining, demandDecline,
@@ -111,32 +111,6 @@ for (const grp of watchGroups) {
     });
   }
 }
-
-// SPR cavern gauge geometry (static data → precomputed)
-// Scale runs 60 → 750M so the all-time record (Dec 2009, 726.6M) fits in the bar.
-const y = (level: number) => 430 - ((level - 60) / (750 - 60)) * 400;
-const yPreWar = y(sprPreWar);      // 415.441
-const yNow = y(284.957);
-const g = sprFloors.map((f) => ({ ...f, y: y(f.level) }));
-// Historical anchors — EIA official monthly series (eia.gov/dnav/pet/hist, MCSSTUS1)
-const hist = [
-  { level: 726.6, label: "727 · 2009", tip: "727 — Dec 2009 · all-time peak (EIA monthly series)" },
-  { level: 591.7, label: "592 · 1995", tip: "592 — 1995 · mid-90s plateau (EIA)" },
-  { level: 270.5, label: "270 · 1982", tip: "270.5 — wk ending Aug 20, 1982 · the Aug 1982 level (EIA)" },
-].map((h) => ({ ...h, y: y(h.level) }));
-
-// SPR drawdown sparkline (last 16 weeks) — Tufte: no axes, dots at max/min
-const drawSpark = sprDrawDeltas.slice(-16);
-const sparkMax = Math.max(...drawSpark.map((d) => d.mmbbl));
-const sparkPts = drawSpark.map((d, i) => ({
-  x: 4 + (i / (drawSpark.length - 1)) * 152,
-  y: 36 - (d.mmbbl / sparkMax) * 30,
-}));
-const sparkMaxPt = sparkPts[drawSpark.findIndex((d) => d.mmbbl === sparkMax)];
-const sparkMinI = drawSpark.findIndex((d) => d.mmbbl === Math.min(...drawSpark.map((d) => d.mmbbl)));
-const sparkMinPt = sparkPts[sparkMinI];
-const sparkLine = sparkPts.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
-const latestDrawPace = (sprDrawDeltas[sprDrawDeltas.length - 1].mmbbl / 7).toFixed(2);
 
 // Data-as-of date, formatted (UTC so it's deterministic regardless of build timezone)
 const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", {
@@ -271,10 +245,13 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
         </figure>
       </header>
 
-      <!-- Stat strip -->
-      <section class="grid grid-cols-2 border-x border-b border-rule md:grid-cols-3 lg:grid-cols-5">
+      <!-- Stat strip. Grid lines are the section's background showing through 1px gaps —
+           no per-cell border logic, so a divider can't go missing at any breakpoint
+           (the old per-cell borders lost the mobile row lines and the md col-3 line).
+           The last stat spans the remainder of its row so no empty cell is left. -->
+      <section class="grid grid-cols-2 gap-px border-x border-b border-rule bg-rule md:grid-cols-3 lg:grid-cols-5">
         {stats.map((s, i) => (
-          <div class={`px-4 py-4 ${i % 2 === 1 ? "border-l border-rule" : ""} md:[&:nth-child(3n+2)]:border-l md:[&:nth-child(3n+2)]:border-rule lg:[&:not(:first-child)]:border-l lg:border-rule`}>
+          <div class={`bg-paper px-4 py-4 ${i === stats.length - 1 ? "col-span-2 lg:col-span-1" : ""}`}>
             <p class="text-xs text-faint">{s.label}</p>
             <p class="tabular mt-1 font-mono text-xl font-semibold text-ink">
               {s.value}
@@ -456,6 +433,15 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             than 10 million barrels per day of Gulf production still shut down. Saudi production
             alone fell by 2.3 million barrels per day that month, to 5.97 million.
           </p>
+          <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
+            The IEA has coordinated a release of 400 million barrels from 32 countries.
+            Withdrawals from China's commercial stockpiles are estimated at about 2–3 million
+            barrels a day, based on customs data, while its official reserve remains untouched.
+            In its Sep 9 report, the EIA separately estimates that global commercial stocks have
+            fallen about 400 million barrels this year; that figure and the IEA's estimate of
+            507 million barrels withdrawn since February cover different sets of stocks over
+            different periods.
+          </p>
         </div>
         <div class="h-80 sm:h-[400px]">
           <canvas id="flipChart" role="img" aria-label="World oil balance, million barrels per day, January to August 2026 actuals: a 3.5 to 4.2 surplus in January and February, then net withdrawals every month after the war began on February 28 — 5.2 in March, the worst month, easing to 0.1 in July and back to 4.1 in August. Above zero, production exceeded consumption and stocks grew. Below zero, consumption exceeded production and stocks fell."></canvas>
@@ -468,20 +454,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           an average of 2.8 million barrels/day, including 95 million barrels in August.
         </p>
 
-        <div class="mt-12 grid gap-8 lg:grid-cols-[300px_1fr]">
-          <div>
-            <h3 class="text-lg font-bold tracking-tight">How much stored oil has been used</h3>
-            <p class="mt-1 text-[13px] leading-relaxed text-faint">Withdrawals and changes in demand, using figures available as of Sep 11.</p>
-          </div>
-          <div class="border border-rule rounded-md">
-            {billLedger.map((b, i) => (
-              <div class={`flex flex-wrap items-baseline gap-x-4 gap-y-0.5 px-4 py-3 ${i > 0 ? "border-t border-rule/70" : ""}`}>
-                <p class="w-52 shrink-0 text-sm font-medium text-ink">{b.name}</p>
-                <p class="tabular font-mono text-sm font-semibold text-alarm">{b.value}</p>
-                <p class="w-full text-xs text-faint sm:w-auto">{b.note}</p>
-              </div>
-            ))}
-          </div>
+        <!-- Oil transit by route -->
+        <div class="mt-12">
+          <ShippingRoutes />
         </div>
 
         <!-- Panel A: OECD commercial stocks (levels) -->
@@ -615,8 +590,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
         <div class="mb-6 max-w-[65ch] text-[13px]">
           <p class="text-[13px] leading-relaxed text-ink/80">
             These stocks exclude the Strategic Petroleum Reserve (SPR). They stood at 423.4 million
-            barrels on Sep 11, up from 404.5 million on Jul 24. That's 8.1 million barrels above the
-            same week last year and 1% above the five-year average, according to the EIA. SPR releases
+            barrels on Sep 11, up from 404.5 million on Jul 24. The EIA's Sep 16 report shows
+            a weekly decline of 0.6 million barrels, but stocks were still 8.1 million barrels above
+            the same week last year and 1% above the five-year average. SPR releases
             have helped supply commercial oil users this year. Moving oil from the reserve to
             commercial storage leaves the combined amount unchanged.
           </p>
@@ -639,8 +615,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             barrels when the war began. The latest report, for the week ending Sep 11, puts it at
             285.0 million, down 0.4 million barrels in a week. Withdrawals slowed for a third straight week,
             from 1.2 million the week before and 3.1 million the week before that.
-            Oil is being released to help make up for supplies that can't leave the Gulf. You can
-            use the withdrawal rate to see how quickly the emergency supply is being used.
+            For comparison, the reserve peaked at 727 million barrels in December 2009
+            and stood at 270.5 million in August 1982. The releases help make up for
+            supplies that can't leave the Gulf.
           </p>
           <div>
             <h3 class="flex items-center gap-2 text-[13px] font-bold leading-relaxed text-ink/70">
@@ -663,7 +640,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             </h3>
             <p id="sprChartAssumptions" class="mt-1.5 text-[13px] leading-relaxed text-ink/70">
               The Department of Energy releases oil from the SPR through contracts and scheduled
-              deliveries. A supply shortage doesn't automatically trigger withdrawals, and once
+              deliveries. A supply shortage doesn't automatically trigger withdrawals. Once
               the current program's deliveries end, DOE would have to arrange further releases
               for withdrawals to continue. The latest reported week averaged about 60,000
               barrels a day. The pace can change with each release decision.
@@ -682,156 +659,13 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The red lines mark the model's reserve thresholds, or <em>floors</em>. At about <span class="font-semibold text-ink">300M</span> barrels, some caverns risk damage and
             can't safely be refilled after a withdrawal. The first report below that threshold
-            was for the week ending Aug 7, at 298.7 million barrels.
-          </p>
-          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            In its Sep 16 report, the EIA said commercial crude stocks fell 0.6 million barrels. The American
-            Petroleum Institute (API) had reported an increase for that week. Diesel
-            stocks rose for a second straight week, to 107.9 million barrels, but East Coast stocks
-            are still 31% below last year.
-          </p>
-          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The other floors are <span class="font-semibold text-ink">250M</span>, the GEF minimum
+            was for the week ending Aug 7, at 298.7 million barrels. The other floors are <span class="font-semibold text-ink">250M</span>, the GEF minimum
             for sustained withdrawals; <span class="font-semibold text-ink">180M</span>, the hard
             operating limit; and <span class="font-semibold text-ink">70M</span>, the Department
             of Energy's stated safe minimum.
           </p>
-          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Diesel stocks increased by 1.6 million barrels that week, according to the EIA's
-            Sep 16 report.
-          </p>
 
 
-
-        <!-- Cavern gauge + supply snapshot + drawdown clock: one row -->
-        <div class="mt-12 grid items-start gap-10 lg:grid-cols-3">
-        <!-- SPR cavern gauge -->
-        <div>
-          <h2 class="mb-4 text-xl font-bold tracking-tight">How the reserve compares with past levels</h2>
-          <p class="mb-4 text-[13px] leading-relaxed text-faint">
-            The reserve held 727 million barrels at its December 2009 peak and 270.5 million
-            in August 1982, compared with 285.0 million on Sep 11. The green line marks the
-            level before the war.
-          </p>
-          <figure class="relative mx-auto w-full max-w-[280px]">
-          <svg id="sprGauge" viewBox="0 0 320 470" role="img" aria-label="SPR level gauge on a scale from 60 to 750 million barrels. Now 285.0, down from 415.4 pre-war. Grey historical markers: 727 all-time peak in December 2009, 592 in the mid-1990s, and 270.5, the August 1982 level. Red dashed lines mark the floors at 300, 250, 180, and 70. Hover any line for details.">
-            <!-- historical anchors (EIA historical series) -->
-            {hist.map((h) => (
-              <g>
-                <line x1="88" x2="96" y1={h.y} y2={h.y} stroke="#8a867a" stroke-width="1" />
-                <text x="84" y={h.y + 3.5} text-anchor="end" font-size="9.5" font-family="IBM Plex Mono, monospace" fill="#8a867a">{h.label}</text>
-              </g>
-            ))}
-            <!-- cavern shell -->
-            <rect x="96" y="30" width="120" height="400" fill="none" stroke="#d8d4c6" stroke-width="1.5" rx="4" />
-            <!-- oil fill -->
-            <path d={`M96 ${yNow} h120 v${430 - yNow} h-120 z`} fill="rgba(180,105,14,0.28)" />
-            <line x1="96" x2="216" y1={yNow} y2={yNow} stroke="#1c1b17" stroke-width="2.5" />
-            <!-- pre-war level -->
-            <line x1="96" x2="216" y1={yPreWar} y2={yPreWar} stroke="#3d6b64" stroke-width="1.5" stroke-dasharray="4 3" />
-            <!-- floors (top to bottom: 300, 250, 180, 70 — hover for what each means) -->
-            {g.map((f) => (
-              <line x1="96" x2="216" y1={f.y} y2={f.y} stroke="#b3261e" stroke-width={f.level === 70 ? 1.5 : 1} stroke-dasharray="3 3" opacity={f.level === 300 ? 0.9 : 0.55} />
-            ))}
-            <!-- labels -->
-            <text x="224" y={yPreWar - 6} font-size="10" font-family="IBM Plex Mono, monospace" fill="#3d6b64">415.4 pre-war</text>
-            <text x="224" y={yNow + 14} font-size="11" font-weight="600" font-family="IBM Plex Mono, monospace" fill="#1c1b17">285.0 now</text>
-            <!-- hover hit-areas (transparent, wide) -->
-            {g.map((f) => (
-              <line x1="96" x2="216" y1={f.y} y2={f.y} stroke="transparent" stroke-width="12" style="cursor:crosshair" data-tip={f.name} />
-            ))}
-            {hist.map((h) => (
-              <line x1="30" x2="96" y1={h.y} y2={h.y} stroke="transparent" stroke-width="12" style="cursor:crosshair" data-tip={h.tip} />
-            ))}
-            <line x1="96" x2="216" y1={yPreWar} y2={yPreWar} stroke="transparent" stroke-width="8" style="cursor:crosshair" data-tip="415.4 — pre-war level (Feb 27, 2026, EIA)" />
-            <line x1="96" x2="216" y1={yNow} y2={yNow} stroke="transparent" stroke-width="8" style="cursor:crosshair" data-tip="285.0 — now (EIA, w/e Sep 11) · lowest level in 44 years" />
-          </svg>
-          <figcaption class="mt-2 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-            SPR, million bbl (EIA w/e Sep 11)
-            <span class="block">Down 130.5M since Feb 27 · lowest level in 44 years</span>
-            <span class="block text-alarm/80">red lines: the floors — 300 · 250 · 180 · 70 (hover a line)</span>
-          </figcaption>
-        </figure>
-        <script>
-          // SPR gauge tooltips: plain DOM tooltip (reliable cross-browser, unlike SVG/canvas ones)
-          const sprGauge = document.getElementById("sprGauge");
-          if (sprGauge) {
-            const tip = document.createElement("div");
-            tip.style.cssText =
-              "position:fixed;z-index:20;display:none;pointer-events:none;max-width:240px;background:#1c1b17;color:#f5f4f0;font:11px/1.5 'IBM Plex Mono',monospace;padding:5px 9px;border-radius:3px;box-shadow:0 2px 10px rgba(0,0,0,.2)";
-            document.body.appendChild(tip);
-            sprGauge.querySelectorAll("[data-tip]").forEach((el) => {
-              el.addEventListener("mousemove", (e) => {
-                tip.textContent = el.getAttribute("data-tip");
-                tip.style.display = "block";
-                tip.style.left = e.clientX + 14 + "px";
-                tip.style.top = e.clientY - 12 + "px";
-              });
-              el.addEventListener("mouseleave", () => {
-                tip.style.display = "none";
-              });
-            });
-          }
-        </script>
-        </div>
-        <div>
-          <h2 class="mb-4 text-xl font-bold tracking-tight">Supply snapshot</h2>
-          <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
-            Large withdrawals began on Apr 3, when the reserve held 413.3 million barrels.
-            They reached about 1.2 million barrels per day in May. In the week ending Sep 11,
-            withdrawals totaled about 0.4 million barrels, or roughly 60,000 a day. Weekly withdrawals
-            slowed for a third straight week, from 3.1M to 1.2M to 0.4M barrels.
-          </p>
-          <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
-            US diesel and heating-oil stocks were 13.5% below a year earlier on Sep 11,
-            according to the EIA.
-          </p>
-          <div class="border border-rule rounded-md">
-            {invSnapshot.map((r, i) => (
-              <div class={`px-4 py-3 ${i > 0 ? "border-t border-rule" : ""}`}>
-                <div class="flex items-baseline justify-between gap-3">
-                  <p class="text-sm font-semibold">{r.name}</p>
-                  <p class="tabular font-mono text-sm font-semibold">{r.value}</p>
-                </div>
-                <p class="mt-0.5 text-xs text-faint">{r.delta}</p>
-                <p class="mt-1 text-xs text-crude">{r.flag}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <!-- The drawdown clock -->
-        <div>
-          <h2 class="mb-4 text-xl font-bold tracking-tight">How quickly the reserve is shrinking</h2>
-          <p class="mb-4 text-[13px] leading-relaxed text-faint">
-            The latest withdrawal rate, using the EIA's Sep 16 report
-            for the week ending Sep 11.
-          </p>
-          <div class="space-y-6">
-            <!-- Quadrant: current SPR drawdown rate -->
-            <div class="flex flex-col justify-between border border-rule p-5">
-              <div>
-                <p class="text-xs text-faint">SPR withdrawal rate</p>
-                <p class="tabular mt-2 font-mono text-3xl font-semibold text-crude">
-                  {sprDrawPace4w}<span class="ml-1 text-sm font-medium text-ink/60">million barrels/day</span>
-                </p>
-                <p class="mt-1.5 text-xs leading-relaxed text-faint">
-                  4-week average, EIA weekly report (week ending Sep 11) · latest single week: {latestDrawPace}.
-                </p>
-              </div>
-              <div>
-                <svg viewBox="0 0 160 40" class="w-full" role="img" aria-label="Weekly SPR withdrawals over 16 weeks, ending Sep 11: about 9.1 million barrels at the mid-June peak (week ending Jun 19), falling to 0.4 million in the latest week — the third straight week of slowing. The earlier peak of 9.9 million barrels in the week ending May 15 isn't shown.">
-                  <polyline points={sparkLine} fill="none" stroke="#b4690e" stroke-width="1.5" />
-                  <circle cx={sparkMaxPt.x} cy={sparkMaxPt.y} r="1.8" fill="#b4690e" />
-                  <circle cx={sparkMinPt.x} cy={sparkMinPt.y} r="1.8" fill="#1c1b17" />
-                </svg>
-                <p class="mt-1 text-[11px] text-faint">Weekly withdrawals: about 9.1M barrels at the mid-June peak (week ending Jun 19), falling to 0.4M by Sep 11. The earlier 9.9M peak in the week ending May 15 falls outside this 16-week chart.</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        </div>
 
       </section>
 
@@ -849,8 +683,20 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           </p>
         </div>
 
+        <!-- OECD refinery intake and output, June 2026 vs June 2025 (IEA Monthly Oil Statistics) -->
+        <div class="mb-3">
+          <h2 class="text-xl font-bold tracking-tight">OECD refineries made less gasoline and diesel than a year earlier</h2>
+          <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
+            In June 2026, total refinery output in OECD countries was about 1% lower
+            than in June 2025. Gasoline and diesel output fell. Jet fuel and other
+            kerosene rose. The comparison doesn't tell us how much of the change
+            was caused by the war.
+          </p>
+        </div>
+        <SupplyFlow />
+
         <!-- US refinery utilization 2026 vs 2025 + global refining anchors -->
-        <div class="grid gap-10 lg:grid-cols-3">
+        <div class="mt-12 grid gap-10 lg:grid-cols-3">
           <div class="lg:col-span-2">
             <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
               <h2 class="text-xl font-bold tracking-tight">US refineries have run above 95% of capacity since June</h2>
@@ -2080,10 +1926,11 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
       // Diesel YTD — true-date axis. The line draws the full mixed-source series (monthly
       // + weekly + daily), so the path keeps its movement; the dots are thinned to the story
       // beats — pre-Sep 3 points, Sep 4 (old record broken), Sep 11 (first above $6.00),
-      // Sep 14, 17, 20 — because seven daily dots in seven days bunch into ~30px at the
-      // right edge. dieselView is the dot-keep set, not the data.
+      // Sep 14, 17, 20, and the Sep 22 endpoint (the labeled record point needs its dot;
+      // Sep 21 is skipped so the last two dots don't blur into one) — because a run of
+      // daily dots bunches into ~30px at the right edge. dieselView is the dot-keep set, not the data.
       const dieselView = dieselYtd.filter(
-        (p) => p.date < "2026-09-03" || p.date === "2026-09-04" || p.date === "2026-09-11" || p.date === "2026-09-14" || p.date === "2026-09-17" || p.date === "2026-09-20",
+        (p) => p.date < "2026-09-03" || p.date === "2026-09-04" || p.date === "2026-09-11" || p.date === "2026-09-14" || p.date === "2026-09-17" || p.date === "2026-09-20" || p.date === "2026-09-22",
       );
       const dieselDotKeep = new Set(dieselView.map((p) => p.date));
       new Chart(document.getElementById("dieselChart")!, {
@@ -2152,7 +1999,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
         },
         ticks: { color: "#8a867a", padding: 8, callback: (v: unknown) => `$${v}` },
       });
-      const gasRef = (val: number) => [{ x: 0, y: val }, { x: 257, y: val }];
+      // Reference lines run the full axis width — the endpoint follows the scale's max
+      // (a hardcoded doy stopped short of the right edge once the scale was extended).
+      const gasRef = (val: number) => [{ x: 0, y: val }, { x: gasXScale.max, y: val }];
       const gasTooltip = (pts: { date: string; value: number; assessed?: boolean; note?: string }[]) => ({
         filter: (item: { datasetIndex: number }) => item.datasetIndex === 0,
         callbacks: {
@@ -2256,7 +2105,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
 
       // Wider x-scale for the bonds/inflation charts: data runs to Sep 17 (day 260).
       const moneyXScale = { ...gasXScale, max: 268 };
-      const mref = (val: number) => [{ x: 0, y: val }, { x: 258, y: val }];
+      const mref = (val: number) => [{ x: 0, y: val }, { x: moneyXScale.max, y: val }]; // full axis width, follows the scale
 
       // Inflation chart: monthly points fall at month-END, so month ticks must sit at
       // month-end too — gasXScale ticks at month-start, which reads one month ahead for
@@ -2411,15 +2260,15 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
       // source label follows this (kept in step with the panel copy: "Sep 10–11 and Sep 14–17").
       const wtiNonFred = new Set(["2026-09-10", "2026-09-11", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-21"]);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
-      // thinned to the same story beats as the charts above — diesel: the early-Sep
-      // breakout plus Sep 14, 17, 20; gasoline: the weekly series through Aug 31 plus
-      // Sep 10, 17, 20 — because seven daily dots in seven days bunch into ~30px. The
-      // nearest-WTI pairing below runs over the FULL wtiWeekly either way.
+      // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 and the Sep 22
+      // record point (Sep 21 skipped so the last two dots don't blur at ~3px/day);
+      // gasoline: pre-Sep 3 plus Sep 10, 17, 22 — because a run of daily dots bunches into
+      // ~30px at the right edge. The nearest-WTI pairing below runs over the FULL wtiWeekly either way.
       const dieCrackSrc = dieselYtd.filter(
-        (p) => p.date < "2026-09-03" || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-14", "2026-09-17", "2026-09-21"].includes(p.date)
+        (p) => p.date < "2026-09-03" || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-14", "2026-09-17", "2026-09-22"].includes(p.date)
       );
       const gasCrackSrc = gasolineYtd.filter(
-        (p) => p.date < "2026-09-03" || p.date === "2026-09-10" || p.date === "2026-09-17" || p.date === "2026-09-21",
+        (p) => p.date < "2026-09-03" || p.date === "2026-09-10" || p.date === "2026-09-17" || p.date === "2026-09-22",
       );
       const dieDotKeep = new Set(dieCrackSrc.map((p) => p.date));
       const gasDotKeep = new Set(gasCrackSrc.map((p) => p.date));

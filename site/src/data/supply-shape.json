@@ -1,0 +1,152 @@
+{
+  "source": {
+    "publisher": "International Energy Agency",
+    "title": "Monthly Oil Statistics — September 2026",
+    "published": "2026-09-11",
+    "retrieved": "2026-09-22",
+    "url": "https://www.iea.org/data-and-statistics/data-product/monthly-oil-statistics",
+    "retrieved_via": "https://www.mtsinsights.com/summaries/10893/",
+    "local_pdf": "/tmp/iea-mos-september-2026.pdf",
+    "pdf_sha256": "536bc13638fbefcfd3992440578102765dc39ff2021b0a499dc5a5d61360f612"
+  },
+  "geography": "OECD",
+  "current_period": "2026-06",
+  "comparison_period": "2025-06",
+  "unit": "thousand metric tons",
+  "flows": [
+    {
+      "id": "crude",
+      "name": "Oil entering refineries",
+      "previous_kt": 162575,
+      "current_kt": 161021,
+      "pdf_page": 7,
+      "note": "Table 1, refinery intake (observed); includes crude, NGL and feedstocks. June 2025 is the year-earlier figure in the same edition.",
+      "status": "source-reported-with-estimates"
+    },
+    {
+      "id": "refining",
+      "name": "Refinery output",
+      "previous_kt": 157260,
+      "current_kt": 155762,
+      "pdf_page": 7,
+      "note": "Table 1, refinery gross output; not capacity. June 2025 is the year-earlier figure in the same edition.",
+      "status": "source-reported-with-estimates"
+    },
+    {
+      "id": "gasoline",
+      "name": "Gasoline",
+      "previous_kt": 47511,
+      "current_kt": 46566,
+      "pdf_page": 19,
+      "note": "Table 7, total gasoline, including motor, aviation and jet gasoline.",
+      "status": "source-reported-with-estimates"
+    },
+    {
+      "id": "diesel",
+      "name": "Diesel & heating oil",
+      "previous_kt": 51114,
+      "current_kt": 50362,
+      "pdf_page": 19,
+      "note": "Table 7, gas/diesel oil.",
+      "status": "source-reported-with-estimates"
+    },
+    {
+      "id": "jet",
+      "name": "Jet fuel & other kerosene",
+      "previous_kt": 16123,
+      "current_kt": 17687,
+      "pdf_page": 19,
+      "note": "Table 7, total kerosene; jet kerosene is not separated.",
+      "status": "source-reported-with-estimates"
+    },
+    {
+      "id": "other",
+      "name": "Other products",
+      "previous_kt": 42512,
+      "current_kt": 41147,
+      "pdf_page": 19,
+      "note": "Derived: total products minus gasoline, gas/diesel and total kerosene. Includes LPG, naphtha, residual fuel oil and other products. Rounding yields a 1 kt difference from summing those rows.",
+      "status": "derived"
+    }
+  ],
+  "stocks": [
+    {
+      "name": "Crude, NGL & feedstocks",
+      "previous_kt": 261236,
+      "current_kt": 235559,
+      "pdf_page": 30,
+      "note": "June 2025 is the year-earlier figure in the same edition."
+    },
+    {
+      "name": "All products",
+      "previous_kt": 204595,
+      "current_kt": 200195,
+      "pdf_page": 31,
+      "note": "June 2025 is the year-earlier figure in the same edition."
+    },
+    {
+      "name": "Gasoline",
+      "previous_kt": 45552,
+      "current_kt": 43348,
+      "pdf_page": 32,
+      "note": "June 2025 is the year-earlier figure in the same edition."
+    },
+    {
+      "name": "Middle distillates",
+      "previous_kt": 95047,
+      "current_kt": 96020,
+      "pdf_page": 33,
+      "note": "June 2025 is the year-earlier figure in the same edition."
+    },
+    {
+      "name": "Residual fuel oil",
+      "previous_kt": 19269,
+      "current_kt": 17439,
+      "pdf_page": 34,
+      "note": "June 2025 is the year-earlier figure in the same edition."
+    }
+  ],
+  "notes": [
+    "Both comparison months are June (30 days each), so monthly amounts compare directly as daily rates. Stocks are end-month levels on national territory.",
+    "Product inventories are grouped differently from output: middle distillates include gas/diesel oil, jet kerosene and other kerosene.",
+    "The publication includes country estimates; see PDF page 5.",
+    "Product stock rows are subsets of All products, not additive alongside that total.",
+    "No common barrel conversion factor has been applied.",
+    "June 2025 and June 2026 both come from the September 2026 edition (year-earlier columns), so no cross-edition revision gap exists.",
+    "Flows compare mean daily output: monthly thousand tonnes divided by 30 days for each June.",
+    "Not seasonally adjusted. The comparison does not isolate the effect of the war."
+  ],
+  "current_days": 30,
+  "comparison_days": 30,
+  "chokepoints": {
+    "source": {
+      "publisher": "U.S. Energy Information Administration",
+      "title": "Global Energy Security Data, Table 2",
+      "published": "2026-08-12",
+      "retrieved": "2026-09-22",
+      "url": "https://www.eia.gov/outlooks/steo/report/energysecurity/article.php"
+    },
+    "comparison_period": "2025-Q4",
+    "current_period": "2026-Q2",
+    "unit": "million barrels per day",
+    "status": "source-estimate",
+    "scope": "Global route traffic: crude oil and petroleum liquids; not limited to OECD destinations. Routes overlap and cannot be added.",
+    "routes": [
+      {
+        "name": "Strait of Hormuz",
+        "previous": 21.6,
+        "current": 4.9
+      },
+      {
+        "name": "Suez Canal & SUMED pipeline",
+        "previous": 5.9,
+        "current": 5.8
+      },
+      {
+        "name": "Bab el-Mandeb",
+        "previous": 5.4,
+        "current": 8.1
+      }
+    ]
+  }
+}

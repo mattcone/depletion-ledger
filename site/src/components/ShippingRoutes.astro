@@ -1,0 +1,125 @@
+---
+import shipping from "../data/shipping-routes.json";
+---
+
+<section class="shipping-section" aria-labelledby="shipping-title">
+  <h2 id="shipping-title" class="text-xl font-bold tracking-tight">Oil shipments through Hormuz fell 77%</h2>
+  <p class="intro">EIA estimates that crude oil shipments through Hormuz fell from 15.9 million barrels a day in late 2025 to 3.7 million in April–June 2026. Refined fuel shipments fell too. Crude shipments through Bab el-Mandeb rose, while traffic through the Suez Canal and Egypt's SUMED pipeline stayed near its late-2025 level.</p>
+  <p class="intro">These April–June figures are from before the Red Sea closed in July. For more recent traffic, see Kpler's ship counts in the map caption at the top of the page.</p>
+  <p class="chart-note">Million barrels per day · Annual averages for 2023–24; quarterly averages from 2025</p>
+  <div class="shipping-grid">
+    {shipping.routes.map(route => (
+      <figure>
+        <h3>{route.name}</h3>
+        <div class="chart-wrap">
+          <canvas id={`shipping-${route.id}`} role="img" aria-label={`${route.name}. Annual averages for 2023 and 2024, then quarterly averages through April–June 2026, in million barrels per day. ${route.points.map(p => `${p.period}: crude ${p.crude}, refined products ${p.products}`).join('; ')}. EIA estimates.`}></canvas>
+        </div>
+      </figure>
+    ))}
+  </div>
+  <p class="source-note">Sources: EIA <a href={shipping.sources.annual.url}>World Oil Transit Chokepoints</a> (March 3, 2026) and <a href={shipping.sources.quarterly.url}>Global Energy Security Data</a> (August 12, 2026). Hollow dots mark EIA estimates: annual averages for 2023–24 and quarterly averages from 2025. Lines connect those averages. All three charts use the same scale. The 77% headline uses EIA's total for Hormuz, 21.6 to 4.9 million barrels a day; the two rounded components shown add to 4.8 in April–June. The figures cover global traffic, and a cargo can pass through more than one route. Ship tracking became less reliable around Hormuz in 2026, so those estimates may miss some traffic.</p>
+</section>
+
+<script>
+  import Chart from "chart.js/auto";
+  import shipping from "../data/shipping-routes.json";
+
+  const ink = "#1c1b17", products = "#b4690e", paper = "#f2f1ec", faint = "#8a867a";
+  const font = { family: "Georgia, 'Times New Roman', serif", size: 11 };
+  for (const route of shipping.routes) {
+    const canvas = document.getElementById(`shipping-${route.id}`) as HTMLCanvasElement;
+    // One continuous line per series: the 2023–24 annual averages flow directly
+    // into the quarterly points, so no dot is left stranded.
+    const datasets = (["crude", "products"] as const).map(key => ({
+      label: key === "crude" ? "Crude oil & condensate" : "Refined products",
+      data: route.points.map(p => ({ x: p.x_year, y: p[key], period: p.period, frequency: p.frequency })),
+      borderColor: key === "crude" ? ink : products,
+      borderWidth: 1.6,
+      borderDash: key === "products" ? [4, 3] : [],
+      showLine: true,
+      tension: 0,
+      pointRadius: 3,
+      pointHoverRadius: 5,
+      pointBorderWidth: 1.4,
+      pointBackgroundColor: paper,
+      pointBorderColor: key === "crude" ? ink : products,
+    }));
+    const chart = new Chart(canvas, {
+      type: "line",
+      data: { datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false, animation: false,
+        interaction: { mode: "nearest", axis: "x", intersect: false },
+        layout: { padding: { top: 18, right: 108 } },
+        scales: {
+          x: {
+            type: "linear", min: 2023.2, max: 2026.5,
+            grid: { display: false }, border: { color: "#d8d4c6", width: .5 },
+            afterBuildTicks: scale => { scale.ticks = [2023.5, 2024.5, 2025.5, 2026.25].map(value => ({ value })); },
+            ticks: { font, color: faint, maxRotation: 0, autoSkip: false, padding: 8, callback: value => `${Math.floor(Number(value))}` },
+          },
+          y: {
+            min: 0, max: 18,
+            grid: { display: false }, border: { display: false },
+            ticks: { font, color: faint, stepSize: 6, padding: 7 },
+          },
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: "rgba(255,255,248,.97)", titleColor: "#6b675c", bodyColor: ink,
+            titleFont: font, bodyFont: font, displayColors: false, padding: 8,
+            callbacks: {
+              title: items => {
+                const point = items[0].raw as { period: string; frequency: string };
+                return `${point.period} · ${point.frequency === "annual" ? "annual" : "quarterly"} average`;
+              },
+              label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y?.toFixed(1)} million b/d (estimate)`,
+            },
+          },
+        },
+      },
+      plugins: [{
+        id: "shippingEndpointLabels",
+        afterDatasetsDraw(chart) {
+          const { ctx } = chart;
+          ctx.save(); ctx.font = "12px Georgia, serif"; ctx.textBaseline = "middle";
+          const last = route.points[route.points.length - 1];
+          const endpoints = [
+            { index: 0, label: "crude", value: last.crude, color: ink },
+            { index: 1, label: "products", value: last.products, color: products },
+          ];
+          for (const en of endpoints) {
+            const meta = chart.getDatasetMeta(en.index);
+            const point = meta.data[meta.data.length - 1];
+            ctx.fillStyle = en.color;
+            ctx.fillText(`${en.label} ${en.value.toFixed(1)}`, point.x + 9, point.y);
+          }
+          ctx.restore();
+        },
+      }],
+    });
+    // Same inspection handle used by the dashboard's browser checks.
+    const w = window as typeof window & { __charts?: Record<string, Chart> };
+    (w.__charts ??= {})[`shipping-${route.id}`] = chart;
+  }
+</script>
+
+<style>
+  .shipping-section { margin: 0; }
+  .intro { max-width: 760px; margin-top: 12px; font-size: 13px; line-height: 1.7; color: #625e52; }
+  .chart-note { margin-top: 16px; font-family: var(--font-mono); font-size: 10px; color: #777369; line-height: 1.7; }
+  .shipping-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+  figure { min-width: 0; }
+  h3 { font-size: 14px; font-weight: 700; letter-spacing: -0.01em; color: #1c1b17; margin-bottom: 10px; }
+  .chart-wrap { position: relative; height: 240px; }
+  .source-note { max-width: 860px; margin-top: 16px; font-family: var(--font-mono); font-size: 10px; line-height: 1.75; color: #777369; }
+  a { text-decoration: underline; text-underline-offset: 3px; }
+  details { margin-top: 12px; font-size: 12px; color: #625e52; }
+  summary { cursor: pointer; padding: 8px 0; }
+  summary:focus-visible { outline: 2px solid #827354; outline-offset: 4px; }
+  @media (max-width: 1000px) {
+    .shipping-grid { grid-template-columns: 1fr; gap: 32px; }
+    .chart-wrap { height: 230px; }
+  }
+</style>
