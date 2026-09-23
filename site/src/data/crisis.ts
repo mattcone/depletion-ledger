@@ -25,8 +25,8 @@ export const stats = [
   { label: "Brent", value: "$99.25", sub: "Sep 22 settlement · first close below $100 since Sep 8 (Reuters) · fifth straight down session · +31% vs pre-crisis ~$76" },
   { label: "US diesel (AAA)", value: "$6.52", sub: "Sep 23 · down from the Sep 22 record $6.5276 · +75% vs pre-war $3.72" },
   { label: "US gasoline (AAA)", value: "$4.47", sub: "Sep 23 · +10.7¢ in a week (AAA) · +59% vs Jan $2.81" },
-  { label: "SPR", value: "285.0M", sub: "Sep 11 · down 0.4M in a week · down 130.5M from pre-war 415.4M · lowest since Nov 1982" },
-  { label: "US diesel & heating oil", value: "107.9M", sub: "Sep 11 · up 1.6M in a week · 13.5% below last year · East Coast stocks 31% below last year" },
+  { label: "SPR", value: "284.6M", sub: "Sep 18 · down 0.4M in a week, a second straight week at that pace · down 130.9M from pre-war 415.4M · lowest since Nov 1982" },
+  { label: "US diesel & heating oil", value: "107.4M", sub: "Sep 18 · down 0.4M in a week · 12.7% below last year · East Coast stocks 27% below last year" },
 ];
 
 // ---------- Brent, $/bbl — 2026 YTD (observed points) ----------
@@ -254,6 +254,7 @@ export const sprWeekly: { date: string; level: number }[] = [
   { date: "2026-08-28", level: 286.604 },
   { date: "2026-09-04", level: 285.360 },
   { date: "2026-09-11", level: 284.957 },
+  { date: "2026-09-18", level: 284.552 },
 ];
 // US commercial crude inventories, EXCLUDING the SPR (EIA WPSR, week ending Friday),
 // million barrels. Source: EIA API series WCESTUS1 ("U.S. Ending Stocks excluding SPR of
@@ -279,7 +280,7 @@ export const commercialCrude2026: { date: string; value: number }[] = [
   { date: "2026-07-31", value: 406.987 }, { date: "2026-08-07", value: 424.410 },
   { date: "2026-08-14", value: 428.815 }, { date: "2026-08-21", value: 428.910 },
   { date: "2026-08-28", value: 424.460 }, { date: "2026-09-04", value: 424.069 },
-  { date: "2026-09-11", value: 423.429 },
+  { date: "2026-09-11", value: 423.429 }, { date: "2026-09-18", value: 426.398 },
 ];
 // Same weeks in 2025 (each 2026 week matched to its nearest 2025 week-ending date).
 export const commercialCrude2025: { date: string; value: number }[] = [
@@ -301,7 +302,7 @@ export const commercialCrude2025: { date: string; value: number }[] = [
   { date: "2025-08-01", value: 423.662 }, { date: "2025-08-08", value: 426.698 },
   { date: "2025-08-15", value: 420.684 }, { date: "2025-08-22", value: 418.292 },
   { date: "2025-08-29", value: 420.707 }, { date: "2025-09-05", value: 424.646 },
-  { date: "2025-09-12", value: 415.361 },
+  { date: "2025-09-12", value: 415.361 }, { date: "2025-09-19", value: 414.754 },
 ];
 export const sprFloors = [
   { level: 300, name: "Cavern damage risk: about 300M barrels (first report below: week ending Aug 7)" },
@@ -421,7 +422,8 @@ export const demandDecline = [
 // Refinery Operable Capacity". api.eia.gov/v2/petroleum/pnp/wiup, fetched 2026-09-10.
 // Sourced values, never interpolated. EIA's definition: "Percent Utilization is
 // calculated as gross inputs divided by the latest reported monthly operable capacity."
-// 2026: avg 93.5% (n=36); above 95% every week since Jun 5; peak 98.0 (wk of Aug 28).
+// 2026: avg 93.6% (n=38); above 95% every week from Jun 5 through Sep 11, then 94.0
+// (wk of Sep 18, first sub-95% week since May 29); peak 98.0 (wk of Aug 28).
 // 2025 same Jan–Sep window: avg 90.7%, deeper winter maintenance dip (83.5, Jan 24).
 // (For provenance, the mb/d view from STEO 4a CORIPUS, Jan–Aug: 2026 16.33 15.91 16.40
 // 16.14 16.79 17.20 17.16 17.31 · 2025 15.74 15.36 15.83 16.09 16.72 17.10 17.00 16.94.)
@@ -445,7 +447,7 @@ export const usRefineryUtil2026: UtilPt[] = [
   { date: "2026-07-31", value: 96.5 }, { date: "2026-08-07", value: 96.2 },
   { date: "2026-08-14", value: 97.2 }, { date: "2026-08-21", value: 97.4 },
   { date: "2026-08-28", value: 98.0 }, { date: "2026-09-04", value: 97.8 },
-  { date: "2026-09-11", value: 96.8 },
+  { date: "2026-09-11", value: 96.8 }, { date: "2026-09-18", value: 94.0 },
 ];
 export const usRefineryUtil2025: UtilPt[] = [
   { date: "2025-01-03", value: 93.3 }, { date: "2025-01-10", value: 91.7 },
@@ -466,7 +468,7 @@ export const usRefineryUtil2025: UtilPt[] = [
   { date: "2025-08-01", value: 96.9 }, { date: "2025-08-08", value: 96.4 },
   { date: "2025-08-15", value: 96.6 }, { date: "2025-08-22", value: 94.6 },
   { date: "2025-08-29", value: 94.3 }, { date: "2025-09-05", value: 94.9 },
-  { date: "2025-09-12", value: 93.3 },
+  { date: "2025-09-12", value: 93.3 }, { date: "2025-09-19", value: 93.0 },
 ];
 
 // Global refining anchors — IEA Oil Market Report (runs: Sep 11 edition; Q3 cut: Aug 12)
@@ -485,37 +487,28 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     when: "Any day",
     items: [
       { item: "An official repair timetable for the East–West pipeline. Reuters reported on Sep 22, citing three sources, that the pipeline had restarted at a low rate. Full service could take weeks. Aramco aims to pump about 4M barrels a day within a few weeks, and the first cargo from Yanbu was scheduled to load for China on Sep 22. An unnamed Bloomberg source says Saudi Arabia aims to restore half its capacity within days and full capacity in six weeks. Before the restart, Vortexa reported that Saudi Red Sea loadings had fallen to zero. Gulf terminals loaded about 3.7M barrels a day on average since Sep 12, up from 2.9M earlier in the month.", why: "A confirmed resumption of Yanbu exports — or an official estimate of repairs taking only days — would reverse the Sep 11 change in odds. The reported restart and planned cargo do not confirm that exports have resumed." },
-      { item: "The next round of US–Iran talks. US envoys Witkoff and Kushner met Iran's foreign minister at the UN for about three hours on Sep 22. It was the first acknowledged contact between the governments since June, and another round is scheduled. Iran wants the naval blockade lifted, its frozen assets released, and the war ended on all fronts. IRGC spokesman Mohebbi says the full $24B must be released in one payment before negotiations. Iran also wants Saudi Arabia to lift its blockade on Houthi-held areas of Yemen.", why: "An agreement could help reopen the strait, but Iran's added demands make a deal harder to reach. President Pezeshkian is scheduled to address the UN on Sep 23 (fifth speaker in the first session); no meeting between the two presidents has been scheduled." },
+      { item: "The next round of US–Iran talks. US envoys Witkoff and Kushner met Iran's foreign minister at the UN for about three hours on Sep 22 — the first acknowledged contact between the governments since June — and another round is scheduled. Iran's foreign ministry has laid out its conditions: a halt to what it calls US 'acts of aggression,' an end to the naval blockade and economic warfare, and the release of Iranian assets. IRGC spokesman Mohebbi says the full $24B must be released in one payment before negotiations. Iran also wants Saudi Arabia to lift its blockade on Houthi-held areas of Yemen.", why: "An agreement could help reopen the strait, but Iran's added demands make a deal harder to reach. A senior Iranian official said on Sep 23 that Tehran could reopen the strait within a week if the US eases military pressure and lifts its blockade of Iranian ports (CNBC). President Pezeshkian is scheduled to address the UN on Sep 23 (fifth speaker in the first session); no meeting between the two presidents has been scheduled." },
       { item: "Whether attacks in Bab el-Mandeb spread to non-Saudi vessels.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes." },
       { item: "Ship traffic through Hormuz. Kpler's preliminary counts, reported by Reuters, show 4 crossings on Sep 21 and 3 on Sep 22. The Sep 22 count was roughly 80% below the 10-day average of about 15. On Sep 21, UKMTO reported that a projectile struck a tanker entering the strait, injuring two crew members, and debris hit a second vessel. Iranian state media reported that an explosion was heard near Qeshm Island on Sep 23, but no incident involving a vessel has been confirmed.", why: "Watch whether more ships can pass safely. These counts come from independent trackers and exclude ships with their tracking signals off. The site doesn't use US Central Command's higher claimed totals as data." },
-      { item: "Saudi Arabia's response to Houthi attacks on Riyadh. Saudi Arabia confirmed on Sep 19 that the Houthis tried to strike the capital with a ballistic missile (AP). Reuters imagery showed a fire at a fuel depot at King Khalid International Airport. The BBC reported Riyadh's first air-raid alerts since fighting with the Houthis intensified. The Houthis also claimed on Sep 16 that they shot down a Saudi F-15 over Marib; the BBC verified footage of the wreckage, but Saudi Arabia hasn't confirmed the loss.", why: "Confirmation of the F-15 loss or a Saudi military response would mean the fighting has worsened." },
-      { item: "Whether the Saudi-led Red Sea coalition takes military action. Saudi Arabia hosted a meeting on Sep 19 to secure the Red Sea, the Gulf of Aden, and Bab el-Mandeb. Turkey offered defense support, and the UK agreed on Sep 21 to provide one refuelling aircraft for a limited period to help Saudi jets defend against Houthi drones and missiles. The UK says this support does not cover strikes on the Houthis.", why: "A coalition naval operation or an expanded UK role would mean the fighting has worsened." },
     ],
   },
   {
     when: "Sep 23",
     items: [
-      { item: "The EIA report for the week ending Sep 18, due today (Sep 23) at 10:30 ET — the week in which the East–West pipeline shutdown (announced Sep 11; loadings halted Sep 13) stopped Yanbu exports; Kpler reports no visible Yanbu loadings since Sep 16. The pipeline's low-rate restart on Sep 22 is after the reporting week.", why: "Watch for faster SPR withdrawals, lower commercial crude stocks, or falling diesel stocks." },
       { item: "The Trump–Xi summit in Washington. Xi is due at Joint Base Andrews this afternoon, with an arrival ceremony scheduled for the evening, Eastern Time. His state visit runs through Sep 25. It follows a new US law authorizing tariffs of up to 100% on countries buying Russian oil and gas, and pressure on China to cut purchases of Iranian crude.", why: "Watch for agreements affecting oil purchases or trade. Better trade relations could increase demand for oil; exemptions from sanctions could make it easier to buy Russian crude." },
     ],
   },
   {
     when: "Sep 30",
     items: [
-      { item: "The US-led coalition is scheduled to complete its withdrawal from Iraq.", why: "The withdrawal changes security for Iraq, a major Gulf exporter." },
-    ],
-  },
-  {
-    when: "Oct 6",
-    items: [
-      { item: "The EIA's next monthly oil outlook.", why: "Watch whether the EIA still expects shipping to continue despite restrictions." },
+      { item: "The EIA report for the week ending Sep 25, due Sep 30 at 10:30 a.m. Eastern Time. It will be published after the Sep 26 delivery deadline for the third round of SPR exchanges. SPR withdrawals averaged about 58,000 barrels a day in the week ending Sep 18, unchanged from the previous week. Weekly withdrawals had fallen from 3.1M to 1.2M to 0.4M barrels over the preceding three weeks.", why: "The program's awarded volume (~133.6M barrels) is nearly accounted for in the SPR's net decline (~130.9M; the arithmetic is conditional — delivery receipts aren't audited). A stop would be consistent with those deliveries running out, though the DOE could still arrange more. An increase could reflect further DOE releases or more deliveries arriving that week under existing contracts. Watch the DOE's SPR site (spr.doe.gov) for confirmation of further releases, including a request for proposals for a fourth round of exchanges." },
     ],
   },
 ];
 
 // ---------- Breaking-points cascade (§11, compressed twice) ----------
 export const cascade = [
-  { date: "Sep 23", region: "US East Coast", trigger: "US diesel and heating-oil stocks covered about a month of consumption on Sep 11. East Coast stocks were 31% below last year. The Sep 23 EIA report, covering the week ending Sep 18, will let us check whether national coverage has fallen below a month." },
+  { date: "Each weekly EIA report (next: Sep 30)", region: "US East Coast", trigger: "US diesel and heating-oil stocks totaled 107.4M barrels in the week ending Sep 18. At the four-week average consumption rate of 3.6M barrels a day, that covers roughly 30 days — right at the one-month line. These rounded figures don't establish whether coverage is just above or below a month. East Coast stocks rose by 0.6M barrels that week but remain 27% below last year. National stocks fell by 0.4M barrels, so coverage could move to either side of the line at the next report, due Sep 30." },
   { date: "Sep 30", region: "Russia", trigger: "The diesel export ban expires. With more than 30% of refining capacity damaged, Russia may have little fuel available to export." },
   { date: "≈ mid-October", region: "China", trigger: "Commercial oil stocks could begin to fall faster than normal." },
   { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, making it harder for traders to find supplies. If the strait closes fully, this could happen by mid-October." },
@@ -532,21 +525,21 @@ export const russiaCapacityAnchors = [
   { date: "2026-04-15", pct: 75, label: "~25% of capacity lost (mid-April)" },
   { date: "2026-08-29", pct: 70, label: ">30% of actual capacity offline (Moscow Times, Aug 29)" },
 ];
-// Sep 9 spread of estimates (capacity OUT): UA Gen Staff 42.74% · Russian Forbes 54% · IEA ">20%"
-// → capacity REMAINING: 46%–80%
-export const russiaCurrentSpread = { date: "2026-09-09", low: 46, high: 80 };
+// Spread of estimates (capacity OUT), current as of Sep 21: UA Gen Staff >45% of DESIGNED
+// capacity (Sep 21, up from their 42.74% on Sep 9 — UA.NEWS/National Security Journal) ·
+// Russian Forbes 54% (Sep 9) · IEA ">20%" → capacity REMAINING: 46%–80% (unchanged; the
+// Sep 21 Gen Staff update sits inside the existing range; Forbes still sets the low end)
+export const russiaCurrentSpread = { date: "2026-09-21", low: 46, high: 80 };
 
 // Snapshot card rows (name / value / delta / flag)
 export const russiaSnapshot = [
-  { name: "Capacity out of service", value: ">30%", delta: "Aug 29, Moscow Times — up from ~25% in April", flag: "Early September estimates of capacity offline: 42.7% (Ukraine's General Staff) to 54% (Forbes)" },
-  { name: "Strikes in August", value: "21+", delta: "record month, near-daily (Bloomberg, Aug 29)", flag: "" },
+  { name: "Capacity out of service", value: ">30%", delta: "Aug 29, Moscow Times — up from ~25% in April", flag: "Ukraine's General Staff: more than 45% of designed capacity out as of Sep 21 (up from 42.7% on Sep 9) · Russian Forbes: 54% (Sep 9) · Perm: −86% of primary processing, every major Lukoil refinery out (Bloomberg, Aug 25)" },
   { name: "Kirishi, Russia's second-largest refinery", value: "halted", delta: "~400K b/d; Russia's only northwestern refinery, hit twice in a month (UA.NEWS, Sep 2)", flag: "" },
   { name: "Ryazan (Rosneft), Moscow's main supplier", value: "down", delta: "~156K barrels/day; both primary units offline since Sep 6, with repairs expected to take several weeks (Reuters, Sep 10)", flag: "" },
-  { name: "Perm capacity", value: "−86%", delta: "Primary processing capacity lost, based on satellite imagery (Bloomberg, Aug 25)", flag: "Every major Lukoil refinery is out of service" },
+  { name: "Moscow refinery", value: "halted", delta: "Output halted after a Sep 20 drone strike (Reuters, Sep 21)", flag: "" },
+  { name: "Kuibyshev (Samara) and Ufa refineries", value: "struck", delta: "Both hit in the Sep 21–22 Ukrainian strike; fires reported at each (Ukrainska Pravda; ISW, Sep 22)", flag: "" },
   { name: "Novorossiysk — main Black Sea port", value: "hit", delta: "The fuel-oil terminal and city were hit; 4 people killed (Sep 8–9)", flag: "Crude exports fell from 800 to 350 kb/d between Jul and Aug; all three export routes are now under attack" },
   { name: "Gas stations rationing fuel", value: "28%", delta: "Purchase limits nationwide; 90% of Moscow stations out of AI-92 gasoline (Euronews, Aug 20)", flag: "" },
-  { name: "Gasoline contracts unfilled", value: ">50%", delta: "TASS, Sep 3", flag: "" },
-  { name: "Oil and gas revenue", value: "−45.4%", delta: "First-quarter decline from a year earlier, official figures", flag: "Lost production is also reducing government revenue" },
 ];
 
 export const russiaBanCascade = [
@@ -579,7 +572,7 @@ export const ratesStats = [
 
 export const foodStats = [
   { label: "Gulf–India tanker shipping costs", value: "+411%", sub: "$4.34/bbl in Aug vs pre-war (Frontline)" },
-  { label: "TTF gas (Europe)", value: "€80/MWh", sub: "Sep 18 · Trading Economics CFD quote · $26.7/MMBtu" },
+  { label: "TTF gas (Europe)", value: "€72/MWh", sub: "Sep 22 close (Geagency) · ≈$24.2/MMBtu (× EUR/USD 1.1467) · down from €80 on Sep 18" },
   { label: "JKM gas (Asia)", value: "$27.5/MMBtu", sub: "Sep 18 · Trading Economics CFD quote" },
 ];
 
@@ -645,6 +638,7 @@ export const gasTtf: GasPt[] = [
   { date: "2026-09-11", value: 27.0, assessed: true, note: "Global LNG Hub (JOGMEC) — highest since Dec 2022" },
   { date: "2026-09-14", value: 27.8, assessed: true, note: "€81.98/MWh (TradingEconomics CFD) × EUR/USD 1.1557 — converted" },
   { date: "2026-09-18", value: 26.7, assessed: true, note: "€79.52/MWh (TradingEconomics CFD, Sep 18 close) × EUR/USD 1.1460 (ECB reference) — converted" },
+  { date: "2026-09-22", value: 24.2, assessed: true, note: "€72.10/MWh (Geagency close quote, Sep 22) × EUR/USD 1.1467 — converted; a market quote, ~9% below the Sep 18 quote" },
 ];
 
 export const gasJkm: GasPt[] = [
