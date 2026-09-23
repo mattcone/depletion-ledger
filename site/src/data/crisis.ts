@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-09-22";
+export const DATA_AS_OF = "2026-09-23";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -22,9 +22,9 @@ export interface SeriesPoint {
 
 // ---------- Headline stats ----------
 export const stats = [
-  { label: "Brent", value: "$100.34", sub: "Sep 21 settlement · −3.4% vs. prior close $103.87 (Sep 18) · +32% vs pre-crisis ~$76" },
-  { label: "US diesel (AAA)", value: "$6.53", sub: "Sep 22 · all-time high $6.5276 · +75% vs pre-war $3.72" },
-  { label: "US gasoline (AAA)", value: "$4.48", sub: "Sep 22 · +14.6¢ in a week (AAA) · +59% vs Jan $2.81" },
+  { label: "Brent", value: "$99.25", sub: "Sep 22 settlement · first close below $100 since Sep 8 (Reuters) · fifth straight down session · +31% vs pre-crisis ~$76" },
+  { label: "US diesel (AAA)", value: "$6.52", sub: "Sep 23 · down from the Sep 22 record $6.5276 · +75% vs pre-war $3.72" },
+  { label: "US gasoline (AAA)", value: "$4.47", sub: "Sep 23 · +10.7¢ in a week (AAA) · +59% vs Jan $2.81" },
   { label: "SPR", value: "285.0M", sub: "Sep 11 · down 0.4M in a week · down 130.5M from pre-war 415.4M · lowest since Nov 1982" },
   { label: "US diesel & heating oil", value: "107.9M", sub: "Sep 11 · up 1.6M in a week · 13.5% below last year · East Coast stocks 31% below last year" },
 ];
@@ -52,6 +52,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-09-17", value: 104.82, tip: "settlement · down 1.0% (Yahoo front-month)", note: "settlement (Yahoo front-month; −1.0% vs Sep 16). A second straight down session in the settlement series as Saudi bypass hopes — the 20M-barrel ship-to-ship sale and pipeline repair targets — eased disruption fears (Reuters/CNBC; CNBC framed it as the 'third day')." },
   { date: "2026-09-18", value: 103.87, tip: "settlement · down 0.9% (Yahoo front-month; also reported by CNBC)", note: "settlement (Yahoo front-month; −0.9% vs Sep 17; CNBC concurs). A third straight down session; the week finished roughly flat. JPMorgan: Middle East flows averaged ~17M b/d over 10 days, and satellite imagery shows ~2.8M b/d moving through Hormuz over six days. Rapidan: the pipeline outage will constrain Saudi exports through at least the end of September." },
   { date: "2026-09-21", value: 100.34, tip: "settlement · down 3.4% (Reuters)", note: "settlement (Reuters, November contract; −3.4% vs Sep 18). A fourth straight down session and the lowest since Sep 9. Both presidents arrived in New York for the UN General Assembly; no meeting between them has been confirmed. Saudi Arabia is again shipping oil through the strait (WSJ: ~2.4M b/d over the past two weeks, per Kpler)." },
+  { date: "2026-09-22", value: 99.25, tip: "settlement · down 1.1% (Yahoo front-month; news: below $100)", note: "Session close (Yahoo, November front-month; −1.1% vs Sep 21) — the first close below $100 since Sep 8 (Reuters) and a fifth straight down session. Drivers: the first acknowledged US–Iran contact since June (Witkoff and Kushner met Araghchi on the UN margins, Sep 22) and the East–West pipeline restart. News: Brent fell below $100 on Tuesday (OilPrice/Reuters; TradingEconomics: 'fell to $99')." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -124,7 +125,8 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-09-16", value: 102.43, note: "front-month futures close (NYMEX 2pm ET; CNBC) · −3.2%" },
   { date: "2026-09-17", value: 101.91, note: "front-month futures close (Yahoo) · −0.5%" },
   { date: "2026-09-18", value: 100.3, note: "front-month futures close (Yahoo; CNBC concurs) · −1.6%" },
-  { date: "2026-09-21", value: 95.78, note: "settlement (Reuters, October contract — its final trading day) · −4.5%" },
+  { date: "2026-09-21", value: 95.78, note: "settlement (Reuters, October contract) · −4.5%" },
+  { date: "2026-09-22", value: 94.59, note: "settlement (Jiji, October contract — its final trading day, Sep 22) · −1.2% vs Sep 21 for the same contract. The series switches to November starting Sep 23. November closed at $90.52 on Sep 22, about $4 below October, so the next change will reflect both the switch in contracts and any movement in November’s price." },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -179,6 +181,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-09-20", value: 4.4761, note: "AAA release, Sep 20" },
   { date: "2026-09-21", value: 4.4786, note: "AAA release, Sep 21" },
   { date: "2026-09-22", value: 4.4750, note: "AAA release, Sep 22" },
+  { date: "2026-09-23", value: 4.4744, note: "AAA release, Sep 23" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -208,6 +211,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-09-20", value: 6.505, note: "AAA record — first above $6.50" },
   { date: "2026-09-21", value: 6.5107, note: "AAA record" },
   { date: "2026-09-22", value: 6.5276, note: "AAA record" },
+  { date: "2026-09-23", value: 6.5217, note: "AAA — first decline since the Sep 4 record streak began" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 
@@ -480,10 +484,10 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "An official repair timetable for the East–West pipeline. An unnamed Bloomberg source says Saudi Arabia aims to restore half its capacity within days and full capacity in six weeks. In the meantime, Vortexa reports that Saudi Gulf terminals have loaded an average of about 3.7M barrels a day since Sep 12, up from 2.9M earlier in the month. Saudi Red Sea loadings fell to zero.", why: "An official estimate of repairs taking only days would reverse the Sep 11 change in odds." },
-      { item: "Whether the US and Iran meet at the UN General Assembly this week. Both presidents arrived in New York on Sep 21, but no meeting between them has been confirmed. Iran's military warned on Sep 20 that the US was preparing new strikes.", why: "Talks could help reopen the strait. Renewed strikes could make that harder." },
+      { item: "An official repair timetable for the East–West pipeline. Reuters reported on Sep 22, citing three sources, that the pipeline had restarted at a low rate. Full service could take weeks. Aramco aims to pump about 4M barrels a day within a few weeks, and the first cargo from Yanbu was scheduled to load for China on Sep 22. An unnamed Bloomberg source says Saudi Arabia aims to restore half its capacity within days and full capacity in six weeks. Before the restart, Vortexa reported that Saudi Red Sea loadings had fallen to zero. Gulf terminals loaded about 3.7M barrels a day on average since Sep 12, up from 2.9M earlier in the month.", why: "A confirmed resumption of Yanbu exports — or an official estimate of repairs taking only days — would reverse the Sep 11 change in odds. The reported restart and planned cargo do not confirm that exports have resumed." },
+      { item: "The next round of US–Iran talks. US envoys Witkoff and Kushner met Iran's foreign minister at the UN for about three hours on Sep 22. It was the first acknowledged contact between the governments since June, and another round is scheduled. Iran wants the naval blockade lifted, its frozen assets released, and the war ended on all fronts. IRGC spokesman Mohebbi says the full $24B must be released in one payment before negotiations. Iran also wants Saudi Arabia to lift its blockade on Houthi-held areas of Yemen.", why: "An agreement could help reopen the strait, but Iran's added demands make a deal harder to reach. President Pezeshkian is scheduled to address the UN on Sep 23 (fifth speaker in the first session); no meeting between the two presidents has been scheduled." },
       { item: "Whether attacks in Bab el-Mandeb spread to non-Saudi vessels.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes." },
-      { item: "Ship traffic through Hormuz. Reuters reported a preliminary Kpler count of 17 tracked commodity vessels crossing on Sep 19–20, down from 37 the previous weekend. Kpler also reported that 22 tankers carried 42M barrels of crude through the strait in the week of Sep 13. On Sep 21, UKMTO reported that a projectile struck a tanker entering the strait, injuring two crew members, and debris hit a second vessel.", why: "Watch whether more ships can pass safely. These counts come from independent trackers and exclude ships with their tracking signals off. The site doesn't use US Central Command's higher claimed totals as data." },
+      { item: "Ship traffic through Hormuz. Kpler's preliminary counts, reported by Reuters, show 4 crossings on Sep 21 and 3 on Sep 22. The Sep 22 count was roughly 80% below the 10-day average of about 15. On Sep 21, UKMTO reported that a projectile struck a tanker entering the strait, injuring two crew members, and debris hit a second vessel. Iranian state media reported that an explosion was heard near Qeshm Island on Sep 23, but no incident involving a vessel has been confirmed.", why: "Watch whether more ships can pass safely. These counts come from independent trackers and exclude ships with their tracking signals off. The site doesn't use US Central Command's higher claimed totals as data." },
       { item: "Saudi Arabia's response to Houthi attacks on Riyadh. Saudi Arabia confirmed on Sep 19 that the Houthis tried to strike the capital with a ballistic missile (AP). Reuters imagery showed a fire at a fuel depot at King Khalid International Airport. The BBC reported Riyadh's first air-raid alerts since fighting with the Houthis intensified. The Houthis also claimed on Sep 16 that they shot down a Saudi F-15 over Marib; the BBC verified footage of the wreckage, but Saudi Arabia hasn't confirmed the loss.", why: "Confirmation of the F-15 loss or a Saudi military response would mean the fighting has worsened." },
       { item: "Whether the Saudi-led Red Sea coalition takes military action. Saudi Arabia hosted a meeting on Sep 19 to secure the Red Sea, the Gulf of Aden, and Bab el-Mandeb. Turkey offered defense support, and the UK agreed on Sep 21 to provide one refuelling aircraft for a limited period to help Saudi jets defend against Houthi drones and missiles. The UK says this support does not cover strikes on the Houthis.", why: "A coalition naval operation or an expanded UK role would mean the fighting has worsened." },
     ],
@@ -491,8 +495,8 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Sep 23",
     items: [
-      { item: "The EIA report for the week ending Sep 18, which includes the first days after loadings at Yanbu stopped.", why: "Watch for faster SPR withdrawals, lower commercial crude stocks, or falling diesel stocks." },
-      { item: "The Trump–Xi summit in Washington. Xi's state visit is scheduled for Sep 23–25. It follows a new US law authorizing tariffs of up to 100% on countries buying Russian oil and gas, and pressure on China to cut purchases of Iranian crude.", why: "Watch for agreements affecting oil purchases or trade. Better trade relations could increase demand for oil; exemptions from sanctions could make it easier to buy Russian crude." },
+      { item: "The EIA report for the week ending Sep 18, due today (Sep 23) at 10:30 ET — the week in which the East–West pipeline shutdown (announced Sep 11; loadings halted Sep 13) stopped Yanbu exports; Kpler reports no visible Yanbu loadings since Sep 16. The pipeline's low-rate restart on Sep 22 is after the reporting week.", why: "Watch for faster SPR withdrawals, lower commercial crude stocks, or falling diesel stocks." },
+      { item: "The Trump–Xi summit in Washington. Xi is due at Joint Base Andrews this afternoon, with an arrival ceremony scheduled for the evening, Eastern Time. His state visit runs through Sep 25. It follows a new US law authorizing tariffs of up to 100% on countries buying Russian oil and gas, and pressure on China to cut purchases of Iranian crude.", why: "Watch for agreements affecting oil purchases or trade. Better trade relations could increase demand for oil; exemptions from sanctions could make it easier to buy Russian crude." },
     ],
   },
   {
@@ -738,6 +742,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-09-17", value: 4.947, note: "session close (Yahoo) · back below 5%" },
   { date: "2026-09-18", value: 4.998, note: "session close (Yahoo) · just below 5%" },
   { date: "2026-09-21", value: 4.96, note: "session close (Yahoo) · below 5%" },
+  { date: "2026-09-22", value: 4.968, note: "session close (Yahoo) · below 5%" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
