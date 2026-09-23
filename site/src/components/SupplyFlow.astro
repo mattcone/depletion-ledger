@@ -1,0 +1,171 @@
+---
+import supplyShape from "../data/supply-shape.json";
+
+// Display unit: million barrels per day (mb/d), like the rest of the site.
+// Source data stays in the IEA's metric tonnes; each band is converted with its
+// own factor from the UN Energy Statistics Yearbook (unstats.un.org/unsd/energy/
+// yearbook/conversion.htm, barrels per metric tonne). "Other products" is a
+// mixed bundle (LPG, naphtha, residual) with no single UN factor; 8.0 is a
+// disclosed assumption between residual fuel oil (6.62) and LPG (11.65).
+const BBL_PER_MT: Record<string, number> = {
+  crude: 7.32, // "crude petroleum (average specific gravity)"
+  gasoline: 8.5, // "gasolene (undifferentiated)"
+  diesel: 7.23, // "gas diesel oil"
+  jet: 7.77, // "kerosene / jet fuel"
+  other: 8.0, // assumed blend, see above
+};
+// One shared scale for the whole plate: 12 px per mmtd/day = 1.64 px per mb/d.
+const K = 12 / 7.33;
+const rate = (kt: number, days: number) => kt / days / 1000; // mmtd/day
+const change = (current: number, previous: number) => {
+  const percent = (current / previous - 1) * 100;
+  return `${percent < 0 ? "−" : "+"}${Math.abs(percent).toFixed(1)}%`;
+};
+const amount = (v: number) => v.toLocaleString("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+// Every stage from the same teal→amber palette
+// (coolors.co/001219-005f73-0a9396-94d2bd-e9d8a6-ee9b00-ca6702-bb3e03-ae2012-9b2226).
+const COLORS: Record<string, string> = {
+  crude: "#001219", // near-black — the oil coming in
+  refining: "#e9d8a6", // pale cream — the process, not a product
+  gasoline: "#005f73", // dark teal
+  diesel: "#ca6702", // burnt orange — the crisis fuel
+  jet: "#0a9396", // teal — the one rising
+  other: "#94d2bd", // pale mint
+};
+const stages = supplyShape.flows.map(row => {
+  const f = BBL_PER_MT[row.id] ?? 7.33;
+  const current = rate(row.current_kt, supplyShape.current_days) * f;
+  const previous = rate(row.previous_kt, supplyShape.comparison_days) * f;
+  return {
+    ...row,
+    current, previous,
+    change: change(current, previous),
+    color: COLORS[row.id] ?? "#8b877a",
+    w: current * K,
+  };
+});
+const crude = stages[0]!;
+const fuels = stages.slice(2);
+// Refinery output in barrels = the sum of the four product bands: in tonnes they
+// already sum to the IEA total, so the diagram keeps its invariant (products add
+// up to output) in the display unit, without inventing a factor for the mix.
+const output = {
+  ...stages[1]!,
+  current: fuels.reduce((s, f) => s + f.current, 0),
+  previous: fuels.reduce((s, f) => s + f.previous, 0),
+  change: change(fuels.reduce((s, f) => s + f.current, 0), fuels.reduce((s, f) => s + f.previous, 0)),
+};
+output.w = fuels.reduce((s, f) => s + f.w, 0);
+const Y = 260; // shared centerline: intake band, refinery node
+const NODE_X = 660, NODE_W = 48;
+const FUEL_Y = [75, 212, 349, 486]; // the four fuel rows, top to bottom
+// Stack the branch start points along the refinery node, in fuel order, so the
+// bands fan out without crossing.
+let stackY = Y - output.w / 2;
+const branch = fuels.map((f, i) => {
+  const s = stackY + f.w / 2;
+  stackY += f.w;
+  const e = FUEL_Y[i]!;
+  // One gentle ease, horizontal at both ends: control points at 45% / 55%.
+  const span = 1440 - (NODE_X + NODE_W);
+  return { ...f, e, d: `M ${NODE_X + NODE_W} ${s.toFixed(2)} C ${(NODE_X + NODE_W + 0.45 * span).toFixed(1)} ${s.toFixed(2)}, ${(NODE_X + NODE_W + 0.55 * span).toFixed(1)} ${e}, 1440 ${e}` };
+});
+const desc = `OECD, June 2026 versus June 2025, estimated million barrels per day. We convert metric tonnes using UN conversion factors. The crude oil factor approximates the mixed refinery intake; "other products" uses an assumed 8.0 barrels per tonne. ${[crude, output, ...fuels]
+  .map(s => `${s.name}: ${amount(s.current)}, ${s.change} versus a year earlier`)
+  .join(". ")}. Band widths are proportional to volume on one shared scale, so the product bands add up to the refinery output band.`;
+---
+
+<section id="supply-flow" class="supply-flow">
+  <figure>
+    <p class="flow-sub">Estimated million barrels per day · June 2026, change vs June 2025</p>
+
+    <div class="flow-bleed">
+      <div class="flow-diagram">
+        <svg viewBox="0 0 1440 520" class="flow-chart" role="img" aria-labelledby="supply-flow-title supply-flow-desc">
+          <title id="supply-flow-title">OECD refinery intake and oil product output, June 2026, change versus June 2025</title>
+          <desc id="supply-flow-desc">{desc}</desc>
+
+          <!-- June 2026: edge to edge -->
+          <rect x="0" y={Y - crude.w / 2} width="660" height={crude.w} fill={crude.color} />
+          <rect x={NODE_X} y={Y - output.w / 2} width={NODE_W} height={output.w} fill={output.color} />
+          {branch.map(b => <path d={b.d} stroke={b.color} stroke-width={b.w} fill="none" />)}
+
+          <!-- Direct labels: small, in the clear space beside each band -->
+          <text x="24" y="214" class="flow-name">Oil entering refineries</text>
+          <text x="24" y="313" class="flow-num">{amount(crude.current)}<tspan dx="14" class="flow-delta">{crude.change}</tspan></text>
+          <text x={NODE_X + NODE_W / 2} y="214" text-anchor="middle" class="flow-name">Refinery output</text>
+          <text x={NODE_X + NODE_W / 2} y="313" text-anchor="middle" class="flow-num">{amount(output.current)}</text>
+          <text x={NODE_X + NODE_W / 2} y="330" text-anchor="middle" class="flow-delta">{output.change}</text>
+          {branch.map(b => (
+            <g text-anchor="end">
+              <text x="1416" y={b.e - b.w / 2 - 40} class="flow-name">{b.name}</text>
+              <text x="1416" y={b.e - b.w / 2 - 22} class="flow-num">
+                {amount(b.current)}<tspan dx="14" class="flow-delta">{b.change}</tspan>
+              </text>
+            </g>
+          ))}
+        </svg>
+      </div>
+
+      <!-- A readable, vertical version of the same comparisons on small screens. -->
+      <div class="flow-mobile" aria-label="OECD refinery comparisons, June 2026 versus June 2025, estimated million barrels per day">
+        {[crude, output, ...fuels].map((s, i) => (
+          <div class="flow-m-stage">
+            {i === 0 && <p class="flow-m-group">Oil coming in</p>}
+            {i === 1 && <p class="flow-m-group">After refining</p>}
+            {i === 2 && <p class="flow-m-group">Products coming out</p>}
+            <div class="flow-m-label">
+              <span>{s.name}</span>
+              <span class="flow-m-num">{amount(s.current)} <em>{s.change}</em></span>
+            </div>
+            <div class="flow-m-track">
+              <span class="flow-m-bar" style={`width:${s.current / output.current * 100}%;background:${s.color}`}></span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <figcaption>
+      Band widths show estimated daily volumes on the same scale. The four product
+      bands add up to refinery output. Percentages compare June 2026 with June 2025.
+      We convert the IEA's figures from metric tonnes using{" "}
+      <a href="https://unstats.un.org/unsd/energy/yearbook/conversion.htm">UN conversion factors</a>:
+      7.32 barrels per tonne for oil entering refineries, 8.50 for gasoline, 7.23 for
+      diesel, and 7.77 for kerosene. The 7.32 factor is an approximation because
+      refinery intake includes crude and other raw materials. For the mixed
+      "other products" category, we assume 8.0 barrels per tonne. Source:{" "}
+      <a href={supplyShape.source.url}>IEA Monthly Oil Statistics</a>, September 2026,
+      tables 1 and 7. The figures include estimates.
+    </figcaption>
+  </figure>
+</section>
+
+<style>
+  /* Constrained to the page column, like the other charts. */
+  .flow-bleed { }
+  /* Aligned to the page's text column, not the full-bleed plate. */
+  .flow-sub { margin: 0 0 14px; font-family: var(--font-mono); font-size: 10.5px; color: #8a867a; letter-spacing: .02em; }
+  .flow-diagram { margin: 0; }
+  .flow-chart { display: block; width: 100%; height: auto; }
+  /* Font sizes in viewBox units (1440 wide): at a ~1230px rendered column these
+     land near the fixed 12.5px labels of the gas/diesel price charts. */
+  .flow-name { font-family: Georgia, "Times New Roman", serif; font-size: 15px; fill: #33322c; }
+  .flow-num { font-family: var(--font-mono); font-size: 14.5px; fill: #1c1b17; font-variant-numeric: tabular-nums; }
+  .flow-delta { font-size: 12.5px; fill: #8a867a; }
+  figcaption { margin-top: 12px; font-family: var(--font-mono); font-size: 10.5px; line-height: 1.7; color: #8a867a; }
+  figcaption a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+  .flow-mobile { display: none; }
+  @media (max-width: 700px) {
+    .flow-sub { margin-bottom: 12px; }
+    .flow-diagram { display: none; }
+    .flow-mobile { display: block; padding: 16px; margin-bottom: 20px; }
+    .flow-m-stage { margin-top: 26px; }
+    .flow-m-group { margin: 22px 0 12px; font-family: Georgia, "Times New Roman", serif; font-size: 14px; font-style: italic; color: #8a867a; }
+    .flow-m-label { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 7px; font-size: 13px; color: #1c1b17; }
+    .flow-m-num { font-family: var(--font-mono); font-size: 10.5px; color: #3b3a32; white-space: nowrap; }
+    .flow-m-num em { font-style: normal; color: #8a867a; margin-left: 6px; }
+    .flow-m-track { height: 12px; position: relative; }
+    .flow-m-bar { position: absolute; top: 0; bottom: 0; left: 0; }
+  }
+</style>

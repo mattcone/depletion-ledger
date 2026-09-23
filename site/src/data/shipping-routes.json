@@ -1,0 +1,286 @@
+{
+  "unit": "million barrels per day",
+  "status": "source-estimate",
+  "sources": {
+    "annual": {
+      "title": "EIA World Oil Transit Chokepoints",
+      "published": "2026-03-03",
+      "retrieved": "2026-09-22",
+      "url": "https://www.eia.gov/international/content/analysis/special_topics/World_Oil_Transit_Chokepoints/"
+    },
+    "quarterly": {
+      "title": "EIA Global Energy Security Data",
+      "published": "2026-08-12",
+      "retrieved": "2026-09-22",
+      "url": "https://www.eia.gov/outlooks/steo/report/energysecurity/article.php"
+    }
+  },
+  "notes": [
+    "Annual averages for 2023 and 2024 and quarterly averages from Q1 2025 are connected in the chart. Straight segments between unlike periods do not represent monthly observations; none were interpolated.",
+    "Crude includes condensate. Products exclude LNG. All points are EIA estimates based on Vortexa data.",
+    "Annual and quarterly figures come from different releases; the earlier release has overlapping first-half 2025 figures that are not spliced into the newer quarterly series.",
+    "Reported components and totals can differ by 0.1 million b/d because of rounding; preserve source values.",
+    "Global route flows are not restricted to OECD destinations. A cargo may transit more than one route; do not sum routes.",
+    "EIA warns that Hormuz AIS data have been especially unreliable since late February 2026 and 2026 estimates are revised frequently."
+  ],
+  "routes": [
+    {
+      "id": "hormuz",
+      "name": "Strait of Hormuz",
+      "points": [
+        {
+          "period": "2023",
+          "frequency": "annual",
+          "x_year": 2023.5,
+          "crude": 15.8,
+          "products": 6.0,
+          "total": 21.8,
+          "source": "annual",
+          "table": 3
+        },
+        {
+          "period": "2024",
+          "frequency": "annual",
+          "x_year": 2024.5,
+          "crude": 14.6,
+          "products": 6.1,
+          "total": 20.7,
+          "source": "annual",
+          "table": 3
+        },
+        {
+          "period": "2025-Q1",
+          "frequency": "quarterly",
+          "x_year": 2025.125,
+          "crude": 14.8,
+          "products": 6.2,
+          "total": 20.9,
+          "source": "quarterly",
+          "table": 4
+        },
+        {
+          "period": "2025-Q2",
+          "frequency": "quarterly",
+          "x_year": 2025.375,
+          "crude": 14.9,
+          "products": 6.2,
+          "total": 21.0,
+          "source": "quarterly",
+          "table": 4
+        },
+        {
+          "period": "2025-Q3",
+          "frequency": "quarterly",
+          "x_year": 2025.625,
+          "crude": 15.0,
+          "products": 6.3,
+          "total": 21.3,
+          "source": "quarterly",
+          "table": 4
+        },
+        {
+          "period": "2025-Q4",
+          "frequency": "quarterly",
+          "x_year": 2025.875,
+          "crude": 15.9,
+          "products": 5.7,
+          "total": 21.6,
+          "source": "quarterly",
+          "table": 4
+        },
+        {
+          "period": "2026-Q1",
+          "frequency": "quarterly",
+          "x_year": 2026.125,
+          "crude": 10.9,
+          "products": 4.0,
+          "total": 14.9,
+          "source": "quarterly",
+          "table": 4
+        },
+        {
+          "period": "2026-Q2",
+          "frequency": "quarterly",
+          "x_year": 2026.375,
+          "crude": 3.7,
+          "products": 1.1,
+          "total": 4.9,
+          "source": "quarterly",
+          "table": 4
+        }
+      ]
+    },
+    {
+      "id": "suez",
+      "name": "Suez Canal & SUMED pipeline",
+      "points": [
+        {
+          "period": "2023",
+          "frequency": "annual",
+          "x_year": 2023.5,
+          "crude": 4.5,
+          "products": 4.3,
+          "total": 8.8,
+          "source": "annual",
+          "table": 4
+        },
+        {
+          "period": "2024",
+          "frequency": "annual",
+          "x_year": 2024.5,
+          "crude": 3.0,
+          "products": 1.7,
+          "total": 4.8,
+          "source": "annual",
+          "table": 4
+        },
+        {
+          "period": "2025-Q1",
+          "frequency": "quarterly",
+          "x_year": 2025.125,
+          "crude": 2.8,
+          "products": 1.9,
+          "total": 4.6,
+          "source": "quarterly",
+          "table": 5
+        },
+        {
+          "period": "2025-Q2",
+          "frequency": "quarterly",
+          "x_year": 2025.375,
+          "crude": 2.9,
+          "products": 2.2,
+          "total": 5.1,
+          "source": "quarterly",
+          "table": 5
+        },
+        {
+          "period": "2025-Q3",
+          "frequency": "quarterly",
+          "x_year": 2025.625,
+          "crude": 3.1,
+          "products": 2.5,
+          "total": 5.6,
+          "source": "quarterly",
+          "table": 5
+        },
+        {
+          "period": "2025-Q4",
+          "frequency": "quarterly",
+          "x_year": 2025.875,
+          "crude": 3.6,
+          "products": 2.3,
+          "total": 5.9,
+          "source": "quarterly",
+          "table": 5
+        },
+        {
+          "period": "2026-Q1",
+          "frequency": "quarterly",
+          "x_year": 2026.125,
+          "crude": 3.2,
+          "products": 2.5,
+          "total": 5.7,
+          "source": "quarterly",
+          "table": 5
+        },
+        {
+          "period": "2026-Q2",
+          "frequency": "quarterly",
+          "x_year": 2026.375,
+          "crude": 3.6,
+          "products": 2.2,
+          "total": 5.8,
+          "source": "quarterly",
+          "table": 5
+        }
+      ]
+    },
+    {
+      "id": "bab",
+      "name": "Bab el-Mandeb",
+      "points": [
+        {
+          "period": "2023",
+          "frequency": "annual",
+          "x_year": 2023.5,
+          "crude": 4.7,
+          "products": 4.6,
+          "total": 9.3,
+          "source": "annual",
+          "table": 4
+        },
+        {
+          "period": "2024",
+          "frequency": "annual",
+          "x_year": 2024.5,
+          "crude": 2.7,
+          "products": 1.4,
+          "total": 4.1,
+          "source": "annual",
+          "table": 4
+        },
+        {
+          "period": "2025-Q1",
+          "frequency": "quarterly",
+          "x_year": 2025.125,
+          "crude": 2.1,
+          "products": 1.7,
+          "total": 3.9,
+          "source": "quarterly",
+          "table": 6
+        },
+        {
+          "period": "2025-Q2",
+          "frequency": "quarterly",
+          "x_year": 2025.375,
+          "crude": 2.6,
+          "products": 1.8,
+          "total": 4.5,
+          "source": "quarterly",
+          "table": 6
+        },
+        {
+          "period": "2025-Q3",
+          "frequency": "quarterly",
+          "x_year": 2025.625,
+          "crude": 2.6,
+          "products": 2.0,
+          "total": 4.6,
+          "source": "quarterly",
+          "table": 6
+        },
+        {
+          "period": "2025-Q4",
+          "frequency": "quarterly",
+          "x_year": 2025.875,
+          "crude": 3.2,
+          "products": 2.2,
+          "total": 5.4,
+          "source": "quarterly",
+          "table": 6
+        },
+        {
+          "period": "2026-Q1",
+          "frequency": "quarterly",
+          "x_year": 2026.125,
+          "crude": 3.4,
+          "products": 2.2,
+          "total": 5.6,
+          "source": "quarterly",
+          "table": 6
+        },
+        {
+          "period": "2026-Q2",
+          "frequency": "quarterly",
+          "x_year": 2026.375,
+          "crude": 6.1,
+          "products": 2.0,
+          "total": 8.1,
+          "source": "quarterly",
+          "table": 6
+        }
+      ]
+    }
+  ]
+}
