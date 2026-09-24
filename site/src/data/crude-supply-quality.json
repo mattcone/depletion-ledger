@@ -1,0 +1,1521 @@
+{
+  "source": {
+    "publisher": "Eni",
+    "title": "World Energy Review 2025 (24th edition)",
+    "published": "2025-10-21",
+    "url": "https://www.eni.com/content/dam/enicom/documents/eng/visione/wer/2025/world-energy-review-2025.pdf",
+    "sha256": "a7efc6d260bd038526d7afa54250a310229bd5b6feed3b8de5484dbc7bde4976",
+    "retrieved": "2026-09-23",
+    "table": "World, 'Crude Production by Quality (Gravity and Sulphur Content)', thousand barrels/day (print p96; PDF page 98)",
+    "underlying_data": "Table footnote: 'Eni's elaborations on IEA (2025) Monthly Oil Data Service data.'",
+    "note": "Annual data; the 2025 edition ends at calendar 2024. This is the pre-war baseline."
+  },
+  "unit": "thousand barrels per day (kb/d)",
+  "years_reported": [
+    2010,
+    2015,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "missing_years_note": "The table reports 2010, 2015, and 2019-2024 only; this edition has no complete annual table for the quality split (the 2000-2024 stacked chart on print p98 is a chart, not a table). 2011-2014 and 2016-2018 are explicit nulls below and are not plotted; nothing is interpolated.",
+  "band_definitions": {
+    "Ultra Light": {
+      "definition": "API level equal to or greater than 50° and a low sulphur content",
+      "source_page": 9
+    },
+    "Light & Sweet": {
+      "definition": "API level equal to or greater than 35° and less than 50°, sulphur content less 0.5%",
+      "source_page": 9
+    },
+    "Light & Medium Sour": {
+      "definition": "API level equal to or greater than 35° and less than 50°, sulphur content equal to or greater than 0.5% and less than 1%",
+      "source_page": 9
+    },
+    "Light & Sour": {
+      "definition": "API level equal to or greater than 35° and less than 50°, sulphur content equal to or greater than 1%",
+      "source_page": 9
+    },
+    "Medium & Sweet": {
+      "definition": "API level equal to or greater than 26° and less than 35°, sulphur content less 0.5%",
+      "source_page": 9
+    },
+    "Medium & Medium Sour": {
+      "definition": "API level equal to or greater than 26° and less than 35°, sulphur content equal to or greater than 0.5% and less than 1%",
+      "source_page": 9
+    },
+    "Medium & Sour": {
+      "definition": "API level equal to or greater than 26° and less than 35°, sulphur content equal to or greater than 1%",
+      "source_page": 9
+    },
+    "Heavy & Sweet": {
+      "definition": "API level equal to or greater than 10° and less than 26°, sulphur content less 0.5%",
+      "source_page": 9
+    },
+    "Heavy & Medium Sour": {
+      "definition": "API level equal to or greater than 10° and less than 26°, sulphur content equal to or greater than 0.5% and less than 1%",
+      "source_page": 9
+    },
+    "Heavy & Sour": {
+      "definition": "API level equal to or greater than 10° and less than 26°, sulphur content equal to or greater than 1%",
+      "source_page": 9
+    },
+    "Unassigned production": {
+      "definition": "Production Eni could not assign to a quality band; 0.7% of the 2024 world total (Eni's own note, table p96).",
+      "source_page": 96
+    }
+  },
+  "grouping": {
+    "medium_sour": [
+      "Medium & Sour"
+    ],
+    "heavy_sour": [
+      "Heavy & Sour"
+    ],
+    "other_grades": [
+      "Light & Medium Sour",
+      "Light & Sour",
+      "Medium & Sweet",
+      "Medium & Medium Sour",
+      "Heavy & Sweet",
+      "Heavy & Medium Sour",
+      "Unassigned production"
+    ],
+    "light_sweet": [
+      "Light & Sweet"
+    ],
+    "ultra_light": [
+      "Ultra Light"
+    ]
+  },
+  "grouping_note": "Stack order, bottom to top: medium_sour, heavy_sour, other_grades, light_sweet, ultra_light. 'Other grades' is every remaining Eni band except light & sweet and ultra light, and also absorbs Eni's 'unassigned production' row so that the five grouped bands sum to Eni's world total in every reported year. Medium & sour sits at the bottom because it is the class the Gulf produces.",
+  "series": [
+    {
+      "eni_band": "Ultra Light",
+      "year": 2010,
+      "kb_d": 2664,
+      "grouped": "ultra_light",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Ultra Light",
+      "year": 2011,
+      "kb_d": null,
+      "grouped": "ultra_light",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Ultra Light",
+      "year": 2012,
+      "kb_d": null,
+      "grouped": "ultra_light",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Ultra Light",
+      "year": 2013,
+      "kb_d": null,
+      "grouped": "ultra_light",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Ultra Light",
+      "year": 2014,
+      "kb_d": null,
+      "grouped": "ultra_light",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Ultra Light",
+      "year": 2015,
+      "kb_d": 2878,
+      "grouped": "ultra_light",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Ultra Light",
+      "year": 2016,
+      "kb_d": null,
+      "grouped": "ultra_light",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Ultra Light",
+      "year": 2017,
+      "kb_d": null,
+      "grouped": "ultra_light",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Ultra Light",
+      "year": 2018,
+      "kb_d": null,
+      "grouped": "ultra_light",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Ultra Light",
+      "year": 2019,
+      "kb_d": 2924,
+      "grouped": "ultra_light",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Ultra Light",
+      "year": 2020,
+      "kb_d": 2883,
+      "grouped": "ultra_light",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Ultra Light",
+      "year": 2021,
+      "kb_d": 2911,
+      "grouped": "ultra_light",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Ultra Light",
+      "year": 2022,
+      "kb_d": 2977,
+      "grouped": "ultra_light",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Ultra Light",
+      "year": 2023,
+      "kb_d": 3084,
+      "grouped": "ultra_light",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Ultra Light",
+      "year": 2024,
+      "kb_d": 3103,
+      "grouped": "ultra_light",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sweet",
+      "year": 2010,
+      "kb_d": 13911,
+      "grouped": "light_sweet",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sweet",
+      "year": 2011,
+      "kb_d": null,
+      "grouped": "light_sweet",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sweet",
+      "year": 2012,
+      "kb_d": null,
+      "grouped": "light_sweet",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sweet",
+      "year": 2013,
+      "kb_d": null,
+      "grouped": "light_sweet",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sweet",
+      "year": 2014,
+      "kb_d": null,
+      "grouped": "light_sweet",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sweet",
+      "year": 2015,
+      "kb_d": 15996,
+      "grouped": "light_sweet",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sweet",
+      "year": 2016,
+      "kb_d": null,
+      "grouped": "light_sweet",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sweet",
+      "year": 2017,
+      "kb_d": null,
+      "grouped": "light_sweet",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sweet",
+      "year": 2018,
+      "kb_d": null,
+      "grouped": "light_sweet",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sweet",
+      "year": 2019,
+      "kb_d": 19162,
+      "grouped": "light_sweet",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sweet",
+      "year": 2020,
+      "kb_d": 17206,
+      "grouped": "light_sweet",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sweet",
+      "year": 2021,
+      "kb_d": 17569,
+      "grouped": "light_sweet",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sweet",
+      "year": 2022,
+      "kb_d": 17809,
+      "grouped": "light_sweet",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sweet",
+      "year": 2023,
+      "kb_d": 18637,
+      "grouped": "light_sweet",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sweet",
+      "year": 2024,
+      "kb_d": 18953,
+      "grouped": "light_sweet",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Medium Sour",
+      "year": 2010,
+      "kb_d": 3686,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Medium Sour",
+      "year": 2011,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Medium Sour",
+      "year": 2012,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Medium Sour",
+      "year": 2013,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Medium Sour",
+      "year": 2014,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Medium Sour",
+      "year": 2015,
+      "kb_d": 3806,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Medium Sour",
+      "year": 2016,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Medium Sour",
+      "year": 2017,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Medium Sour",
+      "year": 2018,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Medium Sour",
+      "year": 2019,
+      "kb_d": 4237,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Medium Sour",
+      "year": 2020,
+      "kb_d": 3913,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Medium Sour",
+      "year": 2021,
+      "kb_d": 3807,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Medium Sour",
+      "year": 2022,
+      "kb_d": 4124,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Medium Sour",
+      "year": 2023,
+      "kb_d": 4145,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Medium Sour",
+      "year": 2024,
+      "kb_d": 4040,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sour",
+      "year": 2010,
+      "kb_d": 2293,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sour",
+      "year": 2011,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sour",
+      "year": 2012,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sour",
+      "year": 2013,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sour",
+      "year": 2014,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sour",
+      "year": 2015,
+      "kb_d": 2692,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sour",
+      "year": 2016,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sour",
+      "year": 2017,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sour",
+      "year": 2018,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sour",
+      "year": 2019,
+      "kb_d": 3017,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sour",
+      "year": 2020,
+      "kb_d": 2907,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sour",
+      "year": 2021,
+      "kb_d": 2929,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sour",
+      "year": 2022,
+      "kb_d": 3043,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sour",
+      "year": 2023,
+      "kb_d": 2823,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Light & Sour",
+      "year": 2024,
+      "kb_d": 2712,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sweet",
+      "year": 2010,
+      "kb_d": 8541,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sweet",
+      "year": 2011,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sweet",
+      "year": 2012,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sweet",
+      "year": 2013,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sweet",
+      "year": 2014,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sweet",
+      "year": 2015,
+      "kb_d": 8746,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sweet",
+      "year": 2016,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sweet",
+      "year": 2017,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sweet",
+      "year": 2018,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sweet",
+      "year": 2019,
+      "kb_d": 8770,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sweet",
+      "year": 2020,
+      "kb_d": 8786,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sweet",
+      "year": 2021,
+      "kb_d": 8884,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sweet",
+      "year": 2022,
+      "kb_d": 8972,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sweet",
+      "year": 2023,
+      "kb_d": 9386,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sweet",
+      "year": 2024,
+      "kb_d": 9608,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Medium Sour",
+      "year": 2010,
+      "kb_d": 2748,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Medium Sour",
+      "year": 2011,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Medium Sour",
+      "year": 2012,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Medium Sour",
+      "year": 2013,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Medium Sour",
+      "year": 2014,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Medium Sour",
+      "year": 2015,
+      "kb_d": 3131,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Medium Sour",
+      "year": 2016,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Medium Sour",
+      "year": 2017,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Medium Sour",
+      "year": 2018,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Medium Sour",
+      "year": 2019,
+      "kb_d": 4223,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Medium Sour",
+      "year": 2020,
+      "kb_d": 4485,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Medium Sour",
+      "year": 2021,
+      "kb_d": 4698,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Medium Sour",
+      "year": 2022,
+      "kb_d": 4763,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Medium Sour",
+      "year": 2023,
+      "kb_d": 5249,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Medium Sour",
+      "year": 2024,
+      "kb_d": 5456,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sour",
+      "year": 2010,
+      "kb_d": 30094,
+      "grouped": "medium_sour",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sour",
+      "year": 2011,
+      "kb_d": null,
+      "grouped": "medium_sour",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sour",
+      "year": 2012,
+      "kb_d": null,
+      "grouped": "medium_sour",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sour",
+      "year": 2013,
+      "kb_d": null,
+      "grouped": "medium_sour",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sour",
+      "year": 2014,
+      "kb_d": null,
+      "grouped": "medium_sour",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sour",
+      "year": 2015,
+      "kb_d": 32010,
+      "grouped": "medium_sour",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sour",
+      "year": 2016,
+      "kb_d": null,
+      "grouped": "medium_sour",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sour",
+      "year": 2017,
+      "kb_d": null,
+      "grouped": "medium_sour",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sour",
+      "year": 2018,
+      "kb_d": null,
+      "grouped": "medium_sour",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sour",
+      "year": 2019,
+      "kb_d": 28917,
+      "grouped": "medium_sour",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sour",
+      "year": 2020,
+      "kb_d": 25835,
+      "grouped": "medium_sour",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sour",
+      "year": 2021,
+      "kb_d": 26223,
+      "grouped": "medium_sour",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sour",
+      "year": 2022,
+      "kb_d": 28391,
+      "grouped": "medium_sour",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sour",
+      "year": 2023,
+      "kb_d": 27783,
+      "grouped": "medium_sour",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Medium & Sour",
+      "year": 2024,
+      "kb_d": 27021,
+      "grouped": "medium_sour",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sweet",
+      "year": 2010,
+      "kb_d": 1394,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sweet",
+      "year": 2011,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sweet",
+      "year": 2012,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sweet",
+      "year": 2013,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sweet",
+      "year": 2014,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sweet",
+      "year": 2015,
+      "kb_d": 1260,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sweet",
+      "year": 2016,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sweet",
+      "year": 2017,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sweet",
+      "year": 2018,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sweet",
+      "year": 2019,
+      "kb_d": 1196,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sweet",
+      "year": 2020,
+      "kb_d": 1154,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sweet",
+      "year": 2021,
+      "kb_d": 1129,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sweet",
+      "year": 2022,
+      "kb_d": 1177,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sweet",
+      "year": 2023,
+      "kb_d": 1157,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sweet",
+      "year": 2024,
+      "kb_d": 1101,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Medium Sour",
+      "year": 2010,
+      "kb_d": 2533,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Medium Sour",
+      "year": 2011,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Medium Sour",
+      "year": 2012,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Medium Sour",
+      "year": 2013,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Medium Sour",
+      "year": 2014,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Medium Sour",
+      "year": 2015,
+      "kb_d": 2329,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Medium Sour",
+      "year": 2016,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Medium Sour",
+      "year": 2017,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Medium Sour",
+      "year": 2018,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Medium Sour",
+      "year": 2019,
+      "kb_d": 1647,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Medium Sour",
+      "year": 2020,
+      "kb_d": 1565,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Medium Sour",
+      "year": 2021,
+      "kb_d": 1566,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Medium Sour",
+      "year": 2022,
+      "kb_d": 1680,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Medium Sour",
+      "year": 2023,
+      "kb_d": 1847,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Medium Sour",
+      "year": 2024,
+      "kb_d": 1783,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sour",
+      "year": 2010,
+      "kb_d": 6032,
+      "grouped": "heavy_sour",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sour",
+      "year": 2011,
+      "kb_d": null,
+      "grouped": "heavy_sour",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sour",
+      "year": 2012,
+      "kb_d": null,
+      "grouped": "heavy_sour",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sour",
+      "year": 2013,
+      "kb_d": null,
+      "grouped": "heavy_sour",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sour",
+      "year": 2014,
+      "kb_d": null,
+      "grouped": "heavy_sour",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sour",
+      "year": 2015,
+      "kb_d": 7635,
+      "grouped": "heavy_sour",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sour",
+      "year": 2016,
+      "kb_d": null,
+      "grouped": "heavy_sour",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sour",
+      "year": 2017,
+      "kb_d": null,
+      "grouped": "heavy_sour",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sour",
+      "year": 2018,
+      "kb_d": null,
+      "grouped": "heavy_sour",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sour",
+      "year": 2019,
+      "kb_d": 8331,
+      "grouped": "heavy_sour",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sour",
+      "year": 2020,
+      "kb_d": 7452,
+      "grouped": "heavy_sour",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sour",
+      "year": 2021,
+      "kb_d": 7424,
+      "grouped": "heavy_sour",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sour",
+      "year": 2022,
+      "kb_d": 7694,
+      "grouped": "heavy_sour",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sour",
+      "year": 2023,
+      "kb_d": 7864,
+      "grouped": "heavy_sour",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Heavy & Sour",
+      "year": 2024,
+      "kb_d": 8062,
+      "grouped": "heavy_sour",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Unassigned production",
+      "year": 2010,
+      "kb_d": 676,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Unassigned production",
+      "year": 2011,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Unassigned production",
+      "year": 2012,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Unassigned production",
+      "year": 2013,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Unassigned production",
+      "year": 2014,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Unassigned production",
+      "year": 2015,
+      "kb_d": 668,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Unassigned production",
+      "year": 2016,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Unassigned production",
+      "year": 2017,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Unassigned production",
+      "year": 2018,
+      "kb_d": null,
+      "grouped": "other_grades",
+      "status": "not_in_source",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Unassigned production",
+      "year": 2019,
+      "kb_d": 577,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Unassigned production",
+      "year": 2020,
+      "kb_d": 544,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Unassigned production",
+      "year": 2021,
+      "kb_d": 537,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Unassigned production",
+      "year": 2022,
+      "kb_d": 490,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Unassigned production",
+      "year": 2023,
+      "kb_d": 474,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "eni_band": "Unassigned production",
+      "year": 2024,
+      "kb_d": 567,
+      "grouped": "other_grades",
+      "status": "reported",
+      "source_page": 96
+    }
+  ],
+  "totals": [
+    {
+      "year": 2010,
+      "world_total_kb_d": 74572,
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "year": 2015,
+      "world_total_kb_d": 81153,
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "year": 2019,
+      "world_total_kb_d": 83000,
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "year": 2020,
+      "world_total_kb_d": 76729,
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "year": 2021,
+      "world_total_kb_d": 77677,
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "year": 2022,
+      "world_total_kb_d": 81119,
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "year": 2023,
+      "world_total_kb_d": 82449,
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "year": 2024,
+      "world_total_kb_d": 82406,
+      "status": "reported",
+      "source_page": 96
+    },
+    {
+      "year": 2011,
+      "world_total_kb_d": null,
+      "status": "not_in_source",
+      "source_page": null
+    },
+    {
+      "year": 2012,
+      "world_total_kb_d": null,
+      "status": "not_in_source",
+      "source_page": null
+    },
+    {
+      "year": 2013,
+      "world_total_kb_d": null,
+      "status": "not_in_source",
+      "source_page": null
+    },
+    {
+      "year": 2014,
+      "world_total_kb_d": null,
+      "status": "not_in_source",
+      "source_page": null
+    },
+    {
+      "year": 2016,
+      "world_total_kb_d": null,
+      "status": "not_in_source",
+      "source_page": null
+    },
+    {
+      "year": 2017,
+      "world_total_kb_d": null,
+      "status": "not_in_source",
+      "source_page": null
+    },
+    {
+      "year": 2018,
+      "world_total_kb_d": null,
+      "status": "not_in_source",
+      "source_page": null
+    }
+  ],
+  "rounding_note": "Band values are Eni's integers in kb/d; in 2015, 2019, 2020 and 2022 the ten bands plus unassigned sum to Eni's stated world total within 1-2 kb/d (their own rounding). 2010, 2021, 2023, 2024 sum exactly.",
+  "annotation": {
+    "id": "gulf_shutin_bracket",
+    "kind": "bracket on the 2024 medium & sour band",
+    "label": "about 10 mb/d offline since Feb 2026",
+    "volume_mb_d": 10,
+    "status": "agency-estimate",
+    "source": "IEA Oil Market Report, August 2026 edition (12 Aug 2026): 'more than 10 million barrels per day of Gulf production still shut down' (August 2026). The same figure is used in the Supply section of this dashboard. X in the label is 10, the figure the IEA edition states.",
+    "note": "An annotation drawn on the 2024 bar, not a data series; it does not modify any plotted value.",
+    "date": "2026-08-12"
+  },
+  "band_definitions_note": "Definitions transcribed verbatim from Eni's 'Quality levels - API gravity and sulphur content' table, print p9 (PDF page 11). Page numbers cited throughout are the printed page numbers; the PDF page is the printed page plus 2."
+}

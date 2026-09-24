@@ -120,6 +120,119 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
   day: "numeric",
 });
 
+// ── Not all crude is the same: straight-run yields of three crudes ────────────
+// Every number in the section is derived from src/data/crude-yields.json (ExxonMobil
+// public assays, "Yield (% vol)" cut row). The seven reported cuts are grouped into
+// five bands; band colors match the refinery plate in SupplyFlow.astro (same palette).
+// VGO and residue are separate bands: VGO is converted in nearly every complex
+// refinery (FCC/hydrocracker, standard equipment), residue needs a coker — the
+// scarce, geographically concentrated unit.
+import crudeYieldsData from "../data/crude-yields.json";
+const cyBandDefs = [
+  { id: "naphtha", label: "naphtha", sub: "becomes gasoline after further processing", color: "#005f73", text: "#ffffff", cuts: ["light_naphtha", "heavy_naphtha"] },
+  { id: "kerosene", label: "kerosene", sub: "jet fuel", color: "#0a9396", text: "#ffffff", cuts: ["kerosene"] },
+  { id: "diesel", label: "diesel", sub: "", color: "#ca6702", text: "#ffffff", cuts: ["diesel"] },
+  { id: "vgo", label: "VGO", sub: "cracked in most complex refineries", color: "#e9d8a6", text: "#1c1b17", cuts: ["vacuum_gas_oil"] },
+  { id: "residue", label: "residue", sub: "needs a coker — the scarce unit", color: "#001219", text: "#ffffff", cuts: ["vacuum_residue"] },
+];
+const cyFmt = (n: number) => n.toFixed(1);
+const cyCrudes = (crudeYieldsData as any).crudes.map((c: any) => {
+  const val: Record<string, number> = Object.fromEntries(c.cuts.map((k: any) => [k.cut, k.value]));
+  const bands = cyBandDefs.map((b) => ({ ...b, pct: b.cuts.reduce((s: number, k: string) => s + val[k], 0) }));
+  const sum = val.butane_and_lighter + bands.reduce((s: number, b) => s + b.pct, 0);
+  if (Math.abs(sum - 100) > 0.2) throw new Error(`crude-yields: ${c.name} cuts sum to ${sum.toFixed(2)}, expected 100`);
+  return { ...c, val, bands };
+});
+const cyMid = (c: any) => c.val.diesel + c.val.kerosene;
+const cyNaph = (c: any) => c.val.light_naphtha + c.val.heavy_naphtha;
+const [cyWti, cyZakum, cyKearl] = cyCrudes;
+const cyDate = (d: string) => new Date(d + "T12:00:00").toLocaleDateString("en-US", { timeZone: "UTC", day: "numeric", month: "short", year: "numeric" });
+const cyAssayList = cyCrudes.map((c: any) => `${c.name}, ${c.assay_code}, ${cyDate(c.assay_date)}`).join("; ");
+const cyAria = `Three horizontal stacked bars on one shared scale, each one barrel split by straight-run (distillation) yield, percent of barrel volume. ${cyCrudes
+  .map((c: any) => `${c.name} (${c.type}): butane and lighter ${cyFmt(c.val.butane_and_lighter)}, naphtha ${cyFmt(cyNaph(c))}, kerosene ${cyFmt(c.val.kerosene)}, diesel ${cyFmt(c.val.diesel)}, vacuum gas oil ${cyFmt(c.val.vacuum_gas_oil)}, vacuum residue ${cyFmt(c.val.vacuum_residue)}`)
+  .join(". ")} .`;
+
+// ── World crude supply by quality (Eni, World Energy Review 2025) ───────────
+// Every plotted value comes from src/data/crude-supply-quality.json (Eni WER 2025,
+// 24th edition, print p96: World "Crude Production by Quality", kb/d). Eni's table
+// reports 2010, 2015 and 2019–2024 only; the other years are nulls in the data
+// file and get no data point here — nothing is interpolated, no smoothing, no
+// 2025/2026 values. The five grouped bands are checked against Eni's world total
+// for every reported year. The 2026 Gulf shut-in is a bracket annotation on the
+// 2024 bar (agency estimate), not a data series.
+import crudeSupplyData from "../data/crude-supply-quality.json";
+const cq = crudeSupplyData as any;
+const cqYears = cq.years_reported as number[];
+// Band colors: medium & sour takes the color of the widest band in the Upper
+// Zakum row of the yields chart above (its 27.2% VGO band, #e9d8a6). The yields
+// chart has no per-row colors, so heavy & sour (Kearl) and light & sweet (WTI)
+// fall back to two grays, and other grades / ultra light use light grays — the
+// band names on the chart do the mapping to the three barrels.
+const cqBands = [
+  { id: "medium_sour", label: "medium & sour", color: "#e9d8a6", text: "#1c1b17" },
+  { id: "heavy_sour", label: "heavy & sour", color: "#8a867a", text: "#ffffff" },
+  { id: "other_grades", label: "other grades", color: "#d8d4c6", text: "#1c1b17" },
+  { id: "light_sweet", label: "light & sweet", color: "#b7b1a1", text: "#1c1b17" },
+  { id: "ultra_light", label: "ultra light", color: "#e9e7de", text: "#1c1b17" },
+];
+const cqBandKb = (y: number, id: string) => (cq.series as any[])
+  .filter((s) => s.grouped === id && s.year === y)
+  .reduce((s: number, r: any) => s + r.kb_d, 0);
+const cqTotalKb = (y: number) => (cq.totals as any[]).find((t) => t.year === y)!.world_total_kb_d;
+const cqShare1 = (y: number, id: string) => (cqBandKb(y, id) / cqTotalKb(y) * 100).toFixed(1);
+// Cumulative stack (mb/d) per reported year, bottom-to-top band order.
+const cqStack = cqYears.map((y: number) => {
+  let cum = 0;
+  const rows = cqBands.map((g) => {
+    const lo = cum;
+    cum += cqBandKb(y, g.id) / 1000;
+    return { id: g.id, lo, hi: cum };
+  });
+  return { year: y, total: cum, rows };
+});
+// The five grouped bands must sum to Eni's world total for every year (±5 kb/d
+// covers Eni's own 1–2 kb/d rounding in 2015/2019/2020/2022).
+for (const p of cqStack) {
+  if (Math.abs(p.total * 1000 - cqTotalKb(p.year)) > 5) {
+    throw new Error(`crude-supply-quality: ${p.year} grouped sum ${(p.total * 1000).toFixed(0)} kb/d != Eni total ${cqTotalKb(p.year)} kb/d`);
+  }
+}
+const cqW = 880, cqH = 424, cqL = 52, cqR = 866, cqT = 26, cqB = 366;
+const cqMax = 84; // mb/d, top of the y scale (2024 world total is 82.4)
+const cqX = (y: number) => cqL + (y - 2010) / 14 * (cqR - cqL);
+const cqY = (v: number) => cqB - (v / cqMax) * (cqB - cqT);
+const cqArea = (id: string) => {
+  const top = cqStack.map((p) => `${cqX(p.year).toFixed(1)},${cqY(p.rows.find((r) => r.id === id)!.hi).toFixed(1)}`);
+  const bot = [...cqStack].reverse().map((p) => `${cqX(p.year).toFixed(1)},${cqY(p.rows.find((r) => r.id === id)!.lo).toFixed(1)}`);
+  return `M ${top.join(" L ")} L ${bot.join(" L ")} Z`;
+};
+// Direct labels at the horizontal middle of the plot (2017). 2017 has no data
+// point; the position is the same linear midpoint the drawn areas use between
+// the 2015 and 2019 data points. The ultra-light band is too thin for inside
+// text, so its label sits just above its top edge.
+const cqA15 = cqStack.find((p) => p.year === 2015)!;
+const cqA19 = cqStack.find((p) => p.year === 2019)!;
+const cqMid17 = {
+  total: (cqA15.total + cqA19.total) / 2,
+  rows: cqA15.rows.map((r, i) => ({ id: r.id, lo: (r.lo + cqA19.rows[i].lo) / 2, hi: (r.hi + cqA19.rows[i].hi) / 2 })),
+};
+const cqLabelY: Record<string, number> = {};
+for (const g of cqBands) {
+  const r = cqMid17.rows.find((r) => r.id === g.id)!;
+  cqLabelY[g.id] = g.id === "ultra_light" ? cqY(cqMid17.total) - 7 : cqY((r.lo + r.hi) / 2) + 4;
+}
+// Bracket: the IEA's Gulf shut-in on the right edge of the 2024 medium & sour
+// band, drawn from the top of the band downward. Annotation, not a series.
+const cqBrk = cq.annotation as any;
+const cqP24 = cqStack.find((p) => p.year === 2024)!;
+const cqMs24 = cqP24.rows.find((r) => r.id === "medium_sour")!;
+const cqBrkTop = cqY(cqMs24.hi);
+const cqBrkBot = cqY(cqMs24.hi - cqBrk.volume_mb_d);
+const cqBrkLines = cqBrk.label.split(" offline ").map((s: string, i: number) => (i === 0 ? s : `offline ${s}`));
+const cqAria = `Stacked area chart of world crude production by quality class, million barrels per day, reported years 2010, 2015 and 2019 to 2024. ${cqBands
+  .map((g) => `${g.label}: ${(cqBandKb(2010, g.id) / 1000).toFixed(1)} in 2010 (${cqShare1(2010, g.id)}% of world crude) to ${(cqBandKb(2024, g.id) / 1000).toFixed(1)} in 2024 (${cqShare1(2024, g.id)}%)`)
+  .join("; ")}. A bracket on the 2024 medium & sour band marks about ${cqBrk.volume_mb_d} mb/d of Gulf production offline since February 2026 (IEA Oil Market Report, August 2026 edition; an agency estimate drawn on the 2024 bar, not a data series).`;
+
 ---
 
 <!doctype html>
@@ -690,6 +803,143 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             elsewhere and strikes continue to damage Russian refineries. The IEA describes the
             global refining system as “stretched to the limit.” Atlantic Basin refining margins
             reached records in August, led by diesel.
+          </p>
+        </div>
+
+        <!-- Not all crude is the same: straight-run yields of three crudes (ExxonMobil assays) -->
+        <div id="crude-yields" class="mb-12">
+          <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+            <h2 class="text-xl font-bold tracking-tight">A third of an extra-heavy barrel needs a coker to become fuel</h2>
+            <p class="font-mono text-[11px] text-faint">Straight-run (distillation) yield, % of barrel volume</p>
+          </div>
+          <p class="mb-6 max-w-3xl text-[13px] leading-relaxed text-ink/70">
+            Crude is not all the same, and the split below is the first step of refining.
+            These are <em>straight-run yields</em> — the cuts that come out of a barrel when it
+            is simply boiled, before any cracking or blending, so they are not the
+            refinery's final fuel output. A US shale barrel (WTI Light – Export) gives {cyFmt(cyMid(cyWti))}%
+            straight out as diesel and jet, and the most naphtha of
+            the three, at {cyFmt(cyNaph(cyWti))}%, which becomes gasoline after further
+            processing. A Gulf medium-sour barrel gives a similar share of diesel and jet — {cyFmt(cyMid(cyZakum))}%
+            in Upper Zakum, the nearest public equivalent to Arab
+            Light, which has no public assay. An extra-heavy barrel does much worse: in Kearl,
+            the public proxy for Venezuela's Merey, which also has no public assay, {cyFmt(cyMid(cyKearl))}%
+            comes out as diesel and jet. The difference between the barrels is in the heavy
+            end. Vacuum gas oil — {cyFmt(cyWti.val.vacuum_gas_oil)}% of the WTI barrel, {cyFmt(cyZakum.val.vacuum_gas_oil)}% of the Gulf
+            barrel, {cyFmt(cyKearl.val.vacuum_gas_oil)}% of Kearl — is converted in nearly every complex
+            refinery: fluid catalytic crackers and hydrocrackers are standard equipment, and
+            much of the world's diesel is hydrocracked VGO. Vacuum residue is the different
+            problem: it needs a coker, and cokers are the scarce, geographically concentrated
+            units. A third of the Kearl barrel ({cyFmt(cyKearl.val.vacuum_residue)}%) is residue, against {cyFmt(cyZakum.val.vacuum_residue)}%
+            in Upper Zakum and {cyFmt(cyWti.val.vacuum_residue)}% in WTI. That split is one
+            reason heavy crude from Venezuela or Canada can't fill the gap quickly; for the
+            price side of the same story, see
+            <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#crackChart">the diesel price gap chart</a> in the Prices section.
+          </p>
+          <div role="img" aria-label={cyAria}>
+            {cyCrudes.map((c: any) => (
+              <div class="mb-5">
+                <div class="mb-1 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+                  <p class="text-sm font-semibold">{c.name} <span class="font-normal text-faint">· {c.type}</span></p>
+                  <p class="font-mono text-[11px] text-faint tabular">diesel + jet without conversion: {cyFmt(cyMid(c))}%</p>
+                </div>
+                <div class="flex h-14 w-full overflow-hidden rounded-[3px] border border-rule">
+                  <div class="h-full" style={`width:${c.val.butane_and_lighter}%;background:#8a867a`}></div>
+                  {c.bands.map((b: any) => (
+                    <div class="flex h-full flex-col items-center justify-center overflow-hidden leading-tight" style={`width:${b.pct}%;background:${b.color};color:${b.text}`}>
+                      {b.pct >= 10 && <span class="hidden whitespace-nowrap text-[10px] sm:block">{b.label}</span>}
+                      {b.pct >= 5 && <span class="whitespace-nowrap font-mono text-[10px] tabular sm:text-xs">{cyFmt(b.pct)}%</span>}
+                    </div>
+                  ))}
+                </div>
+                <p class="mt-1 font-mono text-[10.5px] text-faint tabular">butane and lighter {cyFmt(c.val.butane_and_lighter)}% (LPG)</p>
+              </div>
+            ))}
+          </div>
+          <div class="mt-5 flex flex-wrap gap-x-5 gap-y-1.5 text-xs text-ink/80">
+            {cyCrudes[0].bands.map((b: any) => (
+              <span class="inline-flex items-center gap-1.5">
+                <span class="inline-block h-2.5 w-2.5 rounded-[2px]" style={`background:${b.color}`}></span>
+                {b.id === "naphtha" ? "naphtha (light + heavy) — " : b.id === "kerosene" ? "kerosene — " : b.id === "vgo" ? "vacuum gas oil — " : b.id === "residue" ? "vacuum residue — " : "diesel"}{b.sub}
+              </span>
+            ))}
+            <span class="inline-flex items-center gap-1.5">
+              <span class="inline-block h-2.5 w-2.5 rounded-[2px]" style="background:#8a867a"></span>butane and lighter — LPG
+            </span>
+          </div>
+          <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+            Straight-run (distillation) yields by cut volume, % of barrel — the cuts a
+            barrel gives up on its own when distilled, not final product yields after
+            cracking. Naphtha is light + heavy naphtha; VGO is the 350–550 °C cut and
+            residue runs from 550 °C to the final boiling point. Assays from ExxonMobil's public crude oil
+            library: {cyAssayList}. Dates as printed in each assay's PDF (WTI and Kearl
+            carry the date at the foot of the report; the assay spreadsheet stores the
+            same date). Source: <a href="https://corporate.exxonmobil.com/crude-oils/crude-trading">corporate.exxonmobil.com/crude-oils/crude-trading</a>.
+          </p>
+        </div>
+
+        <!-- World crude supply by quality, 2010–2024 (Eni World Energy Review 2025) -->
+        <div class="mb-12">
+          <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+            <h2 class="text-xl font-bold tracking-tight">A third of the world's crude is medium &amp; sour. Over a third of that class is offline</h2>
+            <p class="font-mono text-[11px] text-faint">million barrels per day · world, annual</p>
+          </div>
+          <p class="mb-6 max-w-3xl text-[13px] leading-relaxed text-ink/70">
+            The Gulf barrels that went offline were nearly all medium &amp; sour: that class was {cqShare1(2024, "medium_sour")}%
+            of world crude in 2024, and the {cqBrk.volume_mb_d} mb/d the IEA still counts as shut in is {((cqBrk.volume_mb_d / (cqBandKb(2024, "medium_sour") / 1000) * 100)).toFixed(0)}%
+            of it. That share had already been falling while
+            light &amp; sweet — the shale class — grew from {cqShare1(2010, "light_sweet")}% to {cqShare1(2024, "light_sweet")}%
+            across the years shown. The class that could in principle replace the Gulf barrels,
+            heavy &amp; sour at {cqShare1(2024, "heavy_sour")}% of world crude, is the one with the worst
+            yields; see <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#crude-yields">the yields chart above</a> for why it can't simply fill the gap.
+            Eni's figures are annual, end in 2024, and are Eni's elaboration of IEA data, so this is
+            the pre-war baseline with the shut-in drawn on it, not a live series.
+          </p>
+          <div class="overflow-x-auto">
+            <svg viewBox={`0 0 ${cqW} ${cqH}`} class="block w-full min-w-[640px]" role="img" aria-label={cqAria}>
+              <!-- gridlines and y labels -->
+              {[20, 40, 60, 80].map((v) => (
+                <g>
+                  <line x1={cqL} x2={cqR} y1={cqY(v)} y2={cqY(v)} stroke="#d8d4c6" stroke-width="0.75" opacity="0.6" />
+                  <text x={cqL - 8} y={cqY(v) + 3.5} text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="10" fill="#8a867a">{v}</text>
+                </g>
+              ))}
+              <text x={cqL - 8} y={cqB + 3.5} text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="10" fill="#8a867a">0</text>
+              <!-- baseline and x labels (reported years only) -->
+              <line x1={cqL} x2={cqR} y1={cqB} y2={cqB} stroke="#d8d4c6" stroke-width="1" />
+              {cqYears.map((y: number) => (
+                <g>
+                  <line x1={cqX(y)} x2={cqX(y)} y1={cqB} y2={cqB + 4} stroke="#d8d4c6" stroke-width="1" />
+                  <text x={cqX(y)} y={cqB + 18} text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="10" fill="#8a867a">{y}</text>
+                </g>
+              ))}
+              <!-- stacked areas, bottom to top; the paper-colored stroke is the thin gap between bands -->
+              {cqBands.map((g) => (
+                <path d={cqArea(g.id)} fill={g.color} stroke="#f2f1ec" stroke-width="2" />
+              ))}
+              <!-- direct labels: band name + 2010 and 2024 shares of world crude -->
+              {cqBands.map((g) => (
+                <text x={cqX(2017)} y={cqLabelY[g.id]} text-anchor="middle">
+                  <tspan font-family="Georgia, 'Times New Roman', serif" font-size="12.5" fill={g.text}>{g.label}</tspan>
+                  <tspan dx="7" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11.5" fill={g.text}>{cqShare1(2010, g.id)}% to {cqShare1(2024, g.id)}%</tspan>
+                </text>
+              ))}
+              <!-- the Gulf shut-in: a bracket on the right edge of the 2024 medium & sour band -->
+              <path d={`M ${cqR - 2} ${cqBrkTop.toFixed(1)} L ${cqR - 10} ${cqBrkTop.toFixed(1)} L ${cqR - 10} ${cqBrkBot.toFixed(1)} L ${cqR - 2} ${cqBrkBot.toFixed(1)}`} stroke="#1c1b17" stroke-width="1.5" fill="none" />
+              <text x={cqR - 16} y={cqBrkTop + 15} text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#1c1b17">{cqBrkLines[0]}</text>
+              <text x={cqR - 16} y={cqBrkTop + 29} text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#1c1b17">{cqBrkLines[1]}</text>
+            </svg>
+          </div>
+          <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+            World crude production by quality, million barrels per day; five groups stacked from Eni's
+            ten bands: medium &amp; sour = Medium &amp; Sour; heavy &amp; sour = Heavy &amp; Sour; light &amp; sweet =
+            Light &amp; Sweet; ultra light = Ultra Light; other grades = the remaining six Eni bands (Light &amp;
+            Medium Sour, Light &amp; Sour, Medium &amp; Sweet, Medium &amp; Medium Sour, Heavy &amp; Sweet, Heavy &amp;
+            Medium Sour) plus Eni's unassigned production (0.7% of the 2024 total). Eni's table reports
+            2010, 2015 and 2019–2024; the other years are not in the table and are not plotted. Source:
+            Eni, World Energy Review 2025 (24th edition, 21 Oct 2025), table p96, band definitions p9;
+            Eni's elaboration of IEA (2025) Monthly Oil Data Service data. Bracket: about {cqBrk.volume_mb_d} mb/d of Gulf
+            production shut in — IEA Oil Market Report, Aug 2026 edition (12 Aug 2026); an agency
+            estimate drawn on the 2024 bar, not a data series.
           </p>
         </div>
 

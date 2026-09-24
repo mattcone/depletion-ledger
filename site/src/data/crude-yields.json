@@ -1,0 +1,74 @@
+{
+  "source": {
+    "publisher": "ExxonMobil crude oil assay library (assays by ExxonMobil Technology & Engineering Company)",
+    "url": "https://corporate.exxonmobil.com/crude-oils/crude-trading",
+    "retrieved": "2026-09-23",
+    "method": "Cut Data table of each assay's XLS (sheet 'Summary (C)'), 'Yield (% vol)' row. The seven standard cuts are groupings of the assay's temperature cuts: butane and lighter = IBP–C5 (an explicit IBP–C4 column in the 2026-format files); light naphtha = C5–100 °C; heavy naphtha = 100–150 °C; kerosene = 150–250 °C; diesel = 250–350 °C; vacuum gas oil = 350–550 °C (includes the 350–370 °C atmospheric cut); vacuum residue = 550 °C–FBP. In every file the 370 °C–FBP column is the total of the four vacuum sub-cuts (370–450, 450–500, 500–550, 550–FBP), so it is not added a second time. The reported cuts sum to 100% (99.96–100.0, rounding) for each crude, and the cumulative row's differences match the yields.",
+    "basis": "Straight-run (distillation) yields, % of barrel volume. These are NOT final product yields: naphtha becomes gasoline and VGO/residue becomes other fuels only after further processing."
+  },
+  "unit": "percent of barrel volume",
+  "crudes": [
+    {
+      "id": "wti-light-export",
+      "name": "WTI Light – Export",
+      "origin": "Texas, US",
+      "type": "Light sweet (US shale)",
+      "assay_code": "WTLEX26Y",
+      "assay_date": "2026-02-27",
+      "assay_date_note": "The 'Assay Date:' field on the PDF is blank; the report is dated 2/27/2026 at the foot of the PDF and the XLS stores the same date (Excel serial 46080).",
+      "pdf_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/pdf/wti_light.pdf",
+      "xls_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/wti_light.xlsx",
+      "cuts": [
+        { "cut": "butane_and_lighter", "value": 3.05, "status": "reported", "assay_code": "WTLEX26Y", "assay_date": "2026-02-27", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/wti_light.xlsx" },
+        { "cut": "light_naphtha", "value": 18.41, "status": "reported", "assay_code": "WTLEX26Y", "assay_date": "2026-02-27", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/wti_light.xlsx" },
+        { "cut": "heavy_naphtha", "value": 16.49, "status": "reported", "assay_code": "WTLEX26Y", "assay_date": "2026-02-27", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/wti_light.xlsx" },
+        { "cut": "kerosene", "value": 22.31, "status": "reported", "assay_code": "WTLEX26Y", "assay_date": "2026-02-27", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/wti_light.xlsx" },
+        { "cut": "diesel", "value": 16.92, "status": "reported", "assay_code": "WTLEX26Y", "assay_date": "2026-02-27", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/wti_light.xlsx" },
+        { "cut": "vacuum_gas_oil", "value": 18.68, "status": "reported", "assay_code": "WTLEX26Y", "assay_date": "2026-02-27", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/wti_light.xlsx" },
+        { "cut": "vacuum_residue", "value": 4.11, "status": "reported", "assay_code": "WTLEX26Y", "assay_date": "2026-02-27", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/wti_light.xlsx" }
+      ]
+    },
+    {
+      "id": "upper-zakum",
+      "name": "Upper Zakum",
+      "origin": "Abu Dhabi (UAE)",
+      "type": "Medium sour (Gulf)",
+      "proxy_note": "Arab Light has no public assay; Upper Zakum is the nearest public equivalent for Gulf medium-sour crude.",
+      "assay_code": "UPZAK26B",
+      "assay_date": "2026-01-23",
+      "assay_date_note": "Assay Date 1/23/2026 as printed on the PDF; the XLS stores the same date (Excel serial 46045).",
+      "pdf_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/pdf/upper_zakum.pdf",
+      "xls_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/upper_zakum.xlsx",
+      "cuts": [
+        { "cut": "butane_and_lighter", "value": 3.07, "status": "reported", "assay_code": "UPZAK26B", "assay_date": "2026-01-23", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/upper_zakum.xlsx" },
+        { "cut": "light_naphtha", "value": 10.39, "status": "reported", "assay_code": "UPZAK26B", "assay_date": "2026-01-23", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/upper_zakum.xlsx" },
+        { "cut": "heavy_naphtha", "value": 7.93, "status": "reported", "assay_code": "UPZAK26B", "assay_date": "2026-01-23", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/upper_zakum.xlsx" },
+        { "cut": "kerosene", "value": 17.87, "status": "reported", "assay_code": "UPZAK26B", "assay_date": "2026-01-23", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/upper_zakum.xlsx" },
+        { "cut": "diesel", "value": 17.06, "status": "reported", "assay_code": "UPZAK26B", "assay_date": "2026-01-23", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/upper_zakum.xlsx" },
+        { "cut": "vacuum_gas_oil", "value": 27.23, "status": "reported", "assay_code": "UPZAK26B", "assay_date": "2026-01-23", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/upper_zakum.xlsx" },
+        { "cut": "vacuum_residue", "value": 16.46, "status": "reported", "assay_code": "UPZAK26B", "assay_date": "2026-01-23", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/upper_zakum.xlsx" }
+      ]
+    },
+    {
+      "id": "kearl-blend",
+      "name": "Kearl Blend",
+      "origin": "Alberta, Canada",
+      "type": "Extra-heavy sour (diluted bitumen)",
+      "proxy_note": "Venezuelan Merey has no public assay; Kearl is used as a proxy for extra-heavy crude. Assay comments field says 'Summer' (the summer diluent blend).",
+      "assay_code": "KEARL23B",
+      "assay_date": "2023-10-26",
+      "assay_date_note": "The 'Assay Date:' field on the PDF is blank; the report is dated 10/26/2023 at the foot of the PDF and the XLS stores the same date (Excel serial 45225).",
+      "pdf_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/pdf/2024/kearl.pdf",
+      "xls_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/2024/kearl.xlsx",
+      "cuts": [
+        { "cut": "butane_and_lighter", "value": 1.4, "status": "reported", "assay_code": "KEARL23B", "assay_date": "2023-10-26", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/2024/kearl.xlsx", "note": "The 2023-format cut table has no gas column; the value is 100 minus the sum of the reported cuts (98.60), matching the assay's own TBP curve volume at the C5 boundary (10.58 at 65 °C minus the reported C5–65 cut of 9.18) and the table's cumulative row (0.86 % wt at C5)." },
+        { "cut": "light_naphtha", "value": 13.24, "status": "reported", "assay_code": "KEARL23B", "assay_date": "2023-10-26", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/2024/kearl.xlsx" },
+        { "cut": "heavy_naphtha", "value": 3.12, "status": "reported", "assay_code": "KEARL23B", "assay_date": "2023-10-26", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/2024/kearl.xlsx" },
+        { "cut": "kerosene", "value": 6.29, "status": "reported", "assay_code": "KEARL23B", "assay_date": "2023-10-26", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/2024/kearl.xlsx" },
+        { "cut": "diesel", "value": 11.85, "status": "reported", "assay_code": "KEARL23B", "assay_date": "2023-10-26", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/2024/kearl.xlsx" },
+        { "cut": "vacuum_gas_oil", "value": 32.69, "status": "reported", "assay_code": "KEARL23B", "assay_date": "2023-10-26", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/2024/kearl.xlsx" },
+        { "cut": "vacuum_residue", "value": 31.4, "status": "reported", "assay_code": "KEARL23B", "assay_date": "2023-10-26", "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/2024/kearl.xlsx" }
+      ]
+    }
+  ]
+}
