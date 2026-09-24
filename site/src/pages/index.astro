@@ -16,7 +16,7 @@ import {
 } from "../data/crisis";
 
 // Crisis day number, computed from the data-as-of date (NOT the viewer's clock) so the
-// page is a stable snapshot: Sep 23 data = day 207, no matter when someone loads it.
+// page is a stable snapshot: Sep 24 data = day 208, no matter when someone loads it.
 const dayNum = Math.round((Date.parse(DATA_AS_OF) - Date.parse(CRISIS_DAY_1)) / 86400000);
 
 // ── World oil stocks panels (below the flip chart) ─────────────────────────────
@@ -280,10 +280,10 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             <p class="font-mono text-[11px] text-faint">EIA weekly and AAA daily national averages</p>
           </div>
           <div class="h-72">
-            <canvas id="gasChart" role="img" aria-label="US gasoline, EIA weekly national average (AAA daily readings Sep 10 to 23): $2.81 in January, May peak $4.50, $4.47 on Sep 23. Reference line at the January pre-crisis $2.81."></canvas>
+            <canvas id="gasChart" role="img" aria-label="US gasoline, EIA weekly national average (AAA daily readings Sep 10 to 24): $2.81 in January, May peak $4.50, $4.48 on Sep 24. Reference line at the January pre-crisis $2.81."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The national average has risen from $2.81 in January to $4.47, an increase of about 59%.
+            The national average has risen from $2.81 in January to $4.48, an increase of about 59%.
             Prices peaked at $4.50 in May. Every month since March has averaged above the levels
             seen before the crisis.
           </p>
@@ -294,11 +294,12 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             <p class="font-mono text-[11px] text-faint">AAA national average · dots on selected dates</p>
           </div>
           <div class="h-72">
-            <canvas id="dieselChart" role="img" aria-label="US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $6.53 on Sep 22, easing to $6.52 on Sep 23."></canvas>
+            <canvas id="dieselChart" role="img" aria-label="US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $6.53 on Sep 22, easing to $6.52 on Sep 23 and $6.51 on Sep 24."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Diesel cost $3.72 on Feb 27, just before the war. It reached a record $6.53 on
-            Sep 22, then eased to $6.52 on Sep 23. That's still about 75% above its pre-war price.
+            Sep 22, then fell to $6.52 on Sep 23 and $6.51 on Sep 24.
+            That's still about 75% above its pre-war price.
             It first passed the previous record of about $5.85, set in June 2022, on Sep 4.
           </p>
         </div>
@@ -310,19 +311,19 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           <div>
             <div class="mb-4">
               <h2 class="text-xl font-bold tracking-tight">Natural gas prices in Europe are up about 120%</h2>
-              <p class="mt-2 font-mono text-[11px] text-faint">TTF, dollars per million British thermal units ($/MMBtu). Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: individual contract prices and Trading Economics quotes (May–Sep). Contracts and delivery periods differ, so comparisons are approximate.</p>
+              <p class="mt-2 font-mono text-[11px] text-faint">TTF, dollars per million British thermal units ($/MMBtu). Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: assessed prices and market quotes (May–Sep). Contracts and delivery periods differ, so comparisons are approximate.</p>
             </div>
             <div class="h-72">
-              <canvas id="gasTtfChart" role="img" aria-label="TTF, Europe's gas benchmark, 2026 year to date: $12.40 in January, $11.00 before the closure, spiking to a three-year high of $18.89 on Mar 20, easing to $14.10 after the June ceasefire, $19.90 on Jul 31, then trading above $28 on Sep 10, its highest level since December 2022, and $27.00 on Sep 11. Market quotes: about $27.80 on Sep 14, $26.70 on Sep 18, and $24.20 on Sep 22. Reference line at the pre-closure week's $10.99."></canvas>
+              <canvas id="gasTtfChart" role="img" aria-label="TTF, Europe's gas benchmark, 2026 year to date: $12.40 in January, $11.00 before the closure, spiking to a three-year high of $18.89 on Mar 20, easing to $14.10 after the June ceasefire, $19.90 on Jul 31, then trading above $28 on Sep 10, its highest level since December 2022, and $27.00 on Sep 11, about $27.80 on Sep 14, and $26.70 on Sep 18 (JOGMEC, published Sep 24). The latest market quote is about $24.20 on Sep 22. Reference line at the pre-closure week's $10.99."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
               TTF is the benchmark used to track natural gas prices in Europe. It traded above
               $28 on Sep 10, its highest level since December 2022, before easing to $27.00 on
-              Sep 11. Prices have since eased: the latest quote was about $24.20 on Sep 22
-              (€72.10 per megawatt-hour), still about 120% above the price before the strait
-              closed. Its Sep 14, Sep 18, and Sep 22 quotes (€81.98, €79.52, and €72.10 per
-              megawatt-hour) are converted to the dollar units used here. They come from market
-              quotes, including contracts for difference (CFDs), financial contracts that track gas prices.
+              Sep 11. JOGMEC's Sep 24 report put the Sep 18 price at $26.70. The latest market
+              quote was about $24.20 on Sep 22, still about 120% above the price before the strait
+              closed. The Sep 14 and Sep 22 points are converted from euro quotes (€81.98 and
+              €72.10 per megawatt-hour). The Sep 14 quote is for a contract for difference (CFD),
+              a financial contract that tracks gas prices.
               Unplanned maintenance at Norway's Asgard and Troll fields and tanker attacks have
               reduced supplies as prices have risen.
               </p>
@@ -334,18 +335,19 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           </div>
           <div>
             <div class="mb-4">
-              <h2 class="text-xl font-bold tracking-tight">Natural gas prices in Asia are up about 158%</h2>
-              <p class="mt-2 font-mono text-[11px] text-faint">JKM, $/MMBtu. Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: estimated spot prices and Trading Economics quotes (May–Sep). Contracts and delivery periods differ, so comparisons are approximate.</p>
+              <h2 class="text-xl font-bold tracking-tight">Natural gas prices in Asia are up about 155%</h2>
+              <p class="mt-2 font-mono text-[11px] text-faint">JKM, $/MMBtu. Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: assessed spot prices and market quotes (May–Sep). Contracts and delivery periods differ, so comparisons are approximate.</p>
             </div>
             <div class="h-72">
-              <canvas id="gasJkmChart" role="img" aria-label="JKM, Asia's LNG benchmark, 2026 year to date: $10.66 before the closure, spiking to $20.67 on Mar 20, easing to $15.20 on Jun 26, then climbing to $24.50 on Aug 28, the high-$28s on Sep 10 — its highest level in about two and a half years — about $28.50 on Sep 11, and a Trading Economics quote of about $27.50 on Sep 18. Reference line at the pre-closure week's $10.66."></canvas>
+              <canvas id="gasJkmChart" role="img" aria-label="JKM, Asia's LNG benchmark, 2026 year to date: $10.66 before the closure, spiking to $20.67 on Mar 20, easing to $15.20 on Jun 26, then climbing to $24.50 on Aug 28, the high-$28s on Sep 10 — its highest level in about two and a half years — about $28.50 on Sep 11, and the low-$27s (about $27.20) on Sep 18 in the assessment published Sep 24. Reference line at the pre-closure week's $10.66."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
               JKM tracks the price of liquefied natural gas (LNG) delivered to Asia. It reached
               the high-$28s on Sep 10 — its highest level in roughly two and a half years —
-              and was around $28.50 on Sep 11, according to JOGMEC. The latest Trading Economics
-              quote was about $27.50 on Sep 18, about 158% above the price before the closure.
-              This is a CFD quote, so it isn't directly comparable with JOGMEC's spot price assessment.
+              and was around $28.50 on Sep 11, according to JOGMEC. Its Sep 24 report put the
+              Sep 18 price in the low-$27s, shown here as about $27.20. That's down from the
+              previous week but still about 155% above the price before the closure.
+              Prices eased as concern about the conflict declined.
               Damaged production units at Qatar's Ras Laffan complex — about 17%
               of the country's LNG export capacity — are expected to be offline for 3–5 years,
               forcing Asian buyers to look elsewhere for supplies.
@@ -360,17 +362,19 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
       <div class="mt-12 grid gap-10 lg:grid-cols-2">
         <div class="min-w-0">
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">Brent and WTI prices are up about 31% and 41%</h2>
+            <h2 class="text-xl font-bold tracking-tight">Brent and WTI prices are up about 36% and 38%</h2>
             <p class="font-mono text-[11px] text-faint tabular">Brent: selected observations and monthly averages. WTI: weekly FRED spot prices and recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent rises from about $76 before the war to $99.25 on Sep 22, after a $126 intraday peak in March. WTI closes at $94.59 on Sep 22. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent rises from about $76 before the war to $103.08 on Sep 23, up 3.9% and its first close back above $100, after a $126 intraday peak in March. WTI's November contract settles at $92.16 on Sep 23, up 1.8% on the same contract. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Brent and West Texas Intermediate (WTI) are crude oil price benchmarks. On Sep 22,
-            Brent closed at $99.25 a barrel, down 1.1%. It was the fifth trading day in a row that
-            prices fell, and the first close below $100 since Sep 8. WTI's October contract closed
-            at $94.59, down 1.2%, on its final trading day.
+            Brent and West Texas Intermediate (WTI) are crude oil price benchmarks. On Sep 23,
+            Brent closed at $103.08 a barrel, up 3.9%, ending five trading days of declines
+            and returning above $100. The rise came after Iran's security council gave the
+            US four to five days to accept its seven conditions and a Supreme Leader adviser said
+            the war could extend to the Indian Ocean. WTI's November contract settled at $92.16,
+            up 1.8% on the same contract.
             The gray line shows WTI, which is also used in the fuel price spread chart beside this one.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
@@ -381,9 +385,10 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             series. Hollow dots mark rounded estimates from the sources.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Starting with Sep 23, the WTI line will use the November contract. It closed at $90.52
-            on Sep 22, below October's price. Switching contracts can change the line even if oil
-            prices haven't moved.
+            Starting with Sep 23, the WTI line uses the November contract. It closed at $90.52
+            on Sep 22, about $4 below October's $94.59 — which is why the line steps down on
+            Sep 23 even though the November contract itself rose. Switching contracts can change
+            the line even if oil prices haven't moved.
           </p>
         </div>
         <div class="min-w-0">
@@ -392,7 +397,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             <p class="font-mono text-[11px] text-faint tabular">Retail fuel price minus WTI, dollars per barrel. EIA/AAA fuel prices; FRED and recent futures closes for WTI.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. Diesel rises from about $89 in January to $179.6 on Sep 22, its highest plotted value, with a temporary narrowing to $148 on Sep 10. Gasoline rises from about $59 in January to $93.4 on Sep 22. Both lines show every reading; the dots mark selected dates to keep nearby points legible."></canvas>
+            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. Diesel rises from about $89 in January to $181.8 on Sep 23, its highest plotted value, then eases to $181.4 on Sep 24, with a temporary narrowing to $148 on Sep 10. Gasoline rises from about $59 in January to $96.1 on Sep 24. Both lines show every reading; the dots mark selected dates to keep nearby points legible."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             This chart subtracts the price of crude oil from the retail price of fuel, with both
@@ -400,18 +405,20 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             retailing. It helps explain why prices at the pump can keep rising even when crude gets cheaper.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The gap between diesel and crude prices rose from about $89 in January to $179.6 on
-            Sep 22, its highest value on the chart. It briefly narrowed to $148 on Sep 10,
+            The gap between diesel and crude prices rose from about $89 in January to $181.8 on
+            Sep 23, its highest value on the chart, then eased to $181.4 on Sep 24. It briefly narrowed to $148 on Sep 10,
             when crude prices rose faster than pump prices.
-            The gap between gasoline and crude prices also widened, from about $59 in January to $93.4 on Sep 22.
+            The gap between gasoline and crude prices also widened, from about $59 in January to $96.1 on Sep 24.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The calculation uses retail prices from EIA and AAA, minus WTI from FRED, with futures closes for
-            Sep 10–11 and Sep 14–22. The EIA's official <em>crack spread</em> uses wholesale fuel prices, so the
+            Sep 10–11 and Sep 14–23. The EIA's official <em>crack spread</em> uses wholesale fuel prices, so the
             values differ. Some readings fall on days with no same-day WTI price; the chart pairs those with the
             nearest available trading day's price, within 1–3 days. The Sep 21 reading uses the Sep 21 WTI
-            settlement. The Sep 22 and Sep 23 readings use the October contract's final closing price
-            on Sep 22, the latest trading day available when this page was updated.
+            settlement. The Sep 22 reading uses the October contract's final closing price on Sep 22
+            ($94.59); the Sep 23 and Sep 24 readings use the November contract's settlement on Sep 23
+            ($92.16). Switching to the lower-priced contract increases the calculated spread,
+            even though November WTI rose that day.
             No missing prices are estimated.
           </p>
         </div>
@@ -930,9 +937,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           <div class="mt-6 grid gap-10 lg:grid-cols-2">
             <div>
               <h3 class="text-lg font-bold tracking-tight">US 10-year Treasury yield</h3>
-              <p class="mt-2 font-mono text-[11px] text-faint">10-year US Treasury yield, % · chart through Sep 22 · weekly closes (FRED) · Sep 11, 14, 15, 16, 17, 18, 21, and 22: Yahoo closing values.</p>
+              <p class="mt-2 font-mono text-[11px] text-faint">10-year US Treasury yield, % · chart through Sep 23 · weekly closes (FRED) · Sep 11, 14, 15, 16, 17, 18, 21, 22, and 23: Yahoo closing values.</p>
               <div class="mt-4 h-72">
-                <canvas id="treasury10yChart" role="img" aria-label="US 10-year Treasury yield, 2026: 4.19% on Jan 2, 3.97% on Feb 27 before the war, and 4.968% on Sep 22. The Sep 16 close of 5.006% is the first above 5% since the war began. Reference lines mark the pre-war 3.97% and the January 2025 high of 4.8%."></canvas>
+                <canvas id="treasury10yChart" role="img" aria-label="US 10-year Treasury yield, 2026: 4.19% on Jan 2, 3.97% on Feb 27 before the war, and 5.11% on Sep 23, back above 5%. The Sep 16 close of 5.006% is the first above 5% since the war began. Reference lines mark the pre-war 3.97% and the January 2025 high of 4.8%."></canvas>
               </div>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 The 10-year Treasury yield is the rate the US government pays to borrow for a decade.
@@ -943,10 +950,12 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
                 refinanced by year-end.
               </p>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-                The 10-year yield closed at 4.968% on Sep 22, its fourth straight close below 5%.
-                Its Sep 16 close of 5.006% was the
-                first above 5% since the war began. Al Jazeera reported an
-                intraday high of 5.02% on Sep 15, its highest level since 2007.
+                The 10-year yield closed at 5.11% on Sep 23, back above 5% after four straight
+                closes below it. It rose 14 basis points in a day to its highest close since 2007.
+                A preliminary business survey showed activity growing at its fastest pace in over
+                four years, increasing expectations that the Fed would raise rates again.
+                Its Sep 16 close of 5.006% was the first above 5% since the war began.
+                Al Jazeera reported an intraday high of 5.02% on Sep 15.
               </p>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 The 2-year yield was 4.63% on Sep 11, its highest since July 2024.
@@ -1906,7 +1915,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             { value: gasolinePreCrisis, text: "Jan $2.81 (pre-crisis)", color: "#3d6b64", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: gasolineYtd.length - 1, text: "Sep 23 · $4.47", ...endpoint },
+            { dataset: 0, index: gasolineYtd.length - 1, text: "Sep 24 · $4.48", ...endpoint },
             { dataset: 0, index: 18, text: "May peak $4.50", dy: -14, color: "#1c1b17" },
           ]),
         ],
@@ -1921,7 +1930,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
       const gasXScale = {
         type: "linear" as const,
         min: 0,
-        max: 268, // data now runs to Sep 23 (doy 266); headroom for endpoint labels
+        max: 268, // data now runs to Sep 24 (doy 267); headroom for endpoint labels
         grid: { display: false },
         border: { display: true, color: "#d8d4c6", width: 0.5 },
         afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
@@ -1940,11 +1949,12 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
       // Diesel YTD — true-date axis. The line draws the full mixed-source series (monthly
       // + weekly + daily), so the path keeps its movement; the dots are thinned to the story
       // beats — pre-Sep 3 points, Sep 4 (old record broken), Sep 11 (first above $6.00),
-      // Sep 14, 17, 20, and the Sep 22 endpoint (the labeled record point needs its dot;
-      // Sep 21 is skipped so the last two dots don't blur into one) — because a run of
-      // daily dots bunches into ~30px at the right edge. dieselView is the dot-keep set, not the data.
+      // Sep 14, 17, 20, 22, and the Sep 24 endpoint (the labeled endpoint point needs
+      // its dot; Sep 23 is skipped so the last two dots don't blur into one) — because a
+      // run of daily dots bunches into ~30px at the right edge. dieselView is the dot-keep
+      // set, not the data.
       const dieselView = dieselYtd.filter(
-        (p) => p.date < "2026-09-03" || p.date === "2026-09-04" || p.date === "2026-09-11" || p.date === "2026-09-14" || p.date === "2026-09-17" || p.date === "2026-09-20" || p.date === "2026-09-22",
+        (p) => p.date < "2026-09-03" || p.date === "2026-09-04" || p.date === "2026-09-11" || p.date === "2026-09-14" || p.date === "2026-09-17" || p.date === "2026-09-20" || p.date === "2026-09-22" || p.date === "2026-09-24",
       );
       const dieselDotKeep = new Set(dieselView.map((p) => p.date));
       new Chart(document.getElementById("dieselChart")!, {
@@ -1997,7 +2007,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             { value: dieselOldRecord, text: "Jun 2022 record $5.85", color: "rgba(179,38,30,0.8)", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: dieselYtd.length - 1, text: "Sep 23 · $6.52", ...endpoint, color: "#b3261e" },
+            { dataset: 0, index: dieselYtd.length - 1, text: "Sep 24 · $6.51", ...endpoint, color: "#b3261e" },
           ]),
         ],
       });
@@ -2016,13 +2026,15 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
       // Reference lines run the full axis width — the endpoint follows the scale's max
       // (a hardcoded doy stopped short of the right edge once the scale was extended).
       const gasRef = (val: number) => [{ x: 0, y: val }, { x: gasXScale.max, y: val }];
-      const gasTooltip = (pts: { date: string; value: number; assessed?: boolean; note?: string }[]) => ({
+      // Tooltip shows the SHORT label (tip, like the Brent chart's tip/note split) — the
+      // full provenance note runs ~120 chars and overflowed the canvas as one line.
+      const gasTooltip = (pts: { date: string; value: number; assessed?: boolean; tip?: string; note?: string }[]) => ({
         filter: (item: { datasetIndex: number }) => item.datasetIndex === 0,
         callbacks: {
           title: (items: { dataIndex: number }[]) => fmt(pts[items[0].dataIndex].date),
           label: (ctx: { dataIndex: number }) => {
             const p = pts[ctx.dataIndex];
-            return ` $${p.value.toFixed(2)} — ${p.note || (p.assessed ? "assessed spot" : "EIA weekly avg")}`;
+            return ` $${p.value.toFixed(2)} — ${p.tip || p.note || (p.assessed ? "assessed spot" : "EIA weekly avg")}`;
           },
         },
       });
@@ -2112,7 +2124,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           directLabels([
             { dataset: 0, index: 6, text: "Mar 20 · $20.7", dy: -14, color: "#1c1b17" },
             { dataset: 0, index: 22, text: "Jun 26 · $15.2 — ceasefire", dy: 18, color: "#8a867a" },
-            { dataset: 0, index: gasJkm.length - 1, text: "Sep 18 · ≈$27.5", ...endpoint, color: "#b3261e" },
+            { dataset: 0, index: gasJkm.length - 1, text: "Sep 18 · ≈$27.2", ...endpoint, color: "#b3261e" },
           ]),
         ],
       });
@@ -2145,14 +2157,15 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
       // Brent (sourced points) + WTI (weekly FRED spot) — linear time scale.
       // The lines draw every point (the movement stays visible — e.g. the Sep 11 dip);
       // the dots are thinned to the story beats — pre-Sep 11 points, Sep 10 (+$6.82 in a
-      // day), Sep 15 (closing record 108.75), Sep 21 (current settle) — because seven
-      // daily dots in nine days bunch into ~30px at the right edge. The views are
-      // dot-keep sets, not the data.
+      // day), Sep 15 (closing record 108.75), Sep 21, and the Sep 23 endpoint (the
+      // labeled settle points need their dots; Sep 22 is skipped so the last two dots
+      // don't blur) — because seven daily dots in nine days bunch into ~30px at the right
+      // edge. The views are dot-keep sets, not the data.
       const brentView = brentYtd.filter(
-        (p) => p.date < "2026-09-11" || p.date === "2026-09-15" || p.date === "2026-09-21",
+        (p) => p.date < "2026-09-11" || p.date === "2026-09-15" || p.date === "2026-09-21" || p.date === "2026-09-23",
       );
       const wtiView = wtiWeekly.filter(
-        (p) => p.date < "2026-09-11" || p.date === "2026-09-15" || p.date === "2026-09-21",
+        (p) => p.date < "2026-09-11" || p.date === "2026-09-15" || p.date === "2026-09-21" || p.date === "2026-09-23",
       );
       const brentDotKeep = new Set(brentView.map((p) => p.date));
       const wtiDotKeep = new Set(wtiView.map((p) => p.date));
@@ -2230,11 +2243,11 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             { value: 76, text: "pre-crisis $76 (Feb 27)", color: "#3d6b64", align: "right" },
           ]),
           directLabels([
-            { dataset: 0, index: brentYtd.length - 1, text: "Sep 22 · $99.25 — Brent", ...endpoint },
+            { dataset: 0, index: brentYtd.length - 1, text: "Sep 23 · $103.08 — Brent", ...endpoint },
             { dataset: 0, index: 3, text: "peak $126 · Mar 18", dy: -16, color: "#1c1b17" },
             { dataset: 0, index: 6, text: "Jun 30 · $74", dy: 20, ...note },
             { dataset: 0, index: 1, text: "war began Feb 28", dx: 8, dy: 18, align: "left", ...note },
-            { dataset: 1, index: wtiWeekly.length - 1, text: "Sep 22 · $94.59 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a" },
+            { dataset: 1, index: wtiWeekly.length - 1, text: "Sep 23 · $92.16 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a" },
           ]),
         ],
       });
@@ -2248,9 +2261,12 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
       // Sep 17 and Sep 18 pair with their same-day WTI settlements (101.91 / 100.30).
       // Sep 19 (Saturday) and Sep 20 (Sunday) pair with the Sep 18 settle — the weekend
       // convention for the Sep 12–13 AAA dailies. Sep 21 (Monday) pairs with its same-day
-      // WTI settlement (95.78, October contract; Reuters). Sep 22 and Sep 23 (AAA releases)
-      // pair with the Sep 22 WTI settlement (94.59, October contract — its final trading
-      // day, per the Jiji settlement report) — the nearest settled session to each.
+      // WTI settlement (95.78, October contract; Reuters). Sep 22 (AAA release) pairs with
+      // the Sep 22 settlement (94.59, October contract — its final trading day, per the Jiji
+      // settlement report). Sep 23 (AAA release) pairs with the Sep 23 settlement (92.16,
+      // November contract — the roll day; ~$2.4 below the October close, so the Sep 23 bar
+      // steps up: a roll artifact, disclosed in the panel copy). Sep 24 (AAA release) pairs
+      // with the same Sep 23 settlement (92.16).
       // Data note (Sep 21 evening): the Sep 18 pass observed the Yahoo front-month bars at 99.29 /
       // 96.08 (read as a December-contract roll); a later pull shows the same bars at the
       // news-reported Nov/Oct settles (103.87 / 100.30). The observation was a transient
@@ -2271,18 +2287,19 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
           return { date: p.date, x: gd(p.date), y: +((p.value * 42 - w.value) * 10).toFixed(0) / 10 };
         });
       // WTI points that are futures closes, not the FRED weekly spot series — the tooltip
-      // source label follows this (kept in step with the panel copy: "Sep 10–11 and Sep 14–22").
-      const wtiNonFred = new Set(["2026-09-10", "2026-09-11", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22"]);
+      // source label follows this (kept in step with the panel copy: "Sep 10–11 and Sep 14–23").
+      const wtiNonFred = new Set(["2026-09-10", "2026-09-11", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22", "2026-09-23"]);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
-      // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 and the Sep 22
-      // record point (Sep 23 skipped so the last two dots don't blur at ~3px/day);
-      // gasoline: pre-Sep 3 plus Sep 10, 17, 22 — because a run of daily dots bunches into
+      // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 and the Sep 24
+      // point (the record is Sep 23 — the label tracks the max on the line; Sep 23's dot is
+      // skipped so the last two dots don't blur at ~3px/day);
+      // gasoline: pre-Sep 3 plus Sep 10, 17, 24 — because a run of daily dots bunches into
       // ~30px at the right edge. The nearest-WTI pairing below runs over the FULL wtiWeekly either way.
       const dieCrackSrc = dieselYtd.filter(
-        (p) => p.date < "2026-09-03" || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-14", "2026-09-17", "2026-09-22"].includes(p.date)
+        (p) => p.date < "2026-09-03" || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-14", "2026-09-17", "2026-09-24"].includes(p.date)
       );
       const gasCrackSrc = gasolineYtd.filter(
-        (p) => p.date < "2026-09-03" || p.date === "2026-09-10" || p.date === "2026-09-17" || p.date === "2026-09-22",
+        (p) => p.date < "2026-09-03" || p.date === "2026-09-10" || p.date === "2026-09-17" || p.date === "2026-09-24",
       );
       const dieDotKeep = new Set(dieCrackSrc.map((p) => p.date));
       const gasDotKeep = new Set(gasCrackSrc.map((p) => p.date));
@@ -2325,7 +2342,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             y: {
               type: "linear" as const,
               min: 40,
-              // headroom above the 179.6 record (Sep 22) so its label clears the top edge
+              // headroom above the 181.8 record (Sep 23) so its label clears the top edge
               max: 185,
               afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
                 scale.ticks = [40, 60, 80, 100, 120, 140, 160].map((v) => ({ value: v }));
@@ -2370,12 +2387,13 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
       // Same dot-thinning as the diesel chart: the line draws the full weekly + daily
       // series, so the path keeps its movement; the dots are thinned to the story beats
       // — pre-Sep 10 points, Sep 11 (pre-hike run-up, intraday 4.992, highest since
-      // Oct 2023), Sep 16 (5.006, first close above 5% of the war), and the newest
-      // point (Sep 21, under its endpoint label) — because the other daily dots in
-      // the final 11 days would bunch into ~30px at the right edge. treasuryView is
-      // the dot-keep set, not the data.
+      // Oct 2023), Sep 16 (5.006, first close above 5% of the war), Sep 21, and the
+      // newest point (Sep 23, under its endpoint label — the labeled point needs its
+      // dot; Sep 22 is skipped so the last two dots don't blur) — because the other
+      // daily dots in the final 11 days would bunch into ~30px at the right edge.
+      // treasuryView is the dot-keep set, not the data.
       const treasuryView = treasury10y.filter(
-        (p) => p.date < "2026-09-10" || p.date === "2026-09-11" || p.date === "2026-09-16" || p.date === "2026-09-21",
+        (p) => p.date < "2026-09-10" || p.date === "2026-09-11" || p.date === "2026-09-16" || p.date === "2026-09-21" || p.date === "2026-09-23",
       );
       const treasuryDotKeep = new Set(treasuryView.map((p) => p.date));
       new Chart(document.getElementById("treasury10yChart")!, {
@@ -2419,9 +2437,9 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             y: {
               type: "linear" as const,
               min: 3.9,
-              max: 5.05, // headroom so the 5.006 point isn't clipped at the top
+              max: 5.25, // headroom above the 5.11 point so its endpoint label (18px above) clears the top
               afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
-                scale.ticks = [4.0, 4.2, 4.4, 4.6, 4.8, 5.0].map((v) => ({ value: v }));
+                scale.ticks = [4.0, 4.2, 4.4, 4.6, 4.8, 5.0, 5.2].map((v) => ({ value: v }));
               },
               ticks: {
                 font: { family: "Georgia, serif", size: 11 },
@@ -2442,7 +2460,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
                   const p = treasury10y[ctx.dataIndex];
                   // Yahoo session closes on the daily tail; FRED weekly closes before that —
                   // kept in step with the panel subline ("Sep 11, 14, 15, 16, 17, and 18: Yahoo").
-                  const src = ["2026-09-11", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18"].includes(p.date) ? "Yahoo session close" : "FRED weekly";
+                  const src = ["2026-09-11", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22", "2026-09-23"].includes(p.date) ? "Yahoo session close" : "FRED weekly";
                   // 3 decimals: yields are quoted in bps — 2 decimals would show 4.998 as 5.00
                   return ` ${p.value.toFixed(3)}% — 10-yr US Treasury (${src})`;
                 },
@@ -2457,7 +2475,7 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
             { value: treasuryTestLevel, text: "4.8% — Jan 2025 high", color: "#8a867a", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: treasury10y.length - 1, text: "Sep 22 · 4.968%", ...endpoint, dy: 18, color: "#b3261e" },
+            { dataset: 0, index: treasury10y.length - 1, text: "Sep 23 · 5.11%", ...endpoint, dy: 18, color: "#b3261e" },
           ]),
         ],
       });
