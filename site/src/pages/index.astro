@@ -125,15 +125,15 @@ const dataAsOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", 
 // public assays, "Yield (% vol)" cut row). The seven reported cuts are grouped into
 // five bands; band colors match the refinery plate in SupplyFlow.astro (same palette).
 // VGO and residue are separate bands: VGO is converted in nearly every complex
-// refinery (FCC/hydrocracker, standard equipment), residue needs a coker — the
-// scarce, geographically concentrated unit.
+// refinery (FCC/hydrocracker, standard equipment), residue needs deep-conversion
+// equipment such as a coker (less common, geographically concentrated).
 import crudeYieldsData from "../data/crude-yields.json";
 const cyBandDefs = [
   { id: "naphtha", label: "naphtha", sub: "becomes gasoline after further processing", color: "#005f73", text: "#ffffff", cuts: ["light_naphtha", "heavy_naphtha"] },
   { id: "kerosene", label: "kerosene", sub: "jet fuel", color: "#0a9396", text: "#ffffff", cuts: ["kerosene"] },
   { id: "diesel", label: "diesel", sub: "", color: "#ca6702", text: "#ffffff", cuts: ["diesel"] },
   { id: "vgo", label: "VGO", sub: "cracked in most complex refineries", color: "#e9d8a6", text: "#1c1b17", cuts: ["vacuum_gas_oil"] },
-  { id: "residue", label: "residue", sub: "needs a coker — the scarce unit", color: "#001219", text: "#ffffff", cuts: ["vacuum_residue"] },
+  { id: "residue", label: "residue", sub: "needs a coker or residue hydrocracker", color: "#001219", text: "#ffffff", cuts: ["vacuum_residue"] },
 ];
 const cyFmt = (n: number) => n.toFixed(1);
 const cyCrudes = (crudeYieldsData as any).crudes.map((c: any) => {
@@ -148,8 +148,9 @@ const cyNaph = (c: any) => c.val.light_naphtha + c.val.heavy_naphtha;
 const [cyWti, cyZakum, cyKearl] = cyCrudes;
 const cyDate = (d: string) => new Date(d + "T12:00:00").toLocaleDateString("en-US", { timeZone: "UTC", day: "numeric", month: "short", year: "numeric" });
 const cyAssayList = cyCrudes.map((c: any) => `${c.name}, ${c.assay_code}, ${cyDate(c.assay_date)}`).join("; ");
+const cyLib = (crudeYieldsData as any).library_size;
 const cyAria = `Three horizontal stacked bars on one shared scale, each one barrel split by straight-run (distillation) yield, percent of barrel volume. ${cyCrudes
-  .map((c: any) => `${c.name} (${c.type}): butane and lighter ${cyFmt(c.val.butane_and_lighter)}, naphtha ${cyFmt(cyNaph(c))}, kerosene ${cyFmt(c.val.kerosene)}, diesel ${cyFmt(c.val.diesel)}, vacuum gas oil ${cyFmt(c.val.vacuum_gas_oil)}, vacuum residue ${cyFmt(c.val.vacuum_residue)}`)
+  .map((c: any) => `${c.name} (${c.type}, ${c.api}° API, ${c.sulfur_pct}% S): butane and lighter ${cyFmt(c.val.butane_and_lighter)}, naphtha ${cyFmt(cyNaph(c))}, kerosene ${cyFmt(c.val.kerosene)}, diesel ${cyFmt(c.val.diesel)}, vacuum gas oil ${cyFmt(c.val.vacuum_gas_oil)}, vacuum residue ${cyFmt(c.val.vacuum_residue)}`)
   .join(". ")} .`;
 
 // ── World crude supply by quality (Eni, World Energy Review 2025) ───────────
@@ -158,8 +159,8 @@ const cyAria = `Three horizontal stacked bars on one shared scale, each one barr
 // reports 2010, 2015 and 2019–2024 only; the other years are nulls in the data
 // file and get no data point here — nothing is interpolated, no smoothing, no
 // 2025/2026 values. The five grouped bands are checked against Eni's world total
-// for every reported year. The 2026 Gulf shut-in is a bracket annotation on the
-// 2024 bar (agency estimate), not a data series.
+// for every reported year. The 2026 Gulf shut-in is a text annotation above
+// the 2024 column (agency figure), not a data series.
 import crudeSupplyData from "../data/crude-supply-quality.json";
 const cq = crudeSupplyData as any;
 const cqYears = cq.years_reported as number[];
@@ -221,17 +222,36 @@ for (const g of cqBands) {
   const r = cqMid17.rows.find((r) => r.id === g.id)!;
   cqLabelY[g.id] = g.id === "ultra_light" ? cqY(cqMid17.total) - 7 : cqY((r.lo + r.hi) / 2) + 4;
 }
-// Bracket: the IEA's Gulf shut-in on the right edge of the 2024 medium & sour
-// band, drawn from the top of the band downward. Annotation, not a series.
+// Gulf shut-in: a text annotation above the 2024 column, outside all bands
+// (fact-check 2026-09-24: the earlier bracket sat inside the medium & sour band
+// and implied a grade-specific loss). Annotation, not a series.
 const cqBrk = cq.annotation as any;
 const cqP24 = cqStack.find((p) => p.year === 2024)!;
-const cqMs24 = cqP24.rows.find((r) => r.id === "medium_sour")!;
-const cqBrkTop = cqY(cqMs24.hi);
-const cqBrkBot = cqY(cqMs24.hi - cqBrk.volume_mb_d);
-const cqBrkLines = cqBrk.label.split(" offline ").map((s: string, i: number) => (i === 0 ? s : `offline ${s}`));
+const cqAnnTop = cqY(cqP24.total); // top of the 2024 column
+const cqBrkLines: string[] = (cqBrk as { label_lines?: string[] }).label_lines ?? [cqBrk.label];
+// Mobile variant (below md): a narrow 540×448 viewBox so the whole chart —
+// latest years and the shut-in annotation included — fits the screen with no
+// sideways scroll. The chart content sits in a <g> shifted down 28px; the top
+// strip is reserved for the shut-in annotation (it otherwise collides with the
+// "ultra light" band label, which sits above the plot area). Bigger relative type, name-only band labels, four x labels.
+const mqW = 540, mqH = 448, mqL = 44, mqR = 528, mqB = 372; // 448 = 420 + 28px annotation strip; chart group is translated down 28
+const mqX = (y: number) => mqL + (y - 2010) / 14 * (mqR - mqL);
+const mqY = (v: number) => mqB - (v / cqMax) * (mqB - 24);
+const mqArea = (id: string) => {
+  const top = cqStack.map((p) => `${mqX(p.year).toFixed(1)},${mqY(p.rows.find((r) => r.id === id)!.hi).toFixed(1)}`);
+  const bot = [...cqStack].reverse().map((p) => `${mqX(p.year).toFixed(1)},${mqY(p.rows.find((r) => r.id === id)!.lo).toFixed(1)}`);
+  return `M ${top.join(" L ")} L ${bot.join(" L ")} Z`;
+};
+const mqLabelY: Record<string, number> = {};
+for (const g of cqBands) {
+  const r = cqMid17.rows.find((r) => r.id === g.id)!;
+  mqLabelY[g.id] = g.id === "ultra_light" ? mqY(cqMid17.total) - 8 : mqY((r.lo + r.hi) / 2) + 5;
+}
+const mqAnnTop = mqY(cqP24.total); // top of the 2024 column
+const mqXLabels = [2010, 2015, 2019, 2024];
 const cqAria = `Stacked area chart of world crude production by quality class, million barrels per day, reported years 2010, 2015 and 2019 to 2024. ${cqBands
   .map((g) => `${g.label}: ${(cqBandKb(2010, g.id) / 1000).toFixed(1)} in 2010 (${cqShare1(2010, g.id)}% of world crude) to ${(cqBandKb(2024, g.id) / 1000).toFixed(1)} in 2024 (${cqShare1(2024, g.id)}%)`)
-  .join("; ")}. A bracket on the 2024 medium & sour band marks about ${cqBrk.volume_mb_d} mb/d of Gulf production offline since February 2026 (IEA Oil Market Report, August 2026 edition; an agency estimate drawn on the 2024 bar, not a data series).`;
+  .join("; ")}. A text annotation above the 2024 column, outside all bands, notes that over 10 mb/d of Gulf output was shut in in August 2026 (IEA Oil Market Report, September 2026 edition). The shut-in spans several quality classes; the annotation is a scale reference, not a data series and not a grade-specific value.`;
 
 ---
 
@@ -352,8 +372,8 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             <line x1="162" y1="252" x2="144" y2="237" stroke="#b3261e" stroke-width="0.75" opacity="0.6" />
           </svg>
           <figcaption class="mt-2 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-            <span class="block">Hormuz: preliminary Kpler counts (via Reuters), excluding vessels with tracking signals off — 4 on Sep 21 and 3 on Sep 22. The Sep 22 count was roughly 80% below the 10-day average of about 15 · 17 over Sep 19–20, down from 37 the previous weekend · 6 on Sep 16 (revised from 3) and 12 on Sep 15 · more than 130/day before the crisis · Kpler: confirmed transits averaged 6.98M barrels a day over the seven days to Sep 20 — about 38% of the 18.3M pre-crisis baseline (a volume measure; the counts above are vessel crossings).</span>
-            <span class="mt-1 block">Bab el-Mandeb: the Houthis held Mokha, Perim, and the Hanish islands as of Sep 14. On Sep 15, they claimed 85 vessels had passed through the strait in 72 hours. Kpler counted 21 crossings on Sep 16, 24 on Sep 15, and 22 on Sep 22 (10-day average ~26).</span>
+            <span class="block">Hormuz: Kpler's preliminary counts (via Reuters) show 4 vessel crossings on Sep 21 and 3 on Sep 22, versus more than 130 a day before the crisis. The Sep 22 count was about 80% below the 10-day average of about 15. Counts exclude ships with tracking signals off. Separately, Kpler's confirmed oil volumes averaged 6.98M barrels a day in the seven days to Sep 20 — about 38% of the pre-crisis 18.3M.</span>
+            <span class="mt-1 block">Bab el-Mandeb: Kpler counted 22 crossings on Sep 22, versus a 10-day average of about 26. The Houthis held Mokha, Perim, and the Hanish islands as of Sep 14.</span>
           </figcaption>
         </figure>
       </header>
@@ -567,7 +587,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
         <div class="h-80 sm:h-[400px]">
           <canvas id="flipChart" role="img" aria-label="World oil balance, million barrels per day, January to August 2026 actuals: a 3.5 to 4.2 surplus in January and February, then net withdrawals every month after the war began on February 28 — 5.2 in March, the worst month, easing to 0.1 in July and back to 4.1 in August. Above zero, production exceeded consumption and stocks grew. Below zero, consumption exceeded production and stocks fell."></canvas>
         </div>
-        <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+        <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
           World production minus consumption, million barrels/day. EIA Short-Term Energy Outlook (STEO),
           Table 3a, January–August 2026; forecasts aren't shown. Gulf production outages peaked at
           11.2 million barrels/day in May; lower consumption and supply from elsewhere offset much of the loss.
@@ -599,7 +619,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
         <div class="h-80 sm:h-[400px]">
           <canvas id="oecdStocksChart" role="img" aria-label={ wsPanelAAria }></canvas>
         </div>
-        <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+        <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
           Company and government oil stocks held on land. EIA international data,
           monthly, January 2021–May 2026, in million barrels. Shaded range: 2021–2025.
           The vertical line marks the start of the war on February 28, 2026.
@@ -643,7 +663,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           June–August 2026 trend continued ({ wsPersMonthlyStr } million barrels a month).
           Both use the same starting point as the scenarios.
         </p>
-        <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+        <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
           Change since { wsFcAnchorMonthStr }, in million barrels. We adjust production and
           consumption from the EIA's September 9 outlook for each scenario. The EIA comparison
           uses that forecast without our adjustments. Recent trend repeats IEA-reported changes.
@@ -809,49 +829,55 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
         <!-- Not all crude is the same: straight-run yields of three crudes (ExxonMobil assays) -->
         <div id="crude-yields" class="mb-12">
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">A third of an extra-heavy barrel needs a coker to become fuel</h2>
+            <h2 class="text-xl font-bold tracking-tight">Replacing Gulf crude can raise costs for refineries</h2>
             <p class="font-mono text-[11px] text-faint">Straight-run (distillation) yield, % of barrel volume</p>
           </div>
+          <p class="mb-3 max-w-3xl text-sm leading-relaxed text-ink/80">
+            Crude oil comes in different forms, and they don’t all produce the same mix of fuels
+            or need the same processing. Replacement oil has to suit the refinery's equipment. Heavier crude needs extra
+            processing, which consumes energy and, in some steps, hydrogen. Lighter crude can
+            overwhelm equipment that handles its lighter components while leaving other units
+            underused. The refinery may have to cut output or pay for modifications. Lower output
+            spreads fixed costs over fewer barrels, raising the cost per barrel.
+          </p>
+          <p class="mb-3 max-w-3xl text-[13px] leading-relaxed text-ink/70">
+            These examples compare US shale, Gulf crude, and heavy sour crude (diluted bitumen) using
+            three of the {cyLib} lab reports, called assays, in ExxonMobil's public library.
+            It's a small sample, chosen for availability and contrast.
+            The bars show <em>straight-run yields</em>: the parts separated by heating the oil,
+            before further processing into finished fuels. The parts used for diesel and jet fuel
+            make up {cyFmt(cyMid(cyWti))}% of WTI Light – Export, {cyFmt(cyMid(cyZakum))}% of Upper Zakum,
+            and {cyFmt(cyMid(cyKearl))}% of Kearl.
+          </p>
           <p class="mb-6 max-w-3xl text-[13px] leading-relaxed text-ink/70">
-            Crude is not all the same, and the split below is the first step of refining.
-            These are <em>straight-run yields</em> — the cuts that come out of a barrel when it
-            is simply boiled, before any cracking or blending, so they are not the
-            refinery's final fuel output. A US shale barrel (WTI Light – Export) gives {cyFmt(cyMid(cyWti))}%
-            straight out as diesel and jet, and the most naphtha of
-            the three, at {cyFmt(cyNaph(cyWti))}%, which becomes gasoline after further
-            processing. A Gulf medium-sour barrel gives a similar share of diesel and jet — {cyFmt(cyMid(cyZakum))}%
-            in Upper Zakum, the nearest public equivalent to Arab
-            Light, which has no public assay. An extra-heavy barrel does much worse: in Kearl,
-            the public proxy for Venezuela's Merey, which also has no public assay, {cyFmt(cyMid(cyKearl))}%
-            comes out as diesel and jet. The difference between the barrels is in the heavy
-            end. Vacuum gas oil — {cyFmt(cyWti.val.vacuum_gas_oil)}% of the WTI barrel, {cyFmt(cyZakum.val.vacuum_gas_oil)}% of the Gulf
-            barrel, {cyFmt(cyKearl.val.vacuum_gas_oil)}% of Kearl — is converted in nearly every complex
-            refinery: fluid catalytic crackers and hydrocrackers are standard equipment, and
-            much of the world's diesel is hydrocracked VGO. Vacuum residue is the different
-            problem: it needs a coker, and cokers are the scarce, geographically concentrated
-            units. A third of the Kearl barrel ({cyFmt(cyKearl.val.vacuum_residue)}%) is residue, against {cyFmt(cyZakum.val.vacuum_residue)}%
-            in Upper Zakum and {cyFmt(cyWti.val.vacuum_residue)}% in WTI. That split is one
-            reason heavy crude from Venezuela or Canada can't fill the gap quickly; for the
-            price side of the same story, see
-            <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#crackChart">the diesel price gap chart</a> in the Prices section.
+            The heavier parts need more equipment. Most complex refineries can process vacuum
+            gas oil, but the heaviest residue needs specialized equipment, such as a coker, to break it down.
+            Residue makes up {cyFmt(cyKearl.val.vacuum_residue)}% of Kearl, compared with{" "}
+            {cyFmt(cyZakum.val.vacuum_residue)}% of Upper Zakum and {cyFmt(cyWti.val.vacuum_residue)}%
+            of WTI. That helps explain why heavy crude from Canada or Venezuela can't quickly
+            replace missing Gulf supplies. The{" "}
+            <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#crude-quality">next chart</a>{" "}
+            shows how much of each type the world produced before the war; the{" "}
+            <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#crackChart">diesel price gap chart</a>{" "}
+            shows how fuel prices have diverged from crude prices.
           </p>
           <div role="img" aria-label={cyAria}>
             {cyCrudes.map((c: any) => (
               <div class="mb-5">
                 <div class="mb-1 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
-                  <p class="text-sm font-semibold">{c.name} <span class="font-normal text-faint">· {c.type}</span></p>
-                  <p class="font-mono text-[11px] text-faint tabular">diesel + jet without conversion: {cyFmt(cyMid(c))}%</p>
+                  <p class="text-sm font-semibold">{c.name} <span class="font-normal text-ink/60">· {c.type}, {c.api}° API, {c.sulfur_pct}% S</span></p>
+                  <p class="font-mono text-[11px] text-ink/60 tabular">diesel + kerosene fractions: {cyFmt(cyMid(c))}%</p>
                 </div>
                 <div class="flex h-14 w-full overflow-hidden rounded-[3px] border border-rule">
                   <div class="h-full" style={`width:${c.val.butane_and_lighter}%;background:#8a867a`}></div>
                   {c.bands.map((b: any) => (
                     <div class="flex h-full flex-col items-center justify-center overflow-hidden leading-tight" style={`width:${b.pct}%;background:${b.color};color:${b.text}`}>
                       {b.pct >= 10 && <span class="hidden whitespace-nowrap text-[10px] sm:block">{b.label}</span>}
-                      {b.pct >= 5 && <span class="whitespace-nowrap font-mono text-[10px] tabular sm:text-xs">{cyFmt(b.pct)}%</span>}
+                      {b.pct >= 5 && <span class="whitespace-nowrap font-mono text-[11px] tabular sm:text-xs">{cyFmt(b.pct)}%</span>}
                     </div>
                   ))}
                 </div>
-                <p class="mt-1 font-mono text-[10.5px] text-faint tabular">butane and lighter {cyFmt(c.val.butane_and_lighter)}% (LPG)</p>
+                <p class="mt-1 font-mono text-[11px] text-ink/60 tabular">butane and lighter {cyFmt(c.val.butane_and_lighter)}% (gases)</p>
               </div>
             ))}
           </div>
@@ -863,53 +889,105 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
               </span>
             ))}
             <span class="inline-flex items-center gap-1.5">
-              <span class="inline-block h-2.5 w-2.5 rounded-[2px]" style="background:#8a867a"></span>butane and lighter — LPG
+              <span class="inline-block h-2.5 w-2.5 rounded-[2px]" style="background:#8a867a"></span>butane and lighter gases
             </span>
           </div>
-          <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-            Straight-run (distillation) yields by cut volume, % of barrel — the cuts a
-            barrel gives up on its own when distilled, not final product yields after
-            cracking. Naphtha is light + heavy naphtha; VGO is the 350–550 °C cut and
-            residue runs from 550 °C to the final boiling point. Assays from ExxonMobil's public crude oil
-            library: {cyAssayList}. Dates as printed in each assay's PDF (WTI and Kearl
-            carry the date at the foot of the report; the assay spreadsheet stores the
-            same date). Source: <a href="https://corporate.exxonmobil.com/crude-oils/crude-trading">corporate.exxonmobil.com/crude-oils/crude-trading</a>.
+          <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
+            First-stage yields by volume, not finished fuel output. Upper Zakum stands in for Arab Light;
+            Kearl stands in for Venezuela's Merey; no public assays of Arab Light or Merey are in that library.
+            These are examples,
+            not averages for their classes. Naphtha combines light and heavy naphtha; vacuum gas oil
+            (VGO) is the 350–550 °C portion; residue is what remains above 550 °C.
+            Assays: {cyAssayList}. Dates as printed in the reports. Source:{" "}
+            <a href="https://corporate.exxonmobil.com/crude-oils/crude-trading">ExxonMobil's crude oil assay library</a>.
+            Processing requirements:{" "}
+            <a href="https://www.eia.gov/energyexplained/oil-and-petroleum-products/refining-crude-oil-inputs-and-outputs.php">EIA</a>.
+            Lighter-crude constraints:{" "}
+            <a href="https://www.eia.gov/analysis/studies/petroleum/lto/">EIA's study of processing light shale oil</a>.
           </p>
         </div>
 
         <!-- World crude supply by quality, 2010–2024 (Eni World Energy Review 2025) -->
-        <div class="mb-12">
+        <div id="crude-quality" class="mb-12">
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">A third of the world's crude is medium &amp; sour. Over a third of that class is offline</h2>
+            <h2 class="text-xl font-bold tracking-tight">Refineries built for medium-sour crude can't easily switch supplies</h2>
             <p class="font-mono text-[11px] text-faint">million barrels per day · world, annual</p>
           </div>
+          <p class="mb-3 max-w-3xl text-sm leading-relaxed text-ink/80">
+            A refinery's equipment is built around the oil it expects to process. For a plant
+            designed for medium-sour crude — oil with a medium density and high sulfur content —
+            switching supplies changes the work that equipment has to do. Lighter oil can leave
+            some units underused; heavier oil leaves more residue to break down. Major changes
+            take years: ExxonMobil's Beaumont expansion began construction in 2019 and started
+            operating in 2023.
+          </p>
+          <p class="mb-3 max-w-3xl text-[13px] leading-relaxed text-ink/70">
+            The chart below shows how the world's supply of different types of crude changed
+            before the war. Medium-sour crude accounted for {cqShare1(2024, "medium_sour")}% of
+            production in 2024. Its share had been falling while light, sweet crude grew from{" "}
+            {cqShare1(2010, "light_sweet")}% in 2010 to {cqShare1(2024, "light_sweet")}% in 2024.
+            Refiners had invested in equipment for heavier oil before the shale boom, so the
+            growing supply of lighter crude doesn't suit every plant equally well.
+          </p>
           <p class="mb-6 max-w-3xl text-[13px] leading-relaxed text-ink/70">
-            The Gulf barrels that went offline were nearly all medium &amp; sour: that class was {cqShare1(2024, "medium_sour")}%
-            of world crude in 2024, and the {cqBrk.volume_mb_d} mb/d the IEA still counts as shut in is {((cqBrk.volume_mb_d / (cqBandKb(2024, "medium_sour") / 1000) * 100)).toFixed(0)}%
-            of it. That share had already been falling while
-            light &amp; sweet — the shale class — grew from {cqShare1(2010, "light_sweet")}% to {cqShare1(2024, "light_sweet")}%
-            across the years shown. The class that could in principle replace the Gulf barrels,
-            heavy &amp; sour at {cqShare1(2024, "heavy_sour")}% of world crude, is the one with the worst
-            yields; see <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="#crude-yields">the yields chart above</a> for why it can't simply fill the gap.
-            Eni's figures are annual, end in 2024, and are Eni's elaboration of IEA data, so this is
-            the pre-war baseline with the shut-in drawn on it, not a live series.
+            The war has cut supplies of the medium-sour oil those plants were built to use.
+            The IEA's September report put lost Gulf production at more than {cqBrk.volume_mb_d} million
+            barrels a day (August 2026). Several of the Gulf's main export grades sit in this
+            chart's medium-sour band (26–35° API): Arab Light (32.8°), Arab Medium (30.2°) and
+            Basrah Medium (27.9°, Iraq's largest export grade since 2021). The IEA does not break
+            the shut-in down by grade, so how the loss splits across the bands is not known.
+            The production data ends in 2024; the annotation above the 2024 column shows the loss
+            reported in 2026, across all grades.
           </p>
           <div class="overflow-x-auto">
-            <svg viewBox={`0 0 ${cqW} ${cqH}`} class="block w-full min-w-[640px]" role="img" aria-label={cqAria}>
+            <!-- Below md: narrow viewBox so the whole chart (latest years and the
+                 shut-in annotation included) fits the screen without sideways scrolling -->
+            <svg viewBox={`0 0 ${mqW} ${mqH}`} class="mx-auto block w-full max-w-[460px] md:hidden" role="img" aria-label={cqAria}>
+              <!-- shut-in annotation: own strip above the chart, outside all bands -->
+              <text x={mqR} y={12} text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="14" fill="#1c1b17">{cqBrkLines[0]}</text>
+              <text x={mqR} y={27} text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="14" fill="#1c1b17">{cqBrkLines[1]}</text>
+              <line x1={mqR - 2} x2={mqR - 2} y1={31} y2={mqAnnTop + 27.5} stroke="#1c1b17" stroke-width="1.5" />
+              <g transform="translate(0,28)">
+              {[20, 40, 60, 80].map((v) => (
+                <g>
+                  <line x1={mqL} x2={mqR} y1={mqY(v)} y2={mqY(v)} stroke="#d8d4c6" stroke-width="0.75" opacity="0.6" />
+                  <text x={mqL - 8} y={mqY(v) + 5} text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="15" fill="#767267">{v}</text>
+                </g>
+              ))}
+              <text x={mqL - 8} y={mqB + 5} text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="15" fill="#767267">0</text>
+              <line x1={mqL} x2={mqR} y1={mqB} y2={mqB} stroke="#d8d4c6" stroke-width="1" />
+              {cqYears.map((y: number) => (
+                <g>
+                  <line x1={mqX(y)} x2={mqX(y)} y1={mqB} y2={mqB + 6} stroke="#d8d4c6" stroke-width="1" />
+                  {mqXLabels.includes(y) && (
+                    <text x={mqX(y)} y={mqB + 26} text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="15" fill="#767267">{y}</text>
+                  )}
+                </g>
+              ))}
+              {cqBands.map((g) => (
+                <path d={mqArea(g.id)} fill={g.color} stroke="#f2f1ec" stroke-width="2" />
+              ))}
+              {cqBands.map((g) => (
+                <text x={mqX(2017)} y={mqLabelY[g.id]} text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill={g.text}>{g.label}</text>
+              ))}
+              </g>
+            </svg>
+            <!-- md and up: the wide chart with in-band 2010→2024 share labels -->
+            <svg viewBox={`0 0 ${cqW} ${cqH}`} class="mx-auto hidden w-full max-w-[760px] min-w-[640px] md:block" role="img" aria-label={cqAria}>
               <!-- gridlines and y labels -->
               {[20, 40, 60, 80].map((v) => (
                 <g>
                   <line x1={cqL} x2={cqR} y1={cqY(v)} y2={cqY(v)} stroke="#d8d4c6" stroke-width="0.75" opacity="0.6" />
-                  <text x={cqL - 8} y={cqY(v) + 3.5} text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="10" fill="#8a867a">{v}</text>
+                  <text x={cqL - 8} y={cqY(v) + 4} text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11.5" fill="#767267">{v}</text>
                 </g>
               ))}
-              <text x={cqL - 8} y={cqB + 3.5} text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="10" fill="#8a867a">0</text>
+              <text x={cqL - 8} y={cqB + 4} text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11.5" fill="#767267">0</text>
               <!-- baseline and x labels (reported years only) -->
               <line x1={cqL} x2={cqR} y1={cqB} y2={cqB} stroke="#d8d4c6" stroke-width="1" />
               {cqYears.map((y: number) => (
                 <g>
                   <line x1={cqX(y)} x2={cqX(y)} y1={cqB} y2={cqB + 4} stroke="#d8d4c6" stroke-width="1" />
-                  <text x={cqX(y)} y={cqB + 18} text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="10" fill="#8a867a">{y}</text>
+                  <text x={cqX(y)} y={cqB + 19} text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11.5" fill="#767267">{y}</text>
                 </g>
               ))}
               <!-- stacked areas, bottom to top; the paper-colored stroke is the thin gap between bands -->
@@ -919,27 +997,36 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
               <!-- direct labels: band name + 2010 and 2024 shares of world crude -->
               {cqBands.map((g) => (
                 <text x={cqX(2017)} y={cqLabelY[g.id]} text-anchor="middle">
-                  <tspan font-family="Georgia, 'Times New Roman', serif" font-size="12.5" fill={g.text}>{g.label}</tspan>
-                  <tspan dx="7" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11.5" fill={g.text}>{cqShare1(2010, g.id)}% to {cqShare1(2024, g.id)}%</tspan>
+                  <tspan font-family="Georgia, 'Times New Roman', serif" font-size="13.5" fill={g.text}>{g.label}</tspan>
+                  <tspan dx="7" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="12" fill={g.text}>{cqShare1(2010, g.id)}% to {cqShare1(2024, g.id)}%</tspan>
                 </text>
               ))}
-              <!-- the Gulf shut-in: a bracket on the right edge of the 2024 medium & sour band -->
-              <path d={`M ${cqR - 2} ${cqBrkTop.toFixed(1)} L ${cqR - 10} ${cqBrkTop.toFixed(1)} L ${cqR - 10} ${cqBrkBot.toFixed(1)} L ${cqR - 2} ${cqBrkBot.toFixed(1)}`} stroke="#1c1b17" stroke-width="1.5" fill="none" />
-              <text x={cqR - 16} y={cqBrkTop + 15} text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#1c1b17">{cqBrkLines[0]}</text>
-              <text x={cqR - 16} y={cqBrkTop + 29} text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#1c1b17">{cqBrkLines[1]}</text>
+              <!-- shut-in annotation: above the 2024 column, outside all bands -->
+              <text x={cqR} y={10} text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="12" fill="#1c1b17">{cqBrkLines[0]}</text>
+              <text x={cqR} y={23} text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="12" fill="#1c1b17">{cqBrkLines[1]}</text>
+              <line x1={cqR - 4} x2={cqR - 4} y1={25} y2={cqAnnTop - 0.5} stroke="#1c1b17" stroke-width="1" />
             </svg>
           </div>
-          <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-            World crude production by quality, million barrels per day; five groups stacked from Eni's
-            ten bands: medium &amp; sour = Medium &amp; Sour; heavy &amp; sour = Heavy &amp; Sour; light &amp; sweet =
-            Light &amp; Sweet; ultra light = Ultra Light; other grades = the remaining six Eni bands (Light &amp;
-            Medium Sour, Light &amp; Sour, Medium &amp; Sweet, Medium &amp; Medium Sour, Heavy &amp; Sweet, Heavy &amp;
-            Medium Sour) plus Eni's unassigned production (0.7% of the 2024 total). Eni's table reports
-            2010, 2015 and 2019–2024; the other years are not in the table and are not plotted. Source:
-            Eni, World Energy Review 2025 (24th edition, 21 Oct 2025), table p96, band definitions p9;
-            Eni's elaboration of IEA (2025) Monthly Oil Data Service data. Bracket: about {cqBrk.volume_mb_d} mb/d of Gulf
-            production shut in — IEA Oil Market Report, Aug 2026 edition (12 Aug 2026); an agency
-            estimate drawn on the 2024 bar, not a data series.
+          <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
+            World crude production, million barrels per day. Eni's ten quality classes are grouped
+            into five; “other grades” combines six classes and unassigned production (0.7% in 2024).
+            Reported years: 2010, 2015 and 2019–2024. Source: Eni, World Energy Review 2025
+            (21 Oct 2025), using IEA data; table on printed p96, definitions on p9
+            (PDF pages 98 and 11). Annotation: IEA Oil Market Report, 11 Sep 2026
+            (August 2026 data); it marks the total loss, not a single grade. Gulf
+            export-grade properties:
+            <a href="https://en.wikipedia.org/wiki/List_of_crude_oil_products">Wikipedia</a>
+            (Arab Light, Arab Medium) and
+            <a href="https://www.petro-logistics.com/blog/posts/basrah-medium-iraqs-new-flagship-grade-as-basrah-light-stops-being-exported/">Petro-Logistics</a>
+            (Basrah Medium, 27.9° API / 3.0% S, Iraq's main export grade since 2021;
+            Basrah Light export stopped in Jan 2022).
+            Gulf losses also include lighter grades such as Murban and heavier grades such as
+            Arab and Basrah heavy.
+            Refinery configuration:{" "}
+            <a href="https://www.iea.org/commentaries/quality-vs-quantity-are-global-refiners-ready-for-us-shale-exports">IEA</a>{" "}
+            and <a href="https://www.eia.gov/Todayinenergy/detail.php?id=42936">EIA</a>.
+            Beaumont construction timeline:{" "}
+            <a href="https://corporate.exxonmobil.com/news/news-releases/2023/0316_exxonmobil-boosts-fuel-supply-with-2-billion-dollar-beaumont-refinery-expansion">ExxonMobil</a>.
           </p>
         </div>
 
@@ -976,7 +1063,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             <div class="relative h-96">
               <canvas id="refineryChart" role="img" aria-label="US refinery utilization, percent of operable capacity, weekly: 2026 above 2025 from spring onward — a dip to 88.6 percent in late February, then a steady climb from 95.3 on Jun 5 to a 98.0 peak on Aug 28, easing to 96.8 on Sep 11 and slipping to 94.0 on Sep 18, below 95% for the first time since late May; the same period in 2025 ranged from 83.5 to 96.9."></canvas>
             </div>
-            <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+            <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
               EIA Weekly Petroleum Status Report (WPULEUS3), weeks ending Friday. Utilization is the
               amount processed divided by available capacity. Both lines cover the same Jan–Sep period.
               Monthly processing volumes were 16.3–17.3 million barrels/day (STEO Table 4a), above 2025
@@ -1101,7 +1188,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
               OPEC expects a different result: demand growth of 0.4 million barrels per day in
               2026. That's a difference of 2.9 million between the two forecasts.
             </p>
-            <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+            <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
               EIA STEO Table 3e, Sep 9 2026; forecast completed Sep 3. The release lists Jan–Aug
               as historical data, though world and regional consumption figures are estimates.
               They include fuel used by refineries and ships. Forecasts from Sep 2026 onward aren't shown.
@@ -1252,7 +1339,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           <div class="mt-6 h-72 sm:h-80">
             <canvas id="foodChart" role="img" aria-label="Illustrative timeline of how energy costs could affect food prices, from February 2026 to mid-2028, based on delays in past energy shocks. A vertical line marks the war beginning February 28, 2026. Bars: freight costs in food prices during the fourth quarter of 2026; fertilizer prices peaking December 2026 to February 2027; 2027 plantings March to April 2027; effects on harvests July to October 2027; and the food-price spike from late 2027 through mid-2028."></canvas>
           </div>
-          <p class="mt-3 font-mono text-[10.5px] leading-relaxed text-faint tabular">
+          <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
             Higher energy prices can raise freight and fertilizer costs, affect planting and
             harvests, and eventually raise food prices. The bars show approximate periods based
             on the 2007–08 and 2022 price increases. The effects on food prices can take more

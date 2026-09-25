@@ -21,7 +21,7 @@
     2023,
     2024
   ],
-  "missing_years_note": "The table reports 2010, 2015, and 2019-2024 only; this edition has no complete annual table for the quality split (the 2000-2024 stacked chart on print p98 is a chart, not a table). 2011-2014 and 2016-2018 are explicit nulls below and are not plotted; nothing is interpolated.",
+  "missing_years_note": "The table reports 2010, 2015, and 2019-2024 only; this edition has no complete annual table for the quality split (the 2000-2024 stacked chart on print p98 is a chart, not a table). 2011-2014 and 2016-2018 are explicit nulls below and are not plotted. Only reported years have observations; the chart lines connect them (a presentation choice, not data).",
   "band_definitions": {
     "Ultra Light": {
       "definition": "API level equal to or greater than 50° and a low sulphur content",
@@ -1508,14 +1508,25 @@
   ],
   "rounding_note": "Band values are Eni's integers in kb/d; in 2015, 2019, 2020 and 2022 the ten bands plus unassigned sum to Eni's stated world total within 1-2 kb/d (their own rounding). 2010, 2021, 2023, 2024 sum exactly.",
   "annotation": {
-    "id": "gulf_shutin_bracket",
-    "kind": "bracket on the 2024 medium & sour band",
-    "label": "about 10 mb/d offline since Feb 2026",
+    "id": "gulf_shutin_annotation",
+    "kind": "text annotation above the 2024 column, outside all bands",
+    "label": "over 10 mb/d of Gulf output shut in (Aug 2026)",
+    "label_lines": [
+      "over 10 mb/d of Gulf output shut in",
+      "(Aug 2026, IEA), all grades"
+    ],
     "volume_mb_d": 10,
     "status": "agency-estimate",
-    "source": "IEA Oil Market Report, August 2026 edition (12 Aug 2026): 'more than 10 million barrels per day of Gulf production still shut down' (August 2026). The same figure is used in the Supply section of this dashboard. X in the label is 10, the figure the IEA edition states.",
-    "note": "An annotation drawn on the 2024 bar, not a data series; it does not modify any plotted value.",
-    "date": "2026-08-12"
+    "source": "IEA Oil Market Report, September 2026 edition (published 11 Sep 2026), Highlights: 'more than 10 mb/d of Gulf output remained shut in amid heightened security risks', referring to August 2026. The August 2026 edition (published 12 Aug 2026) reported 8.3 mb/d still shut in, referring to July 2026. The >10 figure is also used in the Supply section of this dashboard, which cites the IEA latest report.",
+    "note": "A text annotation above the 2024 column (outside all bands), not a data series; it does not modify any plotted value. The reported loss spans all grades the Gulf was producing, so the annotation is placed on the whole column, not one band.",
+    "simplification": "The shut-in spans several quality classes: Murban is light & medium sour (40.2 API, 0.79% S, per Eni's band definitions); Arab and Basrah heavy are heavy & sour; Arab extra light and the Qatari condensate are lighter grades. First version drew the full volume as a bracket inside the medium & sour band; first fact-check pass (2026-09-24) added disclaimers; second pass moved it to a text annotation outside all bands and removed the unsupported \"most of the loss is medium-sour\" claim from the copy.",
+    "allocation": {
+      "medium_sour_share_of_shutin": "DROPPED from copy 2026-09-24 (external fact-check, two passes): pass 1 removed 'two-thirds to three-quarters / 25-30%' (no reproducible source; the IEA gives no per-grade shut-in); pass 2 removed 'most of the loss lands there' (listing medium-sour export grades establishes examples, not the volume-weighted composition of lost production). Copy now only names the Gulf's main export grades that sit in the 26-35 API medium band: Arab Light 32.8/1.97 and Arab Medium 30.2/2.59 (Wikipedia, List of crude oil products, accessed 2026-09-24) and Basrah Medium 27.9/3.0 (Petro-Logistics, 'End of an Era: Basrah Light Exports Cease' + EIA Iraq background; Iraq's largest export grade since Jan 2021; Basrah Light export stopped Jan 2022). No proportion of the loss is asserted.",
+      "medium_sour_class_share_offline": "DROPPED with the share above (25-30% followed from the unsourced fraction).",
+      "provenance_note": "Murban band (light & medium sour) follows from its published specs (about 40 API, 0.7% S) against Eni's band definitions (print p9; light = 35-50 API with sweet <0.5% S, medium sour 0.5-1% S, sour >=1% S); the WER 2025 named-crudes pages (PDF p99, p109) are bubble charts and give no named volumes, so no per-grade shut-in volumes are asserted."
+    },
+    "date": "2026-09-11",
+    "observation_month": "2026-08"
   },
   "band_definitions_note": "Definitions transcribed verbatim from Eni's 'Quality levels - API gravity and sulphur content' table, print p9 (PDF page 11). Page numbers cited throughout are the printed page numbers; the PDF page is the printed page plus 2."
 }
