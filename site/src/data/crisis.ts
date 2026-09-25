@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-09-24";
+export const DATA_AS_OF = "2026-09-25";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -22,9 +22,9 @@ export interface SeriesPoint {
 
 // ---------- Headline stats ----------
 export const stats = [
-  { label: "Brent", value: "$103.08", sub: "Sep 23 settlement · up 3.9% after five trading days of declines (Reuters) · November contract · +36% vs pre-crisis ~$76" },
-  { label: "US diesel (AAA)", value: "$6.51", sub: "Sep 24 · second straight drop from the Sep 22 record $6.5276 · +75% vs pre-war $3.72" },
-  { label: "US gasoline (AAA)", value: "$4.48", sub: "Sep 24 · +59% vs Jan $2.81 (AAA)" },
+  { label: "Brent", value: "$106.60", sub: "Sep 24 settlement · up 3.4% · intraday high $108.23 · November contract · +40% vs pre-crisis ~$76" },
+  { label: "US diesel (AAA)", value: "$6.50", sub: "Sep 25 · third straight drop from the Sep 22 record $6.5276 · +75% vs pre-war $3.72" },
+  { label: "US gasoline (AAA)", value: "$4.49", sub: "Sep 25 · +60% vs Jan $2.81 (AAA)" },
   { label: "SPR", value: "284.6M", sub: "Sep 18 · down 0.4M in a week, a second straight week at that pace · down 130.9M from pre-war 415.4M · lowest since Nov 1982" },
   { label: "US diesel & heating oil", value: "107.4M", sub: "Sep 18 · down 0.4M in a week · 12.7% below last year · East Coast stocks 27% below last year" },
 ];
@@ -54,6 +54,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-09-21", value: 100.34, tip: "settlement · down 3.4% (Reuters)", note: "settlement (Reuters, November contract; −3.4% vs Sep 18). A fourth straight down session and the lowest since Sep 9. Both presidents arrived in New York for the UN General Assembly; no meeting between them has been confirmed. Saudi Arabia is again shipping oil through the strait (WSJ: ~2.4M b/d over the past two weeks, per Kpler)." },
   { date: "2026-09-22", value: 99.25, tip: "settlement · down 1.1% (Yahoo front-month; news: below $100)", note: "Session close (Yahoo, November front-month; −1.1% vs Sep 21) — the first close below $100 since Sep 8 (Reuters) and a fifth straight down session. Drivers: the first acknowledged US–Iran contact since June (Witkoff and Kushner met Araghchi on the UN margins, Sep 22) and the East–West pipeline restart. News: Brent fell below $100 on Tuesday (OilPrice/Reuters; TradingEconomics: 'fell to $99')." },
   { date: "2026-09-23", value: 103.08, tip: "settlement · up 3.9% (Reuters)", note: "Session close (Yahoo, November front-month; +3.9% vs Sep 22) — five straight down sessions reversed and the first close back above $100 (Reuters). Drivers: Iran's security-council secretary gave Washington four to five days to accept Tehran's seven conditions, a written road map (up to 60-day regionwide ceasefire, phased strait reopening) produced no announced breakthrough from the second New York round, and a Supreme Leader adviser said the war could extend to the Indian Ocean." },
+  { date: "2026-09-24", value: 106.60, tip: "settlement · up 3.4% (Yahoo front-month) · intraday high $108.23", note: "Session close (Yahoo, November front-month; +3.4% vs Sep 23; intraday high $108.23). The strait's risk premium came back: the Houthis fired the first missiles at Saudi territory since the pause began (six ballistic missiles at Taif and Yanbu, all intercepted), France said it would send troops and air-defence systems to protect the Red Sea port of Yanbu, and Iran's security-council secretary restated the four-to-five-day deadline in harder terms — 'talk is enough, negotiations are enough, now we must act.' Prices retreated in the afternoon from the intraday high on Iran's seven-day road map to reopen the strait (Araghchi; NYT)." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -129,6 +130,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-09-21", value: 95.78, note: "settlement (Reuters, October contract) · −4.5%" },
   { date: "2026-09-22", value: 94.59, note: "settlement (Jiji, October contract — its final trading day, Sep 22) · −1.2% vs Sep 21 for the same contract. The series switches to November starting Sep 23. November closed at $90.52 on Sep 22, about $4 below October, so the next change will reflect both the switch in contracts and any movement in November's price." },
   { date: "2026-09-23", value: 92.16, note: "settlement (MarketScreener, November contract) · +1.8% on the same contract (November closed $90.52 on Sep 22). The step down from the Sep 22 point is the October→November contract switch, not a price move." },
+  { date: "2026-09-24", value: 94.61, note: "settlement (Yahoo, November contract) · +2.7% on the same contract" },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -185,6 +187,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-09-22", value: 4.4750, note: "AAA release, Sep 22" },
   { date: "2026-09-23", value: 4.4744, note: "AAA release, Sep 23" },
   { date: "2026-09-24", value: 4.4825, note: "AAA release, Sep 24" },
+  { date: "2026-09-25", value: 4.4918, note: "AAA release, Sep 25" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -216,6 +219,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-09-22", value: 6.5276, note: "AAA record" },
   { date: "2026-09-23", value: 6.5217, note: "AAA — first decline since the Sep 4 record streak began" },
   { date: "2026-09-24", value: 6.5141, note: "AAA — second straight decline off the Sep 22 record" },
+  { date: "2026-09-25", value: 6.5019, note: "AAA — third straight decline off the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 
@@ -490,16 +494,18 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "An official repair timetable for the East–West pipeline. Reuters reported on Sep 22 that the pipeline had restarted at a low rate; the first cargo from Yanbu (bound for China) was scheduled to load that day. Aramco is targeting about 4M barrels a day within a few weeks, and a security source says full resumption could take weeks. An unnamed Bloomberg source says Saudi Arabia aims to restore half its capacity within days and full capacity in six weeks.", why: "A confirmed resumption of Yanbu exports — or an official estimate of repairs taking only days — would reverse the Sep 11 change in odds. The reported restart and planned cargo do not confirm that exports have resumed at scale." },
-      { item: "The deadline Iran set for the US. Iran delivered a written proposal for a regionwide ceasefire of up to 60 days, a phased reopening of the strait, an end to the blockade, and a halt to Iranian attacks on Arab neighbors (The National, citing mediators). Security-council secretary Rezaei gave Washington four to five days (to about Sep 27–28) to accept all seven conditions — including the full $24B frozen-asset release — and said the strait stays closed if it does not. Witkoff and Araghchi were expected to hold a second round of talks late Sep 23. No outcome had been announced when this page was updated. At the UN on Sep 22, President Trump said his choice was a deal — which he expects only after the midterms — or to 'annihilate' Iran, and Secretary of State Rubio called for 'a lot of hard work.'", why: "The deadline expires around Sep 27–28. Iran has previously used rejected deadlines to justify renewed attacks. This deadline could also remain part of negotiations during the UN General Assembly. The model responds to changes in conditions in the strait." },
-      { item: "Whether attacks in Bab el-Mandeb spread to non-Saudi vessels.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes." },
-      { item: "Ship traffic through Hormuz. Kpler's preliminary counts, reported by Reuters, show 4 crossings on Sep 21 and 3 on Sep 22. The Sep 22 count was roughly 80% below the 10-day average of about 15. The Sep 23 count was not yet available when this page was updated. The seafarers' union says two torpedoes hit the Cape Dao bulk carrier in the strait on Sep 23, killing one of its 20 Indian crew members; 27 people were evacuated and the ship is adrift. The IRGC claimed the strike on an 'unauthorized route.' US officials told The National the strait is back to 60–70% of pre-war oil flow — a claim not corroborated by the independent data reviewed for this update.", why: "Watch whether more ships can pass safely. These counts come from independent trackers and exclude ships with their tracking signals off. The site doesn't use US Central Command's higher claimed totals as data." },
+      { item: "An official repair timetable for the East–West pipeline. Reuters reported on Sep 22 that the pipeline had restarted at a low rate, with the first cargo from Yanbu (bound for China) scheduled to load that day; on Sep 24 it reported Saudi Arabia is building up pumping volumes through the line, but that crude tanker loadings have yet to resume. Bloomberg (Sep 22) reported Saudi Arabia is running tests to resume the pipeline; Aramco is targeting about 4M barrels a day within a few weeks.", why: "A confirmed resumption of Yanbu exports — or an official estimate of repairs taking only days — would reverse the Sep 11 change in odds. Pumping volumes rising without resumed loadings does not confirm that exports have resumed at scale." },
+      { item: "The deadline Iran set for the US. Security-council secretary Rezaei repeated the demand on Sep 25: 'talk is enough, negotiations are enough, now we must act.' The four-to-five-day window to accept all seven conditions — a 60-day regionwide ceasefire, an end to US attacks, the frozen-asset release, oil-sanctions relief, the blockade lifted, the strait reopened, a US withdrawal from the Red Sea — now runs roughly to Sep 27–28. Talks are still underway. President Pezeshkian wants to revive the Islamabad agreement before the US midterm elections, and Foreign Minister Araghchi proposed a seven-day plan (cease fire, frozen assets released, oil sanctions and the naval blockade lifted, the strait reopened on day seven, nuclear talks to start). Araghchi is staying in New York over the weekend; the White House calls talks 'positive and constructive,' but says it is not rushing to a deal.", why: "The deadline expires around Sep 27–28. Iran has previously used rejected deadlines to justify renewed attacks. This deadline could also remain part of negotiations during the UN General Assembly. The model responds to changes in conditions in the strait." },
+      { item: "Whether attacks in Bab el-Mandeb spread to non-Saudi vessels. The Houthis fired six ballistic missiles at Taif and Yanbu on Sep 24, their first confirmed launch at Saudi territory since about Sep 19. All were intercepted.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes. Further launches at Saudi territory would show whether attacks are continuing." },
+      { item: "A US ban on diesel exports. Politico reported on Sep 23 that the White House is preparing a 90-day ban; the White House denied the report the same day ('This is not true,' in a statement to The Hill). President Trump has backed a ban, while Energy Secretary Wright has argued against it and said the administration would take a voluntary approach instead; Treasury Secretary Bessent says the administration has been 'examining' a ban. No official decision as of Sep 25.", why: "A ban would keep US diesel exports at home, reducing the supply available to buyers in Europe and Asia. Watch for an official decision and what happens to pump prices and supplies in those markets." },
+      { item: "France's deployment to defend Yanbu. Macron announced on Sep 24 that France will send troops, radar, and air-defence systems to protect the Saudi Red Sea port, after six Houthi ballistic missiles at Taif and Yanbu were intercepted on Sep 24. Reports also describe Greek air-defence involvement in the region. The Saudi–Turkish–Pakistani chiefs of staff are meeting under the Mecca agreement; watch for interceptor transfers and a joint command.", why: "Watch whether the deployment protects exports from Yanbu or draws France into further fighting. (This is a risk to watch, not a pre-committed trigger of the model — the Sep 25 re-run left the odds unchanged.)" },
+      { item: "Ship traffic through Hormuz. Kpler's preliminary counts, reported by Reuters on Sep 25, show 14 crossings on Sep 23 and 9 on Sep 24 (eight out, one in), after 3 on Sep 22 and 4 on Sep 21; the 10-day average is 18, against roughly 125 large commercial vessels a day before the war. The daily time-charter rate for a very large crude carrier (VLCC) moving Middle East crude to China hit a record $1.27M on Monday, Sep 21 (LSEG data, via Reuters). Saudi crude moving through the strait has risen to about 2.9M barrels a day, from about 700k in August, much of it by ship-to-ship transfer off Oman, which is now at its limit.", why: "Watch whether more ships can pass safely. These counts come from independent trackers and exclude ships with their tracking signals off. The site doesn't use US Central Command's higher claimed totals as data." },
     ],
   },
   {
-    when: "Sep 24–25",
+    when: "Sep 26–27",
     items: [
-      { item: "The Trump–Xi summit in Washington. Xi arrived at Joint Base Andrews on the evening of Sep 23. The official schedule places the arrival ceremony and state dinner on Sep 24; the visit ends Friday morning (Sep 25) with a Red Room tea and a National Archives visit. It follows a new US law authorizing tariffs of up to 100% on countries buying Russian oil and gas, and pressure on China to cut purchases of Iranian crude.", why: "Watch for agreements affecting oil purchases or trade. Better trade relations could increase demand for oil; exemptions from sanctions could make it easier to buy Russian crude." },
+      { item: "The UN Security Council Panel of Experts mandate on Iran expires (Sep 26–27); the Council vetoed extending it on Sep 17. The US withdrawal from Iraq is due to complete on Sep 30.", why: "Without the panel, the UN loses a way to monitor compliance with sanctions on Iran's nuclear and missile programs. An Iraqi militia attack during the withdrawal could widen the war." },
     ],
   },
   {
@@ -571,7 +577,7 @@ export const recessionOdds = [
 export const ratesStats = [
   { label: "Fed's target rate, Sep 16", value: "3.75–4.00%", sub: "Up 0.25 percentage points in a 12-to-0 vote · statement: 'Inflation remains elevated. … The Committee will deliver price stability.'" },
   { label: "Odds of a rate increase, Oct 27–28", value: "60%", sub: "Our estimate, published Sep 16 · 16 of 18 Fed officials projected another increase this year · we'll check this prediction after the October decision" },
-  { label: "August producer prices (BLS, Sep 10)", value: "5.4% YoY", sub: "+0.4% for the month · July revised to 4.8% annually · energy +4.2%, diesel +24.1% annually · 10-year yield 5.11% on Sep 23, its highest close of the war" },
+  { label: "August producer prices (BLS, Sep 10)", value: "5.4% YoY", sub: "+0.4% for the month · July revised to 4.8% annually · energy +4.2%, diesel +24.1% annually · 10-year yield 5.16% on Sep 24, its highest close of the war" },
 ];
 
 export const foodStats = [
@@ -742,6 +748,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-09-21", value: 4.96, note: "session close (Yahoo) · below 5%" },
   { date: "2026-09-22", value: 4.968, note: "session close (Yahoo) · below 5%" },
   { date: "2026-09-23", value: 5.11, note: "session close (Yahoo) · +14bp, back above 5% — flash PMI (mfg 57.0, fastest since 2022) stoked Fed-hike bets (CNN)" },
+  { date: "2026-09-24", value: 5.162, note: "session close (Yahoo) · +5bp — second straight close above 5%, with oil prices rising and markets expecting another Fed rate increase" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
