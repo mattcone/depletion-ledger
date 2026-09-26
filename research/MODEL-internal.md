@@ -4,7 +4,9 @@
 > time, written for a general audience). This file is the full technical spec and
 > the working instructions: exact inputs, formulas, branch weights, floor math,
 > breaking points, calibration, and the update procedure. The "main report"
-> referenced below is `Oil-Depletion-Report.md`.
+> referenced below was `Oil-Depletion-Report.md` — it ended Sep 9, 2026 and was
+> removed from the tree Sep 26, 2026 (git history has it); this file, `SUMMARY.md`,
+> and the dated logs are the working record.
 >
 > **Instructions for future passes:** when the model changes (new data, regime event,
 > reweighting), update THIS file first — it is the spec of record. Then translate the
@@ -15,7 +17,7 @@
 
 ---
 
-*Distilled from the [main report](Oil-Depletion-Report.md) (§3, §4, §9A, §9B, §11) on Sep 9, 2026 (Day 193); branch weights reweighted Sep 9 (regime event: biggest tit-for-tat wave of the war, exclusion zone enforced, first third-country base hit). The main report is the source of truth; this file is the compact technical spec — what goes in, what is assumed, what comes out, and how it updates. Review before treating as canonical.*
+*Distilled from the main report (`Oil-Depletion-Report.md`, §3, §4, §9A, §9B, §11 — archived, see above) on Sep 9, 2026 (Day 193); branch weights reweighted Sep 9 (regime event: biggest tit-for-tat wave of the war, exclusion zone enforced, first third-country base hit). The main report was the source of truth while it lived; this file is the compact technical spec — what goes in, what is assumed, what comes out, and how it updates. Review before treating as canonical.*
 
 ## 1. Inputs (what feeds the model)
 

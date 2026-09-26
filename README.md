@@ -25,11 +25,9 @@ The site has two pages:
 depletion-ledger/
 ├── research/           the working research project
 │   ├── SUMMARY.md          living summary, ~2-minute read (updated every pass)
-│   ├── Oil-Depletion-Report.md   the main report — full analysis, newest-first
 │   ├── MODEL.md            public model card (synced to the site's /model/ at build)
 │   ├── MODEL-internal.md   technical model spec: inputs, formulas, branch weights,
 │   │                       floors, breaking points, calibration, update procedure
-│   ├── Oil-Crisis-Plain-Summary.md   plain-language summary
 │   ├── Oil-Report-Index.md old hub page, kept for reference
 │   ├── API-RECIPES.md      verified copy-paste recipes for the EIA + BLS + AAA data pulls
 │   ├── model/              stdlib-only Python helpers (draw rate, elasticity,

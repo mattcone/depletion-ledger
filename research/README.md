@@ -9,10 +9,8 @@ depletion under the Hormuz closure.
 | File | What it is |
 |---|---|
 | [SUMMARY.md](SUMMARY.md) | **Start here.** Living summary — ~2-minute read of where things stand. Updated at the end of every research pass. |
-| [Oil-Depletion-Report.md](Oil-Depletion-Report.md) | The main report — full analysis, stacked update banners (newest first), depletion timelines, sources & caveats. The working canonical document. |
 | [MODEL.md](MODEL.md) | The public model card, written for a general audience: what the model answers, the data feeds, the three futures and odds, the reserve's four floors, how odds change, limitations, update cadence. Synced to the site's [`/model/`](https://oil-report.me-fce.workers.dev/model/) at build time. |
 | [MODEL-internal.md](MODEL-internal.md) | Technical model specification + working instructions (inputs, formulas, branch weights, floors, breaking points, calibration, update procedure). Source of record for the public card. |
-| [Oil-Crisis-Plain-Summary.md](Oil-Crisis-Plain-Summary.md) | Plain-language summary for non-readers. |
 | [Oil-Report-Index.md](Oil-Report-Index.md) | Old hub/index page, kept in case a hub is wanted again. |
 | [API-RECIPES.md](API-RECIPES.md) | Verified copy-paste recipes for the EIA + BLS data APIs and the AAA retail pull (keys as git-ignored `.eia_api_key` / `.bls_api_key` at the repo root, series IDs, gotchas). Every command was executed before landing here. |
 | [model/](model/) | Stdlib-only Python 3 helpers that formalize the hand math: price-triggered SPR draw rate + runway, elasticity-driven demand destruction, Bayesian branch reweighting + Brier-score calibration ledger (`calibration.csv`). See [model/README.md](model/README.md). |
@@ -23,13 +21,13 @@ depletion under the Hormuz closure.
 1. Pull data (EIA WPSR weekly, traffic counts, prices, strikes/bans, prediction
    markets — see MODEL.md).
 2. Log everything new in `logs/<today>.md` with sources.
-3. Update SUMMARY.md. Regime changes also get a banner in the main report.
+3. Update SUMMARY.md. Regime changes get a banner in the daily log.
 4. Branch reweighting only on regime events, not weekly noise.
 5. Update `../site/src/data/crisis.ts` with the new chart data, then
    `npm run deploy` in `../site/` — the model card page re-syncs from this
    directory automatically.
 
-## Timeline (retrospective — distilled from the report's banners)
+## Timeline (retrospective — distilled from the archived main report's banners; `Oil-Depletion-Report.md` ended Sep 9 and was removed from the tree Sep 26, 2026 — git history has it)
 
 Dated research logs formally begin Sep 9, 2026. Everything before that was worked
 up directly into the report and backfilled Sep 9 into dated `logs/` files (Jun 30
