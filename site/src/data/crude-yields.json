@@ -1,0 +1,243 @@
+{
+  "source": {
+    "publisher": "ExxonMobil crude oil assay library (assays by ExxonMobil Technology & Engineering Company)",
+    "url": "https://corporate.exxonmobil.com/crude-oils/crude-trading",
+    "retrieved": "2026-09-23",
+    "method": "Cut Data table of each assay's XLS (sheet 'Summary (C)'), 'Yield (% vol)' row. The seven standard cuts are groupings of the assay's temperature cuts: butane and lighter = IBP–C5 (an explicit IBP–C4 column in the 2026-format files); light naphtha = C5–100 °C; heavy naphtha = 100–150 °C; kerosene = 150–250 °C; diesel = 250–350 °C; vacuum gas oil = 350–550 °C (includes the 350–370 °C atmospheric cut); vacuum residue = 550 °C–FBP. In every file the 370 °C–FBP column is the total of the four vacuum sub-cuts (370–450, 450–500, 500–550, 550–FBP), so it is not added a second time. The reported cuts sum to 100% (99.96–100.0, rounding) for each crude, and the cumulative row's differences match the yields. Provenance per cut: 'reported' means a single column of the assay's 'Yield (% vol)' row (butane and lighter in the 2026-format files, heavy naphtha 100-150 deg C, residue 550 deg C-FBP); 'derived' means a sum of reported sub-cuts (see derived_from on each cut) or, for Kearl's butane and lighter, a residual cross-checked against the assay's TBP curve.",
+    "basis": "Straight-run (distillation) yields, % of barrel volume. These are NOT final product yields: naphtha becomes gasoline and VGO/residue becomes other fuels only after further processing."
+  },
+  "unit": "percent of barrel volume",
+  "crudes": [
+    {
+      "id": "wti-light-export",
+      "name": "WTI Light – Export",
+      "origin": "Texas, US",
+      "type": "Light sweet (US shale)",
+      "assay_code": "WTLEX26Y",
+      "assay_date": "2026-02-27",
+      "assay_date_note": "The 'Assay Date:' field on the PDF is blank; the report is dated 2/27/2026 at the foot of the PDF and the XLS stores the same date (Excel serial 46080).",
+      "pdf_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/pdf/wti_light.pdf",
+      "xls_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/wti_light.xlsx",
+      "cuts": [
+        {
+          "cut": "butane_and_lighter",
+          "value": 3.05,
+          "status": "reported",
+          "assay_code": "WTLEX26Y",
+          "assay_date": "2026-02-27",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/wti_light.xlsx"
+        },
+        {
+          "cut": "light_naphtha",
+          "value": 18.41,
+          "status": "derived",
+          "assay_code": "WTLEX26Y",
+          "assay_date": "2026-02-27",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/wti_light.xlsx",
+          "derived_from": "sum of the reported C5-65 and 65-100 deg C columns"
+        },
+        {
+          "cut": "heavy_naphtha",
+          "value": 16.49,
+          "status": "reported",
+          "assay_code": "WTLEX26Y",
+          "assay_date": "2026-02-27",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/wti_light.xlsx"
+        },
+        {
+          "cut": "kerosene",
+          "value": 22.31,
+          "status": "derived",
+          "assay_code": "WTLEX26Y",
+          "assay_date": "2026-02-27",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/wti_light.xlsx",
+          "derived_from": "sum of the reported 150-200 and 200-250 deg C columns"
+        },
+        {
+          "cut": "diesel",
+          "value": 16.92,
+          "status": "derived",
+          "assay_code": "WTLEX26Y",
+          "assay_date": "2026-02-27",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/wti_light.xlsx",
+          "derived_from": "sum of the reported 250-300 and 300-350 deg C columns"
+        },
+        {
+          "cut": "vacuum_gas_oil",
+          "value": 18.68,
+          "status": "derived",
+          "assay_code": "WTLEX26Y",
+          "assay_date": "2026-02-27",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/wti_light.xlsx",
+          "derived_from": "sum of the reported 350-370, 370-450, 450-500 and 500-550 deg C columns (the 370-FBP total column is not added twice)"
+        },
+        {
+          "cut": "vacuum_residue",
+          "value": 4.11,
+          "status": "reported",
+          "assay_code": "WTLEX26Y",
+          "assay_date": "2026-02-27",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/wti_light.xlsx"
+        }
+      ],
+      "api": 47.4,
+      "sulfur_pct": 0.07
+    },
+    {
+      "id": "upper-zakum",
+      "name": "Upper Zakum",
+      "origin": "Abu Dhabi (UAE)",
+      "type": "Medium sour (Gulf)",
+      "proxy_note": "No public assay of Arab Light was found in that library; Upper Zakum is the nearest public equivalent for Gulf medium-sour crude.",
+      "assay_code": "UPZAK26B",
+      "assay_date": "2026-01-23",
+      "assay_date_note": "Assay Date 1/23/2026 as printed on the PDF; the XLS stores the same date (Excel serial 46045).",
+      "pdf_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/pdf/upper_zakum.pdf",
+      "xls_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/upper_zakum.xlsx",
+      "cuts": [
+        {
+          "cut": "butane_and_lighter",
+          "value": 3.07,
+          "status": "reported",
+          "assay_code": "UPZAK26B",
+          "assay_date": "2026-01-23",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/upper_zakum.xlsx"
+        },
+        {
+          "cut": "light_naphtha",
+          "value": 10.39,
+          "status": "derived",
+          "assay_code": "UPZAK26B",
+          "assay_date": "2026-01-23",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/upper_zakum.xlsx",
+          "derived_from": "sum of the reported C5-65 and 65-100 deg C columns"
+        },
+        {
+          "cut": "heavy_naphtha",
+          "value": 7.93,
+          "status": "reported",
+          "assay_code": "UPZAK26B",
+          "assay_date": "2026-01-23",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/upper_zakum.xlsx"
+        },
+        {
+          "cut": "kerosene",
+          "value": 17.87,
+          "status": "derived",
+          "assay_code": "UPZAK26B",
+          "assay_date": "2026-01-23",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/upper_zakum.xlsx",
+          "derived_from": "sum of the reported 150-200 and 200-250 deg C columns"
+        },
+        {
+          "cut": "diesel",
+          "value": 17.06,
+          "status": "derived",
+          "assay_code": "UPZAK26B",
+          "assay_date": "2026-01-23",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/upper_zakum.xlsx",
+          "derived_from": "sum of the reported 250-300 and 300-350 deg C columns"
+        },
+        {
+          "cut": "vacuum_gas_oil",
+          "value": 27.23,
+          "status": "derived",
+          "assay_code": "UPZAK26B",
+          "assay_date": "2026-01-23",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/upper_zakum.xlsx",
+          "derived_from": "sum of the reported 350-370, 370-450, 450-500 and 500-550 deg C columns (the 370-FBP total column is not added twice)"
+        },
+        {
+          "cut": "vacuum_residue",
+          "value": 16.46,
+          "status": "reported",
+          "assay_code": "UPZAK26B",
+          "assay_date": "2026-01-23",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/upper_zakum.xlsx"
+        }
+      ],
+      "api": 33.4,
+      "sulfur_pct": 2.09
+    },
+    {
+      "id": "kearl-blend",
+      "name": "Kearl Blend",
+      "origin": "Alberta, Canada",
+      "type": "Heavy sour (diluted bitumen)",
+      "proxy_note": "No public assay of Venezuelan Merey was found; Kearl is used as a proxy for heavy sour crude. Assay comments field says 'Summer' (the summer diluent blend). Classification: ExxonMobil assay library lists Kearl as Heavy (19.8 API, 3.83 S).",
+      "assay_code": "KEARL23B",
+      "assay_date": "2023-10-26",
+      "assay_date_note": "The 'Assay Date:' field on the PDF is blank; the report is dated 10/26/2023 at the foot of the PDF and the XLS stores the same date (Excel serial 45225).",
+      "pdf_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/pdf/2024/kearl.pdf",
+      "xls_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/2024/kearl.xlsx",
+      "cuts": [
+        {
+          "cut": "butane_and_lighter",
+          "value": 1.4,
+          "status": "derived",
+          "assay_code": "KEARL23B",
+          "assay_date": "2023-10-26",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/2024/kearl.xlsx",
+          "note": "The 2023-format cut table has no gas column; the value is 100 minus the sum of the reported cuts (98.60), matching the assay's own TBP curve volume at the C5 boundary (10.58 at 65 °C minus the reported C5–65 cut of 9.18) and the table's cumulative row (0.86 % wt at C5).",
+          "derived_from": "2023-format table has no gas column; 100 minus the sum of the reported cuts, cross-checked against the assay TBP curve (see note)"
+        },
+        {
+          "cut": "light_naphtha",
+          "value": 13.24,
+          "status": "derived",
+          "assay_code": "KEARL23B",
+          "assay_date": "2023-10-26",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/2024/kearl.xlsx",
+          "derived_from": "sum of the reported C5-65 and 65-100 deg C columns"
+        },
+        {
+          "cut": "heavy_naphtha",
+          "value": 3.12,
+          "status": "reported",
+          "assay_code": "KEARL23B",
+          "assay_date": "2023-10-26",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/2024/kearl.xlsx"
+        },
+        {
+          "cut": "kerosene",
+          "value": 6.29,
+          "status": "derived",
+          "assay_code": "KEARL23B",
+          "assay_date": "2023-10-26",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/2024/kearl.xlsx",
+          "derived_from": "sum of the reported 150-200 and 200-250 deg C columns"
+        },
+        {
+          "cut": "diesel",
+          "value": 11.85,
+          "status": "derived",
+          "assay_code": "KEARL23B",
+          "assay_date": "2023-10-26",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/2024/kearl.xlsx",
+          "derived_from": "sum of the reported 250-300 and 300-350 deg C columns"
+        },
+        {
+          "cut": "vacuum_gas_oil",
+          "value": 32.69,
+          "status": "derived",
+          "assay_code": "KEARL23B",
+          "assay_date": "2023-10-26",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/2024/kearl.xlsx",
+          "derived_from": "sum of the reported 350-370, 370-450, 450-500 and 500-550 deg C columns (the 370-FBP total column is not added twice)"
+        },
+        {
+          "cut": "vacuum_residue",
+          "value": 31.4,
+          "status": "reported",
+          "assay_code": "KEARL23B",
+          "assay_date": "2023-10-26",
+          "source_url": "https://corporate.exxonmobil.com/-/media/global/files/crude-oils/xls/2024/kearl.xlsx"
+        }
+      ],
+      "api": 19.8,
+      "sulfur_pct": 3.83
+    }
+  ],
+  "specs_note": "api and sulfur_pct are the assay-file values (XLS full precision + PDF cover, both agree; recorded in research/logs/2026-09-23.md). WTI 47.4 is the Light-EXPORT blend assay, not the commonly cited ~40-42 WTI Midland. library_size counts the assay-library entries (42 pdf+xls pairs, complete A-Z list).",
+  "library_size": 42
+}
