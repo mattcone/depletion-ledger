@@ -522,7 +522,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
 // ---------- Breaking-points cascade (§11, compressed twice) ----------
 export const cascade = [
   { date: "Each weekly EIA report (next: Sep 30)", region: "US East Coast", trigger: "US diesel and heating-oil stocks totaled 107.4M barrels in the week ending Sep 18. At the four-week average consumption rate of 3.6M barrels a day, that covers roughly 30 days — right at the one-month line. These rounded figures don't establish whether coverage is just above or below a month. East Coast stocks rose by 0.6M barrels that week but remain 27% below last year. National stocks fell by 0.4M barrels, so coverage could move to either side of the line at the next report, due Sep 30." },
-  { date: "Sep 30", region: "Russia", trigger: "The diesel export ban expires. With more than 30% of refining capacity damaged, Russia may have little fuel available to export." },
+  { date: "Sep 30", region: "Russia", trigger: "The diesel export ban is scheduled to expire, though an extension through Oct 31 has been reported (Vedomosti, Sep 15). With more than 30% of refining capacity damaged, Russia may have little fuel available to export." },
   { date: "≈ mid-October", region: "China", trigger: "Commercial oil stocks could begin to fall faster than normal." },
   { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, making it harder for traders to find supplies. If the strait closes fully, this could happen by mid-October." },
   { date: "≈ late October", region: "Europe, at the pump", trigger: "Consumers could face fuel shortages and higher prices, increasing pressure on governments to respond." },
@@ -545,18 +545,43 @@ export const russiaCapacityAnchors = [
 export const russiaCurrentSpread = { date: "2026-09-21", low: 46, high: 80 };
 
 // Snapshot card rows (name / value / delta / flag)
+// Organized by mechanism, not by plant: the headline number, the recent-strike
+// window, the big plants still dark, the domestic shortage, the jet-fuel front, the
+// export routes. One plant per row is the anti-pattern — plants go dark in batches
+// (six in the Sep 20–26 window), and a row-per-plant table grows without bound while
+// saying the same thing. Keep it at six rows; when a new fact lands, fold it into a
+// mechanism row.
+//
+// Updating the struck row: append an entry to russiaStruckRefineries and extend
+// russiaStrikeWindow.end when a new day lands. The row's label, count, and plant list
+// are DERIVED from that list — never retype them into the row. The window label
+// degrades gracefully: a missed update stops being complete, never false. If the
+// strikes pause for a week and restart, start a fresh window (new start, cleared
+// list). The row says "struck", not "halted", on purpose: a strike plus a reported
+// fire is what the General Staff confirms for every entry, while a HALT requires
+// plant-specific confirmation (Reuters, a governor, an industry source). Ufa has
+// the strike and the fire but no confirmed halt as of Sep 26 — if one lands, the
+// flag's wording is the only thing that changes.
+const russiaStrikeWindow = { start: "Sep 20", end: "Sep 26" };
+const russiaStruckRefineries = [
+  { plant: "Moscow refinery", date: "Sep 20" },
+  { plant: "Kuibyshev, near Samara", date: "Sep 21–22" },
+  { plant: "Ufa", date: "Sep 21–22" },
+  { plant: "Perm, seventh-largest at ~257 kb/d (an earlier shutdown was reported on Aug 24)", date: "Sep 25" },
+  { plant: "Novoshakhtinsk, ~110–140 kb/d, the largest fuel supplier in southern Russia", date: "Sep 25" },
+  { plant: "Ilsky, ~125 kb/d — three people killed", date: "Sep 26" },
+];
 export const russiaSnapshot = [
-  { name: "Capacity out of service", value: ">30%", delta: "Aug 29, Moscow Times — up from ~25% in April", flag: "Ukraine's General Staff: more than 45% of designed capacity out as of Sep 21 (up from 42.7% on Sep 9) · Russian Forbes: 54% (Sep 9) · Perm: −86% of primary processing, every major Lukoil refinery out (Bloomberg, Aug 25)" },
-  { name: "Kirishi, Russia's second-largest refinery", value: "halted", delta: "~400K b/d; Russia's only northwestern refinery, hit twice in a month (UA.NEWS, Sep 2)", flag: "" },
-  { name: "Ryazan (Rosneft), Moscow's main supplier", value: "down", delta: "~156K barrels/day; both primary units offline since Sep 6, with repairs expected to take several weeks (Reuters, Sep 10)", flag: "" },
-  { name: "Moscow refinery", value: "halted", delta: "Output halted after a Sep 20 drone strike (Reuters, Sep 21)", flag: "" },
-  { name: "Kuibyshev (Samara) and Ufa refineries", value: "struck", delta: "Both hit in the Sep 21–22 Ukrainian strike; fires reported at each (Ukrainska Pravda; ISW, Sep 22)", flag: "" },
+  { name: "Capacity out of service", value: ">30%", delta: "Aug 29, Moscow Times — up from ~25% in April", flag: "Ukraine's General Staff: more than 45% of designed capacity out as of Sep 21 (up from 42.7% on Sep 9) · Russian Forbes: 54% (Sep 9) · RBC-Ukraine: ~14% of capacity out of service in the first 20 days of September" },
+  { name: `Refineries struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} plants`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Ufa: strike and fire confirmed, halt unverified (Gen Staff, Sep 22); the other five have confirmed halts; no restarts reported (Reuters, RBC-Ukraine, ISW, Gen Staff)" },
+  { name: "Major refineries still offline", value: "both out", delta: "Kirishi, Russia's second-largest, ~404 kb/d nameplate (S&P Global, Mar 2026), fully halted, hit twice in a month (UA.NEWS, Sep 2) · Ryazan, Moscow's main supplier, ~344 kb/d nameplate (S&P Global, Mar 2026) — both primary units, 12Mt/yr, offline since Sep 6 (Reuters, Sep 10)", flag: "These figures describe plant capacity, not measured lost output. Bloomberg reported every major Lukoil refinery offline on Aug 25." },
+  { name: "Gasoline shortages at gas stations", value: "45–53%", delta: "Share of stations without AI-92 (45%) and AI-95 (53%) gasoline, mid-September — 33% and 38% at the end of August (gdebenzin, via UNN, Sep 22); rationing measures are back in about two-thirds of regions (Independent, Sep 22)", flag: "Gasoline prices +21% YTD, national average 78.51 rubles/liter as of Sep 14 (Moscow Times); authorities are preparing for further shortages (UNN)" },
+  { name: "Jet fuel now imported", value: "military + civilian", delta: "Ukraine's military intelligence agency reports that Russia is importing Jet A-1 aviation fuel from South Korea and Egypt after a year of refinery strikes (Aug 29), and that Russian military aviation has a kerosene shortage. The jet-fuel export ban runs through Nov 30", flag: "ISW (Sep 26) assesses that Russia's long-range strike campaign depends on jet-powered Geran drones; a kerosene shortage would constrain that capability" },
   { name: "Novorossiysk — main Black Sea port", value: "hit", delta: "The fuel-oil terminal and city were hit; 4 people killed (Sep 8–9)", flag: "Crude exports fell from 800 to 350 kb/d between Jul and Aug; all three export routes are now under attack" },
-  { name: "Gas stations rationing fuel", value: "28%", delta: "Purchase limits nationwide; 90% of Moscow stations out of AI-92 gasoline (Euronews, Aug 20)", flag: "" },
 ];
 
 export const russiaBanCascade = [
-  { date: "Sep 30, 2026", what: "diesel exports" },
+  { date: "Sep 30, 2026", what: "diesel exports — scheduled to expire; extension to Oct 31 reported (Vedomosti, Sep 15)" },
   { date: "Nov 30, 2026", what: "jet fuel exports" },
   { date: "Jan 31, 2027", what: "gasoline & the remaining diesel" },
 ];
