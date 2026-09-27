@@ -404,6 +404,28 @@ bot-filtered page). Use the brave-search skill's `content.js https://gasprices.a
 it prints "Today's AAA National Average $X.XXXX" plus the all-time record table.
 AAA's daily newsroom release (newsroom.aaa.com) is a static page with the same numbers.
 
+## Polymarket branch odds (verified Sep 27 — the weekly macro cross-check)
+
+The polymarket.com pages are JS-rendered — content.js gets the navigation only, and
+search snippets carry stale cached prices. Use the public gamma API directly (no key):
+
+```bash
+# By event slug (slugs are in the page URL, e.g. polymarket.com/event/<slug>):
+curl -s -A "Mozilla/5.0" "https://gamma-api.polymarket.com/events?slug=us-ceasefire-against-iran-continues-throughptptpt"
+# → events[].markets[] with question, outcomePrices (JSON string), outcomes, endDate, closed
+
+# Full-text search (finds all Hormuz-related markets):
+curl -s -A "Mozilla/5.0" "https://gamma-api.polymarket.com/public-search?q=hormuz&limit_per_type=20"
+```
+
+Markets logged as model inputs ("as published"): the "Strait of Hormuz traffic returns
+to normal by <date>?" ladders (Sep 30 / Oct 31 / Nov 30 / Dec 31) + the weekly
+"How many ships transit the Strait of Hormuz week of <date>?" buckets. Sep 27 prints:
+Dec 31 = 19.5% (was 31.5% when logged early Sep — moving toward closure), Oct 31 6.5%,
+Nov 30 12%, week-of-Sep 28 favorite bucket 20–24 ships (≈3/day). A market's
+`outcomePrices` is the implied probability; `closed: true` + prices 0/1 = settled.
+These numbers go STALE FAST — log the print with its date next to the model inputs.
+
 ---
 
 ## Site-side rules that go with these feeds
