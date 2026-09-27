@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-09-26";
+export const DATA_AS_OF = "2026-09-27";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -23,8 +23,8 @@ export interface SeriesPoint {
 // ---------- Headline stats ----------
 export const stats = [
   { label: "Brent", value: "$104.32", sub: "Sep 25 settlement · down 2.1% · third straight close above $100 · November contract · +37% vs pre-crisis ~$76" },
-  { label: "US diesel (AAA)", value: "$6.48", sub: "Sep 26 · fourth straight drop from the Sep 22 record $6.5276 · +74% vs pre-war $3.72" },
-  { label: "US gasoline (AAA)", value: "$4.49", sub: "Sep 26 · +60% vs Jan $2.81 (AAA)" },
+  { label: "US diesel (AAA)", value: "$6.47", sub: "Sep 27 · fifth straight drop from the Sep 22 record $6.5276 · +74% vs pre-war $3.72" },
+  { label: "US gasoline (AAA)", value: "$4.48", sub: "Sep 27 · +59% vs Jan $2.81 (AAA)" },
   { label: "SPR", value: "284.6M", sub: "Sep 18 · down 0.4M in a week, a second straight week at that pace · down 130.9M from pre-war 415.4M · lowest since Nov 1982" },
   { label: "US diesel & heating oil", value: "107.4M", sub: "Sep 18 · down 0.4M in a week · 12.7% below last year · East Coast stocks 27% below last year" },
 ];
@@ -191,6 +191,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-09-24", value: 4.4825, note: "AAA release, Sep 24" },
   { date: "2026-09-25", value: 4.4918, note: "AAA release, Sep 25" },
   { date: "2026-09-26", value: 4.4874, note: "AAA release, Sep 26" },
+  { date: "2026-09-27", value: 4.4798, note: "AAA release, Sep 27" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -224,6 +225,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-09-24", value: 6.5141, note: "AAA — second straight decline off the Sep 22 record" },
   { date: "2026-09-25", value: 6.5019, note: "AAA — third straight decline off the Sep 22 record" },
   { date: "2026-09-26", value: 6.4839, note: "AAA — fourth straight decline off the Sep 22 record" },
+  { date: "2026-09-27", value: 6.4709, note: "AAA — fifth straight decline off the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 
@@ -499,21 +501,18 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     when: "Any day",
     items: [
       { item: "An official repair timetable for the East–West pipeline. Reuters reported a restart at a low rate on Sep 22. Its Sep 24 report said pumping was increasing, but tanker loadings at Yanbu had not resumed. Aramco is targeting about 4M barrels a day within a few weeks.", why: "A confirmed resumption of Yanbu exports — or an official estimate of repairs taking only days — would reverse the Sep 11 change in odds. More oil in the pipeline doesn't yet mean more oil is leaving the port." },
-      { item: "Whether US–Iran talks produce another proposal. Trump rejected Iran's seven-day ceasefire proposal, The Wall Street Journal reported on Sep 25. President Pezeshkian said on Sep 26 that Iran 'no longer trusts' negotiations with Washington. Talks through Qatari mediators continue.", why: "Watch for revised terms, a change in the US blockade, or renewed attacks that disrupt shipping. The model responds to changes in conditions in the strait." },
-      { item: "Whether attacks in Bab el-Mandeb spread to non-Saudi vessels. Saudi Arabia intercepted six Houthi ballistic missiles aimed at Taif and Yanbu on Sep 24, the first confirmed launch at Saudi territory since about Sep 19. Early on Sep 26, the coalition also reported intercepting two drones headed toward Riyadh.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes. Further launches at Saudi territory would show whether attacks are continuing." },
+      { item: "Whether the US and Iran can agree on new terms. President Trump publicly rejected Iran's seven-day plan on Sep 26, saying Iran was 'losing so badly,' and posted an image labeling the waterway the 'Trump Strait.' Foreign Minister Araghchi said on Sep 27 that Tehran is waiting for mediators to convey Washington's final position and would not withdraw its conditions. President Pezeshkian told CBS News that Iran would allow UN nuclear inspectors access as part of a peace deal.", why: "Watch for revised terms, a change in the US blockade, or renewed attacks that disrupt shipping. The model responds to changes in conditions in the strait." },
+      { item: "Whether attacks in Bab el-Mandeb spread to non-Saudi vessels. GlobalSecurity reports Houthi attacks on Saudi Arabia on three consecutive days: six ballistic missiles at Taif and Yanbu on Sep 24, two drones over Riyadh on Sep 25, and two ballistic missiles and two drones aimed at Riyadh and Khamis Mushait air base early on Sep 26 — the first at Khamis Mushait in weeks. The Gulf Cooperation Council called the Sep 26 attack a 'grave escalation.' No casualties or damage were reported.", why: "An attack on a non-Saudi vessel would raise the model's odds that the shipping corridor closes. Further launches at Saudi territory would show whether attacks are continuing." },
       { item: "US measures to lower diesel prices. After denying plans for a 90-day export ban on Sep 23, the White House is considering fuel-tax suspensions and wider use of dyed diesel — tax-exempt fuel normally reserved for off-road use (Politico and Bloomberg, Sep 25). Bloomberg reported that no action was imminent.", why: "A ban would keep US diesel exports at home, reducing the supply available to buyers in Europe and Asia. The other proposals aim to lower US pump prices without banning exports. Watch for an official decision." },
-      { item: "Ship traffic through Hormuz. Kpler's preliminary counts (via Reuters, Sep 25) show 4 crossings on Sep 21, 3 on Sep 22, 14 on Sep 23, and 9 on Sep 24 (eight out, one in). The 10-day average is 18, compared with roughly 125 large commercial vessels a day before the war. The Sep 25 count was not available when this page was updated.", why: "Watch whether more ships can pass safely. The counts exclude ships with their tracking signals off. The site uses independent tracking data rather than US Central Command's higher claimed totals." },
-    ],
-  },
-  {
-    when: "Sep 26–27",
-    items: [
-      { item: "The UN panel that monitors sanctions on Iran loses its mandate on Sep 26–27. An extension was vetoed on Sep 17. The US withdrawal from Iraq is due to complete on Sep 30.", why: "Without the panel, the UN loses a way to monitor compliance with sanctions on Iran's nuclear and missile programs. An Iraqi militia attack during the withdrawal could widen the war." },
+      { item: "Ship traffic through Hormuz. Kpler's preliminary counts (via Reuters, Sep 25) show 4 crossings on Sep 21, 3 on Sep 22, 14 on Sep 23, and 9 on Sep 24 (eight out, one in); the Sep 25 count was not yet published when this page was updated. Kpler's counts exclude ships with their tracking signals off. Windward's separate tracker counted 21 transits on Sep 26 (thirteen in, eight out), including nine ships with their tracking signals off. The two trackers count different sets of ships. President Trump said on Sep 26 that the US has 'total control' of the strait and that 29 ships had left the previous night (CBS). That claim covers a different period and direction of travel than the trackers' daily totals.", why: "Watch whether more ships can pass safely. The site uses independent tracking data rather than US Central Command's higher claimed totals." },
+      { item: "Europe's winter fuel preparation. The EU's energy commissioner warned member states on Sep 26 of a 'price crisis linked to a supply crisis,' urging governments to increase gas stocks and reduce consumption. Inflation across the bloc is above 3%.", why: "If shortages and high prices persist into winter, European governments may cap prices, ration fuel, or release reserves. Those decisions could change the model's demand assumptions." },
+      { item: "The UN panel that monitors sanctions on Iran lost its mandate on Sep 26–27, with no replacement body or Security Council comment as of this Sep 27 update. Iraq is separately seeking a humanitarian exemption for limited Iranian civil-aviation access to its airports.", why: "Without the panel, the UN loses a way to monitor compliance with sanctions on Iran's nuclear and missile programs. Watch whether a new monitoring body takes its place." },
     ],
   },
   {
     when: "Sep 30",
     items: [
+      { item: "The US-led coalition's withdrawal from Iraq is due to complete. Iraqi Prime Minister Ali al-Zaidi reaffirmed on Sep 26 that the remaining coalition forces will be 'completely withdrawn' by Sep 30, with Iraqi security forces taking over the country's defense.", why: "An Iraqi militia attack during the withdrawal could widen the war and change the model's odds." },
       { item: "The EIA report for the week ending Sep 25, due Sep 30 at 10:30 a.m. Eastern Time. It will be published after the Sep 26 delivery deadline for the third round of SPR exchanges. SPR withdrawals averaged about 58,000 barrels a day in the week ending Sep 18, unchanged from the previous week. Weekly withdrawals had fallen from 3.1M to 1.2M to 0.4M barrels over the preceding three weeks.", why: "The program awarded about 133.6M barrels, close to the SPR's net decline of 130.9M. That comparison doesn't confirm how much has been delivered; we haven't checked the delivery receipts. A stop would be consistent with those deliveries running out, though the DOE could still arrange more. An increase could reflect further DOE releases or more deliveries arriving that week under existing contracts. Watch the DOE's SPR site (spr.doe.gov) for confirmation of further releases, including a request for proposals for a fourth round of exchanges." },
     ],
   },

@@ -1,0 +1,12 @@
+Windward insights.windward.ai — snapshot from the Sep 25 pass (fetched Sep 25 07:44)
+
+HEADLINE: "Hormuz Transits Fully AIS-Visible"
+NARRATIVE: "11 vessels transited the Strait of Hormuz — 9 inbound and 2
+outbound — all AIS-visible, after 6 dark inbound transits the day before.
+Six inbound transits used the northern corridor; both outbound used the
+southern corridor."
+
+Note: this is the Sep 24 count (the page lags by one day). The raw 6MB HTML
+was not retained (too large for the repo); headline + narrative are the
+provenance-relevant content. The Sep 27 pass's "13 (8 in, 5 out)" reading of
+the Sep 26 count has no raw snapshot — see logs/2026-09-27.md, Corrections.
