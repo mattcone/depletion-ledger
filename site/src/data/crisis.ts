@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-09-28";
+export const DATA_AS_OF = "2026-09-29";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -340,15 +340,15 @@ export const branchTracks = [
     name: "Standoff",
     bar: "bg-crude",
     border: "border-l-crude",
-    weight: "40%",
-    what: "Fighting continues at the current level. Tanker attacks and shipping restrictions continue, some Iranian facilities remain out of service, and the damaged Saudi bypass operates at a reduced rate. The strait stays partly open.",
+    weight: "50%",
+    what: "Fighting continues at the current level. Tanker attacks and shipping restrictions continue, some Iranian facilities remain out of service, and the repaired Saudi bypass operates at a reduced rate. The strait stays partly open.",
     path: "Brent stays in the $100–120 range. Oil stocks keep falling through 2027. We assume Gulf production stays at the same level.",
   },
   {
     name: "Corridor lapses",
     bar: "bg-alarm",
     border: "border-l-alarm",
-    weight: "50%",
+    weight: "40%",
     what: "The shipping route closes for a prolonged period or the fighting gets worse. More tankers are lost, shipping restrictions remain, and the bypass, Abqaiq, and Jazan stay out of service for months.",
     path: "Brent rises above $130. Shortages spread from the US East Coast to Russia, Europe, China, and aviation fuel.",
   },
@@ -363,6 +363,7 @@ export const branchWeights = [
   { date: "Sep 11", holds: 10, standoff: 40, lapse: 50, note: "The Saudi bypass pipeline was suspended, and the Houthis held the entire Red Sea coast. An official pipeline restart would return the odds to 10/50/40." },
   { date: "Sep 16", holds: 10, standoff: 35, lapse: 55, note: "Oil loadings at Yanbu, the pipeline's export port, stopped while the pipeline remained shut. Oil could no longer leave through the Saudi bypass. In Libya, guards shut the Hamada–Zawiya pipeline, halting two oil fields." },
   { date: "Sep 22", holds: 10, standoff: 40, lapse: 50, note: "Reuters reported that the bypass pipeline had restarted at a reduced rate, with the first cargo at Yanbu scheduled to load on Sep 22. We moved the odds back toward standoff on that report." },
+  { date: "Sep 29", holds: 10, standoff: 50, lapse: 40, note: "The repaired Saudi bypass pipeline is carrying about 3.5M barrels a day, close to the 4M it carried before the drone strikes, and tanker loadings at Yanbu have resumed (Wall Street Journal, Sep 28). We moved the odds toward standoff based on that report, making an exception to our rule requiring official confirmation or an assessment that repairs would take only days." },
 ];
 
 // ---------- Research log (local-only files) ----------

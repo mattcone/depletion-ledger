@@ -1,0 +1,26 @@
+---
+interface BranchWeight {
+  date: string;
+  holds: number;
+  standoff: number;
+  lapse: number;
+  note: string;
+}
+interface Props {
+  weight: BranchWeight;
+}
+const { weight } = Astro.props as Props;
+const { date, holds, standoff, lapse, note } = weight;
+---
+
+<div>
+  <div class="flex items-center gap-3">
+    <span class="w-14 shrink-0 font-mono text-xs text-faint tabular">{date}</span>
+    <div class="flex h-7 w-full overflow-hidden rounded-sm">
+      <div style={`width: ${holds}%`} class="flex items-center justify-center bg-calm text-[10px] font-medium text-white">{holds ? holds + "%" : ""}</div>
+      <div style={`width: ${standoff}%`} class="flex items-center justify-center bg-crude text-[10px] font-medium text-white">{standoff ? standoff + "%" : ""}</div>
+      <div style={`width: ${lapse}%`} class="flex items-center justify-center bg-alarm text-[10px] font-medium text-white">{lapse ? lapse + "%" : ""}</div>
+    </div>
+  </div>
+  <p class="mt-1 pl-[68px] text-xs text-faint">{note}</p>
+</div>
