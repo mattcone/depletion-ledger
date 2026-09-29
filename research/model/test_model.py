@@ -145,6 +145,101 @@ class TestBranchFilter(unittest.TestCase):
         self.assertEqual([round(x * 100, 1) for x in h_v2], [12.1, 38.5, 49.3])
         self.assertLess(h_v2[2], h_v1[2])  # lapse weight falls toward judgment (40)
 
+    def test_volume_maps_to_corridor_flow_vectors(self):
+        # v2.3: sourced volume -> the SAME vetted structural vectors, with
+        # inclusive lower bounds (4M degraded, 10M functioning)
+        v = branch_filter.volume_vector
+        self.assertEqual(v(2.0), branch_filter.CORRIDOR_FLOW["absent"])
+        self.assertEqual(v(3.99), branch_filter.CORRIDOR_FLOW["absent"])
+        self.assertEqual(v(4.0), branch_filter.CORRIDOR_FLOW["degraded"])
+        self.assertEqual(v(7.4), branch_filter.CORRIDOR_FLOW["degraded"])
+        self.assertEqual(v(9.99), branch_filter.CORRIDOR_FLOW["degraded"])
+        self.assertEqual(v(10.0), branch_filter.CORRIDOR_FLOW["functioning"])
+        self.assertEqual(v(15.0), branch_filter.CORRIDOR_FLOW["functioning"])
+
+    def test_volume_equivalent_to_corridor_flow(self):
+        # the sourced basis reuses the vetted vectors: --volume 7.4 (->
+        # degraded) must give the identical posterior to --corridor-flow degraded
+        base = {"transits": 9, "tankers": 1, "brent": 104.32}
+        p_manual = branch_filter.state_posterior(
+            [0.10, 0.40, 0.50], dict(base, corridor_flow="degraded"))
+        p_vol = branch_filter.state_posterior(
+            [0.10, 0.40, 0.50], dict(base, volume=7.4))
+        self.assertEqual([round(x, 8) for x in p_manual],
+                         [round(x, 8) for x in p_vol])
+
+    def test_volume_current_data_unchanged(self):
+        # v2.3 must leave every published number unchanged for the current
+        # data (Kpler Sep 7.4M -> degraded): HORIZON 15.0/50.0/35.0, state
+        # fully standoff
+        post = branch_filter.state_posterior(
+            [0.10, 0.40, 0.50],
+            {"transits": 9, "tankers": 1, "brent": 104.32, "volume": 7.4})
+        h = branch_filter.horizon_weights(post, branch_filter.DEFAULT_TRANSITION)
+        self.assertEqual([round(x * 100, 1) for x in h], [15.0, 50.0, 35.0])
+        self.assertGreater(post[1], 0.999)  # state fully standoff (0.9998)
+
+    def test_volume_precedence_over_corridor_flow(self):
+        # passing both --volume (degraded) and --corridor-flow absent: the
+        # sourced number wins, so the horizon is the degraded row, not absent
+        rc, out, _ = run("branch_filter.py", "update",
+                         "--prior", "0.10,0.40,0.50", "--transits", "9",
+                         "--tankers", "1", "--brent", "104.32",
+                         "--volume", "7.4", "--corridor-flow", "absent")
+        self.assertEqual(rc, 0)
+        self.assertIn("precedence", out)
+        self.assertIn("15.0%", out)   # degraded horizon
+        self.assertNotIn("absent", out.split("Horizon")[1])
+
+    def test_volume_precedence_in_state_posterior(self):
+        # the documented precedence must hold in the LIBRARY, not just the
+        # CLI: with both keys present, the sourced --volume wins over
+        # --corridor-flow. Uses a discriminating input (transits 5 / brent 100)
+        # where the degraded and absent vectors actually differ.
+        base = {"transits": 5, "tankers": 1, "brent": 100.0}
+        p_vol = branch_filter.state_posterior([0.10, 0.40, 0.50],
+                                              dict(base, volume=7.4))
+        p_abs = branch_filter.state_posterior([0.10, 0.40, 0.50],
+                                              dict(base, corridor_flow="absent"))
+        p_both = branch_filter.state_posterior([0.10, 0.40, 0.50],
+                                               dict(base, volume=7.4,
+                                                    corridor_flow="absent"))
+        self.assertEqual([round(x, 8) for x in p_vol],
+                         [round(x, 8) for x in p_both])  # volume wins
+        self.assertNotEqual([round(x, 8) for x in p_abs],
+                            [round(x, 8) for x in p_both])  # ...and they differ
+
+    def test_negative_volume_rejected(self):
+        rc, _, err = run("branch_filter.py", "update", "--prior", "0.1,0.5,0.4",
+                         "--transits", "9", "--volume", "-1")
+        self.assertNotEqual(rc, 0)
+        self.assertIn(">= 0", err)
+
+    def test_nonfinite_volume_rejected(self):
+        # nan/inf must not silently become model evidence: a bare `>=` would
+        # map nan -> 'absent' and inf -> 'functioning' and return a bogus
+        # 'successful' forecast. Guarded in the shared mapping (library path)
+        # and in the CLI.
+        for bad in ("nan", "inf"):
+            rc, _, err = run("branch_filter.py", "update", "--prior", "0.1,0.4,0.5",
+                             "--transits", "9", "--volume", bad)
+            self.assertNotEqual(rc, 0, f"--volume {bad} should be rejected")
+            self.assertIn("finite", err)
+        for bad in (float("nan"), float("inf")):
+            with self.assertRaises(SystemExit):
+                branch_filter.volume_vector(bad)
+
+    def test_volume_only_update(self):
+        # a volume-only update is valid evidence: the 'at least one' guard
+        # must not demand a second signal just because --volume is present
+        rc, out, _ = run("branch_filter.py", "update", "--prior", "0.1,0.4,0.5",
+                         "--volume", "7.4")
+        self.assertEqual(rc, 0, f"volume-only update failed: {out}")
+        # 7.4 -> degraded: prior x (0.15,0.70,0.15) -> horizon 14.8/41.1/44.1
+        self.assertIn("14.8%", out)
+        self.assertIn("41.1%", out)
+        self.assertIn("44.1%", out)
+
     def test_matrix_validation(self):
         bad = ["1,1,1,1,1,1,1,1,1",              # rows sum to 3
                "-1,2,0,0.5,0.5,0,0,0,1"]          # negative entry

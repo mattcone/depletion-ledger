@@ -16,8 +16,14 @@ v2.0 (Sep 11): the state filter gained a STRUCTURAL input --
 likelihood that encodes "contested, not closed" so a single bad transit week
 cannot swing the lapse weight alone. (v1 limitation: the filter had no memory
 of structure/trend -- underweighted lapse on Sep 9, overweighted it by Sep 10,
-same gap, opposite sign. See research/logs/2026-09-10.md.) Remaining v2.1:
-news-frequency escalation index, STEO revision direction.
+same gap, opposite sign. See research/logs/2026-09-10.md.) v2.3 (Sep 29):
+the structural signal gained a SOURCED basis -- `--volume <M bpd>` (Kpler
+Hormuz crude throughput) maps onto the same CORRIDOR_FLOW vectors via
+documented thresholds (<4M absent, 4-10M degraded, >=10M functioning) and
+takes precedence over --corridor-flow. Ship count (--transits)
+systematically undercounts (dark/shuttle fleet); volume does not, so the
+model now responds to volume exports, not just transit count. Remaining
+v2.1: news-frequency escalation index, STEO revision direction.
 
 STATE LIKELIHOODS (observations; defaults are author's judgment):
   transits/day (verified, Kpler) : Poisson  holds=20  standoff=10  lapse=2
@@ -39,11 +45,18 @@ STATE LIKELIHOODS (observations; defaults are author's judgment):
   corridor flow (structural, v2) : functioning (0.55, 0.40, 0.05)
                                    degraded    (0.15, 0.70, 0.15)
                                    absent      (0.02, 0.18, 0.80)
+  volume (structural, v2.3)      : sourced Kpler Hormuz crude throughput
+                                   (M bpd) mapped onto the vectors above --
+                                   <4M absent, 4-10M degraded, >=10M
+                                   functioning. Takes precedence over
+                                   --corridor-flow (sourced beats manual).
 
 Usage:
   branch_filter.py update --prior 0.15,0.50,0.35 --transits 10 \
                           --tankers 10 --brent 100.71 \
                           --corridor-flow degraded
+  branch_filter.py update --prior 0.10,0.40,0.50 --transits 9 \
+                          --tankers 1 --brent 104.32 --volume 7.4
   branch_filter.py add "Hormuz normal by Sep 30" 0.038 2026-09-30
   branch_filter.py resolve 2026-09-30 0 --match "Hormuz"   # --match is
                                                   # required when several
@@ -81,6 +94,36 @@ CORRIDOR_FLOW = {  # (holds, standoff, lapse) per assessment
 SIGNAL_WEIGHTS = {"transits": 1.0, "tankers": 0.5, "brent": 1.0,
                   "corridor_flow": 1.0}
 
+# v2.3: sourced volume (Kpler Hormuz crude throughput, M bpd) -> structural
+# vector. Gives the structural signal a SOURCED basis instead of the author
+# eyeballing --corridor-flow. Ship count (--transits) systematically
+# undercounts (dark / shuttle fleet: vessels run AIS-dark, STS off Oman) --
+# Sep: ~19 tankers transited, yet the strait moved ~7.4M bpd of Hormuz crude
+# (regional total incl. the Red Sea bypass: 12.8M) -- a high volume on a low
+# count. Feed the HORMUZ crude figure, not the regional total (12.8 would
+# select the wrong category). Volume does not carry that count bias, so it is
+# the better "is the corridor moving trade" signal. Maps a sourced bpd figure
+# onto the SAME vetted CORRIDOR_FLOW
+# vectors via documented thresholds (judgment); --volume takes precedence
+# over --corridor-flow. Sourced anchors (Hormuz crude, Kpler): pre-war ~15M;
+# Aug 18 2.0M; Aug 31 8.6M; Sep 7.4M.
+VOLUME_THRESHOLDS = (4.0, 10.0)  # (degraded floor, functioning floor), M bpd
+
+
+def volume_vector(vol):
+    """Map a sourced Kpler Hormuz crude throughput (M bpd) onto a structural
+    vector. Rejects non-finite / negative values: a bare `>=` would silently
+    map nan -> 'absent' and inf -> 'functioning' and let garbage in as model
+    evidence (both CLI and library paths)."""
+    if not math.isfinite(vol) or vol < 0:
+        raise SystemExit("volume must be a finite number >= 0 (Kpler Hormuz "
+                         "crude throughput, M bpd)")
+    if vol >= VOLUME_THRESHOLDS[1]:
+        return CORRIDOR_FLOW["functioning"]
+    if vol >= VOLUME_THRESHOLDS[0]:
+        return CORRIDOR_FLOW["degraded"]
+    return CORRIDOR_FLOW["absent"]
+
 # state -> horizon branch weights (the documented judgment table)
 DEFAULT_TRANSITION = [
     [0.60, 0.30, 0.10],   # holds
@@ -107,7 +150,9 @@ def normal_pdf(x, mu, sd):
 
 
 def state_posterior(prior, obs):
-    """obs: dict with optional 'transits', 'tankers', 'brent', 'corridor_flow'."""
+    """obs: dict with optional 'transits', 'tankers', 'brent', 'volume',
+    'corridor_flow'. 'volume' and 'corridor_flow' are the SAME structural
+    signal (sourced vs manual); 'volume' takes precedence if both present."""
     unnorm = []
     for i, st in enumerate(STATES):
         l = 1.0
@@ -118,7 +163,10 @@ def state_posterior(prior, obs):
         if obs.get("brent") is not None:
             mu, sd = NORMAL["brent"][i]
             l *= normal_pdf(obs["brent"], mu, sd) ** SIGNAL_WEIGHTS["brent"]
-        if obs.get("corridor_flow") is not None:
+        if obs.get("volume") is not None:
+            l *= volume_vector(obs["volume"])[i] \
+                ** SIGNAL_WEIGHTS["corridor_flow"]
+        elif obs.get("corridor_flow") is not None:
             l *= CORRIDOR_FLOW[obs["corridor_flow"]][i] \
                 ** SIGNAL_WEIGHTS["corridor_flow"]
         unnorm.append(prior[i] * l)
@@ -147,11 +195,19 @@ def cmd_update(a):
         obs["tankers"] = a.tankers
     if a.brent is not None:
         obs["brent"] = a.brent
-    if not obs:
-        raise SystemExit("provide at least one of --transits/--tankers/--brent")
-
-    if a.corridor_flow is not None:
+    if a.volume is not None:
+        if not math.isfinite(a.volume) or a.volume < 0:
+            raise SystemExit("--volume must be a finite number >= 0 "
+                             "(Kpler Hormuz crude throughput, M bpd)")
+        obs["volume"] = a.volume
+        if a.corridor_flow is not None:
+            print("note: --volume takes precedence over --corridor-flow "
+                  "(sourced beats manual)")
+    elif a.corridor_flow is not None:
         obs["corridor_flow"] = a.corridor_flow
+    if not obs:
+        raise SystemExit("provide at least one of --transits/--tankers/--brent/"
+                         "--volume/--corridor-flow")
 
     transition = DEFAULT_TRANSITION
     if a.matrix:
@@ -295,6 +351,11 @@ def main():
     u.add_argument("--corridor-flow",
                    choices=["functioning", "degraded", "absent"], default=None,
                    help="structural assessment of (shadow) corridor trade (v2.0)")
+    u.add_argument("--volume", type=float, default=None,
+                   help="sourced Kpler Hormuz crude throughput, M bpd (v2.3) "
+                        "-- the sourced basis for the structural signal; takes "
+                        "precedence over --corridor-flow. Thresholds: <4M "
+                        "absent, 4-10M degraded, >=10M functioning")
     u.add_argument("--matrix", default=None,
                    help="override transition matrix (9 numbers, row-major)")
     u.set_defaults(fn=cmd_update)

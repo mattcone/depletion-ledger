@@ -52,11 +52,11 @@ The September 19 assumptions file lists the saved EIA workbook, source excerpts,
 
 A *corridor* is an agreed shipping route through the Strait of Hormuz. We assign probabilities to three possible outcomes and calculate how storage could change under each one. **The percentages show how likely we consider each outcome.** They don't change the calculations for each line or tell you how accurate its numbers will be.
 
-| Scenario | Odds (Sep 22) | What happens |
+| Scenario | Odds (Sep 29) | What happens |
 |---|---|---|
 | The corridor holds | 10% | The shipping agreement works and tanker traffic returns to normal. |
-| The standoff continues | 40% | The corridor barely works, attacks continue, and the damaged Saudi bypass pipeline operates at a reduced rate. |
-| The corridor lapses | 50% | The agreement breaks down or comes under attack, the strait is effectively closed, and the bypass stays shut. |
+| The standoff continues | 50% | The corridor barely works, attacks continue, and the repaired Saudi bypass pipeline operates at a reduced rate. |
+| The corridor lapses | 40% | The agreement breaks down or comes under attack, the strait is effectively closed, and the bypass stays shut. |
 
 The assumptions below were published on September 19. You can expand each table to see the monthly calculations. **P** means production, **C** means consumption, and **Δ** means an adjustment to the EIA baseline. Daily figures are in millions of barrels per day; cumulative figures show the total change in millions of barrels since the end of February 2026. We round the figures for display, so they may not add up exactly.
 
@@ -213,12 +213,16 @@ These examples show how much the result changes when we change an assumption. We
 
 We assign the odds using judgment. To keep our decisions consistent, we list the events that would prompt a change in advance. The odds change when one of those events affects supply or shipping. A quiet week or a price move alone isn't enough.
 
-The September 11 pipeline suspension moved the odds from 10/50/40 to 10/40/50. The September 16 update, after Yanbu loadings stopped, moved them to 10/35/55. We returned the odds to 10/40/50 on September 22, after Reuters reported that the pipeline had restarted and the first cargo at Yanbu was scheduled to load that day. The dashboard shows the history in “The model's odds for each outcome.”
+The September 11 pipeline suspension moved the odds from 10/50/40 to 10/40/50. When oil loadings at Yanbu stopped, we moved them to 10/35/55 on September 16. We returned to 10/40/50 on September 22, after Reuters reported that the pipeline had restarted and the first cargo at Yanbu was scheduled to load that day.
+
+On September 29, we moved the odds to 10/50/40. The Wall Street Journal and [Bloomberg](https://www.rigzone.com/news/wire/saudi_arabias_key_oil_pipeline_starts_exports-28-sep-2026-184718-article/) reported that exports had resumed through the repaired pipeline, which was carrying about 3.5 million barrels a day. The Journal reported that tanker loadings at Yanbu had resumed on September 27. Our rule called for an official restart announcement or an assessment that repairs would take only days. Neither condition had been met. We made an exception because the reports showed that oil was moving through the pipeline and leaving the port again.
+
+The dashboard shows the history in “The model's odds for each outcome.”
 
 <details>
 <summary>Events that would prompt a change</summary>
 
-These rules were recorded as of September 16; the Yanbu rule was applied on September 22:
+We recorded these rules as of September 16 and applied the Yanbu rule on September 22. The September 29 change was an exception to the pipeline-restart rule, as explained above.
 
 | Event | Effect on the odds |
 |---|---|

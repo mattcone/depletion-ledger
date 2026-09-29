@@ -61,6 +61,8 @@ python3 branch_filter.py update --prior 0.15,0.50,0.35 \
         --transits 10 --tankers 10 --brent 100.71
 ```
 
+**Authority (Sep 29, external review):** the HORIZON row is the *judgment's own pre-committed table* applied to the classified state — not an independent probability estimate from the data. The filter's genuine, data-informed contribution is the *state* label (transits/losses/Brent/volume → holds/standoff/lapsed) and the direction/consistency check (it flags when the judgment and the data diverge — e.g. Sep 21); its precision is the judgment's. Two transit baselines: ~85/day is the AIS-only count (IMF PortWatch — the method the daily counts use); ~125 large commercial vessels/day is the Kpler/Reuters total — compare current AIS-only counts to the AIS-only baseline. The v2.3 `--volume` signal sourced the structural label but did not remove the AIS-dark undercount (the transit Poisson remains the load-bearing state signal).
+
 **v2.2 (Sep 16): transit input is now the 3-day average of verified daily
 counts** (rounded), not a single day — single days get revised after the fact
 (Sep 14: 4 → 7). KNOWN LIMITATION (quantified Sep 16): the Poisson likelihoods
@@ -93,6 +95,31 @@ than judgment. v2.0 (`degraded`): **12.1 / 38.5 / 49.3** — the lapse gap
 narrows to 9 pts and standoff approaches judgment. The judgment still governs
 publication; the signal makes the filter's disagreement auditable instead of
 invisible.
+
+**Sourced volume (v2.3, Sep 29):** `--volume <M bpd>` gives the structural
+signal a *sourced* basis instead of the author eyeballing `--corridor-flow`.
+The flow evidence `--transits` is an AIS **ship count**, which systematically
+undercounts (the dark/shuttle fleet runs AIS-dark, STS off Oman) — in Sep,
+~19 large crude tankers transited on a weekly count that reads "barely
+working," yet the strait still moved a large volume. `--volume` takes a
+sourced **Kpler Hormuz crude throughput** and maps it onto the same
+`CORRIDOR_FLOW` vectors via documented thresholds: **< 4M → absent, 4–10M →
+degraded, ≥ 10M → functioning** (sourced anchors, Hormuz crude: pre-war
+~15M; Aug 18 2.0M; Aug 31 8.6M; Sep 7.4M). Feed the **Hormuz crude** figure,
+not the regional Gulf total (Sep: 7.4M Hormuz vs 12.8M regional, which
+includes the Red Sea bypass) — 12.8 would wrongly select "functioning." It
+**takes precedence over `--corridor-flow`** (sourced beats manual); keep
+`--corridor-flow` as the override for weeks between Kpler's monthly prints.
+
+```
+python3 branch_filter.py update --prior 0.10,0.40,0.50 --transits 9 \
+        --tankers 1 --brent 104.32 --volume 7.4    # 7.4M -> degraded
+```
+
+Current data (7.4M → degraded) leaves the published numbers unchanged
+(HORIZON 15.0 / 50.0 / 35.0); the change makes the model react to a future
+volume print mechanically (10M+ → functioning → toward holds) instead of
+requiring a manual re-label.
 
 `score` also reports a **base-rate comparator** (Brier of always predicting
 the settled items' base rate) next to the running score — a bare Brier number
@@ -136,6 +163,9 @@ Every constant is a documented judgment, not a measurement:
 - corridor-flow likelihood vectors — recalibrate when the structural
   assessment changes or the Brier ledger says a branch was systematically
   mis-weighted.
+- volume thresholds (4M / 10M M bpd, v2.3) — recalibrate when Kpler's Hormuz
+  crude series re-baselines or the Brier ledger flags a branch mis-weight. Only
+  the thresholds are new; the mapped vectors are the corridor-flow vectors.
 - transition matrix — the judgment table; review when a horizon prediction
   settles (Brier ledger) or a regime event reopens the question.
 - v2.1 inputs: news-frequency escalation index (GPR method), STEO revision
@@ -151,7 +181,8 @@ Every constant is a documented judgment, not a measurement:
 
 ## Tests
 
-`python3 test_model.py` (stdlib `unittest`) — 14 tests pinning the documented
-Sep 9/Sep 10 worked examples, the band boundaries, and the v2.0 fixes. Run it
-after any edit to the scripts; a changed published number fails loudly
-instead of drifting into the logs.
+`python3 test_model.py` (stdlib `unittest`) — 30 tests pinning the documented
+Sep 9/Sep 10 worked examples, the band boundaries, and the v2.0–v2.3 fixes
+(corridor-flow and volume structural signal, input guards). Run it after any
+edit to the scripts; a changed published number fails loudly instead of
+drifting into the logs.

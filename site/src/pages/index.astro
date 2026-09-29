@@ -5,6 +5,7 @@ import SiteMeta from "../components/SiteMeta.astro";
 import TopNav from "../components/TopNav.astro";
 import ShippingRoutes from "../components/ShippingRoutes.astro";
 import SupplyFlow from "../components/SupplyFlow.astro";
+import BranchWeightRow from "../components/BranchWeightRow.astro";
 import {
   stats, brentYtd, brentMonthlyAvgs, wtiWeekly, gasolineYtd, gasolinePreCrisis,
   dieselYtd, dieselOldRecord, sprWeekly, sprFloors,
@@ -18,6 +19,13 @@ import {
 // Crisis day number, computed from the data-as-of date (NOT the viewer's clock) so the
 // page is a stable snapshot: Sep 28 data = day 212, no matter when someone loads it.
 const dayNum = Math.round((Date.parse(DATA_AS_OF) - Date.parse(CRISIS_DAY_1)) / 86400000);
+
+// Odds history: keep the most recent changes visible and fold the older ones into a
+// collapsed "earlier" block, so the section reads as a recent trajectory, not an
+// archive. (The full sourced history lives in research/logs/.)
+const RECENT_BRANCHES = 4;
+const recentBranch = branchWeights.slice(-RECENT_BRANCHES).reverse();
+const earlierBranch = branchWeights.slice(0, -RECENT_BRANCHES).reverse();
 
 // ── World oil stocks panels (below the flip chart) ─────────────────────────────
 // Every computed number in the panel copy/captions is derived from the data file,
@@ -692,18 +700,8 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           is more likely. It doesn't tell you how accurate the storage projection will be.
         </p>
         <div class="space-y-3">
-          {branchWeights.slice().reverse().map((b) => (
-            <div>
-              <div class="flex items-center gap-3">
-                <span class="w-14 shrink-0 font-mono text-xs text-faint tabular">{b.date}</span>
-                <div class="flex h-7 w-full overflow-hidden rounded-sm">
-                  <div style={`width: ${b.holds}%`} class="flex items-center justify-center bg-calm text-[10px] font-medium text-white">{b.holds ? b.holds + "%" : ""}</div>
-                  <div style={`width: ${b.standoff}%`} class="flex items-center justify-center bg-crude text-[10px] font-medium text-white">{b.standoff ? b.standoff + "%" : ""}</div>
-                  <div style={`width: ${b.lapse}%`} class="flex items-center justify-center bg-alarm text-[10px] font-medium text-white">{b.lapse ? b.lapse + "%" : ""}</div>
-                </div>
-              </div>
-              <p class="mt-1 pl-[68px] text-xs text-faint">{b.note}</p>
-            </div>
+          {recentBranch.map((b) => (
+            <BranchWeightRow weight={b} />
           ))}
         </div>
         <div class="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-xs text-faint">
@@ -711,6 +709,18 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           <span><span class="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm bg-crude"></span>standoff</span>
           <span><span class="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm bg-alarm"></span>corridor lapses</span>
         </div>
+        {earlierBranch.length > 0 && (
+          <details class="mt-5">
+            <summary class="cursor-pointer select-none list-none text-xs font-medium text-faint hover:text-ink/80">
+              Show earlier odds ({earlierBranch[earlierBranch.length - 1].date}–{earlierBranch[0].date})
+            </summary>
+            <div class="mt-3 space-y-3">
+              {earlierBranch.map((b) => (
+                <BranchWeightRow weight={b} />
+              ))}
+            </div>
+          </details>
+        )}
 
         <!-- What the tracks are -->
         <div class="mt-8 grid gap-6 md:grid-cols-3">
