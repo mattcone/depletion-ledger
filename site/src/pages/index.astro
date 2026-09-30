@@ -17,7 +17,7 @@ import {
 } from "../data/crisis";
 
 // Crisis day number, computed from the data-as-of date (NOT the viewer's clock) so the
-// page is a stable snapshot: Sep 29 data = day 213, no matter when someone loads it.
+// page is a stable snapshot: Sep 30 data = day 214, no matter when someone loads it.
 const dayNum = Math.round((Date.parse(DATA_AS_OF) - Date.parse(CRISIS_DAY_1)) / 86400000);
 
 // Odds history: keep the most recent changes visible and fold the older ones into a
@@ -380,7 +380,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             <line x1="162" y1="252" x2="144" y2="237" stroke="#b3261e" stroke-width="0.75" opacity="0.6" />
           </svg>
           <figcaption class="mt-2 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-            <span class="block">Hormuz: Kpler recorded 5 crossings over Sep 26–27, down from 31 the prior weekend (Reuters). Windward counted 17 on Sep 28, including 6 with tracking turned off. The trackers cover different sets of ships, and vessels with tracking off can be missed.</span>
+            <span class="block">Hormuz: Kpler recorded 5 crossings over Sep 26–27, down from 31 the prior weekend (Reuters). Windward counted 17 on Sep 28, including 6 with tracking turned off. Kpler estimated oil exports at 13.2 million barrels a day over the seven days ending Sep 23 — about three-quarters of the pre-war 17 million (CNBC, Sep 25). The trackers cover different sets of ships, and vessels with tracking off can be missed.</span>
             <span class="mt-1 block">Bab el-Mandeb: Kpler counted 49 crossings over Sep 26–27, down from 55 the prior weekend, with no tracked Saudi oil shipments (Reuters). Yanbu lies north of this strait, so its exports needn't pass through it.</span>
           </figcaption>
         </figure>
@@ -417,30 +417,30 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
       <div class="grid gap-10 lg:grid-cols-2">
         <div>
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">US gasoline prices are up 59%</h2>
+            <h2 class="text-xl font-bold tracking-tight">US gasoline prices are up 58%</h2>
             <p class="font-mono text-[11px] text-faint">EIA weekly and AAA daily national averages</p>
           </div>
           <div class="h-72">
-            <canvas id="gasChart" role="img" aria-label="US gasoline, EIA weekly national average (AAA daily readings Sep 10 to 29): $2.81 in January, May peak $4.50, $4.46 on Sep 29. Reference line at the January pre-crisis $2.81."></canvas>
+            <canvas id="gasChart" role="img" aria-label="US gasoline, EIA weekly national average (AAA daily readings Sep 10 to 30): $2.81 in January, May peak $4.50, $4.43 on Sep 30. Reference line at the January pre-crisis $2.81."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The national average has risen from $2.81 in January to $4.46, an increase of about 59%.
+            The national average has risen from $2.81 in January to $4.43, an increase of about 58%.
             Prices peaked at $4.50 in May. Every month since March has averaged above the levels
             seen before the crisis.
           </p>
         </div>
         <div>
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">US diesel prices are up 73%</h2>
+            <h2 class="text-xl font-bold tracking-tight">US diesel prices are up 72%</h2>
             <p class="font-mono text-[11px] text-faint">AAA national average · dots on selected dates</p>
           </div>
           <div class="h-72">
-            <canvas id="dieselChart" role="img" aria-label="US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $6.53 on Sep 22, easing to $6.52 on Sep 23, $6.51 on Sep 24, $6.50 on Sep 25, $6.48 on Sep 26, $6.47 on Sep 27, $6.45 on Sep 28, and $6.44 on Sep 29."></canvas>
+            <canvas id="dieselChart" role="img" aria-label="US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $6.53 on Sep 22, easing to $6.52 on Sep 23, $6.51 on Sep 24, $6.50 on Sep 25, $6.48 on Sep 26, $6.47 on Sep 27, $6.45 on Sep 28, $6.44 on Sep 29, and $6.41 on Sep 30."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Diesel cost $3.72 on Feb 27, just before the war. It reached a record $6.53 on
-            Sep 22, then fell for seven consecutive days to $6.44 on Sep 29.
-            That's still about 73% above its pre-war price.
+            Sep 22, then fell for eight consecutive days to $6.41 on Sep 30.
+            That's still about 72% above its pre-war price.
             It first passed the previous record of about $5.85, set in June 2022, on Sep 4.
           </p>
         </div>
@@ -455,14 +455,15 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
               <p class="mt-2 font-mono text-[11px] text-faint">TTF, dollars per million British thermal units ($/MMBtu). Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: assessed prices and market quotes (May–Sep). Contracts and delivery periods differ, so comparisons are approximate.</p>
             </div>
             <div class="h-72">
-              <canvas id="gasTtfChart" role="img" aria-label="TTF, Europe's gas benchmark, 2026 year to date: $12.40 in January, $11.00 before the closure, spiking to a three-year high of $18.89 on Mar 20, easing to $14.10 after the June ceasefire, $19.90 on Jul 31, then trading above $28 on Sep 10, its highest level since December 2022, and $27.00 on Sep 11, about $27.80 on Sep 14, and $26.70 on Sep 18 (JOGMEC, published Sep 24). The latest market quote is about $24.20 on Sep 22. Reference line at the pre-closure week's $10.99."></canvas>
+              <canvas id="gasTtfChart" role="img" aria-label="TTF, Europe's gas benchmark, 2026 year to date: $12.40 in January, $11.00 before the closure, spiking to a three-year high of $18.89 on Mar 20, easing to $14.10 after the June ceasefire, $19.90 on Jul 31, then trading above $28 on Sep 10, its highest level since December 2022, and $27.00 on Sep 11, about $27.80 on Sep 14, $26.70 on Sep 18 (JOGMEC, published Sep 24), and $24.10 on Sep 25 (JOGMEC, published Sep 28). Reference line at the pre-closure week's $10.99."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
               TTF is the benchmark used to track natural gas prices in Europe. It traded above
               $28 on Sep 10, its highest level since December 2022, before easing to $27.00 on
-              Sep 11. JOGMEC's Sep 24 report put the Sep 18 price at $26.70. The latest market
-              quote was about $24.20 on Sep 22, still about 120% above the price before the strait
-              closed. The Sep 14 and Sep 22 points are converted from euro quotes (€81.98 and
+              Sep 11. JOGMEC's Sep 28 report put the Sep 25 price at $24.10, down from $26.70
+              a week earlier but still about 120% above the price before the strait closed.
+              JOGMEC attributed the drop to warmer-weather forecasts and hopes that US–Iran talks
+              would ease tensions. The Sep 14 and Sep 22 points are converted from euro quotes (€81.98 and
               €72.10 per megawatt-hour). The Sep 14 quote is for a contract for difference (CFD),
               a financial contract that tracks gas prices.
               Unplanned maintenance at Norway's Asgard and Troll fields and tanker attacks have
@@ -476,19 +477,20 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           </div>
           <div>
             <div class="mb-4">
-              <h2 class="text-xl font-bold tracking-tight">Natural gas prices in Asia are up about 155%</h2>
+              <h2 class="text-xl font-bold tracking-tight">Natural gas prices in Asia are up about 135%</h2>
               <p class="mt-2 font-mono text-[11px] text-faint">JKM, $/MMBtu. Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: assessed spot prices and market quotes (May–Sep). Contracts and delivery periods differ, so comparisons are approximate.</p>
             </div>
             <div class="h-72">
-              <canvas id="gasJkmChart" role="img" aria-label="JKM, Asia's LNG benchmark, 2026 year to date: $10.66 before the closure, spiking to $20.67 on Mar 20, easing to $15.20 on Jun 26, then climbing to $24.50 on Aug 28, the high-$28s on Sep 10 — its highest level in about two and a half years — about $28.50 on Sep 11, and the low-$27s (about $27.20) on Sep 18 in the assessment published Sep 24. Reference line at the pre-closure week's $10.66."></canvas>
+              <canvas id="gasJkmChart" role="img" aria-label="JKM, Asia's LNG benchmark, 2026 year to date: $10.66 before the closure, spiking to $20.67 on Mar 20, easing to $15.20 on Jun 26, then climbing to $24.50 on Aug 28, the high-$28s on Sep 10 — its highest level in about two and a half years — about $28.50 on Sep 11, and the low-$27s (about $27.20) on Sep 18 in the assessment published Sep 24, and the low-$25s (about $25.20) on Sep 25 in the assessment published Sep 28. Reference line at the pre-closure week's $10.66."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
               JKM tracks the price of liquefied natural gas (LNG) delivered to Asia. It reached
               the high-$28s on Sep 10 — its highest level in roughly two and a half years —
-              and was around $28.50 on Sep 11, according to JOGMEC. Its Sep 24 report put the
-              Sep 18 price in the low-$27s, shown here as about $27.20. That's down from the
-              previous week but still about 155% above the price before the closure.
-              Prices eased as concern about the conflict declined.
+              and was around $28.50 on Sep 11, according to JOGMEC. Its Sep 28 report put the
+              Sep 25 price in the low-$25s, shown here as about $25.20 — down from the low-$27s
+              on Sep 18, but still about 135% above the price before the closure.
+              JOGMEC linked the Sep 25 decline to reports that Iran had proposed reopening
+              the strait under certain conditions.
               Damaged production units at Qatar's Ras Laffan complex — about 17%
               of the country's LNG export capacity — are expected to be offline for 3–5 years,
               forcing Asian buyers to look elsewhere for supplies.
@@ -503,17 +505,17 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
       <div class="mt-12 grid gap-10 lg:grid-cols-2">
         <div class="min-w-0">
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">Brent and WTI prices are up about 39% and 38%</h2>
+            <h2 class="text-xl font-bold tracking-tight">Brent and WTI prices are up about 35% and 33%</h2>
             <p class="font-mono text-[11px] text-faint tabular">Brent: selected observations and monthly averages. WTI: weekly FRED spot prices and recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent rises from about $76 before the war to $105.28 on Sep 28, up 0.9% and a fourth straight close above $100, after a $126 intraday peak in March. WTI's November contract settles at $92.60 on Sep 28, up 0.2% on the same contract. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent rises from about $76 before the war to $102.59 on Sep 29, down 2.6% — its fifth straight close above $100 — after a $126 intraday peak in March. WTI's November contract settles at $89.38 on Sep 29, down 3.5% on the same contract. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Brent and West Texas Intermediate (WTI) are crude oil price benchmarks. On Sep 28,
-            Brent settled at $105.28 a barrel, up 0.9%. It was the fourth consecutive close above $100.
-            WTI's November contract settled at $92.60,
-            up 0.2% on the same contract.
+            Brent and West Texas Intermediate (WTI) are crude oil price benchmarks. On Sep 29,
+            Brent settled at $102.59 a barrel, down 2.6% — its fifth consecutive close above $100.
+            WTI's November contract settled at $89.38,
+            down 3.5% on the same contract.
             The gray line shows WTI, which is also used in the fuel price spread chart beside this one.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
@@ -536,7 +538,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             <p class="font-mono text-[11px] text-faint tabular">Retail fuel price minus WTI, dollars per barrel. EIA/AAA fuel prices; FRED and recent futures closes for WTI.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. Diesel rises from about $89 in January to $181.8 on Sep 23, its highest plotted value, then eases to $179.0 on Sep 24, widens to $180.7 on Sep 25, and eases to $179.9 on Sep 26, $179.2 on Sep 27, $178.4 on Sep 28, and $177.8 on Sep 29, with a temporary narrowing to $148 on Sep 10. Gasoline rises from about $59 in January to $95.8 on Sep 23, dips to $93.7 on Sep 24, then rises to $96.2 on Sep 25, and eases to $96.1 on Sep 26, $95.6 on Sep 27, $95.4 on Sep 28, and $94.5 on Sep 29. Both lines show every reading; the dots mark selected dates to keep nearby points legible."></canvas>
+            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. Diesel rises from about $89 in January to $181.8 on Sep 23, its highest plotted value, then eases to $179.0 on Sep 24, widens to $180.7 on Sep 25, and eases to $179.9 on Sep 26, $179.2 on Sep 27, $178.4 on Sep 28, rises to $181.1 on Sep 29 when WTI fell 3.5%, and eases to $180.0 on Sep 30, with a temporary narrowing to $148 on Sep 10. Gasoline rises from about $59 in January to $95.8 on Sep 23, dips to $93.7 on Sep 24, then rises to $96.2 on Sep 25, and eases to $96.1 on Sep 26, $95.6 on Sep 27, $95.4 on Sep 28, rises to $97.8 on Sep 29, and eases to $96.9 on Sep 30. Both lines show every reading; the dots mark selected dates to keep nearby points legible."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             This chart subtracts the price of crude oil from the retail price of fuel, with both
@@ -546,24 +548,25 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The gap between diesel and crude prices rose from about $89 in January to $181.8 on
             Sep 23, its highest value on the chart. It fell to $179.0 on Sep 24, rose to
-            $180.7 on Sep 25, then fell to $179.9 on Sep 26, $179.2 on Sep 27, $178.4 on Sep 28,
-            and $177.8 on Sep 29.
+            $180.7 on Sep 25, then fell to $179.9 on Sep 26, $179.2 on Sep 27, and $178.4 on Sep 28.
+            It rose to $181.1 on Sep 29 when WTI fell 3.5%, then eased to $180.0 on Sep 30.
             It briefly narrowed to $148 on Sep 10,
             when crude prices rose faster than pump prices.
             The gap between gasoline and crude prices rose to $95.8 on Sep 23, dipped to $93.7 on Sep 24,
             then rose to $96.2 on Sep 25 before falling to $96.1 on Sep 26, $95.6 on Sep 27,
-            $95.4 on Sep 28, and $94.5 on Sep 29.
+            and $95.4 on Sep 28. It rose to $97.8 on Sep 29, then eased to $96.9 on Sep 30.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The calculation uses retail prices from EIA and AAA, minus WTI from FRED, with futures closes for
-            Sep 10–11 and Sep 14–28. The EIA's official <em>crack spread</em> uses wholesale fuel prices, so the
+            Sep 10–11 and Sep 14–29. The EIA's official <em>crack spread</em> uses wholesale fuel prices, so the
             values differ. Some readings fall on days with no same-day WTI price; the chart pairs those with the
             nearest available trading day's price, within 1–3 days. The Sep 21 reading uses the Sep 21 WTI
             settlement. The Sep 22 reading uses the October contract's final closing price on Sep 22
             ($94.59); the Sep 23 reading uses the November contract's settlement on Sep 23
             ($92.16); the Sep 24 reading uses the November contract's settlement on
             Sep 24 ($94.61); the Sep 25 and Sep 26 readings use its settlement on Sep 25 ($92.41);
-            the Sep 27–29 readings use its settlement on Sep 28 ($92.60). Because the
+            the Sep 27–28 readings use the Sep 28 settlement ($92.60), and the Sep 29–30 readings
+            use the Sep 29 settlement ($89.38). Because the
             November contract's Sep 23 settlement was lower than the October close, the Sep 23
             spread reads higher than the Sep 22 spread even though pump prices barely moved.
             No missing prices are estimated.
@@ -806,10 +809,12 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             </h3>
             <p id="sprChartAssumptions" class="mt-1.5 text-[13px] leading-relaxed text-ink/70">
               The Department of Energy releases oil from the SPR through contracts and scheduled
-              deliveries. A supply shortage doesn't automatically trigger withdrawals. Once
-              the current program's deliveries end, DOE would have to arrange further releases
-              for withdrawals to continue. The latest reported week averaged about 58,000
-              barrels a day. The pace can change with each release decision.
+              deliveries. A supply shortage doesn't automatically trigger withdrawals. On Sep 29,
+              DOE offered companies loans of up to 40 million barrels, with bids due Oct 6 and
+              deliveries under awarded contracts scheduled for November and December. Contracts
+              haven't been awarded yet, so withdrawals could pause as earlier deliveries end.
+              Withdrawals averaged about 58,000 barrels a day in the latest reported week.
+              The pace can change with each release decision.
             </p>
           </div>
         </div>
@@ -1291,9 +1296,9 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           <div class="mt-6 grid gap-10 lg:grid-cols-2">
             <div>
               <h3 class="text-lg font-bold tracking-tight">US 10-year Treasury yield</h3>
-              <p class="mt-2 font-mono text-[11px] text-faint">10-year US Treasury yield, % · chart through Sep 28 · weekly closes (FRED) · Sep 11, 14, 15, 16, 17, 18, 21, 22, 23, 24, 25, and 28: Yahoo closing values.</p>
+              <p class="mt-2 font-mono text-[11px] text-faint">10-year US Treasury yield, % · chart through Sep 29 · weekly closes (FRED) · Sep 11, 14, 15, 16, 17, 18, 21, 22, 23, 24, 25, 28, and 29: Yahoo closing values.</p>
               <div class="mt-4 h-72">
-                <canvas id="treasury10yChart" role="img" aria-label="US 10-year Treasury yield, 2026: 4.19% on Jan 2, 3.97% on Feb 27 before the war, and 5.24% on Sep 28, the fourth straight close above 5% and the highest close of the war. The Sep 16 close of 5.006% is the first above 5% since the war began. Reference lines mark the pre-war 3.97% and the January 2025 high of 4.8%."></canvas>
+                <canvas id="treasury10yChart" role="img" aria-label="US 10-year Treasury yield, 2026: 4.19% on Jan 2, 3.97% on Feb 27 before the war, and 5.255% on Sep 29, the fifth straight close above 5% and the highest close of the war. The Sep 16 close of 5.006% is the first above 5% since the war began. Reference lines mark the pre-war 3.97% and the January 2025 high of 4.8%."></canvas>
               </div>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 The 10-year Treasury yield is the rate the US government pays to borrow for a decade.
@@ -1304,9 +1309,8 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
                 refinanced by year-end.
               </p>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-                The 10-year yield closed at 5.24% on Sep 28, its fourth straight close above 5%
-                and the highest close of the war, up 6 basis points, or 0.06 percentage
-                points, on Monday.
+                The 10-year yield closed at 5.255% on Sep 29, its fifth straight close above 5%
+                and the highest close of the war.
                 A preliminary business survey showed activity growing at its fastest pace in over
                 four years, increasing expectations that the Fed would raise rates again.
                 Its Sep 16 close of 5.006% was the first above 5% since the war began.
@@ -2269,7 +2273,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             { value: gasolinePreCrisis, text: "Jan $2.81 (pre-crisis)", color: "#3d6b64", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: gasolineYtd.length - 1, text: "Sep 29 · $4.46", ...endpoint },
+            { dataset: 0, index: gasolineYtd.length - 1, text: "Sep 30 · $4.43", ...endpoint },
             { dataset: 0, index: 18, text: "May peak $4.50", dy: -14, color: "#1c1b17" },
           ]),
         ],
@@ -2284,7 +2288,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
       const gasXScale = {
         type: "linear" as const,
         min: 0,
-        max: 274, // data now runs to Sep 29 (doy 271); headroom for endpoint dots/labels
+        max: 276, // data now runs to Sep 30 (doy 273); headroom for endpoint dots/labels
         grid: { display: false },
         border: { display: true, color: "#d8d4c6", width: 0.5 },
         afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
@@ -2303,12 +2307,12 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
       // Diesel YTD — true-date axis. The line draws the full mixed-source series (monthly
       // + weekly + daily), so the path keeps its movement; the dots are thinned to the story
       // beats — pre-Sep 3 points, Sep 4 (old record broken), Sep 11 (first above $6.00),
-      // Sep 14, 17, 20, 22, and the Sep 29 endpoint (the labeled endpoint point needs
-      // its dot; Sep 26–28 are skipped so the last two dots don't blur into one) — because a
+      // Sep 14, 17, 20, 22, and the Sep 30 endpoint (the labeled endpoint point needs
+      // its dot; Sep 26–29 are skipped so the last two dots don't blur into one) — because a
       // run of daily dots bunches into ~30px at the right edge. dieselView is the dot-keep
       // set, not the data.
       const dieselView = dieselYtd.filter(
-        (p) => p.date < "2026-09-03" || p.date === "2026-09-04" || p.date === "2026-09-11" || p.date === "2026-09-14" || p.date === "2026-09-17" || p.date === "2026-09-20" || p.date === "2026-09-22" || p.date === "2026-09-29",
+        (p) => p.date < "2026-09-03" || p.date === "2026-09-04" || p.date === "2026-09-11" || p.date === "2026-09-14" || p.date === "2026-09-17" || p.date === "2026-09-20" || p.date === "2026-09-22" || p.date === "2026-09-30",
       );
       const dieselDotKeep = new Set(dieselView.map((p) => p.date));
       new Chart(document.getElementById("dieselChart")!, {
@@ -2361,7 +2365,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             { value: dieselOldRecord, text: "Jun 2022 record $5.85", color: "rgba(179,38,30,0.8)", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: dieselYtd.length - 1, text: "Sep 29 · $6.44", ...endpoint, color: "#b3261e" },
+            { dataset: 0, index: dieselYtd.length - 1, text: "Sep 30 · $6.41", ...endpoint, color: "#b3261e" },
           ]),
         ],
       });
@@ -2433,7 +2437,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           directLabels([
             { dataset: 0, index: 6, text: "Mar 20 · $18.9 — three-yr high", dy: -14, color: "#1c1b17" },
             { dataset: 0, index: 21, text: "Jun 19 · $14.1 — ceasefire", align: "right", dy: 48, color: "#8a867a" },
-            { dataset: 0, index: gasTtf.length - 1, text: "Sep 22 · ≈$24.2", ...endpoint, color: "#b3261e" },
+            { dataset: 0, index: gasTtf.length - 1, text: "Sep 25 · $24.1", ...endpoint, color: "#b3261e" },
           ]),
         ],
       });
@@ -2478,15 +2482,15 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           directLabels([
             { dataset: 0, index: 6, text: "Mar 20 · $20.7", dy: -14, color: "#1c1b17" },
             { dataset: 0, index: 22, text: "Jun 26 · $15.2 — ceasefire", dy: 18, color: "#8a867a" },
-            { dataset: 0, index: gasJkm.length - 1, text: "Sep 18 · ≈$27.2", ...endpoint, color: "#b3261e" },
+            { dataset: 0, index: gasJkm.length - 1, text: "Sep 25 · ≈$25.2", ...endpoint, color: "#b3261e" },
           ]),
         ],
       });
 
-      // X-scale for the bonds/inflation charts: data runs to Sep 28 (day 270). A dot
+      // X-scale for the bonds/inflation charts: data runs to Sep 29 (day 272). A dot
       // centered on the axis max would be half-clipped at the plot edge, so the crack
-      // chart widens this to 274 — its data runs to Sep 29 (day 271).
-      const moneyXScale = { ...gasXScale, max: 273 };
+      // chart widens this to 276 — its data runs to Sep 30 (day 273).
+      const moneyXScale = { ...gasXScale, max: 275 };
       const mref = (val: number) => [{ x: 0, y: val }, { x: moneyXScale.max, y: val }]; // full axis width, follows the scale
 
       // Inflation chart: monthly points fall at month-END, so month ticks must sit at
@@ -2513,15 +2517,15 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
       // Brent (sourced points) + WTI (weekly FRED spot) — linear time scale.
       // The lines draw every point (the movement stays visible — e.g. the Sep 11 dip);
       // the dots are thinned to the story beats — pre-Sep 11 points, Sep 10 (+$6.82 in a
-      // day), Sep 15 (closing record 108.75), Sep 21, Sep 25, and the Sep 28 endpoint (the
-      // labeled settle points need their dots; Sep 26–27 are skipped so the last dots
+      // day), Sep 15 (closing record 108.75), Sep 21, Sep 25, and the Sep 29 endpoint (the
+      // labeled settle points need their dots; Sep 26–28 are skipped so the last dots
       // don't blur) — because a run of daily dots in the final days would bunch into
       // ~30px at the right edge. The views are dot-keep sets, not the data.
       const brentView = brentYtd.filter(
-        (p) => p.date < "2026-09-11" || p.date === "2026-09-15" || p.date === "2026-09-21" || p.date === "2026-09-25" || p.date === "2026-09-28",
+        (p) => p.date < "2026-09-11" || p.date === "2026-09-15" || p.date === "2026-09-21" || p.date === "2026-09-25" || p.date === "2026-09-29",
       );
       const wtiView = wtiWeekly.filter(
-        (p) => p.date < "2026-09-11" || p.date === "2026-09-15" || p.date === "2026-09-21" || p.date === "2026-09-25" || p.date === "2026-09-28",
+        (p) => p.date < "2026-09-11" || p.date === "2026-09-15" || p.date === "2026-09-21" || p.date === "2026-09-25" || p.date === "2026-09-29",
       );
       const brentDotKeep = new Set(brentView.map((p) => p.date));
       const wtiDotKeep = new Set(wtiView.map((p) => p.date));
@@ -2599,11 +2603,11 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             { value: 76, text: "pre-crisis $76 (Feb 27)", color: "#3d6b64", align: "right" },
           ]),
           directLabels([
-            { dataset: 0, index: brentYtd.length - 1, text: "Sep 28 · $105.28 — Brent", ...endpoint },
+            { dataset: 0, index: brentYtd.length - 1, text: "Sep 29 · $102.59 — Brent", ...endpoint },
             { dataset: 0, index: 3, text: "peak $126 · Mar 18", dy: -16, color: "#1c1b17" },
             { dataset: 0, index: 6, text: "Jun 30 · $74", dy: 20, ...note },
             { dataset: 0, index: 1, text: "war began Feb 28", dx: 8, dy: 18, align: "left", ...note },
-            { dataset: 1, index: wtiWeekly.length - 1, text: "Sep 28 · $92.60 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a" },
+            { dataset: 1, index: wtiWeekly.length - 1, text: "Sep 29 · $89.38 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a" },
           ]),
         ],
       });
@@ -2626,7 +2630,8 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
       // pairs with the same-day Sep 25 settlement (92.41). Sep 26 (AAA release, Saturday)
       // pairs with the Sep 25 settlement (92.41) — the nearest. Sep 27 and Sep 28 (AAA
       // releases) pair with the Sep 28 settlement (92.60); Sep 29 (AAA release)
-      // pairs with that same settlement — the nearest WTI.
+      // pairs with its same-day settlement (89.38); Sep 30 (AAA release) pairs
+      // with the Sep 29 settlement (89.38) — the nearest WTI.
       // Data note (Sep 21 evening): the Sep 18 pass observed the Yahoo front-month bars at 99.29 /
       // 96.08 (read as a December-contract roll); a later pull shows the same bars at the
       // news-reported Nov/Oct settles (103.87 / 100.30). The observation was a transient
@@ -2647,22 +2652,23 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           return { date: p.date, x: gd(p.date), y: +((p.value * 42 - w.value) * 10).toFixed(0) / 10 };
         });
       // WTI points that are futures closes, not the FRED weekly spot series — the tooltip
-      // source label follows this (kept in step with the panel copy: "Sep 10–11 and Sep 14–28").
+      // source label follows this (kept in step with the panel copy: "Sep 10–11 and Sep 14–29").
       // Pairing check (nearest WTI point, same day wins): Sep 23 AAA → Sep 23 settle 92.16;
       // Sep 24 AAA → Sep 24 settle 94.61; Sep 25 and 26 AAA → Sep 25 settle 92.41;
-      // Sep 27–29 AAA → Sep 28 settle 92.60 — disclosed in the crack methodology paragraph.
-      const wtiNonFred = new Set(["2026-09-10", "2026-09-11", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-25", "2026-09-28"]);
+      // Sep 27–28 AAA → Sep 28 settle 92.60; Sep 29 AAA → Sep 29 settle 89.38;
+      // Sep 30 AAA → Sep 29 settle 89.38 — disclosed in the crack methodology paragraph.
+      const wtiNonFred = new Set(["2026-09-10", "2026-09-11", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-25", "2026-09-28", "2026-09-29"]);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
-      // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 and the Sep 29
+      // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 and the Sep 30
       // point (the record is Sep 23 — the label tracks the max on the line; Sep 26's, Sep 27's,
-      // and Sep 28's dots are skipped so the last dots don't blur at ~3px/day);
-      // gasoline: pre-Sep 3 plus Sep 10, 17, 29 — because a run of daily dots bunches into
+      // Sep 28's, and Sep 29's dots are skipped so the last dots don't blur at ~3px/day);
+      // gasoline: pre-Sep 3 plus Sep 10, 17, 30 — because a run of daily dots bunches into
       // ~30px at the right edge. The nearest-WTI pairing below runs over the FULL wtiWeekly either way.
       const dieCrackSrc = dieselYtd.filter(
-        (p) => p.date < "2026-09-03" || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-14", "2026-09-17", "2026-09-29"].includes(p.date)
+        (p) => p.date < "2026-09-03" || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-14", "2026-09-17", "2026-09-30"].includes(p.date)
       );
       const gasCrackSrc = gasolineYtd.filter(
-        (p) => p.date < "2026-09-03" || p.date === "2026-09-10" || p.date === "2026-09-17" || p.date === "2026-09-29",
+        (p) => p.date < "2026-09-03" || p.date === "2026-09-10" || p.date === "2026-09-17" || p.date === "2026-09-30",
       );
       const dieDotKeep = new Set(dieCrackSrc.map((p) => p.date));
       const gasDotKeep = new Set(gasCrackSrc.map((p) => p.date));
@@ -2718,9 +2724,9 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
               grid: { display: true, color: "rgba(28,27,23,0.05)" },
               border: { display: false },
             },
-            // 274, not 273: the last dots (Sep 29 = day 271) sit inside the plot, not
+            // 276, not 275: the last dots (Sep 30 = day 273) sit inside the plot, not
             // half-clipped on the right edge (matches the retail charts' gasXScale).
-            x: { ...moneyXScale, max: 274 },
+            x: { ...moneyXScale, max: 276 },
           },
           plugins: {
             tooltip: {
@@ -2748,17 +2754,17 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
         ],
       });
 
-      // US 10-year Treasury yield (weekly FRED closes + Yahoo session closes Sep 10–28).
+      // US 10-year Treasury yield (weekly FRED closes + Yahoo session closes Sep 10–29).
       // Same dot-thinning as the diesel chart: the line draws the full weekly + daily
       // series, so the path keeps its movement; the dots are thinned to the story beats
       // — pre-Sep 10 points, Sep 11 (pre-hike run-up, intraday 4.992, highest since
       // Oct 2023), Sep 16 (5.006, first close above 5% of the war), Sep 21, Sep 25, and
-      // the newest point (Sep 28, under its endpoint label — the labeled point needs its
-      // dot; Sep 26–27 are skipped so the last dots don't blur) — because the other
+      // the newest point (Sep 29, under its endpoint label — the labeled point needs its
+      // dot; Sep 26–28 are skipped so the last dots don't blur) — because the other
       // daily dots in the final days would bunch into ~30px at the right edge.
       // treasuryView is the dot-keep set, not the data.
       const treasuryView = treasury10y.filter(
-        (p) => p.date < "2026-09-10" || p.date === "2026-09-11" || p.date === "2026-09-16" || p.date === "2026-09-21" || p.date === "2026-09-25" || p.date === "2026-09-28",
+        (p) => p.date < "2026-09-10" || p.date === "2026-09-11" || p.date === "2026-09-16" || p.date === "2026-09-21" || p.date === "2026-09-25" || p.date === "2026-09-29",
       );
       const treasuryDotKeep = new Set(treasuryView.map((p) => p.date));
       new Chart(document.getElementById("treasury10yChart")!, {
@@ -2802,7 +2808,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             y: {
               type: "linear" as const,
               min: 3.9,
-              max: 5.38, // headroom above the 5.24 point so its endpoint label (18px above) clears the top
+              max: 5.38, // headroom above the 5.255 point so its endpoint label (18px above) clears the top
               afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
                 scale.ticks = [4.0, 4.2, 4.4, 4.6, 4.8, 5.0, 5.2].map((v) => ({ value: v }));
               },
@@ -2825,7 +2831,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
                   const p = treasury10y[ctx.dataIndex];
                   // Yahoo session closes on the daily tail; FRED weekly closes before that —
                   // kept in step with the panel subline ("Sep 11 … 25: Yahoo closing values").
-                  const src = ["2026-09-11", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-25", "2026-09-28"].includes(p.date) ? "Yahoo session close" : "FRED weekly";
+                  const src = ["2026-09-11", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-25", "2026-09-28", "2026-09-29"].includes(p.date) ? "Yahoo session close" : "FRED weekly";
                   // 3 decimals: yields are quoted in bps — 2 decimals would show 4.998 as 5.00
                   return ` ${p.value.toFixed(3)}% — 10-yr US Treasury (${src})`;
                 },
@@ -2840,7 +2846,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             { value: treasuryTestLevel, text: "4.8% — Jan 2025 high", color: "#8a867a", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: treasury10y.length - 1, text: "Sep 28 · 5.24%", ...endpoint, dy: 18, color: "#b3261e" },
+            { dataset: 0, index: treasury10y.length - 1, text: "Sep 29 · 5.255%", ...endpoint, dy: 18, color: "#b3261e" },
           ]),
         ],
       });
