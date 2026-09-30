@@ -25,8 +25,8 @@ export const stats = [
   { label: "Brent", value: "$102.59", sub: "Sep 29 settlement · down 2.6% · fifth straight close above $100 · November contract · +35% vs pre-crisis ~$76" },
   { label: "US diesel (AAA)", value: "$6.41", sub: "Sep 30 · eighth straight drop from the Sep 22 record $6.5276 · +72% vs pre-war $3.72" },
   { label: "US gasoline (AAA)", value: "$4.43", sub: "Sep 30 · +58% vs Jan $2.81 (AAA)" },
-  { label: "SPR", value: "284.6M", sub: "Sep 18 · down 0.4M in a week, a second straight week at that pace · down 130.9M from pre-war 415.4M · lowest since Nov 1982" },
-  { label: "US diesel & heating oil", value: "107.4M", sub: "Sep 18 · down 0.4M in a week · 12.7% below last year · East Coast stocks 27% below last year" },
+  { label: "SPR", value: "283.8M", sub: "Sep 25 · down 0.8M in a week — about twice the prior two weeks' pace · down 131.7M from pre-war 415.4M · lowest since Nov 1982" },
+  { label: "US diesel & heating oil", value: "105.2M", sub: "Sep 25 · down 2.3M in a week · 14.9% below last year · East Coast stocks 29% below last year" },
 ];
 
 // ---------- Brent, $/bbl — 2026 YTD (observed points) ----------
@@ -279,6 +279,7 @@ export const sprWeekly: { date: string; level: number }[] = [
   { date: "2026-09-04", level: 285.360 },
   { date: "2026-09-11", level: 284.957 },
   { date: "2026-09-18", level: 284.552 },
+  { date: "2026-09-25", level: 283.767 },
 ];
 // US commercial crude inventories, EXCLUDING the SPR (EIA WPSR, week ending Friday),
 // million barrels. Source: EIA API series WCESTUS1 ("U.S. Ending Stocks excluding SPR of
@@ -305,6 +306,7 @@ export const commercialCrude2026: { date: string; value: number }[] = [
   { date: "2026-08-14", value: 428.815 }, { date: "2026-08-21", value: 428.910 },
   { date: "2026-08-28", value: 424.460 }, { date: "2026-09-04", value: 424.069 },
   { date: "2026-09-11", value: 423.429 }, { date: "2026-09-18", value: 426.398 },
+  { date: "2026-09-25", value: 427.320 },
 ];
 // Same weeks in 2025 (each 2026 week matched to its nearest 2025 week-ending date).
 export const commercialCrude2025: { date: string; value: number }[] = [
@@ -327,6 +329,7 @@ export const commercialCrude2025: { date: string; value: number }[] = [
   { date: "2025-08-15", value: 420.684 }, { date: "2025-08-22", value: 418.292 },
   { date: "2025-08-29", value: 420.707 }, { date: "2025-09-05", value: 424.646 },
   { date: "2025-09-12", value: 415.361 }, { date: "2025-09-19", value: 414.754 },
+  { date: "2025-09-26", value: 416.546 },
 ];
 export const sprFloors = [
   { level: 300, name: "Cavern damage risk: about 300M barrels (first report below: week ending Aug 7)" },
@@ -473,6 +476,7 @@ export const usRefineryUtil2026: UtilPt[] = [
   { date: "2026-08-14", value: 97.2 }, { date: "2026-08-21", value: 97.4 },
   { date: "2026-08-28", value: 98.0 }, { date: "2026-09-04", value: 97.8 },
   { date: "2026-09-11", value: 96.8 }, { date: "2026-09-18", value: 94.0 },
+  { date: "2026-09-25", value: 92.5 },
 ];
 export const usRefineryUtil2025: UtilPt[] = [
   { date: "2025-01-03", value: 93.3 }, { date: "2025-01-10", value: 91.7 },
@@ -494,6 +498,7 @@ export const usRefineryUtil2025: UtilPt[] = [
   { date: "2025-08-15", value: 96.6 }, { date: "2025-08-22", value: 94.6 },
   { date: "2025-08-29", value: 94.3 }, { date: "2025-09-05", value: 94.9 },
   { date: "2025-09-12", value: 93.3 }, { date: "2025-09-19", value: 93.0 },
+  { date: "2025-09-26", value: 91.4 },
 ];
 
 // Global refining anchors — IEA Oil Market Report (runs: Sep 11 edition; Q3 cut: Aug 12)
@@ -525,15 +530,20 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     when: "Sep 30",
     items: [
       { item: "The US military announced that its withdrawal from Iraq was complete on Sep 30 (AP). The last troops left an air base in the northern Kurdish region, and Prime Minister Ali al-Zaidi presided over the handover ceremony the same day, describing the end of the 12-year mission as the beginning of a 'new phase' defined by Iraq's sovereignty.", why: "The wind-down was agreed in 2024. Watch for militia attacks that could widen the war and change the model's odds." },
-      { item: "The EIA report for the week ending Sep 25, due Sep 30 at 10:30 a.m. Eastern Time. It will be published after the Sep 26 delivery deadline for the third round of SPR exchanges. SPR withdrawals averaged about 58,000 barrels a day in the week ending Sep 18, unchanged from the previous week. Weekly withdrawals had fallen from 3.1M to 1.2M to 0.4M barrels over the preceding three weeks.", why: "The program awarded about 133.6M barrels, close to the SPR's net decline of 130.9M. That comparison doesn't confirm how much has been delivered; we haven't checked the delivery receipts. Withdrawals could pause as those deliveries end. DOE is seeking bids by Oct 6 for more releases in November and December, but contracts haven't been awarded yet. An increase could reflect further DOE releases or more deliveries arriving that week under existing contracts." },
+    ],
+  },
+  {
+    when: "Oct 6–7",
+    items: [
       { item: "Bids for more SPR releases are due Oct 6 at 11:00 a.m. Central. DOE is offering companies loans of up to 40 million barrels from Big Hill and Bryan Mound, with deliveries under awarded contracts scheduled for November and December (DOE, Sep 29). This is its sixth request for bids; the previous five led to four completed exchanges totaling more than 133 million barrels awarded.", why: "DOE is arranging more releases, but companies still need to bid and receive contracts. Withdrawals could pause before the scheduled November–December deliveries." },
+      { item: "The next EIA report is due Oct 7 at 10:30 a.m. Eastern Time and covers the week ending Oct 2. The Sep 30 report showed SPR withdrawals of 0.8M barrels in the week ending Sep 25, about twice the prior two weeks' pace of roughly 58,000 barrels a day. That week ended before the Sep 26 delivery deadline for the third round of SPR exchanges. Diesel and heating-oil stocks fell 2.3M barrels to 105.2M, 14.9% below last year. At the four-week average rate of 3.8M barrels a day, those stocks are equivalent to about 28 days of use — less than a month. East Coast stocks fell 0.3M to 21.9M, 29% below last year.", why: "Watch whether SPR withdrawals continue at the higher pace. We haven't verified how much oil remains to be delivered under existing contracts. The Oct 7 report covers a week before the Oct 6 bid deadline. Deliveries from the new offering are scheduled for November and December." },
     ],
   },
 ];
 
 // ---------- Breaking-points cascade (§11, compressed twice) ----------
 export const cascade = [
-  { date: "Each weekly EIA report (next: Sep 30)", region: "US East Coast", trigger: "US diesel and heating-oil stocks totaled 107.4M barrels in the week ending Sep 18. At the four-week average consumption rate of 3.6M barrels a day, that covers roughly 30 days — right at the one-month line. These rounded figures don't establish whether coverage is just above or below a month. East Coast stocks rose by 0.6M barrels that week but remain 27% below last year. National stocks fell by 0.4M barrels, so coverage could move to either side of the line at the next report, due Sep 30." },
+  { date: "Each weekly EIA report (next: Oct 7)", region: "US East Coast", trigger: "US diesel and heating-oil stocks fell to 105.2M barrels in the week ending Sep 25, down 2.3M on the week. At the four-week average rate of 3.8M barrels a day, those stocks are equivalent to about 28 days of use — less than a month. East Coast stocks fell 0.3M barrels that week and remain 29% below last year. The next report is due Oct 7." },
   { date: "Sep 30", region: "Russia", trigger: "The diesel export ban is scheduled to expire, though an extension through Oct 31 has been reported (Vedomosti, Sep 15). With more than 30% of refining capacity damaged, Russia may have little fuel available to export." },
   { date: "≈ mid-October", region: "China", trigger: "Commercial oil stocks could begin to fall faster than normal." },
   { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, making it harder for traders to find supplies. If the strait closes fully, this could happen by mid-October." },
