@@ -145,39 +145,109 @@ class TestBranchFilter(unittest.TestCase):
         self.assertEqual([round(x * 100, 1) for x in h_v2], [12.1, 38.5, 49.3])
         self.assertLess(h_v2[2], h_v1[2])  # lapse weight falls toward judgment (40)
 
-    def test_volume_maps_to_corridor_flow_vectors(self):
-        # v2.3: sourced volume -> the SAME vetted structural vectors, with
-        # inclusive lower bounds (4M degraded, 10M functioning)
-        v = branch_filter.volume_vector
-        self.assertEqual(v(2.0), branch_filter.CORRIDOR_FLOW["absent"])
-        self.assertEqual(v(3.99), branch_filter.CORRIDOR_FLOW["absent"])
-        self.assertEqual(v(4.0), branch_filter.CORRIDOR_FLOW["degraded"])
-        self.assertEqual(v(7.4), branch_filter.CORRIDOR_FLOW["degraded"])
-        self.assertEqual(v(9.99), branch_filter.CORRIDOR_FLOW["degraded"])
-        self.assertEqual(v(10.0), branch_filter.CORRIDOR_FLOW["functioning"])
-        self.assertEqual(v(15.0), branch_filter.CORRIDOR_FLOW["functioning"])
+    def test_volume_anchor_dominance(self):
+        # v2.4b: single-sigma location family anchored on the sourced Kpler
+        # prints (holds, standoff, lapse): the Aug 18 2.0M near-closed print
+        # is lapse-dominant, the Sep 7.4M print is standoff-dominant, the
+        # pre-war ~15M is holds-dominant
+        l = branch_filter.volume_likelihood
+        share = lambda v: [x / sum(l(v)) for x in l(v)]  # normalized
+        self.assertEqual(max(l(2.0)), l(2.0)[2])
+        self.assertGreater(share(2.0)[2], 0.99)
+        self.assertEqual(max(l(7.4)), l(7.4)[1])
+        self.assertGreater(share(7.4)[1], 0.85)
+        self.assertEqual(max(l(15.0)), l(15.0)[0])
+        self.assertGreater(share(15.0)[0], 0.75)
 
-    def test_volume_equivalent_to_corridor_flow(self):
-        # the sourced basis reuses the vetted vectors: --volume 7.4 (->
-        # degraded) must give the identical posterior to --corridor-flow degraded
+    def test_volume_channel_dominance_monotone(self):
+        # v2.4b (Oct 1 review, structural requirement): test the volume
+        # channel DIRECTLY, independently of any other input. Every pairwise
+        # likelihood ratio must be strictly increasing in vol (with equal
+        # sigmas ln(r_ij) is linear in ln vol -- one crossing), so (a) the
+        # dominance ordering never backtracks and (b) more throughput never
+        # shifts evidence toward a worse corridor state -- including the far
+        # tails that broke v2.4 (widest sigma won both tails: holds 92.1%
+        # at 17M -> 45.0% at 25M, lapse-dominant at 1000M; vol->inf must be
+        # holds-dominant)
+        l = branch_filter.volume_likelihood
+        share = lambda v: [x / sum(l(v)) for x in l(v)]
+        names = ["holds", "standoff", "lapse"]
+        rank = {"lapse": 0, "standoff": 1, "holds": 2}
+        vs = [x / 10 for x in range(1, 400)]  # 0.1 .. 39.9 M bpd
+        r_hs = [share(v)[0] / share(v)[1] for v in vs]
+        r_sl = [share(v)[1] / share(v)[2] for v in vs]
+        for a, b in zip(r_hs, r_hs[1:]):
+            self.assertLess(a, b)  # holds/standoff strictly increasing
+        for a, b in zip(r_sl, r_sl[1:]):
+            self.assertLess(a, b)  # standoff/lapse strictly increasing
+        ranks = [rank[names[max(range(3), key=lambda i: share(v)[i])]]
+                 for v in vs]
+        for a, b in zip(ranks, ranks[1:]):
+            self.assertLessEqual(a, b)  # dominance never backtracks
+        # dominance windows: geometric means of the medians (sigma-independent)
+        self.assertEqual(names[max(range(3), key=lambda i: share(3.0)[i])], "lapse")
+        self.assertEqual(names[max(range(3), key=lambda i: share(8.5)[i])], "standoff")
+        self.assertEqual(names[max(range(3), key=lambda i: share(15.0)[i])], "holds")
+        # far tails: vol -> inf holds-dominant (the v2.4 bug), vol -> 0 lapse
+        for v in (100.0, 1000.0, 10000.0):
+            self.assertEqual(names[max(range(3), key=lambda i: share(v)[i])], "holds")
+        for v in (0.001, 0.01, 0.1):
+            self.assertEqual(names[max(range(3), key=lambda i: share(v)[i])], "lapse")
+
+    def test_volume_graded_not_categorical(self):
+        # v2.4: 7.4 and 9.719 no longer collapse to the same vector (v2.3
+        # mapped both to 'degraded'); the posterior must differ
         base = {"transits": 9, "tankers": 1, "brent": 104.32}
-        p_manual = branch_filter.state_posterior(
-            [0.10, 0.40, 0.50], dict(base, corridor_flow="degraded"))
-        p_vol = branch_filter.state_posterior(
+        p1 = branch_filter.state_posterior(
             [0.10, 0.40, 0.50], dict(base, volume=7.4))
-        self.assertEqual([round(x, 8) for x in p_manual],
-                         [round(x, 8) for x in p_vol])
+        p2 = branch_filter.state_posterior(
+            [0.10, 0.40, 0.50], dict(base, volume=9.719))
+        self.assertNotEqual([round(x, 6) for x in p1],
+                            [round(x, 6) for x in p2])
 
-    def test_volume_current_data_unchanged(self):
-        # v2.3 must leave every published number unchanged for the current
-        # data (Kpler Sep 7.4M -> degraded): HORIZON 15.0/50.0/35.0, state
-        # fully standoff
+    def test_volume_horizon_monotonic(self):
+        # v2.4: the HORIZON lapse weight is non-increasing in volume -- the
+        # whole point of the graded likelihood (v2.3 was FLAT above 10M)
+        base = {"transits": 5, "tankers": 1, "brent": 103.50}
+        prior = [0.10, 0.50, 0.40]
+        prev = None
+        for v in (2.0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 20):
+            post = branch_filter.state_posterior(prior, dict(base, volume=v))
+            h = branch_filter.horizon_weights(post, branch_filter.DEFAULT_TRANSITION)
+            if prev is not None:
+                self.assertLessEqual(h[2], prev + 1e-12)
+            prev = h[2]
+
+    def test_volume_current_data_v2_4(self):
+        # v2.4b pin: current data (transits 5, tankers 1, Brent 103.50) with
+        # the Sep strait-export volume 9.719M -> HORIZON 15.0/50.0/35.0,
+        # state standoff (the 35 is the transition assumption for the
+        # classified standoff state, not an independent estimate -- the run
+        # classifies the state; it does not establish 35 over the judgment's 40)
         post = branch_filter.state_posterior(
-            [0.10, 0.40, 0.50],
-            {"transits": 9, "tankers": 1, "brent": 104.32, "volume": 7.4})
+            [0.10, 0.50, 0.40],
+            {"transits": 5, "tankers": 1, "brent": 103.50, "volume": 9.719})
         h = branch_filter.horizon_weights(post, branch_filter.DEFAULT_TRANSITION)
         self.assertEqual([round(x * 100, 1) for x in h], [15.0, 50.0, 35.0])
-        self.assertGreater(post[1], 0.999)  # state fully standoff (0.9998)
+        self.assertGreater(post[1], 0.99)  # state standoff
+
+    def test_volume_downside_response(self):
+        # v2.4b: a collapse print must bite, and graded (not step): 2.0M
+        # (deep in the lapse regime) pulls the HORIZON lapse to 85.0, while
+        # 4.0M (just below the 4.12M lapse/standoff crossing) is strictly
+        # between the 35.0 baseline and the deep-collapse 85.0
+        def h_at(v):
+            post = branch_filter.state_posterior(
+                [0.10, 0.50, 0.40],
+                {"transits": 5, "tankers": 1, "brent": 103.50, "volume": v})
+            return branch_filter.horizon_weights(post, branch_filter.DEFAULT_TRANSITION)
+        h2 = h_at(2.0)
+        h4 = h_at(4.0)
+        self.assertEqual([round(x * 100, 1) for x in h2], [5.0, 10.0, 85.0])
+        self.assertGreater(h2[2], 0.8)
+        self.assertEqual([round(x * 100, 1) for x in h4], [11.8, 37.3, 50.8])
+        self.assertGreater(h4[2], 0.35)   # above the standoff baseline
+        self.assertLess(h4[2], h2[2])     # graded: 4M is not yet a closure
 
     def test_volume_precedence_over_corridor_flow(self):
         # passing both --volume (degraded) and --corridor-flow absent: the
@@ -215,11 +285,54 @@ class TestBranchFilter(unittest.TestCase):
         self.assertNotEqual(rc, 0)
         self.assertIn(">= 0", err)
 
+    def test_zero_volume_is_closure_limit(self):
+        # v2.4 (Oct 1 review): a CONFIRMED closure must not become weaker
+        # evidence than a 0.1M print just because it is exactly zero. --volume
+        # 0 is accepted as the x -> 0 limit [0,0,1]: numerically identical to
+        # any underflowing print, and stronger than the manual 'absent'
+        # assessment (a measurement outranks an assessment).
+        self.assertEqual(branch_filter.volume_likelihood(0), [0.0, 0.0, 1.0])
+        common = ["branch_filter.py", "update", "--prior", "0.1,0.5,0.4",
+                  "--transits", "5", "--tankers", "1", "--brent", "103.50"]
+        rc0, out0, _ = run(*common, "--volume", "0")
+        _, out1, _ = run(*common, "--volume", "0.001")
+        self.assertEqual(rc0, 0)
+        self.assertEqual(out0, out1)  # 0 == the underflow limit (85.0% lapse)
+        self.assertIn("85.0%", out0)
+        _, outa, _ = run(*common, "--corridor-flow", "absent")
+        self.assertIn("64.5%", outa)   # manual assessment is weaker
+        self.assertNotIn("64.5%", out0)
+
+    def test_volume_mix_corner_monotone(self):
+        # v2.4b (Oct 1 review): the v2.4 REVERSAL is gone. The corner that
+        # exposed it (transits 20 pulls holds, Brent 103.50 crushes it -> a
+        # holds/standoff MIX; v2.4's three sigmas made the channel itself
+        # non-monotone here, lapse 32.2%@17M -> 33.2%@20M) now runs
+        # monotonically: more throughput moves the state toward holds, whose
+        # row (lapse 0.10) is more lapse-averse than standoff's (0.35), so
+        # the HORIZON lapse FALLS 34.0% (15M) -> 31.7% (20M) -> 15.3% (40M).
+        # Pinned so a regression to heteroskedastic sigmas fails loudly.
+        common = {"transits": 20, "tankers": 1, "brent": 103.50}
+        prior = [0.10, 0.50, 0.40]
+        h15 = branch_filter.horizon_weights(
+            branch_filter.state_posterior(prior, dict(common, volume=15.0)),
+            branch_filter.DEFAULT_TRANSITION)
+        h20 = branch_filter.horizon_weights(
+            branch_filter.state_posterior(prior, dict(common, volume=20.0)),
+            branch_filter.DEFAULT_TRANSITION)
+        h40 = branch_filter.horizon_weights(
+            branch_filter.state_posterior(prior, dict(common, volume=40.0)),
+            branch_filter.DEFAULT_TRANSITION)
+        self.assertEqual([round(x * 100, 1) for x in h15], [16.7, 49.2, 34.0])
+        self.assertEqual([round(x * 100, 1) for x in h20], [20.9, 47.4, 31.7])
+        self.assertEqual([round(x * 100, 1) for x in h40], [50.5, 34.2, 15.3])
+        self.assertLess(h20[2], h15[2])  # the v2.4 reversal would be > here
+        self.assertLess(h40[2], h20[2])
+
     def test_nonfinite_volume_rejected(self):
-        # nan/inf must not silently become model evidence: a bare `>=` would
-        # map nan -> 'absent' and inf -> 'functioning' and return a bogus
-        # 'successful' forecast. Guarded in the shared mapping (library path)
-        # and in the CLI.
+        # nan/inf must not silently become model evidence: a bare lognormal
+        # eval would return 0.0 (inf) or nan and corrupt the posterior.
+        # Guarded in the shared mapping (library path) and in the CLI.
         for bad in ("nan", "inf"):
             rc, _, err = run("branch_filter.py", "update", "--prior", "0.1,0.4,0.5",
                              "--transits", "9", "--volume", bad)
@@ -227,7 +340,21 @@ class TestBranchFilter(unittest.TestCase):
             self.assertIn("finite", err)
         for bad in (float("nan"), float("inf")):
             with self.assertRaises(SystemExit):
-                branch_filter.volume_vector(bad)
+                branch_filter.volume_likelihood(bad)
+
+    def test_volume_extreme_finite_inputs_no_crash(self):
+        # v2.4b code review: finite inputs at the edge of the float range must
+        # not crash with an unhandled numerical error. Upper tail: all three
+        # densities underflow to 0.0 -> state_posterior's clean "posterior is
+        # zero" SystemExit (consistent with the brent channel). Lower subnormal
+        # edge: the direct-form 0.0/0.0 ZeroDivisionError is gone; the density
+        # is the x -> 0 limit (0.0, lapse-dominant once normalized)
+        self.assertEqual(branch_filter.volume_likelihood(1e300), [0.0, 0.0, 0.0])
+        self.assertEqual(branch_filter.volume_likelihood(5e-324), [0.0, 0.0, 0.0])
+        with self.assertRaises(SystemExit):
+            branch_filter.state_posterior(
+                [0.1, 0.5, 0.4],
+                {"transits": 5, "tankers": 1, "brent": 103.50, "volume": 1e300})
 
     def test_volume_only_update(self):
         # a volume-only update is valid evidence: the 'at least one' guard
@@ -235,10 +362,10 @@ class TestBranchFilter(unittest.TestCase):
         rc, out, _ = run("branch_filter.py", "update", "--prior", "0.1,0.4,0.5",
                          "--volume", "7.4")
         self.assertEqual(rc, 0, f"volume-only update failed: {out}")
-        # 7.4 -> degraded: prior x (0.15,0.70,0.15) -> horizon 14.8/41.1/44.1
-        self.assertIn("14.8%", out)
-        self.assertIn("41.1%", out)
-        self.assertIn("44.1%", out)
+        # v2.4b: 7.4M graded (standoff-anchored) -> horizon 16.5/49.3/34.2
+        self.assertIn("16.5%", out)
+        self.assertIn("49.3%", out)
+        self.assertIn("34.2%", out)
 
     def test_matrix_validation(self):
         bad = ["1,1,1,1,1,1,1,1,1",              # rows sum to 3

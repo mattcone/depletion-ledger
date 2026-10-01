@@ -96,30 +96,59 @@ narrows to 9 pts and standoff approaches judgment. The judgment still governs
 publication; the signal makes the filter's disagreement auditable instead of
 invisible.
 
-**Sourced volume (v2.3, Sep 29):** `--volume <M bpd>` gives the structural
-signal a *sourced* basis instead of the author eyeballing `--corridor-flow`.
-The flow evidence `--transits` is an AIS **ship count**, which systematically
-undercounts (the dark/shuttle fleet runs AIS-dark, STS off Oman) — in Sep,
-~19 large crude tankers transited on a weekly count that reads "barely
-working," yet the strait still moved a large volume. `--volume` takes a
-sourced **Kpler Hormuz crude throughput** and maps it onto the same
-`CORRIDOR_FLOW` vectors via documented thresholds: **< 4M → absent, 4–10M →
-degraded, ≥ 10M → functioning** (sourced anchors, Hormuz crude: pre-war
-~15M; Aug 18 2.0M; Aug 31 8.6M; Sep 7.4M). Feed the **Hormuz crude** figure,
-not the regional Gulf total (Sep: 7.4M Hormuz vs 12.8M regional, which
-includes the Red Sea bypass) — 12.8 would wrongly select "functioning." It
-**takes precedence over `--corridor-flow`** (sourced beats manual); keep
-`--corridor-flow` as the override for weeks between Kpler's monthly prints.
+**Sourced volume (v2.4b, Oct 1; graded lognormal LOCATION family):**
+`--volume <M bpd>` gives the structural signal a *sourced* basis instead of
+the author eyeballing `--corridor-flow`. The flow evidence `--transits` is an
+AIS **ship count**, which systematically undercounts (the dark/shuttle fleet
+runs AIS-dark, STS off Oman) — in Sep, ~19 large crude tankers transited on a
+weekly count that reads "barely working," yet the strait still moved a large
+volume. **v2.3 mapped a sourced Kpler Hormuz crude throughput onto the three
+fixed `CORRIDOR_FLOW` categories; the Oct 1 external review found that made
+the channel a near-no-op (HORIZON flat above 10M).** **v2.4b replaces the
+category snap with a graded lognormal likelihood per state**, anchored on the
+same sourced prints: **holds** median 15.0 (pre-war ~15M), **standoff**
+median 8.5 (Sep war-era 7.4–9.7), **lapse** median 2.0 (Aug 18, the only
+observed near-closed print). All three share **one σ (0.35)**. That single σ
+is not a stylistic choice — it is what makes the channel obey the structural
+requirement from the Oct 1 review: *within the supported volume range,
+increasing throughput must never shift evidence toward a worse corridor
+state.* With equal σ, every pairwise log-likelihood ratio is **linear in ln
+(vol)** (the quadratic terms cancel), so there is exactly **one** crossing —
+at the geometric mean of the two medians — and the dominance ordering is
+**strictly monotone: lapse < 4.12M < standoff < 11.29M < holds** (vol → 0 is
+lapse-dominant, vol → ∞ holds-dominant). (The earlier v2.4 draft used three
+different σ; a ratio of two lognormals with *different* σ is concave in ln
+vol with up to *two* crossings, so the widest distribution won in both tails
+— holds support fell 92.1%@17M → 45.0%@25M and the channel was lapse-
+dominant at 1000M. The single σ removes that by construction.) 7.4 and 9.7
+no longer map to the same vector, and a collapse print bites (2M pulls the
+HORIZON lapse to 85; 4M — just under the 4.12M crossing — to 50.8, graded).
+Feed the **Hormuz crude** figure, not the regional Gulf total (Sep: 7.4M
+Hormuz vs 12.8M regional, which includes the Red Sea bypass) — 12.8 would
+read holds-anchored. `--volume 0` is **accepted** as the confirmed-closure
+limit (lapse-dominant, identical to any underflowing print — a measurement
+outranks an assessment: 85% vs the manual `--corridor-flow absent` 64.5% at
+current data). It **takes precedence over `--corridor-flow`** (sourced beats
+manual); keep `--corridor-flow` as the override for weeks between Kpler's
+monthly prints. The medians carry the sourcing and set the dominance windows;
+σ (0.35, the middle of the three σ the v2.4 draft specified) sets only the
+steepness between anchors.
 
 ```
-python3 branch_filter.py update --prior 0.10,0.40,0.50 --transits 9 \
-        --tankers 1 --brent 104.32 --volume 7.4    # 7.4M -> degraded
+python3 branch_filter.py update --prior 0.10,0.40,0.50 --transits 5 \
+        --tankers 1 --brent 103.50 --volume 9.719   # HORIZON 15.0 / 50.0 / 35.0
 ```
 
-Current data (7.4M → degraded) leaves the published numbers unchanged
-(HORIZON 15.0 / 50.0 / 35.0); the change makes the model react to a future
-volume print mechanically (10M+ → functioning → toward holds) instead of
-requiring a manual re-label.
+Current data (9.719M, transits 5) → HORIZON 15.0 / 50.0 / 35.0, state
+standoff. **What the run says and does not say (Oct 1 review):** the run's
+contribution is the *state classification* (standoff) plus responsiveness;
+the 35 is the transition assumption for that state (the judgment's own
+table), NOT an independent estimate — this run does not establish 35 as
+more accurate than the published 40. The Sep 29 "deliberately lapse-
+leaning" premium stands or falls on judgment, not on the fix. The transit Poisson lambdas
+are deliberately NOT re-tuned here (the count-vs-volume discrepancy is an
+open reconciliation item — reporting windows, vessel coverage, cargo sizes,
+tracking gaps; AIS-dark is a documented candidate, not established).
 
 `score` also reports a **base-rate comparator** (Brier of always predicting
 the settled items' base rate) next to the running score — a bare Brier number
@@ -163,9 +192,13 @@ Every constant is a documented judgment, not a measurement:
 - corridor-flow likelihood vectors — recalibrate when the structural
   assessment changes or the Brier ledger says a branch was systematically
   mis-weighted.
-- volume thresholds (4M / 10M M bpd, v2.3) — recalibrate when Kpler's Hormuz
-  crude series re-baselines or the Brier ledger flags a branch mis-weight. Only
-  the thresholds are new; the mapped vectors are the corridor-flow vectors.
+- volume lognormal location family (medians 15.0/8.5/2.0, single σ 0.35,
+  v2.4b) — recalibrate when Kpler's Hormuz crude series re-baselines or the
+  Brier ledger flags a branch mis-weight. The medians are anchored on the
+  sourced prints (pre-war 15M / Sep 7.4–9.7 / Aug 18 2.0M) and set the
+  dominance windows (σ-independent); the single σ is REQUIRED for the
+  monotone-dominance structural requirement (different σ reintroduce the
+  two-crossing tail reversal) and sets steepness only.
 - transition matrix — the judgment table; review when a horizon prediction
   settles (Brier ledger) or a regime event reopens the question.
 - v2.1 inputs: news-frequency escalation index (GPR method), STEO revision
