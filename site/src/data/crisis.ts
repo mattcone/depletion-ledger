@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-09-30";
+export const DATA_AS_OF = "2026-10-01";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -22,9 +22,9 @@ export interface SeriesPoint {
 
 // ---------- Headline stats ----------
 export const stats = [
-  { label: "Brent", value: "$102.59", sub: "Sep 29 settlement · down 2.6% · fifth straight close above $100 · November contract · +35% vs pre-crisis ~$76" },
-  { label: "US diesel (AAA)", value: "$6.41", sub: "Sep 30 · eighth straight drop from the Sep 22 record $6.5276 · +72% vs pre-war $3.72" },
-  { label: "US gasoline (AAA)", value: "$4.43", sub: "Sep 30 · +58% vs Jan $2.81 (AAA)" },
+  { label: "Brent", value: "$103.50", sub: "Sep 30 settlement · up 0.9% · sixth straight close above $100 · November contract · +36% vs pre-crisis ~$76" },
+  { label: "US diesel (AAA)", value: "$6.39", sub: "Oct 1 · ninth straight drop from the Sep 22 record $6.5276 · +72% vs pre-war $3.72" },
+  { label: "US gasoline (AAA)", value: "$4.41", sub: "Oct 1 · +57% vs Jan $2.81 (AAA)" },
   { label: "SPR", value: "283.8M", sub: "Sep 25 · down 0.8M in a week — about twice the prior two weeks' pace · down 131.7M from pre-war 415.4M · lowest since Nov 1982" },
   { label: "US diesel & heating oil", value: "105.2M", sub: "Sep 25 · down 2.3M in a week · 14.9% below last year · East Coast stocks 29% below last year" },
 ];
@@ -58,6 +58,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-09-25", value: 104.32, tip: "settlement · down 2.1% (Reuters)", note: "Settlement (Reuters; −$2.28 vs Sep 24) — a third straight close above $100 and a small weekly gain. Friday's decline: hopes that the US and Iran could negotiate a phased path toward ending the war and reopening the strait outweighed worry over the Houthis' escalating attacks on Saudi oil facilities (Reuters). The Wall Street Journal reported the rejection of Iran's seven-day proposal after Friday's settlement. Watch how prices respond when futures trading resumes." },
   { date: "2026-09-28", value: 105.28, tip: "settlement · up 0.9% (Reuters)", note: "Settlement (Reuters, November contract; +$0.96 vs Sep 25, +0.9%) — a fourth straight close above $100. Brent jumped toward $108 in Asian trading on Monday after the rejection of Iran's seven-day proposal, then eased. Foreign Minister Araghchi met Qatari mediators on Sep 28 in separate sessions and said Iran expects an official US response to the amended proposal on Sep 29; the Houthis vowed 'severe consequences' for Saudi Arabia after strikes on a Taiz market (Sep 27–28)." },
   { date: "2026-09-29", value: 102.59, tip: "settlement · down 2.6% (CNBC)", note: "Settlement (CNBC; −2.6% vs Sep 28) — a fifth straight close above $100. The decline tracked the recovery in Saudi Red Sea exports: satellite imagery showed tankers loading some 12.5 million barrels at the Yanbu and Muajjiz terminals on Sunday (Kpler, via AP), and Kpler's strait flow ran at a seven-day average of 13.2 million barrels a day through Sep 23, about three-quarters of pre-war (CNBC, Sep 25)." },
+  { date: "2026-09-30", value: 103.50, tip: "settlement · up 0.9% (Fox News)", note: "Settlement (Fox News; +0.9% vs Sep 29) — the November Brent contract's sixth straight close above $100 and its final trading day. WTI's November contract settled at $90.42, up 1.2% (Fox News). On Oct 1, Brent's December contract traded near $96–97, then rose above $100 after reports of China's fuel export suspension (CNBC). Its gain of over 2% was against December's own prior settlement; the change of contract accounts for part of the apparent drop from November's $103.50." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -137,6 +138,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-09-25", value: 92.41, note: "settlement (November contract) · down 2.3% on the same contract · the price gap between Brent and WTI was at its widest since May, according to the settlement report" },
   { date: "2026-09-28", value: 92.60, note: "settlement (Reuters, November contract) · up 0.2% on the same contract" },
   { date: "2026-09-29", value: 89.38, note: "settlement (CNBC, November contract) · down 3.5% on the same contract — the drop tracked the Saudi Red Sea export recovery (Kpler)" },
+  { date: "2026-09-30", value: 90.42, note: "settlement (Fox News, November contract) · up 1.2% on the same contract" },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -199,6 +201,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-09-28", value: 4.4768, note: "AAA release, Sep 28" },
   { date: "2026-09-29", value: 4.4558, note: "AAA release, Sep 29" },
   { date: "2026-09-30", value: 4.4343, note: "AAA release, Sep 30" },
+  { date: "2026-10-01", value: 4.4137, note: "AAA release, Oct 1" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -236,6 +239,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-09-28", value: 6.4531, note: "AAA — sixth straight decline off the Sep 22 record" },
   { date: "2026-09-29", value: 6.4391, note: "AAA — seventh straight decline off the Sep 22 record" },
   { date: "2026-09-30", value: 6.4139, note: "AAA — eighth straight decline off the Sep 22 record" },
+  { date: "2026-10-01", value: 6.3895, note: "AAA — ninth straight decline off the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 
@@ -517,18 +521,20 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     when: "Any day",
     items: [
       { item: "Whether the Saudi bypass keeps recovering. The repaired East–West pipeline is carrying about 3.5M barrels a day (WSJ, Bloomberg, Sep 28), roughly 87% of the 4M it moved before the Sep 10 strikes, and tanker loadings at Yanbu resumed Sep 27. Aramco is targeting about 4M a day within a few weeks.", why: "The restart restores an export route around Hormuz. We moved the odds to 10/50/40 on Sep 29 based on these reports, making an exception to our pipeline-restart rule. Watch for official confirmation or a drop in Yanbu shipments." },
-      { item: "Whether the US and Iran agree on the steps to reopen the strait. Iran received the US response to its seven-day plan through Qatari mediators on Sep 29 (Reuters); the two sides disagree on the order of the steps, not what they involve. The plan would expand June's agreement and includes steps on Iran's nuclear program.", why: "Watch for a signed deal, a change in the blockade, or a resumption of attacks. A deal or further attacks could change how much oil gets through." },
+      { item: "Whether the US and Iran agree on the steps to reopen the strait. Iran received the US response to its seven-day plan through Qatari mediators on Sep 29 (Reuters) and was still considering it on Oct 1 (CBS). Reuters reports that the disagreement is over the order of the steps, not what they involve. The plan would expand June's agreement and includes steps on Iran's nuclear program.", why: "Watch for a signed deal, a change in the blockade, or a resumption of attacks. A deal or further attacks could change how much oil gets through." },
       { item: "Whether Houthi attacks in Bab el-Mandeb spread to non-Saudi shipping. The Houthis have been striking Saudi territory and vowed 'severe consequences' after the Mawiya market strikes near Taiz (Sep 27, Reuters).", why: "An attack on a non-Saudi vessel would raise the odds that the corridor closes. Watch whether attacks spread from Saudi territory to shipping." },
-      { item: "US measures to lower diesel prices. Trump said he is 'very seriously' considering a diesel export ban (Bloomberg, Sep 27). The White House is also weighing fuel-tax suspensions and wider use of tax-exempt diesel normally reserved for off-road use. It urged the EU to release emergency diesel stocks on Sep 29 (Reuters).", why: "A ban would keep more US diesel at home but leave less for buyers abroad. Reserve releases could ease prices. Watch for an official decision." },
+      { item: "China's fuel export suspension. Reuters reported on Oct 1 that Chinese refiners suspended fuel exports to destinations other than Hong Kong and Macau until further notice. PetroChina cancelled October gasoline and jet-fuel cargoes. Asian diesel refining margins reached a one-week high of about $75 a barrel.", why: "The suspension leaves buyers abroad with less fuel while supplies from the Middle East and Russia are already disrupted. It doesn't change whether ships can pass through Hormuz. Watch whether exports resume after China's Oct 1–7 holiday." },
+      { item: "US measures to lower diesel prices. The US threatened a diesel export ban unless France and Germany release reserves (Reuters, Oct 1). It asked the EU to release about 120M barrels of diesel over six months, stepping up its Sep 29 request. It is also weighing fuel-tax suspensions and wider use of tax-exempt off-road diesel.", why: "A ban would keep more US diesel at home but leave less for buyers abroad. Reserve releases could ease prices. Watch for an official decision or an EU release." },
+      { item: "The investigation at RAF Fairford. The UK prime minister said on Sep 30 that there are 'strong indications' Iran was involved in the suspected terror plot near the airbase (BBC interview). The US has so far referred to a 'foreign actor.' Iran denies involvement.", why: "A US or UK finding that Iran was responsible could make an agreement harder to reach or widen the conflict. Watch for the investigation's findings and any response." },
       { item: "Ship traffic through Hormuz. Kpler's daily crossing counts have varied — 14 on Sep 23, 9 on Sep 24, 5 on Sep 26, none on Sep 27 — and Windward's separate tracker counted 17 on Sep 28. The trackers cover different sets of ships. Vessels with tracking off can be missed, so a low count doesn't mean oil stopped moving.", why: "Watch whether more ships can pass safely. Kpler estimated oil exports through the strait at 13.2M barrels a day over the week ending Sep 23, about three-quarters of the pre-war level (CNBC, Sep 25)." },
-      { item: "Europe's winter fuel preparation. The EU's energy commissioner warned member states on Sep 26 of a 'price crisis linked to a supply crisis' and urged governments to build gas stocks.", why: "If high prices persist into winter, European governments may cap prices, ration fuel, or release reserves." },
     ],
   },
   {
-    when: "Oct 6–7",
+    when: "Oct 4–7",
     items: [
+      { item: "The OPEC+ meeting is Oct 4. Two delegates told Bloomberg it is expected to hold November production quotas steady.", why: "A production decision can move prices while shipping through the strait remains disrupted. Watch the statement for any change or a split among members." },
       { item: "Bids for more SPR releases are due Oct 6 at 11:00 a.m. Central. DOE is offering loans of up to 40M barrels from Big Hill and Bryan Mound, with deliveries under awarded contracts scheduled for November–December. This is its sixth request; the first five led to four completed exchanges, with more than 133M barrels awarded.", why: "Companies still need to bid and win contracts, so withdrawals could pause before the scheduled deliveries." },
-      { item: "The next EIA report is due Oct 7 at 10:30 a.m. Eastern and covers the week ending Oct 2. The Sep 30 report showed SPR stocks fell by 0.8M barrels in the week ending Sep 25 — about twice the prior two weeks' pace. Diesel and heating-oil stocks fell 2.3M to 105.2M, 14.9% below last year.", why: "Watch whether SPR withdrawals continue at the higher pace. The report covers the week before the Oct 6 bid deadline. Deliveries from the new offering are scheduled for November–December." },
+      { item: "The next weekly EIA report is due Oct 7 at 10:30 a.m. Eastern and covers the week ending Oct 2. The Sep 30 report showed SPR stocks fell by 0.8M barrels in the week ending Sep 25 — about twice the prior two weeks' pace. Diesel and heating-oil stocks fell 2.3M to 105.2M, 14.9% below last year.", why: "Watch whether SPR withdrawals continue at the higher pace. The report covers the week before the Oct 6 bid deadline. Deliveries from the new offering are scheduled for November–December." },
     ],
   },
 ];
@@ -595,9 +601,9 @@ export const russiaSnapshot = [
 ];
 
 export const russiaBanCascade = [
-  { date: "Sep 30, 2026", what: "diesel exports — scheduled to expire; extension to Oct 31 reported (Vedomosti, Sep 15)" },
+  { date: "Oct 31, 2026", what: "diesel exports by producers — extended from Sep 30 to Oct 31 by government decree (Sep 30; Moscow Times, Reuters)" },
   { date: "Nov 30, 2026", what: "jet fuel exports" },
-  { date: "Jan 31, 2027", what: "gasoline & the remaining diesel" },
+  { date: "Jan 31, 2027", what: "gasoline exports and diesel exports by non-producers" },
 ];
 
 // ---------- Second-order effects (recession / rates / food — report macro channel + §11B) ----------
@@ -619,7 +625,7 @@ export const recessionOdds = [
 export const ratesStats = [
   { label: "Fed's target rate, Sep 16", value: "3.75–4.00%", sub: "Up 0.25 percentage points in a 12-to-0 vote · statement: 'Inflation remains elevated. … The Committee will deliver price stability.'" },
   { label: "Odds of a rate increase, Oct 27–28", value: "60%", sub: "Our estimate, published Sep 16 · 16 of 18 Fed officials projected another increase this year · we'll check this prediction after the October decision" },
-  { label: "August producer prices (BLS, Sep 10)", value: "5.4% YoY", sub: "+0.4% for the month · July revised to 4.8% annually · energy +4.2%, diesel +24.1% annually · 10-year yield 5.255% on Sep 29, its highest close of the war" },
+  { label: "August producer prices (BLS, Sep 10)", value: "5.4% YoY", sub: "+0.4% for the month · July revised to 4.8% annually · energy +4.2%, diesel +24.1% annually · 10-year yield 5.293% on Sep 30, its highest close of the war" },
 ];
 
 export const foodStats = [
@@ -796,6 +802,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-09-25", value: 5.18, note: "session close (Yahoo) · +2bp — third straight close above 5%, the highest close of the war" },
   { date: "2026-09-28", value: 5.24, note: "session close (Yahoo) · +6bp — fourth straight close above 5%, the highest close of the war" },
   { date: "2026-09-29", value: 5.255, note: "session close (Yahoo) · fifth straight close above 5%, the highest close of the war" },
+  { date: "2026-09-30", value: 5.293, note: "session close (Yahoo) · sixth straight close above 5%, the highest close of the war" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
