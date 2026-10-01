@@ -1499,7 +1499,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
       const directLabels = (specs: {
         dataset: number; index: number; text: string;
         dx?: number; dy?: number | ((chart: Chart) => number); align?: CanvasTextAlign;
-        color?: string; font?: string;
+        color?: string; font?: string; halo?: string;
       }[]) => ({
         id: "directLabels",
         afterDatasetsDraw(chart: Chart) {
@@ -1514,7 +1514,18 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             ctx.textAlign = s.align || "center";
             ctx.textBaseline = "middle";
             const dy = typeof s.dy === "function" ? s.dy(chart) : (s.dy ?? -14);
-            ctx.fillText(s.text, el.x + (s.dx ?? 0), el.y + dy);
+            const lx = el.x + (s.dx ?? 0), ly = el.y + dy;
+            if (s.halo) {
+              // Labels may cross a line (e.g. the endpoint label sits over the final
+              // segment). Knock the line out under the glyphs with a page-colored halo
+              // — readable, no box.
+              ctx.lineJoin = "round";
+              ctx.miterLimit = 2;
+              ctx.strokeStyle = s.halo;
+              ctx.lineWidth = 4;
+              ctx.strokeText(s.text, lx, ly);
+            }
+            ctx.fillText(s.text, lx, ly);
             ctx.restore();
           }
         },
@@ -2307,12 +2318,12 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
       // Diesel YTD — true-date axis. The line draws the full mixed-source series (monthly
       // + weekly + daily), so the path keeps its movement; the dots are thinned to the story
       // beats — pre-Sep 3 points, Sep 4 (old record broken), Sep 11 (first above $6.00),
-      // Sep 14, 17, 20, 22, and the Sep 30 endpoint (the labeled endpoint point needs
-      // its dot; Sep 26–29 are skipped so the last two dots don't blur into one) — because a
-      // run of daily dots bunches into ~30px at the right edge. dieselView is the dot-keep
-      // set, not the data.
+      // Sep 22 (record $6.53), and the labeled Sep 30 endpoint — because the daily settle
+      // run would bunch ~6 dots into the last ~50px at the right edge. Routine records in
+      // between stay on the line; the tooltip still covers every point on hover.
+      // dieselView is the dot-keep set, not the data.
       const dieselView = dieselYtd.filter(
-        (p) => p.date < "2026-09-03" || p.date === "2026-09-04" || p.date === "2026-09-11" || p.date === "2026-09-14" || p.date === "2026-09-17" || p.date === "2026-09-20" || p.date === "2026-09-22" || p.date === "2026-09-30",
+        (p) => p.date < "2026-09-03" || p.date === "2026-09-04" || p.date === "2026-09-11" || p.date === "2026-09-22" || p.date === "2026-09-30",
       );
       const dieselDotKeep = new Set(dieselView.map((p) => p.date));
       new Chart(document.getElementById("dieselChart")!, {
@@ -2365,7 +2376,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             { value: dieselOldRecord, text: "Jun 2022 record $5.85", color: "rgba(179,38,30,0.8)", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: dieselYtd.length - 1, text: "Sep 30 · $6.41", ...endpoint, color: "#b3261e" },
+            { dataset: 0, index: dieselYtd.length - 1, text: "Sep 30 · $6.41", ...endpoint, color: "#b3261e", halo: "#f2f1ec" },
           ]),
         ],
       });
@@ -2397,7 +2408,14 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
         },
       });
 
-      // TTF (Europe)
+      // TTF (Europe). Dots: the series is weekly assessed prices, but September's
+      // cadence compressed to 3–4 days — 5 dots in the last ~48px at the right edge.
+      // Thin the right side to the story beats (pre-Sep 11 weekly, the Sep 11 record
+      // week, the labeled Sep 25 endpoint); the line keeps drawing every point and the
+      // tooltip covers each. gasTtfDotKeep is a dot-keep set, not the data.
+      const gasTtfDotKeep = new Set(gasTtf.filter(
+        (p) => p.date <= "2026-09-11" || p.date === "2026-09-25",
+      ).map((p) => p.date));
       new Chart(document.getElementById("gasTtfChart")!, {
         type: "line",
         data: {
@@ -2408,7 +2426,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
               borderColor: "#3d6b64",
               borderWidth: 1.75,
               tension: 0.15,
-              ...markers(gasTtf.map((p) => ({ approx: p.assessed })), "#3d6b64"),
+              ...markersKeep(gasTtf.map((p) => ({ date: p.date, approx: p.assessed })), gasTtfDotKeep, "#3d6b64"),
             },
             {
               label: "pre-closure (Feb 27)",
@@ -2437,7 +2455,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           directLabels([
             { dataset: 0, index: 6, text: "Mar 20 · $18.9 — three-yr high", dy: -14, color: "#1c1b17" },
             { dataset: 0, index: 21, text: "Jun 19 · $14.1 — ceasefire", align: "right", dy: 48, color: "#8a867a" },
-            { dataset: 0, index: gasTtf.length - 1, text: "Sep 25 · $24.1", ...endpoint, color: "#b3261e" },
+            { dataset: 0, index: gasTtf.length - 1, text: "Sep 25 · $24.1", ...endpoint, color: "#b3261e", halo: "#f2f1ec" },
           ]),
         ],
       });
@@ -2482,7 +2500,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           directLabels([
             { dataset: 0, index: 6, text: "Mar 20 · $20.7", dy: -14, color: "#1c1b17" },
             { dataset: 0, index: 22, text: "Jun 26 · $15.2 — ceasefire", dy: 18, color: "#8a867a" },
-            { dataset: 0, index: gasJkm.length - 1, text: "Sep 25 · ≈$25.2", ...endpoint, color: "#b3261e" },
+            { dataset: 0, index: gasJkm.length - 1, text: "Sep 25 · ≈$25.2", ...endpoint, color: "#b3261e", halo: "#f2f1ec" },
           ]),
         ],
       });
@@ -2516,16 +2534,16 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
 
       // Brent (sourced points) + WTI (weekly FRED spot) — linear time scale.
       // The lines draw every point (the movement stays visible — e.g. the Sep 11 dip);
-      // the dots are thinned to the story beats — pre-Sep 11 points, Sep 10 (+$6.82 in a
-      // day), Sep 15 (closing record 108.75), Sep 21, Sep 25, and the Sep 29 endpoint (the
-      // labeled settle points need their dots; Sep 26–28 are skipped so the last dots
-      // don't blur) — because a run of daily dots in the final days would bunch into
-      // ~30px at the right edge. The views are dot-keep sets, not the data.
+      // the dots are thinned so the final three weeks don't pack ~7 dots into the last
+      // ~50px at the right edge: pre-Sep 8 observations (Brent) / weekly (WTI), the
+      // Sep 10 jump (+$6.82 in a day — Brent; the WTI step stays on the line), and the
+      // labeled Sep 29 endpoint. Routine settles in between stay on the line; the
+      // tooltip still covers every point on hover. The views are dot-keep sets, not data.
       const brentView = brentYtd.filter(
-        (p) => p.date < "2026-09-11" || p.date === "2026-09-15" || p.date === "2026-09-21" || p.date === "2026-09-25" || p.date === "2026-09-29",
+        (p) => p.date < "2026-09-08" || p.date === "2026-09-10" || p.date === "2026-09-29",
       );
       const wtiView = wtiWeekly.filter(
-        (p) => p.date < "2026-09-11" || p.date === "2026-09-15" || p.date === "2026-09-21" || p.date === "2026-09-25" || p.date === "2026-09-29",
+        (p) => p.date < "2026-09-08" || p.date === "2026-09-29",
       );
       const brentDotKeep = new Set(brentView.map((p) => p.date));
       const wtiDotKeep = new Set(wtiView.map((p) => p.date));
@@ -2603,11 +2621,11 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             { value: 76, text: "pre-crisis $76 (Feb 27)", color: "#3d6b64", align: "right" },
           ]),
           directLabels([
-            { dataset: 0, index: brentYtd.length - 1, text: "Sep 29 · $102.59 — Brent", ...endpoint },
-            { dataset: 0, index: 3, text: "peak $126 · Mar 18", dy: -16, color: "#1c1b17" },
-            { dataset: 0, index: 6, text: "Jun 30 · $74", dy: 20, ...note },
-            { dataset: 0, index: 1, text: "war began Feb 28", dx: 8, dy: 18, align: "left", ...note },
-            { dataset: 1, index: wtiWeekly.length - 1, text: "Sep 29 · $89.38 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a" },
+            { dataset: 0, index: brentYtd.length - 1, text: "Sep 29 · $102.59 — Brent", ...endpoint, halo: "#f2f1ec" },
+            { dataset: 0, index: 3, text: "peak $126 · Mar 18", dy: -16, color: "#1c1b17", halo: "#f2f1ec" },
+            { dataset: 0, index: 6, text: "Jun 30 · $74", dy: 20, ...note, halo: "#f2f1ec" },
+            { dataset: 0, index: 1, text: "war began Feb 28", dx: 8, dy: 18, align: "left", ...note, halo: "#f2f1ec" },
+            { dataset: 1, index: wtiWeekly.length - 1, text: "Sep 29 · $89.38 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a", halo: "#f2f1ec" },
           ]),
         ],
       });
