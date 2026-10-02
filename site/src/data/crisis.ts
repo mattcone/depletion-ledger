@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-10-01";
+export const DATA_AS_OF = "2026-10-02";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -22,9 +22,9 @@ export interface SeriesPoint {
 
 // ---------- Headline stats ----------
 export const stats = [
-  { label: "Brent", value: "$103.50", sub: "Sep 30 settlement · up 0.9% · sixth straight close above $100 · November contract · +36% vs pre-crisis ~$76" },
-  { label: "US diesel (AAA)", value: "$6.39", sub: "Oct 1 · ninth straight drop from the Sep 22 record $6.5276 · +72% vs pre-war $3.72" },
-  { label: "US gasoline (AAA)", value: "$4.41", sub: "Oct 1 · +57% vs Jan $2.81 (AAA)" },
+  { label: "Brent", value: "$102.31", sub: "Oct 1 settlement · up 4.4% on the December contract · seventh session close above $100 · +35% vs pre-crisis ~$76" },
+  { label: "US diesel (AAA)", value: "$6.37", sub: "Oct 2 · tenth straight drop from the Sep 22 record $6.5276 · +71% vs pre-war $3.72" },
+  { label: "US gasoline (AAA)", value: "$4.40", sub: "Oct 2 · +56% vs Jan $2.81 (AAA)" },
   { label: "SPR", value: "283.8M", sub: "Sep 25 · down 0.8M in a week — about twice the prior two weeks' pace · down 131.7M from pre-war 415.4M · lowest since Nov 1982" },
   { label: "US diesel & heating oil", value: "105.2M", sub: "Sep 25 · down 2.3M in a week · 14.9% below last year · East Coast stocks 29% below last year" },
 ];
@@ -59,6 +59,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-09-28", value: 105.28, tip: "settlement · up 0.9% (Reuters)", note: "Settlement (Reuters, November contract; +$0.96 vs Sep 25, +0.9%) — a fourth straight close above $100. Brent jumped toward $108 in Asian trading on Monday after the rejection of Iran's seven-day proposal, then eased. Foreign Minister Araghchi met Qatari mediators on Sep 28 in separate sessions and said Iran expects an official US response to the amended proposal on Sep 29; the Houthis vowed 'severe consequences' for Saudi Arabia after strikes on a Taiz market (Sep 27–28)." },
   { date: "2026-09-29", value: 102.59, tip: "settlement · down 2.6% (CNBC)", note: "Settlement (CNBC; −2.6% vs Sep 28) — a fifth straight close above $100. The decline tracked the recovery in Saudi Red Sea exports: satellite imagery showed tankers loading some 12.5 million barrels at the Yanbu and Muajjiz terminals on Sunday (Kpler, via AP), and Kpler's strait flow ran at a seven-day average of 13.2 million barrels a day through Sep 23, about three-quarters of pre-war (CNBC, Sep 25)." },
   { date: "2026-09-30", value: 103.50, tip: "settlement · up 0.9% (Fox News)", note: "Settlement (Fox News; +0.9% vs Sep 29) — the November Brent contract's sixth straight close above $100 and its final trading day. WTI's November contract settled at $90.42, up 1.2% (Fox News). On Oct 1, Brent's December contract traded near $96–97, then rose above $100 after reports of China's fuel export suspension (CNBC). Its gain of over 2% was against December's own prior settlement; the change of contract accounts for part of the apparent drop from November's $103.50." },
+  { date: "2026-10-01", value: 102.31, tip: "settlement · up 4.4% on the December contract", note: "Settlement (December contract; the BZ=F daily bar matches the settlement feed) — +$4.28 vs the December contract's own Sep 30 settlement of $98.03, a seventh session close above $100. The Nov contract had settled at $103.50 on Sep 30, its final day, so part of the step down from the Sep 30 point is the contract switch, not a price move." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -139,6 +140,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-09-28", value: 92.60, note: "settlement (Reuters, November contract) · up 0.2% on the same contract" },
   { date: "2026-09-29", value: 89.38, note: "settlement (CNBC, November contract) · down 3.5% on the same contract — the drop tracked the Saudi Red Sea export recovery (Kpler)" },
   { date: "2026-09-30", value: 90.42, note: "settlement (Fox News, November contract) · up 1.2% on the same contract" },
+  { date: "2026-10-01", value: 92.87, note: "settlement (November contract; the CL=F daily bar matches the settlement feed) · up 2.7% on the same contract — tracked China's fuel export suspension and the US carrier build-up (Reuters/WSJ, Oct 1)" },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -202,6 +204,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-09-29", value: 4.4558, note: "AAA release, Sep 29" },
   { date: "2026-09-30", value: 4.4343, note: "AAA release, Sep 30" },
   { date: "2026-10-01", value: 4.4137, note: "AAA release, Oct 1" },
+  { date: "2026-10-02", value: 4.3961, note: "AAA release, Oct 2" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -240,6 +243,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-09-29", value: 6.4391, note: "AAA — seventh straight decline off the Sep 22 record" },
   { date: "2026-09-30", value: 6.4139, note: "AAA — eighth straight decline off the Sep 22 record" },
   { date: "2026-10-01", value: 6.3895, note: "AAA — ninth straight decline off the Sep 22 record" },
+  { date: "2026-10-02", value: 6.3726, note: "AAA — tenth straight decline off the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 
@@ -520,21 +524,18 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "Whether the Saudi bypass keeps recovering. Since it restarted on Sep 22, the East–West pipeline has run at about 2.65M barrels a day (Kpler, Sep 29) — roughly half the pre-attack pace Kpler puts at about 5.5M a day. Aramco told customers of its October loading schedule from Yanbu on Sep 28, the first commercial sign of the restart, and satellite pictures show loadings resumed and the first inventory build since the Sep 11 shutdown.", why: "The restart restores an export route around Hormuz. We moved the odds to 10/50/40 on Sep 29 on Wall Street Journal reports of about 3.5M a day, making an exception to our rule of waiting for official confirmation; Kpler reported a lower rate and expects a full return to pre-attack flows to take another month. Watch for official confirmation or a drop in Yanbu loadings." },
-      { item: "Whether the US and Iran agree on the steps to reopen the strait. Iran received the US response to its seven-day plan through Qatari mediators on Sep 29 (Reuters) and was still considering it on Oct 1 (CBS). Reuters reports that the disagreement is over the order of the steps, not what they involve. The plan would expand June's agreement and includes steps on Iran's nuclear program.", why: "Watch for a signed deal, a change in the blockade, or a resumption of attacks. A deal or further attacks could change how much oil gets through." },
-      { item: "Whether Houthi attacks in Bab el-Mandeb spread to non-Saudi shipping. The escalation so far has stayed on Saudi territory: the Saudi-led coalition intercepted four drones and two ballistic missiles over Khamis Mushait and Jazan on Sep 30, and says a power-distribution station feeding Medina was attacked on Tuesday. No non-Saudi vessel has been hit, and strait transits are unaffected.", why: "War-risk insurance for ships without a Saudi connection costs about 0.2–0.3% of hull value, near pre-crisis levels, while Saudi-linked tankers face 3–7% — and there is no US escort in the Red Sea (Reuters, Sep 25). A strike on a non-Saudi vessel could push returning container traffic back around Africa and raise the odds the corridor closes." },
-      { item: "The US build-up around Iran. The USS Theodore Roosevelt carrier strike group and the USS Makin Island amphibious readiness group are moving to the region with up to about 10,000 additional troops (AP, WSJ, Oct 1). A US official told Al Jazeera that by the end of November three aircraft carriers and two landing groups will be deployed around Iran.", why: "The Joint Maritime Information Center raised its Hormuz threat assessment to 'severe', saying deliberate hostile action against commercial shipping is now considered likely. Watch for new US strikes on Iran or a widening of the blockade." },
-      { item: "China's fuel export suspension. Reuters reported on Oct 1 that Chinese refiners suspended fuel exports to destinations other than Hong Kong and Macau until further notice. PetroChina cancelled October gasoline and jet-fuel cargoes. Asian diesel refining margins reached a one-week high of about $75 a barrel.", why: "The suspension leaves buyers abroad with less fuel while supplies from the Middle East and Russia are already disrupted. It doesn't change whether ships can pass through Hormuz. Watch whether exports resume after China's Oct 1–7 holiday." },
-      { item: "The Fairford and Flydubai investigations. A sixth person was arrested in the RAF Fairford case — a 27-year-old British-Iranian national in London (Oct 1). Separately, the co-pilot of a Sep 30 Flydubai flight from Dubai to Tel Aviv was accused of stabbing the captain and attempting to crash the plane; President Trump said it 'could be linked to Iran.' No government has made an attribution.", why: "The UK prime minister said on Sep 30 there are 'strong indications' Iran was involved in the Fairford plot; Iran denies it. A US or UK finding that Iran was responsible could make an agreement harder to reach or widen the conflict. Watch for the investigation's findings and any Iranian response." },
-      { item: "Ship traffic through Hormuz. Kpler's verified daily counts have varied — 14 on Sep 23, 9 on Sep 24, 5 on Sep 26, none on Sep 27 — while Windward's separate tracker, which includes ships with tracking off, counted 17 on Sep 29 and 16 on Sep 30 (six inbound, ten outbound, six with tracking off). The trackers cover different sets of ships; a low count doesn't mean oil stopped moving. Iranian media reported a supertanker was struck near Oman on Oct 1; no wire has confirmed it.", why: "Watch whether more ships can pass safely. Kpler estimated oil exports through the strait at 13.2M barrels a day over the week ending Sep 23, about three-quarters of the pre-war level (CNBC, Sep 25)." },
+      { item: "Whether the Saudi bypass keeps recovering. Since it restarted on Sep 22, the East–West pipeline has run at about 2.65M barrels a day (Kpler, Sep 29) — roughly half the pre-attack pace of about 5.5M a day. Aramco told customers of its October loading schedule from Yanbu on Sep 28, the first commercial sign of the restart.", why: "The restart restores an export route around Hormuz. We moved the odds to 10/50/40 on Sep 29 based on a Wall Street Journal report of about 3.5M a day — an exception to our rule of waiting for official confirmation; Kpler reported a lower rate and expects flows to return to pre-attack levels within a month." },
+      { item: "Whether Europe releases diesel reserves. EU countries discussed a French proposal to release 50M barrels of diesel jointly and 50M barrels of crude through the IEA (Reuters, Oct 2). The European Commission rejected the US diesel export-ban threat, saying a ban would 'not be beneficial to anyone.' G7 leaders may discuss the proposal on Oct 2.", why: "Releasing stored diesel would give buyers more fuel and could help lower pump prices. If the release stalls, the ban threat stays on the table." },
+      { item: "Whether the US and Iran agree on the steps to reopen the strait. Iran received the US response to its seven-day plan through Qatari mediators on Sep 29 and was still considering it on Oct 1. Speaking in Denton, Texas, on Oct 1, Trump said Iran is 'ready to fold up' (CBS, Oct 2). Reuters reports the disagreement is over the order of the steps, not what they involve.", why: "Watch for a signed deal, a change in the blockade, or a resumption of attacks — any of which could change how much oil gets through." },
+      { item: "Whether Houthi attacks spread to non-Saudi shipping. The escalation so far has stayed on Saudi territory — the coalition intercepted four drones and two ballistic missiles over Khamis Mushait and Jazan on Oct 1; no non-Saudi vessel has been hit.", why: "War-risk insurance for non-Saudi ships is about 0.2–0.3% of hull value vs 3–7% for Saudi-linked tankers, and there is no US escort in the Red Sea (Reuters, Sep 25). A strike on a non-Saudi vessel could push container traffic back around Africa." },
+      { item: "Ship traffic through Hormuz. Kpler's verified daily counts: 14 (Sep 23), 9 (Sep 24), 5 (Sep 26), none (Sep 27). UKMTO logged a tanker struck by an unknown projectile on Oct 1 — the first such attack of October; the crew was safe and the damage was unknown.", why: "Kpler's seven-day average of crude oil exports through the strait rose to 13.5M barrels a day through Sep 28 — back at the pre-war crude level. But crude and products together (14.2M a day) still run about 80% of pre-war, with refined products far below pre-war (CNBC, Sep 30). Watch whether more ships can pass safely." },
     ],
   },
   {
     when: "Oct 4–7",
     items: [
-      { item: "The OPEC+ meeting is Oct 4. Two delegates told Bloomberg it is expected to hold November production quotas steady.", why: "A production decision can move prices while shipping through the strait remains disrupted. Watch the statement for any change or a split among members." },
-      { item: "Bids for more SPR releases are due Oct 6 at 11:00 a.m. Central. DOE is offering loans of up to 40M barrels from Big Hill and Bryan Mound, with deliveries under awarded contracts scheduled for November–December. This is its sixth request; the first five led to four completed exchanges, with more than 133M barrels awarded.", why: "Companies still need to bid and win contracts, so withdrawals could pause before the scheduled deliveries." },
-      { item: "The next weekly EIA report is due Oct 7 at 10:30 a.m. Eastern and covers the week ending Oct 2. The Sep 30 report showed SPR stocks fell by 0.8M barrels in the week ending Sep 25 — about twice the prior two weeks' pace. Diesel and heating-oil stocks fell 2.3M to 105.2M, 14.9% below last year.", why: "Watch whether SPR withdrawals continue at the higher pace. The report covers the week before the Oct 6 bid deadline. Deliveries from the new offering are scheduled for November–December." },
+      { item: "OPEC+ meets on Oct 4. Two delegates told Bloomberg they expect November production quotas to stay unchanged. A source told Reuters its delayed production-capacity review, used to set 2027 quotas, is now expected by mid-November (Oct 2).", why: "A production decision can move prices while shipping through the strait remains disrupted." },
+      { item: "The next weekly EIA report is due Oct 7 at 10:30 a.m. Eastern and covers the week ending Oct 2. Bids for DOE's sixth SPR offering are due Oct 6. The Sep 30 report showed SPR stocks fell 0.8M barrels — about twice the prior two weeks' pace — and diesel and heating-oil stocks fell 2.3M to 105.2M, 14.9% below last year.", why: "Watch whether SPR withdrawals continue at the higher pace. Deliveries from the new offering are scheduled for November–December." },
     ],
   },
 ];
@@ -803,6 +804,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-09-28", value: 5.24, note: "session close (Yahoo) · +6bp — fourth straight close above 5%, the highest close of the war" },
   { date: "2026-09-29", value: 5.255, note: "session close (Yahoo) · fifth straight close above 5%, the highest close of the war" },
   { date: "2026-09-30", value: 5.293, note: "session close (Yahoo) · sixth straight close above 5%, the highest close of the war" },
+  { date: "2026-10-01", value: 5.237, note: "session close (Yahoo) · seventh straight close above 5%, down from the war's high close (5.293, Sep 30)" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
