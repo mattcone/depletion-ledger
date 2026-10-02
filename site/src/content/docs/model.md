@@ -19,6 +19,8 @@ On the dashboard, all three lines start at **zero in August 2026**. Values below
 
 The detailed tables below count changes since the end of February 2026. They start with the International Energy Agency's (IEA) reported loss of **507 million barrels by the end of August**. The “cumulative” column adds each month's change to that running total. The dashboard removes the loss through August from the displayed figures, so you can see what happens after that month.
 
+For example, the standoff table ends at −1,832.6 million barrels. Subtracting the August starting value of −507 million gives −1,325.6 million, shown as **−1,326 million barrels on the dashboard**. Both figures describe the same projection from different starting dates.
+
 The IEA's reported total includes oil held by governments and companies, as well as oil on ships. The projections use production and consumption figures from the US Energy Information Administration (EIA), which cover more than the stocks the IEA tracks. We use the same starting point to compare the lines, but the agencies' figures still measure different things.
 
 Oil is measured in **barrels**. One barrel holds about 42 US gallons, or 159 liters. **M b/d** means millions of barrels per day.
@@ -55,8 +57,8 @@ A *corridor* is an agreed shipping route through the Strait of Hormuz. We assign
 | Scenario | Odds (Sep 29) | What happens |
 |---|---|---|
 | The corridor holds | 10% | The shipping agreement works and tanker traffic returns to normal. |
-| The standoff continues | 50% | The corridor barely works, attacks continue, and the repaired Saudi bypass pipeline operates at a reduced rate. |
-| The corridor lapses | 40% | The agreement breaks down or comes under attack, the strait is effectively closed, and the bypass stays shut. |
+| The standoff continues | 50% | Shipping remains restricted, attacks continue, and the repaired Saudi bypass pipeline operates at a reduced rate. |
+| The corridor lapses | 40% | The agreement breaks down or comes under attack, the strait is effectively closed, and the bypass is shut for months. |
 
 The assumptions below were published on September 19. You can expand each table to see the monthly calculations. **P** means production, **C** means consumption, and **Δ** means an adjustment to the EIA baseline. Daily figures are in millions of barrels per day; cumulative figures show the total change in millions of barrels since the end of February 2026. We round the figures for display, so they may not add up exactly.
 
