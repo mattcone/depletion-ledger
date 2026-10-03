@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-10-02";
+export const DATA_AS_OF = "2026-10-03";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -23,8 +23,8 @@ export interface SeriesPoint {
 // ---------- Headline stats ----------
 export const stats = [
   { label: "Brent", value: "$102.25", sub: "Oct 2 settlement · down $0.06 on the December contract · eighth session close above $100 · +35% vs pre-crisis ~$76" },
-  { label: "US diesel (AAA)", value: "$6.37", sub: "Oct 2 · tenth straight drop from the Sep 22 record $6.5276 · +71% vs pre-war $3.72" },
-  { label: "US gasoline (AAA)", value: "$4.40", sub: "Oct 2 · +56% vs Jan $2.81 (AAA)" },
+  { label: "US diesel (AAA)", value: "$6.36", sub: "Oct 3 · eleventh straight drop from the Sep 22 record $6.5276 · +71% vs pre-war $3.72" },
+  { label: "US gasoline (AAA)", value: "$4.38", sub: "Oct 3 · +56% vs Jan $2.81 (AAA)" },
   { label: "SPR", value: "283.8M", sub: "Sep 25 · down 0.8M in a week — about twice the prior two weeks' pace · down 131.7M from pre-war 415.4M · lowest since Nov 1982" },
   { label: "US diesel & heating oil", value: "105.2M", sub: "Sep 25 · down 2.3M in a week · 14.9% below last year · East Coast stocks 29% below last year" },
 ];
@@ -207,6 +207,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-09-30", value: 4.4343, note: "AAA release, Sep 30" },
   { date: "2026-10-01", value: 4.4137, note: "AAA release, Oct 1" },
   { date: "2026-10-02", value: 4.3961, note: "AAA release, Oct 2" },
+  { date: "2026-10-03", value: 4.3807, note: "AAA release, Oct 3" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -246,6 +247,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-09-30", value: 6.4139, note: "AAA — eighth straight decline off the Sep 22 record" },
   { date: "2026-10-01", value: 6.3895, note: "AAA — ninth straight decline off the Sep 22 record" },
   { date: "2026-10-02", value: 6.3726, note: "AAA — tenth straight decline off the Sep 22 record" },
+  { date: "2026-10-03", value: 6.3554, note: "AAA — eleventh straight decline off the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 
@@ -526,11 +528,11 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "Whether the Saudi bypass keeps recovering. Since it restarted on Sep 22, the East–West pipeline has run at about 2.65M barrels a day (Kpler, Sep 29) — roughly half the pre-attack pace of about 5.5M a day. Shipping reports citing Vanguard Tech say a projectile struck the Yanbu North Crude Terminal on Oct 1, briefly stopping operations. No one has claimed responsibility, and news agencies have not confirmed the report.", why: "The restart restores an export route around Hormuz. We moved the odds to 10/50/40 on Sep 29 based on corroborated loadings and flows — further interruptions at the terminal could slow the recovery. Watch whether scheduled loadings continue." },
-      { item: "The G7's 100M-barrel release. On Oct 2 the G7 agreed to release up to 100M barrels of crude oil and refined fuels over four months through the IEA, including a substantial diesel release in the first 20 days. US distillate stocks, which include diesel and heating oil, stood at 105.2M barrels on Sep 25 (EIA).", why: "Watch whether diesel pump prices fall through late October and whether US distillate stocks return above about 30 days of supply, starting with the Oct 7 EIA report. Deliveries under the March 400M-barrel IEA release are still underway." },
+      { item: "Whether the Saudi bypass keeps recovering. Bloomberg reported on Oct 2 that the East–West pipeline was carrying about 6M barrels a day, more than 80% of its capacity. About 4.5M a day was available for export from Red Sea ports, a wartime high. Kpler had reported pipeline flows of about 2.65M a day on Sep 29, after the Sep 22 restart. Shipping reports (Marine Insight, citing Clearwater Dynamics) say a projectile struck inside the Yanbu port on Oct 1, starting a fire and briefly stopping loadings; loading later resumed. No one has claimed responsibility.", why: "The bypass lets oil leave Saudi Arabia without passing through Hormuz. Its restart informed our Sep 29 odds of 10/50/40. Watch whether tanker loadings keep up with the higher pipeline flows and whether further attacks interrupt them." },
+      { item: "The G7's 100M-barrel release. On Oct 2 the G7 agreed to release up to 100M barrels of crude oil and refined fuels over four months through the IEA, including a substantial diesel release in the first 20 days. Trump said the US would not ban diesel exports (Reuters, Oct 2). US distillate stocks, which include diesel and heating oil, stood at 105.2M barrels on Sep 25 (EIA).", why: "Watch whether diesel pump prices fall through late October and whether US distillate stocks return above about 30 days of supply, starting with the Oct 7 EIA report. Deliveries under the March 400M-barrel IEA release are still underway." },
       { item: "Whether the US and Iran agree on the steps to reopen the strait. Trump publicly rejected Iran's seven-day proposal on Sep 26. Rubio ordered the Iranian delegation to leave New York on Sep 28; the State Department confirmed the order on Oct 1. The Pentagon is considering sending more naval forces, which could leave three carriers in the region (Washington Post). Iran is preparing a broader, more forceful response if the US resumes large-scale strikes (Reuters, Oct 1).", why: "Watch for a signed deal, a change in the blockade, or a resumption of strikes — any of which could change how much oil gets through." },
-      { item: "Whether Houthi attacks spread to non-Saudi shipping. The escalation so far has stayed on Saudi territory — the coalition intercepted four drones and two ballistic missiles over Khamis Mushait and Jazan on Oct 1; no non-Saudi vessel has been hit. Separately, Reuters (Oct 2) reports Saudi Arabia is planning a ground assault on the Houthis — an attack around Bab el-Mandeb or on several fronts, potentially involving more than 100,000 Yemeni troops.", why: "War-risk insurance for non-Saudi ships is about 0.2–0.3% of hull value vs 3–7% for Saudi-linked tankers, and there is no US escort in the Red Sea (Reuters, Sep 25). A strike on a non-Saudi vessel could push container traffic back around Africa." },
-      { item: "Ship traffic through Hormuz. Kpler's verified daily counts: 14 (Sep 23), 9 (Sep 24), 5 (Sep 26), none (Sep 27). UKMTO logged a tanker struck by an unknown projectile on Oct 1 (147-26) and a second on Oct 2 (148-26). The second tanker was leaving the strait; its crew extinguished the fire and the vessel continued underway. Six vessels have been struck since Sunday (gCaptain).", why: "Kpler's seven-day average of crude oil exports through the strait rose to 13.5M barrels a day through Sep 28 — back at the pre-war crude level. But crude and products together (14.2M a day) still run about 80% of pre-war, with refined products far below pre-war (CNBC, Sep 30). Watch whether more ships can pass safely." },
+      { item: "Whether Houthi attacks spread to non-Saudi shipping. The escalation so far has stayed on Saudi territory — the coalition intercepted four drones and two ballistic missiles over Khamis Mushait and Jazan on Oct 1; no non-Saudi vessel has been hit. Yemeni government forces claim 474 strikes in 24 hours killed or wounded 1,540 Houthi fighters (Oct 3 report; unverified). Reuters reported on Oct 2 that Saudi Arabia is planning a larger ground assault, potentially involving more than 100,000 Yemeni troops. Critical Threats, citing a Pakistani official, reports that Pakistan has deployed 30,000–40,000 military personnel to help defend Saudi airspace and borders.", why: "War-risk insurance for non-Saudi ships is about 0.2–0.3% of hull value vs 3–7% for Saudi-linked tankers, and there is no US escort in the Red Sea (Reuters, Sep 25). A strike on a non-Saudi vessel could push container traffic back around Africa." },
+      { item: "Ship traffic through Hormuz. Kpler's verified daily counts: 14 (Sep 23), 9 (Sep 24), 5 (Sep 26), none (Sep 27). UKMTO logged tankers struck by unknown projectiles on Oct 1 (147-26) and Oct 2 (148-26) inside the strait. Reuters reported early on Oct 3 that a third crude tanker had been struck 4 nautical miles east of the Omani coast (UKMTO 149-26, issued Oct 2 at 21:42 UTC — the warning gives no coordinates). Crews were reported safe in all three incidents, with no vessel losses reported. Six vessels had been struck in the strait since Sunday as of Oct 2 (gCaptain).", why: "Kpler's seven-day average of crude oil exports through the strait rose to 13.5M barrels a day through Sep 28 — back at the pre-war crude level. But crude and products together (14.2M a day) still run about 80% of pre-war, with refined products far below pre-war (CNBC, Sep 30). Watch whether more ships can pass safely." },
     ],
   },
   {
