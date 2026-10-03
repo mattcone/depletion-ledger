@@ -505,16 +505,17 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
       <div class="mt-12 grid gap-10 lg:grid-cols-2">
         <div class="min-w-0">
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">Brent and WTI prices are up about 35% and 39%</h2>
+            <h2 class="text-xl font-bold tracking-tight">Brent and WTI prices are up about 35% and 36%</h2>
             <p class="font-mono text-[11px] text-faint tabular">Brent: selected observations and monthly averages. WTI: weekly FRED spot prices and recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent rises from about $76 before the war to $102.31 on Oct 1 on the December contract — a seventh session close above $100 — after a $126 intraday peak in March. WTI's November contract settles at $92.87 on Oct 1, up 2.7% on the same contract. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent rises from about $76 before the war to $102.25 on Oct 2 on the December contract — an eighth session close above $100 — after a $126 intraday peak in March. WTI's November contract settles at $91.11 on Oct 2, down 1.9% on the same contract. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Brent and West Texas Intermediate (WTI) are crude oil price benchmarks. On Oct 1,
-            Brent's December contract settled at $102.31 a barrel, up 4.4% from that contract's
-            previous close. WTI's November contract settled at $92.87, up 2.7%.
+            Brent and West Texas Intermediate (WTI) are crude oil price benchmarks. On Oct 2,
+            Brent's December contract settled at $102.25 a barrel, down 6 cents from the prior
+            close. It briefly fell below $100 after the G7 reserve-release announcement,
+            then recovered. WTI's November contract settled at $91.11, down 1.9%.
             The gray line shows WTI, which is also used in the fuel price spread chart beside this one.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
@@ -538,7 +539,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             <p class="font-mono text-[11px] text-faint tabular">Retail fuel price minus WTI, dollars per barrel. EIA/AAA fuel prices; FRED and recent futures closes for WTI.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. The diesel gap rises from about $89 in January to a plotted peak of $181.8 on Sep 23, then eases to $174.8 on Oct 2. It briefly narrows to $148 on Sep 10. The gasoline gap rises from about $59 in January to $91.8 on Oct 2. Both lines show every reading; dots mark selected dates."></canvas>
+            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. The diesel gap rises from about $89 in January to a plotted peak of $181.8 on Sep 23, then eases to $176.5 on Oct 2. It briefly narrows to $148 on Sep 10. The gasoline gap rises from about $59 in January to $93.5 on Oct 2. Both lines show every reading; dots mark selected dates."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             This chart subtracts the price of crude oil from the retail price of fuel, with both
@@ -547,13 +548,13 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The diesel price gap reached $181.8 a barrel on Sep 23, its highest value on the chart.
-            By Oct 2, it had eased to $174.8 — still about twice January's $89.
-            The gasoline gap was $91.8 on Oct 2, up from about $59 in January.
+            By Oct 2, it had eased to $176.5 — still about twice January's $89.
+            The gasoline gap was $93.5 on Oct 2, up from about $59 in January.
             These gaps can narrow when crude prices rise faster than pump prices, as they did on Sep 10.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The calculation uses retail prices from EIA and AAA, minus WTI from FRED, with futures closes for
-            Sep 10–11 and Sep 14–Oct 1. The EIA's official <em>crack spread</em> uses wholesale fuel prices, so the
+            Sep 10–11 and Sep 14–Oct 2. The EIA's official <em>crack spread</em> uses wholesale fuel prices, so the
             values differ. Some readings fall on days with no same-day WTI price; the chart pairs those with the
             nearest available trading day's price, within 1–3 days. The Sep 21 reading uses the Sep 21 WTI
             settlement. The Sep 22 reading uses the October contract's final closing price on Sep 22
@@ -561,8 +562,9 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             ($92.16); the Sep 24 reading uses the November contract's settlement on
             Sep 24 ($94.61); the Sep 25 and Sep 26 readings use its settlement on Sep 25 ($92.41);
             the Sep 27–28 readings use the Sep 28 settlement ($92.60), the Sep 29 reading
-            uses the Sep 29 settlement ($89.38), the Sep 30 reading uses the Sep 30 settlement ($90.42), and the Oct 1–2
-            readings use the Oct 1 settlement ($92.87). Because the
+            uses the Sep 29 settlement ($89.38), the Sep 30 reading uses the Sep 30 settlement ($90.42), the Oct 1
+            reading uses the Oct 1 settlement ($92.87), and the Oct 2 reading uses the Oct 2 settlement
+            ($91.11). Because the
             November contract's Sep 23 settlement was lower than the October close, the Sep 23
             spread reads higher than the Sep 22 spread even though pump prices barely moved.
             No missing prices are estimated.
@@ -1155,9 +1157,11 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
               <p class="mt-1 text-[13px] leading-relaxed text-ink/70">
                 Russia's export restrictions leave less fuel available to other countries during the
                 heating season. On Sep 30, Russia extended its diesel export ban for producers
-                through Oct 31 (government decree; Moscow Times, Reuters). The jet-fuel export ban,
-                in force since Jun 1, ends on Nov 30. Damaged refineries also leave Russia
-                with less fuel for its own gas stations and military as winter approaches.
+                through Oct 31 (government decree; Moscow Times, Reuters) — though on Oct 2,
+                Deputy Prime Minister Alexander Novak said Moscow may consider partially lifting it in case of
+                overproduction (Reuters). The jet-fuel export ban, in force since Jun 1, ends on
+                Nov 30. Damaged refineries also leave Russia with less fuel for its own gas
+                stations and military as winter approaches.
               </p>
               <div class="mt-3 border border-rule rounded-md">
                 {
@@ -1172,25 +1176,20 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 Russian diesel and gasoil shipments out of
                 Black Sea ports fell to zero in the week to Sep 24 — the first time on record
-                (S&P Global Commodities at Sea, Oct 1). A year ago those ports sent out around
-                200,000 tonnes a week. S&P also reported 448,000 tonnes of diesel and gasoil
-                shipped in September to date, compared with 535,000 tonnes during August and
-                713,000 during July. It also reported no seaborne jet-fuel or gasoline exports
+                (S&P Global Commodities at Sea, Oct 1); a year ago those ports sent out around
+                200,000 tonnes a week. S&P also reported no seaborne jet-fuel or gasoline exports
                 for two straight weeks.
               </p>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-                Imports aren't making up the difference: fuel shipments on the Belarus rail route are running at 25 times last
-                year's volume. The shortage also reaches countries that rely on Russian fuel.
-                Kyrgyzstan imports more than 90% of its gasoline from Russia and has about six
-                weeks of reserves left. In Mongolia, long lines at fuel stations have turned
-                into protests (Bloomberg, Oct 1).
+                Imports aren't making up the difference, even with fuel shipments on the Belarus rail
+                route at 25 times last year's volume. The shortage also affects Kyrgyzstan,
+                which imports more than 90% of its gasoline from Russia and has about six weeks
+                of reserves left.
               </p>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-                The refinery strikes are continuing. In September, Ukraine hit 12
-                refineries. Most had stopped refining or sharply reduced output, according to the
-                DroneBomber monitoring channel (via UNN, Oct 1). On Oct 1, Putin called a proposed
+                On Oct 1, Putin called a proposed
                 trade — halting attacks on ships in the Black Sea in exchange for halting strikes
-                on refineries — "absurd." He estimated that the strikes
+                on refineries — "absurd," and estimated the strikes
                 had cost Russia about 1% of GDP. In the US, President Trump has blamed
                 the refinery strikes for the diesel-price surge: "This isn't really a Middle
                 Eastern problem; this is more of a Russia problem" (Fox News, Sep 27).
@@ -1312,9 +1311,9 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           <div class="mt-6 grid gap-10 lg:grid-cols-2">
             <div>
               <h3 class="text-lg font-bold tracking-tight">US 10-year Treasury yield</h3>
-              <p class="mt-2 font-mono text-[11px] text-faint">10-year US Treasury yield, % · chart through Oct 1 · weekly closes (FRED) · Sep 11, 14, 15, 16, 17, 18, 21, 22, 23, 24, 25, 28, 29, 30, and Oct 1: Yahoo closing values.</p>
+              <p class="mt-2 font-mono text-[11px] text-faint">10-year US Treasury yield, % · chart through Oct 2 · weekly closes (FRED) · Sep 11, 14, 15, 16, 17, 18, 21, 22, 23, 24, 25, 28, 29, 30, and Oct 1–2: Yahoo closing values.</p>
               <div class="mt-4 h-72">
-                <canvas id="treasury10yChart" role="img" aria-label="US 10-year Treasury yield, 2026: 4.19% on Jan 2, 3.97% on Feb 27 before the war, and 5.237% on Oct 1, its seventh straight close above 5%; 5.293% on Sep 30 remains the highest close of the war. The Sep 16 close of 5.006% is the first above 5% since the war began. Reference lines mark the pre-war 3.97% and the January 2025 high of 4.8%."></canvas>
+                <canvas id="treasury10yChart" role="img" aria-label="US 10-year Treasury yield, 2026: 4.19% on Jan 2, 3.97% on Feb 27 before the war, and 5.277% on Oct 2, its eighth straight close above 5%; 5.293% on Sep 30 remains the highest close of the war. The Sep 16 close of 5.006% is the first above 5% since the war began. Reference lines mark the pre-war 3.97% and the January 2025 high of 4.8%."></canvas>
               </div>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 The 10-year Treasury yield is the rate the US government pays to borrow for a decade.
@@ -1325,8 +1324,10 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
                 refinanced by year-end.
               </p>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-                The 10-year yield closed at 5.237% on Oct 1, its seventh straight close above 5%
-                — down from the war's high close of 5.293% on Sep 30.
+                The 10-year yield closed at 5.277% on Oct 2, its eighth straight close above 5%
+                — still below the war's high close of 5.293% on Sep 30. The close came after the G7
+                reserve-release announcement and a weak September jobs report (29,000 jobs, with
+                unemployment rising), which cut expectations of another Fed hike.
                 According to the Wall Street Journal (Oct 1), the yield reached its highest level
                 in 24 years this week. Its quarterly increase was the largest since 1994,
                 helping push US mortgage rates above 7%.
@@ -2570,10 +2571,10 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
       // the line; the tooltip still covers every point on hover. The views are dot-keep
       // sets, not data.
       const brentView = brentYtd.filter(
-        (p) => p.date < "2026-09-08" || p.date === "2026-09-10" || p.date === "2026-09-30" || p.date === "2026-10-01",
+        (p) => p.date < "2026-09-08" || p.date === "2026-09-10" || p.date === "2026-09-30" || p.date === "2026-10-01" || p.date === "2026-10-02",
       );
       const wtiView = wtiWeekly.filter(
-        (p) => p.date < "2026-09-08" || p.date === "2026-09-30" || p.date === "2026-10-01",
+        (p) => p.date < "2026-09-08" || p.date === "2026-09-30" || p.date === "2026-10-01" || p.date === "2026-10-02",
       );
       const brentDotKeep = new Set(brentView.map((p) => p.date));
       const wtiDotKeep = new Set(wtiView.map((p) => p.date));
@@ -2651,11 +2652,11 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             { value: 76, text: "pre-crisis $76 (Feb 27)", color: "#3d6b64", align: "right" },
           ]),
           directLabels([
-            { dataset: 0, index: brentYtd.length - 1, text: "Oct 1 · $102.31 — Brent", ...endpoint, halo: "#f2f1ec" },
+            { dataset: 0, index: brentYtd.length - 1, text: "Oct 2 · $102.25 — Brent", ...endpoint, halo: "#f2f1ec" },
             { dataset: 0, index: 3, text: "peak $126 · Mar 18", dy: -16, color: "#1c1b17", halo: "#f2f1ec" },
             { dataset: 0, index: 6, text: "Jun 30 · $74", dy: 20, ...note, halo: "#f2f1ec" },
             { dataset: 0, index: 1, text: "war began Feb 28", dx: 8, dy: 18, align: "left", ...note, halo: "#f2f1ec" },
-            { dataset: 1, index: wtiWeekly.length - 1, text: "Oct 1 · $92.87 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a", halo: "#f2f1ec" },
+            { dataset: 1, index: wtiWeekly.length - 1, text: "Oct 2 · $91.11 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a", halo: "#f2f1ec" },
           ]),
         ],
       });
@@ -2680,7 +2681,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
       // releases) pair with the Sep 28 settlement (92.60); Sep 29 (AAA release)
       // pairs with its same-day settlement (89.38); Sep 30 (AAA release) pairs
       // with its same-day settlement (90.42); Oct 1 and Oct 2 (AAA releases) pair
-      // with the Oct 1 settlement (92.87) — the nearest WTI.
+      // with their same-day settlements (92.87 / 91.11).
       // Data note (Sep 21 evening): the Sep 18 pass observed the Yahoo front-month bars at 99.29 /
       // 96.08 (read as a December-contract roll); a later pull shows the same bars at the
       // news-reported Nov/Oct settles (103.87 / 100.30). The observation was a transient
@@ -2701,13 +2702,13 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           return { date: p.date, x: gd(p.date), y: +((p.value * 42 - w.value) * 10).toFixed(0) / 10 };
         });
       // WTI points that are futures closes, not the FRED weekly spot series — the tooltip
-      // source label follows this (kept in step with the panel copy: "Sep 10–11 and Sep 14–Oct 1").
+      // source label follows this (kept in step with the panel copy: "Sep 10–11 and Sep 14–Oct 2").
       // Pairing check (nearest WTI point, same day wins): Sep 23 AAA → Sep 23 settle 92.16;
       // Sep 24 AAA → Sep 24 settle 94.61; Sep 25 and 26 AAA → Sep 25 settle 92.41;
       // Sep 27–28 AAA → Sep 28 settle 92.60; Sep 29 AAA → Sep 29 settle 89.38;
-      // Sep 30 AAA → Sep 30 settle 90.42; Oct 1–2 AAA → Oct 1 settle 92.87 —
+      // Sep 30 AAA → Sep 30 settle 90.42; Oct 1 and Oct 2 AAA → same-day settles 92.87 / 91.11 —
       // disclosed in the crack methodology paragraph.
-      const wtiNonFred = new Set(["2026-09-10", "2026-09-11", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-25", "2026-09-28", "2026-09-29", "2026-09-30", "2026-10-01"]);
+      const wtiNonFred = new Set(["2026-09-10", "2026-09-11", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-25", "2026-09-28", "2026-09-29", "2026-09-30", "2026-10-01", "2026-10-02"]);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
       // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 and the Oct 2
       // point (the record is Sep 23 — the label tracks the max on the line; Oct 1's and the
@@ -2896,7 +2897,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             { value: treasuryTestLevel, text: "4.8% — Jan 2025 high", color: "#8a867a", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: treasury10y.length - 1, text: "Oct 1 · 5.237%", ...endpoint, dy: 18, color: "#b3261e" },
+            { dataset: 0, index: treasury10y.length - 1, text: "Oct 2 · 5.277%", ...endpoint, dy: 18, color: "#b3261e" },
           ]),
         ],
       });
