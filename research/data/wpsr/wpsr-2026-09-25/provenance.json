@@ -1,0 +1,23 @@
+{
+  "report": "EIA WPSR",
+  "weekEnd": "2026-09-25",
+  "url": "https://www.eia.gov/petroleum/supply/weekly/",
+  "retrievedAt": "2026-10-04T17:16:35.070Z",
+  "files": [
+    {
+      "file": "table1.csv",
+      "sha256": "9d2628089c0cec9f0fd9f19fc4a7c26ee3a7c6d30ebfb3e1f28f23a30e310a2d",
+      "bytes": 6576
+    },
+    {
+      "file": "table5.csv",
+      "sha256": "91b6e017c3d0f83e54e370e85821b701db7d66dee1b459e5bb3872cb7086480c",
+      "bytes": 3734
+    },
+    {
+      "file": "table6.csv",
+      "sha256": "8f208824e73fa103bb44ba63a1b91e919fa192c003a2409e3268f0d73f8ae925",
+      "bytes": 5956
+    }
+  ]
+}

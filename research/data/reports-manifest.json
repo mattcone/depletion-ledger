@@ -1,0 +1,26 @@
+{
+  "steo": {
+    "lastEdition": "steo-2026-09",
+    "dir": "/home/mcone/depletion-ledger/research/data/steo/steo-2026-09",
+    "at": "2026-10-04T17:13:59.519Z"
+  },
+  "wpsr": {
+    "lastWeekEnd": "2026-09-25",
+    "dir": "/home/mcone/depletion-ledger/research/data/wpsr/wpsr-2026-09-25",
+    "at": "2026-10-04T17:16:35.070Z"
+  },
+  "omr": {
+    "lastPub": "2026-05-13",
+    "dir": "/home/mcone/depletion-ledger/research/data/omr/omr-2026-05-13",
+    "at": "2026-10-04T17:17:55.133Z"
+  },
+  "bls": {
+    "periods": {
+      "CUUR0000SA0": "2026-08",
+      "CUUR0000SA0L1E": "2026-08",
+      "WPUFD4": "2026-08"
+    },
+    "dir": "/home/mcone/depletion-ledger/research/data/bls/bls-2026-08",
+    "at": "2026-10-04T17:34:11.709Z"
+  }
+}

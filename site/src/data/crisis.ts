@@ -252,6 +252,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-10-04", value: 6.3434, note: "AAA — twelfth straight decline off the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
+export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
 
 // ---------- SPR, million bbl — EIA weekly ending stocks (verified) ----------
 export const sprWeekly: { date: string; level: number }[] = [

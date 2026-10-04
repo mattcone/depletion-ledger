@@ -8,7 +8,7 @@ import SupplyFlow from "../components/SupplyFlow.astro";
 import BranchWeightRow from "../components/BranchWeightRow.astro";
 import {
   stats, brentYtd, brentMonthlyAvgs, wtiWeekly, gasolineYtd, gasolinePreCrisis,
-  dieselYtd, dieselOldRecord, sprWeekly, sprFloors,
+  dieselYtd, dieselOldRecord, dieselPreWar, sprWeekly, sprFloors,
   branchWeights, branchTracks, watchGroups, cascade,
   DATA_AS_OF, CRISIS_DAY_1,
   russiaCapacityAnchors, russiaCurrentSpread, russiaSnapshot, russiaBanCascade,
@@ -19,6 +19,97 @@ import {
 // Crisis day number, computed from the data-as-of date (NOT the viewer's clock) so the
 // page is a stable snapshot: Oct 4 data = day 218, no matter when someone loads it.
 const dayNum = Math.round((Date.parse(DATA_AS_OF) - Date.parse(CRISIS_DAY_1)) / 86400000);
+
+// ── Derived, not re-typed (Tier 1, Oct 4) ─────────────────────────────────
+// Endpoint labels, the day counter, streak prose, and the "up NN%" headings used
+// to be hard-coded and went stale on consecutive passes (Sep 28, Oct 2, Oct 4).
+// Compute them once from the series; the HTML below interpolates. If a derived
+// string ever disagrees with hand-written prose, the prose is wrong.
+const shortDate = (iso: string) =>
+  new Date(iso + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" });
+const lastPt = <T,>(arr: T[]): T => arr[arr.length - 1];
+const WORDS = ["zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty"];
+const TENS = ["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
+const wordNum = (n: number) =>
+  n < 20 ? WORDS[n] : n < 100 ? `${TENS[Math.floor(n / 10)]}${n % 10 ? `-${WORDS[n % 10]}` : ""}` : String(n);
+
+const lastDiesel = lastPt(dieselYtd);
+const lastGas = lastPt(gasolineYtd);
+const dieselPeak = dieselYtd.reduce((a, b) => (b.value > a.value ? b : a));
+// Decline streak ending at the latest reading: strictly lower than the previous
+// reading AND exactly one calendar day later (AAA updates daily; a missed day breaks
+// the streak, so index adjacency alone would overcount).
+let dieselStreak = 0;
+for (let i = dieselYtd.length - 1; i > 0; i--) {
+  const gap = (Date.parse(dieselYtd[i].date) - Date.parse(dieselYtd[i - 1].date)) / 86400000;
+  if (dieselYtd[i].value < dieselYtd[i - 1].value && gap === 1) dieselStreak++;
+  else break;
+}
+const dieselUpPct = Math.round((lastDiesel.value / dieselPreWar - 1) * 100);
+const gasUpPct = Math.round((lastGas.value / gasolinePreCrisis - 1) * 100);
+
+// Diesel narrative — generated whole so the record claim, the move to the current
+// reading, and the current streak stay SEPARATE facts: an uptick after the record
+// must not read "fell for zero consecutive days", and a fresh streak must not be
+// welded to the record when an uptick sat between them.
+const dieselPara = (() => {
+  const last = lastDiesel;
+  const prior = dieselYtd[dieselYtd.length - 2];
+  let now: string;
+  // "the day before" only if the two readings are consecutive; after a missed AAA day
+  // the honest phrase is "the previous reading" (a streak >= 2 implies consecutiveness
+  // by construction, so that branch never needs the check)
+  const prevGap = prior ? (Date.parse(last.date) - Date.parse(prior.date)) / 86400000 : 0;
+  const ref = prevGap === 1 ? "the day before" : "the previous reading";
+  if (!prior || last === dieselPeak) {
+    now = prior && last !== dieselPeak ? ` It is now $${last.value.toFixed(2)} on ${shortDate(last.date)}.` : "";
+  } else if (last.value < prior.value) {
+    now =
+      dieselStreak >= 2
+        ? ` It is now $${last.value.toFixed(2)} on ${shortDate(last.date)}, down ${wordNum(dieselStreak)} days in a row.`
+        : ` It is now $${last.value.toFixed(2)} on ${shortDate(last.date)}, down from ${ref}.`;
+  } else if (last.value > prior.value) {
+    now = ` It is now $${last.value.toFixed(2)} on ${shortDate(last.date)}, up from ${ref}.`;
+  } else {
+    now = ` It is now $${last.value.toFixed(2)} on ${shortDate(last.date)}, unchanged from ${ref}.`;
+  }
+  return (
+    `Diesel cost $${dieselPreWar.toFixed(2)} on Feb 27, just before the war. It reached a record ` +
+    `$${dieselPeak.value.toFixed(2)} on ${shortDate(dieselPeak.date)}.${now}` +
+    ` That's still about ${dieselUpPct}% above its pre-war price. It first passed the previous record of about $5.85, set in June 2022, on Sep 4.`
+  );
+})();
+
+// Diesel aria: fixed narrative prefix through the record, then the post-record tail
+// generated from the series (first drop "easing to", last "and …"). If the record is
+// the most recent reading there is no tail (no dangling comma).
+const dieselAria = (() => {
+  const head = `US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $${dieselPeak.value.toFixed(2)} on ${shortDate(dieselPeak.date)}`;
+  const tailPts = dieselYtd.slice(dieselYtd.indexOf(dieselPeak) + 1);
+  if (!tailPts.length) return `${head}.`;
+  const tail = tailPts
+    .map((p, i) => {
+      const s = `${i === 0 ? "easing to " : ""}$${p.value.toFixed(2)} on ${shortDate(p.date)}`;
+      return i === tailPts.length - 1 ? `and ${s}` : s;
+    })
+    .join(", ");
+  return `${head}, ${tail}.`;
+})();
+
+// Crack endpoint values — same pairing rule as the chart (nearest WTI, same-day wins,
+// ties to the later date) — so the crack aria + prose can't drift from the plotted line.
+const wtiNearest = (iso: string) =>
+  wtiWeekly.reduce((best, w) => {
+    const dw = Math.abs(Date.parse(w.date + "T12:00:00") - Date.parse(iso + "T12:00:00"));
+    const db = Math.abs(Date.parse(best.date + "T12:00:00") - Date.parse(iso + "T12:00:00"));
+    return dw < db || (dw === db && w.date > best.date) ? w : best;
+  });
+const crackLast = (retail: typeof dieselYtd) => {
+  const p = lastPt(retail);
+  return { date: p.date, value: +((p.value * 42 - wtiNearest(p.date).value) * 10).toFixed(0) / 10 };
+};
+const dieCrackLast = crackLast(dieselYtd);
+const gasCrackLast = crackLast(gasolineYtd);
 
 // Odds history: keep the most recent changes visible and fold the older ones into a
 // collapsed "earlier" block, so the section reads as a recent trajectory, not an
@@ -417,32 +508,27 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
       <div class="grid gap-10 lg:grid-cols-2">
         <div>
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">US gasoline prices are up 57%</h2>
+            <h2 class="text-xl font-bold tracking-tight">US gasoline prices are up {gasUpPct}%</h2>
             <p class="font-mono text-[11px] text-faint">EIA weekly and AAA daily national averages</p>
           </div>
           <div class="h-72">
-            <canvas id="gasChart" role="img" aria-label="US gasoline, EIA weekly national average (AAA daily readings Sep 10 to Oct 4): $2.81 in January, May peak $4.50, $4.37 on Oct 4. Reference line at the January pre-crisis $2.81."></canvas>
+            <canvas id="gasChart" role="img" aria-label={`US gasoline, EIA weekly national average (AAA daily readings Sep 10 to ${shortDate(lastGas.date)}): $2.81 in January, May peak $4.50, $${lastGas.value.toFixed(2)} on ${shortDate(lastGas.date)}. Reference line at the January pre-crisis $2.81.`}></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The national average has risen from $2.81 in January to $4.37, an increase of about 56%.
+            The national average has risen from $2.81 in January to ${lastGas.value.toFixed(2)}, an increase of about {gasUpPct}%.
             Prices peaked at $4.50 in May. Every month since March has averaged above the levels
             seen before the crisis.
           </p>
         </div>
         <div>
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">US diesel prices are up 71%</h2>
+            <h2 class="text-xl font-bold tracking-tight">US diesel prices are up {dieselUpPct}%</h2>
             <p class="font-mono text-[11px] text-faint">AAA national average · dots on selected dates</p>
           </div>
           <div class="h-72">
-            <canvas id="dieselChart" role="img" aria-label="US diesel, AAA national: $3.52 in January, breaking the June 2022 record of about $5.85 on Sep 4, passing $6.00 for the first time on Sep 11 — all-time record $6.53 on Sep 22, easing to $6.52 on Sep 23, $6.51 on Sep 24, $6.50 on Sep 25, $6.48 on Sep 26, $6.47 on Sep 27, $6.45 on Sep 28, $6.44 on Sep 29, $6.41 on Sep 30, $6.39 on Oct 1, $6.37 on Oct 2, $6.36 on Oct 3, and $6.34 on Oct 4."></canvas>
+            <canvas id="dieselChart" role="img" aria-label={dieselAria}></canvas>
           </div>
-          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Diesel cost $3.72 on Feb 27, just before the war. It reached a record $6.53 on
-            Sep 22, then fell for twelve consecutive days to $6.34 on Oct 4.
-            That's still about 71% above its pre-war price.
-            It first passed the previous record of about $5.85, set in June 2022, on Sep 4.
-          </p>
+          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">{dieselPara}</p>
         </div>
       </div>
 
@@ -539,7 +625,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             <p class="font-mono text-[11px] text-faint tabular">Retail fuel price minus WTI, dollars per barrel. EIA/AAA fuel prices; FRED and recent futures closes for WTI.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="crackChart" role="img" aria-label="US retail fuel prices minus WTI, in dollars per barrel, 2026. The diesel gap rises from about $89 in January to a plotted peak of $181.8 on Sep 23, then eases to $175.3 on Oct 4. It briefly narrows to $148 on Sep 10. The gasoline gap rises from about $59 in January to $92.4 on Oct 4. Both lines show every reading; dots mark selected dates."></canvas>
+            <canvas id="crackChart" role="img" aria-label={`US retail fuel prices minus WTI, in dollars per barrel, 2026. The diesel gap rises from about $89 in January to a plotted peak of $181.8 on Sep 23, then eases to $${dieCrackLast.value.toFixed(1)} on ${shortDate(dieCrackLast.date)}. It briefly narrows to $148 on Sep 10. The gasoline gap rises from about $59 in January to $${gasCrackLast.value.toFixed(1)} on ${shortDate(gasCrackLast.date)}. Both lines show every reading; dots mark selected dates.`}></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             This chart subtracts the price of crude oil from the retail price of fuel, with both
@@ -548,8 +634,8 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             The diesel price gap reached $181.8 a barrel on Sep 23, its highest value on the chart.
-            By Oct 4, it had eased to $175.3 — still about twice January's $89.
-            The gasoline gap was $92.4 on Oct 4, up from about $59 in January.
+            By {shortDate(dieCrackLast.date)}, it had eased to ${dieCrackLast.value.toFixed(1)} — still about twice January's $89.
+            The gasoline gap was ${gasCrackLast.value.toFixed(1)} on {shortDate(gasCrackLast.date)}, up from about $59 in January.
             These gaps can narrow when crude prices rise faster than pump prices, as they did on Sep 10.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
@@ -1574,6 +1660,11 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
 
       const fmt = (iso: string) =>
         new Date(iso + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" });
+      // Endpoint label derived from the series' last point (Tier 1, Oct 4): the
+      // hard-coded "Oct 2 · $91.11 — WTI" strings went stale on consecutive passes
+      // (Sep 28, Oct 2, Oct 4). The label text can no longer lag the last data point.
+      const endLabel = (arr: { date: string; value: number }[], money: (v: number) => string, suffix = "") =>
+        `${fmt(arr[arr.length - 1].date)} · ${money(arr[arr.length - 1].value)}${suffix}`;
 
       // Marker styling: filled = observed, hollow = source estimate
       const markers = (pts: { approx?: boolean }[], color: string) => ({
@@ -2274,7 +2365,10 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
       const gasXScale = {
         type: "linear" as const,
         min: 0,
-        max: 279, // data now runs to Oct 4 (doy 277); headroom for endpoint dots/labels (278 would clip at ~3.9px)
+        // Derived (Tier 1, Oct 4): last plotted date + 3 units of headroom for the
+        // endpoint dot/label. Was a hand-widened constant (277→278→279) that caused
+        // the right-edge clips; the geometry harness stays as the backstop.
+        max: Math.max(...gasolineYtd.map((p) => gd(p.date)), ...dieselYtd.map((p) => gd(p.date))) + 3,
         grid: { display: false },
         border: { display: true, color: "#d8d4c6", width: 0.5 },
         afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
@@ -2338,7 +2432,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             { value: gasolinePreCrisis, text: "Jan $2.81 (pre-crisis)", color: "#3d6b64", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: gasolineYtd.length - 1, text: "Oct 4 · $4.37", ...endpoint },
+            { dataset: 0, index: gasolineYtd.length - 1, text: endLabel(gasolineYtd, (v) => `$${v.toFixed(2)}`), ...endpoint },
             { dataset: 0, index: 18, text: "May peak $4.50", dy: -14, color: "#1c1b17" },
           ]),
         ],
@@ -2411,7 +2505,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             { value: dieselOldRecord, text: "Jun 2022 record $5.85", color: "rgba(179,38,30,0.8)", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: dieselYtd.length - 1, text: "Oct 4 · $6.34", ...endpoint, color: "#b3261e", halo: "#f2f1ec" },
+            { dataset: 0, index: dieselYtd.length - 1, text: endLabel(dieselYtd, (v) => `$${v.toFixed(2)}`), ...endpoint, color: "#b3261e", halo: "#f2f1ec" },
           ]),
         ],
       });
@@ -2490,7 +2584,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           directLabels([
             { dataset: 0, index: 6, text: "Mar 20 · $18.9 — three-yr high", dy: -14, color: "#1c1b17" },
             { dataset: 0, index: 21, text: "Jun 19 · $14.1 — ceasefire", align: "right", dy: 48, color: "#8a867a" },
-            { dataset: 0, index: gasTtf.length - 1, text: "Sep 25 · $24.1", ...endpoint, color: "#b3261e", halo: "#f2f1ec" },
+            { dataset: 0, index: gasTtf.length - 1, text: endLabel(gasTtf, (v) => `$${v.toFixed(1)}`), ...endpoint, color: "#b3261e", halo: "#f2f1ec" },
           ]),
         ],
       });
@@ -2535,16 +2629,20 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           directLabels([
             { dataset: 0, index: 6, text: "Mar 20 · $20.7", dy: -14, color: "#1c1b17" },
             { dataset: 0, index: 22, text: "Jun 26 · $15.2 — ceasefire", dy: 18, color: "#8a867a" },
-            { dataset: 0, index: gasJkm.length - 1, text: "Sep 25 · ≈$25.2", ...endpoint, color: "#b3261e", halo: "#f2f1ec" },
+            { dataset: 0, index: gasJkm.length - 1, text: endLabel(gasJkm, (v) => `≈$${v.toFixed(1)}`), ...endpoint, color: "#b3261e", halo: "#f2f1ec" },
           ]),
         ],
       });
 
-      // X-scale for the bonds/inflation charts: data runs to Sep 30 (day 273). A dot
-      // centered on the axis max would be half-clipped at the plot edge, so the crack
-      // chart widens this to 276 — its data runs to Oct 1 (day 274).
-      const moneyXScale = { ...gasXScale, max: 277 };
-      const mref = (val: number) => [{ x: 0, y: val }, { x: moneyXScale.max, y: val }]; // full axis width, follows the scale
+      // X-scale for the bonds/inflation charts. A dot centered on the axis max is
+      // half-clipped at the plot edge, so the max is the last plotted date + 3 units of
+      // headroom (Tier 1, Oct 4 — derived, not the hand-widened constants of Sep 28–Oct 2).
+      const moneyXScale = { ...gasXScale, max: Math.max(...treasury10y.map((p) => gd(p.date))) + 3 };
+      // The oil chart's max follows its OWN series, not the treasury series: an explicit
+      // same-day oil settlement can outrun the auto (session-close-only) treasury point,
+      // and a dot on the axis max is half-clipped (Oct 4 review, issue 8).
+      const oilXScale = { ...gasXScale, max: Math.max(...brentYtd.map((p) => gd(p.date)), ...wtiWeekly.map((p) => gd(p.date))) + 3 };
+      const mref = (val: number, xMax: number = moneyXScale.max) => [{ x: 0, y: val }, { x: xMax, y: val }]; // full axis width, follows the scale
 
       // Inflation chart: monthly points fall at month-END, so month ticks must sit at
       // month-end too — gasXScale ticks at month-start, which reads one month ahead for
@@ -2606,7 +2704,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             },
             {
               label: "$100",
-              data: mref(100),
+              data: mref(100, oilXScale.max),
               borderColor: "rgba(179,38,30,0.5)",
               borderDash: [6, 4],
               pointRadius: 0,
@@ -2615,7 +2713,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             },
             {
               label: "pre-crisis $76 (Feb 27)",
-              data: mref(76),
+              data: mref(76, oilXScale.max),
               borderColor: "rgba(61,107,100,0.6)",
               borderDash: [4, 4],
               pointRadius: 0,
@@ -2631,7 +2729,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           // would pair array positions, not dates — the crosshair/tooltip would snap away.
           interaction: { mode: "nearest", intersect: false, axis: "x" as const },
           layout: { padding: { top: 20 } },
-          scales: { y: yScale(55, 135, (v) => `$${v}`, 8), x: moneyXScale },
+          scales: { y: yScale(55, 135, (v) => `$${v}`, 8), x: oilXScale },
           plugins: {
             tooltip: {
               filter: (item: { datasetIndex: number }) => item.datasetIndex < 2,
@@ -2658,11 +2756,11 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             { value: 76, text: "pre-crisis $76 (Feb 27)", color: "#3d6b64", align: "right" },
           ]),
           directLabels([
-            { dataset: 0, index: brentYtd.length - 1, text: "Oct 2 · $102.25 — Brent", ...endpoint, halo: "#f2f1ec" },
+            { dataset: 0, index: brentYtd.length - 1, text: endLabel(brentYtd, (v) => `$${v.toFixed(2)}`, " — Brent"), ...endpoint, halo: "#f2f1ec" },
             { dataset: 0, index: 3, text: "peak $126 · Mar 18", dy: -16, color: "#1c1b17", halo: "#f2f1ec" },
             { dataset: 0, index: 6, text: "Jun 30 · $74", dy: 20, ...note, halo: "#f2f1ec" },
             { dataset: 0, index: 1, text: "war began Feb 28", dx: 8, dy: 18, align: "left", ...note, halo: "#f2f1ec" },
-            { dataset: 1, index: wtiWeekly.length - 1, text: "Oct 2 · $91.11 — WTI", dx: -8, dy: 18, align: "right", color: "#8a867a", halo: "#f2f1ec" },
+            { dataset: 1, index: wtiWeekly.length - 1, text: endLabel(wtiWeekly, (v) => `$${v.toFixed(2)}`, " — WTI"), dx: -8, dy: 18, align: "right", color: "#8a867a", halo: "#f2f1ec" },
           ]),
         ],
       });
@@ -2781,9 +2879,10 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
               grid: { display: true, color: "rgba(28,27,23,0.05)" },
               border: { display: false },
             },
-            // 279, not 277: the last dots (Oct 4 = day 277) sit inside the plot, not
-            // half-clipped on the right edge (matches the retail charts' gasXScale).
-            x: { ...moneyXScale, max: 279 },
+            // The crack lines run to the retail dates (later than treasury's), so reuse
+            // the gas/diesel scale's derived max — the last dots sit inside the plot, not
+            // half-clipped on the right edge.
+            x: { ...moneyXScale, max: gasXScale.max },
           },
           plugins: {
             tooltip: {
@@ -2903,7 +3002,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             { value: treasuryTestLevel, text: "4.8% — Jan 2025 high", color: "#8a867a", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: treasury10y.length - 1, text: "Oct 2 · 5.277%", ...endpoint, dy: 18, color: "#b3261e" },
+            { dataset: 0, index: treasury10y.length - 1, text: endLabel(treasury10y, (v) => `${v.toFixed(3)}%`), ...endpoint, dy: 18, color: "#b3261e" },
           ]),
         ],
       });
