@@ -56,7 +56,9 @@ hashlist() {
   (cd "$SITE" && find src public -type f ${1:-} 2>/dev/null | sort | xargs -r sha256sum)
   for f in "${SYNCED_SOURCES[@]}"; do if [[ -f "$f" ]]; then sha256sum "$f"; fi; done
 }
-hashlist > "$hashlist_file"
+# og-supply.png is excluded here too: make-og re-renders it on EVERY deploy, so it can
+# never be a meaningful "changed since last deploy" signal — it would flag on every run
+hashlist "! -path public/og-supply.png" > "$hashlist_file"
 NEW_FP="$(sha256sum "$hashlist_file" | cut -d' ' -f1)"
 
 changed_files() { # old-state-file → prints "+ added / - removed / ~ changed" lines
