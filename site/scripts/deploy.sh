@@ -180,6 +180,18 @@ if [[ -z "$BUNDLE" ]]; then
 fi
 echo "  bundle: $BUNDLE"
 
+# Chart geometry + console check on the EXACT bytes about to be deployed (local mirror
+# of dist/ — no propagation lag). CLIP/NOTBUILT/missing-endpoint-dot fails the deploy
+# before it ships; the pass can still re-run `python3 scripts/verify-live.py staging`
+# against the live URL afterwards.
+echo "→ geometry check (local mirror of dist/)…"
+if ! python3 "$SITE/scripts/verify-live.py" local; then
+  echo "FATAL: the geometry check failed — the endpoint dot would be clipped or a chart" >&2
+  echo "would not build. Fix the chart (usually: widen the x-scale in index.astro) and" >&2
+  echo "re-run the deploy. The deploy was NOT run." >&2
+  exit 9
+fi
+
 CONFIG="wrangler.jsonc"
 [[ "$MODE" == "staging" ]] && CONFIG="$STAGING_CONFIG"
 echo "→ deploying to $MODE (config: $CONFIG)…"
@@ -200,5 +212,5 @@ json.dump({
     "at": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
 }, open(state_path, "w"), indent=2)
 EOF
-echo "✓ $MODE deploy complete. bundle: $BUNDLE"
-echo "  (staging: verify with the geometry harness before reporting; prod: the user's call was already given — log the version)"
+echo "✓ $MODE deploy complete. bundle: $BUNDLE (geometry check passed on these bytes)"
+echo "  (staging: optionally re-verify the live URL with scripts/verify-live.py staging; prod: log the version)"

@@ -9,7 +9,9 @@ import BranchWeightRow from "../components/BranchWeightRow.astro";
 import {
   stats, brentYtd, brentMonthlyAvgs, wtiWeekly, gasolineYtd, gasolinePreCrisis,
   dieselYtd, dieselOldRecord, dieselPreWar, sprWeekly, sprFloors,
-  wordNum, lastGasoline as lastGas, lastDiesel, gasUpPct, dieselUpPct, dieselStreak,
+  wordNum, ordinal, lastGasoline as lastGas, lastDiesel, gasUpPct, dieselUpPct, dieselStreak,
+  treasury10y, worldBalance, usRefineryUtil2026,
+  treasuryAbove5Streak, refineryBelow95Streak, treasuryNonFred,
   branchWeights, branchTracks, watchGroups, cascade,
   DATA_AS_OF, CRISIS_DAY_1,
   russiaCapacityAnchors, russiaCurrentSpread, russiaSnapshot, russiaBanCascade,
@@ -96,6 +98,76 @@ const crackLast = (retail: typeof dieselYtd) => {
 };
 const dieCrackLast = crackLast(dieselYtd);
 const gasCrackLast = crackLast(gasolineYtd);
+
+// ── 10-yr panel (derived Oct 5) ─────────────────────────────────────────────
+// Endpoint, high close, the "NNth straight close above 5%" streak, and the
+// Yahoo-vs-FRED source sub-line were all re-typed every pass. Now computed.
+const t10Last = lastPt(treasury10y);
+// Highest close OF THE WAR — the post-war subset only (Oct 5 review: a whole-series
+// max could be a pre-war close, which would make "the highest close of the war" a lie).
+const t10PostWar = treasury10y.filter((p) => p.date > "2026-02-28");
+const t10High = t10PostWar.reduce((a, b) => (b.value > a.value ? b : a), t10PostWar[0]);
+const t10Streak = treasuryAbove5Streak;
+const t10HighClause = t10High === t10Last
+  ? " — the highest close of the war"
+  : ` — still below the war's high close of ${t10High.value}% on ${shortDate(t10High.date)}`;
+// compact "Sep 11, 14, 15, …, Oct 1–2" list of the non-FRED (Yahoo) points, grouped
+// by month with consecutive days compressed to a range
+const t10NonFredLine = (() => {
+  const ds = treasuryNonFred.map((iso) => ({
+    m: new Date(iso + "T12:00:00").toLocaleDateString("en-US", { month: "short" }),
+    d: +iso.slice(8),
+  }));
+  const segs: string[] = [];
+  for (let i = 0; i < ds.length; i++) {
+    let j = i;
+    while (j + 1 < ds.length && ds[j + 1].m === ds[j].m && ds[j + 1].d === ds[j].d + 1) j++;
+    segs.push(j === i ? `${ds[i].m} ${ds[i].d}` : `${ds[i].m} ${ds[i].d}–${ds[j].d}`);
+    i = j;
+  }
+  return segs.join(", ");
+})();
+const refineryStreak = refineryBelow95Streak;
+
+// ── Flip chart (world balance, derived Oct 5) ────────────────────────────────
+// Month range, endpoints, worst month, and the month nearest zero for the aria +
+// caption; the chart geometry itself derives from the same array in the script
+// below (the hand-moved lockstep parts are gone). Re-typing this narrative per
+// STEO pass was the "worldBalance lockstep" checklist item.
+const wbFirst = worldBalance[0];
+const wbSecond = worldBalance[1];
+const wbLast = worldBalance[worldBalance.length - 1];
+const wbWorst = worldBalance.reduce((a, b) => (b.value < a.value ? b : a));
+const wbNegs = worldBalance.filter((p) => p.value < 0);
+const wbMinNeg = wbNegs.length
+  ? wbNegs.reduce((a, b) => (Math.abs(b.value) < Math.abs(a.value) ? b : a))
+  : null;
+const wbMonthName = (iso: string) =>
+  new Date(iso + "T12:00:00").toLocaleDateString("en-US", { month: "long" });
+// Post-war clause branches on the data (Oct 5 review: a positive September balance
+// still read "net withdrawals every month" and the last value went through abs()).
+// The ending month is described by its actual sign; the "easing to" milestone only
+// appears when it is a distinct, later month.
+const wbPostWar = worldBalance.filter((p) => p.date >= "2026-03-01");
+const wbAllNeg = wbPostWar.length > 0 && wbPostWar.every((p) => p.value < 0);
+const wbPostWarClause = wbAllNeg
+  ? `then net withdrawals every month after the war began on February 28 — ` +
+    `${Math.abs(wbWorst.value).toFixed(1)} in ${wbMonthName(wbWorst.date)}, the worst month, ` +
+    (wbMinNeg && wbMinNeg.date !== wbWorst.date && wbMinNeg.date > wbWorst.date
+      ? `easing to ${Math.abs(wbMinNeg.value).toFixed(1)} in ${wbMonthName(wbMinNeg.date)} and `
+      : "") +
+    `ending in net withdrawal of ${Math.abs(wbLast.value).toFixed(1)} in ${wbMonthName(wbLast.date)}. `
+  : wbNegs.length === 0
+  ? `then a surplus every month after the war began on February 28 — ending in a surplus of ${wbLast.value.toFixed(1)} in ${wbMonthName(wbLast.date)}. `
+  : `then, after the war began on February 28, withdrawal and surplus months mixed — ` +
+    `${Math.abs(wbWorst.value).toFixed(1)} in ${wbMonthName(wbWorst.date)}, the worst month, ` +
+    `ending in ${wbLast.value > 0 ? `a surplus of ${wbLast.value.toFixed(1)}` : `net withdrawal of ${Math.abs(wbLast.value).toFixed(1)}`} in ${wbMonthName(wbLast.date)}. `;
+const flipAria =
+  `World oil balance, million barrels per day, ${wbMonthName(wbFirst.date)} to ${wbMonthName(wbLast.date)} 2026 actuals: ` +
+  `a ${wbFirst.value.toFixed(1)} to ${wbSecond.value.toFixed(1)} surplus in ${wbMonthName(wbFirst.date)} and ${wbMonthName(wbSecond.date)}, ` +
+  wbPostWarClause +
+  `Above zero, production exceeded consumption and stocks grew. ` +
+  `Below zero, consumption exceeded production and stocks fell.`;
 
 // Odds history: keep the most recent changes visible and fold the older ones into a
 // collapsed "earlier" block, so the section reads as a recent trajectory, not an
@@ -680,11 +752,11 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           </p>
         </div>
         <div class="h-80 sm:h-[400px]">
-          <canvas id="flipChart" role="img" aria-label="World oil balance, million barrels per day, January to August 2026 actuals: a 3.5 to 4.2 surplus in January and February, then net withdrawals every month after the war began on February 28 — 5.2 in March, the worst month, easing to 0.1 in July and back to 4.1 in August. Above zero, production exceeded consumption and stocks grew. Below zero, consumption exceeded production and stocks fell."></canvas>
+          <canvas id="flipChart" role="img" aria-label={flipAria}></canvas>
         </div>
         <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
           World production minus consumption, million barrels/day. EIA Short-Term Energy Outlook (STEO),
-          Table 3a, January–August 2026; forecasts aren't shown. Gulf production outages peaked at
+          Table 3a, {wbMonthName(wbFirst.date)}–{wbMonthName(wbLast.date)} 2026; forecasts aren't shown. Gulf production outages peaked at
           11.2 million barrels/day in May; lower consumption and supply from elsewhere offset much of the loss.
           Separately, the IEA estimates that observed stocks fell by 507 million barrels since February,
           an average of 2.8 million barrels/day, including 95 million barrels in August.
@@ -1145,7 +1217,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
         <div class="mt-12 grid gap-10 lg:grid-cols-3">
           <div class="lg:col-span-2">
             <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-              <h2 class="text-xl font-bold tracking-tight">US refineries ran below 95% of capacity for a second straight week</h2>
+              <h2 class="text-xl font-bold tracking-tight">{refineryStreak > 0 ? `US refineries ran below 95% of capacity ${refineryStreak === 1 ? "for a week" : `for a ${ordinal(refineryStreak)} straight week`}` : "US refineries back above 95% of capacity"}</h2>
               <p class="font-mono text-[11px] text-faint">Share of available refinery capacity in use, weekly.</p>
             </div>
             <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
@@ -1160,7 +1232,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
               Russia continue to put pressure on fuel supplies.
             </p>
             <div class="relative h-96">
-              <canvas id="refineryChart" role="img" aria-label="US refinery utilization, percent of operable capacity, weekly: 2026 above 2025 from spring onward — a dip to 88.6 percent in late February, then a steady climb from 95.3 on Jun 5 to a 98.0 peak on Aug 28, easing to 96.8 on Sep 11, slipping to 94.0 on Sep 18, and falling to 92.5 on Sep 25 — two straight weeks below 95%; the same period in 2025 ranged from 83.5 to 96.9."></canvas>
+              <canvas id="refineryChart" role="img" aria-label={`US refinery utilization, percent of operable capacity, weekly: 2026 above 2025 from spring onward — a dip to 88.6 percent in late February, then a steady climb from 95.3 on Jun 5 to a 98.0 peak on Aug 28, easing to 96.8 on Sep 11, slipping to 94.0 on Sep 18, and falling to 92.5 on Sep 25 — ${refineryStreak} straight week${refineryStreak === 1 ? "" : "s"} below 95%; the same period in 2025 ranged from 83.5 to 96.9.`}></canvas>
             </div>
             <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
               EIA Weekly Petroleum Status Report (WPULEUS3), weeks ending Friday. Utilization is the
@@ -1384,9 +1456,9 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           <div class="mt-6 grid gap-10 lg:grid-cols-2">
             <div>
               <h3 class="text-lg font-bold tracking-tight">US 10-year Treasury yield</h3>
-              <p class="mt-2 font-mono text-[11px] text-faint">10-year US Treasury yield, % · chart through Oct 2 · weekly closes (FRED) · Sep 11, 14, 15, 16, 17, 18, 21, 22, 23, 24, 25, 28, 29, 30, and Oct 1–2: Yahoo closing values.</p>
+              <p class="mt-2 font-mono text-[11px] text-faint">10-year US Treasury yield, % · chart through {shortDate(t10Last.date)} · weekly closes (FRED) · {t10NonFredLine}: Yahoo closing values.</p>
               <div class="mt-4 h-72">
-                <canvas id="treasury10yChart" role="img" aria-label="US 10-year Treasury yield, 2026: 4.19% on Jan 2, 3.97% on Feb 27 before the war, and 5.277% on Oct 2, its eighth straight close above 5%; 5.293% on Sep 30 remains the highest close of the war. The Sep 16 close of 5.006% is the first above 5% since the war began. Reference lines mark the pre-war 3.97% and the January 2025 high of 4.8%."></canvas>
+                <canvas id="treasury10yChart" role="img" aria-label={`US 10-year Treasury yield, 2026: 4.19% on Jan 2, 3.97% on Feb 27 before the war, and ${t10Last.value}% on ${shortDate(t10Last.date)}, ${t10Streak > 0 ? `its ${ordinal(t10Streak)} straight close above 5%` : "back below 5%"}; ${t10High.value}% on ${shortDate(t10High.date)} ${t10High === t10Last ? "is" : "remains"} the highest close of the war. The Sep 16 close of 5.006% is the first above 5% since the war began. Reference lines mark the pre-war 3.97% and the January 2025 high of 4.8%`}></canvas>
               </div>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 The 10-year Treasury yield is the rate the US government pays to borrow for a decade.
@@ -1397,8 +1469,8 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
                 refinanced by year-end.
               </p>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-                The 10-year yield closed at 5.277% on Oct 2, its eighth straight close above 5%
-                — still below the war's high close of 5.293% on Sep 30. The close came after the G7
+                The 10-year yield closed at {t10Last.value}% on {shortDate(t10Last.date)}, {t10Streak > 0 ? `its ${ordinal(t10Streak)} straight close above 5%` : "back below 5%"}
+                {t10HighClause}. The close came after the G7
                 reserve-release announcement and a weak September jobs report (29,000 jobs, with
                 unemployment rising), which cut expectations of another Fed hike.
                 According to the Wall Street Journal (Oct 1), the yield reached its highest level
@@ -1529,6 +1601,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
         usRefineryUtil2026, usRefineryUtil2025,
         commercialCrude2026, commercialCrude2025,
         worldConsumption2025, worldConsumption2026,
+        wtiNonFred as wtiNonFredDates,
       } from "../data/crisis";
       // World stocks panels: provenance per point lives in this file (see research/world-stocks-research.md)
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -1675,12 +1748,44 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
       // Brent chart (linear time + WTI weekly) is built below, after moneyXScale is defined.
 
       // The flip: world oil balance — surplus before the war, net withdrawals after.
-      // Reported months only (STEO actuals Jan–Aug 2026); the forecast tail is deliberately
+      // Reported months only (STEO actuals); the forecast tail is deliberately
       // absent. The zero line is the protagonist; pre-war segments grey, post-war red.
+      // ALL geometry derives from worldBalance (Oct 5): month ticks, axis ranges,
+      // zero-line end, point colors, and label positions. The hand-moved lockstep
+      // checklist (x-max, tick map, `i < 2` color-by-index, y range, label indexes)
+      // is gone — a new STEO month appends to the array and the chart follows.
       {
         const b0 = Date.parse("2026-01-01T12:00:00");
         const bday = (iso: string) => Math.round((Date.parse(iso + "T12:00:00") - b0) / 86400000);
         const bpts = worldBalance.map((p) => ({ x: bday(p.date), y: p.value }));
+        const bvals = worldBalance.map((p) => p.value);
+        const bLastIdx = bpts.length - 1;
+        const bWorstIdx = bvals.indexOf(Math.min(...bvals));
+        // "pre-war surplus" label — candidates restricted to pre-war dates (Oct 5
+        // recheck: the whole-series max would move the label onto a post-war point
+        // if a post-war surplus ever exceeds February's 4.2)
+        const bPreWarIdxs = worldBalance.map((p, i) => (p.date < "2026-02-28" ? i : -1)).filter((i) => i >= 0);
+        const bBestIdx = bPreWarIdxs.length
+          ? bPreWarIdxs.reduce((a, b) => (worldBalance[b].value > worldBalance[a].value ? b : a))
+          : -1;
+        // the negative month nearest zero ("easing to 0.1 in July")
+        const bNegIdxs = worldBalance.map((p, i) => (p.value < 0 ? i : -1)).filter((i) => i >= 0);
+        const bMinNegIdx = bNegIdxs.length
+          ? bNegIdxs.reduce((a, b) => (Math.abs(worldBalance[b].value) < Math.abs(worldBalance[a].value) ? b : a))
+          : -1;
+        const bMonthShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const bMonth = (iso: string) => bMonthShort[Number(iso.slice(5, 7)) - 1];
+        const bfmt = (v: number) => `${v > 0 ? "+" : "−"}${Math.abs(v).toFixed(1)}`;
+        // axis ranges: +8 days of headroom past the last point (the endpoint dot
+        // must clear the right edge), values padded ~0.8 then floored/ceiled to ints
+        const bXMax = bday(worldBalance[bLastIdx].date) + 8;
+        const bYMin = Math.min(0, Math.floor(Math.min(...bvals) - 0.8));
+        const bYMax = Math.max(0, Math.ceil(Math.max(...bvals) + 0.8));
+        // one tick per month present in the data, at that month's first day
+        const bMonths = [...new Set(worldBalance.map((p) => p.date.slice(5, 7)))];
+        const bTickDays = bMonths.map((mm) => bday(`2026-${mm}-01`));
+        const bTickLabels: Record<number, string> = Object.fromEntries(
+          bTickDays.map((d, i) => [d, bMonthShort[Number(bMonths[i]) - 1]]));
         new Chart(document.getElementById("flipChart")!, {
           type: "line",
           data: {
@@ -1698,13 +1803,15 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
                   borderColor: (c) => (c.p0.parsed.y > 0 && c.p1.parsed.y > 0 ? "#8a867a" : "#b3261e"),
                 },
                 pointRadius: bpts.map((_, i) => (i === bpts.length - 1 ? 4 : 3)),
-                pointBackgroundColor: bpts.map((_, i) => (i < 2 ? "#8a867a" : "#b3261e")),
+                // color by DATE, not index: the old `i < 2` greyed "the first two points",
+                // which silently repaints the wrong months if the array head ever shifts
+                pointBackgroundColor: worldBalance.map((p) => (p.value > 0 ? "#8a867a" : "#b3261e")),  // color by SIGN, matching the segment rule (a post-war surplus month is not red)
                 pointBorderColor: "#f2f1ec",
                 pointBorderWidth: 1,
               },
               {
                 label: "zero",
-                data: [{ x: 0, y: 0 }, { x: 235, y: 0 }],
+                data: [{ x: 0, y: 0 }, { x: bXMax, y: 0 }],
                 borderColor: "#1c1b17",
                 borderWidth: 1.5,
                 pointRadius: 0,
@@ -1714,8 +1821,8 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
               {
                 label: "war begins",
                 data: [
-                  { x: bday("2026-02-28"), y: -6 },
-                  { x: bday("2026-02-28"), y: 4.5 },
+                  { x: bday("2026-02-28"), y: bYMin },
+                  { x: bday("2026-02-28"), y: bYMax - 0.5 },
                 ],
                 borderColor: "rgba(28,27,23,0.35)",
                 borderDash: [3, 3],
@@ -1735,24 +1842,23 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
               x: {
                 type: "linear",
                 min: 0,
-                max: 235,
+                max: bXMax,
                 grid: { display: false },
                 border: { display: true, color: "#d8d4c6", width: 0.5 },
                 afterBuildTicks: (scale) => {
-                  scale.ticks = [0, 31, 59, 90, 120, 151, 181, 212].map((v) => ({ value: v }));
+                  scale.ticks = bTickDays.map((v) => ({ value: v }));
                 },
                 ticks: {
                   color: "#8a867a",
                   padding: 8,
                   font: { family: "Georgia, serif", size: 11 },
-                  callback: (v: unknown) =>
-                    ({ 0: "Jan", 31: "Feb", 59: "Mar", 90: "Apr", 120: "May", 151: "Jun", 181: "Jul", 212: "Aug" } as Record<number, string>)[Number(v)] ?? "",
+                  callback: (v: unknown) => bTickLabels[Number(v)] ?? "",
                 },
               },
               y: {
                 type: "linear" as const,
-                min: -6,
-                max: 5,
+                min: bYMin,
+                max: bYMax,
                 grid: { display: false },
                 border: { display: true, color: "#d8d4c6", width: 0.5 },
                 ticks: {
@@ -1780,13 +1886,21 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           },
           plugins: [
             crosshair,
-            directLabels([
-              { dataset: 0, index: 1, text: "+4.2 — pre-war surplus", align: "left", dx: 8, dy: 16, color: "#8a867a" },
-              { dataset: 2, index: 1, text: "war begins Feb 28", align: "left", dx: 6, dy: -10, ...note },
-              { dataset: 0, index: 2, text: "−5.2 — worst month", align: "left", dx: 6, dy: -16, color: "#b3261e" },
-              { dataset: 0, index: 6, text: "−0.1 (Jul)", dy: 18, color: "#8a867a" },
-              { dataset: 0, index: 7, text: "−4.1 (Aug, latest)", ...endpoint, color: "#b3261e" },
-            ]),
+            // labels derive from the data too (the hard-coded indexes 1/2/6/7 were the
+            // lockstep trap); the two conditional ones only exist while their fact holds
+            directLabels((() => {
+              const specs: { dataset: number; index: number; text: string; dx?: number; dy?: number; align?: CanvasTextAlign; color?: string }[] = [];
+              if (bBestIdx >= 0 && worldBalance[bBestIdx].value > 0) specs.push({
+                dataset: 0, index: bBestIdx, text: `${bfmt(worldBalance[bBestIdx].value)} — pre-war surplus`, align: "left", dx: 8, dy: 16, color: "#8a867a",
+              });
+              specs.push({ dataset: 2, index: 1, text: "war begins Feb 28", align: "left", dx: 6, dy: -10, ...note } as typeof specs[number]);
+              specs.push({ dataset: 0, index: bWorstIdx, text: `${bfmt(worldBalance[bWorstIdx].value)} — worst month`, align: "left", dx: 6, dy: -16, color: "#b3261e" });
+              if (bMinNegIdx >= 0 && bMinNegIdx !== bLastIdx) specs.push({
+                dataset: 0, index: bMinNegIdx, text: `${bfmt(worldBalance[bMinNegIdx].value)} (${bMonth(worldBalance[bMinNegIdx].date)})`, dy: 18, color: "#8a867a",
+              });
+              specs.push({ dataset: 0, index: bLastIdx, text: `${bfmt(worldBalance[bLastIdx].value)} (${bMonth(worldBalance[bLastIdx].date)}, latest)`, ...endpoint, color: "#b3261e" } as typeof specs[number]);
+              return specs;
+            })()), 
           ],
         });
       }
@@ -2792,15 +2906,18 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
           const w = nearestWti(gd(p.date));
           return { date: p.date, x: gd(p.date), y: +((p.value * 42 - w.value) * 10).toFixed(0) / 10 };
         });
-      // WTI points that are futures closes, not the FRED weekly spot series — the tooltip
-      // source label follows this (kept in step with the panel copy: "Sep 10–11 and Sep 14–Oct 5").
+      // WTI points that are futures closes / settlements, not the FRED weekly spot series —
+      // the tooltip source label follows this. Derived from the `fred` flag on each
+      // wtiWeekly point (Oct 5): it used to be a hand-typed date set that had to be
+      // extended with every appended point (and lagged three times). When a later pass
+      // swaps a Yahoo point for the FRED value, set `fred: true` on that point.
       // Pairing check (nearest WTI point, same day wins): Sep 23 AAA → Sep 23 settle 92.16;
       // Sep 24 AAA → Sep 24 settle 94.61; Sep 25 and 26 AAA → Sep 25 settle 92.41;
       // Sep 27–28 AAA → Sep 28 settle 92.60; Sep 29 AAA → Sep 29 settle 89.38;
       // Sep 30 AAA → Sep 30 settle 90.42; Oct 1 and Oct 2 AAA → same-day settles 92.87 / 91.11;
       // Oct 3–5 AAA → Oct 2 settle 91.11 (nearest trading day — Oct 3–4 the weekend; Oct 5's settle
       // not yet on record) — disclosed in the methodology paragraph.
-      const wtiNonFred = new Set(["2026-09-10", "2026-09-11", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-25", "2026-09-28", "2026-09-29", "2026-09-30", "2026-10-01", "2026-10-02"]);
+      const wtiNonFred = new Set(wtiNonFredDates);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
       // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 and the Oct 5
       // point (the record is Sep 23 — the label tracks the max on the line; Oct 1–2's and the

@@ -18,6 +18,7 @@ export interface SeriesPoint {
   approx?: boolean; // source gave a rounded estimate
   note?: string;
   tip?: string; // short tooltip-only label; the tooltip shows tip when set, else note
+  fred?: boolean; // true = value from the FRED weekly spot series; unset/false = futures close or settlement (tooltip source labels derive from this)
 }
 
 // ---------- Brent, $/bbl — 2026 YTD (observed points) ----------
@@ -74,49 +75,49 @@ export const brentMonthlyAvgs = [
 // SeriesPoint (not a bare {date, value}): the tail is mixed-source — FRED weekly closes
 // plus the Sep 10 front-month close and the Sep 11 and Sep 14 closes, flagged in the notes.
 export const wtiWeekly: SeriesPoint[] = [
-  { date: "2026-01-05", value: 58.1 },
-  { date: "2026-01-12", value: 59.39 },
-  { date: "2026-01-15", value: 59.13 },
-  { date: "2026-01-20", value: 60.3 },
-  { date: "2026-01-26", value: 60.46 },
-  { date: "2026-02-02", value: 61.6 },
-  { date: "2026-02-09", value: 64.53 },
-  { date: "2026-02-17", value: 62.53 },
-  { date: "2026-02-23", value: 66.36 },
-  { date: "2026-02-27", value: 66.96 },
-  { date: "2026-03-02", value: 71.13 },
-  { date: "2026-03-09", value: 94.65 },
-  { date: "2026-03-16", value: 93.39 },
-  { date: "2026-03-23", value: 89.33 },
-  { date: "2026-03-30", value: 104.69 },
-  { date: "2026-04-06", value: 114.01 },
-  { date: "2026-04-13", value: 100.72 },
-  { date: "2026-04-20", value: 91.06 },
-  { date: "2026-04-27", value: 99.89 },
-  { date: "2026-05-04", value: 109.76 },
-  { date: "2026-05-11", value: 101.56 },
-  { date: "2026-05-15", value: 108.99 },
-  { date: "2026-05-18", value: 112.25 },
-  { date: "2026-05-26", value: 97.63 },
-  { date: "2026-06-01", value: 95.96 },
-  { date: "2026-06-08", value: 95.0 },
-  { date: "2026-06-15", value: 84.65 },
-  { date: "2026-06-22", value: 78.94 },
-  { date: "2026-06-29", value: 71.87 },
-  { date: "2026-07-06", value: 69.6 },
-  { date: "2026-07-13", value: 79.2 },
-  { date: "2026-07-20", value: 84.38 },
-  { date: "2026-07-27", value: 84.25 },
-  { date: "2026-08-03", value: 81.96 },
-  { date: "2026-08-10", value: 83.76 },
-  { date: "2026-08-17", value: 86.04 },
-  { date: "2026-08-21", value: 87.21 },
-  { date: "2026-08-24", value: 86.34 },
-  { date: "2026-08-31", value: 87.03 },
-  { date: "2026-09-03", value: 92.55 },
-  { date: "2026-09-04", value: 92.69 },
-  { date: "2026-09-08", value: 94.21 },
-  { date: "2026-09-09", value: 97.26 },
+  { fred: true, date: "2026-01-05", value: 58.1 },
+  { fred: true, date: "2026-01-12", value: 59.39 },
+  { fred: true, date: "2026-01-15", value: 59.13 },
+  { fred: true, date: "2026-01-20", value: 60.3 },
+  { fred: true, date: "2026-01-26", value: 60.46 },
+  { fred: true, date: "2026-02-02", value: 61.6 },
+  { fred: true, date: "2026-02-09", value: 64.53 },
+  { fred: true, date: "2026-02-17", value: 62.53 },
+  { fred: true, date: "2026-02-23", value: 66.36 },
+  { fred: true, date: "2026-02-27", value: 66.96 },
+  { fred: true, date: "2026-03-02", value: 71.13 },
+  { fred: true, date: "2026-03-09", value: 94.65 },
+  { fred: true, date: "2026-03-16", value: 93.39 },
+  { fred: true, date: "2026-03-23", value: 89.33 },
+  { fred: true, date: "2026-03-30", value: 104.69 },
+  { fred: true, date: "2026-04-06", value: 114.01 },
+  { fred: true, date: "2026-04-13", value: 100.72 },
+  { fred: true, date: "2026-04-20", value: 91.06 },
+  { fred: true, date: "2026-04-27", value: 99.89 },
+  { fred: true, date: "2026-05-04", value: 109.76 },
+  { fred: true, date: "2026-05-11", value: 101.56 },
+  { fred: true, date: "2026-05-15", value: 108.99 },
+  { fred: true, date: "2026-05-18", value: 112.25 },
+  { fred: true, date: "2026-05-26", value: 97.63 },
+  { fred: true, date: "2026-06-01", value: 95.96 },
+  { fred: true, date: "2026-06-08", value: 95.0 },
+  { fred: true, date: "2026-06-15", value: 84.65 },
+  { fred: true, date: "2026-06-22", value: 78.94 },
+  { fred: true, date: "2026-06-29", value: 71.87 },
+  { fred: true, date: "2026-07-06", value: 69.6 },
+  { fred: true, date: "2026-07-13", value: 79.2 },
+  { fred: true, date: "2026-07-20", value: 84.38 },
+  { fred: true, date: "2026-07-27", value: 84.25 },
+  { fred: true, date: "2026-08-03", value: 81.96 },
+  { fred: true, date: "2026-08-10", value: 83.76 },
+  { fred: true, date: "2026-08-17", value: 86.04 },
+  { fred: true, date: "2026-08-21", value: 87.21 },
+  { fred: true, date: "2026-08-24", value: 86.34 },
+  { fred: true, date: "2026-08-31", value: 87.03 },
+  { fred: true, date: "2026-09-03", value: 92.55 },
+  { fred: true, date: "2026-09-04", value: 92.69 },
+  { fred: true, date: "2026-09-08", value: 94.21 },
+  { fred: true, date: "2026-09-09", value: 97.26 },
   { date: "2026-09-10", value: 102.93 },
   { date: "2026-09-11", value: 100.05, note: "settle −2.4% (CNBC)" },
   { date: "2026-09-14", value: 101.39, note: "front-month futures close (Yahoo, corrected Sep 15; FRED not yet available)" },
@@ -785,44 +786,46 @@ export const gasPreClosure = { ttf: 10.99, jkm: 10.66 };
 export interface Y10Pt {
   date: string;
   value: number;
+  note?: string;
+  fred?: boolean; // true = FRED DGS10 close; unset = Yahoo ^TNX session close
 }
 export const treasury10y: Y10Pt[] = [
-  { date: "2026-01-02", value: 4.19 },
-  { date: "2026-01-09", value: 4.18 },
-  { date: "2026-01-16", value: 4.24 },
-  { date: "2026-01-23", value: 4.24 },
-  { date: "2026-01-30", value: 4.26 },
-  { date: "2026-02-06", value: 4.22 },
-  { date: "2026-02-13", value: 4.04 },
-  { date: "2026-02-20", value: 4.08 },
-  { date: "2026-02-27", value: 3.97 },
-  { date: "2026-03-06", value: 4.15 },
-  { date: "2026-03-13", value: 4.28 },
-  { date: "2026-03-20", value: 4.39 },
-  { date: "2026-03-27", value: 4.44 },
-  { date: "2026-04-03", value: 4.35 },
-  { date: "2026-04-10", value: 4.31 },
-  { date: "2026-04-17", value: 4.26 },
-  { date: "2026-04-24", value: 4.31 },
-  { date: "2026-05-01", value: 4.39 },
-  { date: "2026-05-08", value: 4.38 },
-  { date: "2026-05-15", value: 4.59 },
-  { date: "2026-05-22", value: 4.56 },
-  { date: "2026-05-29", value: 4.45 },
-  { date: "2026-06-05", value: 4.55 },
-  { date: "2026-06-12", value: 4.48 },
-  { date: "2026-06-26", value: 4.38 },
-  { date: "2026-07-10", value: 4.56 },
-  { date: "2026-07-17", value: 4.55 },
-  { date: "2026-07-24", value: 4.69 },
-  { date: "2026-07-31", value: 4.75 },
-  { date: "2026-08-07", value: 4.65 },
-  { date: "2026-08-14", value: 4.68 },
-  { date: "2026-08-21", value: 4.74 },
-  { date: "2026-08-28", value: 4.73 },
-  { date: "2026-09-04", value: 4.78 },
-  { date: "2026-09-09", value: 4.83 },
-  { date: "2026-09-10", value: 4.95, note: "FRED (was Yahoo 4.94; FRED posted Sep 11)" },
+  { fred: true, date: "2026-01-02", value: 4.19 },
+  { fred: true, date: "2026-01-09", value: 4.18 },
+  { fred: true, date: "2026-01-16", value: 4.24 },
+  { fred: true, date: "2026-01-23", value: 4.24 },
+  { fred: true, date: "2026-01-30", value: 4.26 },
+  { fred: true, date: "2026-02-06", value: 4.22 },
+  { fred: true, date: "2026-02-13", value: 4.04 },
+  { fred: true, date: "2026-02-20", value: 4.08 },
+  { fred: true, date: "2026-02-27", value: 3.97 },
+  { fred: true, date: "2026-03-06", value: 4.15 },
+  { fred: true, date: "2026-03-13", value: 4.28 },
+  { fred: true, date: "2026-03-20", value: 4.39 },
+  { fred: true, date: "2026-03-27", value: 4.44 },
+  { fred: true, date: "2026-04-03", value: 4.35 },
+  { fred: true, date: "2026-04-10", value: 4.31 },
+  { fred: true, date: "2026-04-17", value: 4.26 },
+  { fred: true, date: "2026-04-24", value: 4.31 },
+  { fred: true, date: "2026-05-01", value: 4.39 },
+  { fred: true, date: "2026-05-08", value: 4.38 },
+  { fred: true, date: "2026-05-15", value: 4.59 },
+  { fred: true, date: "2026-05-22", value: 4.56 },
+  { fred: true, date: "2026-05-29", value: 4.45 },
+  { fred: true, date: "2026-06-05", value: 4.55 },
+  { fred: true, date: "2026-06-12", value: 4.48 },
+  { fred: true, date: "2026-06-26", value: 4.38 },
+  { fred: true, date: "2026-07-10", value: 4.56 },
+  { fred: true, date: "2026-07-17", value: 4.55 },
+  { fred: true, date: "2026-07-24", value: 4.69 },
+  { fred: true, date: "2026-07-31", value: 4.75 },
+  { fred: true, date: "2026-08-07", value: 4.65 },
+  { fred: true, date: "2026-08-14", value: 4.68 },
+  { fred: true, date: "2026-08-21", value: 4.74 },
+  { fred: true, date: "2026-08-28", value: 4.73 },
+  { fred: true, date: "2026-09-04", value: 4.78 },
+  { fred: true, date: "2026-09-09", value: 4.83 },
+  { fred: true, date: "2026-09-10", value: 4.95, note: "FRED (was Yahoo 4.94; FRED posted Sep 11)" },
   { date: "2026-09-11", value: 4.975, note: "session close (Yahoo) · intraday 4.992, highest since Oct 2023" },
   { date: "2026-09-14", value: 4.961, note: "session close (Yahoo)" },
   { date: "2026-09-15", value: 4.996, note: "session close (Yahoo) · pre-Fed (decision Sep 16, 14:00 ET)" },
@@ -885,3 +888,46 @@ export const ppiYtd: CpiPt[] = [
   { date: "2026-07-31", value: 4.8 },
   { date: "2026-08-31", value: 5.4 },
 ];
+
+// ---------- Streaks (derived, Oct 5) ----------
+// The "NNth straight …" sub-lines, headings, and aria fragments used to be typed by
+// hand each pass. Count backwards from the last point; a streak is consecutive
+// points (no gaps allowed — the arrays are strictly increasing dates) on one side
+// of a threshold. wordNum/wordNumOrdinal above give the phrasing.
+// Ordinal word. n >= 1 required (callers branch on zero before calling — a zero streak
+// must get its own sentence, never ordinal(0)). The 1-19 forms are irregular enough to
+// table (fifth, eighth, ninth, twelfth); 20+ combines the tens word with the unit
+// ordinal (twenty-fifth) or takes "th" (thirtieth, fortieth).
+const UNIT_ORDINALS = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth",
+  "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth"];
+export const ordinal = (n: number) => {
+  if (n < 1) return `${n}th`; // caller bug — surface it in output, never "undefined"
+  if (n < 20) return UNIT_ORDINALS[n - 1];
+  if (n < 100) {
+    const last = n % 10, tens = TENS[Math.floor(n / 10)];
+    // 20/30/… drop the "y" and take "ieth": twenty → twentieth, thirty → thirtieth
+    return last ? `${tens}-${UNIT_ORDINALS[last - 1]}` : `${tens.slice(0, -1)}ieth`;
+  }
+  return `${n}th`;
+};
+// consecutive closes above `threshold`, ending at the latest point
+export const aboveStreak = (pts: { value: number }[], threshold: number) => {
+  let n = 0;
+  for (let i = pts.length - 1; i >= 0; i--) if (pts[i].value > threshold) n++; else break;
+  return n;
+};
+// consecutive readings below `threshold`, ending at the latest point
+export const belowStreak = (pts: { value: number }[], threshold: number) => {
+  let n = 0;
+  for (let i = pts.length - 1; i >= 0; i--) if (pts[i].value < threshold) n++; else break;
+  return n;
+};
+// 10-yr: consecutive session closes above 5% (the "eighth straight close above 5%" copy)
+export const treasuryAbove5Streak = aboveStreak(treasury10y, 5);
+// refinery utilization: consecutive weeks below 95% (the "second straight week" heading)
+export const refineryBelow95Streak = belowStreak(usRefineryUtil2026, 95);
+// 10-yr points that are Yahoo session closes, not FRED — the panel's source sub-line
+// lists them (was a hand-typed date list; it went stale for the same reason wtiNonFred did)
+export const treasuryNonFred = treasury10y.filter((p) => !p.fred).map((p) => p.date);
+// same for WTI — the tooltip source label ("front-month futures close" vs "FRED weekly spot")
+export const wtiNonFred = wtiWeekly.filter((p) => !p.fred).map((p) => p.date);

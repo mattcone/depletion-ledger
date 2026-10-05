@@ -22,11 +22,25 @@ if (!/^\d{4}-\d{2}-\d{2}$/.test(since)) {
   process.exit(1);
 }
 
+// Property-ORDER-INDEPENDENT (same fix as daily-update.mjs, Oct 5 review): the FRED
+// rows put `fred:` before `date:`, so a regex anchored on `{ date: …` dropped 43 of
+// 60 WTI rows — and this script silently paired Sep 3/4 retail prices to the Sep 10
+// settlement as a result. Parse each `{ … }` entry individually and fail loudly if
+// any entry lacks date+value.
 const arr = (name) => {
   const m = ts.match(new RegExp(`export const ${name}\\s*[:=][^\\[]*\\[([\\s\\S]*?)\\n\\];`));
   if (!m) throw new Error(`could not find ${name} in crisis.ts`);
-  return [...m[1].matchAll(/\{\s*date:\s*"([^"]+)"\s*,\s*value:\s*([0-9.]+)/g)]
-    .map((x) => ({ date: x[1], value: Number(x[2]) }));
+  const entries = [...m[1].matchAll(/\{[^{}]*\}/g)].map((x) => x[0]);
+  const pts = [];
+  for (const e of entries) {
+    const d = e.match(/date:\s*"([^"]+)"/);
+    const v = e.match(/\bvalue:\s*(-?[0-9.]+)/);
+    if (d && v) pts.push({ date: d[1], value: Number(v[1]) });
+  }
+  if (pts.length !== entries.length) {
+    throw new Error(`${name}: only ${pts.length}/${entries.length} entries parsed (missing date/value) — fix the parser, do not pair on partial data`);
+  }
+  return pts;
 };
 
 const wti = arr("wtiWeekly");
