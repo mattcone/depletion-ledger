@@ -592,12 +592,13 @@ export const russiaCapacityAnchors = [
   { date: "2025-08-01", pct: 100, label: "strikes begin (Aug 2025)" },
   { date: "2026-04-15", pct: 75, label: "~25% of capacity lost (mid-April)" },
   { date: "2026-08-29", pct: 70, label: ">30% of actual capacity offline (Moscow Times, Aug 29)" },
+  { date: "2026-10-04", pct: 49, label: "51% of capacity disabled (UA Defense Ministry, Oct 4 — Khmara; up from >45% Sep 21; not independently verifiable)" },
 ];
-// Spread of estimates (capacity OUT), current as of Sep 21: UA Gen Staff >45% of DESIGNED
-// capacity (Sep 21, up from their 42.74% on Sep 9 — UA.NEWS/National Security Journal) ·
-// Russian Forbes 54% (Sep 9) · IEA ">20%" → capacity REMAINING: 46%–80% (unchanged; the
-// Sep 21 Gen Staff update sits inside the existing range; Forbes still sets the low end)
-export const russiaCurrentSpread = { date: "2026-09-21", low: 46, high: 80 };
+// Spread of estimates (capacity OUT), current as of Oct 4: UA Defense Ministry 51% struck
+// (Oct 4, Khmara) · Russian Forbes 54% (Sep 9) · IEA ">20%" → capacity REMAINING: 46%–80%
+// (the range is unchanged by the Oct 4 figure — it sits inside; Forbes still sets the
+// low end, IEA the high end)
+export const russiaCurrentSpread = { date: "2026-10-04", low: 46, high: 80 };
 
 // Snapshot card rows (name / value / delta / flag)
 // Organized by mechanism, not by plant: the headline number, the recent-strike
@@ -622,17 +623,17 @@ const russiaStruckRefineries = [
   { plant: "Moscow refinery", date: "Sep 20" },
   { plant: "Kuibyshev, near Samara", date: "Sep 21–22" },
   { plant: "Ufa", date: "Sep 21–22" },
-  { plant: "Perm, seventh-largest at ~257 kb/d (an earlier shutdown was reported on Aug 24)", date: "Sep 25" },
-  { plant: "Novoshakhtinsk, ~110–140 kb/d, the largest fuel supplier in southern Russia", date: "Sep 25" },
-  { plant: "Ilsky, ~125 kb/d — three people killed", date: "Sep 26" },
-  { plant: "Lukoil-Volgograd (Volgograd)", date: "Oct 2" },
+  { plant: "Perm, ~257 kb/d", date: "Sep 25" },
+  { plant: "Novoshakhtinsk, ~110–140 kb/d", date: "Sep 25" },
+  { plant: "Ilsky, ~125 kb/d — three killed", date: "Sep 26" },
+  { plant: "Lukoil-Volgograd", date: "Oct 2" },
 ];
 export const russiaSnapshot = [
-  { name: "Capacity out of service", value: ">30%", delta: "Aug 29, Moscow Times — up from ~25% in April", flag: "Ukraine's General Staff: more than 45% of designed capacity out as of Sep 21 (up from 42.7% on Sep 9) · Russian Forbes: 54% (Sep 9) · RBC-Ukraine: ~14% of capacity out of service in the first 20 days of September · September total: 12 refineries struck, most halted or sharply reduced (DroneBomber, via UNN, Oct 1)" },
-  { name: `Refineries struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} plants`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Ufa and Volgograd: strike and fire confirmed, halt unverified (Gen Staff, Oct 2 for Volgograd); the other five have confirmed halts; no restarts reported. The 'Samara' oil terminal and the Novorossiysk fuel-oil terminal were also hit (Gen Staff, Oct 2; Sep 8–9) — all three export routes are now under attack (Reuters, RBC-Ukraine, ISW, Gen Staff)" },
-  { name: "Major refineries still offline", value: "both out", delta: "Kirishi, Russia's second-largest, ~404 kb/d nameplate (S&P Global, Mar 2026), fully halted, hit twice in a month (UA.NEWS, Sep 2) · Ryazan, Moscow's main supplier, ~344 kb/d nameplate (S&P Global, Mar 2026) — both primary units, 12Mt/yr, offline since Sep 6 (Reuters, Sep 10)", flag: "These figures describe plant capacity, not measured lost output. Bloomberg reported every major Lukoil refinery offline on Aug 25." },
-  { name: "Gasoline shortages at gas stations", value: "45–53%", delta: "Share of stations without AI-92 (45%) and AI-95 (53%) gasoline, mid-September — 33% and 38% at the end of August (gdebenzin, via UNN, Sep 22); rationing measures are back in about two-thirds of regions (Independent, Sep 22)", flag: "Gasoline prices +21% YTD, national average 78.51 rubles/liter as of Sep 14 (Moscow Times); authorities are preparing for further shortages (UNN)" },
-  { name: "Jet fuel now imported", value: "military + civilian", delta: "Ukraine's military intelligence agency reports that Russia is importing Jet A-1 aviation fuel from South Korea and Egypt after a year of refinery strikes (Aug 29), and that Russian military aviation has a kerosene shortage. The jet-fuel export ban runs through Nov 30 — and no jet fuel or gasoline has left Russia by sea for two straight weeks (S&P Global CAS, Oct 1)", flag: "ISW (Sep 26) assesses that Russia's long-range strike campaign depends on jet-powered Geran drones; a kerosene shortage would constrain that capability" },
+  { name: "Capacity out of service", value: "51%", delta: "UA Defense Ministry, Oct 4 (Khmara) — up from >45% (Sep 21) and ~30% (Aug 29, Moscow Times)", flag: "Russian Forbes: 54% (Sep 9) · IEA: more than 20% · the 51% claim can't be independently verified (AP)" },
+  { name: `Refineries struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} plants`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Fires at Ufa and Volgograd are confirmed; shutdowns are unverified. The other five plants have confirmed shutdowns, with no restarts reported. Samara and Novorossiysk terminals were also hit — all three export routes are now under attack (Reuters, ISW, Gen Staff)" },
+  { name: "Major refineries still offline", value: "both out", delta: "Kirishi, Russia's second-largest, ~404 kb/d, halted since early September (UA.NEWS, Sep 2) · Ryazan, Moscow's main supplier, ~344 kb/d, offline since Sep 6 (Reuters, Sep 10)", flag: "Nameplate capacity, not measured lost output." },
+  { name: "Gasoline shortages at gas stations", value: "45–53%", delta: "Share of stations without AI-92 (45%) or AI-95 (53%) gasoline, mid-September (gdebenzin, via UNN, Sep 22); rationing has returned in about two-thirds of regions (Independent, Sep 22)", flag: "Gasoline prices +21% YTD (Moscow Times, Sep 14) · IEA: diesel output down about 30%, with waits of up to 40 hours (Oct 5)" },
+  { name: "Jet fuel now imported", value: "military + civilian", delta: "Russia is importing Jet A-1 from South Korea and Egypt (UA military intelligence, Aug 29); no jet fuel or gasoline has left Russia by sea for two straight weeks (S&P Global CAS, Oct 1)", flag: "ISW (Sep 26): Geran drones use jet fuel; a kerosene shortage would limit their use" },
 ];
 
 export const russiaBanCascade = [
@@ -931,3 +932,145 @@ export const refineryBelow95Streak = belowStreak(usRefineryUtil2026, 95);
 export const treasuryNonFred = treasury10y.filter((p) => !p.fred).map((p) => p.date);
 // same for WTI — the tooltip source label ("front-month futures close" vs "FRED weekly spot")
 export const wtiNonFred = wtiWeekly.filter((p) => !p.fred).map((p) => p.date);
+
+// ---------- UKMTO maritime incidents (attack-frequency chart, Oct 5) ----------
+// UKMTO (UK Maritime Trade Operations) numbers each confirmed incident sequentially
+// FOR THE YEAR ("NNN-26" = the NNNth confirmed incident of 2026) — the first three
+// reports predate the war (the official "incidents since 28 Feb" list starts at #4;
+// JMIC Monthly Statistics Mar 2026 puts the last pre-war incident on Feb 17). Its
+// "Recent Incidents" page (ukmto.org/recent-incidents) is a SLIDING WINDOW (roughly
+// the last 96 days) — the chart plots the window we
+// captured on 2026-10-05 (via a web reader; ukmto.org is Cloudflare-blocked from
+// this box), and the raw entries are kept here so the series survives the page
+// scrolling and future passes can diff the page against this array.
+// type is UKMTO's own classification: attack / hijack / advisory / suspicious activity.
+// EXTENDING THE SERIES: the page slides, but this array is CUMULATIVE — each pass
+// fetches the page, keeps everything already here, appends entries with numbers
+// beyond the current max, and updates ukmtoCoverageEnd to the capture date, even
+// on quiet days. Keep ukmtoCoverageStart fixed and update the caption date.
+// (When the bar count gets unwieldy, trim the plot to a recent span with a caption
+// note — do not trim the array.)
+// Caveats (also in the chart caption):
+//  - the window starts at #78 on Jul 1 → 77 reports preceded it (3 pre-war,
+//    the rest Feb 28 – Jun 30);
+//  - report numbers #99, #100, #125 are NOT shown on the page; JMIC Update 080
+//    (Aug 4) records Egyptian authorities confirming #99/#100 as "likely UAV
+//    maritime attacks", so the attack counts may understate by up to 2 (all three
+//    would be attacks in that case);
+//  - UKMTO only counts incidents it can verify through primary sources and says
+//    other strikes probably go unreported.
+export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisory" | "suspicious activity"; date: string }[] = [
+
+  { num: 78, type: "suspicious activity", date: "2026-07-01" },
+  { num: 79, type: "attack", date: "2026-07-05" },
+  { num: 80, type: "attack", date: "2026-07-06" },
+  { num: 81, type: "attack", date: "2026-07-07" },
+  { num: 82, type: "attack", date: "2026-07-07" },
+  { num: 83, type: "attack", date: "2026-07-11" },
+  { num: 84, type: "suspicious activity", date: "2026-07-13" },
+  { num: 85, type: "attack", date: "2026-07-13" },
+  { num: 86, type: "attack", date: "2026-07-14" },
+  { num: 87, type: "attack", date: "2026-07-14" },
+  { num: 88, type: "attack", date: "2026-07-17" },
+  { num: 89, type: "advisory", date: "2026-07-17" },
+  { num: 90, type: "hijack", date: "2026-07-17" },
+  { num: 91, type: "advisory", date: "2026-07-17" },
+  { num: 92, type: "attack", date: "2026-07-19" },
+  { num: 93, type: "attack", date: "2026-07-19" },
+  { num: 94, type: "attack", date: "2026-07-20" },
+  { num: 95, type: "attack", date: "2026-07-22" },
+  { num: 97, type: "suspicious activity", date: "2026-07-24" },
+  { num: 96, type: "advisory", date: "2026-07-25" },
+  { num: 98, type: "advisory", date: "2026-07-27" },
+  { num: 101, type: "attack", date: "2026-08-01" },
+  { num: 102, type: "attack", date: "2026-08-01" },
+  { num: 103, type: "advisory", date: "2026-08-02" },
+  { num: 104, type: "attack", date: "2026-08-03" },
+  { num: 105, type: "attack", date: "2026-08-05" },
+  { num: 106, type: "attack", date: "2026-08-05" },
+  { num: 107, type: "advisory", date: "2026-08-05" },
+  { num: 108, type: "attack", date: "2026-08-08" },
+  { num: 109, type: "advisory", date: "2026-08-11" },
+  { num: 110, type: "attack", date: "2026-08-11" },
+  { num: 111, type: "attack", date: "2026-08-14" },
+  { num: 112, type: "attack", date: "2026-08-14" },
+  { num: 113, type: "attack", date: "2026-08-14" },
+  { num: 114, type: "hijack", date: "2026-08-17" },
+  { num: 115, type: "attack", date: "2026-08-18" },
+  { num: 116, type: "attack", date: "2026-08-18" },
+  { num: 117, type: "attack", date: "2026-08-18" },
+  { num: 118, type: "hijack", date: "2026-08-20" },
+  { num: 119, type: "attack", date: "2026-08-24" },
+  { num: 120, type: "attack", date: "2026-08-24" },
+  { num: 121, type: "attack", date: "2026-08-27" },
+  { num: 122, type: "attack", date: "2026-08-29" },
+  { num: 123, type: "advisory", date: "2026-08-31" },
+  { num: 124, type: "attack", date: "2026-08-31" },
+  { num: 126, type: "attack", date: "2026-09-02" },
+  { num: 127, type: "advisory", date: "2026-09-05" },
+  { num: 128, type: "advisory", date: "2026-09-08" },
+  { num: 129, type: "advisory", date: "2026-09-09" },
+  { num: 130, type: "attack", date: "2026-09-09" },
+  { num: 131, type: "attack", date: "2026-09-09" },
+  { num: 132, type: "suspicious activity", date: "2026-09-10" },
+  { num: 133, type: "attack", date: "2026-09-10" },
+  { num: 134, type: "attack", date: "2026-09-12" },
+  { num: 135, type: "attack", date: "2026-09-15" },
+  { num: 136, type: "suspicious activity", date: "2026-09-17" },
+  { num: 137, type: "attack", date: "2026-09-17" },
+  { num: 138, type: "attack", date: "2026-09-18" },
+  { num: 139, type: "attack", date: "2026-09-18" },
+  { num: 140, type: "attack", date: "2026-09-21" },
+  { num: 141, type: "attack", date: "2026-09-21" },
+  { num: 142, type: "attack", date: "2026-09-23" },
+  { num: 143, type: "suspicious activity", date: "2026-09-28" },
+  { num: 144, type: "attack", date: "2026-09-30" },
+  { num: 145, type: "attack", date: "2026-09-30" },
+  { num: 146, type: "attack", date: "2026-09-30" },
+  { num: 147, type: "attack", date: "2026-10-01" },
+  { num: 148, type: "attack", date: "2026-10-02" },
+  { num: 149, type: "attack", date: "2026-10-02" },
+  { num: 150, type: "attack", date: "2026-10-04" },
+  { num: 151, type: "suspicious activity", date: "2026-10-04" },
+  { num: 152, type: "suspicious activity", date: "2026-10-05" },
+  { num: 153, type: "attack", date: "2026-10-03" },
+  { num: 154, type: "attack", date: "2026-10-04" },
+  { num: 155, type: "attack", date: "2026-10-03" },
+  { num: 156, type: "attack", date: "2026-10-05" },
+];
+
+// Reports that existed before the captured window — the smallest number present,
+// minus one (min, not [0], so it stays right even if the array is ever reordered;
+// the window opens at #78 → 77 today). Note the pre-war reports (#1–3) are INCLUDED
+// in this count — they precede the window even though they predate the war.
+export const ukmtoReportsBeforeWindow = Math.min(...ukmtoIncidents.map((i) => i.num)) - 1;
+
+// Capture bounds are explicit: a quiet day must not shorten the covered period.
+export const ukmtoCoverageStart = "2026-07-01";
+export const ukmtoCoverageEnd = "2026-10-05";
+
+// Include every Monday–Sunday week, even when it has no attack reports.
+// Partial weeks cover fewer than seven days and don't enter full-week comparisons.
+export const weeklyAttackCounts = (
+  incidents: { type: string; date: string }[], start: string, end: string,
+): { weekStart: string; count: number; partial: boolean }[] => {
+  const monday = (iso: string) => {
+    const d = new Date(iso + "T00:00:00Z");
+    d.setUTCDate(d.getUTCDate() - (d.getUTCDay() + 6) % 7);
+    return d;
+  };
+  const byWeek = new Map<string, number>();
+  for (const incident of incidents) {
+    if (incident.type !== "attack" || incident.date < start || incident.date > end) continue;
+    const key = monday(incident.date).toISOString().slice(0, 10);
+    byWeek.set(key, (byWeek.get(key) ?? 0) + 1);
+  }
+  const weeks = [];
+  for (const d = monday(start); d.toISOString().slice(0, 10) <= end; d.setUTCDate(d.getUTCDate() + 7)) {
+    const weekStart = d.toISOString().slice(0, 10);
+    const sunday = new Date(d.getTime() + 6 * 86400000).toISOString().slice(0, 10);
+    weeks.push({ weekStart, count: byWeek.get(weekStart) ?? 0, partial: weekStart < start || sunday > end });
+  }
+  return weeks;
+};
+export const ukmtoWeeklyAttacks = weeklyAttackCounts(ukmtoIncidents, ukmtoCoverageStart, ukmtoCoverageEnd);

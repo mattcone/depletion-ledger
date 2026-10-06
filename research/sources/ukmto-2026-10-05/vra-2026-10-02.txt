@@ -1,0 +1,376 @@
+Source PDF:
+https://www.ukmto.org/-/media/ukmto/products/20261002-ukmto_vra_overview_u.pdf?rev=9d75c4f2af3f4f2a915079a75a794654
+
+VOLUNTARY REPORTING AREA
+WEEKLY OVERVIEW
+Transit statistics, GNSS interference and regional incident activity
+across the maritime VRA.
+
+PRODUCED
+02 Oct 2026
+
+REPORT
+No. 9
+
+Cover running figures:
+121
+WARNINGS YTD
+
+17
+ADVISORIES YTD
+
+110
+IRAN –US CONFLICT
+RELATED INCIDENTS YTD
+
+6
+RED SEA ATTACKS ON
+SHIPPING YTD
+
+41
+PIRACY RELATED
+INCIDENTS YTD
+
+OFFICIAL - FOR PUBLIC RELEASE
+
+STRAIT OF HORMUZ TRANSIT OVERVIEW
+
+53 INCIDENTS REPORTED TO UKMTO
+DURING STRAIT OF HORMUZ TRANSIT
+SINCE 28 FEB 26
+
+TOTAL OUTBOUND TRANSITS LAST 7 DAYS
+124
+
+TOTAL INBOUND TRANSITS LAST 7 DAYS
+123
+
+Week ending: 02 Oct 26
+Reporting Range 28 Feb 26 – 30 Sep 26
+
+UKMTO Comment: Vessel traffic through the Strait of Hormuz remains approximately 75%
+below pre- conflict levels, with tankers continuing to dominate observed movements. AIS -
+derived traffic indicates most broadcasting vessels are routing via Iranian Route.
+Separately sourced US NCAGS facilitation figures remain significantly higher than AIS -
+observed transits (approx. 5:1), suggesting a substantial proportion of vessels using the
+southern route are not broadcasting AIS or are otherwise not captured by AIS analysis.
+Disclaimer: All figures are derived from AIS data and enriched through S&P vessel entity
+correlation, except US NCAGS facilitated transit figures and associated totals, which are
+sourced separately, including non -AIS broadcasting vessels, and cannot be independently
+verified by UKMTO at this stage.
+
+MARITIME INCIDENTS – Strait of Hormuz, Arabian Gulf, Gulf of Oman
+EVENT TIMELINE
+INCIDENTS REPORTED TO UKMTO IN THE LAST 7 DAYS
+
+91 REPORTS OF DAMAGE
+TO VESSELS YTD
+
+14
+NEAR MISS
+REPORTS YTD
+
+33 INJURY /
+FATALITIES YTD
+
+5
+CONFIRMED TOTAL
+LOSSES YTD
+
+110
+TOTAL EVENTS
+REPORTED YTD
+
+214
+DAYS SINCE
+CONFLICT START
+(28 FEB 26)
+
+Week ending: 02 Oct 26
+Reporting Range 28 Feb 26 – 30 Sep 26
+
+Incident table:
+Date Name IMO Type Position Event Product
+
+29/09/2026 WITHHELD WITHHELD TANKER
+26°23’N, 056°26’E
+Strait of Hormuz
+ATTACK 146- 26
+
+29/09/2026 WITHHELD WITHHELD TANKER
+26°26’N, 056°29’E
+Strait of Hormuz
+ATTACK 145- 26
+
+29/09/2026 WITHHELD WITHHELD TANKER
+26°23’N, 056°29’E
+Strait of Hormuz
+ATTACK 144- 26
+
+28/09/2026 WITHHELD WITHHELD TANKER
+26°23’N, 056°18’E
+Strait of Hormuz
+SUSPICIOUS
+ACTIVITY
+143- 26
+
+UKMTO Comment:
+• No diplomatic resolution has been achieved and the regional threat environment remains elevated.
+Commercial vessels continue to be targeted on the southern route, with ongoing military activity sustaining an
+increased risk to maritime operations.
+• Since 6 Jul 26, 31 of 48 projectile strike incidents reported to UKMTO have occurred on the southern Omani
+route. There is probably other projectile strikes occurring that have NOT been reported to UKMTO.
+• Since 6 Jul 26, 25 incidents involved engine room damage, highlighting the continued vulnerability of
+propulsion and manoeuvrability systems.
+• UKMTO reports only incidents that can be verified through primary sources; additional incidents are known but
+cannot be independently verified.
+• UKMTO encourages transparent and timely reporting from vessels to support maritime situational awareness
+and enable information sharing across the wider maritime community.
+• JMIC Threat Levels: Strait of Hormuz SEVERE (hostile action highly likely, continued navigation interference
+and potential mining activity); Gulf of Oman MODERATE (ongoing electronic interference and enforcement
+activity); Arabian Gulf MODERATE (navigation interference and residual kinetic risk remain present).
+
+MARITIME INCIDENTS – Red Sea, Gulf of Aden
+
+Week ending: 02 Oct 26
+Reporting Range 01 Jan 26 – 30 Sep 26
+
+UKMTO Comment:
+• Northernmost incident at 17°N in line with previous 2023- 2024 northernmost attacks, in the same period
+056°E and 10°N were the eastern and southernmost positions of incidents
+• Current threat to shipping appears to be in line with published blockade to Saudi linked shipping
+• Since the Houthi announced a maritime blockade on Saudi shipping 6 fatalities have been reported to
+UKMTO
+• Houthis currently have more control over the strait, seizing Mokhaand key Red Sea islands.
+• JMIC threat level for the Southern Red Sea and Bab el - Mandeb and Gulf of Aden is SUBSTANTIAL
+• No projectile attacks to shipping reported to UKMTO in the Red Sea and Gulf of Aden since 24/08/26
+• However, attacks against KSA commercial ports is significant, with numerous reports of missile strikes.
+
+Confirmed Events within
+Defined Area
+6
+
+Casualties Reported Year to
+Date
+6
+
+Year to Date Suspicious
+Activity Reported
+7
+
+Year to Date Incidents Reported in Region
+
+Bab El - Mandeb Transits Prior
+to 22 Jul 26
+24%
+
+LATEST SUSPICIOUS ACTIVITY – unaccountable actions indicating potential threats, such as unusual equipment or behaviour
+• No recent suspicious activity reported UKMTO in the last 7 - days within the defined area
+• No recent attacks reported UKMTO in the last 7- days within the defined area
+
+MARITIME PIRACY RELATED INCIDENTS – Gulf of Aden, Arabian Sea, Somali Coast
+
+PIRACY RELATED
+INCIDENTS YTD 41
+
+ATTACKS Y EAR TO DATE
+4
+
+SUSPICIOUS
+ACTIVITY YEAR TO
+DATE 27
+
+BOARDING & HIJACKS
+YEAR TO DATE 10
+
+Week ending: 02 Oct 26
+Reporting Range 01 Jan 26 – 30 Sep 26
+
+UKMTO Comment:
+• Recent Piracy incidents meeting BMP criteria have migrated from the Somali coastline towards the Gulf of Aden
+• Historical hijackings and boardings demonstrate a proven capability for operations up to 500 NM offshore
+• Recent reporting also highlights opportunistic attacks closer to shore, indicating adaptive and flexible tactics
+• As of 30 Sep 26 one vessel is currently reported under pirate control
+• JMIC threat level for the Gulf of Aden is SUBSTANTIAL and Somali Coast/ Somali Basin is MODERATE
+• None of the vessels successfully hijacked or boarded were actively reporting to UKMTO prior to the incident
+• Active and frequent reports of suspicious activity are useful as potential indicators and early warning, UKMTO
+encourages any vessel within the VRA to report any anomalous maritime behaviour for wider sharing to the
+maritime community.
+• No recent attacks reported UKMTO in the last 7 - days within the defined area
+• No recent suspicious activity reported UKMTO in the last 7 - days within the defined area
+
+Incident table:
+Date Name IMO Type Position Event Product Status
+
+10/09/26 GLAMOR 9177961 GENERAL CARGO 13°24’N, 047°58’E BOARDING 132- 26 Hijack Unsuccessful
+20/08/26 SEAMULL 9204776 TANKER 14°41’N, 051°27’E HIJACK 118- 26 Released 25 Sep 26
+17/08/26 LUTUF 9109134 GENERAL CARGO 08°12’N, 050°11'E HIJACK 114- 26 Released 29 Aug 26
+17/07/26 ASANA 9035838 TANKER 13°36’N, 048°37'E HIJACK 090- 26 ~68 days in captivity
+01/07/26 GOLDEN ARSENAL 9493212 DRY BULK CARGO 12°52’N, 048°1'E BOARDING 077- 26 Released 03 Jul 26
+02/05/26 EUREKA 1022823 TANKER 13°49’N, 048°28'E HIJACK Null Released 29 Sep 26
+26/04/26 SWARD 9174244 GENERAL CARGO 7°13’N, 049°32'E HIJACK 046- 26 Released 18 Sep 26
+21/04/26 HONOUR 25 1099735 TANKER 8°25’N, 050°21'E HIJACK 045- 26 Released 29 Sep 26
+
+UKMTO VRA: VESSEL REPORTED GNSS INTERFERENCE
+
+Vessel Report
+36
+30-DAY REPORTS
+
+659
+YTD REPORTS
+
+35,347
+7-DAY ANOMALOUS AIS
+
+8
+7-DAY REPORTS
+
+Week ending: 02 Oct 26
+Reporting Range 01 Jan 26 – 30 Sep 26
+
+UKMTO Comment:
+• GNSS interference reporting during 2026 has remained concentrated within the Red
+Sea, Gulf of Oman, and Arabian Gulf.
+• The highest reporting density is observed in the southern Arabian Gulf and along the
+Red Sea transit corridor.
+• Reporting received during the last 30 days indicates interference activity remains
+persistent within these established areas, with no significant change in the geographic
+distribution of incidents.
+• Areas with high concentrations of GNSS interference reports closely correlate with
+locations where UKMTO has observed AIS spoofing, anomalous vessel positions, and
+movement patterns inconsistent with normal commercial operations, increasing
+confidence in the assessed extent of disruption activity.
+
+EVENT DEFINITIONS
+The following event definitions are aligned with BMP Maritime Security (BMP MS)
+terminology and classifications wherever possible:
+• Hijack: Attackers take control of a ship against the crew's will for purposes such as
+robbery, cargo theft, or kidnapping.
+• Kidnap: Unauthorised forcible removal of one or more persons from a vessel.
+• Attack: Aggressive approach or hostile action against a vessel, including the
+discharge of weapons or missiles, or the impact of loitering munitions on or near the
+vessel.
+• Illegal Boarding: Boarding of a vessel without lawful authority and with intent to steal,
+cause harm, or commit another criminal act, without taking control of the vessel.
+• Attempted Boarding: A close approach to a vessel with visible boarding paraphernalia
+or indicators of intent to board, where the boarding is unsuccessful or prevented by
+defensive measures.
+• Suspicious Activity: Unaccountable actions, behaviours, or circumstances that may
+indicate a potential threat to a vessel. Indicators can include unusual equipment,
+unusual vessel behaviour, abnormal crew numbers, high -speed approaches, multiple
+skiffs, unusual vessel types for the location, or other activity inconsistent with normal
+maritime operations.
+UKMTO event definitions are intended to be consistent with BMP MS guidance wherever
+possible.
+This is not an exhaustive list. Other incidents, events, activities, vessels, or behaviours may
+reasonably be assessed as suspicious based on the professional judgement of a vessel's
+Master, crew, reporting authority, or relevant maritime security organisation, taking into
+account local operating conditions and information shared within the maritime community.
+
+INFORMATION SOURCES, VALIDATION & USE
+All information contained within this report is OFFICIAL and derived from a
+combination of commercial Automatic Identification System (AIS) data, geospatial
+analysis, vessel and industry reporting, open -source information, and information
+shared by partner organisations including the Joint Maritime Information Center
+(JMIC), Maritime Security Centre Indian Ocean (MSCIO), Information Fusion Center
+– Indian Ocean Region (IFC -IOR), US Naval Cooperation and Guidance for Shipping
+(NCAGS), MICA Center and other regional maritime security stakeholders.
+Where practicable, information is assessed using a multi -source analytical
+process. Reporting is cross -referenced against available AIS, geospatial, industry
+and partner information to improve confidence, reduce duplication, and provide
+the most accurate representation of the maritime operating environment
+available at the time of publication. Some partner and vessel reporting may
+remain single -source and independently unverifiable.
+This product is provided to support maritime security awareness, voyage
+planning, operational understanding, and risk -informed decision -making by
+Masters, operators and Company Security Officers operating within the UKMTO
+Voluntary Reporting Area (VRA). It should be considered alongside company
+procedures, Flag State guidance, industry best practice (BMP MS), and individual
+vessel risk assessments.
+UKMTO provides information and situational awareness to support informed
+decision -making. The inclusion of information within this report does not
+constitute navigational advice, routing recommendations, operational direction,
+legal attribution of responsibility, or formal determination of liability.
+Information reflects reporting available to UKMTO at the time of publication and
+may be subject to amendment as additional information becomes available.
+Whilst every effort is made to ensure accuracy and timeliness, UKMTO cannot
+guarantee the completeness, accuracy, or continued validity of third - party
+reporting.
+This report may be shared for legitimate maritime safety and security purposes,
+provided the content remains unaltered and appropriate UKMTO attribution is
+retained.
+UKMTO remains a neutral and impartial information provider, supporting
+vessels of all flags and ownership operating within the VRA.
+
+LEXICON
+WARNINGS
+UKMTO warnings notify the maritime industry of attacks, boardings, hijackings,
+and other maritime security incidents occurring within the UKMTO Voluntary
+Reporting Area (VRA). They provide timely alerts to Masters and Company
+Security Officers (CSOs) to support risk awareness and decision - making.
+
+ADVISORIES
+UKMTO advisories are security -related reports received within, or relevant to,
+the Voluntary Reporting Area (VRA) that do not meet the BMP criteria for issuing
+a warning. They are published to maintain situational awareness and provide
+industry with information on maritime security developments within the region.
+
+IRAN - US CONFLICT RELATED INCIDENTS
+Events reported to, or shared with, UKMTO concerning maritime security -
+related incidents potentially linked to the Iran - US conflict within the Arabian
+Gulf, Strait of Hormuz, Gulf of Oman, and wider Arabian Sea.
+
+RED SEA ATTACKS ON SHIPPING
+Events reported to, or shared with, UKMTO relating to maritime security
+incidents within the Red Sea, Bab el - Mandeb, and adjacent areas. These
+incidents are reported separately from BMP - defined piracy activity, with a focus
+on kinetic events targeting commercial shipping in the region.
+
+PIRACY RELATED INCIDENTS
+Events reported to UKMTO within the Voluntary Reporting Area (VRA),
+predominantly covering the Somali Basin, Gulf of Aden, and wider Indian Ocean.
+This category focuses on incidents that meet BMP piracy reporting criteria,
+including hijackings, attacks, illegal boardings, and suspicious activity.
+
+TRANSIT OVERVIEW
+Derived from AIS data, supplemented with vessel characteristics, ownership,
+operator, flag state, and entity - link information from S&P Global. Vessel tracks
+are operator - verified to mitigate the effects of GNSS interference, AIS
+manipulation, and reporting anomalies. Full transits are defined as IMO -
+numbered vessels completing a movement from the Arabian Gulf to the Gulf of
+Oman, via any currently utilised Strait of Hormuz transit route, within a 24 - hour
+reporting period. Vessels not completing a transit within the reporting window
+are reviewed on the following day and categorised as either completed transits
+or local/partial movements.
+Complementary contextual reporting is also received from US NCAGS on daily
+facilitated transit volumes through the Strait of Hormuz. These figures cannot
+be independently verified in full by UKMTO and may include vessels not
+observable through AIS. Consequently, facilitated transit figures and AIS -
+derived transit statistics should be considered related but distinct datasets,
+each reflecting different collection methods, coverage, and limitations.
+
+GNSS REPORTING
+This heatmap displays year - to- date GNSS interference reports voluntarily
+submitted to UKMTO by vessels operating within the Voluntary Reporting Area
+(VRA). Geographic concentrations of reported interference broadly align with
+areas where anomalous AIS positions are observed, providing increased
+confidence that both datasets are reflecting the same underlying GNSS disruption
+patterns. AIS anomaly analysis is derived from commercial vessels over 1,000GT
+displaying geographically implausible positions or speeds greater than 30 knots
+within a 20km hexbin . The data presented should not be considered a complete
+representation of all GNSS interference activity, as reporting remains voluntary
+and is dependent upon vessel participation, AIS availability, data integrity, and
+reporting compliance.
+
+INCIDENT INFORMATION
+Events are correlated with AIS positioning and S&P entity data; some incident
+reporting remains single -source and cannot always be verified beyond the initial
+report information is verified against other sources where possible. Incident
+Attack density uses 100NM natural breaks; piracy density uses 250NM natural
+breaks, larger radius is to account for mobility of pirate action groups (PAG).
+
+Notes on legibility:
+- Web reader identified report number as "No. 9", not "No. 8".
+- The Strait of Hormuz incident table includes four readable rows. The first row position was available in the initial web-reader extraction as 26°23’N, 056°26’E; a later focused view omitted those position lines, so this extraction preserves the readable initial extraction rather than marking the whole row illegible.
+- No additional Red Sea/Gulf of Aden incident rows were present in the web-reader text for the last 7 days; the page states no recent suspicious activity and no recent attacks reported to UKMTO in the last 7 days within the defined area.

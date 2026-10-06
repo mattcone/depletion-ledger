@@ -90,7 +90,7 @@ EXPECTED = [
     "gasTtfChart", "gasJkmChart", "treasury10yChart", "cpiChart",
     "flipChart", "sprChart", "refineryChart", "russiaChart", "demandChart",
     "recessionChart", "foodChart", "commercialCrudeChart",
-    "oecdStocksChart", "globalObservedChart",
+    "oecdStocksChart", "globalObservedChart", "ukmtoChart",
 ]
 # Ids that may legitimately report NODATA today (registered, no data to plot).
 # Empty as of the Oct 5 recheck: foodChart's "exemption" was based on a wrong
@@ -101,7 +101,7 @@ EXPECTED_NODATA = []
 # The four daily-updated lines whose endpoint dot is checked.
 END_DOT = ["dieselChart", "gasChart", "brentChart", "crackChart"]
 # Category-scale ids (informational — the probe reports CAT from the scale type).
-CATEGORY = ["sprChart", "recessionChart", "oecdStocksChart", "globalObservedChart"]
+CATEGORY = ["sprChart", "recessionChart", "oecdStocksChart", "globalObservedChart", "ukmtoChart"]
 
 
 def get(url: str) -> bytes:

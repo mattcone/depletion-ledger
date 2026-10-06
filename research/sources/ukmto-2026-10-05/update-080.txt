@@ -1,0 +1,295 @@
+Microsoft Word - Update 080 JMIC Advisory Note 04 August -FINAL
+URL: https://www.ukmto.org/-/media/ukmto/products/update-080-jmic-advisory-note-04-august.pdf
+Crawled via web reader. Content type: application/pdf. Number of pages: 20.
+
+Joint Maritime Information Center
+Update 080 to JMIC Advisory Note:
+01 March – 04 August 2026
+Regional Tension - Impact on Maritime Security
+Area of Concern:
+Middle East Maritime Region
+JMIC# 001 26 Regional Threat Level: SEVERE2
+
+1. Confirmed Maritime Security Incidents List since last report
+Date Vessel Vessel
+Type
+Event
+Type Location Narrative
+02 August 2026,
+UKMTO 103-26
+Names
+withheld UFN Tankers Advisory
+Vessels were transiting
+eastbound/westbound
+through the Strait of
+Hormuz in Omani
+TTW.
+At 2037 UTC, UKMTO received
+two linked reports from tankers
+transiting the SoH in Omani
+TTW. One outbound vessel
+reversed course toward Dubai
+OPL after VHF threats claiming
+to be from the Sepah Navy and
+reporting a distant explosion. A
+second inbound tanker reported
+warning shots from the north and
+an explosion approx. 1.5 NM off
+its port quarter. UKMTO assesses
+the reports are likely connected
+due to timing and location.
+03 August 2026,
+UKMTO 104-26
+Name
+withheld UFN
+Bulk
+Carrier Attack
+Vessel was transiting
+northbound in the
+Strait of Hormuz in
+Omani TTW.
+At 2210 UTC, UKMTO received a
+military-source report of a
+mayday from a vessel. A second
+vessel, relayed that the first vessel
+was struck by an unknown
+projectile in its engine room and
+crew accommodations. One crew
+member was reported missing and
+the remaining crew evacuated
+safely. A fire was reported, the
+vessel lost power and required
+assistance. The vessel was last
+reported at anchor. UKMTO has
+been unable to contact the vessel.
+
+2. Operational Summary – Last 48 Hours
+2A. Arabian Gulf (no change)
+Traffic flows remained stable, with anchorage congestion unchanged across the region.
+Navigational system interference and wider regional military activity continued to warrant caution,
+and recurring GNSS interference remained consistent with prior reporting; no new kinetic events
+have been reported in this period.
+2B. Strait of Hormuz
+Commercial traffic through the Strait of Hormuz remained at reduced levels. Independent tracking
+data indicated suppression with single-digit numbers of tankers in both directions.
+IRGC attacks have increased and harassment activity persisted, including hailing, UAV overflight,
+and targeted surveillance of merchant shipping. These actions continue to demonstrate Iran’s intent
+to assert presence along key transit lanes and maintain pressure on transiting vessels. Confirmed
+projectile strikes and near-misses on merchant vessels in Omani territorial waters and approaches to
+the Strait of Hormuz. Focus remains on Limah–Khasab axis.
+There remained a continued risk of drifting or uncharted mines in and near the TSS, with mine
+danger areas still active.
+2C. Gulf of Oman
+Traffic flows in the Gulf of Oman remained stable, with vessels maintaining heightened awareness
+amid ongoing naval activity.
+Naval presence remained elevated due to blockade enforcement activity. US CENTCOM stated that,
+as of August 3rd, 44 commercial vessels had been redirected, two disabled, and two boarded for
+compliance verification. Previous kinetic enforcement of the Iranian-port blockade signifies a US
+commitment to blockade operations.
+Vessels were expected to respond promptly to military queries and maintain AIS-on unless
+constrained by security threats. Operators continued to exercise caution due to regional strike
+activity, and ongoing IRGC monitoring of shipping in adjacent waters.
+2D. Arabian Sea (No change)
+The northern Arabian Sea remained calm with no confirmed maritime security incidents in this
+period. Naval forces continued routine patrols, and commercial traffic was transiting without
+disruption. The broader operating environment remained influenced by regional tensions.
+2E. Gulf of Aden (No change)
+Commercial traffic remained steady in the Gulf of Aden.
+2F. Southern Red Sea & Bab el Mandeb
+Commercial traffic continued to transit steadily through the Southern Red Sea and Bab el Mandeb;
+however, the security posture shifted following previous confirmed Houthi attack on a Saudiflagged tanker. The incident demonstrates a renewed willingness and capability by Houthi forces to
+target specified merchant shipping.
+On 30 July 2026, Saudi Arabia hosted military representatives from 43 countries and the EU in
+Riyadh to review the draft charter, structure, and operational framework for a proposed Multinational
+Maritime Defense Coalition focused on the Bab el-Mandeb, southern Red Sea, and Gulf of Aden.
+A joint declaration was issued, designating Saudi Arabia as the founding and lead state and host of the
+coalition headquarters and command structure. Planned activities include intelligence sharing,
+operational planning, training, exercises, capacity building, and joint maritime operations. As of 04
+August 2026, there is no public confirmation that the charter has been signed or that joint patrols or
+threat-monitoring networks have become operational.
+2G. Somali Coast and Somali Basin (No change)
+No piracy incidents were reported in this period. Three merchant vessels remain held:
+• Oil/products tanker – held since 21 April 2026 3
+• General cargo / cement carrier – held since 26 April 2026
+• Oil tanker – held since 02 May 2026; taken 10 NM off the Yemen coast and diverted toward Somali
+waters; status unconfirmed.
+2H. Northern Red Sea & Suez Canal (No change)
+No confirmed attacks or disruptions were reported in this period. Suez Canal transits continue
+normally. Reports of elevated GNSS interference persist in the vicinity of Yanbu, though without
+operational impact on traffic flow.
+2I. Eastern Mediterranean
+UKMTO 099-26, 100-26 were confirmed by Egyptian authorities as likely UAV maritime attacks.
+Periodic electronic and navigational interference continued near Cyprus and the Levant.
+
+3. Regional Threat overview
+JMIC Threat Scale: 밄 Low | 밃 Moderate | 밂 Substantial | 밂 Severe | 꾂 Critical
+Region Threat Level Notes
+Arabian Gulf MODERATE Navigation interference and residual kinetic risk persist; an attack is possible
+but not likely under current conditions.
+Strait of Hormuz SEVERE
+Recent Iranian attacks, the threat level at SEVERE, with deliberate hostile
+action assessed as highly likely under current conditions. Navigation
+interference persists, and mine-risk reporting remains relevant within and
+adjacent to the TSS. The threat environment remains heightened and
+warrants increased vigilance. IRGC attacks, hailing, and routing pressure
+continue, particularly for AIS-on vessels.
+Gulf of Oman SUBSTANTIAL
+Residual strike-linked risk keeps the threat level at SUBSTANTIAL, and an
+attack is a strong possibility under current conditions. Naval presence
+remains visible, with ongoing monitoring, hailing, and verification queries,
+particularly near approaches to the Strait of Hormuz. Enforcement activity
+poses no direct impact to neutral shipping transits in the Gulf of Oman.
+Electronic interference continues to present a credible concern for operators.
+Arabian Sea MODERATE Residual conflict-linked risk persists, but no attacks have been reported, and
+current indicators suggest no imminent change to the threat environment.
+Gulf of Aden SUBSTANTIAL
+Piracy-related events and Houthi rhetoric and attacks, keep the threat level as
+SUBSTANTIAL, with a strong possibility of a maritime security incident in
+coastal approaches, transit corridors, and established small-craft areas.
+Bab el-Mandeb /
+Southern Red Sea SUBSTANTIAL
+The threat level continues to be SUBSTANTIAL following the suspected
+Houthi attack on a Saudi-flagged tanker in the Southern Red Sea. The strike
+demonstrates active targeting capability and a clear willingness to engage
+merchant shipping. Houthi messaging continues to assert that the Bab el
+Mandeb is closed to Saudi-affiliated vessels, reinforcing hostile intent toward
+vessels perceived as linked to Saudi interests. Forward-deployed missile and
+drone systems near Bab el Mandeb remain in place, and regional reporting
+indicates the group has been instructed to remain prepared to disrupt the Red
+Sea oil route should broader escalation occur. Based on the recent attack,
+sustained intent, and maintained capability, additional attacks are a strong
+possibility.
+Somali Coast /
+Somali Basin MODERATE PAG activity remains possible; monsoon conditions restrict offshore skiffs
+but coastal opportunism persists.
+Northern Red Sea /
+Suez Canal MODERATE No attacks or disruptions reported. Suez Canal operations remain normal.
+Periodic EMI/GNSS interference remains possible.
+Eastern
+Mediterranean LOW
+Localized EMI/GNSS disruptions persist, and regional naval presence
+remains steady. There is one recently confirmed attack; however, the threat
+to commercial shipping is unlikely.
+
+4. Maritime Incidents & Traffic Assessment
+4A. Confirmed Vessel Incidents (Since 1 March)
+Total of 80 incidents since 01 March; two incidents since the last report.
+4B. Infrastructure Incidents (Last 48 Hours)
+No attacks on ports or maritime infrastructure reported.
+The overall risk remains MODERATE, driven by the potential for renewed kinetic activity and
+ongoing uncertainty along Iranian coastal areas. Recent UAV activity continues, and while regional
+strikes have occurred outside the maritime domain; Houthi drone Strike on Najran Airport in Saudi
+Arabia on August 4th, no reports of targeting port or maritime infrastructure have been confirmed
+during the reporting period.
+
+PLEASE NOTE – starting Sunday 9th of August, the full compilation of
+Confirmed Maritime Security list since 28th February will not longer be a
+part of the JMIC Advisory but incorporated in JMIC Monthly statistics.
+Confirmed Maritime Security Incidents List since 28 February
+Date Vessel Vessel
+Type
+Event
+Type Location Summary
+[Full web-reader extraction for the long annex list was partially garbled by table wrapping. Captured incident numbers visible in the annex: UKMTO 004-36, 006-36, 005-26, 006-26, 007-36, 008-26, 009-26, 010-26, 011-26, 012-26, 013-26, 015-26, 016-26, 017-26, 018-26, 020-26, 021-26, 022-26, 023-26, 024-26, 025-26, 026-26, 028-26, 029-26, 030-26, 031-26, 032-26, 036-26, 037-26, 038-26, 039-26, 040-26, 041-26, 042-26, 043-26, 050-26, 052-26, 053-26, 054-26, 055-26, 056-26, 057-26, 058-26, 059-26, 060-26, 062-26, 063-26, 064-26, 065-26, 066-26, 067-26, 068-26, 069-26, 070-26, 071-26, 072-26, 074-26, 076-26, 077-26, 078-26, 079-26, 080-26, 081-26, 082-26, 083-26, 084-26, 085-26, 086-26, 087-26, 089-26, 088-26, 090-26, 091-26, 092-26, 093-26, 094-26, 095-26, 096-26, 097-26, 098-26, 099-26, 100-26, 101-26, 102-26, 103-26, 104-26.]
+
+1 August 2026,
+UKMTO 101-26
+Name
+withheld
+UFN
+LNG
+Carrier Attack
+Strait of
+Hormuz, in
+Omani
+TTW, 11NM
+north east
+from the
+coast of
+Lima. The
+vessel was
+An LNG tanker was struck by an unknown
+projectile at 2330 UTC on the July 31st while
+transiting outbound through the SoH. All
+crew were reported safe. The projectile
+struck the port side engine room, causing a
+fire which was extinguished. The vessel lost
+propulsion. Omani Coast Guard provided
+assistance. No environmental impact
+reported.
+transiting
+eastbound.
+1 August 2026,
+UKMTO 102-26
+Name
+withheld
+UFN
+Tanker Attack
+Strait of
+Hormuz, in
+Omani
+TTW, 21NM
+northeast
+from the
+coast of
+Khasab. The
+vessel was
+transiting
+westbound.
+A VLCC reported that at 2206 UTC July 31st
+the crew witnessed an unidentified projectile
+land in the water 5 meters from the vessel, on
+its starboard quarter. The crew stated they
+heard an explosion and could see flames on
+the water. The crew were reported safe. The
+vessel was not struck.
+02 August 2026,
+UKMTO 103-26
+Names
+withheld
+UFN
+Tankers Advisory
+Vessels were
+transiting
+eastbound/w
+estbound
+through the
+Strait of
+Hormuz in
+Omani
+TTW.
+At 2037 UTC, UKMTO received two linked
+reports from tankers transiting the SoH in
+Omani TTW. One outbound vessel reversed
+course toward Dubai OPL after VHF threats
+claiming to be from the Sepah Navy and
+reporting a distant explosion. A second
+inbound tanker reported warning shots from
+the north and an explosion approx. 1.5 NM
+off its port quarter. UKMTO assesses the
+reports are likely connected due to timing
+and location.
+03 August 2026,
+UKMTO 104-26
+Name
+withheld
+UFN
+Bulk
+Carrier Attack
+Vessel was
+transiting
+northbound
+in the Strait
+of Hormuz in
+Omani
+TTW.
+At 2210 UTC, UKMTO received a militarysource report of a mayday from a vessel. A
+second vessel, relayed that the first vessel was
+struck by an unknown projectile in its engine
+room and crew accommodations. One crew
+member was reported missing and the
+remaining crew evacuated safely. A fire was
+reported, the vessel lost power and required
+assistance. The vessel was last reported at
+anchor. UKMTO has been unable to contact
+the vessel.

@@ -4,6 +4,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 import SiteMeta from "../components/SiteMeta.astro";
 import TopNav from "../components/TopNav.astro";
 import ShippingRoutes from "../components/ShippingRoutes.astro";
+import UkmtoChart from "../components/UkmtoChart.astro";
 import SupplyFlow from "../components/SupplyFlow.astro";
 import BranchWeightRow from "../components/BranchWeightRow.astro";
 import {
@@ -17,6 +18,7 @@ import {
   russiaCapacityAnchors, russiaCurrentSpread, russiaSnapshot, russiaBanCascade,
   globalRefining, demandDecline,
   recessionOdds, ratesStats, foodStats, foodLagBars,
+  ukmtoIncidents, ukmtoWeeklyAttacks, ukmtoReportsBeforeWindow, ukmtoCoverageStart, ukmtoCoverageEnd,
 } from "../data/crisis";
 
 // Crisis day number, computed from the data-as-of date (NOT the viewer's clock) so the
@@ -410,6 +412,21 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
   .map((g) => `${g.label}: ${(cqBandKb(2010, g.id) / 1000).toFixed(1)} in 2010 (${cqShare1(2010, g.id)}% of world crude) to ${(cqBandKb(2024, g.id) / 1000).toFixed(1)} in 2024 (${cqShare1(2024, g.id)}%)`)
   .join("; ")}. A text annotation above the 2024 column, outside all bands, notes that over 10 mb/d of Gulf output was shut in in August 2026 (IEA Oil Market Report, September 2026 edition). The shut-in spans several quality classes; the annotation is a scale reference, not a data series and not a grade-specific value.`;
 
+// UKMTO attack frequency (Supply section, Oct 5) — every number the prose and the
+// chart interpolate comes from the ukmtoIncidents capture in crisis.ts, so the copy
+// can't drift from the data the way hand-typed figures did.
+// Order-independent (the script keeps the array sorted, but the copy must not
+// depend on it — same rule as ukmtoReportsBeforeWindow using Math.min).
+const ukmtoFirst = ukmtoIncidents.reduce((a, b) => (b.num < a.num ? b : a));
+const ukmtoLast = ukmtoIncidents.reduce((a, b) => (b.num > a.num ? b : a));
+const ukmtoAttackTotal = ukmtoWeeklyAttacks.reduce((a, w) => a + w.count, 0);
+const ukmtoFullWeeks = ukmtoWeeklyAttacks.filter((w) => !w.partial);
+const ukmtoMinFullWeek = ukmtoFullWeeks.length ? Math.min(...ukmtoFullWeeks.map((w) => w.count)) : null;
+const ukmtoNonAttack = ukmtoIncidents.length - ukmtoAttackTotal;
+const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, ${shortDate(ukmtoCoverageStart)} to ${shortDate(ukmtoCoverageEnd)} 2026. ${ukmtoWeeklyAttacks
+  .map((w) => `week of ${shortDate(w.weekStart)}: ${w.count}${w.partial ? " (partial week)" : ""}`)
+  .join(", ")} — ${ukmtoAttackTotal} in total. UKMTO's page is a rolling window; ${ukmtoReportsBeforeWindow} reports were filed before it.`;
+
 ---
 
 <!doctype html>
@@ -686,33 +703,17 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             <canvas id="crackChart" role="img" aria-label={`US retail fuel prices minus WTI, in dollars per barrel, 2026. The diesel gap rises from about $89 in January to a plotted peak of $181.8 on Sep 23, then eases to $${dieCrackLast.value.toFixed(1)} on ${shortDate(dieCrackLast.date)}. It briefly narrows to $148 on Sep 10. The gasoline gap rises from about $59 in January to $${gasCrackLast.value.toFixed(1)} on ${shortDate(gasCrackLast.date)}. Both lines show every reading; dots mark selected dates.`}></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            This chart subtracts the price of crude oil from the retail price of fuel, with both
-            expressed in dollars per barrel. The difference covers refining, transportation, and
-            retailing. It helps explain why prices at the pump can keep rising even when crude gets cheaper.
-          </p>
-          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The diesel price gap reached $181.8 a barrel on Sep 23, its highest value on the chart.
-            By {shortDate(dieCrackLast.date)}, it had eased to ${dieCrackLast.value.toFixed(1)} — still about twice January's $89.
+            This chart subtracts the price of WTI crude oil from the retail price of fuel, both in
+            dollars per barrel. The gap includes refining, transportation, and retailing costs.
+            It helps explain why prices at the pump can keep rising even when crude gets cheaper. The diesel gap peaked at $181.8 a barrel on Sep 23 and had
+            eased to ${dieCrackLast.value.toFixed(1)} by {shortDate(dieCrackLast.date)} — still about twice January's $89.
             The gasoline gap was ${gasCrackLast.value.toFixed(1)} on {shortDate(gasCrackLast.date)}, up from about $59 in January.
-            These gaps can narrow when crude prices rise faster than pump prices, as they did on Sep 10.
+            The gaps can narrow when crude prices rise faster than pump prices, as they did on Sep 10.
           </p>
-          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The calculation uses retail prices from EIA and AAA, minus WTI from FRED, with futures closes for
-            Sep 10–11 and Sep 14–Oct 5. The EIA's official <em>crack spread</em> uses wholesale fuel prices, so the
-            values differ. Some readings fall on days with no same-day WTI price; the chart pairs those with the
-            nearest available trading day's price, within 1–3 days. The Sep 21 reading uses the Sep 21 WTI
-            settlement. The Sep 22 reading uses the October contract's final closing price on Sep 22
-            ($94.59); the Sep 23 reading uses the November contract's settlement on Sep 23
-            ($92.16); the Sep 24 reading uses the November contract's settlement on
-            Sep 24 ($94.61); the Sep 25 and Sep 26 readings use its settlement on Sep 25 ($92.41);
-            the Sep 27–28 readings use the Sep 28 settlement ($92.60), the Sep 29 reading
-            uses the Sep 29 settlement ($89.38), the Sep 30 reading uses the Sep 30 settlement ($90.42), the Oct 1
-            reading uses the Oct 1 settlement ($92.87), and the Oct 2–5 readings use the Oct 2 settlement
-            ($91.11). Oct 3 and Oct 4 fell on the weekend, so there was no settlement on either day, and the
-            Oct 5 reading pairs with the most recent settlement on record. Because the
-            November contract's Sep 23 settlement was lower than the October close, the Sep 23
-            spread reads higher than the Sep 22 spread even though pump prices barely moved.
-            No missing prices are estimated.
+          <p class="mt-2 text-[12px] leading-relaxed text-faint">
+            Readings with no same-day WTI price are paired with the nearest trading day's settlement, within
+            1–3 days; no missing prices are estimated. The EIA's official <em>crack spread</em> uses wholesale
+            fuel prices, so these values differ.
           </p>
         </div>
       </div>
@@ -766,6 +767,19 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
         <div class="mt-12">
           <ShippingRoutes />
         </div>
+
+        <!-- UKMTO attack frequency (Oct 5) — values in as props; markup-expression
+             interpolation is broken in this toolchain (see the Oct 5 log) -->
+        <UkmtoChart
+          minWeek={ukmtoMinFullWeek}
+          firstNum={ukmtoFirst.num}
+          lastNum={ukmtoLast.num}
+          firstDate={shortDate(ukmtoCoverageStart)}
+          lastDate={shortDate(ukmtoCoverageEnd)}
+          beforeWindow={ukmtoReportsBeforeWindow}
+          nonAttack={ukmtoNonAttack}
+          aria={ukmtoAria}
+        />
 
         <!-- Panel A: OECD commercial stocks (levels) -->
         <div class="mt-12 mb-3">
@@ -860,7 +874,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
         </div>
         {earlierBranch.length > 0 && (
           <details class="mt-5">
-            <summary class="cursor-pointer select-none list-none text-xs font-medium text-faint hover:text-ink/80">
+            <summary class="cursor-pointer select-none text-xs font-medium text-faint hover:text-ink/80">
               Show earlier odds ({earlierBranch[earlierBranch.length - 1].date}–{earlierBranch[0].date})
             </summary>
             <div class="mt-3 space-y-3">
@@ -1263,22 +1277,21 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
 
         <!-- Russia: the second front (moved from Supply into Refining) -->
         <div class="mt-12">
-          <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">Estimates put Russia's lost refining capacity at 20–54%</h2>
-            <p class="font-mono text-[11px] text-faint">Estimated capacity remaining, as a share of capacity before the strikes</p>
-          </div>
-          <div class="relative h-96">
-            <canvas id="russiaChart" role="img" aria-label="Estimated remaining Russian refining capacity, September 2024 to September 2026: flat at 100 percent until strikes began in August 2025, about 75 percent by April 2026, about 70 percent by August 29, with current estimates (as of Sep 21) spread between 46 and 80 percent remaining."></canvas>
-          </div>
-          <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+          <h2 class="text-xl font-bold tracking-tight">Estimates put Russia's lost refining capacity at 20–54%</h2>
+          <p class="mb-4 mt-2 max-w-3xl text-[13px] leading-relaxed text-ink/70">
             Strikes on Russian refineries are reducing the amount of fuel available to other
-            countries. The chart shows about 75% of capacity remaining by mid-April and about
-            70% by Aug 29, according to the Moscow Times. The red bar shows how much current
-            estimates differ: Ukraine's General Staff puts the capacity lost at more than 45%
-            of designed capacity as of Sep 21, Russian Forbes at 54% (Sep 9), and the IEA at
-            more than 20%. You can compare these estimates with
-            the reported outages and export restrictions below.
+            countries. The line connects reported estimates: about 75% of capacity remaining
+            by mid-April, about 70% by Aug 29 (Moscow Times), and about 49% by Oct 4
+            (Ukraine's Defense Ministry). The red bar shows how much the estimates differ.
+            The Defense Ministry says 51% was struck (Oct 4), Russian Forbes puts lost capacity
+            at 54% (Sep 9), and the IEA estimates more than 20%. You can compare these figures
+            with the outages and export restrictions below. The Defense Ministry's claim
+            hasn't been independently verified.
           </p>
+          <div class="relative h-96">
+            <canvas id="russiaChart" role="img" aria-label="Estimated remaining Russian refining capacity, September 2024 to October 2026: flat at 100 percent until strikes began in August 2025, about 75 percent by April 2026, about 70 percent by August 29, about 49 percent by October 4 per Ukraine's Defense Ministry, with current estimates spread between 46 and 80 percent remaining."></canvas>
+          </div>
+          <p class="mt-3 font-mono text-[11px] leading-relaxed text-faint">Estimated capacity remaining, as a share of capacity before the strikes</p>
           <div class="mt-8 grid gap-10 lg:grid-cols-2">
             <div>
               <h3 class="text-sm font-bold tracking-tight">Russian refinery outages and fuel shortages</h3>
@@ -1602,6 +1615,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
         commercialCrude2026, commercialCrude2025,
         worldConsumption2025, worldConsumption2026,
         wtiNonFred as wtiNonFredDates,
+        ukmtoWeeklyAttacks,
       } from "../data/crisis";
       // World stocks panels: provenance per point lives in this file (see research/world-stocks-research.md)
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -2262,7 +2276,8 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
               { dataset: 0, index: 1, text: "strikes begin (Aug 2025)", align: "right", dx: -8, dy: 16, ...note },
               { dataset: 0, index: 2, text: "~75% (Apr 2026)", dy: 22, ...note },
               { dataset: 0, index: 3, text: "~70% (Aug 29)", align: "right", dx: -10, dy: 30, ...note },
-              { dataset: 1, index: 1, text: "Sep 21: 46–80%", align: "left", dx: 10, dy: -68, color: "#b3261e" },
+              { dataset: 0, index: 4, text: "~49% (Oct 4)", align: "right", dx: -8, dy: 6, ...note },
+              { dataset: 1, index: 1, text: "Oct 4: 46–80%", align: "left", dx: 10, dy: -68, color: "#b3261e" },
             ]),
           ],
         });
@@ -2533,7 +2548,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             { value: gasolinePreCrisis, text: "Jan $2.81 (pre-crisis)", color: "#3d6b64", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: gasolineYtd.length - 1, text: endLabel(gasolineYtd, (v) => `$${v.toFixed(2)}`), ...endpoint },
+            { dataset: 0, index: gasolineYtd.length - 1, text: endLabel(gasolineYtd, (v) => `$${v.toFixed(2)}`), ...endpoint, halo: "#f2f1ec" },
             { dataset: 0, index: 18, text: "May peak $4.50", dy: -14, color: "#1c1b17" },
           ]),
         ],
@@ -3107,7 +3122,7 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
             { value: treasuryTestLevel, text: "4.8% — Jan 2025 high", color: "#8a867a", align: "left" },
           ]),
           directLabels([
-            { dataset: 0, index: treasury10y.length - 1, text: endLabel(treasury10y, (v) => `${v.toFixed(3)}%`), ...endpoint, dy: 18, color: "#b3261e" },
+            { dataset: 0, index: treasury10y.length - 1, text: endLabel(treasury10y, (v) => `${v.toFixed(3)}%`), ...endpoint, dy: 18, color: "#b3261e", halo: "#f2f1ec" },
           ]),
         ],
       });
@@ -3691,8 +3706,74 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
         wireOverlay("toggleTrend", 5);
       }
 
+      // UKMTO attack frequency (Supply section). Weekly bars from the ukmtoIncidents
+      // capture — data and the weekly counts are derived in crisis.ts (Tier 1).
+      // Category x-axis of week-start labels; the partial first week gets a lighter
+      // fill so it can't be read as a normal quiet week.
+      const ukmtoWeekLabels = ukmtoWeeklyAttacks.map((w) =>
+        new Date(w.weekStart + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+      );
+      new Chart(document.getElementById("ukmtoChart")!, {
+        type: "bar",
+        data: {
+          labels: ukmtoWeekLabels,
+          datasets: [
+            {
+              label: "UKMTO attack reports",
+              data: ukmtoWeeklyAttacks.map((w) => w.count),
+              backgroundColor: ukmtoWeeklyAttacks.map((w) => (w.partial ? "rgba(179,38,30,0.35)" : "#b3261e")),
+              barPercentage: 0.72,
+              categoryPercentage: 0.92,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: { padding: { top: 18 } },
+          scales: {
+            x: {
+              type: "category",
+              grid: { display: false },
+              border: { display: true, color: "#d8d4c6", width: 0.5 },
+              ticks: { color: "#8a867a", padding: 6 },
+            },
+            y: {
+              type: "linear" as const,
+              min: 0,
+              // headroom above the tallest bar (direct labels sit above the bars);
+              // grows with the data instead of clipping at a hard 8 (max is 7 today)
+              max: Math.max(8, ...ukmtoWeeklyAttacks.map((w) => w.count)) + 1,
+              grid: { display: false },
+              border: { display: true, color: "#d8d4c6", width: 0.5 },
+              ticks: { stepSize: 2, color: "#8a867a", padding: 8 },
+            },
+          },
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: (ctx) => {
+                  const w = ukmtoWeeklyAttacks[ctx.dataIndex];
+                  return ` ${w.count} attack report${w.count === 1 ? "" : "s"} in the week of ${ukmtoWeekLabels[ctx.dataIndex]}${w.partial ? " (partial week)" : ""}`;
+                },
+              },
+            },
+          },
+        },
+        plugins: [
+          directLabels(
+            ukmtoWeeklyAttacks.map((w, i) => ({
+              dataset: 0,
+              index: i,
+              text: String(w.count),
+              dy: -9,
+            })),
+          ),
+        ],
+      });
+
       // Register chart instances for QA/debug scripts (harmless in production)
-      for (const id of ["brentChart", "gasChart", "dieselChart", "crackChart", "gasTtfChart", "gasJkmChart", "treasury10yChart", "cpiChart", "flipChart", "sprChart", "refineryChart", "russiaChart", "demandChart", "recessionChart", "foodChart", "commercialCrudeChart"]) {
+      for (const id of ["brentChart", "gasChart", "dieselChart", "crackChart", "gasTtfChart", "gasJkmChart", "treasury10yChart", "cpiChart", "flipChart", "sprChart", "refineryChart", "russiaChart", "demandChart", "recessionChart", "foodChart", "commercialCrudeChart", "ukmtoChart"]) {
         (window as any).__charts[id] = Chart.getChart(document.getElementById(id)!);
       }
       (window as any).__charts["oecdStocksChart"] = Chart.getChart(document.getElementById("oecdStocksChart")!);

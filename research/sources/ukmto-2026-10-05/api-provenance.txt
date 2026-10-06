@@ -1,0 +1,15 @@
+Raw API response archive
+========================
+URL:        https://sccd.royalnavy.mod.uk/api/ukmto/all
+Fetched:    2026-10-05T21:30:56Z (UTC) from this machine
+Method:     curl --http2 with browser headers (User-Agent Chrome/126, Accept: application/json,
+            Referer: https://www.ukmto.org/recent-incidents, Origin: https://www.ukmto.org,
+            sec-ch-ua*/Sec-Fetch-* set). Plain GET, no auth, no cookies.
+File:       api-all-2026-10-05T15h.json (SHA-256 in the .sha256 sidecar)
+Shape:      JSON array of incident records. Fields include incidentNumber,
+            incidentTypeName, utcDateOfIncident, utcDateCreated, place, region,
+            vesselName, vesselType, otherDetails (full warning text), lat/lon.
+Note:       Cloudflare on sccd.royalnavy.mod.uk intermittently challenges (403 or
+            challenge page). This response was a clean 200 on the first attempt at the
+            timestamp above. The external review's 403 is consistent with that — retry.
+Note:       ukmto.org's own /api/... paths 404; the API lives only on the mod.uk host.

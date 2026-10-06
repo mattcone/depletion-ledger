@@ -505,6 +505,7 @@ async function runFetch() {
   say(`  - [ ] WTI/Brent settlement confirmation (cross-check the Yahoo bar; pass via --wti/--brent)`);
   say(`  - [ ] TTF/JKM plotted values from the lines above (bands/assessed/conversions are judgment)`);
   say(`  - [ ] shipping watchlist copy: Kpler counts + UKMTO warnings + incidents from the search above (verify before publishing; the EIA chokepoint chart is quarterly — leave it alone)`);
+  say(`  - [ ] UKMTO attack chart: node scripts/ukmto-fetch.mjs --apply (pulls the UKMTO JSON API the site itself uses, diffs, appends new entries to ukmtoIncidents; weekly bars + copy re-derive automatically). If the API stays challenged after its retries, fall back to the web reader CLI on ukmto.org/recent-incidents and diff by hand`);
   say(`  - [ ] Russia: russiaSnapshot estimates/outages + russiaBanCascade from the search above (verify before publishing)`);
   say(`  - [ ] stats-strip sub-line WORDING + any watchlist changes (the streak FACTS are printed above)`);
   say(`  - [ ] crack methodology paragraph (node scripts/crack-pairing.mjs --since <date>)`);
