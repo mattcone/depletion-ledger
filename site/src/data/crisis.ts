@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-10-05";
+export const DATA_AS_OF = "2026-10-06";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -204,6 +204,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-10-03", value: 4.3807, note: "AAA release, Oct 3" },
   { date: "2026-10-04", value: 4.3697, note: "AAA release, Oct 4" },
   { date: "2026-10-05", value: 4.3653, note: "AAA release, Oct 5" },
+  { date: "2026-10-06", value: 4.3685, note: "AAA release, Oct 6" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -246,6 +247,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-10-03", value: 6.3554, note: "AAA — eleventh straight decline off the Sep 22 record" },
   { date: "2026-10-04", value: 6.3434, note: "AAA — twelfth straight decline off the Sep 22 record" },
   { date: "2026-10-05", value: 6.3207, note: "AAA release, Oct 5" },
+  { date: "2026-10-06", value: 6.3151, note: "AAA — fourteenth straight decline off the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
@@ -561,10 +563,10 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "Whether the Saudi bypass keeps recovering. Bloomberg reported on Oct 2 that the East–West pipeline was carrying about 6M barrels a day, more than 80% of its capacity. About 4.5M a day was available for export from Red Sea ports, a wartime high. Kpler had reported pipeline flows of about 2.65M a day on Sep 29, after the Sep 22 restart. Shipping reports (Marine Insight, citing Clearwater Dynamics) say a projectile struck inside the Yanbu port on Oct 1, starting a fire and briefly stopping loadings; loading later resumed. No one has claimed responsibility. Reports conflict on Oct 5. AFP, citing a Saudi energy-sector source, says the pipeline was struck again on Oct 4 at a Khurais pumping station east of Riyadh and suffered major damage, stopping flows. Bloomberg reported the same day, citing sources, that oil is flowing normally. On Oct 4, Aramco cut the price of November Arab Light shipments to Asian buyers to $5 below the regional benchmark, the widest discount since 2020, against expectations of a hike (Bloomberg, The National; reported Oct 5).", why: "The bypass lets oil leave Saudi Arabia without passing through Hormuz. Its restart informed our Sep 29 odds of 10/50/40. Watch whether tanker loadings keep up with the higher pipeline flows, whether the conflicting Oct 4 strike reports resolve, and whether further attacks interrupt them." },
-      { item: "Whether the US and Iran agree on the steps to reopen the strait. Trump publicly rejected Iran's seven-day proposal on Sep 26. Rubio ordered the Iranian delegation to leave New York on Sep 28; the State Department confirmed the order on Oct 1. On Oct 4, Iran's parliament speaker Ghalibaf said the strait would stay closed until the US accepts the seven conditions of the June deal. Defense Secretary Hegseth called the US blockade “ironclad.” On Oct 3, Trump said a decision on Iran was imminent — “it'll either be the easy way or the hard way” (Gulf News). AP reported on Oct 1, in a story carried by CBS News, that the US is sending the Theodore Roosevelt carrier strike group and the Makin Island amphibious group to the Middle East. That could bring the number of US carriers there to three. On Oct 4, Iran announced that it had accepted oil minister Mohsen Paknejad's resignation and appointed Hamid Bovard, head of the National Iranian Oil Company, as acting minister (state media, Bloomberg). Iran is preparing a broader, more forceful response if the US resumes large-scale strikes (Reuters, Oct 1).", why: "Watch for a signed deal, a change in the blockade, or a resumption of strikes — any of which could change how much oil gets through." },
-      { item: "Whether the Yemen offensive changes shipping through the Red Sea. In a televised address on Oct 4, Rashad al-Alimi, head of Yemen's Saudi-backed Presidential Leadership Council, announced operations to retake the remaining Houthi-held territory. On Oct 5, government forces said they had taken the Dhubab airfield, cut the road to the Bab al-Mandeb strait, and recaptured Mocha, the Red Sea port the Houthis seized in September. They also announced a 'strategic offensive' on the Houthi-held capital, Sanaa. These claims haven't been independently verified. Sources cited by Reuters and AFP said forces had reached the outskirts of Mocha as Houthi fighters withdrew. The Saudi-led coalition says 100 jets have joined the offensive, struck 324 targets, and provided 'air protection' for the Bab al-Mandeb. Turkiye and Pakistan have agreed to deploy troops quickly to defend Saudi Arabia (Al Jazeera, BBC, The National). At sea, UKMTO reported explosions near Chrystal Sky, a non-Saudi tanker carrying refined fuel, about 60 nautical miles south of Mocha on Oct 4. The tanker flies the Marshall Islands flag and has a Singapore-based operator. No damage was reported, and no one has claimed responsibility. No other attacks on non-Saudi vessels have been reported in this escalation.", why: "War-risk insurance for non-Saudi ships is about 0.2–0.3% of hull value vs 3–7% for Saudi-linked tankers, and there is no US escort in the Red Sea (Reuters, Sep 25). A strike on a non-Saudi vessel could push container traffic back around Africa." },
-      { item: "Ship traffic through Hormuz. Kpler's verified daily counts: 14 (Sep 23), 9 (Sep 24), 5 (Sep 26), none (Sep 27). UKMTO logged tankers struck by unknown projectiles on Oct 1 (147-26) and Oct 2 (148-26) inside the strait. The Kuwait-flagged crude tanker MT Kazimah III, en route to Togo, caught fire in the strait after a projectile strike on Oct 1, according to shipping reports (Moneycontrol, NDTV); the Indian embassy in Muscat announced on Oct 2 that five Indian crew members had been rescued. Reuters reported early on Oct 3 that a third crude tanker had been struck 4 nautical miles east of the Omani coast (UKMTO 149-26, issued Oct 2 at 21:42 UTC — the warning gives no coordinates). UKMTO reported on Oct 4 that a tanker had been struck by an unknown projectile in the strait, damaging its engine room; shipping reports identify it as the Liberian-flagged tanker Lipsi, delivered six weeks earlier and operated by Dynacom, struck near Jazirat Um Al Fayarin and left disabled and adrift (Marisks, TradeWinds). Marisks counts at least seven incidents in the past week and says missiles may be fired into a fixed area rather than aimed at individual ships; UKMTO has logged at least one attack a day in the strait or the Gulf of Aden since Oct 2. Crews were reported safe in all four identified incidents, with no vessel losses reported. Meanwhile, Kpler's provisional data show regional crude exports averaged 18.3M barrels a day in the seven days through Sep 30. Daily exports exceeded the pre-war average of about 18M on 14 days in September, driven by Saudi loadings from both the Red Sea and the Gulf. Iraq's state tanker company also moved 2M barrels through the strait on a very large crude carrier, its first such run in decades (Reuters, Oct 5).", why: "Crude exports have recovered to pre-war levels in the latest estimates, but attacks have increased. Watch whether more ships can pass safely and whether the flow data hold." },
+      { item: "Whether the Saudi bypass keeps recovering. Bloomberg reported pipeline flows of about 6M barrels a day on Oct 2, with 4.5M available for export from Red Sea ports. Reports of another shutdown conflict: AFP says an Oct 4 strike at Khurais stopped flows; Bloomberg says oil was flowing normally on Oct 5. On Oct 6, Saudi Arabia's energy minister said oil pumped through the pipeline had reached 5.8M barrels that morning (Al Arabiya). The statement doesn't specify a period; reports differ on whether the figure describes capacity or actual flow. The Houthis also claimed an Oct 5 strike on Rabigh refinery; Saudi Arabia hasn't reported the extent of the damage.", why: "The bypass avoids Hormuz. Watch for confirmation of any damage and whether tanker loadings keep up with pipeline flows. Its restart informed our Sep 29 odds of 10/50/40." },
+      { item: "Whether the US and Iran agree on the steps to reopen the strait. Trump rejected Iran's seven-day proposal on Sep 26. On Oct 4, parliament speaker Ghalibaf said the strait would stay closed until the US accepts the June deal's seven conditions. On Oct 5, President Pezeshkian called US negotiations “meaningless.” The US is sending another carrier strike group and an amphibious group to the region, potentially bringing the carrier count to three (AP, Oct 1). Iran is preparing a stronger response if large-scale US strikes resume (Reuters, Oct 1). At his Oct 5 Nebraska rally, Trump called Iranian strikes on US cities “a small price to pay” (CBS News).", why: "Watch for a signed deal, a change in the blockade, or renewed strikes — any of which could change how much oil gets through." },
+      { item: "Whether the Yemen offensive changes Red Sea shipping. Yemen's information minister claimed “effective control” of Bab al-Mandeb on Oct 5 (Reuters). Government forces also claimed to have retaken Mocha; the Houthis deny losing ground, and the claims aren't independently verified. The Houthis claimed Oct 5 strikes on Riyadh's King Khalid airport and Rabigh refinery. Saudi aviation authorities said attacks on Jazan and Najran airports that evening caused damage and three minor injuries. At sea, UKMTO reported explosions near the non-Saudi fuel tanker Chrystal Sky south of Mocha on Oct 4. No damage or responsibility was reported.", why: "There is no US escort in the Red Sea. Insurance costs are much lower for non-Saudi ships than Saudi-linked tankers (Reuters, Sep 25). An attack on a non-Saudi vessel could send container traffic back around Africa." },
+      { item: "Whether oil keeps moving through Hormuz despite attacks. Kpler's provisional estimates put regional crude exports at 18.3M barrels a day in the week through Sep 30, near pre-war levels, including Saudi exports through the Red Sea (Reuters, Oct 5). But UKMTO reported four tanker strikes Oct 1–4, with crews safe and no vessel losses reported; the latest left a tanker disabled, according to shipping reports. The US military said on Oct 5 that it had redirected 130 vessels, disabled three and destroyed 13 commercial vessels it said violated the blockade or belonged to the IRGC's shadow network since the blockade resumed Jul 14. Large crude-carrier rates reached $1.3M a day on the Middle East–Far East route, about 43 times January levels (Gulf News, Oct 5); rates vary by route and vessel.", why: "Watch whether ships can pass safely and export estimates hold up. Regional exports include routes outside Hormuz; they don't show that the strait has returned to normal." },
     ],
   },
   {
@@ -663,13 +665,13 @@ export const recessionOdds = [
 export const ratesStats = [
   { label: "Fed's target rate, Sep 16", value: "3.75–4.00%", sub: "Up 0.25 percentage points in a 12-to-0 vote · statement: 'Inflation remains elevated. … The Committee will deliver price stability.'" },
   { label: "Odds of a rate increase, Oct 27–28", value: "60%", sub: "Our estimate, published Sep 16 · 16 of 18 Fed officials projected another increase this year · we'll check this prediction after the October decision" },
-  { label: "August producer prices (BLS, Sep 10)", value: "5.4% YoY", sub: "+0.4% for the month · July revised to 4.8% annually · energy +4.2%, diesel +24.1% annually · 10-year yield 5.293% on Sep 30, its highest close of the war" },
+  { label: "August producer prices (BLS, Sep 10)", value: "5.4% YoY", sub: "+0.4% for the month · July revised to 4.8% annually · energy +4.2%, diesel +24.1% annually · 10-year yield 5.311% on Oct 5, its highest close of the war" },
 ];
 
 export const foodStats = [
   { label: "Gulf–India tanker shipping costs", value: "+411%", sub: "$4.34/bbl in Aug vs pre-war (Frontline)" },
-  { label: "TTF gas (Europe)", value: "$24.1/MMBtu", sub: "JOGMEC assessed Sep 25 (published Sep 28) · down from $26.7 on Sep 18" },
-  { label: "JKM gas (Asia)", value: "≈$25.2/MMBtu", sub: "JOGMEC assessed Sep 25 (published Sep 28) · low-$25s, down from low-$27s on Sep 18" },
+  { label: "TTF gas (Europe)", value: "$24.6/MMBtu", sub: "JOGMEC assessed Oct 2 (published Oct 5) · up from $24.1 on Sep 25" },
+  { label: "JKM gas (Asia)", value: "≈$24.8/MMBtu", sub: "JOGMEC assessed Oct 2 (published Oct 5) · high-$24s, down from low-$25s on Sep 25" },
 ];
 
 // The lag chain: energy shock → food shock, 12–18 months. Dates are the midpoint of
@@ -736,6 +738,7 @@ export const gasTtf: GasPt[] = [
   { date: "2026-09-18", value: 26.7, assessed: true, tip: "JOGMEC (pub. Sep 24), Oct delivery", note: "Global LNG Hub (JOGMEC, published Sep 24) — USD 26.7/MBtu, Oct delivery; matches the Sep 18 CFD close (€79.52 × 1.1460)" },
   { date: "2026-09-22", value: 24.2, assessed: true, tip: "€72.10 close quote × 1.1467 (converted)", note: "€72.10/MWh (Geagency close quote, Sep 22) × EUR/USD 1.1467 — converted; a market quote, ~9% below the Sep 18 quote" },
   { date: "2026-09-25", value: 24.1, assessed: true, tip: "JOGMEC (pub. Sep 28), Oct delivery", note: "Global LNG Hub (JOGMEC, published Sep 28) — USD 24.1/MBtu, Oct delivery; down from 26.7 on Sep 18 as forecasts turned warmer and traders hoped US–Iran talks would ease tensions" },
+  { date: "2026-10-02", value: 24.6, assessed: true, tip: "JOGMEC (pub. Oct 5), Nov delivery", note: "Global LNG Hub (JOGMEC, published Oct 5) — USD 24.6/MBtu, Nov delivery; up from 24.1 on Sep 25 as the front month rolled to November and traders refocused on winter supply risks and storage well below the prior year's level" },
 ];
 
 export const gasJkm: GasPt[] = [
@@ -775,6 +778,7 @@ export const gasJkm: GasPt[] = [
   { date: "2026-09-11", value: 28.5, assessed: true, tip: "assessed: mid-USD 28s (record Sep 10)", note: "assessed: mid-USD 28s (record: high-USD 28s on Sep 10, per JOGMEC)" },
   { date: "2026-09-18", value: 27.2, assessed: true, tip: "JOGMEC (pub. Sep 24), Nov delivery", note: "assessed: low-USD 27s (JOGMEC, published Sep 24, Nov delivery; swapped in for the CFD quote 27.51)" },
   { date: "2026-09-25", value: 25.2, assessed: true, tip: "JOGMEC: low-$25s · Nov delivery · pub. Sep 28", note: "assessed: low-USD 25s (JOGMEC, published Sep 28, Nov delivery; down from low-USD 27s on Sep 18)" },
+  { date: "2026-10-02", value: 24.8, assessed: true, tip: "JOGMEC: high-$24s · Nov delivery · pub. Oct 5", note: "assessed: high-USD 24s (JOGMEC, published Oct 5, Nov delivery; down from low-USD 25s on Sep 25 as East Asian buying stayed subdued and winter outlooks turned mild)" },
 ];
 
 export const gasPreClosure = { ttf: 10.99, jkm: 10.66 };
@@ -1039,6 +1043,7 @@ export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisor
   { num: 154, type: "attack", date: "2026-10-04" },
   { num: 155, type: "attack", date: "2026-10-03" },
   { num: 156, type: "attack", date: "2026-10-05" },
+  { num: 157, type: "attack", date: "2026-10-05" },
 ];
 
 // Reports that existed before the captured window — the smallest number present,

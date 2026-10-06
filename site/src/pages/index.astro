@@ -22,7 +22,7 @@ import {
 } from "../data/crisis";
 
 // Crisis day number, computed from the data-as-of date (NOT the viewer's clock) so the
-// page is a stable snapshot: Oct 5 data = day 219, no matter when someone loads it.
+// page is a stable snapshot: Oct 6 data = day 220, no matter when someone loads it.
 const dayNum = Math.round((Date.parse(DATA_AS_OF) - Date.parse(CRISIS_DAY_1)) / 86400000);
 
 // ── Derived, not re-typed (Tier 1, Oct 4) ─────────────────────────────────
@@ -613,22 +613,19 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           <div>
             <div class="mb-4">
               <h2 class="text-xl font-bold tracking-tight">Natural gas prices in Europe are up about 120%</h2>
-              <p class="mt-2 font-mono text-[11px] text-faint">TTF, dollars per million British thermal units ($/MMBtu). Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: assessed prices and market quotes (May–Sep). Contracts and delivery periods differ, so comparisons are approximate.</p>
+              <p class="mt-2 font-mono text-[11px] text-faint">TTF, dollars per million British thermal units ($/MMBtu). Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: assessed prices and market quotes (May–Oct), including converted euro quotes on Sep 14 and 22; Sep 14 uses a contract for difference (CFD), which tracks gas prices. Contracts and delivery periods differ, so comparisons are approximate.</p>
             </div>
             <div class="h-72">
-              <canvas id="gasTtfChart" role="img" aria-label="TTF, Europe's gas benchmark, 2026 year to date: $12.40 in January, $11.00 before the closure, spiking to a three-year high of $18.89 on Mar 20, easing to $14.10 after the June ceasefire, $19.90 on Jul 31, then trading above $28 on Sep 10, its highest level since December 2022, and $27.00 on Sep 11, about $27.80 on Sep 14, $26.70 on Sep 18 (JOGMEC, published Sep 24), and $24.10 on Sep 25 (JOGMEC, published Sep 28). Reference line at the pre-closure week's $10.99."></canvas>
+              <canvas id="gasTtfChart" role="img" aria-label="TTF, Europe's gas benchmark, 2026 year to date: $12.40 in January, $11.00 before the closure, spiking to a three-year high of $18.89 on Mar 20, easing to $14.10 after the June ceasefire, $19.90 on Jul 31, then trading above $28 on Sep 10, its highest level since December 2022, and $27.00 on Sep 11, about $27.80 on Sep 14, $26.70 on Sep 18 (JOGMEC, published Sep 24), $24.10 on Sep 25 (JOGMEC, published Sep 28), and $24.60 on Oct 2 (JOGMEC, published Oct 5). Reference line at the pre-closure week's $10.99."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-              TTF is the benchmark used to track natural gas prices in Europe. It traded above
-              $28 on Sep 10, its highest level since December 2022, before easing to $27.00 on
-              Sep 11. JOGMEC's Sep 28 report put the Sep 25 price at $24.10, down from $26.70
-              a week earlier but still about 120% above the price before the strait closed.
-              JOGMEC attributed the drop to warmer-weather forecasts and hopes that US–Iran talks
-              would ease tensions. The Sep 14 and Sep 22 points are converted from euro quotes (€81.98 and
-              €72.10 per megawatt-hour). The Sep 14 quote is for a contract for difference (CFD),
-              a financial contract that tracks gas prices.
-              Unplanned maintenance at Norway's Asgard and Troll fields and tanker attacks have
-              reduced supplies as prices have risen.
+              TTF tracks natural gas prices in Europe. After trading above $28 on Sep 10,
+              its highest level since December 2022, it was $24.60 on Oct 2, according to
+              JOGMEC's Oct 5 report. That's about 120% above the price before the strait closed.
+              The latest reading is for November delivery; the previous week's $24.10 was for
+              October. JOGMEC linked the rise to winter supply concerns and storage levels
+              well below last year's. Norwegian field maintenance and tanker attacks have
+              also reduced supplies.
               </p>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
               By January 20, European gas storage had fallen to 48%, compared with a five-year
@@ -638,20 +635,19 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           </div>
           <div>
             <div class="mb-4">
-              <h2 class="text-xl font-bold tracking-tight">Natural gas prices in Asia are up about 135%</h2>
-              <p class="mt-2 font-mono text-[11px] text-faint">JKM, $/MMBtu. Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: assessed spot prices and market quotes (May–Sep). Contracts and delivery periods differ, so comparisons are approximate.</p>
+              <h2 class="text-xl font-bold tracking-tight">Natural gas prices in Asia are up about 130%</h2>
+              <p class="mt-2 font-mono text-[11px] text-faint">JKM, $/MMBtu. Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: assessed spot prices and market quotes (May–Oct). Contracts and delivery periods differ, so comparisons are approximate.</p>
             </div>
             <div class="h-72">
-              <canvas id="gasJkmChart" role="img" aria-label="JKM, Asia's LNG benchmark, 2026 year to date: $10.66 before the closure, spiking to $20.67 on Mar 20, easing to $15.20 on Jun 26, then climbing to $24.50 on Aug 28, the high-$28s on Sep 10 — its highest level in about two and a half years — about $28.50 on Sep 11, and the low-$27s (about $27.20) on Sep 18 in the assessment published Sep 24, and the low-$25s (about $25.20) on Sep 25 in the assessment published Sep 28. Reference line at the pre-closure week's $10.66."></canvas>
+              <canvas id="gasJkmChart" role="img" aria-label="JKM, Asia's LNG benchmark, 2026 year to date: $10.66 before the closure, spiking to $20.67 on Mar 20, easing to $15.20 on Jun 26, then climbing to $24.50 on Aug 28, the high-$28s on Sep 10 — its highest level in about two and a half years — about $28.50 on Sep 11, the low-$27s (about $27.20) on Sep 18 in the assessment published Sep 24, the low-$25s (about $25.20) on Sep 25 in the assessment published Sep 28, and the high-$24s (about $24.80) on Oct 2 in the assessment published Oct 5. Reference line at the pre-closure week's $10.66."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
               JKM tracks the price of liquefied natural gas (LNG) delivered to Asia. It reached
               the high-$28s on Sep 10 — its highest level in roughly two and a half years —
-              and was around $28.50 on Sep 11, according to JOGMEC. Its Sep 28 report put the
-              Sep 25 price in the low-$25s, shown here as about $25.20 — down from the low-$27s
-              on Sep 18, but still about 135% above the price before the closure.
-              JOGMEC linked the Sep 25 decline to reports that Iran had proposed reopening
-              the strait under certain conditions.
+              and was around $28.50 on Sep 11, according to JOGMEC. Its Oct 5 report put the
+              Oct 2 price in the high-$24s, shown here as about $24.80 — down from the low-$25s
+              on Sep 25, but still about 130% above the price before the closure. JOGMEC
+              attributed the decline to subdued buying in East Asia and forecasts for a mild winter.
               Damaged production units at Qatar's Ras Laffan complex — about 17%
               of the country's LNG export capacity — are expected to be offline for 3–5 years,
               forcing Asian buyers to look elsewhere for supplies.
@@ -2655,10 +2651,12 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // TTF (Europe). Dots: the series is weekly assessed prices, but September's
       // cadence compressed to 3–4 days — 5 dots in the last ~48px at the right edge.
       // Thin the right side to the story beats (pre-Sep 11 weekly, the Sep 11 record
-      // week, the labeled Sep 25 endpoint); the line keeps drawing every point and the
-      // tooltip covers each. gasTtfDotKeep is a dot-keep set, not the data.
+      // week, plus the CURRENT endpoint — derived from the last point, not a hand-typed
+      // date (Oct 6: the hardcoded Sep 25 endpoint left the Oct 2 point dotless)); the
+      // line keeps drawing every point and the tooltip covers each.
+      // gasTtfDotKeep is a dot-keep set, not the data.
       const gasTtfDotKeep = new Set(gasTtf.filter(
-        (p) => p.date <= "2026-09-11" || p.date === "2026-09-25",
+        (p) => p.date <= "2026-09-11" || p.date === gasTtf[gasTtf.length - 1].date,
       ).map((p) => p.date));
       new Chart(document.getElementById("gasTtfChart")!, {
         type: "line",
@@ -2929,7 +2927,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // Sep 24 AAA → Sep 24 settle 94.61; Sep 25 and 26 AAA → Sep 25 settle 92.41;
       // Sep 27–28 AAA → Sep 28 settle 92.60; Sep 29 AAA → Sep 29 settle 89.38;
       // Sep 30 AAA → Sep 30 settle 90.42; Oct 1 and Oct 2 AAA → same-day settles 92.87 / 91.11;
-      // Oct 3 AAA → Oct 2 settle 91.11 (nearest trading day — Oct 3–4 the weekend); Oct 4–5 AAA →
+      // Oct 3 AAA → Oct 2 settle 91.11 (nearest trading day — Oct 3–4 the weekend); Oct 4–6 AAA →
       // Oct 5 settle 89.43 — disclosed in the methodology paragraph.
       const wtiNonFred = new Set(wtiNonFredDates);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
@@ -2939,10 +2937,10 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // gasoline: pre-Sep 3 plus Sep 10, 17, 30 — because a run of daily dots bunches into
       // ~30px at the right edge. The nearest-WTI pairing below runs over the FULL wtiWeekly either way.
       const dieCrackSrc = dieselYtd.filter(
-        (p) => p.date < "2026-09-03" || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-14", "2026-09-17", "2026-10-05"].includes(p.date)
+        (p) => p.date < "2026-09-03" || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-14", "2026-09-17", "2026-10-06"].includes(p.date)
       );
       const gasCrackSrc = gasolineYtd.filter(
-        (p) => p.date < "2026-09-03" || p.date === "2026-09-10" || p.date === "2026-09-17" || p.date === "2026-10-05",
+        (p) => p.date < "2026-09-03" || p.date === "2026-09-10" || p.date === "2026-09-17" || p.date === "2026-10-06",
       );
       const dieDotKeep = new Set(dieCrackSrc.map((p) => p.date));
       const gasDotKeep = new Set(gasCrackSrc.map((p) => p.date));

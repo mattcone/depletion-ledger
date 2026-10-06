@@ -8,6 +8,8 @@
 > removed from the tree Sep 26, 2026 (git history has it); this file, `SUMMARY.md`,
 > and the dated logs are the working record.
 >
+> **Naming (user correction, Oct 6):** the bypass pipeline is Saudi Arabia's **East–West pipeline** (Abqaiq/Khurais → Yanbu). Older text in this file and the Sep logs mislabels it "ESPO" — that is Russia's East Siberia–Pacific Oil pipeline. Use "East–West pipeline" (or "the bypass") in all new text.
+>
 > **Instructions for future passes:** when the model changes (new data, regime event,
 > reweighting), update THIS file first — it is the spec of record. Then translate the
 > change into plain language in `MODEL.md` (no jargon: no "Brier", "Bayes", "kb/d",

@@ -14,7 +14,7 @@ Usage:
                expected: the full registry passes (foodChart with real floating-bar
                data); a missing chart, an empty linear chart, an EMPTY CATEGORY
                chart, an unexpected extra chart, a clipped chart, and a missing
-               endpoint dot each FAIL; the verdict requires all four EndDot results
+               endpoint dot each FAIL; the verdict requires all EndDot results (six)
                and rejects missing/duplicate/unexpected tokens of either kind. Run it
                after editing this file or EXPECTED. (The Oct 5 external review
                reproduced a false PASS with 16 of 21 charts absent and one chart
@@ -36,7 +36,7 @@ Checks, per chart in EXPECTED (all 21 register on window.__charts):
              to register or was deleted used to vanish silently: the old check
              only iterated whatever registered)
     NOTBUILT chart id registered a null — FAIL
-    EndDot   the endpoint dot of the four daily-updated lines (diesel/gas/brent/
+    EndDot   the endpoint dot of the six daily-updated lines (diesel/gas/brent/
              crack) is present (the margin check alone can't catch a missing dot)
     UNEXPECTED a registered id not in EXPECTED — FAIL (a renamed id is a bug)
 
@@ -99,7 +99,10 @@ EXPECTED = [
 # foodChart fails like any other chart. The mechanism stays for a real future case.
 EXPECTED_NODATA = []
 # The four daily-updated lines whose endpoint dot is checked.
-END_DOT = ["dieselChart", "gasChart", "brentChart", "crackChart"]
+# gasTtfChart/gasJkmChart added Oct 6 — the Oct 2 log claimed these two were already
+# end-dot-checked; they were not, and the TTF keep-set (hardcoded Sep 25 endpoint)
+# left the Oct 2 point dotless on staging.
+END_DOT = ["dieselChart", "gasChart", "brentChart", "crackChart", "gasTtfChart", "gasJkmChart"]
 # Category-scale ids (informational — the probe reports CAT from the scale type).
 CATEGORY = ["sprChart", "recessionChart", "oecdStocksChart", "globalObservedChart", "ukmtoChart"]
 
