@@ -205,7 +205,7 @@ const ws2325Hi = Math.max(...ws2325.map((p) => p.value));
 const wsPanelAAria = `OECD on-land oil stocks, commercial plus government-controlled, million barrels. The EIA's monthly levels from ${wsMbFirst.value.toLocaleString()} in January 2021, falling to ${wsDec22.toLocaleString()} by December 2022, then holding between ${ws2325Lo.toLocaleString()} and ${ws2325Hi.toLocaleString()} across 2023 to 2025, then dropping to ${wsMbLastStr} by May 2026 — the lowest month in the series. The shaded band is the same calendar month's range over 2021 to 2025, extended across 2026; ${wsBelowBandStr} 2026 fall below it. A dashed line marks the start of the war, February 28, 2026.`;
 // Forecast paths come from the forecast records — the stored targets are the source of truth,
 // so the copy, the chart, and the record can never drift apart.
-const wsEiaRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === "steo-2026-09-global-observed");
+const wsEiaRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === "steo-2026-10-global-observed");
 const wsPersRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === "persistence-2026-09-global-observed");
 // The scenario names and colors live in the assumptions file, not in the chart code.
 import worldStocksAssumptions from "../data/world-stocks-assumptions.json";
@@ -257,7 +257,7 @@ const wsHoldsEndMonthStr = wsMonthStr(wsScHoldsEnd.period);
 const wsEiaEndStr = wsSigned(wsRebase(wsEiaEnd.target_cumulative_mb));
 const wsPersEndStr = wsSigned(wsRebase(wsPersEnd.target_cumulative_mb));
 const wsPersMonthlyStr = `−${Math.abs(wsPersMonthly).toFixed(1)}`;
-const wsPanelBAria = `Line chart of the change in global oil inventories since ${wsFcAnchorMonthStr}, in million barrels, starting at zero in ${wsFcAnchorMonthStr} — zero means inventories unchanged since that month, not empty storage. Three scenarios adjust the Sep 9, 2026 EIA production and consumption forecast, using assumptions explained on the model page: corridor holds (solid) reaches ${wsHoldsEndStr} by ${wsHoldsEndMonthStr}; standoff (dashed) reaches ${wsStandoffEndStr}; corridor lapses (long dashed) reaches ${wsLapseEndStr} by ${wsLapseEndMonthStr}, the final month calculated. Two optional comparisons, hidden until selected: the EIA Short-Term Energy Outlook (Sep 9, 2026 release) world stock change calculated from production minus consumption, ${wsEiaEndStr} by ${wsMonthStr(wsEiaEnd.period)}; and the recent trend, which repeats the June–August 2026 average monthly change (${wsPersMonthlyStr} million barrels a month), ${wsPersEndStr} by ${wsMonthStr(wsPersEnd.period)}. All lines combine crude oil and refined fuels, and none counts government stock releases as a loss.`;
+const wsPanelBAria = `Line chart of the change in global oil inventories since ${wsFcAnchorMonthStr}, in million barrels, starting at zero in ${wsFcAnchorMonthStr} — zero means inventories unchanged since that month, not empty storage. Three scenarios adjust the Sep 9, 2026 EIA production and consumption forecast, using assumptions explained on the model page: corridor holds (solid) reaches ${wsHoldsEndStr} by ${wsHoldsEndMonthStr}; standoff (dashed) reaches ${wsStandoffEndStr}; corridor lapses (long dashed) reaches ${wsLapseEndStr} by ${wsLapseEndMonthStr}, the final month calculated. Two optional comparisons, hidden until selected: the EIA Short-Term Energy Outlook (Oct 6, 2026 release), with a September estimate and forecasts from October, calculated from production minus consumption, ${wsEiaEndStr} by ${wsMonthStr(wsEiaEnd.period)}; and the recent trend, which repeats the June–August 2026 average monthly change (${wsPersMonthlyStr} million barrels a month), ${wsPersEndStr} by ${wsMonthStr(wsPersEnd.period)}. All lines combine crude oil and refined fuels, and none counts government stock releases as a loss.`;
 
 // Watch list as flat ledger rows (date column + text). Tufte: structure from the date
 // column and whitespace, not boxes or shaded bands.
@@ -730,12 +730,13 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           <h2 class="text-xl font-bold tracking-tight">The world is using more oil than it produces</h2>
           <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
             Before the war, the world produced about 4 million more barrels of oil per day than
-            it used. Since the war began, it has needed stored oil every month.
+            it used. Since the war began, it has used stored oil to cover the shortfall in most
+            months. The EIA estimates that stocks rose slightly in July.
             The IEA's latest report estimates a full-year supply loss of 5.7 million barrels per day,
             about 6% of the world's oil, and expects Middle East oil flows to remain below normal
-            until 2027. Global production fell to 100.1 million barrels per day in August, with more
-            than 10 million barrels per day of Gulf production still shut down. Saudi production
-            alone fell by 2.3 million barrels per day that month, to 5.97 million.
+            until 2027. The EIA estimates global production at 100.4 million barrels per day in
+            August. The IEA estimates that more than 10 million barrels per day of Gulf
+            production remained shut down. Saudi production alone fell by 2.3 million barrels per day that month, to 5.97 million.
           </p>
           <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
             The IEA has coordinated a release of 400 million barrels from 32 countries.
@@ -835,14 +836,15 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           </label>
         </div>
         <p class="mt-1 max-w-prose text-xs leading-relaxed text-faint">
-          Select a comparison to see the EIA's September 9 forecast or what would happen if the
+          Select a comparison to see the EIA's October 6 outlook or what would happen if the
           June–August 2026 trend continued ({ wsPersMonthlyStr } million barrels a month).
           Both use the same starting point as the scenarios.
         </p>
         <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
           Change since { wsFcAnchorMonthStr }, in million barrels. We adjust production and
           consumption from the EIA's September 9 outlook for each scenario. The EIA comparison
-          uses that forecast without our adjustments. Recent trend repeats IEA-reported changes.
+          uses its October 6 outlook: a September estimate followed by forecasts from October.
+          Recent trend repeats IEA-reported changes.
           The two agencies' figures cover different sets of oil stocks.
         </p>
 
@@ -1368,15 +1370,18 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         <!-- Demand destruction: the force, measured directly -->
         <div class="grid gap-10 lg:grid-cols-3">
           <div class="lg:col-span-2">
-            <h3 class="text-lg font-bold tracking-tight">World oil use fell about 4% in May compared with last year</h3>
-            <p class="mt-2 font-mono text-[11px] text-faint">World oil and other liquid fuel use, million barrels/day. EIA STEO, Sep 9 release; January–August, 2026 vs 2025.</p>
+            <h3 class="text-lg font-bold tracking-tight">World oil use fell about 5% in May compared with last year</h3>
+            <p class="mt-2 font-mono text-[11px] text-faint">World oil and other liquid fuel use, million barrels/day. EIA STEO, Oct 6 release; January–September, 2026 vs 2025.</p>
             <div class="mt-4 h-72">
-              <canvas id="demandChart" role="img" aria-label="World petroleum consumption, 2026 versus the same months of 2025, in million barrels per day: in line with last year through March, then falling away — 99.2 in May, 4.3 below the prior year, 101.8 in July, 3.6 below — recovering to 103.7 in August, within 0.8 of the year earlier."></canvas>
+              <canvas id="demandChart" role="img" aria-label="World petroleum consumption, 2026 versus the same months of 2025, in million barrels per day: in line with last year through March, then falling away — 99.0 in May, 4.7 below the prior year, 101.8 in July, 3.9 below — recovering to 103.4 in August, within 1.1 of the year earlier, and 104.2 in September, 1.8 below."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-              World oil use fell 4.3 million barrels per day below last year's level in May, a
-              decline of about 4%. The gap narrowed to 3.6 million in July and 0.8 million in August.
+              World oil use fell 4.7 million barrels per day below last year's level in May, a
+              decline of about 5%. The gap narrowed to 3.9 million in July and 1.1 million in August,
+              then widened slightly to 1.8 million in September.
               Using less oil helps contain prices, but it also reflects the strain on the economy.
+            </p>
+            <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
               The IEA now expects demand to fall by 2.5 million barrels per day across 2026,
               compared with its August estimate of 1.6 million. It expects the quarterly decline to
               ease from 5.3 million in Q2 to 3.4 million in Q3 and 2.0 million in Q4, followed by a
@@ -1386,9 +1391,9 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               2026. That's a difference of 2.9 million between the two forecasts.
             </p>
             <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
-              EIA STEO Table 3e, Sep 9 2026; forecast completed Sep 3. The release lists Jan–Aug
+              EIA STEO Table 3e, Oct 6 2026; forecast completed Oct 1. The release lists Jan–Sep
               as historical data, though world and regional consumption figures are estimates.
-              They include fuel used by refineries and ships. Forecasts from Sep 2026 onward aren't shown.
+              They include fuel used by refineries and ships. Forecasts from Oct 2026 onward aren't shown.
             </p>
           </div>
           <div>
@@ -2101,8 +2106,8 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         };
         const w26 = worldConsumption2026.map((p) => ({ x: wdoy(p.date), y: p.value }));
         const w25 = worldConsumption2025.map((p) => ({ x: wdoy(p.date), y: p.value }));
-        const wTicks = [0, 31, 59, 90, 120, 151, 181, 212];
-        const wNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
+        const wTicks = [0, 31, 59, 90, 120, 151, 181, 212, 244];
+        const wNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"];
         new Chart(document.getElementById("demandChart")!, {
           type: "line",
           data: {
@@ -2136,7 +2141,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               x: {
                 type: "linear" as const,
                 min: 0,
-                max: 232,
+                max: 266,
                 grid: { display: false },
                 border: { display: true, color: "#d8d4c6", width: 0.5 },
                 afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
@@ -2173,8 +2178,9 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             directLabels([
               { dataset: 0, index: 0, text: "2026", align: "left", dx: 10, dy: -10, ...endpoint },
               { dataset: 1, index: 0, text: "2025", align: "left", dx: 10, dy: 16, ...endpoint, color: "#8a867a" },
-              { dataset: 0, index: 4, text: "−4.3 below 2025 (May)", align: "left", dx: 8, dy: 20, ...note },
-              { dataset: 0, index: w26.length - 1, text: "103.7 (Aug)", align: "right", dx: -6, dy: 16, ...endpoint },
+              { dataset: 0, index: 4, text: `−${(w25[4].y - w26[4].y).toFixed(1)} below 2025 (May)`, align: "left", dx: 8, dy: 20, ...note },
+              // data-derived: the hand-typed "103.7 (Aug)" survived the Oct 6 STEO refresh (stale label bug)
+              { dataset: 0, index: w26.length - 1, text: `${w26[w26.length - 1].y.toFixed(1)} (${new Date(worldConsumption2026[worldConsumption2026.length - 1].date + "T12:00:00").toLocaleDateString("en-US", { month: "short" })})`, align: "right", dx: -6, dy: 16, ...endpoint },
             ]),
           ],
         });
@@ -3453,7 +3459,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // only: displayed = stored − stored anchor; the records are never modified. Checkbox
       // visibility is chart state only — scoring reads the records, not the chart.
       {
-        const eiaRec = (ws as any).forecast_records.find((r: any) => r.record_id === "steo-2026-09-global-observed");
+        const eiaRec = (ws as any).forecast_records.find((r: any) => r.record_id === "steo-2026-10-global-observed");
         const persRec = (ws as any).forecast_records.find((r: any) => r.record_id === "persistence-2026-09-global-observed");
         // Phase 3 scenario records + colors (from the assumptions file's scenario list).
         const scColor = (id: string) => (worldStocksAssumptions as any).scenarios.find((s: any) => s.id === id)?.color ?? "#8a867a";
@@ -3650,7 +3656,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
                       return ` ${scName(sid)} (scenario published ${activeVersion}; adjusts the Sep 9 EIA forecast): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
                     }
                     if (ctx.datasetIndex === 4)
-                      return ` EIA forecast (production minus consumption, Sep 9, 2026 release): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
+                      return ` EIA October 6 outlook (September estimate; forecasts from October, production minus consumption): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
                     if (ctx.datasetIndex === 5)
                       return ` Recent trend (Jun–Aug 2026 average, repeated): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
                     return null;

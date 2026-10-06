@@ -1,6 +1,6 @@
 {
  "generated": "2026-09-19",
- "generated_by": "World stocks panels, Phase 1 + Phase 2 (benchmarks, persistence baseline, forecast records) + Phase 3 scenarios v2026-09-17; corridor-lapses extended to Dec 2027 as conditional version v2026-09-18 (fixed-total-disruption reading, P2+C0); standoff redefined as candidate A (no net Gulf recovery; research page /research/standoff-recovery) as version v2026-09-19 — the v2026-09-17/18 records are preserved for scoring. See research/world-stocks-research.md and research/stress-test/.",
+ "generated_by": "World stocks panels, Phase 1 + Phase 2 (benchmarks, persistence baseline, forecast records) + Phase 3 scenarios v2026-09-17; corridor-lapses extended to Dec 2027 as conditional version v2026-09-18 (fixed-total-disruption reading, P2+C0); standoff redefined as candidate A (no net Gulf recovery; research page /research/standoff-recovery) as version v2026-09-19 — the v2026-09-17/18 records are preserved for scoring. See research/world-stocks-research.md and research/stress-test/.; STEO Oct 2026 edition record added 2026-10-06 (Oct 6 pass)",
  "conventions": {
   "sign": "positive = stocks increased; negative = stocks decreased",
   "status": {
@@ -2421,6 +2421,338 @@
    "outcome_policy": "score against outcome_first_release only — the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
    "issued_at": null,
    "issued_at_note": "issue time was not captured for this version — 2026-09-17 is the calendar date the site shipped with these targets; the exact finalization time is unknown. Forecast versions finalized after this one must record a timezone-aware issued_at timestamp at finalization.",
+   "anchor_observation": {
+    "series": "global_observed_cumulative_mb",
+    "period": "2026-08",
+    "value_mb": -507.0,
+    "edition": "IEA OMR, 11 Sep 2026 (web report page)"
+   }
+  },
+  {
+   "record_id": "steo-2026-10-global-observed",
+   "issued": "2026-10-06",
+   "issued_before_outcome": true,
+   "type": "agency-projection",
+   "agency": "EIA",
+   "release": "STEO, released 6 Oct 2026 (workbook generated 1 Oct 2026)",
+   "scope": "global — EIA world total, all liquids, balance-implied (production − consumption). Anchored to the IEA's cumulative observed level for visual comparison only; EIA's coverage is broader than the IEA's observed pool, and a balance-implied path is not a forecast of IEA observed stocks. Scores against the IEA series must carry that coverage mismatch.",
+   "anchor": {
+    "period": "2026-08",
+    "value_mb": -507,
+    "basis": "IEA OMR Sep 2026 web: cumulative change in global observed stocks since end-Feb 2026"
+   },
+   "targets": [
+    {
+     "period": "2026-09",
+     "target_monthly_mb": -88.128771018,
+     "target_cumulative_mb": -595.128771018,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-10",
+     "target_monthly_mb": -20.79822253485,
+     "target_cumulative_mb": -615.9269935528499,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-11",
+     "target_monthly_mb": -14.1369781389,
+     "target_cumulative_mb": -630.0639716917499,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2026-12",
+     "target_monthly_mb": -28.69797480711,
+     "target_cumulative_mb": -658.7619464988599,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-01",
+     "target_monthly_mb": 86.1893715976,
+     "target_cumulative_mb": -572.5725749012598,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-02",
+     "target_monthly_mb": 56.3437120176,
+     "target_cumulative_mb": -516.2288628836599,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-03",
+     "target_monthly_mb": 129.8185014729,
+     "target_cumulative_mb": -386.41036141075983,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-04",
+     "target_monthly_mb": 137.622218055,
+     "target_cumulative_mb": -248.78814335575984,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-05",
+     "target_monthly_mb": 177.2899104297,
+     "target_cumulative_mb": -71.49823292605984,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-06",
+     "target_monthly_mb": 135.591930306,
+     "target_cumulative_mb": 64.09369737994015,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-07",
+     "target_monthly_mb": 159.64399903860001,
+     "target_cumulative_mb": 223.73769641854017,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-08",
+     "target_monthly_mb": 169.5636877769,
+     "target_cumulative_mb": 393.30138419544016,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-09",
+     "target_monthly_mb": 165.915594831,
+     "target_cumulative_mb": 559.2169790264402,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-10",
+     "target_monthly_mb": 215.2411859623,
+     "target_cumulative_mb": 774.4581649887402,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-11",
+     "target_monthly_mb": 197.659632477,
+     "target_cumulative_mb": 972.1177974657403,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    },
+    {
+     "period": "2027-12",
+     "target_monthly_mb": 159.9930266808,
+     "target_cumulative_mb": 1132.1108241465404,
+     "outcome_first_release": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null
+     },
+     "outcome_latest": {
+      "monthly_mb": null,
+      "monthly_published": null,
+      "cumulative_mb": null,
+      "cumulative_published": null,
+      "revisions": 0,
+      "published_date": null
+     }
+    }
+   ],
+   "model_version": "world-stocks phase 2",
+   "assumptions": "monthly change = (papr_world − patc_world) × calendar days; site sign convention",
+   "outcome_status": "open — the first scoreable outcome (Sep 2026) had not been published as of the 2026-10-06 issue date; the Oct 2026 OMR publishes it. Append outcomes to the first target, then the next, as editions publish. NOTE: the 2026-09 target is the EIA's retrospective estimate (an 'actual' in the Oct edition's own data), not a prospective forecast — score it as estimate-vs-observation and keep it separate from genuine prospective forecast skill; the first prospective EIA score is 2026-10.",
+   "outcome_policy": "score against outcome_first_release only — the figure as first published in the source edition. If a later edition revises the outcome, update outcome_latest (and increment its revisions counter) but leave outcome_first_release frozen, so historical revisions cannot distort the score.",
+   "issued_at": "2026-10-06T10:40:00-06:00",
+   "issued_at_note": "finalized during the Oct 6 pass, after the release posted (~10:35 ET release window; workbook fetched 10:02 MDT)",
    "anchor_observation": {
     "series": "global_observed_cumulative_mb",
     "period": "2026-08",

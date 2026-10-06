@@ -40,7 +40,7 @@ const byId = (id: string) => records.find((r: any) => r.record_id === id);
 const recHolds = byId(`scenario-corridor-holds-${activeVersion}-global-observed`);
 const recStandoff = byId(`scenario-standoff-${activeVersion}-global-observed`);
 const recLapses = byId(`scenario-corridor-lapses-${activeVersion}-global-observed`);
-const recEia = byId("steo-2026-09-global-observed");
+const recEia = byId("steo-2026-10-global-observed");
 if (!recHolds || !recStandoff || !recLapses || !recEia)
   throw new Error("og card: missing a forecast record");
 

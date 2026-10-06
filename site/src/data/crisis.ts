@@ -427,69 +427,74 @@ export const branchWeights = [
 // ---------- Research log (local-only files) ----------
 // ---------- The flip: surplus → reserve drawdown (reported months only) ----------
 // World oil balance, mb/d — production minus consumption. Source: EIA STEO Table 3a
-// (STEO_m.xlsx, Sep 9 2026 release, "Total crude oil and other liquids inventory net
-// withdrawals, world total"; positive there = drawdown). Jan–Aug 2026 are ACTUALS in
-// that release; Sep 2026 onward is EIA forecast and deliberately NOT shown (the
+// (STEO_m.xlsx, Oct 6 2026 release, "Total crude oil and other liquids inventory net
+// withdrawals, world total"; positive there = drawdown). Jan–Sep 2026 are ACTUALS in
+// that release; Oct 2026 onward is EIA forecast and deliberately NOT shown (the
 // forecasted 2027 return to surplus is not credible while the strait is contested).
 // Positive here = surplus (build); negative = net withdrawal (running on reserves).
-// Raw STEO values (drawdown +): Jan −3.47, Feb −4.23, Mar +5.24, Apr +4.16, May +4.76,
-// Jun +2.63, Jul +0.09, Aug +4.07. Mid-month x positions.
+// Raw STEO values (drawdown +), Oct 6 edition: Jan −3.59, Feb −4.33, Mar +5.21, Apr
+// +4.04, May +4.42, Jun +2.16, Jul −0.27, Aug +2.97, Sep +2.94. Mid-month x positions.
+// (The Sep 9 edition had forecast Sep at +4.80 drawdown — the Oct edition's actual is
+// a much shallower 2.94.)
 // Context: the physical loss peaked at 11.2M b/d of Gulf shut-in in May (EIA); demand
 // destruction (−1.6 in the Aug 12 OMR; −2.5 in the Sep 11 edition) and non-Gulf supply
-// absorbed most of it, so the world balance never went deeper than ~5.2. IEA counts
+// absorbed most of it, so the world balance never went deeper than ~5.2 (Oct 6 edition). IEA counts
 // ≈1.3B bbl lost in total since Feb (Aug edition figure; the Sep edition's total is not
 // in the public copy).
 export const worldBalance = [
-  { date: "2026-01-15", value: 3.5 },
-  { date: "2026-02-15", value: 4.2 },
+  { date: "2026-01-15", value: 3.6 },
+  { date: "2026-02-15", value: 4.3 },
   { date: "2026-03-15", value: -5.2 },
-  { date: "2026-04-15", value: -4.2 },
-  { date: "2026-05-15", value: -4.8 },
-  { date: "2026-06-15", value: -2.6 },
-  { date: "2026-07-15", value: -0.1 },
-  { date: "2026-08-15", value: -4.1 },
+  { date: "2026-04-15", value: -4.0 },
+  { date: "2026-05-15", value: -4.4 },
+  { date: "2026-06-15", value: -2.2 },
+  { date: "2026-07-15", value: 0.3 },
+  { date: "2026-08-15", value: -3.0 },
+  { date: "2026-09-15", value: -2.9 },
 ];
 
 // ---------- Demand destruction: world petroleum consumption (mb/d, monthly) ----------
-// EIA STEO Sep 9, 2026 workbook (forecast completed Sep 3), Table 3e "World Petroleum and
-// Other Liquid Fuels Consumption" (row patc_world). Jan–Aug 2026 are ACTUALS in that
-// release — same convention as the world-balance chart; Sep 2026 onward is EIA forecast
+// EIA STEO Oct 6, 2026 workbook (forecast completed Oct 1), Table 3e "World Petroleum and
+// Other Liquid Fuels Consumption" (row patc_world). Jan–Sep 2026 are ACTUALS in that
+// release — same convention as the world-balance chart; Oct 2026 onward is EIA forecast
 // and deliberately not shown. World/regional consumption is EIA-estimated (apparent
 // consumption, incl. refinery fuel & bunkering) — sourced estimates, not interpolation.
-// Story: the destruction is BROAD, not Chinese. China is only −0.8 of the −3.6 Jul gap
-// because it is holding consumption up by halting imports and drawing commercial
+// Story: the destruction is BROAD, not Chinese. China is only −0.8 of the −3.9 Jul gap
+// (Oct 6 edition) because it is holding consumption up by halting imports and drawing commercial
 // stockpiles (Q2 imports −32% QoQ, EIA TIE; Jan–Jul −13.2% YoY, China customs; official
 // 1.2–1.4B bbl reserve untouched — research/2026-08-30.md). China's buffer is the next
 // breaking point (Q1–Q2 2027), not a source of the destruction. The largest single
 // regional decliner is the Middle East itself (−1.2).
 export const worldConsumption2026: { date: string; value: number }[] = [
-  { date: "2026-01-15", value: 102.48 },
-  { date: "2026-02-15", value: 104.48 },
-  { date: "2026-03-15", value: 102.14 },
-  { date: "2026-04-15", value: 99.62 },
-  { date: "2026-05-15", value: 99.17 },
-  { date: "2026-06-15", value: 102.05 },
-  { date: "2026-07-15", value: 101.82 },
-  { date: "2026-08-15", value: 103.7 },
+  { date: "2026-01-15", value: 102.38 },
+  { date: "2026-02-15", value: 104.38 },
+  { date: "2026-03-15", value: 102.0 },
+  { date: "2026-04-15", value: 99.47 },
+  { date: "2026-05-15", value: 99.0 },
+  { date: "2026-06-15", value: 101.68 },
+  { date: "2026-07-15", value: 101.77 },
+  { date: "2026-08-15", value: 103.39 },
+  { date: "2026-09-15", value: 104.24 },
 ];
 export const worldConsumption2025: { date: string; value: number }[] = [
-  { date: "2025-01-15", value: 102.01 },
-  { date: "2025-02-15", value: 103.54 },
-  { date: "2025-03-15", value: 102.31 },
-  { date: "2025-04-15", value: 103.59 },
-  { date: "2025-05-15", value: 103.51 },
-  { date: "2025-06-15", value: 105.76 },
-  { date: "2025-07-15", value: 105.42 },
-  { date: "2025-08-15", value: 104.49 },
+  { date: "2025-01-15", value: 102.03 },
+  { date: "2025-02-15", value: 103.68 },
+  { date: "2025-03-15", value: 102.37 },
+  { date: "2025-04-15", value: 103.82 },
+  { date: "2025-05-15", value: 103.72 },
+  { date: "2025-06-15", value: 105.82 },
+  { date: "2025-07-15", value: 105.63 },
+  { date: "2025-08-15", value: 104.5 },
+  { date: "2025-09-15", value: 106.0 },
 ];
-// Same table, July column: where the −3.6 mb/d sits (Jul 2026 vs Jul 2025, mb/d).
+// Same table (Oct 6 edition), July column: where the −3.9 mb/d sits (Jul 2026 vs Jul 2025, mb/d).
 export const demandDecline = [
-  { region: "World", from: 105.42, to: 101.82 },
-  { region: "Middle East", from: 10.18, to: 8.94 },
-  { region: "Asia & Oceania", from: 37.88, to: 36.03 },
-  { region: "China", sub: "part of Asia & Oceania; using stockpiles to support consumption", from: 16.41, to: 15.59 },
-  { region: "Europe", from: 14.78, to: 14.71 },
-  { region: "United States", from: 20.98, to: 20.54 },
+  { region: "World", from: 105.63, to: 101.77 },
+  { region: "Middle East", from: 10.18, to: 8.88 },
+  { region: "Asia & Oceania", from: 37.87, to: 35.98 },
+  { region: "China", sub: "part of Asia & Oceania; using stockpiles to support consumption", from: 16.41, to: 15.58 },
+  { region: "Europe", from: 14.78, to: 14.7 },
+  { region: "United States", from: 21.19, to: 20.61 },
 ];
 
 // ---------- Refining: US refinery utilization (weekly, % of operable capacity) ----------
@@ -570,9 +575,8 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     ],
   },
   {
-    when: "Oct 6–7",
+    when: "Oct 7",
     items: [
-      { item: "The EIA's next oil-market outlook is due Oct 6. We'll compare its Brent price forecast with market prices as part of our scheduled review of the odds. The Oct 2 December futures settlement was $102.25, about $12 above the EIA's previous forecast for average spot prices in the second half of 2026. Those figures cover different periods.", why: "In September, we chose a sustained gap of about $10–15 as a reason to review the odds. The gap alone doesn't measure the chance of another closure." },
       { item: "The next weekly EIA report is due Oct 7 at 10:30 a.m. Eastern and covers the week ending Oct 2. Bids for DOE's sixth SPR offering are due Oct 6. The Sep 30 report showed SPR stocks fell 0.8M barrels — about twice the prior two weeks' pace — and diesel and heating-oil stocks fell 2.3M to 105.2M, 14.9% below last year.", why: "Watch whether SPR withdrawals continue at the higher pace. Deliveries from the new offering are scheduled for November–December." },
     ],
   },
