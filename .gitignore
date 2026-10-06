@@ -10,6 +10,9 @@ src/content/
 .eia_api_key
 .bls_api_key
 
+# crisis.ts pre-apply backups (daily-update.mjs writes one per apply, keeps 3 most recent)
+crisis.ts.bak-*
+
 # misc
 .env
 *.log
