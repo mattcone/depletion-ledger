@@ -14,6 +14,13 @@
       "file": "steo-main.html",
       "sha256": "fddbe1fc4514addc68b30326700ef17e554a6142b37153394420e3f077f7d15d",
       "bytes": 67212
+    },
+    {
+      "file": "STEO-oct26.pdf",
+      "url": "https://www.eia.gov/outlooks/steo/archives/oct26.pdf",
+      "sha256": "741d247cffcae488208ad0c5e03966405283eec3ff6b830d02285cbe25b44fe6",
+      "bytes": 7234778,
+      "note": "archived Oct 7, 2026 \u2014 authoritative quarterly Table 2 (Brent 2026: Q1 81.11 Q2 102.93 Q3 95.95 Q4 104.69; 2026 avg 96.32); used to resolve the 2H26 correction"
     }
   ]
 }

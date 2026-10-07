@@ -910,17 +910,17 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         </div>
         <div class="mb-6 max-w-[65ch] text-[13px]">
           <p class="text-[13px] leading-relaxed text-ink/80">
-            These stocks exclude the Strategic Petroleum Reserve (SPR). They stood at 427.3 million
-            barrels on Sep 25, up from 404.5 million on Jul 24. The EIA's Sep 30 report shows
-            stocks rose by 0.9 million barrels, their second weekly increase in a row. Crude imports
-            fell by 179,000 barrels a day that week, to 5.7 million a day. Stocks were 10.8 million barrels above
-            the same week last year and 2% above the five-year average. SPR releases
+            These stocks exclude the Strategic Petroleum Reserve (SPR). They stood at 424.1 million
+            barrels on Oct 2, up from 404.5 million on Jul 24. The EIA's Oct 7 report shows
+            stocks fell by 3.2 million barrels, the first weekly decline after two increases. Crude
+            imports rose by 1.1 million barrels a day that week, to 6.8 million a day. Stocks were
+            3.9 million barrels above the same week last year. SPR releases
             have helped supply commercial oil users this year. Moving oil from the reserve to
             commercial storage leaves the combined amount unchanged.
           </p>
         </div>
         <div class="relative h-72">
-          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus the same weeks in 2025: 2026 stocks rose from 419.1 million in early January to a peak of 465.7 million on Apr 17, fell to 404.5 million on Jul 24 — the lowest level since the war began and 22.2 million barrels below the same week in 2025 — rose again to 428.9 million on Aug 21, eased over the next three weeks, and rose for a second straight week to 427.3 million on Sep 25, 10.8 million barrels above the 2025 level of 416.5 million."></canvas>
+          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus the same weeks in 2025: 2026 stocks rose from 419.1 million in early January to a peak of 465.7 million on Apr 17, fell to 404.5 million on Jul 24 — the lowest level since the war began and 22.2 million barrels below the same week in 2025 — rose again to 428.9 million on Aug 21, eased over the next three weeks, rose for a second straight week to 427.3 million on Sep 25, then fell 3.2 million barrels to 424.1 million on Oct 2, 3.9 million barrels above the 2025 level of 420.3 million."></canvas>
         </div>
 
         <p class="mt-3 font-mono text-[11px] text-faint">EIA weekly stocks, excluding the SPR, in million barrels. The Jul 24 low was 22.2M below the same week in 2025.</p>
@@ -934,10 +934,11 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           <p class="text-[13px] leading-relaxed text-ink/80">
             The Strategic Petroleum Reserve (SPR) is the US government's emergency supply of crude
             oil. It was created after the energy shortages of the 1970s. The reserve held 415.4 million
-            barrels when the war began. The latest report, for the week ending Sep 25, puts it at
-            283.8 million, down 0.8 million barrels — about twice the amount withdrawn in each of the prior two weeks.
+            barrels when the war began. The latest report, for the week ending Oct 2, puts it at
+            283.0 million, down 0.8 million barrels — the second straight week at that pace.
             Weekly withdrawals had fallen from 3.1 million barrels in the week ending Aug 28
-            to 1.2 million the following week and 0.4 million in each of the next two weeks.
+            to 1.2 million the following week, 0.4 million in each of the next two weeks, and about
+            0.8 million in each of the last two weeks.
             For comparison, the reserve peaked at 727 million barrels in December 2009
             and stood at 270.5 million in August 1982. The releases help make up for
             supplies that can't leave the Gulf.
@@ -965,16 +966,17 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               The Department of Energy releases oil from the SPR through contracts and scheduled
               deliveries. A supply shortage doesn't automatically trigger withdrawals. On Sep 29,
               DOE offered companies loans of up to 40 million barrels, with bids due Oct 6 and
-              deliveries under awarded contracts scheduled for November and December. Contracts
-              haven't been awarded yet, so withdrawals could pause as earlier deliveries end.
-              Withdrawals averaged about 112,000 barrels a day in the latest reported week.
+              deliveries under awarded contracts scheduled for November and December. As of
+              Oct 7, no award has been announced, so withdrawals could pause as earlier
+              deliveries end. Withdrawals averaged about 112,000 barrels a day in the latest
+              reported week.
               The pace can change with each release decision.
             </p>
           </div>
         </div>
         <!-- SPR chart (full width) -->
         <div class="relative h-96">
-            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 283.8 million on Sep 25. Model thresholds at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
+            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 283.0 million on Oct 2. Model thresholds at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
             <div
               id="sprFloorTip"
               class="pointer-events-none absolute z-10 hidden max-w-[300px] border border-rule bg-[rgba(255,255,248,0.97)] px-3 py-2 text-[12px] leading-snug text-ink shadow-sm"
@@ -1234,22 +1236,23 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
               US refineries operated above 95% of their available capacity every week from
               Jun 5 through Sep 11, reaching 98.0% in the week ending Aug 28. In the week
-              ending Sep 25, they used 92.5% of their capacity and processed 554,000 fewer barrels
-              a day than the week before. For the January–September weeks shown, refineries used
-              an average of 90.7% of their capacity in 2025
+              ending Oct 2, they used 92.7% of their capacity and processed 223,000 more barrels
+              a day than the week before. For the January–October weeks shown, refineries used
+              an average of 90.8% of their capacity in 2025
               and 93.6% in 2026.
               Fuel exports also reached a record 8 million barrels per day in August, according to
               OPEC. US plants are working close to capacity, but shortages in Europe, Asia, and
               Russia continue to put pressure on fuel supplies.
             </p>
             <div class="relative h-96">
-              <canvas id="refineryChart" role="img" aria-label={`US refinery utilization, percent of operable capacity, weekly: 2026 above 2025 from spring onward — a dip to 88.6 percent in late February, then a steady climb from 95.3 on Jun 5 to a 98.0 peak on Aug 28, easing to 96.8 on Sep 11, slipping to 94.0 on Sep 18, and falling to 92.5 on Sep 25 — ${refineryStreak} straight week${refineryStreak === 1 ? "" : "s"} below 95%; the same period in 2025 ranged from 83.5 to 96.9.`}></canvas>
+              <canvas id="refineryChart" role="img" aria-label={`US refinery utilization, percent of operable capacity, weekly: the 2026 line runs above the 2025 line in 38 of the 40 comparable weeks — below it only in the weeks ending Jul 31 and Aug 7 — a dip to 88.6 percent in late February, then a climb from 95.3 on Jun 5 to a 98.0 peak on Aug 28, easing to 96.8 on Sep 11, slipping to 94.0 on Sep 18, falling to 92.5 on Sep 25, and rising slightly to 92.7 on Oct 2 — ${refineryStreak} straight week${refineryStreak === 1 ? "" : "s"} below 95%; the same period in 2025 ranged from 83.5 to 96.9.`}></canvas>
             </div>
             <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
               EIA Weekly Petroleum Status Report (WPULEUS3), weeks ending Friday. Utilization is the
-              amount processed divided by available capacity. Both lines cover the same Jan–Sep period.
-              Monthly processing volumes were 16.3–17.3 million barrels/day (STEO Table 4a), above 2025
-              in every month. The fuel price gap chart in Prices shows how fuel and crude prices compare.
+              amount processed divided by available capacity. Both lines cover the same Jan–Oct period.
+              Monthly crude inputs to refineries ran 15.9–17.4 million barrels/day in the
+              January–September months (STEO Table 4a, Oct 6 release), above 2025 in every month.
+              The fuel price gap chart in Prices shows how fuel and crude prices compare.
             </p>
           </div>
           <div>
@@ -1928,8 +1931,8 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         };
         const u26 = usRefineryUtil2026.map((p) => ({ x: doy(p.date), y: p.value }));
         const u25 = usRefineryUtil2025.map((p) => ({ x: doy(p.date), y: p.value }));
-        const monthTicks = [0, 31, 59, 90, 120, 151, 181, 212, 243];
-        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"];
+        const monthTicks = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273];
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"];
         new Chart(document.getElementById("refineryChart")!, {
           type: "line",
           data: {
@@ -1963,7 +1966,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               x: {
                 type: "linear" as const,
                 min: 0,
-                max: 273, // headroom: data now runs to Sep 25 = doy 268 (2025 series to Sep 26 = doy 269)
+                max: Math.max(...u26.map((p) => p.x), ...u25.map((p) => p.x)) + 3, // derived: last plotted week + headroom
                 grid: { display: false },
                 border: { display: true, color: "#d8d4c6", width: 0.5 },
                 afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
@@ -1995,10 +1998,17 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           plugins: [
             crosshair,
             directLabels([
-              { dataset: 0, index: 0, text: "2026", align: "left", dx: 10, dy: -10, ...endpoint },
-              { dataset: 0, index: u26.length - 1, text: u26[u26.length - 1].y.toFixed(1), ...endpoint },
-              { dataset: 1, index: 0, text: "2025", align: "left", dx: 10, dy: 16, ...endpoint, color: "#8a867a" },
-              { dataset: 1, index: u25.length - 1, text: u25[u25.length - 1].y.toFixed(1), ...endpoint, color: "#8a867a" },
+              // The two lines converge at the right end (92.7 vs 92.4 — under 6px on a
+              // 20-pt y-scale): 2026's value stays above its line, 2025's drops below,
+              // or the two labels print on top of each other. Halos knock the lines out
+              // under the glyphs (the lines run into every label here).
+              // Positional overrides come AFTER the ...endpoint spread — the spread
+              // carries align/dx/dy and clobbers anything placed before it (the old
+              // year labels landed right-aligned at the y-axis because of this).
+              { dataset: 0, index: 0, text: "2026", ...endpoint, align: "left", dx: 10, dy: -10, halo: "#f2f1ec" },
+              { dataset: 0, index: u26.length - 1, text: u26[u26.length - 1].y.toFixed(1), ...endpoint, halo: "#f2f1ec" },
+              { dataset: 1, index: 0, text: "2025", ...endpoint, align: "left", dx: 10, dy: 16, color: "#8a867a", halo: "#f2f1ec" },
+              { dataset: 1, index: u25.length - 1, text: u25[u25.length - 1].y.toFixed(1), ...endpoint, dy: 16, color: "#8a867a", halo: "#f2f1ec" },
             ]),
           ],
         });
@@ -2012,8 +2022,8 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         };
         const cc26 = commercialCrude2026.map((p) => ({ x: doy2(p.date), y: p.value }));
         const cc25 = commercialCrude2025.map((p) => ({ x: doy2(p.date), y: p.value }));
-        const ccMonthTicks = [0, 31, 59, 90, 120, 151, 181, 212, 243];
-        const ccMonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"];
+        const ccMonthTicks = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273];
+        const ccMonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"];
         new Chart(document.getElementById("commercialCrudeChart")!, {
           type: "line",
           data: {
@@ -2047,7 +2057,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               x: {
                 type: "linear" as const,
                 min: 0,
-                max: 273, // headroom: data now runs to Sep 25 = doy 268
+                max: Math.max(...cc26.map((p) => p.x), ...cc25.map((p) => p.x)) + 3, // derived: last plotted week + headroom
                 grid: { display: false },
                 border: { display: true, color: "#d8d4c6", width: 0.5 },
                 afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
@@ -2087,9 +2097,11 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               // NOTE: positional overrides must come AFTER the ...endpoint spread — the
               // spread carries its own align/dx/dy and clobbers anything before it.
               { dataset: 0, index: 0, text: "2026", ...endpoint, align: "left", dx: 40, dy: -44 },
-              { dataset: 0, index: cc26.length - 1, text: cc26[cc26.length - 1].y.toFixed(1), ...endpoint, dy: -16 },
+              { dataset: 0, index: cc26.length - 1, text: cc26[cc26.length - 1].y.toFixed(1), ...endpoint, dy: -16, halo: "#f2f1ec" },
               { dataset: 1, index: 0, text: "2025", ...endpoint, align: "left", dx: 40, dy: 30, color: "#8a867a" },
-              { dataset: 1, index: cc25.length - 1, text: cc25[cc25.length - 1].y.toFixed(1), ...endpoint, color: "#8a867a" },
+              // Same convergence as the refinery chart: 2026 ends 424.1, 2025 ends 420.3
+              // (~15px apart) — 2026's value above its line, 2025's below.
+              { dataset: 1, index: cc25.length - 1, text: cc25[cc25.length - 1].y.toFixed(1), ...endpoint, dy: 16, color: "#8a867a", halo: "#f2f1ec" },
               // Short form: the long YoY version clipped at 390px; the caption carries it.
               { dataset: 0, index: 29, text: "Jul 24 low: 404.5M", align: "center", dy: 18, color: "#b3261e" },
             ]),
@@ -3298,7 +3310,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           ]),
           directLabels([
             // Actuals endpoint
-            { dataset: 0, index: anchorIdx, text: "283.8M · Sep 25", align: "right", dx: -12, dy: 16, font: "600 11.5px Georgia, serif" },
+            { dataset: 0, index: anchorIdx, text: "283.0M · Oct 2", align: "right", dx: -12, dy: 16, font: "600 11.5px Georgia, serif" },
           ]),
         ],
       });

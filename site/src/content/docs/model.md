@@ -219,20 +219,21 @@ The September 11 pipeline suspension moved the odds from 10/50/40 to 10/40/50. W
 
 On September 29, we moved the odds to 10/50/40. The Wall Street Journal and [Bloomberg](https://www.rigzone.com/news/wire/saudi_arabias_key_oil_pipeline_starts_exports-28-sep-2026-184718-article/) reported that exports had resumed through the repaired pipeline, which was carrying about 3.5 million barrels a day. The Journal reported that tanker loadings at Yanbu had resumed on September 27. Our rule called for an official restart announcement or an assessment that repairs would take only days. Neither condition had been met. We made an exception because the reports showed that oil was moving through the pipeline and leaving the port again.
 
+The early-October checks haven't changed the odds. The gap between the EIA's October 6 price forecast and market prices did not meet our threshold. On October 7, we closed the disputed pipeline-shutdown claim after other reports said oil was still flowing.
+
 The dashboard shows the history in “The model's odds for each outcome.”
 
 <details>
 <summary>Events that would prompt a change</summary>
 
-We recorded these rules as of September 16 and applied the Yanbu rule on September 22. The September 29 change was an exception to the pipeline-restart rule, as explained above.
+We recorded these rules as of September 16 and applied the Yanbu rule on September 22. The September 29 change was an exception to the pipeline-restart rule, as explained above. On October 7, we removed rules that had already been used or passed — the two pipeline-reversion rules, the September 30 fuel-ban decision, and the September prediction-market checks — and replaced the dated pipeline clause with a standing one.
 
 | Event | Effect on the odds |
 |---|---|
 | A verified reopening, supported by an International Maritime Organization (IMO) filing and tanker traffic at or above 40% of the 85-per-day baseline for two consecutive weeks, or a durable ceasefire. | Increases the odds that the corridor holds. |
-| A rapid resumption of Yanbu loadings. | Returns the odds to 10/40/50. |
-| An official restart of the East–West pipeline, or an assessment that repairs would take only days. | Reverses both September changes, returning the odds to 10/50/40. |
-| Tanker losses above about 15 per week; delays restarting Jazan or Abqaiq; the pipeline remaining suspended past the September 16 report; or a damage assessment calling for weeks of repairs. | Increases the odds that the corridor lapses. |
-| Russia's September 30 fuel-ban decision; a widening gap between the EIA price outlook and market prices; or an adverse prediction-market result on September 14 or 30. | Could increase the odds that the corridor lapses. |
+| Tanker losses above about 15 per week; delays restarting Jazan or Abqaiq; or a damage assessment calling for weeks of repairs. | Increases the odds that the corridor lapses. |
+| A confirmed shutdown of the repaired East–West pipeline. | Increases the odds that the corridor lapses. |
+| A widening gap between the EIA price outlook and market prices (checked at each monthly outlook release). | Could increase the odds that the corridor lapses. |
 | The Houthis blocking or attacking non-Saudi vessels in the Bab el-Mandeb, leaving both shipping routes closed. | Increases the odds that the corridor lapses. |
 
 A direct US strike on the Houthis would also prompt us to review the odds. How we'd change them would depend on what happened. The dated [research logs](https://github.com/mattcone/depletion-ledger/tree/main/research/logs) explain each decision, including cases where reports disagreed or the news didn't change the odds.

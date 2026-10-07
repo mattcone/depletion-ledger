@@ -286,8 +286,8 @@ export const stats = [
   { label: "Brent", value: "$100.58", sub: "Oct 6 settlement · up $0.26 on the December contract · tenth session close above $100 · +32% vs pre-crisis ~$76" },
   { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : `${wordNum(dieselStreak)} consecutive daily declines`) + " · " : ""}+${dieselUpPct}% vs pre-war $3.72` },
   { label: "US gasoline (AAA)", value: `$${lastGasoline.value.toFixed(2)}`, sub: `${shortStatDate(lastGasoline.date)} · +${gasUpPct}% vs Jan $2.81 (AAA)` },
-  { label: "SPR", value: "283.8M", sub: "Sep 25 · down 0.8M in a week — about twice the prior two weeks' pace · down 131.7M from pre-war 415.4M · lowest since Nov 1982" },
-  { label: "US diesel & heating oil", value: "105.2M", sub: "Sep 25 · down 2.3M in a week · 14.9% below last year · East Coast stocks 29% below last year" },
+  { label: "SPR", value: "283.0M", sub: "Oct 2 · down 0.8M in a week — second straight week at that pace · down 132.4M from pre-war 415.4M · lowest since Nov 1982" },
+  { label: "US diesel & heating oil", value: "105.1M", sub: "Oct 2 · down 0.04M in a week — essentially flat · 13.5% below last year · East Coast stocks 28% below last year" },
 ];
 
 // ---------- SPR, million bbl — EIA weekly ending stocks (verified) ----------
@@ -331,6 +331,7 @@ export const sprWeekly: { date: string; level: number }[] = [
   { date: "2026-09-11", level: 284.957 },
   { date: "2026-09-18", level: 284.552 },
   { date: "2026-09-25", level: 283.767 },
+  { date: "2026-10-02", level: 282.983 },
 ];
 // US commercial crude inventories, EXCLUDING the SPR (EIA WPSR, week ending Friday),
 // million barrels. Source: EIA API series WCESTUS1 ("U.S. Ending Stocks excluding SPR of
@@ -358,6 +359,7 @@ export const commercialCrude2026: { date: string; value: number }[] = [
   { date: "2026-08-28", value: 424.460 }, { date: "2026-09-04", value: 424.069 },
   { date: "2026-09-11", value: 423.429 }, { date: "2026-09-18", value: 426.398 },
   { date: "2026-09-25", value: 427.320 },
+  { date: "2026-10-02", value: 424.134 },
 ];
 // Same weeks in 2025 (each 2026 week matched to its nearest 2025 week-ending date).
 export const commercialCrude2025: { date: string; value: number }[] = [
@@ -380,7 +382,7 @@ export const commercialCrude2025: { date: string; value: number }[] = [
   { date: "2025-08-15", value: 420.684 }, { date: "2025-08-22", value: 418.292 },
   { date: "2025-08-29", value: 420.707 }, { date: "2025-09-05", value: 424.646 },
   { date: "2025-09-12", value: 415.361 }, { date: "2025-09-19", value: 414.754 },
-  { date: "2025-09-26", value: 416.546 },
+  { date: "2025-09-26", value: 416.546 }, { date: "2025-10-03", value: 420.261 },
 ];
 export const sprFloors = [
   { level: 300, name: "Cavern damage risk: about 300M barrels (first report below: week ending Aug 7)" },
@@ -532,7 +534,7 @@ export const usRefineryUtil2026: UtilPt[] = [
   { date: "2026-08-14", value: 97.2 }, { date: "2026-08-21", value: 97.4 },
   { date: "2026-08-28", value: 98.0 }, { date: "2026-09-04", value: 97.8 },
   { date: "2026-09-11", value: 96.8 }, { date: "2026-09-18", value: 94.0 },
-  { date: "2026-09-25", value: 92.5 },
+  { date: "2026-09-25", value: 92.5 }, { date: "2026-10-02", value: 92.7 },
 ];
 export const usRefineryUtil2025: UtilPt[] = [
   { date: "2025-01-03", value: 93.3 }, { date: "2025-01-10", value: 91.7 },
@@ -554,7 +556,7 @@ export const usRefineryUtil2025: UtilPt[] = [
   { date: "2025-08-15", value: 96.6 }, { date: "2025-08-22", value: 94.6 },
   { date: "2025-08-29", value: 94.3 }, { date: "2025-09-05", value: 94.9 },
   { date: "2025-09-12", value: 93.3 }, { date: "2025-09-19", value: 93.0 },
-  { date: "2025-09-26", value: 91.4 },
+  { date: "2025-09-26", value: 91.4 }, { date: "2025-10-03", value: 92.4 },
 ];
 
 // Global refining anchors — IEA Oil Market Report (runs: Sep 11 edition; Q3 cut: Aug 12)
@@ -579,16 +581,16 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     ],
   },
   {
-    when: "Oct 7",
+    when: "Oct 14",
     items: [
-      { item: "The next weekly EIA report is due Oct 7 at 10:30 a.m. Eastern and covers the week ending Oct 2. Bids for DOE's sixth SPR offering are due Oct 6. The Sep 30 report showed SPR stocks fell 0.8M barrels — about twice the prior two weeks' pace — and diesel and heating-oil stocks fell 2.3M to 105.2M, 14.9% below last year.", why: "Watch whether SPR withdrawals continue at the higher pace. Deliveries from the new offering are scheduled for November–December." },
+      { item: "The next weekly EIA report is due Oct 14 at 10:30 a.m. Eastern and covers the week ending Oct 9. Bids for DOE's sixth SPR offering were due Oct 6; no award has been announced as of Oct 7. The EIA report showed SPR stocks fell 0.8M barrels for a second straight week, to 283.0M, and diesel and heating-oil stocks fell 0.04M to 105.1M, 13.5% below last year.", why: "Watch whether SPR withdrawals continue at that pace (about 112,000 barrels a day). Deliveries from the sixth offering are scheduled for November–December if it is awarded." },
     ],
   },
 ];
 
 // ---------- Breaking-points cascade (§11, compressed twice) ----------
 export const cascade = [
-  { date: "Each weekly EIA report (next: Oct 7)", region: "US East Coast", trigger: "US diesel and heating-oil stocks fell to 105.2M barrels in the week ending Sep 25, down 2.3M that week. At the four-week average rate of 3.8M barrels a day, those stocks are equivalent to about 28 days of use. East Coast stocks are 29% below last year." },
+  { date: "Each weekly EIA report (next: Oct 14)", region: "US East Coast", trigger: "US diesel and heating-oil stocks stood at 105.1M barrels in the week ending Oct 2, roughly flat on the week and 13.5% below last year. At the four-week average rate of 3.8M barrels a day, those stocks are equivalent to about 28 days of use. East Coast stocks are 28% below last year." },
   { date: "Oct 31", region: "Russia", trigger: "Russia announced on Sep 30 that it was extending its diesel export ban through Oct 31. With more than 30% of refining capacity damaged, Russia may have little fuel available to export." },
   { date: "≈ mid-October", region: "China", trigger: "Commercial oil stocks could begin to fall faster than normal." },
   { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, making it harder for traders to find supplies. If the strait closes fully, this could happen by mid-October." },
