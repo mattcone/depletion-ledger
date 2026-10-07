@@ -54,6 +54,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-10-01", value: 102.31, tip: "settlement · up 4.4% on the December contract", note: "Settlement (December contract; the BZ=F daily bar matches the settlement feed) — +$4.28 vs the December contract's own Sep 30 settlement of $98.03, a seventh session close above $100. The Nov contract had settled at $103.50 on Sep 30, its final day, so part of the step down from the Sep 30 point is the contract switch, not a price move." },
   { date: "2026-10-02", value: 102.25, tip: "settlement · down $0.06 (Reuters)", note: "Settlement (Reuters, December contract; −$0.06 vs Oct 1) — an eighth session close above $100. Brent fell briefly below $100 intraday (low $98.43) when the G7 announced its reserve release, then recovered (BBC). Drivers: the G7 agreed to release up to 100M barrels over four months, and Reuters reported that Saudi Arabia is planning an assault on the Houthis (Oct 2)." },
   { date: "2026-10-05", value: 100.32, tip: "settlement", note: "Settlement · Yahoo BZ=F closing price: $100.32 (matches)." },
+  { date: "2026-10-06", value: 100.58, tip: "settlement · up 0.3% (Rigzone)", note: "Settlement (Rigzone, December contract; +$0.26 vs Oct 5) — a tenth session close above $100. The session fell as low as the high-$97s in the morning after the WSJ reported Kpler's seven-day strait average at 10.3M barrels a day (76% of pre-war), then recovered into the close." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -137,6 +138,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-10-01", value: 92.87, note: "settlement (November contract; the CL=F daily bar matches the settlement feed) · up 2.7% on the same contract — tracked China's fuel export suspension and the US carrier build-up (Reuters/WSJ, Oct 1)" },
   { date: "2026-10-02", value: 91.11, note: "settlement (Reuters, November contract) · down 1.9% on the same contract — the G7 reserve-release announcement knocked prices lower intraday (CNBC, Oct 2)" },
   { date: "2026-10-05", value: 89.43, note: "Settlement · Yahoo CL=F closing price: $89.43 (matches)." },
+  { date: "2026-10-06", value: 89.44, note: "Settlement (Rigzone, November contract; flat vs Oct 5) — the session dipped to the low-$87s in the morning (WSJ/Kpler strait-flow report) and recovered into the close." },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -279,7 +281,7 @@ export const dieselStreak = (() => {
   return n;
 })();
 export const stats = [
-  { label: "Brent", value: "$100.32", sub: "Oct 5 settlement · down $1.93 on the December contract · ninth session close above $100 · +32% vs pre-crisis ~$76" },
+  { label: "Brent", value: "$100.58", sub: "Oct 6 settlement · up $0.26 on the December contract · tenth session close above $100 · +32% vs pre-crisis ~$76" },
   { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : `${wordNum(dieselStreak)} consecutive daily declines`) + " · " : ""}+${dieselUpPct}% vs pre-war $3.72` },
   { label: "US gasoline (AAA)", value: `$${lastGasoline.value.toFixed(2)}`, sub: `${shortStatDate(lastGasoline.date)} · +${gasUpPct}% vs Jan $2.81 (AAA)` },
   { label: "SPR", value: "283.8M", sub: "Sep 25 · down 0.8M in a week — about twice the prior two weeks' pace · down 131.7M from pre-war 415.4M · lowest since Nov 1982" },
@@ -854,6 +856,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-10-01", value: 5.237, note: "session close (Yahoo) · seventh straight close above 5%, down from the war's high close (5.293, Sep 30)" },
   { date: "2026-10-02", value: 5.277, note: "session close (Yahoo) · eighth straight close above 5%, still below the war's high close (5.293, Sep 30) — the G7 reserve release and a weak September jobs report (29k jobs, unemployment up) cut Fed-hike odds (Kitco, Oct 2)" },
   { date: "2026-10-05", value: 5.311, note: "session close (Yahoo) · ninth straight close above 5%" },
+  { date: "2026-10-06", value: 5.269, note: "session close (Yahoo) · tenth straight close above 5%, down from the war's high close (5.311, Oct 5)" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
@@ -1058,7 +1061,7 @@ export const ukmtoReportsBeforeWindow = Math.min(...ukmtoIncidents.map((i) => i.
 
 // Capture bounds are explicit: a quiet day must not shorten the covered period.
 export const ukmtoCoverageStart = "2026-07-01";
-export const ukmtoCoverageEnd = "2026-10-06";
+export const ukmtoCoverageEnd = "2026-10-07";
 
 // Include every Monday–Sunday week, even when it has no attack reports.
 // Partial weeks cover fewer than seven days and don't enter full-week comparisons.

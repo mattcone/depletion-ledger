@@ -102,7 +102,12 @@ EXPECTED_NODATA = []
 # gasTtfChart/gasJkmChart added Oct 6 — the Oct 2 log claimed these two were already
 # end-dot-checked; they were not, and the TTF keep-set (hardcoded Sep 25 endpoint)
 # left the Oct 2 point dotless on staging.
-END_DOT = ["dieselChart", "gasChart", "brentChart", "crackChart", "gasTtfChart", "gasJkmChart"]
+# treasury10yChart added Oct 6 evening: its keep-set (hard-coded 2026-10-05) stranded
+# the Oct 6 endpoint dot and the old list didn't cover this chart, so the gate missed it.
+# The probe now checks EVERY non-reference dataset (constant pointRadius:0 = reference
+# line, skipped) — so the WTI line in brentChart and gasCrack in crackChart are covered
+# too, not just dataset 0.
+END_DOT = ["dieselChart", "gasChart", "brentChart", "crackChart", "gasTtfChart", "gasJkmChart", "treasury10yChart"]
 # Category-scale ids (informational — the probe reports CAT from the scale type).
 CATEGORY = ["sprChart", "recessionChart", "oecdStocksChart", "globalObservedChart", "ukmtoChart"]
 
@@ -209,14 +214,20 @@ window.addEventListener("DOMContentLoaded", () => setTimeout(() => {{
   const endDot = (id) => {{
     const c = charts[id];
     if (!c) return id + "EndDot=nobuilt";
-    const ds = c.data.datasets[0];
-    const pr = ds.pointRadius, i = ds.data.length - 1;
-    let r = 0;
-    if (typeof pr === "number") r = pr;
-    else if (Array.isArray(pr)) r = pr[i] || 0;
-    else if (typeof pr === "function") r = pr({{ dataIndex: i }}) || 0;
-    else r = 3;
-    return id + "EndDot=" + (r > 0 ? "yes" : "NO");
+    // every dataset must have an endpoint dot EXCEPT reference lines (a constant
+    // pointRadius of 0 means "no dots anywhere" by design — the mref helper's lines).
+    let all = true, bad = -1;
+    c.data.datasets.forEach((ds, di) => {{
+      const pr = ds.pointRadius, i = ds.data.length - 1;
+      if (typeof pr === "number" && pr === 0) return;
+      let r = 0;
+      if (typeof pr === "number") r = pr;
+      else if (Array.isArray(pr)) r = pr[i] || 0;
+      else if (typeof pr === "function") r = pr({{ dataIndex: i }}) || 0;
+      else r = 3;
+      if (r <= 0) {{ all = false; if (bad < 0) bad = di; }}
+    }});
+    return id + "EndDot=" + (all ? "yes" : "NO:" + bad);
   }};
   {chr(10).join('  res.push(endDot(' + json_dq(i) + '));' for i in END_DOT)}
   const el = document.createElement("pre");
