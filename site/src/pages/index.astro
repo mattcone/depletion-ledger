@@ -22,7 +22,7 @@ import {
 } from "../data/crisis";
 
 // Crisis day number, computed from the data-as-of date (NOT the viewer's clock) so the
-// page is a stable snapshot: Oct 6 data = day 220, no matter when someone loads it.
+// page is a stable snapshot: Oct 7 data = day 221, no matter when someone loads it.
 const dayNum = Math.round((Date.parse(DATA_AS_OF) - Date.parse(CRISIS_DAY_1)) / 86400000);
 
 // ── Derived, not re-typed (Tier 1, Oct 4) ─────────────────────────────────
@@ -2936,19 +2936,24 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // Sep 27–28 AAA → Sep 28 settle 92.60; Sep 29 AAA → Sep 29 settle 89.38;
       // Sep 30 AAA → Sep 30 settle 90.42; Oct 1 and Oct 2 AAA → same-day settles 92.87 / 91.11;
       // Oct 3 AAA → Oct 2 settle 91.11 (nearest trading day — Oct 3–4 the weekend); Oct 4–5 AAA →
-      // Oct 5 settle 89.43; Oct 6 AAA → Oct 6 settle 89.44 — disclosed in the methodology paragraph.
+      // Oct 5 settle 89.43; Oct 6 AAA → Oct 6 settle 89.44; Oct 7 AAA → Oct 6 settle 89.44 (no new WTI settle) — disclosed in the methodology paragraph.
       const wtiNonFred = new Set(wtiNonFredDates);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
-      // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 and the Oct 6
-      // point (the record is Sep 23 — the label tracks the max on the line; Oct 1–2's and the
-      // Sep 26–30 dots are skipped so the last dots don't blur at ~3px/day);
-      // gasoline: pre-Sep 3 plus Sep 10, 17, 30 — because a run of daily dots bunches into
-      // ~30px at the right edge. The nearest-WTI pairing below runs over the FULL wtiWeekly either way.
+      // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 (the record is
+      // Sep 23 — the label tracks the max on the line; Oct 1–2's and the Sep 26–30 dots are
+      // skipped so the last dots don't blur at ~3px/day);
+      // gasoline: pre-Sep 3 plus Sep 10, 17 — because a run of daily dots bunches into
+      // ~30px at the right edge. The endpoint dot is the series' LAST date, data-derived
+      // (Oct 7: the hand-typed Oct 6 beat left the new endpoint dotless — fourth instance
+      // of the hand-typed-date-survives-the-refresh bug). The nearest-WTI pairing below runs
+      // over the FULL wtiWeekly either way.
+      const dieLastCrack = dieselYtd[dieselYtd.length - 1].date;
+      const gasLastCrack = gasolineYtd[gasolineYtd.length - 1].date;
       const dieCrackSrc = dieselYtd.filter(
-        (p) => p.date < "2026-09-03" || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-14", "2026-09-17", "2026-10-06"].includes(p.date)
+        (p) => p.date < "2026-09-03" || p.date === dieLastCrack || ["2026-09-03", "2026-09-06", "2026-09-10", "2026-09-14", "2026-09-17"].includes(p.date)
       );
       const gasCrackSrc = gasolineYtd.filter(
-        (p) => p.date < "2026-09-03" || p.date === "2026-09-10" || p.date === "2026-09-17" || p.date === "2026-10-06",
+        (p) => p.date < "2026-09-03" || p.date === gasLastCrack || p.date === "2026-09-10" || p.date === "2026-09-17",
       );
       const dieDotKeep = new Set(dieCrackSrc.map((p) => p.date));
       const gasDotKeep = new Set(gasCrackSrc.map((p) => p.date));
