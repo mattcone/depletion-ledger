@@ -22,7 +22,7 @@ import {
 } from "../data/crisis";
 
 // Crisis day number, computed from the data-as-of date (NOT the viewer's clock) so the
-// page is a stable snapshot: Oct 7 data = day 221, no matter when someone loads it.
+// page is a stable snapshot: Oct 8 data = day 222, no matter when someone loads it.
 const dayNum = Math.round((Date.parse(DATA_AS_OF) - Date.parse(CRISIS_DAY_1)) / 86400000);
 
 // ── Derived, not re-typed (Tier 1, Oct 4) ─────────────────────────────────
@@ -662,16 +662,16 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       <div class="mt-12 grid gap-10 lg:grid-cols-2">
         <div class="min-w-0">
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">Brent and WTI prices are up about 35% and 36%</h2>
+            <h2 class="text-xl font-bold tracking-tight">Brent and WTI prices are up about 32%</h2>
             <p class="font-mono text-[11px] text-faint tabular">Brent: selected observations and monthly averages. WTI: weekly FRED spot prices and recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent rises from about $76 before the war to $100.58 on Oct 6 on the December contract — a tenth session close above $100 — after a $126 intraday peak in March. WTI's November contract settles at $89.44 on Oct 6, flat on the same contract. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent rises from about $76 before the war to $100.20 on Oct 7 on the December contract — an eleventh session close above $100 — after a $126 intraday peak in March. WTI's November contract settles at $88.28 on Oct 7, down 1.3% on the same contract. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Brent and West Texas Intermediate (WTI) are crude oil price benchmarks. On Oct 6,
-            Brent's December contract settled at $100.58 a barrel, up $0.26 from the Oct 5
-            close. WTI's November contract settled at $89.44, nearly unchanged.
+            Brent and West Texas Intermediate (WTI) are crude oil price benchmarks. On Oct 7,
+            Brent's December contract settled at $100.20 a barrel, down $0.38 from the Oct 6
+            close. WTI's November contract settled at $88.28, down 1.3%.
             The gray line shows WTI, which is also used in the fuel price spread chart beside this one.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
@@ -2948,7 +2948,8 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // Sep 27–28 AAA → Sep 28 settle 92.60; Sep 29 AAA → Sep 29 settle 89.38;
       // Sep 30 AAA → Sep 30 settle 90.42; Oct 1 and Oct 2 AAA → same-day settles 92.87 / 91.11;
       // Oct 3 AAA → Oct 2 settle 91.11 (nearest trading day — Oct 3–4 the weekend); Oct 4–5 AAA →
-      // Oct 5 settle 89.43; Oct 6 AAA → Oct 6 settle 89.44; Oct 7 AAA → Oct 6 settle 89.44 (no new WTI settle) — disclosed in the methodology paragraph.
+      // Oct 5 settle 89.43; Oct 6 AAA → Oct 6 settle 89.44; Oct 7 AAA → Oct 7 settle 88.28;
+      // Oct 8 AAA → Oct 7 settle 88.28 (no Oct 8 settle yet) — disclosed in the methodology paragraph.
       const wtiNonFred = new Set(wtiNonFredDates);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
       // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 (the record is

@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-10-07";
+export const DATA_AS_OF = "2026-10-08";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -55,6 +55,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-10-02", value: 102.25, tip: "settlement · down $0.06 (Reuters)", note: "Settlement (Reuters, December contract; −$0.06 vs Oct 1) — an eighth session close above $100. Brent fell briefly below $100 intraday (low $98.43) when the G7 announced its reserve release, then recovered (BBC). Drivers: the G7 agreed to release up to 100M barrels over four months, and Reuters reported that Saudi Arabia is planning an assault on the Houthis (Oct 2)." },
   { date: "2026-10-05", value: 100.32, tip: "settlement", note: "Settlement · Yahoo BZ=F closing price: $100.32 (matches)." },
   { date: "2026-10-06", value: 100.58, tip: "settlement · up 0.3% (Rigzone)", note: "Settlement (Rigzone, December contract; +$0.26 vs Oct 5) — a tenth session close above $100. The session fell as low as the high-$97s in the morning after the WSJ reported Kpler's seven-day strait average at 10.3M barrels a day (76% of pre-war), then recovered into the close." },
+  { date: "2026-10-07", value: 100.20, tip: "settlement · down 0.4% (Reuters)", note: "Settlement (Reuters, December contract; −$0.38 vs Oct 6) — an eleventh session close above $100. Prices fell as the IEA agreed to accelerate its reserve release, with about 100M barrels of the March program still to come, prioritizing diesel (Reuters, Oct 7)." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -139,6 +140,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-10-02", value: 91.11, note: "settlement (Reuters, November contract) · down 1.9% on the same contract — the G7 reserve-release announcement knocked prices lower intraday (CNBC, Oct 2)" },
   { date: "2026-10-05", value: 89.43, note: "Settlement · Yahoo CL=F closing price: $89.43 (matches)." },
   { date: "2026-10-06", value: 89.44, note: "Settlement (Rigzone, November contract; flat vs Oct 5) — the session dipped to the low-$87s in the morning (WSJ/Kpler strait-flow report) and recovered into the close." },
+  { date: "2026-10-07", value: 88.28, note: "Settlement (Reuters, November contract; −1.30% vs Oct 6) — down on the IEA's agreement to accelerate its reserve release (Reuters, Oct 7). Prices reversed higher Thursday on a tanker attack off Qatar and the first Gulf hurricane of the season." },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -208,6 +210,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-10-05", value: 4.3653, note: "AAA release, Oct 5" },
   { date: "2026-10-06", value: 4.3685, note: "AAA release, Oct 6" },
   { date: "2026-10-07", value: 4.3667, note: "AAA release, Oct 7" },
+  { date: "2026-10-08", value: 4.3612, note: "AAA release, Oct 8" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -252,6 +255,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-10-05", value: 6.3207, note: "AAA release, Oct 5" },
   { date: "2026-10-06", value: 6.3151, note: "AAA — fourteenth straight decline off the Sep 22 record" },
   { date: "2026-10-07", value: 6.3015, note: "AAA — fifteenth straight decline off the Sep 22 record" },
+  { date: "2026-10-08", value: 6.2847, note: "AAA — sixteenth straight decline off the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
@@ -283,7 +287,7 @@ export const dieselStreak = (() => {
   return n;
 })();
 export const stats = [
-  { label: "Brent", value: "$100.58", sub: "Oct 6 settlement · up $0.26 on the December contract · tenth session close above $100 · +32% vs pre-crisis ~$76" },
+  { label: "Brent", value: "$100.20", sub: "Oct 7 settlement · down $0.38 on the December contract · eleventh session close above $100 · +32% vs pre-crisis ~$76" },
   { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : `${wordNum(dieselStreak)} consecutive daily declines`) + " · " : ""}+${dieselUpPct}% vs pre-war $3.72` },
   { label: "US gasoline (AAA)", value: `$${lastGasoline.value.toFixed(2)}`, sub: `${shortStatDate(lastGasoline.date)} · +${gasUpPct}% vs Jan $2.81 (AAA)` },
   { label: "SPR", value: "283.0M", sub: "Oct 2 · down 0.8M in a week — second straight week at that pace · down 132.4M from pre-war 415.4M · lowest since Nov 1982" },
@@ -575,9 +579,9 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     when: "Any day",
     items: [
       { item: "Whether the Saudi bypass keeps recovering. Bloomberg reported pipeline flows of about 6M barrels a day on Oct 2, with 4.5M available for export from Red Sea ports. Reports of another shutdown conflict: AFP says an Oct 4 strike at Khurais stopped flows; Bloomberg says oil was flowing normally on Oct 5. On Oct 6, Saudi Arabia's energy minister said oil pumped through the pipeline had reached 5.8M barrels that morning (Al Arabiya). The statement doesn't specify a period; reports differ on whether the figure describes capacity or actual flow. The Houthis also claimed an Oct 5 strike on Rabigh refinery; Saudi Arabia hasn't reported the extent of the damage.", why: "The bypass avoids Hormuz. Watch for confirmation of any damage and whether tanker loadings keep up with pipeline flows. Its restart informed our Sep 29 odds of 10/50/40." },
-      { item: "Whether the US and Iran agree on the steps to reopen the strait. Trump rejected Iran's seven-day proposal on Sep 26. On Oct 4, parliament speaker Ghalibaf said the strait would stay closed until the US accepts the June deal's seven conditions. On Oct 5, President Pezeshkian called US negotiations “meaningless.” The US is sending another carrier strike group and an amphibious group to the region, potentially bringing the carrier count to three (AP, Oct 1). Iran is preparing a stronger response if large-scale US strikes resume (Reuters, Oct 1). At his Oct 5 Nebraska rally, Trump called Iranian strikes on US cities “a small price to pay” (CBS News).", why: "Watch for a signed deal, a change in the blockade, or renewed strikes — any of which could change how much oil gets through." },
+      { item: "Whether the US and Iran agree on the steps to reopen the strait. Trump rejected Iran's seven-day proposal on Sep 26. On Oct 4, parliament speaker Ghalibaf said the strait would stay closed until the US accepts the June deal's seven conditions. On Oct 5, President Pezeshkian called US negotiations “meaningless.” On Oct 7, The Atlantic reported that the White House had asked the Pentagon for options to strike Iran before the Nov 3 midterms. Axios reports that the military has been told to prepare. Secretary of State Rubio said on Oct 7 that Iran has “lost complete control” of the strait and its economy is in “total and complete freefall.” The US is sending another carrier strike group and an amphibious group to the region, potentially bringing the carrier count to three (AP, Oct 1). At his Oct 5 Nebraska rally, Trump called Iranian strikes on US cities “a small price to pay” (CBS News).", why: "Watch for a signed deal, a change in the blockade, or renewed strikes — any of which could change how much oil gets through." },
       { item: "Whether the Yemen offensive changes Red Sea shipping. Yemen's information minister claimed “effective control” of Bab al-Mandeb on Oct 5 (Reuters). Government forces also claimed to have retaken Mocha; the Houthis deny losing ground, and the claims aren't independently verified. The Houthis claimed Oct 5 strikes on Riyadh's King Khalid airport and Rabigh refinery. Saudi aviation authorities said attacks on Jazan and Najran airports that evening caused damage and three minor injuries. At sea, UKMTO reported explosions near the non-Saudi fuel tanker Chrystal Sky south of Mocha on Oct 4. No damage or responsibility was reported.", why: "There is no US escort in the Red Sea. Insurance costs are much lower for non-Saudi ships than Saudi-linked tankers (Reuters, Sep 25). An attack on a non-Saudi vessel could send container traffic back around Africa." },
-      { item: "Whether oil keeps moving through Hormuz despite attacks. Kpler's provisional estimates put regional crude exports at 18.3M barrels a day in the week through Sep 30, near pre-war levels, including Saudi exports through the Red Sea (Reuters, Oct 5). But UKMTO reported four tanker strikes Oct 1–4, with crews safe and no vessel losses reported; the latest left a tanker disabled, according to shipping reports. India's foreign ministry said the Panama-flagged On Peace was struck on Oct 6, injuring 12 of its 19 crew; Oman's air force medevacuated them to hospital. The Maritime Executive says the ship is the unnamed outbound tanker UKMTO reported on Oct 5 at 22:30 UTC — 4:00 a.m. on Oct 6 in New Delhi — so it is already counted in the UKMTO series, not a separate strike. The US military said on Oct 5 that it had redirected 130 vessels, disabled three and destroyed 13 commercial vessels it said violated the blockade or belonged to the IRGC's shadow network since the blockade resumed Jul 14. Large crude-carrier rates reached $1.3M a day on the Middle East–Far East route, about 43 times January levels (Gulf News, Oct 5); rates vary by route and vessel.", why: "Watch whether ships can pass safely and export estimates hold up. Regional exports include routes outside Hormuz; they don't show that the strait has returned to normal." },
+      { item: "Whether oil keeps moving through Hormuz despite attacks. Kpler's provisional estimates put regional crude exports at 18.3M barrels a day in the week through Sep 30, near pre-war levels, including Saudi exports through the Red Sea (Reuters, Oct 5); Kpler says Gulf exports excluding Iran are back at pre-war levels, though 40% now bypass the strait (Kpler, Oct 5). But reported attacks on tankers reached their highest weekly level of the war: at least 12 in the week through Oct 5 (Guardian, Oct 8). On Oct 7, a tanker reported being hit by multiple projectiles off Qatar, about 500 km west of the strait, with casualties not yet confirmed (UKMTO). India's foreign ministry said the Panama-flagged On Peace was struck on Oct 6, injuring 12 of its 19 crew; Oman's air force flew them to hospital. The IRGC says the strait is “closed” and that routes off Oman's coast will “soon” be blocked (Fars, Oct 7). An IRGC adviser claimed about 10 ships cross a day, compared with 125 before the war (Oct 8). The US military said on Oct 5 that it had redirected 130 vessels, disabled three and destroyed 13 commercial vessels it said violated the blockade or belonged to the IRGC's shadow network since the blockade resumed Jul 14. Large crude-carrier rates reached $1.3M a day on the Middle East–Far East route, about 43 times January levels (Gulf News, Oct 5); rates vary by route and vessel.", why: "Watch whether ships can pass safely and export estimates hold up. Regional exports include routes outside Hormuz; they don't show that the strait has returned to normal." },
     ],
   },
   {
@@ -632,7 +636,7 @@ export const russiaCurrentSpread = { date: "2026-10-04", low: 46, high: 80 };
 // plant-specific confirmation (Reuters, a governor, an industry source). Ufa has
 // the strike and the fire but no confirmed halt as of Sep 26 — if one lands, the
 // flag's wording is the only thing that changes.
-const russiaStrikeWindow = { start: "Sep 20", end: "Oct 2" };
+const russiaStrikeWindow = { start: "Sep 20", end: "Oct 8" };
 const russiaStruckRefineries = [
   { plant: "Moscow refinery", date: "Sep 20" },
   { plant: "Kuibyshev, near Samara", date: "Sep 21–22" },
@@ -641,10 +645,11 @@ const russiaStruckRefineries = [
   { plant: "Novoshakhtinsk, ~110–140 kb/d", date: "Sep 25" },
   { plant: "Ilsky, ~125 kb/d — three killed", date: "Sep 26" },
   { plant: "Lukoil-Volgograd", date: "Oct 2" },
+  { plant: "Gazprom Neftekhim Salavat, one of Russia's largest", date: "Oct 8" },
 ];
 export const russiaSnapshot = [
   { name: "Capacity out of service", value: "51%", delta: "UA Defense Ministry, Oct 4 (Khmara) — up from >45% (Sep 21) and ~30% (Aug 29, Moscow Times)", flag: "Russian Forbes: 54% (Sep 9) · IEA: more than 20% · the 51% claim can't be independently verified (AP)" },
-  { name: `Refineries struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} plants`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Volgograd stopped all crude processing after the Oct 2 strike (Reuters, Oct 6); the Ufa shutdown is still unverified. The other five plants have confirmed shutdowns, with no restarts reported. Samara and Novorossiysk terminals were also hit — all three export routes are now under attack (Reuters, ISW, Gen Staff)" },
+  { name: `Refineries struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} plants`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Volgograd stopped all crude processing after the Oct 2 strike (Reuters, Oct 6); the Ufa and Salavat halts are still unverified (Salavat: overnight Oct 8 strike with a reported fire, UNN, Ukrainian General Staff). The other five plants have confirmed shutdowns, with no restarts reported. Samara and Novorossiysk terminals were also hit — all three export routes are now under attack (Reuters, ISW, Gen Staff)" },
   { name: "Major refineries still offline", value: "both out", delta: "Kirishi, Russia's second-largest, ~404 kb/d, halted since early September (UA.NEWS, Sep 2) · Ryazan, Moscow's main supplier, ~344 kb/d, offline since Sep 6 (Reuters, Sep 10)", flag: "Nameplate capacity, not measured lost output." },
   { name: "Gasoline shortages at gas stations", value: "45–53%", delta: "Share of stations without AI-92 (45%) or AI-95 (53%) gasoline, mid-September (gdebenzin, via UNN, Sep 22); rationing has returned in about two-thirds of regions (Independent, Sep 22)", flag: "Gasoline prices +21% YTD (Moscow Times, Sep 14) · IEA: diesel output down about 30%, with waits of up to 40 hours (Oct 5)" },
   { name: "Jet fuel now imported", value: "military + civilian", delta: "Russia is importing Jet A-1 from South Korea and Egypt (UA military intelligence, Aug 29); no jet fuel or gasoline has left Russia by sea for two straight weeks (S&P Global CAS, Oct 1)", flag: "ISW (Sep 26): Geran drones use jet fuel; a kerosene shortage would limit their use" },
@@ -861,6 +866,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-10-02", value: 5.277, note: "session close (Yahoo) · eighth straight close above 5%, still below the war's high close (5.293, Sep 30) — the G7 reserve release and a weak September jobs report (29k jobs, unemployment up) cut Fed-hike odds (Kitco, Oct 2)" },
   { date: "2026-10-05", value: 5.311, note: "session close (Yahoo) · ninth straight close above 5%" },
   { date: "2026-10-06", value: 5.269, note: "session close (Yahoo) · tenth straight close above 5%, down from the war's high close (5.311, Oct 5)" },
+  { date: "2026-10-07", value: 5.277, note: "session close (Yahoo) · eleventh straight close above 5%" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
@@ -1050,11 +1056,12 @@ export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisor
   { num: 150, type: "attack", date: "2026-10-04" },
   { num: 151, type: "suspicious activity", date: "2026-10-04" },
   { num: 152, type: "suspicious activity", date: "2026-10-05" },
-  { num: 153, type: "attack", date: "2026-10-03" },
+  { num: 153, type: "attack", date: "2026-10-04" }, // reclassified by UKMTO (API, Oct 8 fetch): was Oct 3
   { num: 154, type: "attack", date: "2026-10-04" },
   { num: 155, type: "attack", date: "2026-10-03" },
   { num: 156, type: "attack", date: "2026-10-05" },
   { num: 157, type: "attack", date: "2026-10-05" },
+  { num: 158, type: "attack", date: "2026-10-07" },
 ];
 
 // Reports that existed before the captured window — the smallest number present,
@@ -1065,7 +1072,7 @@ export const ukmtoReportsBeforeWindow = Math.min(...ukmtoIncidents.map((i) => i.
 
 // Capture bounds are explicit: a quiet day must not shorten the covered period.
 export const ukmtoCoverageStart = "2026-07-01";
-export const ukmtoCoverageEnd = "2026-10-07";
+export const ukmtoCoverageEnd = "2026-10-08";
 
 // Include every Monday–Sunday week, even when it has no attack reports.
 // Partial weeks cover fewer than seven days and don't enter full-week comparisons.
