@@ -2947,7 +2947,8 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // Sep 30 AAA → Sep 30 settle 90.42; Oct 1 and Oct 2 AAA → same-day settles 92.87 / 91.11;
       // Oct 3 AAA → Oct 2 settle 91.11 (nearest trading day — Oct 3–4 the weekend); Oct 4–5 AAA →
       // Oct 5 settle 89.43; Oct 6 AAA → Oct 6 settle 89.44; Oct 7 AAA → Oct 7 settle 88.28;
-      // Oct 8 AAA → Oct 8 settle 91.49 (same-day); Oct 9 AAA → Oct 9 settle 91.85 (same-day).
+      // Oct 8 AAA → Oct 8 settle 91.49 (same-day); Oct 9 AAA → Oct 9 settle 91.85 (same-day);
+      // Oct 10 AAA → Oct 9 settle 91.85 (Oct 10 is a weekend — no same-day settlement).
       const wtiNonFred = new Set(wtiNonFredDates);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
       // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 (the record is

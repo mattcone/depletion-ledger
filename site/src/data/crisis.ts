@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-10-09";
+export const DATA_AS_OF = "2026-10-10";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -216,6 +216,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-10-07", value: 4.3667, note: "AAA release, Oct 7" },
   { date: "2026-10-08", value: 4.3612, note: "AAA release, Oct 8" },
   { date: "2026-10-09", value: 4.3718, note: "AAA release, Oct 9" },
+  { date: "2026-10-10", value: 4.3669, note: "AAA release, Oct 10" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -262,6 +263,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-10-07", value: 6.3015, note: "AAA — fifteenth straight decline off the Sep 22 record" },
   { date: "2026-10-08", value: 6.2847, note: "AAA — sixteenth straight decline off the Sep 22 record" },
   { date: "2026-10-09", value: 6.2785, note: "AAA — seventeenth straight decline off the Sep 22 record" },
+  { date: "2026-10-10", value: 6.2824, note: "AAA — up $0.0039, the first rise in 18 days and the end of the seventeen-day decline off the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
@@ -292,9 +294,20 @@ export const dieselStreak = (() => {
   }
   return n;
 })();
+// The decline streak ending the day BEFORE the latest reading (calendar days, the same
+// basis as the record-streak wording) — for the "first rise after N declines" sub-line.
+// `fromRecord` is true when the streak runs back to the record day.
+export const dieselPriorStreak = (() => {
+  let s = dieselYtd.length - 2;
+  while (s > 0 && dieselYtd[s].value < dieselYtd[s - 1].value) s--;
+  return {
+    days: Math.round((Date.parse(dieselYtd[dieselYtd.length - 2].date) - Date.parse(dieselYtd[s].date)) / 86400000),
+    fromRecord: s === dieselYtd.indexOf(dieselRecord),
+  };
+})();
 export const stats = [
   { label: "Brent", value: "$104.72", sub: "Oct 9 settlement · up $0.44 on the December contract · thirteenth session close above $100 · +38% vs pre-crisis ~$76" },
-  { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : `${wordNum(dieselStreak)} consecutive daily declines`) + " · " : ""}+${dieselUpPct}% vs pre-war $3.72` },
+  { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : `${wordNum(dieselStreak)} consecutive daily declines`) + " · " : lastDiesel.value > dieselYtd[dieselYtd.length - 2].value && dieselPriorStreak.days > 0 ? `first rise after ${wordNum(dieselPriorStreak.days)} straight declines${dieselPriorStreak.fromRecord ? ` off the ${shortStatDate(dieselRecord.date)} record` : ""} · ` : ""}+${dieselUpPct}% vs pre-war $3.72` },
   { label: "US gasoline (AAA)", value: `$${lastGasoline.value.toFixed(2)}`, sub: `${shortStatDate(lastGasoline.date)} · +${gasUpPct}% vs Jan $2.81 (AAA)` },
   { label: "SPR", value: "283.0M", sub: "Oct 2 · down 0.8M in a week — second straight week at that pace · down 132.4M from pre-war 415.4M · lowest since Nov 1982" },
   { label: "US diesel & heating oil", value: "105.1M", sub: "Oct 2 · down 0.04M in a week — essentially flat · 13.5% below last year · East Coast stocks 28% below last year" },
@@ -586,9 +599,9 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     items: [
       { item: "Whether the Saudi bypass keeps recovering. Bloomberg reported flows of about 6M barrels a day on Oct 2. Reports of an Oct 4 shutdown conflict: AFP says the Khurais strike stopped flows; Bloomberg says oil was flowing normally on Oct 5. Saudi Arabia’s Oct 6 statement of 5.8M barrels doesn’t specify a period or clearly distinguish capacity from actual flow (Al Arabiya).", why: "The bypass avoids Hormuz. Watch for confirmed damage and whether tanker loadings keep up with pipeline flows. Its restart informed our Sep 29 odds of 10/50/40." },
       { item: "Whether the US and Iran agree on reopening the strait. Indirect talks continue through Qatar. Vance says any agreement requires a “meaningful” reduction in Iran’s enrichment capacity (Reuters, Oct 6). Trump said on Oct 8 that the US wouldn’t strike before the midterms, but might afterward (CBS, TIME). His Oct 9 claim of “total control” of Hormuz isn’t a verified shipping assessment.", why: "Watch for a signed deal, a change in the blockade, or renewed strikes. Any could change how much oil gets through." },
-      { item: "Whether the Yemen offensive changes Red Sea shipping. Yemen’s government claims control of Bab al-Mandeb and Mocha; the Houthis deny losing ground, and the claims remain unverified (Reuters, Oct 5). Attacks on Saudi airports killed three on Oct 6–7 and three more on Oct 8 (Saudi aviation authorities). UKMTO reported explosions near the non-Saudi tanker Chrystal Sky on Oct 4, with no damage or responsibility reported.", why: "There is no US escort in the Red Sea. An attack on a non-Saudi vessel could send container traffic back around Africa." },
-      { item: "Whether oil keeps moving through Hormuz despite attacks. Vessel traffic fell to a two-month low (Reuters, Oct 8). UKMTO reported a tanker strike off Qatar on Oct 7 and another off the UAE on Oct 9; the latter caused a fire that was extinguished. A separate tanker fire off Fujairah remains unconfirmed as an attack (Vanguard via Euronews, Oct 8).", why: "Watch whether ships can pass safely and export estimates hold up. Regional exports include routes outside Hormuz; they don’t show that the strait has returned to normal." },
-      { item: "Whether the Russian diesel deal turns into deliveries. Trump announced an initial schedule on Oct 9 — more than 300,000 tons immediately, 500,000 in November, 1M afterward — plus a further 3M tons “within a short period of time” based on refinery conditions. The US Treasury’s General License 135 permits transactions in Russian diesel under US sanctions. It doesn’t lift Russia’s export ban, which runs through Oct 31. Separately, talks in Miami include a possible halt to attacks on energy infrastructure (Axios, Oct 9).", why: "Watch for cargoes and the outcome of the talks. Ukraine says it would stop striking Russian refineries if Russia stopped attacking Ukrainian energy facilities. An agreement could help refiners recover; it wouldn’t immediately restore lost output." },
+      { item: "Whether the Yemen offensive changes Red Sea shipping. Yemen’s government claims control of Bab al-Mandeb and Mocha; the Houthis deny losing ground, and the claims remain unverified (Reuters, Oct 5). Attacks on Saudi airports killed three on Oct 6–7 and three more on Oct 8 (Saudi aviation authorities). An armed boat fired on the Chinese-operated CUL Klang off Mokha on Oct 7. No one was hurt, and the ship continued north (Marisks, MSCIO). A British defence official told Mereja that UKMTO assessed it as neither piracy nor Houthi-related. UKMTO reported explosions near the non-Saudi tanker Chrystal Sky on Oct 4, with no damage or responsibility reported.", why: "There is no US escort in the Red Sea. Responsibility for the CUL Klang shooting remains unconfirmed. A confirmed Houthi attack on non-Saudi shipping could send container traffic back around Africa." },
+      { item: "Whether oil keeps moving through Hormuz despite attacks. Vessel traffic fell to a two-month low (Reuters, Oct 8). UKMTO reported a tanker strike off Qatar on Oct 7 and another off the UAE on Oct 9; the latter caused a fire that was extinguished. On Oct 9 the IRGC claimed a strike on MV Sun Shine and threatened ships beyond the strait. CENTCOM says the main lanes are clear of mines and open to ships not violating US sanctions (Euronews, Oct 9). A separate tanker fire off Fujairah remains unconfirmed as an attack (Vanguard via Euronews, Oct 8).", why: "Watch whether ships can pass safely and export estimates hold up. Regional exports include routes outside Hormuz; they don’t show that the strait has returned to normal." },
+      { item: "Whether the Russian diesel deal turns into deliveries. Russia’s deputy prime minister Novak said on Oct 9 that Russia was starting to lift diesel export restrictions immediately (Tass, via AP and NPR). No decree has been published as of Oct 10. Trump’s Oct 9 announcement set an initial schedule — more than 300,000 tons immediately, 500,000 in November, 1M afterward — plus a further 3M tons “within a short period of time” based on refinery conditions. The US Treasury’s General License 135 permits transactions in Russian diesel under US sanctions. The US–Ukraine–EU talks in Miami ended early on Oct 10, with no agreement announced (RFE/RL; Kyiv Independent, Oct 10), and Ukraine says it will keep striking Russian refineries (FT, Oct 10).", why: "Watch for cargoes and a Russian decree confirming the early lifting of the ban. Russia’s own ban runs through Oct 31 — lifting it early would put diesel on the global market sooner. An agreed halt to refinery strikes could help output recover; it wouldn’t immediately restore lost output." },
     ],
   },
   {
@@ -602,7 +615,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
 // ---------- Breaking-points cascade (§11, compressed twice) ----------
 export const cascade = [
   { date: "Each weekly EIA report (next: Oct 14)", region: "US East Coast", trigger: "US diesel and heating-oil stocks stood at 105.1M barrels in the week ending Oct 2, roughly flat on the week and 13.5% below last year. At the four-week average rate of 3.8M barrels a day, those stocks are equivalent to about 28 days of use. East Coast stocks are 28% below last year." },
-  { date: "Oct 31", region: "Russia", trigger: "Russia’s diesel export ban for producers runs through Oct 31 (Interfax, Sep 30). Trump announced a diesel supply deal on Oct 9, and the US Treasury permitted transactions under General License 135. That US permission doesn’t lift Russia’s ban. With more than 30% of refining capacity damaged, Russia may have little fuel available to export." },
+  { date: "Oct 31", region: "Russia", trigger: "Russia’s diesel export ban for producers runs through Oct 31 (Interfax, Sep 30). Trump announced a diesel supply deal on Oct 9, and the US Treasury permitted transactions under General License 135. That US permission doesn’t lift Russia’s ban. On Oct 9, deputy PM Novak said Russia was starting to lift diesel export restrictions immediately, ahead of schedule (Tass, via AP/NPR); no decree had been published as of Oct 10. With more than 30% of refining capacity damaged, Russia may have little fuel available to export." },
   { date: "≈ mid-October", region: "China", trigger: "Commercial oil stocks could begin to fall faster than normal." },
   { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, making it harder for traders to find supplies. If the strait closes fully, this could happen by mid-October." },
   { date: "≈ late October", region: "Europe, at the pump", trigger: "Consumers could face fuel shortages and higher prices, increasing pressure on governments to respond." },
@@ -658,14 +671,14 @@ const russiaStruckRefineries = [
 ];
 export const russiaSnapshot = [
   { name: "Capacity out of service", value: "51%", delta: "UA Defense Ministry, Oct 4 (Khmara) — up from >45% (Sep 21) and ~30% (Aug 29, Moscow Times)", flag: "Russian Forbes: 54% (Sep 9) · IEA: more than 20% · Dallas Fed: as much as 60% over summer 2026; estimates vary month to month (Oct 8) · the 51% claim can't be independently verified (AP)" },
-  { name: `Refineries struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} plants`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Volgograd stopped all crude processing after the Oct 2 strike (Reuters, Oct 6); the Ufa, Salavat, Omsk, and Ukhta halts are still unverified (Omsk: Oct 8 strike, the second hit on the plant since the Jul 6 strike — the General Staff says the ELOU-AVT-11 primary unit was damaged in the July strike, and an October halt is unconfirmed; Ukhta: Oct 9 strike, local reports, with regional authorities denying damage). The other five plants have confirmed shutdowns, with no restarts reported. Samara and Novorossiysk terminals were also hit — all three export routes are now under attack (Reuters, ISW, Gen Staff)" },
+  { name: `Refineries struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} plants`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Volgograd stopped all crude processing after the Oct 2 strike (Reuters, Oct 6); the Ufa, Salavat, Omsk, and Ukhta halts are still unverified (Omsk: Oct 8 strike, the second hit on the plant since the Jul 6 strike — the General Staff says the ELOU-AVT-11 primary unit was damaged in the July strike, and an October halt is unconfirmed; Ukhta: Oct 9 strike, local reports, with regional authorities denying damage). The other five plants have confirmed shutdowns, with no restarts reported. Samara and Novorossiysk terminals were also hit. A reported drone strike set the Yug Rusi terminal at Rostov-on-Don on fire overnight Oct 9–10 — its second strike since Jul 9. This is the Novoshakhtinsk refinery’s loading terminal, not the refinery itself. A railway bridge was damaged; two ships at Azov were reportedly hit, an unverified claim (Kyiv Independent; UNIAN via Ukraine Today, Oct 10). All three export routes have come under attack (Reuters, ISW, Gen Staff)" },
   { name: "Major refineries still offline", value: "both out", delta: "Kirishi, Russia's second-largest, ~404 kb/d, halted since early September (UA.NEWS, Sep 2) · Ryazan, Moscow's main supplier, ~344 kb/d, offline since Sep 6 (Reuters, Sep 10)", flag: "Nameplate capacity, not measured lost output." },
   { name: "Gasoline shortages at gas stations", value: "45–53%", delta: "Share of stations without AI-92 (45%) or AI-95 (53%) gasoline, mid-September (gdebenzin, via UNN, Sep 22); rationing has returned in about two-thirds of regions (Independent, Sep 22)", flag: "Gasoline prices +21% YTD (Moscow Times, Sep 14) · IEA: diesel output down about 30%, with waits of up to 40 hours (Oct 5)" },
   { name: "Jet fuel now imported", value: "military + civilian", delta: "Russia is importing Jet A-1 from South Korea and Egypt (UA military intelligence, Aug 29); no jet fuel or gasoline has left Russia by sea for two straight weeks (S&P Global CAS, Oct 1)", flag: "ISW (Sep 26): Geran drones use jet fuel; a kerosene shortage would limit their use" },
 ];
 
 export const russiaBanCascade = [
-  { date: "Oct 31, 2026", what: "diesel exports by producers — extended through Oct 31 by government decree (Sep 30; Moscow Times, Reuters). The US Treasury’s Oct 9 license permits transactions in Russian diesel under US sanctions; it doesn’t lift Russia’s ban. See “What to watch next” for the announced delivery schedule." },
+  { date: "Oct 31, 2026", what: "diesel exports by producers — extended through Oct 31 by government decree (Sep 30; Moscow Times, Reuters). The US Treasury’s Oct 9 license permits transactions in Russian diesel under US sanctions; it doesn’t lift Russia’s ban. On Oct 9, deputy PM Novak said Russia is “immediately starting to lift restrictions on diesel exports ahead of schedule” (Tass, via AP/NPR); no decree had been published as of Oct 10. See “What to watch next” for the announced delivery schedule." },
   { date: "Nov 30, 2026", what: "jet fuel exports" },
   { date: "Jan 31, 2027", what: "gasoline exports and diesel exports by non-producers" },
 ];
@@ -1086,7 +1099,7 @@ export const ukmtoReportsBeforeWindow = Math.min(...ukmtoIncidents.map((i) => i.
 
 // Capture bounds are explicit: a quiet day must not shorten the covered period.
 export const ukmtoCoverageStart = "2026-07-01";
-export const ukmtoCoverageEnd = "2026-10-09";
+export const ukmtoCoverageEnd = "2026-10-10";
 
 // Include every Monday–Sunday week, even when it has no attack reports.
 // Partial weeks cover fewer than seven days and don't enter full-week comparisons.
