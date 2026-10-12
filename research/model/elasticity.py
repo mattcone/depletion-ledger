@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Elasticity-driven demand-destruction estimator.
 
-Replaces the contested static agency figures (IEA -1.6 / EIA -1.2 / OPEC +0.58
+Replaces the contested static agency figures (IEA -2.5 / EIA -1.2 / OPEC +0.58
 mb/d) with a band computed from the literature's short-run own-price
 elasticities applied to the observed price move.
 
@@ -45,7 +45,7 @@ EPS_LABELS = {
     0.15: "EIA headline (full pass-through)",
 }
 AGENCY = [
-    ("IEA OMR (Sep)", -1.6),
+    ("IEA OMR (Sep 11)", -2.5),  # 2026 demand vs 2025; the Aug 12 edition had -1.6
     ("EIA", -1.2),
     ("OPEC MOMR", +0.58),
 ]

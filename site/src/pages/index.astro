@@ -417,8 +417,13 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
 // can't drift from the data the way hand-typed figures did.
 // Order-independent (the script keeps the array sorted, but the copy must not
 // depend on it — same rule as ukmtoReportsBeforeWindow using Math.min).
-const ukmtoFirst = ukmtoIncidents.reduce((a, b) => (b.num < a.num ? b : a));
-const ukmtoLast = ukmtoIncidents.reduce((a, b) => (b.num > a.num ? b : a));
+// The "reports #A through #B" range is over the sequential incident-report
+// series only: advisories use a separate ID scheme (e.g. 28082035, the Oct 10
+// tanker-and-military-forces advisory) that would otherwise swallow the range
+// ("#78 through #28082035") — bug caught on the Oct 11 prod verification.
+const ukmtoSeries = ukmtoIncidents.filter((i) => i.type !== "advisory");
+const ukmtoFirst = ukmtoSeries.reduce((a, b) => (b.num < a.num ? b : a));
+const ukmtoLast = ukmtoSeries.reduce((a, b) => (b.num > a.num ? b : a));
 const ukmtoAttackTotal = ukmtoWeeklyAttacks.reduce((a, w) => a + w.count, 0);
 const ukmtoFullWeeks = ukmtoWeeklyAttacks.filter((w) => !w.partial);
 const ukmtoMinFullWeek = ukmtoFullWeeks.length ? Math.min(...ukmtoFullWeeks.map((w) => w.count)) : null;
@@ -546,7 +551,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             <line x1="162" y1="252" x2="144" y2="237" stroke="#b3261e" stroke-width="0.75" opacity="0.6" />
           </svg>
           <figcaption class="mt-2 font-mono text-[10.5px] leading-relaxed text-faint tabular">
-            <span class="block">Hormuz: Kpler counted seven commodity vessels on Oct 6 and 10 on Oct 7. Its Oct 6 estimate puts crude shipments at at least 10.1M barrels a day, 74% of pre-war levels (Reuters, Oct 8). Ships with tracking off are excluded.</span>
+            <span class="block">Hormuz: Kpler counted seven commodity vessels on Oct 6 and 10 on Oct 7, its latest daily counts; the 30-day average through Oct 12 was about 22 vessels a day. Its Oct 6 estimate puts crude shipments at at least 10.1M barrels a day, 74% of pre-war levels (Reuters, Oct 8). September strait crude ran just under 9M barrels a day — the highest month since the war began, but about 44% of February (The National, Oct 12). Ships with tracking off are excluded.</span>
             <span class="mt-1 block">Bab el-Mandeb: Kpler counted 49 crossings over Sep 26–27, with no tracked Saudi oil shipments (Reuters). Yanbu exports can avoid this route because the port is north of the strait.</span>
           </figcaption>
         </figure>
@@ -1313,9 +1318,11 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               <p class="mt-1 text-[13px] leading-relaxed text-ink/70">
                 Russia's export restrictions leave less fuel available to other countries during the
                 heating season. On Sep 30, Russia extended its diesel export ban for producers
-                through Oct 31 (government decree; Moscow Times, Reuters) — though on Oct 2,
-                Deputy Prime Minister Alexander Novak said Moscow may consider partially lifting it in case of
-                overproduction (Reuters). The jet-fuel export ban, in force since Jun 1, ends on
+                through Oct 31 (government decree; Moscow Times, Reuters); on Oct 10, Moscow said
+                the ban was partially lifted with immediate effect. Novak said deliveries could rise from
+                300,000 tons in October to 1M in December, potentially reaching
+                3M tons a month later (Interfax, Oct 12).
+                The jet-fuel export ban, in force since Jun 1, ends on
                 Nov 30. Damaged refineries also leave Russia with less fuel for its own gas
                 stations and military as winter approaches.
               </p>
@@ -2948,7 +2955,8 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // Oct 3 AAA → Oct 2 settle 91.11 (nearest trading day — Oct 3–4 the weekend); Oct 4–5 AAA →
       // Oct 5 settle 89.43; Oct 6 AAA → Oct 6 settle 89.44; Oct 7 AAA → Oct 7 settle 88.28;
       // Oct 8 AAA → Oct 8 settle 91.49 (same-day); Oct 9 AAA → Oct 9 settle 91.85 (same-day);
-      // Oct 10 AAA → Oct 9 settle 91.85 (Oct 10 is a weekend — no same-day settlement).
+      // Oct 10 AAA → Oct 9 settle 91.85 (Oct 10 is a weekend — no same-day settlement);
+      // Oct 11 AAA → Oct 9 settle 91.85 (Oct 11 Sunday — still no new settle).
       const wtiNonFred = new Set(wtiNonFredDates);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
       // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 (the record is

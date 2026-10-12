@@ -133,7 +133,7 @@ function validate(api) {
   for (const d of api) {
     const num = d.incidentNumber, type = String(d.incidentTypeName ?? "").toLowerCase(), date = String(d.utcDateOfIncident ?? "").slice(0, 10);
     if (!Number.isInteger(num)) throw new Error(`entry with non-integer incidentNumber: ${JSON.stringify(d).slice(0, 120)}`);
-    if (seen.has(num)) console.log(`  warn: API returned #${num} more than once — keeping the first occurrence`);
+    if (seen.has(num)) console.log(`  warn: API returned #${num} more than once — keeping the latest publication`);
     seen.add(num);
     if (!KNOWN_TYPES.has(type)) throw new Error(`NEW TYPE VOCABULARY: #${num} is "${d.incidentTypeName}" — review manually, not auto-applying`);
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || date > todayIso()) throw new Error(`#${num} has bad/future incident date "${d.utcDateOfIncident}"`);
@@ -171,9 +171,17 @@ const coverageEnd = coverageEndLine[1];
 
 // New = set membership, NOT "> max": time-late reports can carry numbers
 // below the current max. Sorted by number so the array stays ordered.
-// Dedupe by number (validate warns) in case the backend repeats a record.
+// Dedupe by number (validate warns) in case the backend repeats a record —
+// keeping the LATEST publication, not the first: UKMTO reclassifies incidents
+// in place (Oct 11 #165 arrived first as "suspicious activity", then the same
+// number was re-issued as "attack" after UAV confirmation — the first record
+// is the stale one).
 const apiOnce = [];
-for (const d of api) if (!apiOnce.some((x) => x.incidentNumber === d.incidentNumber)) apiOnce.push(d);
+for (const d of api) {
+  const i = apiOnce.findIndex((x) => x.incidentNumber === d.incidentNumber);
+  if (i === -1) apiOnce.push(d);
+  else if (String(d.utcDateCreated) > String(apiOnce[i].utcDateCreated)) apiOnce[i] = d;
+}
 
 const newEntries = apiOnce
   .filter((d) => !ourNums.has(d.incidentNumber))
@@ -196,9 +204,15 @@ const changed = apiOnce.filter((d) => {
 // Numbers missing from BOTH the API and our records (like #99/#100/#125 —
 // UKMTO simply doesn't list them; the count may understate). Numbers we hold
 // but that have slid out of the API window are NOT gaps — they're history.
-const apiNums = new Set(apiOnce.map((d) => d.incidentNumber));
+// Advisory IDs (e.g. 28082035) use a SEPARATE scheme — they must be excluded
+// from the gap range or the loop iterates ~28M times and prints a 160MB line
+// (caught Oct 11: the loop ran to #28082035 and the output was truncated).
+const seqOf = (ns) => ns.filter((n) => n < 100000);
+const apiSeqNums = seqOf(apiOnce.map((d) => d.incidentNumber));
+const ourSeqNums = seqOf(ours.map((e) => e.num));
+const apiNums = new Set(apiSeqNums);
 const gaps = [];
-for (let n = Math.min(...apiOnce.map((d) => d.incidentNumber)); n <= Math.max(...apiOnce.map((d) => d.incidentNumber)); n++) if (!apiNums.has(n) && !ourNums.has(n)) gaps.push(n);
+for (let n = Math.min(...apiSeqNums); n <= Math.max(...apiSeqNums); n++) if (!apiNums.has(n) && !ourNums.has(n)) gaps.push(n);
 
 // Coverage advances to the fetch date on every successful validated fetch —
 // quiet days included (keeps the trailing partial week honest).
@@ -206,8 +220,8 @@ const newCoverageEnd = fetchDate > coverageEnd ? fetchDate : coverageEnd;
 const coverageAdvances = newCoverageEnd !== coverageEnd;
 const hasChanges = newEntries.length > 0 || coverageAdvances;
 
-console.log(`UKMTO API: ${apiOnce.length} entries (#${Math.min(...apiOnce.map((d) => d.incidentNumber))}–#${Math.max(...apiOnce.map((d) => d.incidentNumber))}), fetched ${fetchDate}`);
-console.log(`crisis.ts: ${ours.length} entries (max #${Math.max(...ours.map((e) => e.num))}), coverageEnd ${coverageEnd}`);
+console.log(`UKMTO API: ${apiOnce.length} entries (sequential #${Math.min(...apiSeqNums)}–#${Math.max(...apiSeqNums)}, +${apiOnce.length - apiSeqNums.length} non-sequential IDs), fetched ${fetchDate}`);
+console.log(`crisis.ts: ${ours.length} entries (sequential max #${Math.max(...ourSeqNums)}), coverageEnd ${coverageEnd}`);
 for (const r of changed) {
   const o = ourNums.get(r.incidentNumber);
   console.log(`  FLAG: #${r.incidentNumber} changed on the API: type "${o.type}" -> "${String(r.incidentTypeName).toLowerCase()}", date ${o.date} -> ${String(r.utcDateOfIncident).slice(0, 10)} (NOT auto-applied — review)`);

@@ -1,0 +1,8 @@
+{
+  "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+  "fetchedUtc": "2026-10-11T13:27:03Z",
+  "sha256": "8e0a6d4b40a873c170ac66712f127ea49126e28276f0613ea561b8c8ef236855",
+  "bytes": 64004,
+  "entries": 60,
+  "note": "Raw API response archived for the Oct 11 daily-pass review request: proves #164 (attack 2026-10-11), advisory 28082035, and the #161/#163 number gaps. The page's incident date IS the incident date (verified 49/49 on Oct 5); utcDateCreated is the publication time."
+}
