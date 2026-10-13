@@ -1,0 +1,7 @@
+{
+  "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+  "retrieved": "2026-10-13T22:18Z (Oct 13 16:18 MDT)",
+  "entries": 68,
+  "sha256": "36000fcaa4fae411928131bcd7e6e99741e05ff97a80cd11967f95e561db90db",
+  "note": "Evening-pass fetch \u2014 first pull carrying #170 (container ship, projectile, Hormuz, incident 18:59 UTC) and #171 (tanker, projectile, Hormuz, incident 19:04 UTC). Both same-day reports (utcDateCreated \u2248 incident time), so the logged incident dates stand. API still returns #165 twice (script keeps latest)."
+}
