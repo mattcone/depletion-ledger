@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-10-12";
+export const DATA_AS_OF = "2026-10-13";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -221,6 +221,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-10-10", value: 4.3669, note: "AAA release, Oct 10" },
   { date: "2026-10-11", value: 4.3585, note: "AAA release, Oct 11" },
   { date: "2026-10-12", value: 4.3556, note: "AAA release, Oct 12" },
+  { date: "2026-10-13", value: 4.3413, note: "AAA — down $0.0143" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -270,6 +271,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-10-10", value: 6.2824, note: "AAA — up $0.0039, the first rise in 18 days and the end of the seventeen-day decline off the Sep 22 record" },
   { date: "2026-10-11", value: 6.2771, note: "AAA — the Oct 10 uptick didn't hold (−$0.0053); still $0.25 below the Sep 22 record" },
   { date: "2026-10-12", value: 6.2665, note: "AAA — second straight decline" },
+  { date: "2026-10-13", value: 6.2787, note: "AAA — up $0.0122, ending the two-day decline; still $0.25 below the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
@@ -603,10 +605,10 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "Whether Saudi oil supplies keep moving. At the WPC energy congress on Oct 12, the Saudi energy minister said the East–West pipeline had recovered to about 5.8M barrels a day by Oct 6 — over 80% of its capacity — after the September attacks, and that Saudi Arabia is looking to expand pipeline capacity to 10M barrels a day within two to three years (Bloomberg, Reuters). US Energy Secretary Wright put Gulf flows at 80–90% of pre-war levels, up to 14M barrels a day through Hormuz (The National, Oct 12). Kpler estimated September shipments through the strait at just under 9M barrels a day. These estimates cover different periods; Wright’s broader Gulf recovery figure also includes bypass routes. Reports and satellite fire imagery point to a possible strike at the Shedgum gas plant serving Ghawar, but damage and lost production remain unconfirmed.", why: "The bypass avoids Hormuz. Watch for confirmed damage at Shedgum/Ghawar, lost output, and whether tanker loadings keep up with pipeline flows." },
-      { item: "Whether the US and Iran agree on reopening the strait. Talks through Qatar have stalled. On Oct 11, Iran’s Rezaei said Tehran was “no longer responding” to Washington and threatened regional cables and data centers if fighting resumes (IRNA via AP). Vance says any agreement requires a “meaningful” reduction in Iran’s enrichment capacity (Reuters, Oct 6). On Oct 8, under “Operation Economic Outcast,” Treasury designated 17 shadow-fleet vessels and State designated five more vessels, 10 entities, and 6 individuals — 22 vessels in all (OFAC; State). Trump said on Oct 8 that the US wouldn’t strike before the midterms, but might afterward (CBS, TIME). His Oct 9 claim of “total control” of Hormuz isn’t a verified shipping assessment.", why: "Watch for a signed deal, a change in the blockade, or renewed strikes. Any could change how much oil gets through." },
-      { item: "Whether the Yemen offensive changes Red Sea shipping. The Saudi-led coalition claims it destroyed 136 Houthi targets and cleared Bab al-Mandeb; the Houthis deny losing ground. The claims remain unverified. Riyadh’s King Khalid airport was attacked again on Oct 11 — a Pakistani was killed and 11 people were injured (AP) — a day after a strike that killed 13 and wounded more than 300. It has been hit four times in five days and remains closed. Dammam’s King Fahd airport was also attacked (Saudi aviation authorities). The Houthis said Sanaa airport was struck, blaming the coalition, and heavy fighting has continued around Taiz, their main offensive objective. The Houthi-run health ministry said coalition strikes killed 91 people over five weeks, 60% of them women and children; the claim remains unverified (AP). Trump says the US “may” join Saudi strikes on the Houthis (CBS, Oct 10); no decision as of Oct 12.", why: "Watch whether the US joins the strikes or shipping routes become safer. A confirmed Houthi attack on non-Saudi shipping could send container traffic back around Africa." },
-      { item: "Whether oil keeps moving through Hormuz despite attacks. Ships are still transiting — Kpler’s three-day average stood at 12 a day (Oct 5–7); its provisional 30-day average through Oct 12 was about 22 vessels a day, roughly two-thirds tankers, and September crude through the strait ran just under 9M barrels a day — the highest month since the war began, but about 44% of February (The National, Oct 12). UKMTO logged four more attacks on ships around the strait on Oct 11–12. Separately, the IRGC claimed a strike on the ADNOC-owned tanker Al Maqam; the claim remains unconfirmed. On Oct 11, the Valthera caught fire after a projectile strike in the strait; its Indian crew were safe. A drone struck the Petro Dolphin off Sohar, Oman: nine Indian crew were rescued and two remain missing, the search still under way as of Oct 12 (UKMTO; India’s shipping ministry). Windward identified 12 vessels from 16 Gulf attacks over ten days, all using the US-assisted southern route with tracking systems off. Oil companies are reportedly paying up to $50 million per transit to reach offshore areas where crude is transferred between ships (Windward, Oct 8).", why: "Watch the search for the missing crew, vessel damage, and whether ships keep passing safely. Regional export figures include routes outside Hormuz; they don’t show that the strait has returned to normal." },
+      { item: "Whether Saudi oil supplies keep moving. At the WPC energy congress on Oct 12, the Saudi energy minister said the East–West pipeline had recovered to about 5.8M barrels a day by Oct 6 — over 80% of its capacity — after the September attacks, and that Saudi Arabia is looking to expand pipeline capacity to 10M barrels a day within two to three years (Bloomberg, Reuters). US Energy Secretary Wright put Gulf flows at 80–90% of pre-war levels, up to 14M barrels a day through Hormuz (The National, Oct 12). Kpler estimated September shipments through the strait at just under 9M barrels a day. Saudi Arabia reported September crude output of 8.372M barrels a day to OPEC, up more than 2M from August (Oct 13 report). These estimates cover different periods; Wright’s broader Gulf recovery figure also includes bypass routes. Reports and satellite fire imagery point to a possible strike at the Shedgum gas plant serving Ghawar, but damage and lost production remain unconfirmed.", why: "The bypass avoids Hormuz. Watch for confirmed damage at Shedgum/Ghawar, lost output, and whether tanker loadings keep up with pipeline flows." },
+      { item: "Whether the US and Iran agree on reopening the strait. Iran’s spokesman Baghaei said on Oct 12 that Tehran was still reviewing Washington’s response to its seven-point proposal (CBS). That follows Rezaei’s Oct 11 statement that Iran was “no longer responding” (IRNA via AP). Trump said the US may have “gone too far” in killing Iranian leaders, leaving it unsure whom to negotiate with (Youngstown rally, Oct 12). Vance says any deal requires a “meaningful” reduction in Iran’s enrichment capacity (Reuters, Oct 6). US sanctions on Oct 8 covered 22 vessels through Treasury and State actions. Trump says the US won’t strike before the midterms but might afterward (CBS, TIME).", why: "Watch for a signed deal, a change in the blockade, or renewed strikes. Any could change how much oil gets through." },
+      { item: "Whether the Yemen offensive changes Red Sea shipping. The Saudi-led coalition claims it destroyed 136 Houthi targets and cleared Bab al-Mandeb; the Houthis deny losing ground. The claims remain unverified. Riyadh’s King Khalid airport was attacked again on Oct 11 — a Pakistani was killed and 11 people were injured (AP) — a day after a strike that killed 13 and wounded more than 300. It has been hit four times in five days and remains closed. Dammam’s King Fahd airport was also attacked (Saudi aviation authorities). The Houthis said Sanaa airport was struck, blaming the coalition, and heavy fighting has continued around Taiz, their main offensive objective. The Houthi-run health ministry said coalition strikes killed 91 people over five weeks, 60% of them women and children; the claim remains unverified (AP). Trump says the US “may” join Saudi strikes on the Houthis (CBS, Oct 10); no decision as of Oct 13. The Houthis warned of a “swift and painful” response if the US joins and told oil and airport workers to stay away (Al Bukhaiti, AFP). Riyadh’s airport is closed through Oct 17 (GACA).", why: "Watch whether the US joins the strikes or shipping routes become safer. A confirmed Houthi attack on non-Saudi shipping could send container traffic back around Africa." },
+      { item: "Whether oil keeps moving through Hormuz despite attacks. Ships are still transiting — Kpler’s three-day average stood at 12 a day (Oct 5–7); its provisional 30-day average through Oct 12 was about 22 vessels a day, roughly two-thirds tankers, and September crude through the strait ran just under 9M barrels a day — the highest month since the war began, but about 44% of February (The National, Oct 12). UKMTO logged four more attacks on ships around the strait on Oct 11–12. Separately, the IRGC claimed a strike on the ADNOC-owned tanker Al Maqam; ADNOC declined to comment, and the claim hasn’t been linked to a specific UKMTO report (Seatrade, Oct 13). On Oct 11, the Valthera caught fire after a projectile strike in the strait; its Indian crew were safe. A drone struck the Petro Dolphin off Sohar, Oman: nine Indian crew were rescued and two remain missing, the search continuing as of Oct 13 (UKMTO; India’s shipping ministry). Iran has warned that merchant ships switching off their tracking during “unauthorised” passages will be treated as hostile (Splash247, Oct 13). Windward identified 12 vessels from 16 Gulf attacks over ten days, all using the US-assisted southern route with tracking systems off. Oil companies are reportedly paying up to $50 million per transit to reach offshore areas where crude is transferred between ships (Windward, Oct 8).", why: "Watch the search for the missing crew, vessel damage, and whether ships keep passing safely. Regional export figures include routes outside Hormuz; they don’t show that the strait has returned to normal." },
       { item: "Whether the Russian diesel deal turns into deliveries. On Saturday, Russia said it had partially lifted its diesel export ban with immediate effect; Novak’s schedule is 300,000 tons this month, 500,000 in November, 1M in December, and potentially 3M a month (Interfax, Oct 12). US Treasury license 135 permits transactions under US sanctions; the Minerva Zen, reported as the first diesel cargo, was carrying liquid fertilizer (TankerTrackers). On the energy ceasefire Trump announced Oct 11, Zelensky said on Oct 12 that Russia had already violated it — a Russian jet-powered drone hit a Ukrainian gas facility in the night, while “Russian oil refineries were not burning” last night (CNN). Seven senators, four of them Republicans, asked the administration to reverse the diesel deal, which they say contradicts the 2022 import ban (CNN, Oct 11).", why: "Watch for diesel deliveries, a Russian decree, and a reciprocal halt to energy strikes. A halt could help refineries recover; it wouldn’t immediately restore lost output. Analysts expect little effect on US diesel prices (Reuters, Oct 11)." },
     ],
   },
@@ -902,6 +904,8 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-10-09", value: 5.244, note: "session close (Yahoo ^TNX bar) · thirteenth straight close above 5%" },
   // Oct 12 (Columbus Day) — US Treasury cash market CLOSED (SIFMA holiday schedule);
   // the Yahoo ^TNX bar is a flat carryover (O=H=L=C=5.240), not a session. No point.
+  // (The daily-update apply step re-added it on Oct 13 — removed again; the script
+  //  can’t know about bond holidays, so re-check after every apply.)
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
@@ -1018,6 +1022,12 @@ export const wtiNonFred = wtiWeekly.filter((p) => !p.fred).map((p) => p.date);
 //    would be attacks in that case);
 //  - UKMTO only counts incidents it can verify through primary sources and says
 //    other strikes probably go unreported.
+// #166–#169 are time-late reports (published Oct 12; payload archived
+// research/data/ukmto/ukmto-all-2026-10-13T0547Z.json). Rule: UKMTO's explicit
+// incident date wins; otherwise the report-logged date stands. #166's report
+// body states "Incident Date: 11 Oct 2026" → Oct 11. #167–#169 carry no explicit
+// incident date in the body (the API's utcDateOfIncident is the registration
+// time) → Oct 12 as logged; the wire (Maritime Executive) places all four on Oct 11.
 export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisory" | "suspicious activity"; date: string }[] = [
   { num: 78, type: "suspicious activity", date: "2026-07-01" },
   { num: 79, type: "attack", date: "2026-07-05" },
@@ -1103,12 +1113,6 @@ export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisor
   { num: 163, type: "advisory", date: "2026-10-10" },
   { num: 164, type: "attack", date: "2026-10-11" },
   { num: 165, type: "attack", date: "2026-10-11" },
-  // #166–#169 are time-late reports (published Oct 12; payload archived
-  // research/data/ukmto/ukmto-all-2026-10-13T0547Z.json). Rule: UKMTO's explicit
-  // incident date wins; otherwise the report-logged date stands. #166's report
-  // body states "Incident Date: 11 Oct 2026" → Oct 11. #167–#169 carry no explicit
-  // incident date in the body (the API's utcDateOfIncident is the registration
-  // time) → Oct 12 as logged; the wire (Maritime Executive) places all four on Oct 11.
   { num: 166, type: "attack", date: "2026-10-11" },
   { num: 167, type: "attack", date: "2026-10-12" },
   { num: 168, type: "attack", date: "2026-10-12" },

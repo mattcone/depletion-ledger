@@ -1,0 +1,7 @@
+{
+  "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+  "retrieved": "2026-10-13T05:47Z (Oct 12 ~23:47 MDT)",
+  "entries": 66,
+  "sha256": "16f28b533ab590ec6e5f79a4849ec2a959ecc0c246cd85840d93cdf21d2c6539",
+  "note": "Evening-pass fetch — archived to reconcile the #166-#169 incident dates (time-late reports; #166's report body says 'Incident Date: 11 Oct 2026'). Field utcDateOfIncident on time-late entries is the report-registration time, not the event time."
+}
