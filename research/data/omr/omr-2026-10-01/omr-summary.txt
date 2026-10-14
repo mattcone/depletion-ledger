@@ -1,0 +1,31 @@
+Source: https://www.iea.org/reports/oil-market-report-october-2026
+Publication date: 14 October 2026
+Reader status: accessible; no 403.
+LIMITATION: This is a brief overview, not a complete verbatim extraction. Copyright limits prevent reproducing the linked article in full. The accompanying JSON contains selected figures, not an exhaustive extraction. Null quotes indicate omitted verbatim text, not inaccessible source text.
+
+About the report
+Introduces the report's coverage and subscription service.
+
+Highlights
+Forecasts weaker demand, recovering supply and refinery activity, diesel shortages, inventory depletion, and higher crude prices.
+
+Supply recovery analysis
+Describes recovering Gulf exports, renewed infrastructure attacks, expensive shipping, and declining land inventories.
+
+Diesel and gasoil analysis
+Explains production shortfalls, reduced exports, falling stocks, and persistent tightness despite an expected seasonal refinery recovery.
+
+Charts
+Five chart headings and links are visible. Chart data: [section not accessible] in the report-page text extraction.
+
+Production table
+Visible: country and aggregate OPEC+ supply, targets, capacity, spare capacity, and explanatory footnotes. Not transcribed here because this file is a limited overview.
+
+Documentation and previous editions
+Glossary and methodology links are visible. No previous-edition entries appear in the reader output.
+
+Full report sections on demand, supply, refining, inventories, and prices beyond the public overview: [section not accessible]
+
+PDF links
+The report's Download PDF control resolves to the report page itself; no direct report-PDF URL was exposed by the reader.
+Methodology PDF: https://iea.blob.core.windows.net/assets/b6542edd-41b7-4a11-988f-4ffbc0a28e3b/IEARefineryMarginMethodologyAugust2024.pdf

@@ -12,15 +12,17 @@
   "omr": {
     "lastPub": "2026-05-13",
     "dir": "/home/mcone/depletion-ledger/research/data/omr/omr-2026-05-13",
-    "at": "2026-10-04T17:17:55.133Z"
+    "at": "2026-10-14T13:11:19.386Z",
+    "lastSummary": "2026-10-01",
+    "summaryDir": "/home/mcone/depletion-ledger/research/data/omr/omr-2026-10-01"
   },
   "bls": {
     "periods": {
-      "CUUR0000SA0": "2026-08",
-      "CUUR0000SA0L1E": "2026-08",
+      "CUUR0000SA0": "2026-09",
+      "CUUR0000SA0L1E": "2026-09",
       "WPUFD4": "2026-08"
     },
-    "dir": "/home/mcone/depletion-ledger/research/data/bls/bls-2026-08",
-    "at": "2026-10-04T17:34:11.709Z"
+    "dir": "/home/mcone/depletion-ledger/research/data/bls/bls-2026-09",
+    "at": "2026-10-14T12:39:20.649Z"
   }
 }

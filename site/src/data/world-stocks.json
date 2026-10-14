@@ -1123,6 +1123,16 @@
      "published": "IEA OMR, 11 Sep 2026 (web report page; no public PDF URL found)",
      "retrieved": "2026-09-17",
      "note": "September 2026 ed web page (3.1 mb/d). Components Aug: oil on water −65, non-OECD −52, OECD +23."
+    },
+    {
+     "period": "2026-09",
+     "value": -10,
+     "status": "reported",
+     "source_id": "iea-omr-web",
+     "source_url": "https://www.iea.org/reports/oil-market-report-october-2026",
+     "published": "IEA OMR, October 2026 ed (published 14 Oct 2026)",
+     "retrieved": "2026-10-14",
+     "note": "Quoted (Brave snippet of the iea.org page): 'Global observed oil inventories edged down by 10 mb in September as a further 113 mb decline in on-land stocks was largely offset by a surge in oil on water.' Full page ingested 2026-10-14 via the codex reader (research/data/omr/omr-2026-10-01/) — publication date 14 Oct 2026 confirmed; components confirmed on the same read: on-land −113 mb, oil on water +103 mb. Independently corroborated by the external review's full-page read (research/review-2026-10-14.md)."
     }
    ]
   },
@@ -1170,14 +1180,24 @@
      "source_url": "https://www.iea.org/reports/oil-market-report-september-2026",
      "published": "IEA OMR, 11 Sep 2026 (web report page; no public PDF URL found)",
      "retrieved": "2026-09-17",
-     "note": "September 2026 ed: cumulative since Feb −507 mb (2.8 mb/d avg)."
+     "note": "September 2026 ed: cumulative since Feb −507 mb (2.8 mb/d avg). Superseded as the latest cumulative by the Oct 2026 ed below."
+    },
+    {
+     "period": "2026-09",
+     "value": -509,
+     "status": "reported",
+     "source_id": "iea-omr-web",
+     "source_url": "https://www.iea.org/reports/oil-market-report-october-2026",
+     "published": "IEA OMR, October 2026 ed (published 14 Oct 2026)",
+     "retrieved": "2026-10-14",
+     "note": "October 2026 ed public page (full-page read via the codex reader, 2026-10-14): global observed inventories 509 mb below end-February levels by end-Sep — a 2.4 mb/d equivalent decline. NOTE: the edition revises the cumulative — Aug −507 + Sep −10 = −517 ≠ −509, so prior months were revised upward by ~8 mb in this edition. Plotted as published; the Aug point above is kept for the revision trail."
     }
    ],
    "residual_check": {
-    "sum_of_latest_monthly_changes_mar_aug_mb": -445,
-    "published_cumulative_mar_aug_mb": -507,
-    "residual_mb": -62,
-    "explanation": "The monthly points and the cumulative totals come from different editions, and editions revise earlier months (April: −117 → −74), so the latest-vintage monthly points do not sum to the latest published cumulative. Revisions are a likely contributor but the full −62 mb residual is NOT reconciled; both sets are shown as published."
+    "sum_of_latest_monthly_changes_mar_sep_mb": -455,
+    "published_cumulative_mar_sep_mb": -509,
+    "residual_mb": -54,
+    "explanation": "The monthly points and the cumulative totals come from different editions, and editions revise earlier months (April: −117 → −74; the Oct 2026 ed revises the cumulative itself: −507 + −10 = −517 vs published −509), so the latest-vintage monthly points do not sum to the latest published cumulative. Revisions are a likely contributor but the full −54 mb residual is NOT reconciled; both sets are shown as published. (Prior state, through the Sep 2026 ed: Mar–Aug months −445 vs cumulative −507, residual −62.)"
    }
   },
   "eia_steo_world_inv_change_mb": {

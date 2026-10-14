@@ -1,0 +1,13 @@
+{
+  "report": "IEA Oil Market Report (public summary page)",
+  "edition": "2026-10-01",
+  "url": "https://www.iea.org/reports/oil-market-report-october-2026",
+  "retrievedAt": "2026-10-14T13:11:19.386Z",
+  "files": [
+    {
+      "file": "omr-summary.txt",
+      "sha256": "64b94ff05c6fc9f38ef0255aa5fc4f941ed232db6706c4c82ce2d7eca0b22bbe",
+      "bytes": 1806
+    }
+  ]
+}
