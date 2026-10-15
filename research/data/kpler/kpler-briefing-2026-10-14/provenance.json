@@ -1,0 +1,42 @@
+{
+  "report": "Kpler Media Briefing — Middle East Energy and Maritime Disruptions",
+  "edition": "kpler-briefing-2026-10-14",
+  "url": "https://marketing.kpler.com/hubfs/Media%20Briefings%20pdfs/Kpler%20media%20briefing%2014%20Oct%202026.pdf",
+  "publishedAt": "2026-10-14",
+  "flowDataAsOf": "2026-10-12 (T-2, preliminary floors; typically settle 1.5-2x higher as confirmations land)",
+  "retrievedAt": "2026-10-15T12:52:41Z",
+  "retrievedVia": "linked directly from CNBC, Oct 14 (https://www.cnbc.com/2026/10/14/container-ship-sinks-strait-hormuz-as-iran-war-attacks.html)",
+  "files": [
+    {
+      "file": "kpler-briefing-2026-10-14.pdf",
+      "sha256": "a461d309fd5a7d9437c727bfb6cf2d23c1fe70f9ac8507fe25e4ce2b1dcf3fe1",
+      "bytes": 1107969
+    },
+    {
+      "file": "kpler-briefing-2026-10-14.txt",
+      "sha256": "de57450aeb0a8adda704ddc962ecd387027939d135a6987d9e5223f342634d92",
+      "bytes": 15458,
+      "note": "prose extracted from the PDF (chart/vector streams dropped); local extraction, not part of the published briefing"
+    }
+  ],
+  "keyFigures": {
+    "hormuzTotalClearance7dAvgKbd": 9275,
+    "hormuzTotalClearancePreWarBaselineKbd": 17145,
+    "straitTransits7dAvgKbd": 7627,
+    "straitTransitsVsBaselinePct": -56,
+    "tankerCrossings7dAvgPerDay": 13,
+    "tankerCrossingsPreWarPerDay": 50,
+    "tankerCrossingsDaily": { "2026-10-09": 17, "2026-10-10": 9, "2026-10-11": 7, "2026-10-12": 3 },
+    "regional7dAvgKbd": 16894,
+    "regionalPreWarBaselineKbd": 23306,
+    "fujairahOmanLoadings7dAvgKbd": 4140,
+    "fujairahOmanVsBaselinePct": 21,
+    "redSea7dAvgKbd": 3478,
+    "redSeaVsBaselinePct": 24,
+    "juaymahVlccs": "4 VLCCs at Juaymah on each of Oct 10 and 12 (SAR imagery)",
+    "yanbuTankers": "a VLCC and an Aframax at the Yanbu crude terminal on Oct 10 (optical imagery)",
+    "terminalNote": "Juaymah and Yanbu are distinct terminals (briefing page 4); an earlier log/caption draft conflated them (external review, Oct 15)",
+    "attacks": "at least 18 vessels reportedly attacked over the past 2 weeks (Kpler Insight, Oct 12; not attributed)",
+    "note": "pre-war baseline = average March 2025 to February 2026; oil only (Crude/Co, CPP, DPP, Chem/Bio), excludes NGLs/LNG; Iranian-origin transits excluded from strait figures"
+  }
+}

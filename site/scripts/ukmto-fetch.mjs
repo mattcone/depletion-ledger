@@ -59,7 +59,11 @@ const [mode] = process.argv.slice(2); // "", "--apply", "--dry-run"
 const willWrite = mode === "--apply";
 const dryRun = mode === "--dry-run";
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const todayIso = () => new Date().toISOString().slice(0, 10);
+// Local date (America/Denver), NOT UTC: the site's convention is Denver local time
+// everywhere ("data as of <local date>"). A UTC toISOString() flips a day early after
+// 18:00 MDT (17:00 MST) and would advance coverageEnd before the local date changes
+// (for example, Oct 14 at 20:25 MDT is Oct 15 at 02:25 UTC).
+const todayIso = () => new Date().toLocaleDateString("en-CA", { timeZone: "America/Denver" });
 
 // ---------- fetch with retries (async — the delays are actually awaited) ----------
 // Uses curl (not Node fetch): Cloudflare fingerprints TLS ClientHellos, and

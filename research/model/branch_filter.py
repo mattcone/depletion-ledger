@@ -18,7 +18,10 @@ cannot swing the lapse weight alone. (v1 limitation: the filter had no memory
 of structure/trend -- underweighted lapse on Sep 9, overweighted it by Sep 10,
 same gap, opposite sign. See research/logs/2026-09-10.md.) v2.3 (Sep 29):
 the structural signal gained a SOURCED basis -- `--volume <M bpd>` (Kpler
-Hormuz crude throughput) takes precedence over --corridor-flow. v2.4
+Hormuz oil throughput — Kpler's total-oil definition: Crude/Co + CPP + DPP +
+Chem/Bio, Iranian-origin excluded; the anchor prints' wire label said "crude",
+Oct 15 scope reconciliation in MODEL-internal.md) takes precedence over
+--corridor-flow. v2.4
 (Oct 1): the volume channel became a GRADED lognormal likelihood per state
 (medians 15.0/8.5/2.0 for holds/standoff/lapse; anchored on the sourced
 pre-war 15M / Sep 7.4-9.7 / Aug 18 2.0M prints) instead of the v2.3
@@ -48,7 +51,8 @@ STATE LIKELIHOODS (observations; defaults are author's judgment):
   corridor flow (structural, v2) : functioning (0.55, 0.40, 0.05)
                                    degraded    (0.15, 0.70, 0.15)
                                    absent      (0.02, 0.18, 0.80)
-  volume (structural, v2.4b)     : sourced Kpler Hormuz crude throughput
+  volume (structural, v2.4b)     : sourced Kpler Hormuz oil throughput
+                                   (total-oil definition, not crude-only)
                                    (M bpd) -> GRADED lognormal LOCATION
                                    family per state (replaces the v2.3
                                    category snap; single shared sigma 0.35,
@@ -113,7 +117,9 @@ CORRIDOR_FLOW = {  # (holds, standoff, lapse) per assessment
 SIGNAL_WEIGHTS = {"transits": 1.0, "tankers": 0.5, "brent": 1.0,
                   "corridor_flow": 1.0}
 
-# v2.4: sourced volume (Kpler Hormuz crude throughput, M bpd) -> GRADED
+# v2.4: sourced volume (Kpler Hormuz oil throughput, M bpd — total-oil
+# definition, not crude-only; Oct 15 scope reconciliation in
+# MODEL-internal.md) -> GRADED
 # per-state lognormal likelihood. Replaces the v2.3 category lookup, which
 # the Oct 1 external review found to be a near-no-op in the published output
 # (7.4/9.719 and 10/13.2/15 all collapse to two of three fixed vectors, so
@@ -134,8 +140,9 @@ SIGNAL_WEIGHTS = {"transits": 1.0, "tankers": 0.5, "brent": 1.0,
 # undercounts (dark / shuttle fleet); the count-vs-volume DISCREPANCY is an
 # open reconciliation item (reporting windows, vessel coverage, cargo sizes,
 # tracking gaps; AIS-dark is a documented candidate, not established) -- the
-# transit lambdas are deliberately NOT re-tuned here. Feed the HORMUZ crude
-# figure, not the regional total (12.8 would read as holds-anchored).
+# Transit lambdas are deliberately NOT re-tuned here. The Oct 15 input is a
+# strait-only, total-oil proxy; comparability to the original crude-labeled
+# anchors remains unresolved. Do not substitute a broader regional total.
 # vol == 0 (Oct 1 review): a CONFIRMED closure must not be weaker evidence
 # than a 0.1M print just because it is exactly zero -- 0 maps to the x -> 0
 # limit [0, 0, 1] (numerically identical to any underflowing print).
@@ -167,8 +174,8 @@ def lognormal_pdf(x, ln_mu, sigma):
 
 
 def volume_likelihood(vol):
-    """v2.4b: graded per-state likelihood for a sourced Kpler Hormuz crude
-    throughput (M bpd). Single-sigma lognormal LOCATION family (medians
+    """v2.4b: graded per-state likelihood for Kpler Hormuz throughput
+    (M bpd; Oct 15 uses a total-oil proxy, with scope caveats in MODEL-internal.md). Single-sigma lognormal LOCATION family (medians
     15.0/8.5/2.0, shared sigma 0.35). Structural property, TRUE BY
     CONSTRUCTION: every pairwise likelihood ratio is strictly increasing in
     vol (with equal sigmas ln(r_ij) is LINEAR in ln vol -- one crossing, at
@@ -195,7 +202,7 @@ def volume_likelihood(vol):
     paths)."""
     if not math.isfinite(vol) or vol < 0:
         raise SystemExit("volume must be a finite number >= 0 (Kpler Hormuz "
-                         "crude throughput, M bpd); 0 is the confirmed-"
+                         "throughput, M bpd); 0 is the confirmed-"
                          "closure limit (lapse-dominant)")
     if vol == 0:
         return [0.0, 0.0, 1.0]
@@ -275,7 +282,8 @@ def cmd_update(a):
     if a.volume is not None:
         if not math.isfinite(a.volume) or a.volume < 0:
             raise SystemExit("--volume must be a finite number >= 0 "
-                             "(Kpler Hormuz crude throughput, M bpd); 0 is "
+                             "(Kpler Hormuz oil throughput, M bpd — "
+                             "total-oil definition); 0 is "
                              "the confirmed-closure limit (lapse-dominant)")
         obs["volume"] = a.volume
         if a.corridor_flow is not None:
@@ -430,7 +438,8 @@ def main():
                    choices=["functioning", "degraded", "absent"], default=None,
                    help="structural assessment of (shadow) corridor trade (v2.0)")
     u.add_argument("--volume", type=float, default=None,
-                   help="sourced Kpler Hormuz crude throughput, M bpd (v2.4b) "
+                   help="sourced Kpler Hormuz oil throughput, M bpd (v2.4b; "
+                        "Kpler's total-oil definition — not crude-only) "
                         "-- graded lognormal likelihood per state (medians "
                         "15/8.5/2.0 for holds/standoff/lapse); 0 = confirmed "
                         "closure (lapse-dominant limit); takes precedence over "

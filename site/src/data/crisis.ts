@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-10-14";
+export const DATA_AS_OF = "2026-10-15";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -60,6 +60,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-10-09", value: 104.72, tip: "settlement · up 0.4% (Reuters)", note: "Settlement (Reuters, December contract; +$0.44 vs Oct 8) — a thirteenth session close above $100. The session dipped to about $102.6 in the morning on Trump's no-strikes-before-midterms remark, then recovered into the close; his announcement of a deal for Russian diesel — with an OFAC temporary license issued the same hour — landed near the close, and China approved about 3.7M metric tons of October refined-fuel exports after its Golden Week pause (Reuters, four traders, Oct 9)." },
   { date: "2026-10-12", value: 106.65, tip: "settlement · up 1.8% (Newsquawk)", note: "Settlement (Newsquawk wire, December contract; +$1.93 vs Oct 9 — Yahoo BZ=F bar matches) — a fourteenth session close above $100. The first priced session after the weekend: a fifth Houthi strike on King Khalid airport (Riyadh) and the Dammam airport strike, and four more UKMTO-logged attacks on ships around the strait (Oct 11–12); separately, the IRGC claimed a strike on the ADNOC-owned VLCC Al Maqam (a claim, unconfirmed)." },
   { date: "2026-10-13", value: 105.69, tip: "settlement · down 0.9% (Reuters)", note: "Settlement (Reuters wire, December contract; −$0.96 vs Oct 12 — the Yahoo BZ=F bar of 106.22 ran off the wire again; the wire value is plotted) — a fifteenth session close above $100, easing after a three-session rally. The Houthi missile that hit Aramco's headquarters complex in Dhahran and two further UKMTO-logged projectile strikes in the strait (a container ship, a tanker) came in after the London close." },
+  { date: "2026-10-14", value: 106.06, tip: "settlement · up 0.4% (Rigzone)", note: "Settlement (Rigzone wire, December contract; +$0.37 vs Oct 13 — the Yahoo BZ=F bar of 106.06 matches) — a sixteenth session close above $100. The first full settlement after the Dhahran strike and the above-forecast Sep CPI: the GFS Pride sank and the Cape Dao was later reported sunk near the strait, a third ship (the GFS Giselle) was hit, and two senior Iranian officials told Reuters Iran is using new attack tactics to keep prices high ahead of the US midterms (Reuters, Oct 14)." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -149,6 +150,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-10-09", value: 91.85, note: "Settlement (Reuters, November contract; +$0.36 vs Oct 8) — the session traded as low as about $90.4 after Trump's no-strikes remark, then recovered; the Russian diesel-deal announcement landed near the close (Reuters, Oct 9)." },
   { fred: false, date: "2026-10-12", value: 93.74, note: "Settlement (Newsquawk wire, November contract; +$1.89 vs Oct 9 — Yahoo CL=F bar matches) — up on the Saudi airport strikes and the strait tanker attacks; early Tuesday trading eased as the Russian diesel-supply story gained (Reuters, Oct 12)." },
   { fred: false, date: "2026-10-13", value: 94.14, note: "Settlement (Reuters wire, November contract; +$0.40 vs Oct 12 — the Yahoo CL=F bar of 94.59 is a post-settlement last trade; the wire value is plotted) — erased the session's early losses; the dollar and the 10-year yield slipped from their highs (Reuters, Oct 13)." },
+  { fred: false, date: "2026-10-14", value: 95.09, note: "Settlement (Rigzone wire, November contract; +$0.95 vs Oct 13 — the Yahoo CL=F bar of 95.17 is a post-settlement last trade; the wire value is plotted) — WTI outpaced Brent; analysts cited fund buying and stronger demand for US barrels as freight conditions shifted (Bloomberg via Rigzone, Oct 14)." },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -225,6 +227,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-10-12", value: 4.3556, note: "AAA release, Oct 12" },
   { date: "2026-10-13", value: 4.3413, note: "AAA — down $0.0143" },
   { date: "2026-10-14", value: 4.3333, note: "AAA — down $0.0080" },
+  { date: "2026-10-15", value: 4.3344, note: "AAA release, Oct 15" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -276,6 +279,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-10-12", value: 6.2665, note: "AAA — second straight decline" },
   { date: "2026-10-13", value: 6.2787, note: "AAA — up $0.0122, ending the two-day decline; still $0.25 below the Sep 22 record" },
   { date: "2026-10-14", value: 6.2997, note: "AAA — second straight rise, +$0.0210; still $0.23 below the Sep 22 record" },
+  { date: "2026-10-15", value: 6.3173, note: "AAA — third straight rise, +$0.0176; still $0.21 below the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
@@ -318,7 +322,7 @@ export const dieselPriorStreak = (() => {
   };
 })();
 export const stats = [
-  { label: "Brent", value: "$105.69", sub: "Oct 13 settlement · down $0.96 on the December contract · fifteenth session close above $100 · +39% vs pre-crisis ~$76" },
+  { label: "Brent", value: "$106.06", sub: "Oct 14 settlement · up $0.37 on the December contract · sixteenth session close above $100 · +39% vs pre-crisis ~$76" },
   { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : (dieselStreak === 1 ? "down again" : `${wordNum(dieselStreak)} consecutive daily declines`)) + " · " : lastDiesel.value > dieselYtd[dieselYtd.length - 2].value && dieselPriorStreak.days > 0 ? `first rise after ${wordNum(dieselPriorStreak.days)} straight declines${dieselPriorStreak.fromRecord ? ` off the ${shortStatDate(dieselRecord.date)} record` : ""} · ` : ""}+${dieselUpPct}% vs pre-war $3.72` },
   { label: "US gasoline (AAA)", value: `$${lastGasoline.value.toFixed(2)}`, sub: `${shortStatDate(lastGasoline.date)} · +${gasUpPct}% vs Jan $2.81 (AAA)` },
   { label: "SPR", value: "283.0M", sub: "Oct 2 · down 0.8M in a week — second straight week at that pace · down 132.4M from pre-war 415.4M · lowest since Nov 1982" },
@@ -612,26 +616,24 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "Whether Saudi oil supplies keep moving. The Houthi missile attack on Aramco’s headquarters complex in Dhahran on Oct 13 caused a fire in an administrative building. The energy ministry described the fire as limited and reported no casualties; Reuters sources reported extensive damage across several floors. No damage to production facilities has been reported (Reuters, Oct 14). Saudi Arabia reported September crude output of 8.372M barrels a day to OPEC, up more than 2M from August, and its energy minister said the East–West pipeline carried 5.8M barrels a day on Oct 6, with plans to expand bypass capacity to 10M within two to three years (Bloomberg, Oct 12). Houthi claims of strikes on the Shedgum gas plant remain unconfirmed.", why: "Watch for confirmed damage or lost production, and whether tanker loadings keep up with pipeline flows. The struck building is administrative; the reported fire does not establish a loss of oil output." },
-      { item: "Whether the US and Iran agree on reopening the strait. Iran’s spokesman Baghaei said on Oct 12 that Tehran was still reviewing Washington’s response to its seven-point proposal (CBS). That follows Rezaei’s Oct 11 statement that Iran was “no longer responding” (IRNA via AP). Trump said the US may have “gone too far” in killing Iranian leaders, leaving it unsure whom to negotiate with (Youngstown rally, Oct 12). Vance says any deal requires a “meaningful” reduction in Iran’s enrichment capacity (Reuters, Oct 6). US sanctions on Oct 8 covered 22 vessels through Treasury and State actions. Trump says the US won’t strike before the midterms but might afterward (CBS, TIME).", why: "Watch for a signed deal, a change in the blockade, or renewed strikes. Any could change how much oil gets through." },
-      { item: "Whether the Yemen offensive changes Red Sea shipping. The Saudi-led coalition claims it cleared Bab al-Mandeb; the Houthis deny losing ground, and the claims remain unverified. Riyadh’s airport is closed through Oct 17 after repeated attacks; the Oct 10 strike killed 13 and wounded more than 300. On Oct 13 the coalition struck Houthi fuel facilities in Sanaa, Hodeidah and Dhamar that it says supply fuel for its missile and drone arsenal (ABC, Guardian). Trump said he might ask Turkey to help Saudi Arabia against the Houthis, without ruling out US strikes, and suggested Iran may be behind the attacks to push oil prices ahead of the midterms (Oct 13). The Houthis threatened a “swift and painful” response and warned oil and airport workers to stay away (AFP).", why: "Watch whether the US joins the strikes or shipping routes become safer. A confirmed Houthi attack on non-Saudi shipping could send container traffic back around Africa." },
-      { item: "Whether oil keeps moving through Hormuz despite attacks. Kpler’s provisional 30-day average through Oct 12 was about 22 vessels a day. September crude shipments through the strait were just under 9M barrels a day, about 44% of February’s level (The National, Oct 12). UKMTO reported four additional attacks on Oct 11–12 and projectile strikes on a container ship and a tanker on Oct 13. On Oct 14 the IRGC claimed a container ship carrying more than 2,500 containers sank south of the strait after hitting a naval mine (AP). Separately, Reuters reported that GFS Pride had sunk, citing maritime security sources and a Pakistani navigational warning (Oct 14). Those sources described a projectile strike; Iran’s mine account remains unconfirmed. Vanguard also reported the capesize bulk carrier Cape Dao — struck in September in an attack that killed one seafarer — as sinking after an unsuccessful rescue attempt (Seatrade Maritime, Oct 14). The IRGC’s separate claim of a strike on the Al Maqam remains unconfirmed; ADNOC declined to comment (Seatrade). Two Indian crew from the Petro Dolphin remain missing after the Oct 11 drone strike off Sohar. Iran has warned that ships switching off their tracking during “unauthorised” passages will be treated as hostile (Splash247, Oct 13).", why: "Watch the search for the missing crew, vessel damage, and whether ships keep passing safely. Watch for confirmation of the reported sinking and its cause. Regional export figures include routes outside Hormuz; they don’t show that the strait has returned to normal." },
-      { item: "Whether the Russian diesel deal turns into deliveries. Russia says it has partially lifted its diesel export ban. Novak’s schedule is 300,000 tons in October, 500,000 in November, 1M in December, and potentially 3M a month later (Interfax, Oct 12). US Treasury license 135 permits transactions under US sanctions. Zelensky says Russia has violated the energy ceasefire Trump announced Oct 11; Ukraine says it paused refinery strikes while awaiting details (CNN). Seven senators, including four Republicans, asked the administration to reverse the diesel deal. The Minerva Zen, reported as the first diesel cargo, was carrying liquid fertilizer (TankerTrackers).", why: "Watch for diesel deliveries, a Russian decree, and a reciprocal halt to energy strikes. A halt could help refineries recover; it wouldn’t immediately restore lost output. Analysts expect little effect on US diesel prices (Reuters, Oct 11)." },
+      { item: "Whether Saudi oil supplies keep moving. The Oct 13 attack on Aramco’s Dhahran headquarters damaged an administrative building. The ministry reported a limited fire and no casualties; Reuters sources described extensive damage across several floors. No production damage has been reported, and the Shedgum strike claim remains unconfirmed (Reuters, Oct 14). Saudi September crude output was 8.372M barrels a day. The East–West pipeline carried 5.8M barrels a day on Oct 6 (OPEC; Bloomberg, Oct 12).", why: "Watch for confirmed production losses and whether tanker loadings keep up with pipeline flows. Damage to offices does not establish lost oil output." },
+      { item: "Whether the US and Iran agree on reopening the strait. Tehran was still reviewing Washington’s response to its seven-point proposal on Oct 12 (CBS). Vance says a deal requires a meaningful reduction in Iran’s enrichment capacity (Reuters, Oct 6). Trump says the US won’t strike Iran before the midterms but might afterward (CBS, TIME).", why: "Watch for a signed deal, a change in the blockade, or renewed strikes. Any could change how much oil gets through." },
+      { item: "Whether the Yemen offensive changes Red Sea shipping. The coalition’s claim that it cleared Bab al-Mandeb remains unverified. Riyadh’s airport is closed through Oct 17 after repeated attacks. On Oct 13 the coalition struck Houthi fuel facilities in Sanaa, Hodeidah and Dhamar (ABC, Guardian). Trump hasn’t ruled out US strikes and said he might seek Turkish help. The Houthis threatened a swift response if the US joins the fighting (AFP).", why: "Watch whether the US joins the strikes or shipping routes become safer. A confirmed Houthi attack on non-Saudi shipping could send container traffic back around Africa." },
+      { item: "Whether oil keeps moving through Hormuz despite attacks. UKMTO’s original warnings date four attacks to Oct 13, including two reported the following day. GFS Pride and the bulk carrier Cape Dao have sunk; all 21 GFS Pride crew escaped safely. GFS Giselle reached safe anchorage after a separate strike, with all 22 crew safe (Reuters; Singapore maritime authority, Oct 14). Two Petro Dolphin crew remain missing after the Oct 11 attack; the Al Maqam strike claim remains unconfirmed (Seatrade). September crude shipments were just under 9M barrels a day, 44% of February’s level (The National, Oct 12). Iranian officials told Reuters the changed attack tactics aim to keep prices high ahead of the US midterms.", why: "Watch for crew updates, further losses, and safe passage. Regional exports include bypass routes and do not establish that Hormuz is back to normal." },
+      { item: "Whether the Russian diesel deal turns into deliveries. Russia says it partially lifted its export ban; Novak’s schedule rises from 300,000 tons in October to 1M in December, potentially 3M a month later (Interfax, Oct 12). US Treasury license 135 permits transactions under US sanctions. Ukraine struck the Ryazan refinery overnight Oct 15, starting a fire, Russian officials said (AP). Zelensky said Kyiv would resume refinery strikes after a three-day pause (FT, Oct 15). The Minerva Zen, initially reported as a diesel cargo, carried fertilizer (TankerTrackers).", why: "Watch for actual deliveries and whether resumed strikes push Russia back toward a full ban. Refineries would need time to recover; analysts expect little effect on US diesel prices (Reuters, Oct 11)." },
     ],
   },
   {
-    when: "Oct 14",
+    when: "Oct 15",
     items: [
-      { item: "The next weekly EIA report is due Oct 14 at 10:30 a.m. Eastern, covering the week ending Oct 9. The previous report put SPR stocks at 283.0M barrels and diesel and heating-oil stocks at 105.1M, 13.5% below last year. No award for DOE’s sixth SPR offering has been announced as of Oct 9.", why: "Watch whether SPR withdrawals continue at about 112,000 barrels a day and whether fuel stocks fall further. Deliveries from the sixth offering are scheduled for November–December if awarded." },
-      { item: "The BLS September CPI report is due Oct 14. August producer prices were already up 5.4% year-over-year (BLS, Sep 10).", why: "Watch whether energy is pushing headline inflation higher; it sets up the Fed’s Oct 27–28 meeting." },
-      { item: "The IEA’s monthly Oil Market Report is due Oct 14. Its demand and supply assessments feed the model’s monthly inputs — the latest edition (Sep 11) forecasts 2026 global demand down 2.5M barrels a day versus 2025.", why: "Watch whether the agency expects oil use and production to recover." },
+      { item: "The next weekly EIA report is due Oct 15 at noon Eastern, covering the week ending Oct 9. The previous report put SPR stocks at 283.0M barrels and diesel and heating-oil stocks at 105.1M, 13.5% below last year. No award for DOE’s sixth SPR offering has been announced as of Oct 9.", why: "Watch whether SPR withdrawals continue at about 112,000 barrels a day and whether fuel stocks fall further. Deliveries from the sixth offering are scheduled for November–December if awarded." },
     ],
   },
 ];
 
 // ---------- Breaking-points cascade (§11, compressed twice) ----------
 export const cascade = [
-  { date: "Each weekly EIA report (next: Oct 14)", region: "US East Coast", trigger: "US diesel and heating-oil stocks stood at 105.1M barrels in the week ending Oct 2, roughly flat on the week and 13.5% below last year. At the four-week average rate of 3.8M barrels a day, those stocks are equivalent to about 28 days of use. East Coast stocks are 28% below last year." },
+  { date: "Each weekly EIA report (next: Oct 15)", region: "US East Coast", trigger: "US diesel and heating-oil stocks stood at 105.1M barrels in the week ending Oct 2, roughly flat on the week and 13.5% below last year. At the four-week average rate of 3.8M barrels a day, those stocks are equivalent to about 28 days of use. East Coast stocks are 28% below last year." },
   { date: "Oct 31", region: "Russia", trigger: "Russia’s diesel export ban for producers runs through Oct 31 (Interfax, Sep 30). Trump announced a diesel supply deal on Oct 9, and the US Treasury permitted transactions under General License 135. That US permission doesn’t lift Russia’s ban. On Oct 10, Russia said it had partially lifted the ban with immediate effect; Novak’s schedule runs from 300,000 tons this month to 1M in December, potentially reaching 3M tons a month later (Interfax, Oct 12). With more than 30% of refining capacity damaged, Russia may have little fuel available to export." },
   { date: "≈ mid-October", region: "China", trigger: "Commercial oil stocks could begin to fall faster than normal." },
   { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, making it harder for traders to find supplies. If the strait closes fully, this could happen by mid-October." },
@@ -673,7 +675,7 @@ export const russiaCurrentSpread = { date: "2026-10-04", low: 46, high: 80 };
 // plant-specific confirmation (Reuters, a governor, an industry source). Ufa has
 // the strike and the fire but no confirmed halt as of Sep 26 — if one lands, the
 // flag's wording is the only thing that changes.
-const russiaStrikeWindow = { start: "Sep 20", end: "Oct 9" };
+const russiaStrikeWindow = { start: "Sep 20", end: "Oct 15" };
 const russiaStruckRefineries = [
   { plant: "Moscow refinery", date: "Sep 20" },
   { plant: "Kuibyshev, near Samara", date: "Sep 21–22" },
@@ -685,10 +687,20 @@ const russiaStruckRefineries = [
   { plant: "Gazprom Neftekhim Salavat, one of Russia's largest", date: "Oct 8" },
   { plant: "Omsk, Russia's largest, ~440 kb/d — second hit", date: "Oct 8" },
   { plant: "Lukoil Ukhta, Komi", date: "Oct 9" },
+  { plant: "Ryazan, offline since Sep 6 — repeat strike", date: "Oct 15" },
 ];
+// Oct 14 (NOT counted above — the array's criterion is a confirmed strike/fire): Novak
+// said Ukrainian drones attacked refineries in the Saratov and Ryazan REGIONS (he named
+// regions, not individual plants); Ukraine denied it; damage unconfirmed (Interfax, TASS,
+// Bloomberg, Oct 14). Resolved Oct 15: the Ryazan refinery fire was CONFIRMED (Ryazan
+// governor Malkov; Russian Defense Ministry; AP) — a repeat strike on a plant already
+// offline since Sep 6, struck the first night Ukraine resumed attacks after its
+// three-day pause (Zelensky, FT, Oct 15) → counted above. The Saratov claim remains
+// unconfirmed as of the Oct 15 pass. (An Oct 14 evening addition was removed the same
+// evening after the accuracy review flagged the count inflation.)
 export const russiaSnapshot = [
   { name: "Capacity out of service", value: "51%", delta: "UA Defense Ministry, Oct 4 (Khmara) — up from >45% (Sep 21) and ~30% (Aug 29, Moscow Times)", flag: "Russian Forbes: 54% (Sep 9) · IEA: more than 20% · Dallas Fed: as much as 60% over summer 2026 · Kpler: refineries operating at 60% of capacity (Oct 10, FT); estimates vary month to month · the 51% claim can't be independently verified (AP)" },
-  { name: `Refineries struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} plants`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Volgograd stopped all crude processing after the Oct 2 strike (Reuters, Oct 6); the Ufa, Salavat, Omsk, and Ukhta halts are still unverified (Omsk: Oct 8 strike, the second hit on the plant since the Jul 6 strike — the General Staff says the ELOU-AVT-11 primary unit was damaged in the July strike, and an October halt is unconfirmed; Ukhta: Oct 9 strike, local reports, with regional authorities denying damage). The other five plants have confirmed shutdowns, with no restarts reported. Samara and Novorossiysk terminals were also hit. A reported drone strike set the Yug Rusi terminal at Rostov-on-Don on fire overnight Oct 9–10 — its second strike since Jul 9. Reports based on footage put seven of the terminal’s twelve storage tanks out of action (Astra; Moscow Times, Oct 12; Euromaidan Press, Oct 13). This is the Novoshakhtinsk refinery’s loading terminal in Rostov-on-Don; the refinery is in a different city and was already among the confirmed shutdowns after the Sep 25 strike. Reports differ on whether the terminal fire was extinguished on Oct 12; further fire reports on Oct 13–14 remain unconfirmed. A railway bridge was damaged; two ships at Azov were reportedly hit, an unverified claim (Kyiv Independent; UNIAN via Ukraine Today, Oct 10). All three export routes have come under attack (Reuters, ISW, Gen Staff)" },
+  { name: `Refineries struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} plants`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Volgograd halted crude processing after the Oct 2 strike (Reuters, Oct 6). Five other listed plants have confirmed shutdowns; halts at Ufa, Salavat, Omsk and Ukhta remain unverified. No restarts have been reported for the confirmed shutdowns. The Oct 15 Ryazan strike (fire confirmed by the region’s governor; AP) is a repeat hit on a plant already offline since Sep 6; damage is being assessed. The Oct 14 Saratov claim remains unconfirmed. Zelensky said Ukraine would resume refinery strikes after a three-day pause (FT, Oct 15). Export terminals have also been hit. Seven of twelve tanks at the Novoshakhtinsk refinery’s separate Rostov loading terminal were reportedly out of action by Oct 12 (Astra; Moscow Times; Euromaidan Press). Reports differ on whether the fire was extinguished; later fire reports remain unconfirmed. Terminal damage is not a new refinery shutdown." },
   { name: "Major refineries still offline", value: "both out", delta: "Kirishi, Russia's second-largest, ~404 kb/d, halted since early September (UA.NEWS, Sep 2) · Ryazan, Moscow's main supplier, ~344 kb/d, offline since Sep 6 (Reuters, Sep 10)", flag: "Nameplate capacity, not measured lost output." },
   { name: "Gasoline shortages at gas stations", value: "45–53%", delta: "Share of stations without AI-92 (45%) or AI-95 (53%) gasoline, mid-September (gdebenzin, via UNN, Sep 22); rationing has returned in about two-thirds of regions (Independent, Sep 22)", flag: "Gasoline prices +21% YTD (Moscow Times, Sep 14) · IEA: diesel output down about 30%, with waits of up to 40 hours (Oct 5)" },
   { name: "Jet fuel now imported", value: "military + civilian", delta: "Russia is importing Jet A-1 from South Korea and Egypt (UA military intelligence, Aug 29); no jet fuel or gasoline has left Russia by sea for two straight weeks (S&P Global CAS, Oct 1)", flag: "ISW (Sep 26): Geran drones use jet fuel; a kerosene shortage would limit their use" },
@@ -709,7 +721,7 @@ export const russiaBanCascade = [
 export const recessionOdds = [
   { name: "Moody's", pct: 50, note: "highest estimate" },
   { name: "JPMorgan", pct: 35, note: "" },
-  { name: "Polymarket (by end-2027)", pct: 32, note: "covers a longer period" },
+  { name: "Polymarket (by end-2027)", pct: 34, note: "covers a longer period · Oct 14" },
   { name: "NY Fed model", pct: 25, note: "" },
   { name: "TD Securities", pct: 25, note: "Sep 7" },
   { name: "WSJ poll (74 economists)", pct: 25, note: "33% in April" },
@@ -724,8 +736,8 @@ export const ratesStats = [
 
 export const foodStats = [
   { label: "Gulf–India tanker shipping costs", value: "+411%", sub: "$4.34/bbl in Aug vs pre-war (Frontline)" },
-  { label: "TTF gas (Europe)", value: "$24.6/MMBtu", sub: "JOGMEC assessed Oct 2 (published Oct 5) · up from $24.1 on Sep 25" },
-  { label: "JKM gas (Asia)", value: "≈$24.8/MMBtu", sub: "JOGMEC assessed Oct 2 (published Oct 5) · high-$24s, down from low-$25s on Sep 25" },
+  { label: "TTF gas (Europe)", value: "$26.7/MMBtu", sub: "JOGMEC assessed Oct 9 (published Oct 13) · up from $24.6 on Oct 2" },
+  { label: "JKM gas (Asia)", value: "≈$26.2/MMBtu", sub: "JOGMEC assessed Oct 9 (published Oct 13) · low-$26s, up from high-$24s on Oct 2" },
 ];
 
 // The lag chain: energy shock → food shock, 12–18 months. Dates are the midpoint of
@@ -793,7 +805,7 @@ export const gasTtf: GasPt[] = [
   { date: "2026-09-22", value: 24.2, assessed: true, tip: "€72.10 close quote × 1.1467 (converted)", note: "€72.10/MWh (Geagency close quote, Sep 22) × EUR/USD 1.1467 — converted; a market quote, ~9% below the Sep 18 quote" },
   { date: "2026-09-25", value: 24.1, assessed: true, tip: "JOGMEC (pub. Sep 28), Oct delivery", note: "Global LNG Hub (JOGMEC, published Sep 28) — USD 24.1/MBtu, Oct delivery; down from 26.7 on Sep 18 as forecasts turned warmer and traders hoped US–Iran talks would ease tensions" },
   { date: "2026-10-02", value: 24.6, assessed: true, tip: "JOGMEC (pub. Oct 5), Nov delivery", note: "Global LNG Hub (JOGMEC, published Oct 5) — USD 24.6/MBtu, Nov delivery; up from 24.1 on Sep 25 as the front month rolled to November and traders refocused on winter supply risks and storage well below the prior year's level" },
-  { date: "2026-10-09", value: 25.7, assessed: true, tip: "€78.12 CFD × 1.1206 (converted)", note: "€78.12/MWh (TradingEconomics CFD, Oct 9) × EUR/USD 1.1206 (Yahoo EURUSD=X) — converted; a market quote, up from the 24.6 Nov-delivery assessment (JOGMEC, pub. Oct 5). The next JOGMEC weekly is due ~Oct 12." },
+  { date: "2026-10-09", value: 26.7, assessed: true, tip: "JOGMEC (pub. Oct 13), Nov delivery", note: "Global LNG Hub (JOGMEC, published Oct 13) — USD 26.7/MBtu on Oct 9, Nov delivery; up from the 24.6 assessment of Oct 2 on tanker attacks in the strait, colder European weather, and constraints at Norway's Dvalin and Heidrun fields. Swapped in for the Oct 9 CFD market quote (25.7)." },
 ];
 
 export const gasJkm: GasPt[] = [
@@ -834,6 +846,7 @@ export const gasJkm: GasPt[] = [
   { date: "2026-09-18", value: 27.2, assessed: true, tip: "JOGMEC (pub. Sep 24), Nov delivery", note: "assessed: low-USD 27s (JOGMEC, published Sep 24, Nov delivery; swapped in for the CFD quote 27.51)" },
   { date: "2026-09-25", value: 25.2, assessed: true, tip: "JOGMEC: low-$25s · Nov delivery · pub. Sep 28", note: "assessed: low-USD 25s (JOGMEC, published Sep 28, Nov delivery; down from low-USD 27s on Sep 18)" },
   { date: "2026-10-02", value: 24.8, assessed: true, tip: "JOGMEC: high-$24s · Nov delivery · pub. Oct 5", note: "assessed: high-USD 24s (JOGMEC, published Oct 5, Nov delivery; down from low-USD 25s on Sep 25 as East Asian buying stayed subdued and winter outlooks turned mild)" },
+  { date: "2026-10-09", value: 26.2, assessed: true, tip: "JOGMEC: low-$26s · Nov delivery · pub. Oct 13", note: "assessed: low-USD 26s (JOGMEC, published Oct 13, Nov delivery; up from high-USD 24s on Oct 2 as renewed attacks in the strait and Middle East tensions lifted LNG supply concerns)" },
 ];
 
 export const gasPreClosure = { ttf: 10.99, jkm: 10.66 };
@@ -914,6 +927,7 @@ export const treasury10y: Y10Pt[] = [
   // (The daily-update apply step re-added it on Oct 13 — removed again; the script
   //  can’t know about bond holidays, so re-check after every apply.)
   { date: "2026-10-13", value: 5.217, note: "session close (Yahoo ^TNX) · fourteenth straight close above 5% — the first cash close since Oct 9 (the market was closed Oct 12 for Columbus Day; the bar is a real session, not a flat carryover)" },
+  { date: "2026-10-14", value: 5.19, note: "session close (Yahoo ^TNX) · fifteenth straight close above 5% — the above-forecast Sep CPI (3.7% YoY) kept yields near their highs; intraday high 5.33 (Yahoo bar), and Fed's Daly said further hikes were likely needed but saw no urgency for an October move (Reuters, Oct 14)" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
@@ -1039,6 +1053,14 @@ export const wtiNonFred = wtiWeekly.filter((p) => !p.fred).map((p) => p.date);
 // body states "Incident Date: 11 Oct 2026" → Oct 11. #167–#169 carry no explicit
 // incident date in the body (the API's utcDateOfIncident is the registration
 // time) → Oct 12 as logged; the wire (Maritime Executive) places all four on Oct 11.
+// #172/#173: the API's utcDateOfIncident says Oct 14 (14:10/14:21 UTC), but the
+// ORIGINAL UKMTO warnings print "Incident Date: 13 OCT 2026" (1640/1700 UTC) — and the
+// API's own utcDateCreated (Oct 14 13:13/13:23 UTC) PREDATES its claimed incident
+// times, which is impossible. The warnings are the primary source; the API field is
+// wrong. Rows date the INCIDENT (Oct 13), not the report issuance (Oct 14, time-late).
+// Originals archived: research/sources/ukmto-2026-10-14-review/ (PDFs + provenance).
+// NOTE: keep this array's body to entry lines only — ukmto-fetch.mjs parses each line
+// strictly and rewrites the whole array on --apply, so inline comments would break it.
 export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisory" | "suspicious activity"; date: string }[] = [
   { num: 78, type: "suspicious activity", date: "2026-07-01" },
   { num: 79, type: "attack", date: "2026-07-05" },
@@ -1130,6 +1152,8 @@ export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisor
   { num: 169, type: "attack", date: "2026-10-12" },
   { num: 170, type: "attack", date: "2026-10-13" },
   { num: 171, type: "attack", date: "2026-10-13" },
+  { num: 172, type: "attack", date: "2026-10-13" },
+  { num: 173, type: "attack", date: "2026-10-13" },
   { num: 28082035, type: "advisory", date: "2026-10-10" },
 ];
 
@@ -1141,7 +1165,7 @@ export const ukmtoReportsBeforeWindow = Math.min(...ukmtoIncidents.map((i) => i.
 
 // Capture bounds are explicit: a quiet day must not shorten the covered period.
 export const ukmtoCoverageStart = "2026-07-01";
-export const ukmtoCoverageEnd = "2026-10-14";
+export const ukmtoCoverageEnd = "2026-10-15";
 
 // Include every Monday–Sunday week, even when it has no attack reports.
 // Partial weeks cover fewer than seven days and don't enter full-week comparisons.

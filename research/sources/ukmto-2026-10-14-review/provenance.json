@@ -1,0 +1,26 @@
+{
+  "retrievedAt": "2026-10-14T22:33:38.681333+00:00",
+  "sources": {
+    "warning-172-26.pdf": "https://www.ukmto.org/-/media/ukmto/products/20261014-ukmto_warning_172-26.pdf",
+    "warning-173-26.pdf": "https://www.ukmto.org/-/media/ukmto/products/20261014-ukmto_warning_173-26.pdf?rev=d1feb1e8533f4d23b71a6ebbbccfca89",
+    "api-all.json": "https://sccd.royalnavy.mod.uk/api/ukmto/all"
+  },
+  "files": [
+    {
+      "file": "warning-172-26.pdf",
+      "sha256": "91d976d9a1860b9537ed405b3ee2d72cd828c651a5dca2fdd9d3e3fcf03c24ad",
+      "bytes": 314379
+    },
+    {
+      "file": "warning-173-26.pdf",
+      "sha256": "3b21cd718764678c70ed1b49892eb8c84a3ed6d163e3a55c8431dc0466ee1857",
+      "bytes": 314276
+    },
+    {
+      "file": "api-all.json",
+      "sha256": "00f6cec655237a152b865a6c2f5222bebc62f00aab904b1d0f6e62363db21a35",
+      "bytes": 73167
+    }
+  ],
+  "note": "Original PDFs visually inspected and text extracted; both print incident date 13 OCT 2026. API fields disagree. No site date rows changed during review."
+}
