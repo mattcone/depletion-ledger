@@ -5,6 +5,7 @@ import {
   DATA_AS_OF,
   branchWeights,
 } from "../data/crisis.ts";
+import worldStocksData from "../data/world-stocks.json";
 
 const entry = await getEntry("docs", "model");
 if (!entry) throw new Error("model entry missing");
@@ -19,12 +20,38 @@ const sections = [
   ["how-to-read-the-chart", "How to read the chart"],
   ["how-the-paths-are-calculated", "How the paths are calculated"],
   ["what-each-scenario-assumes", "Scenario assumptions"],
+  ["the-september-2026-audit", "The September audit"],
+  ["the-september-19-assumptions-preserved", "The September 19 assumptions"],
   ["what-the-model-leaves-out", "What the model leaves out"],
   ["how-the-odds-change", "How the odds change"],
   ["how-we-check-the-predictions", "Checking the predictions"],
   ["where-the-data-comes-from", "Data sources"],
   ["where-the-spr-fits-now", "Where the SPR fits now"],
+  ["september-2026-scorecard", "The September 2026 scorecard"],
 ];
+
+// The full September 2026 scorecard (finding 4): every scored line, frozen at
+// first release. Target/observed are rebased to the frozen August anchor (−507);
+// the reported September change was −10 mb, but the observed shown is the
+// cumulative (−509) rebased → −2.
+const wsV1Anchor = -507;
+const wsV1Obs = -2.0;
+const v1ScoreDefs: [string, string][] = [
+  ["scenario-standoff-2026-09-19-global-observed", "Standoff (Sep 19)"],
+  ["scenario-corridor-holds-2026-09-19-global-observed", "Corridor holds (Sep 19)"],
+  ["scenario-corridor-lapses-2026-09-19-global-observed", "Corridor lapses (Sep 19)"],
+  ["steo-2026-10-global-observed", "EIA estimate (Oct 6)"],
+  ["persistence-2026-09-global-observed", "Recent trend (persistence)"],
+];
+const v1ScoreRows = v1ScoreDefs
+  .map(([rid, name]) => {
+    const rec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === rid);
+    const t = rec?.targets?.find((t: any) => t.period === "2026-09");
+    if (!t) return null;
+    const target = +(t.target_cumulative_mb - wsV1Anchor).toFixed(1);
+    return { name, target, observed: wsV1Obs, miss: +Math.abs(target - wsV1Obs).toFixed(1) };
+  })
+  .filter((r): r is { name: string; target: number; observed: number; miss: number } => r != null);
 ---
 
 <ArticleShell current="model" title={entry.data.title} description={entry.data.description}>
@@ -50,6 +77,59 @@ const sections = [
   <div class="grid grid-cols-[minmax(0,1fr)] gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-14">
     <article class="prose-oil model-copy min-w-0">
       <Content />
+      <!-- The September 2026 scorecard + the original September 19 chart (finding 4):
+           keep the original chart and the full first score on the model page. The
+           dashboard's ghost toggle and 2-version scorecard don't archive them. -->
+      <section id="september-2026-scorecard" class="mt-12 border-t border-rule pt-8">
+        <h2 class="text-xl font-bold tracking-tight">The September 2026 scorecard, and the original September 19 chart</h2>
+        <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
+          The audit above discusses the September miss; this is the full first scorecard
+          (every line, September 2026) and the chart the September 19 (v1) assumptions
+          produced. Values are in million barrels relative to the saved August 2026 anchor.
+          The scenarios were less accurate than the recent-trend baseline in the first
+          scored month.
+        </p>
+
+        <h3 class="mt-6 text-base font-bold tracking-tight">The September 2026 scorecard</h3>
+        <p class="mt-2 max-w-prose text-xs leading-relaxed text-faint">
+          Target and observed are rebased to the August 2026 anchor; miss is the absolute
+          difference. The reported September change was −10 mb; the −2 observed shown is the
+          September cumulative (−509) minus the frozen August anchor (−507) — the 8 mb gap
+          from the monthly −10 is the IEA's revision to earlier months.
+        </p>
+        <div class="mt-3 max-w-2xl overflow-x-auto">
+          <table class="w-full border-collapse text-left text-[13px]">
+            <thead>
+              <tr class="border-b border-rule text-faint">
+                <th class="pb-2 pr-4 font-semibold">Line</th>
+                <th class="pb-2 pr-4 text-right font-semibold">Target</th>
+                <th class="pb-2 pr-4 text-right font-semibold">Observed</th>
+                <th class="pb-2 text-right font-semibold">Miss</th>
+              </tr>
+            </thead>
+            <tbody>
+              {v1ScoreRows.map((r) => (
+                <tr class="border-b border-rule/60">
+                  <td class="py-2 pr-4">{r.name}</td>
+                  <td class="py-2 pr-4 text-right tabular-nums">{r.target > 0 ? "+" : ""}{r.target.toFixed(1)}</td>
+                  <td class="py-2 pr-4 text-right tabular-nums">{r.observed > 0 ? "+" : ""}{r.observed.toFixed(1)}</td>
+                  <td class="py-2 text-right font-semibold tabular-nums">{r.miss.toFixed(1)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="mt-8 text-base font-bold tracking-tight">The original September 19 chart</h3>
+        <p class="mt-2 max-w-prose text-xs leading-relaxed text-faint">
+          The three scenario paths the September 19 (v1) assumptions produced, rebased to the
+          August 2026 anchor and starting there. The current (October 15, v2) paths are on the
+          dashboard; this is the original set, preserved.
+        </p>
+        <div class="relative mt-4 h-80 sm:h-[380px]">
+          <canvas id="v1Chart" role="img" aria-label="Line chart of the original September 19 (v1) scenario paths, in million barrels relative to the saved August 2026 anchor, from September 2026 to December 2027. Corridor holds (solid) reaches +1,736 by December 2027; standoff (dashed) reaches −1,326; corridor lapses (long dashed) reaches −2,988."></canvas>
+        </div>
+      </section>
     </article>
 
     <aside class="hidden self-start text-sm lg:sticky lg:top-8 lg:block">
@@ -78,6 +158,67 @@ const sections = [
       </p>
     </aside>
   </div>
+
+  <script>
+    import Chart from "chart.js/auto";
+    import wsV1 from "../data/world-stocks.json";
+    const v1recs = [
+      { id: "scenario-corridor-holds-2026-09-19-global-observed", label: "Corridor holds (Sep 19)", color: "#2f2c26", dash: [] as number[] },
+      { id: "scenario-standoff-2026-09-19-global-observed", label: "Standoff (Sep 19)", color: "#6b675c", dash: [6, 4] as number[] },
+      { id: "scenario-corridor-lapses-2026-09-19-global-observed", label: "Corridor lapses (Sep 19)", color: "#a39d8f", dash: [2, 3] as number[] },
+    ];
+    const v1records = (wsV1 as any).forecast_records as any[];
+    const v1anchor = v1records.find((r) => r.record_id === v1recs[0].id)?.anchor ?? { period: "2026-08", value_mb: -507 };
+    const v1rebase = (v: number) => v - v1anchor.value_mb;
+    const v1axisSet = new Set<string>([v1anchor.period]);
+    for (const r of v1recs) {
+      const rec = v1records.find((x) => x.record_id === r.id);
+      for (const t of rec?.targets ?? []) v1axisSet.add(t.period);
+    }
+    const v1labels = [...v1axisSet].sort();
+    const v1fmt = (p: string) => new Date(p + "-15T12:00:00").toLocaleDateString("en-US", { month: "short", year: "2-digit" });
+    new Chart(document.getElementById("v1Chart")!, {
+      type: "line",
+      data: {
+        labels: v1labels.map(v1fmt),
+        datasets: v1recs.map((r) => {
+          const rec = v1records.find((x) => x.record_id === r.id);
+          return {
+            label: r.label,
+            data: v1labels.map((m) => {
+              const t = (rec?.targets ?? []).find((t: any) => t.period === m);
+              if (t) return v1rebase(t.target_cumulative_mb);
+              if (m === v1anchor.period) return 0;
+              return null;
+            }),
+            borderColor: r.color,
+            borderWidth: 1.8,
+            borderDash: r.dash,
+            pointRadius: 0,
+            tension: 0,
+            fill: false,
+          };
+        }),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { position: "top" },
+          tooltip: {
+            callbacks: {
+              label: (c: any) => ` ${c.dataset.label}: ${c.parsed.y == null ? "—" : Math.round(c.parsed.y) + " mb"}`,
+            },
+          },
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+          y: { title: { display: true, text: "mb since Aug 2026" }, ticks: { font: { size: 10 } } },
+        },
+      },
+    } as any);
+  </script>
 
 </ArticleShell>
 

@@ -316,6 +316,58 @@ static HTML; month in `<div class="fomc-meeting--shaded...">`, dates in
 2026 section starts with its JANUARY meeting, not the next one — parse year + month + day and
 select the current or next meeting by date.
 
+### UKMTO incidents JSON API (verified Oct 15) — the primary source for shipping strikes
+
+`https://sccd.royalnavy.mod.uk/api/ukmto/all` — plain JSON, no auth; the endpoint ukmto.org's
+own Next.js page calls. **ukmto.org itself 403s from this box** (Cloudflare; the Warnings PDFs
+at `ukmto.org/-/media/ukmto/products/YYYYMMDD-ukmto_warning_NNN-26.pdf` 403 too) — the sccd
+API is the way in. One-shot check:
+
+```bash
+curl -s --http1.1 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36" \
+  -H "Accept: application/json" "https://sccd.royalnavy.mod.uk/api/ukmto/all"
+```
+
+The challenge is intermittent — retry on 403/0 bytes. Fields: `incidentNumber`,
+`incidentTypeName` (Attack / Advisory / …), `utcDateOfIncident`, `utcDateCreated`, `place`,
+`vesselType`, `vesselName` (often "." or "-" = withheld), `pinColour` (Red = attack-grade),
+`otherDetails` = the full warning text (may carry an explicit `Incident Date:` line).
+**The window slides** (68 entries Oct 13 archive, 30 entries Oct 15) — the `ukmtoIncidents`
+array in crisis.ts is cumulative; the site-side tool is
+`node scripts/ukmto-fetch.mjs [--apply]` (site repo): diffs, APPENDS new entries, FLAGS
+changes to existing ones (never auto-applied), bumps `ukmtoCoverageEnd`. **Date rule** (Oct 12
+evening, re-validated Oct 15): `utcDateOfIncident` = incident date for same-day reports
+(verified 49/49), but time-late reports carry the REPORT-REGISTRATION time in the field — and
+the warning body's explicit `Incident Date:` wins over the field (adjudicated Oct 14 for
+#172/#173: the API field said Oct 14, the archived original warnings printed
+"Incident Date: 13 OCT 2026" — the field was wrong; originals in
+research/sources/ukmto-2026-10-14-review/). Number 161 is in neither the API nor our records; a numbering gap alone does not
+establish an additional incident. Archive the raw payload with provenance for any pass with new
+entries (research/data/ukmto/).
+
+### IMO confirmed incidents list (verified Oct 15) — the neutral confirmer for vessel strikes
+
+`curl -s -A "Mozilla/5.0" "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"`
+— static HTML, 200 from this box. Newest incidents first: `Date | Ship Name (IMO number) |
+Location | Description` (e.g. `13 October | GFS PRIDE (IMO 9349045) | Strait of Hormuz |
+Sunk. No pollution.`), plus running totals (fetched Oct 15: 113 incidents in 2026; 24
+confirmed seafarer fatalities). The count explicitly says “as at 14 October 2026”
+(HTML encodes the spaces as `&#160;`); this is an as-of date, not an update timestamp.
+The newest incident was Oct 13 at fetch time. Use it to check named-vessel incident and damage status.
+It does not necessarily identify an attacker, weapon or matching UKMTO warning. Al Maqam
+is listed as damaged in an Oct 11 incident; IRGC responsibility is not confirmed by that row.
+Updates irregularly — check it on every shipping pass, not just when UKMTO moves.
+
+### iMariner maritime-security-tracker (third-party, verified Oct 15) — LEADS only
+
+`curl -s "https://raw.githubusercontent.com/iMariner/maritime-security-tracker/main/data/incidents.json"`
+(~2 MB, ~340 entries). Per incident: `region`, `date_utc`, `vessel_name`, `attack_type`,
+`damage`, `official_source_cited`, `confidence`, a full `news` URL array, and a `verdict`
+block. Entries citing `"IMO confirmed incidents list"` at `confidence: 1.0` mirror the IMO
+page (good cross-check); the rest are news-derived at mixed confidence. LEADS ONLY — verify
+against UKMTO/IMO/wires before logging or site use. (Oct 15: used to enumerate the Oct 11–15
+Hormuz strikes and surface the IMO-confirmed GFS PRIDE sinking before the IMO page check.)
+
 ### Series / routes used or queued
 
 | Route → series | What it is | Status |

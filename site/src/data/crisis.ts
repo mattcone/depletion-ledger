@@ -61,6 +61,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-10-12", value: 106.65, tip: "settlement · up 1.8% (Newsquawk)", note: "Settlement (Newsquawk wire, December contract; +$1.93 vs Oct 9 — Yahoo BZ=F bar matches) — a fourteenth session close above $100. The first priced session after the weekend: a fifth Houthi strike on King Khalid airport (Riyadh) and the Dammam airport strike, and four more UKMTO-logged attacks on ships around the strait (Oct 11–12); separately, the IRGC claimed a strike on the ADNOC-owned VLCC Al Maqam (a claim, unconfirmed)." },
   { date: "2026-10-13", value: 105.69, tip: "settlement · down 0.9% (Reuters)", note: "Settlement (Reuters wire, December contract; −$0.96 vs Oct 12 — the Yahoo BZ=F bar of 106.22 ran off the wire again; the wire value is plotted) — a fifteenth session close above $100, easing after a three-session rally. The Houthi missile that hit Aramco's headquarters complex in Dhahran and two further UKMTO-logged projectile strikes in the strait (a container ship, a tanker) came in after the London close." },
   { date: "2026-10-14", value: 106.06, tip: "settlement · up 0.4% (Rigzone)", note: "Settlement (Rigzone wire, December contract; +$0.37 vs Oct 13 — the Yahoo BZ=F bar of 106.06 matches) — a sixteenth session close above $100. The first full settlement after the Dhahran strike and the above-forecast Sep CPI: the GFS Pride sank and the Cape Dao was later reported sunk near the strait, a third ship (the GFS Giselle) was hit, and two senior Iranian officials told Reuters Iran is using new attack tactics to keep prices high ahead of the US midterms (Reuters, Oct 14)." },
+  { date: "2026-10-15", value: 105.92, tip: "settlement · down $0.14 (CNBC)", note: "Settlement (CNBC/Newsquawk wire, December contract; −$0.14 vs Oct 14 — the Yahoo BZ=F bar of 105.54 ran off the wire; the wire value is plotted) — a seventeenth session close above $100. A divergence day: WTI jumped 3% on the week's 8M-barrel US crude draw and the renewed strait attacks while Brent barely moved, and the IEA agreed to accelerate the remaining ~100M barrels of its March program, including over 20M of diesel (Reuters, Oct 15)." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -151,6 +152,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { fred: false, date: "2026-10-12", value: 93.74, note: "Settlement (Newsquawk wire, November contract; +$1.89 vs Oct 9 — Yahoo CL=F bar matches) — up on the Saudi airport strikes and the strait tanker attacks; early Tuesday trading eased as the Russian diesel-supply story gained (Reuters, Oct 12)." },
   { fred: false, date: "2026-10-13", value: 94.14, note: "Settlement (Reuters wire, November contract; +$0.40 vs Oct 12 — the Yahoo CL=F bar of 94.59 is a post-settlement last trade; the wire value is plotted) — erased the session's early losses; the dollar and the 10-year yield slipped from their highs (Reuters, Oct 13)." },
   { fred: false, date: "2026-10-14", value: 95.09, note: "Settlement (Rigzone wire, November contract; +$0.95 vs Oct 13 — the Yahoo CL=F bar of 95.17 is a post-settlement last trade; the wire value is plotted) — WTI outpaced Brent; analysts cited fund buying and stronger demand for US barrels as freight conditions shifted (Bloomberg via Rigzone, Oct 14)." },
+  { fred: false, date: "2026-10-15", value: 97.97, note: "Settlement (CNBC/Newsquawk wire, November contract; +$2.88 vs Oct 14, +3.0%) — up on the week's 8M-barrel US crude draw, the renewed strait attacks, and reports of US planning for new strikes on Iran including the MOAB (CNBC, Oct 15). Data quality: the Yahoo CL=F bar of 96.11 is an artifact (its session high of 96.39 is below the wire settlement); the wire value is plotted." },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -322,11 +324,11 @@ export const dieselPriorStreak = (() => {
   };
 })();
 export const stats = [
-  { label: "Brent", value: "$106.06", sub: "Oct 14 settlement · up $0.37 on the December contract · sixteenth session close above $100 · +39% vs pre-crisis ~$76" },
+  { label: "Brent", value: "$105.92", sub: "Oct 15 settlement · down $0.14 on the December contract · seventeenth session close above $100 · +39% vs pre-crisis ~$76" },
   { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : (dieselStreak === 1 ? "down again" : `${wordNum(dieselStreak)} consecutive daily declines`)) + " · " : lastDiesel.value > dieselYtd[dieselYtd.length - 2].value && dieselPriorStreak.days > 0 ? `first rise after ${wordNum(dieselPriorStreak.days)} straight declines${dieselPriorStreak.fromRecord ? ` off the ${shortStatDate(dieselRecord.date)} record` : ""} · ` : ""}+${dieselUpPct}% vs pre-war $3.72` },
   { label: "US gasoline (AAA)", value: `$${lastGasoline.value.toFixed(2)}`, sub: `${shortStatDate(lastGasoline.date)} · +${gasUpPct}% vs Jan $2.81 (AAA)` },
-  { label: "SPR", value: "283.0M", sub: "Oct 2 · down 0.8M in a week — second straight week at that pace · down 132.4M from pre-war 415.4M · lowest since Nov 1982" },
-  { label: "US diesel & heating oil", value: "105.1M", sub: "Oct 2 · down 0.04M in a week — essentially flat · 13.5% below last year · East Coast stocks 28% below last year" },
+  { label: "SPR", value: "283.0M", sub: "Oct 9 · unchanged on the week · down 132.4M from pre-war 415.4M · lowest since Nov 1982" },
+  { label: "US diesel & heating oil", value: "102.6M", sub: "Oct 9 · down 2.5M in a week · 12.3% below last year · East Coast stocks 22% below last year" },
 ];
 
 // ---------- SPR, million bbl — EIA weekly ending stocks (verified) ----------
@@ -371,6 +373,7 @@ export const sprWeekly: { date: string; level: number }[] = [
   { date: "2026-09-18", level: 284.552 },
   { date: "2026-09-25", level: 283.767 },
   { date: "2026-10-02", level: 282.983 },
+  { date: "2026-10-09", level: 282.983 },
 ];
 // US commercial crude inventories, EXCLUDING the SPR (EIA WPSR, week ending Friday),
 // million barrels. Source: EIA API series WCESTUS1 ("U.S. Ending Stocks excluding SPR of
@@ -399,6 +402,7 @@ export const commercialCrude2026: { date: string; value: number }[] = [
   { date: "2026-09-11", value: 423.429 }, { date: "2026-09-18", value: 426.398 },
   { date: "2026-09-25", value: 427.320 },
   { date: "2026-10-02", value: 424.134 },
+  { date: "2026-10-09", value: 415.577 },
 ];
 // Same weeks in 2025 (each 2026 week matched to its nearest 2025 week-ending date).
 export const commercialCrude2025: { date: string; value: number }[] = [
@@ -422,6 +426,7 @@ export const commercialCrude2025: { date: string; value: number }[] = [
   { date: "2025-08-29", value: 420.707 }, { date: "2025-09-05", value: 424.646 },
   { date: "2025-09-12", value: 415.361 }, { date: "2025-09-19", value: 414.754 },
   { date: "2025-09-26", value: 416.546 }, { date: "2025-10-03", value: 420.261 },
+  { date: "2025-10-10", value: 423.785 },
 ];
 export const sprFloors = [
   { level: 300, name: "Cavern damage risk: about 300M barrels (first report below: week ending Aug 7)" },
@@ -574,6 +579,7 @@ export const usRefineryUtil2026: UtilPt[] = [
   { date: "2026-08-28", value: 98.0 }, { date: "2026-09-04", value: 97.8 },
   { date: "2026-09-11", value: 96.8 }, { date: "2026-09-18", value: 94.0 },
   { date: "2026-09-25", value: 92.5 }, { date: "2026-10-02", value: 92.7 },
+  { date: "2026-10-09", value: 93.5 },
 ];
 export const usRefineryUtil2025: UtilPt[] = [
   { date: "2025-01-03", value: 93.3 }, { date: "2025-01-10", value: 91.7 },
@@ -596,6 +602,7 @@ export const usRefineryUtil2025: UtilPt[] = [
   { date: "2025-08-29", value: 94.3 }, { date: "2025-09-05", value: 94.9 },
   { date: "2025-09-12", value: 93.3 }, { date: "2025-09-19", value: 93.0 },
   { date: "2025-09-26", value: 91.4 }, { date: "2025-10-03", value: 92.4 },
+  { date: "2025-10-10", value: 85.7 },
 ];
 
 // Global refining anchors — IEA Oil Market Report (runs: Sep 11 edition; 2026 forecast:
@@ -619,21 +626,21 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
       { item: "Whether Saudi oil supplies keep moving. The Oct 13 attack on Aramco’s Dhahran headquarters damaged an administrative building. The ministry reported a limited fire and no casualties; Reuters sources described extensive damage across several floors. No production damage has been reported, and the Shedgum strike claim remains unconfirmed (Reuters, Oct 14). Saudi September crude output was 8.372M barrels a day. The East–West pipeline carried 5.8M barrels a day on Oct 6 (OPEC; Bloomberg, Oct 12).", why: "Watch for confirmed production losses and whether tanker loadings keep up with pipeline flows. Damage to offices does not establish lost oil output." },
       { item: "Whether the US and Iran agree on reopening the strait. Tehran was still reviewing Washington’s response to its seven-point proposal on Oct 12 (CBS). Vance says a deal requires a meaningful reduction in Iran’s enrichment capacity (Reuters, Oct 6). Trump says the US won’t strike Iran before the midterms but might afterward (CBS, TIME).", why: "Watch for a signed deal, a change in the blockade, or renewed strikes. Any could change how much oil gets through." },
       { item: "Whether the Yemen offensive changes Red Sea shipping. The coalition’s claim that it cleared Bab al-Mandeb remains unverified. Riyadh’s airport is closed through Oct 17 after repeated attacks. On Oct 13 the coalition struck Houthi fuel facilities in Sanaa, Hodeidah and Dhamar (ABC, Guardian). Trump hasn’t ruled out US strikes and said he might seek Turkish help. The Houthis threatened a swift response if the US joins the fighting (AFP).", why: "Watch whether the US joins the strikes or shipping routes become safer. A confirmed Houthi attack on non-Saudi shipping could send container traffic back around Africa." },
-      { item: "Whether oil keeps moving through Hormuz despite attacks. UKMTO’s original warnings date four attacks to Oct 13, including two reported the following day. GFS Pride and the bulk carrier Cape Dao have sunk; all 21 GFS Pride crew escaped safely. GFS Giselle reached safe anchorage after a separate strike, with all 22 crew safe (Reuters; Singapore maritime authority, Oct 14). Two Petro Dolphin crew remain missing after the Oct 11 attack; the Al Maqam strike claim remains unconfirmed (Seatrade). September crude shipments were just under 9M barrels a day, 44% of February’s level (The National, Oct 12). Iranian officials told Reuters the changed attack tactics aim to keep prices high ahead of the US midterms.", why: "Watch for crew updates, further losses, and safe passage. Regional exports include bypass routes and do not establish that Hormuz is back to normal." },
+      { item: "Whether oil keeps moving through Hormuz despite attacks. The IMO’s list (fetched Oct 15) lists GFS Pride as sunk after an Oct 13 incident and Al Maqam as damaged in an Oct 11 incident. It does not identify the attacker. GFS Pride’s 21 crew escaped safely, and GFS Giselle reached safe anchorage with all 22 crew safe (Singapore maritime authority, Oct 14). Cape Dao was also reported sunk (Reuters, Oct 14). Two Petro Dolphin crew remain missing after the Oct 11 attack. On Oct 15, Iran’s navy reported an unnamed tanker on fire in the Gulf of Oman, saying it had attempted to cross what Iran calls a prohibited zone with its tracking off. The cause and crew’s condition were not reported; the report has not been independently confirmed.", why: "Watch for crew updates, further losses, and safe passage. UKMTO had issued no new warning as of 11:00 MDT Oct 15. Regional exports include bypass routes and do not establish that Hormuz is back to normal." },
       { item: "Whether the Russian diesel deal turns into deliveries. Russia says it partially lifted its export ban; Novak’s schedule rises from 300,000 tons in October to 1M in December, potentially 3M a month later (Interfax, Oct 12). US Treasury license 135 permits transactions under US sanctions. Ukraine struck the Ryazan refinery overnight Oct 15, starting a fire, Russian officials said (AP). Zelensky said Kyiv would resume refinery strikes after a three-day pause (FT, Oct 15). The Minerva Zen, initially reported as a diesel cargo, carried fertilizer (TankerTrackers).", why: "Watch for actual deliveries and whether resumed strikes push Russia back toward a full ban. Refineries would need time to recover; analysts expect little effect on US diesel prices (Reuters, Oct 11)." },
     ],
   },
   {
-    when: "Oct 15",
+    when: "Oct 21",
     items: [
-      { item: "The next weekly EIA report is due Oct 15 at noon Eastern, covering the week ending Oct 9. The previous report put SPR stocks at 283.0M barrels and diesel and heating-oil stocks at 105.1M, 13.5% below last year. No award for DOE’s sixth SPR offering has been announced as of Oct 9.", why: "Watch whether SPR withdrawals continue at about 112,000 barrels a day and whether fuel stocks fall further. Deliveries from the sixth offering are scheduled for November–December if awarded." },
+      { item: "The next weekly EIA report is due Oct 21 at 10:30 a.m. Eastern, covering the week ending Oct 16. The latest report put SPR stocks at 283.0M barrels — unchanged on the week — and diesel and heating-oil stocks at 102.6M, 12.3% below last year. Argus reported awards of 20–25M barrels on Oct 13, citing sources; DOE had not confirmed them.", why: "Watch whether SPR stocks fall again and whether fuel stocks fall further. Deliveries from the sixth offering are scheduled for November–December." },
     ],
   },
 ];
 
 // ---------- Breaking-points cascade (§11, compressed twice) ----------
 export const cascade = [
-  { date: "Each weekly EIA report (next: Oct 15)", region: "US East Coast", trigger: "US diesel and heating-oil stocks stood at 105.1M barrels in the week ending Oct 2, roughly flat on the week and 13.5% below last year. At the four-week average rate of 3.8M barrels a day, those stocks are equivalent to about 28 days of use. East Coast stocks are 28% below last year." },
+  { date: "Each weekly EIA report (next: Oct 21)", region: "US East Coast", trigger: "US diesel and heating-oil stocks stood at 102.6M barrels in the week ending Oct 9, down 2.5 million on the week and 12.3% below last year. At the four-week average rate of about 4.0M barrels a day, those stocks are equivalent to about 26 days of use. East Coast stocks are 22% below last year." },
   { date: "Oct 31", region: "Russia", trigger: "Russia’s diesel export ban for producers runs through Oct 31 (Interfax, Sep 30). Trump announced a diesel supply deal on Oct 9, and the US Treasury permitted transactions under General License 135. That US permission doesn’t lift Russia’s ban. On Oct 10, Russia said it had partially lifted the ban with immediate effect; Novak’s schedule runs from 300,000 tons this month to 1M in December, potentially reaching 3M tons a month later (Interfax, Oct 12). With more than 30% of refining capacity damaged, Russia may have little fuel available to export." },
   { date: "≈ mid-October", region: "China", trigger: "Commercial oil stocks could begin to fall faster than normal." },
   { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, making it harder for traders to find supplies. If the strait closes fully, this could happen by mid-October." },
@@ -731,7 +738,7 @@ export const recessionOdds = [
 export const ratesStats = [
   { label: "Fed's target rate, Sep 16", value: "3.75–4.00%", sub: "Up 0.25 percentage points in a 12-to-0 vote · statement: 'Inflation remains elevated. … The Committee will deliver price stability.'" },
   { label: "Odds of a rate increase, Oct 27–28", value: "60%", sub: "Our estimate, published Sep 16 · 16 of 18 Fed officials projected another increase this year · we'll check this prediction after the October decision" },
-  { label: "August producer prices (BLS, Sep 10)", value: "5.4% YoY", sub: "+0.4% for the month · July revised to 4.8% annually · energy +4.2%, diesel +24.1% annually · 10-year yield 5.311% on Oct 5, its highest close of the war" },
+  { label: "September producer prices (BLS, Oct 15)", value: "6.3% YoY", sub: "+1.3% for the month, the largest since Mar 2022 · goods +2.6% for the month — energy +10.8%, gasoline +20.3% · Aug revised to 5.6% annually" },
 ];
 
 export const foodStats = [
@@ -928,6 +935,7 @@ export const treasury10y: Y10Pt[] = [
   //  can’t know about bond holidays, so re-check after every apply.)
   { date: "2026-10-13", value: 5.217, note: "session close (Yahoo ^TNX) · fourteenth straight close above 5% — the first cash close since Oct 9 (the market was closed Oct 12 for Columbus Day; the bar is a real session, not a flat carryover)" },
   { date: "2026-10-14", value: 5.19, note: "session close (Yahoo ^TNX) · fifteenth straight close above 5% — the above-forecast Sep CPI (3.7% YoY) kept yields near their highs; intraday high 5.33 (Yahoo bar), and Fed's Daly said further hikes were likely needed but saw no urgency for an October move (Reuters, Oct 14)" },
+  { date: "2026-10-15", value: 5.089, note: "session close (Yahoo ^TNX) · sixteenth straight close above 5% — yields eased from their highs even with the hot Sep PPI (6.3% YoY, released this morning) and a 3% WTI rally; intraday low 5.04 (Yahoo bar), and the Fed's October-hike odds slipped to ~20% (OilPrice, Oct 15)" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
@@ -960,12 +968,14 @@ export const cpiYtd: CpiPt[] = [
 export const fedCpiTarget = 2.0;
 
 // ---- US PPI (final demand), % year-over-year, monthly ----
-// BLS PPI release (Sep 10) Table A: "Change in final demand from 12 months ago (unadj.)" —
-// all official reported values, no computation. Apr–Jul revised per BLS footnote 1 (July
-// 4.7 → 4.8 in this revision); Aug 5.4 released Sep 10.
+// BLS PPI release Table A: "Change in final demand from 12 months ago (unadj.)" —
+// all official reported values, no computation. Jul 4.9 and Aug 5.6 per the Oct 15 release
+// (revised from 4.8 / 5.4 as first reported); Sep 6.3 released Oct 15 — the largest 12-mo
+// increase since Dec 2022 (6.4); the +1.3% month is the largest since Mar 2022 (1.7%); goods
+// +2.6% (largest since the series began, Dec 2009), energy +10.8%, gasoline +20.3% (BLS).
 // RESOLVED Sep 10 via the BLS API: these are exactly the official 12-mo pct changes of
-// series WPUFD4 ("Final demand, not seasonally adjusted") — 3.1 3.4 4.3 5.7 5.9 5.6 4.8 5.4,
-// a perfect match. FRED's PPIACO is simply a different series, which is why it never
+// series WPUFD4 ("Final demand, not seasonally adjusted"); the Sep 10 release values matched
+// the wire to the decimal. FRED's PPIACO is simply a different series, which is why it never
 // reconciled. BLS-reported values were authoritative all along. See research/2026-09-10.md.
 export const ppiYtd: CpiPt[] = [
   { date: "2026-01-31", value: 3.1 },
@@ -974,8 +984,11 @@ export const ppiYtd: CpiPt[] = [
   { date: "2026-04-30", value: 5.7 },
   { date: "2026-05-31", value: 5.9 },
   { date: "2026-06-30", value: 5.6 },
-  { date: "2026-07-31", value: 4.8 },
-  { date: "2026-08-31", value: 5.4 },
+  { date: "2026-07-31", value: 4.9 },
+  { date: "2026-08-31", value: 5.6 },
+  // Sep 2026: BLS release Oct 15 — 6.3% YoY (unadj. 12-mo), largest since Dec 2022;
+  // +1.3% MoM SA, largest since Mar 2022. BLS index 159.613.
+  { date: "2026-09-30", value: 6.3 },
 ];
 
 // ---------- Streaks (derived, Oct 5) ----------

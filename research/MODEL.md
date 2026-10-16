@@ -10,11 +10,11 @@ The model covers crude oil and refined fuels around the world. It doesn't tell y
 
 ## How to read the chart
 
-On the dashboard, all three lines start at **zero in August 2026**. Values below zero mean less oil in storage than in August; values above zero mean more. A rising line shows stocks rebuilding, even if they're still below the August level. Zero doesn't mean empty tanks.
+On the dashboard, the chart's axis starts at **zero in August 2026**. The September 19 (v1) lines and the axis reference start there; the current October 15 (v2) lines begin at the observed September (−2). Values below zero mean less oil in storage than in August; values above zero mean more. A rising line shows stocks rebuilding, even if they're still below the August level. Zero doesn't mean empty tanks.
 
-The detailed tables below count changes since the end of February 2026. They start with the International Energy Agency's (IEA) reported loss of **507 million barrels by the end of August**. The “cumulative” column adds each month's change to that running total. The dashboard removes the loss through August from the displayed figures, so you can see what happens after that month.
+The detailed tables below count changes since the end of February 2026. The current (October 15, v2) tables start from the IEA's observed September cumulative — a loss of **509 million barrels** — because v2 is rebased to the reported September; the archived September 19 (v1) tables in the section below start from the IEA's reported loss of **507 million barrels by the end of August**. In both, the “cumulative” column adds each month's change to the running total. The dashboard removes the August loss (−507) from every displayed figure, so the axis zero is the August level in all cases.
 
-For example, the standoff table ends at −1,832.6 million barrels. Subtracting the August starting value of −507 million gives −1,325.6 million, shown as **−1,326 million barrels on the dashboard**. Both figures describe the same projection from different starting dates.
+For example, the standoff table ends at −1,547.8 million barrels. Subtracting the August starting value of −507 million gives −1,040.8 million, shown as **−1,041 million barrels on the dashboard**. Both figures describe the same projection from different starting dates.
 
 The IEA's reported total includes oil held by governments and companies, as well as oil on ships. The projections use production and consumption figures from the US Energy Information Administration (EIA), which cover more than the stocks the IEA tracks. We use the same starting point to compare the lines, but the agencies' figures still measure different things.
 
@@ -22,7 +22,7 @@ Oil is measured in **barrels**. One barrel holds about 42 US gallons, or 159 lit
 
 ## How the paths are calculated
 
-The baseline is the EIA's **Short-Term Energy Outlook (STEO), released September 9, 2026**. It forecasts monthly world production and consumption through December 2027. For each scenario, we adjust those figures using the assumptions explained below.
+The baseline is the EIA's **Short-Term Energy Outlook (STEO), released October 6, 2026**. It forecasts monthly world production and consumption through December 2027. For each scenario, we adjust those figures using the assumptions explained below.
 
 For each month:
 
@@ -37,11 +37,11 @@ Moving oil from a government reserve to commercial storage leaves the combined a
 <details>
 <summary>What the EIA baseline assumes</summary>
 
-The September outlook expects Middle East production to rise as more oil passes through Hormuz and alternative routes. It estimates that disruptions prevented production of 6.7 million barrels a day in August. It expects that lost production to average 6.2 million in the third quarter, 5.7 million in the fourth, and 2.7 million in the first quarter of 2027. Most of the affected production is expected to resume in the second half of 2027.
+The October 6 outlook is the current baseline. It reports September as a historical month — world production 101.3 million barrels a day, consumption 104.2 million — and carries the forward path, in which Middle East production rises as more oil passes through Hormuz and alternative routes and the disruption's effect on production tapers through 2027. Most of the affected production is expected to resume in the second half of 2027.
 
-The outlook was published before the East–West pipeline was suspended on September 11 and loadings at Yanbu stopped on September 16. Our scenario assumptions account for those events and the recovery already included in the EIA forecast. Reuters reported on September 22 that the pipeline had restarted at a reduced rate. We haven't updated the storage projections to reflect that report.
+By the time this edition was published, the East–West pipeline had been suspended (September 11), loadings at Yanbu had stopped (September 16), and the pipeline had restarted at a reduced rate (reported September 22 and corroborated September 28). The October 6 outlook already reflects that recovered flow. That is the key difference from the September 9 baseline the September 19 assumptions used: the recovery the earlier version had to assume is now inside the baseline itself. The corridor-holds line tracks that baseline exactly (no adjustment of its own); the standoff and corridor-lapses lines deliberately deviate from it (flat world production; a continued closure).
 
-The September 19 assumptions file lists the saved EIA workbook, source excerpts, and model inputs. See [Calculation files and checks](#how-we-check-the-predictions) below.
+The October 15 assumptions file lists the saved EIA workbook, source excerpts, and model inputs. See [Calculation files and checks](#how-we-check-the-predictions) below.
 
 </details>
 
@@ -55,7 +55,146 @@ A *corridor* is an agreed shipping route through the Strait of Hormuz. We assign
 | The standoff continues | 50% | Shipping remains restricted, attacks continue, and the repaired Saudi bypass pipeline operates at a reduced rate. |
 | The corridor lapses | 40% | The agreement breaks down or comes under attack, the strait is effectively closed, and the bypass is shut for months. |
 
-The assumptions below were published on September 19. You can expand each table to see the monthly calculations. **P** means production, **C** means consumption, and **Δ** means an adjustment to the EIA baseline. Daily figures are in millions of barrels per day; cumulative figures show the total change in millions of barrels since the end of February 2026. We round the figures for display, so they may not add up exactly.
+The assumptions below were **revised on October 15, 2026**, after the IEA reported September's values and the EIA released its October 6 outlook. The September 19 assumptions are preserved below, unchanged, and are the version scored for September — [the September audit](#the-september-2026-audit) explains the revision. You can expand each table to see the monthly calculations. **P** means production, **C** means consumption, and **Δ** means an adjustment to the EIA baseline. Daily figures are in millions of barrels per day; cumulative figures show the total change in millions of barrels since the end of February 2026. We round the figures for display, so they may not add up exactly.
+
+### The corridor holds
+
+In this scenario the shipping agreement holds and the EIA's assumed recovery plays out. World production and consumption **match the EIA baseline month for month** — the September recovery is now in the baseline itself, so this line adds no adjustment of its own. (The September 19 version assumed the recovery came a quarter early and ran consumption 0.25 million barrels a day high; the October revision drops both, because the reported September matched the baseline.) Its monthly balance is the same as the EIA forecast, but the cumulative starts from the observed September (the separate EIA overlay line uses the EIA's own frozen starting convention, so its cumulative differs slightly). By December 2027, storage is **1,218.2 million barrels above its end-of-February 2026 level**.
+
+<details>
+<summary>Monthly calculations: corridor holds</summary>
+
+<!-- SCENARIO_TABLE:BEGIN corridor-holds -->
+| Month | Baseline P | ΔP | Scenario P | Baseline C | ΔC | Scenario C | Daily balance | Days | Cumulative |
+|---|---|---|---|---|---|---|---|---|---|
+| Oct 2026 | 102.10 | +0.00 | 102.10 | 102.78 | +0.00 | 102.78 | -0.67 | 31 | -529.8 |
+| Nov 2026 | 103.09 | +0.00 | 103.09 | 103.56 | +0.00 | 103.56 | -0.47 | 30 | -543.9 |
+| Dec 2026 | 103.71 | +0.00 | 103.71 | 104.63 | +0.00 | 104.63 | -0.93 | 31 | -572.6 |
+| Jan 2027 | 104.76 | +0.00 | 104.76 | 101.98 | +0.00 | 101.98 | +2.78 | 31 | -486.4 |
+| Feb 2027 | 106.32 | +0.00 | 106.32 | 104.30 | +0.00 | 104.30 | +2.01 | 28 | -430.1 |
+| Mar 2027 | 107.27 | +0.00 | 107.27 | 103.08 | +0.00 | 103.08 | +4.19 | 31 | -300.3 |
+| Apr 2027 | 108.57 | +0.00 | 108.57 | 103.98 | +0.00 | 103.98 | +4.59 | 30 | -162.7 |
+| May 2027 | 109.84 | +0.00 | 109.84 | 104.12 | +0.00 | 104.12 | +5.72 | 31 | +14.6 |
+| Jun 2027 | 110.23 | +0.00 | 110.23 | 105.71 | +0.00 | 105.71 | +4.52 | 30 | +150.2 |
+| Jul 2027 | 110.75 | +0.00 | 110.75 | 105.60 | +0.00 | 105.60 | +5.15 | 31 | +309.9 |
+| Aug 2027 | 110.90 | +0.00 | 110.90 | 105.43 | +0.00 | 105.43 | +5.47 | 31 | +479.4 |
+| Sep 2027 | 111.10 | +0.00 | 111.10 | 105.57 | +0.00 | 105.57 | +5.53 | 30 | +645.3 |
+| Oct 2027 | 111.36 | +0.00 | 111.36 | 104.41 | +0.00 | 104.41 | +6.94 | 31 | +860.6 |
+| Nov 2027 | 111.82 | +0.00 | 111.82 | 105.23 | +0.00 | 105.23 | +6.59 | 30 | +1,058.2 |
+| Dec 2027 | 111.49 | +0.00 | 111.49 | 106.33 | +0.00 | 106.33 | +5.16 | 31 | +1,218.2 |
+<!-- SCENARIO_TABLE:END corridor-holds -->
+
+</details>
+
+### The standoff continues
+
+In this scenario, fighting continues and the bypass carries less oil than before the shutdown. **We assume world production stays flat at the September reported level** (101.3 million barrels a day) through the end of 2026: the EIA's October 6 outlook has the Gulf recovering (which would lift world production), but this scenario says that recovery does not happen. For 2027, we assume production outside the Gulf rises 0.17 million barrels a day each month (0.5 per quarter), reaching 103.3 million barrels a day in December — about 8.2 million below the EIA forecast.
+
+We set consumption to track the EIA baseline (no adjustment). The September 19 version held consumption below the forecast, but the reported September was flat, so the October revision drops that reduction.
+
+Consumption exceeds production in every month of this scenario. By December 2027, storage is **1,547.8 million barrels below its end-of-February 2026 level**.
+
+<details>
+<summary>Monthly calculations: standoff</summary>
+
+<!-- SCENARIO_TABLE:BEGIN standoff -->
+| Month | Baseline P | ΔP | Scenario P | Baseline C | ΔC | Scenario C | Daily balance | Days | Cumulative |
+|---|---|---|---|---|---|---|---|---|---|
+| Oct 2026 | 102.10 | -0.80 | 101.30 | 102.78 | +0.00 | 102.78 | -1.47 | 31 | -554.6 |
+| Nov 2026 | 103.09 | -1.79 | 101.30 | 103.56 | +0.00 | 103.56 | -2.26 | 30 | -622.4 |
+| Dec 2026 | 103.71 | -2.41 | 101.30 | 104.63 | +0.00 | 104.63 | -3.33 | 31 | -725.7 |
+| Jan 2027 | 104.76 | -3.29 | 101.47 | 101.98 | +0.00 | 101.98 | -0.51 | 31 | -741.5 |
+| Feb 2027 | 106.32 | -4.68 | 101.64 | 104.30 | +0.00 | 104.30 | -2.66 | 28 | -816.1 |
+| Mar 2027 | 107.27 | -5.47 | 101.80 | 103.08 | +0.00 | 103.08 | -1.28 | 31 | -855.8 |
+| Apr 2027 | 108.57 | -6.60 | 101.97 | 103.98 | +0.00 | 103.98 | -2.01 | 30 | -916.1 |
+| May 2027 | 109.84 | -7.70 | 102.14 | 104.12 | +0.00 | 104.12 | -1.98 | 31 | -977.4 |
+| Jun 2027 | 110.23 | -7.93 | 102.30 | 105.71 | +0.00 | 105.71 | -3.41 | 30 | -1,079.6 |
+| Jul 2027 | 110.75 | -8.28 | 102.47 | 105.60 | +0.00 | 105.60 | -3.13 | 31 | -1,176.7 |
+| Aug 2027 | 110.90 | -8.26 | 102.64 | 105.43 | +0.00 | 105.43 | -2.79 | 31 | -1,263.3 |
+| Sep 2027 | 111.10 | -8.30 | 102.80 | 105.57 | +0.00 | 105.57 | -2.77 | 30 | -1,346.4 |
+| Oct 2027 | 111.36 | -8.39 | 102.97 | 104.41 | +0.00 | 104.41 | -1.44 | 31 | -1,391.2 |
+| Nov 2027 | 111.82 | -8.68 | 103.14 | 105.23 | +0.00 | 105.23 | -2.09 | 30 | -1,453.9 |
+| Dec 2027 | 111.49 | -8.19 | 103.30 | 106.33 | +0.00 | 106.33 | -3.03 | 31 | -1,547.8 |
+<!-- SCENARIO_TABLE:END standoff -->
+
+</details>
+
+<details>
+<summary>Why the standoff path changed</summary>
+
+On October 15, we re-anchored the standoff to the EIA's October 6 outlook after the IEA reported September's values. World production now stays flat at the September *reported* level (101.3 million barrels a day) rather than the September 9 assumed level (100.5). The 2027 non-Gulf growth is unchanged from the September 19 version (0.17 million barrels a day per month, 0.5 per quarter). The December 2027 total moved from −1,832.6 (September 19) to −1,547.8.
+
+The September 19 assumptions are preserved below, unchanged. They are the version scored for September — see [the September audit](#the-september-2026-audit) for why the revision was made and what the reported month does and does not establish.
+
+</details>
+
+### The corridor lapses
+
+In this scenario the shipping agreement fails and the disruption continues. It is a counterfactual for September (the strait was not closed), so its offsets are **carried unchanged from the September 19 version** — the October revision did not test it, because September was a non-closure month. More production is lost than the EIA forecast assumes: by early 2027 the disruption prevents about 16.2 million barrels a day in the Gulf, kept unchanged through December 2027, and consumption runs 3 million below the EIA forecast through 2026 and 5 million below it throughout 2027.
+
+By December 2027, storage is **3,165.7 million barrels below its end-of-February 2026 level** (the rebase to the October 6 baseline shifts the path from the September 19 total of −3,495.4, while the closure offsets are unchanged). We don't know whether that much oil could be withdrawn; the line adds up the monthly shortages.
+
+<details>
+<summary>Monthly calculations: corridor lapses</summary>
+
+<!-- SCENARIO_TABLE:BEGIN corridor-lapses -->
+| Month | Baseline P | ΔP | Scenario P | Baseline C | ΔC | Scenario C | Daily balance | Days | Cumulative |
+|---|---|---|---|---|---|---|---|---|---|
+| Oct 2026 | 102.10 | -9.00 | 93.10 | 102.78 | -3.00 | 99.78 | -6.67 | 31 | -715.8 |
+| Nov 2026 | 103.09 | -12.00 | 91.09 | 103.56 | -3.00 | 100.56 | -9.47 | 30 | -999.9 |
+| Dec 2026 | 103.71 | -13.50 | 90.21 | 104.63 | -3.00 | 101.63 | -11.43 | 31 | -1,354.1 |
+| Jan 2027 | 104.76 | -13.50 | 91.26 | 101.98 | -5.00 | 96.98 | -5.72 | 31 | -1,531.4 |
+| Feb 2027 | 106.32 | -13.50 | 92.82 | 104.30 | -5.00 | 99.30 | -6.49 | 28 | -1,713.1 |
+| Mar 2027 | 107.27 | -13.50 | 93.77 | 103.08 | -5.00 | 98.08 | -4.31 | 31 | -1,846.8 |
+| Apr 2027 | 108.57 | -13.50 | 95.07 | 103.98 | -5.00 | 98.98 | -3.91 | 30 | -1,964.2 |
+| May 2027 | 109.84 | -13.50 | 96.34 | 104.12 | -5.00 | 99.12 | -2.78 | 31 | -2,050.4 |
+| Jun 2027 | 110.23 | -13.50 | 96.73 | 105.71 | -5.00 | 100.71 | -3.98 | 30 | -2,169.8 |
+| Jul 2027 | 110.75 | -16.22 | 94.53 | 105.60 | -5.00 | 100.60 | -6.07 | 31 | -2,357.9 |
+| Aug 2027 | 110.90 | -16.22 | 94.69 | 105.43 | -5.00 | 100.43 | -5.75 | 31 | -2,536.0 |
+| Sep 2027 | 111.10 | -16.22 | 94.89 | 105.57 | -5.00 | 100.57 | -5.69 | 30 | -2,706.6 |
+| Oct 2027 | 111.36 | -16.22 | 95.14 | 104.41 | -5.00 | 99.41 | -4.27 | 31 | -2,839.1 |
+| Nov 2027 | 111.82 | -16.22 | 95.60 | 105.23 | -5.00 | 100.23 | -4.63 | 30 | -2,978.0 |
+| Dec 2027 | 111.49 | -16.22 | 95.27 | 106.33 | -5.00 | 101.33 | -6.06 | 31 | -3,165.7 |
+<!-- SCENARIO_TABLE:END corridor-lapses -->
+
+</details>
+
+<details>
+<summary>How the extended closure is calculated</summary>
+
+This block explains the September 19 (v1) calculation, written against the September 9 baseline. The closure offsets were carried into the October 15 (v2) version unchanged and applied to the newer October 6 baseline — which is why the v2 path ends at −3,165.7, not the v1 total of −3,495.4. The total-physical-shut-in figures below were calibrated to the September 9 baseline; against the October 6 baseline the EIA's own forecast differs, so treat those split figures as historical.
+
+The version published on September 17 stopped at February 2027, with a total change of −2,050.5 million barrels. On September 18, we extended the calculation through December 2027. The monthly predictions through February stayed the same.
+
+Under the September 9 baseline, we assumed the Gulf loses 16.217 million barrels a day of production in total. That includes the 2.717 million loss already in the EIA's first-quarter forecast, plus the scenario's additional 13.5 million. For March–June, we keep the loss attributed to the EIA baseline at 2.717 million, then set it to zero from July. We chose that monthly schedule to do the calculation. The EIA describes a recovery in the second half of 2027 but doesn't publish this schedule.
+
+We therefore subtract 13.5 million barrels a day from EIA production through June and 16.217 million from July. If we kept subtracting the same amount, the scenario would gradually recover along with the EIA forecast, even though we meant to model a continued closure.
+
+</details>
+
+## The September 2026 audit
+
+On October 15, we audited the September 19 assumptions against two releases — the IEA's October 14 Oil Market Report, which reported September's global stock change, and the EIA's October 6 outlook — to decide whether a revised model was justified. The September score stands against the September 19 assumptions (frozen at first release); the revision (v2) is scored from October.
+
+**What the reported month showed.** The EIA revised September *production* up by 1.89 million barrels a day (99.4 to 101.3), and the IEA independently reported a sharp rise in global supply. September *consumption* was essentially flat at the baseline. The two non-closure scenarios (corridor holds and standoff) had assumed less production than that.
+
+**What it did not establish.** The scorecard's apparent miss for September is mostly an *unresolved* difference between the two agencies' measures, not a measured forecast error. The scenarios are calculated on the EIA's production-minus-consumption series; the observed line is the IEA's reported total. Those are different measures, and the decomposition below cannot say how much of the gap is coverage, estimation error, or other reconciliation. For the standoff, the 94-million-barrel September miss breaks down as:
+
+- **8.2 million** within the EIA framework (the assumptions versus the EIA's own revised September balance — production ran 0.8 million barrels a day low, partly offset by consumption 0.5 million low);
+- **78.1 million** cross-measure (the EIA's production-minus-consumption versus the IEA's reported total — an unresolved difference between the two agencies' measures; the decomposition cannot say how much of it is coverage, estimation error, or other reconciliation);
+- **8.0 million** prior-revision (the IEA's October edition revised earlier months).
+
+So most of the standoff's displayed miss is the unresolved cross-measure difference and the prior revision, not the flat-production assumption. Production was the larger of the two within-EIA components, but the conditional balance was only 8.2 million barrels from the EIA's own revised September figure.
+
+**Forward judgments.** Setting corridor holds exactly to the EIA baseline, and holding the Gulf flat for the rest of the horizon, are *judgments about the unelapsed months*, not results demonstrated by one flat September. They are documented as such in the revised assumptions.
+
+**The closure scenario.** corridor lapses is a counterfactual for September (the strait was not closed), so it is not directly tested by the reported month; its offsets are carried into v2 unchanged. Its September outcome and displayed miss remain scored exactly like the other scenarios — the counterfactual label is a caveat about applicability, not a change to the scoring policy.
+
+The full method, the EIA-versus-IEA measure note, and the saved inputs are in the [research notes](https://github.com/mattcone/depletion-ledger/tree/main/research/audits). The full September 2026 scorecard and the original September 19 chart are at the [end of this page](#september-2026-scorecard). The September 19 assumptions are preserved below, unchanged.
+
+## The September 19 assumptions, preserved
+
+The assumptions below are the version published on September 19, 2026, **unchanged**. They are the version scored for September, and they are kept so those results can be checked against what we published. The current (revised) assumptions are in the scenario tables above. These tables are historical records; they are not recalculated by the model's checks.
 
 ### The corridor holds
 
@@ -64,9 +203,8 @@ In this scenario, tanker traffic returns to normal over one to two quarters. Pro
 We assume consumption is 0.25 million barrels a day above the EIA forecast through March 2027, then follows it. Under these assumptions, stocks begin rebuilding in December 2026. By December 2027, storage is **1,228.6 million barrels above its end-of-February 2026 level**, about 250 million above the EIA projection.
 
 <details>
-<summary>Monthly calculations: corridor holds</summary>
+<summary>Monthly calculations (September 19): corridor holds</summary>
 
-<!-- SCENARIO_TABLE:BEGIN corridor-holds -->
 | Month | Baseline P | ΔP | Scenario P | Baseline C | ΔC | Scenario C | Daily balance | Days | Cumulative |
 |---|---|---|---|---|---|---|---|---|---|
 | Sep 2026 | 99.41 | +0.50 | 99.91 | 104.21 | +0.25 | 104.46 | -4.55 | 30 | -643.4 |
@@ -85,7 +223,6 @@ We assume consumption is 0.25 million barrels a day above the EIA forecast throu
 | Oct 2027 | 111.68 | +0.00 | 111.68 | 104.71 | +0.00 | 104.71 | +6.97 | 31 | +869.4 |
 | Nov 2027 | 112.14 | +0.00 | 112.14 | 105.49 | +0.00 | 105.49 | +6.65 | 30 | +1,068.8 |
 | Dec 2027 | 111.82 | +0.00 | 111.82 | 106.67 | +0.00 | 106.67 | +5.15 | 31 | +1,228.6 |
-<!-- SCENARIO_TABLE:END corridor-holds -->
 
 </details>
 
@@ -100,9 +237,8 @@ We set consumption below the EIA forecast by 0.5 million barrels a day through 2
 Consumption exceeds production in every month of this scenario. By December 2027, storage is **1,832.6 million barrels below its end-of-February 2026 level**.
 
 <details>
-<summary>Monthly calculations: standoff</summary>
+<summary>Monthly calculations (September 19): standoff</summary>
 
-<!-- SCENARIO_TABLE:BEGIN standoff -->
 | Month | Baseline P | ΔP | Scenario P | Baseline C | ΔC | Scenario C | Daily balance | Days | Cumulative |
 |---|---|---|---|---|---|---|---|---|---|
 | Sep 2026 | 99.41 | +1.09 | 100.50 | 104.21 | -0.50 | 103.71 | -3.21 | 30 | -603.3 |
@@ -121,22 +257,6 @@ Consumption exceeds production in every month of this scenario. By December 2027
 | Oct 2027 | 111.68 | -9.51 | 102.17 | 104.71 | -0.50 | 104.21 | -2.05 | 31 | -1,639.1 |
 | Nov 2027 | 112.14 | -9.81 | 102.33 | 105.49 | -0.50 | 104.99 | -2.66 | 30 | -1,718.9 |
 | Dec 2027 | 111.82 | -9.32 | 102.50 | 106.67 | -0.50 | 106.17 | -3.67 | 31 | -1,832.6 |
-<!-- SCENARIO_TABLE:END standoff -->
-
-</details>
-
-<details>
-<summary>Why the standoff path changed</summary>
-
-The earlier version assumed production would rise in 2027 without clearly explaining how that supply would return while the standoff continued. On September 19, we replaced that assumption with the ones above. The December 2027 total is now about 963 million barrels lower than the previous projection of −869.8 million. We've kept the earlier predictions unchanged so we can check them against what happens.
-
-**Correction (September 19):** Our explanation of the standoff assumptions got three things wrong:
-
-- The EIA's September 9 forecast couldn't account for the September 11–16 disruptions. We assume alternative routes make up for them; the EIA didn't establish that.
-- Production isn't below the EIA forecast in every month. It's 1.09 million barrels a day above it in September 2026 and 0.06 million below it in October, then stays below it.
-- The three scenarios use different consumption assumptions, not identical ones.
-
-We've corrected the explanation without changing the calculations. We've kept the original saved record unchanged so readers can check what we published.
 
 </details>
 
@@ -149,9 +269,8 @@ We keep that production loss unchanged through December 2027. As more Gulf produ
 By December 2027, storage is **3,495.4 million barrels below its end-of-February 2026 level**. That would require about 2,990 million barrels of additional withdrawals after August. We don't know whether that much oil could be withdrawn. The line adds up the monthly shortages; it doesn't show whether enough oil would be available to cover them through December 2027.
 
 <details>
-<summary>Monthly calculations: corridor lapses</summary>
+<summary>Monthly calculations (September 19): corridor lapses</summary>
 
-<!-- SCENARIO_TABLE:BEGIN corridor-lapses -->
 | Month | Baseline P | ΔP | Scenario P | Baseline C | ΔC | Scenario C | Daily balance | Days | Cumulative |
 |---|---|---|---|---|---|---|---|---|---|
 | Sep 2026 | 99.41 | -6.00 | 93.41 | 104.21 | -3.00 | 101.21 | -7.80 | 30 | -740.9 |
@@ -170,18 +289,6 @@ By December 2027, storage is **3,495.4 million barrels below its end-of-February
 | Oct 2027 | 111.68 | -16.22 | 95.46 | 104.71 | -5.00 | 99.71 | -4.25 | 31 | -3,170.3 |
 | Nov 2027 | 112.14 | -16.22 | 95.92 | 105.49 | -5.00 | 100.49 | -4.57 | 30 | -3,307.4 |
 | Dec 2027 | 111.82 | -16.22 | 95.61 | 106.67 | -5.00 | 101.67 | -6.06 | 31 | -3,495.4 |
-<!-- SCENARIO_TABLE:END corridor-lapses -->
-
-</details>
-
-<details>
-<summary>How the extended closure is calculated</summary>
-
-The version published on September 17 stopped at February 2027, with a total change of −2,050.5 million barrels. On September 18, we extended the calculation through December 2027. The monthly predictions through February stayed the same.
-
-We assume the Gulf loses 16.217 million barrels a day of production in total. That includes the 2.717 million loss already in the EIA's first-quarter forecast, plus the scenario's additional 13.5 million. For March–June, we keep the loss attributed to the EIA baseline at 2.717 million, then set it to zero from July. We chose that monthly schedule to do the calculation. The EIA describes a recovery in the second half of 2027 but doesn't publish this schedule.
-
-We therefore subtract 13.5 million barrels a day from EIA production through June and 16.217 million from July. If we kept subtracting the same amount, the scenario would gradually recover along with the EIA forecast, even though we meant to model a continued closure.
 
 </details>
 
@@ -197,6 +304,8 @@ We therefore subtract 13.5 million barrels a day from EIA production through Jun
 
 <details>
 <summary>How much the assumptions can change the result</summary>
+
+**These examples were calculated against the September 9 (v1) baseline.** The size of each change (the delta) is a fixed calculation that doesn't depend on the baseline, but the specific totals were computed against the September 9 EIA forecast; against the October 6 baseline the totals differ, so treat the figures below as historical.
 
 - Changing standoff production by 2 million barrels a day throughout 2027 changes the year-end total by 730 million barrels, if consumption stays the same. A 1 million barrel daily change in consumption moves the total in the opposite direction by about 180 million barrels over half a year.
 - Ending the closure after November 2026 and returning both production and consumption to the EIA baseline gives about −1,224 million barrels by February 2027, compared with −2,051 million under continued closure. That's an 827 million barrel difference at the same date.
@@ -241,6 +350,8 @@ You can compare the scenarios with the **EIA forecast**, without our adjustments
 
 We save each prediction before the result is known. As the IEA reports new figures, we check how far off each prediction was, in millions of barrels. We score the monthly change and the running total separately, using the first figure the IEA publishes for each. If the IEA later revises a figure, we record the revision and keep the original score.
 
+The [dashboard comparison](/#stocks-scorecard) shows the first results, for September 2026. Its cumulative comparison includes revisions to earlier months, so it differs from September’s reported monthly change. The EIA’s October 6 September estimate is retrospective; it does not measure advance prediction.
+
 Comparing errors over the same months helps us see whether the model does better than simply repeating the recent trend. Each scenario assumes different events, though. Picking whichever line came closest after seeing the result doesn't show that we could predict it in advance.
 
 A change in total storage also can't tell us whether we got production or consumption wrong. Errors in the two can cancel each other out. And because the EIA and IEA measure different things, part of the difference may come from their data rather than the model.
@@ -250,7 +361,7 @@ The separate scorecard checks predictions about whether an event happens by a gi
 <details>
 <summary>Calculation files and checks</summary>
 
-The file `research/sources/world-stocks-assumptions-v2026-09-19.json` contains the assumptions used for the current chart. Each older prediction has its own saved assumptions, EIA workbook, and reported starting value. We keep those records unchanged when we update the model or receive new data.
+The file `site/src/data/world-stocks-assumptions-v2026-10-15.json` contains the assumptions used for the current (revised) chart; the September 19 file (`research/sources/world-stocks-assumptions-v2026-09-19.json`) is preserved unchanged for the version scored for September. Each prediction has its own saved assumptions, EIA workbook, and reported starting value. We keep those records unchanged when we update the model or receive new data.
 
 `research/scoring/regen-scenarios.py` calculates the monthly tables, chart lines, and saved predictions from the same inputs. Its `--check` command recalculates every version using its saved inputs. It also checks that the displayed tables and lines match the newest version. The script's tests check that it catches altered records and accepts valid updates.
 

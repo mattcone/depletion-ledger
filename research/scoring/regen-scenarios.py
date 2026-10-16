@@ -318,8 +318,8 @@ def run_check(data_path, model_path, snapshot_path=None, workbook_path=None, onl
         if v["version"] == cur and not only_version:
             cur_baseline = baseline
             for sid in SERIES:
-                rec_anchor = next(r["anchor"] for r in v["records"] if sid in r["record_id"])
-                displayed[sid] = compute(baseline, assumptions, rec_anchor)[sid]
+                _rec = next(r for r in v["records"] if sid in r["record_id"])
+                displayed[sid] = compute(baseline, assumptions, _rec.get("rebase_start") or _rec["anchor"])[sid]
 
         # per-record: targets against this version's recomputation (months strictly
         # after the record's own anchor), anchor against the FROZEN
@@ -329,25 +329,29 @@ def run_check(data_path, model_path, snapshot_path=None, workbook_path=None, onl
             if sid is None:
                 problems.append(f"{label}: cannot determine scenario id from {rec['record_id']}")
                 continue
+            # v2 rebased records carry a rebase_start (the observed month the cumulative
+            # restarts from) distinct from the shared frozen chart anchor; the computation
+            # and the frozen anchor_observation both key off the computation anchor.
+            comp_anchor = rec.get("rebase_start") or rec["anchor"]
             try:
-                series = compute(baseline, assumptions, rec["anchor"])[sid]
+                series = compute(baseline, assumptions, comp_anchor)[sid]
             except ValueError as e:
                 problems.append(f"{label} {rec['record_id']}: {e}")
                 continue
             for t in rec["targets"]:
-                if t["period"] <= rec["anchor"]["period"]:
+                if t["period"] <= comp_anchor["period"]:
                     problems.append(f"{label} {rec['record_id']}: target {t['period']} is at or "
-                                    f"before the anchor month {rec['anchor']['period']} — that month's "
-                                    "draw is already inside the anchor total")
+                                    f"before the anchor month {comp_anchor['period']} (rebase_start if "
+                                    "present) — that month's draw is already inside the anchor total")
             aobs = rec.get("anchor_observation")
             if not aobs:
                 problems.append(f"{label} {rec['record_id']}: missing anchor_observation")
             else:
-                if not (rec["anchor"].get("period") == aobs["period"]
-                        and rec["anchor"].get("value_mb") == aobs["value_mb"]):
-                    problems.append(f"{label} {rec['record_id']}: anchor {rec['anchor'].get('period')}/"
-                                    f"{rec['anchor'].get('value_mb')} != frozen anchor_observation "
-                                    f"{aobs['period']}/{aobs['value_mb']}")
+                if not (comp_anchor.get("period") == aobs["period"]
+                        and comp_anchor.get("value_mb") == aobs["value_mb"]):
+                    problems.append(f"{label} {rec['record_id']}: computation anchor "
+                                    f"{comp_anchor.get('period')}/{comp_anchor.get('value_mb')} != frozen "
+                                    f"anchor_observation {aobs['period']}/{aobs['value_mb']}")
                 elif aobs["period"] not in obs_periods:
                     problems.append(f"{label} {rec['record_id']}: anchor period {aobs['period']} "
                                     "no longer present in the observed series")
@@ -355,7 +359,7 @@ def run_check(data_path, model_path, snapshot_path=None, workbook_path=None, onl
                 problems.append(f"{label} {rec['record_id']}: target periods "
                                 f"{[t['period'] for t in rec['targets']]} != computed {list(series)}")
             for t in rec["targets"]:
-                if t["period"] in series and t["period"] > rec["anchor"]["period"]:
+                if t["period"] in series and t["period"] > comp_anchor["period"]:
                     if abs(t["target_monthly_mb"] - series[t["period"]]["monthly_mb"]) > 1e-9:
                         problems.append(f"{label} {rec['record_id']} {t['period']}: target_monthly "
                                         f"{t['target_monthly_mb']} != {series[t['period']]['monthly_mb']}")
@@ -402,7 +406,12 @@ def selftest():
         snap_path = next(p for p, v in versions.items() if v["version"] == current_version(versions))
         snap_abs = repo_path(snap_path)
         # Synthetic version date, strictly after every real version date in the data file.
-        SYN_VER = "2026-10-15"
+        # Derived from the current (newest) real version + one month so it never collides
+        # with a real dated version (a hard-coded date eventually collides — the synthetic
+        # 2026-10-15 collided with the real v2 issuance and made the selftest abort).
+        _cur = datetime.strptime(current_version(versions), "%Y-%m-%d")
+        SYN_VER = (f"{_cur.year + 1}-01-15" if _cur.month == 12
+                   else f"{_cur.year}-{_cur.month + 1:02d}-15")
 
         def stage():
             """Fresh temp stage: data copy (pointing its snapshot at tmp), MODEL.md, snapshot."""
@@ -543,9 +552,13 @@ def selftest():
 
         def corrupt_table():
             t = open(mp).read()
-            m = re.search(r"(<!-- SCENARIO_TABLE:BEGIN corridor-holds -->.*?\| )(\d+\.\d\d)( \| \+0\.50 \|)", t, re.S)
+            # Corrupt the Baseline P cell of the first data row in the corridor-holds table.
+            # Version-agnostic: the first data row is always the month after the anchor,
+            # so match "| <Month> YYYY | <baseline P> |" rather than a version-specific ΔP
+            # (the old pattern hard-coded "+0.50", which only existed in the Sep 19 tables).
+            m = re.search(r"<!-- SCENARIO_TABLE:BEGIN corridor-holds -->\n[^\n]*\n[^\n]*\n(\| \w+ \d{4} \| )(\d+\.\d\d)( \| )", t)
             if not m:
-                raise SystemExit("selftest: could not locate the corridor-holds Sep 2026 baseline P cell")
+                raise SystemExit("selftest: could not locate a corridor-holds Baseline P cell")
             open(mp, "w").write(t[:m.start(2)] + "999.41" + t[m.end(2):])
         assert_fails("published table cell", corrupt_table)
 
@@ -597,6 +610,9 @@ def main():
     ap.add_argument("--emit-records", action="store_true")
     ap.add_argument("--assumptions", help="assumptions file for --emit-records")
     ap.add_argument("--new-version", help="alias for --version when emitting records")
+    ap.add_argument("--rebase", action="store_true",
+                    help="issue a rebased version: keep the existing shared anchor as the chart zero and add a "
+                         "rebase_start (the last observed point) as the computation anchor")
     ap.add_argument("--data", default=DATA)
     ap.add_argument("--model", default=MODEL_MD)
     args = ap.parse_args()
@@ -626,7 +642,7 @@ def main():
 
     def current_series(sid):
         rec = next(r for r in versions[cur_path]["records"] if sid in r["record_id"])
-        return compute(baseline, assumptions, rec["anchor"])[sid]
+        return compute(baseline, assumptions, rec.get("rebase_start") or rec["anchor"])[sid]
 
     sm = scen_map(assumptions)
 
@@ -671,15 +687,30 @@ def main():
         if not obs:
             fail(["no observed cumulative points to stamp the anchor from"])
         last = obs[-1]
-        anchor = {"period": last["period"], "value_mb": last["value"]}
+        if args.rebase:
+            # v2-style rebase: the record keeps the existing scenario records' shared frozen
+            # anchor as its chart zero, and adds a rebase_start (the last observed point) as
+            # its computation anchor — so the cumulative restarts from the observed month
+            # while the displayed line still shares the frozen zero.
+            existing_scen = [r for r in json.load(open(args.data))["forecast_records"]
+                             if "scenario" in r["record_id"]]
+            if not existing_scen:
+                fail(["--rebase requires existing scenario records to read the shared anchor from"])
+            anchor = dict(existing_scen[0]["anchor"])
+            rebase_start = {"period": last["period"], "value_mb": last["value"]}
+            comp_anchor = rebase_start
+        else:
+            anchor = {"period": last["period"], "value_mb": last["value"]}
+            rebase_start = None
+            comp_anchor = anchor
         anchor_obs = {"series": "global_observed_cumulative_mb", "period": last["period"],
                       "value_mb": last["value"], "edition": last.get("published", "see data file")}
-        # Forecast months start STRICTLY AFTER the anchor month (the anchor's observed
+        # Forecast months start STRICTLY AFTER the computation anchor month (its observed
         # total already includes that month's draw); the checker enforces the same rule.
         try:
-            ncomputed = compute(nbaseline, new_assumptions, anchor)
+            ncomputed = compute(nbaseline, new_assumptions, comp_anchor)
         except ValueError as e:
-            fail([f"cannot issue from anchor {anchor['period']}: {e}"])
+            fail([f"cannot issue from computation anchor {comp_anchor['period']}: {e}"])
         out = []
         for sid in SERIES:
             series_vals = ncomputed[sid]
@@ -690,11 +721,10 @@ def main():
                 "record_id": f"scenario-{sid}-{ver}-global-observed",
                 "type": "model-projection",
                 "scenario": next(sc["name"] for sc in new_assumptions["scenarios"] if sc["id"] == sid),
-                "baseline": (f"EIA STEO, released 9 Sep 2026 (workbook generated 3 Sep 2026), world balance + "
-                             f"documented scenario adjustments — assumptions version {ver}, "
-                             f"sha256 {snap_sha}"),
+                "baseline": (f"{new_assumptions['baseline']['source']}, world balance + documented scenario "
+                             f"adjustments — assumptions version {ver}, sha256 {snap_sha}"),
                 "issued": ver,
-                "issued_before_outcome": all(t["period"] > anchor["period"] for t in
+                "issued_before_outcome": all(t["period"] > comp_anchor["period"] for t in
                                              [{"period": p} for p in series_vals]),
                 "model_version": f"world-stocks phase 3 (v{ver})",
                 "scope": next(r["scope"] for r in data["forecast_records"] if "scenario" in r["record_id"]),
@@ -721,6 +751,11 @@ def main():
                                    "baseline; a changed assumption set issues a NEW dated record — this one is frozen."),
                 "endpoint": {"period": last_p, "cumulative_mb": last_v["cumulative_mb"]},
             }
+            if rebase_start:
+                rec["rebase_start"] = rebase_start
+                rec["rebase_start_note"] = ("v2 rebase: the cumulative restarts from the observed rebase_start "
+                                             "month; the record's anchor is the shared frozen chart zero. Forecast "
+                                             "months run strictly after rebase_start.")
             out.append({"series_key": SERIES[sid], "note": f"REPLACE the series only if this version is the newest "
                                                            f"(it becomes the displayed version); otherwise keep the "
                                                            f"existing series and append the record for scoring.",

@@ -60,6 +60,10 @@ const line = (rec: any): (number | null)[] =>
   labels.map((m) => {
     const t = rec.targets.find((t: any) => t.period === m);
     if (t) return rebase(t.target_cumulative_mb);
+    // rebased (v2) records restart the cumulative at the observed rebase_start month
+    // (September, −2) and have no value before it — August is null, not 0
+    if (rec.rebase_start && m === rec.rebase_start.period) return rebase(rec.rebase_start.value_mb);
+    if (rec.rebase_start && m < rec.rebase_start.period) return null;
     if (m === rec.anchor.period) return 0;
     return null;
   });
@@ -130,8 +134,8 @@ const endMonthStr = new Date(labels[labels.length - 1] + "-15T12:00:00").toLocal
       </h1>
       <p class="faint" style="margin: 8px 0 0; font-size: 14.5px;">
         Change in global oil inventories since {anchorMonthStr}, in million barrels. Zero means
-        unchanged since then — not empty storage. Scenarios adjust the EIA's September 9 forecast.
-        Updated {asOf}.
+        unchanged since then — not empty storage. Scenarios adjust the EIA's October 6 forecast
+        and start at the observed September. Updated {asOf}.
       </p>
 
       <div style="position: relative; flex: 1; margin-top: 16px;">
@@ -180,6 +184,10 @@ const endMonthStr = new Date(labels[labels.length - 1] + "-15T12:00:00").toLocal
           labels.map((m) => {
             const t = rec.targets.find((t: any) => t.period === m);
             if (t) return rebase(t.target_cumulative_mb);
+            // rebased (v2) records restart at the observed rebase_start (Sep, −2);
+            // no value before it — August is null, not 0
+            if (rec.rebase_start && m === rec.rebase_start.period) return rebase(rec.rebase_start.value_mb);
+            if (rec.rebase_start && m < rec.rebase_start.period) return null;
             if (m === rec.anchor.period) return 0;
             return null;
           });

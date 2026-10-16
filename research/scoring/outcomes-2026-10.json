@@ -1,0 +1,12 @@
+{
+ "edition": "IEA OMR, October 2026 (published 2026-10-14)",
+ "published_date": "2026-10-14",
+ "source_url": "https://www.iea.org/reports/oil-market-report-october-2026",
+ "outcomes": {
+  "2026-09": {
+   "monthly_mb": -10,
+   "cumulative_mb": -509
+  }
+ },
+ "note": "First outcomes file (Oct 15, 2026). Values as published in the October edition's public page (full-page read 2026-10-14 via the codex reader, research/data/omr/omr-2026-10-01/): 'Global observed oil inventories edged down by 10 mb in September as a further 113 mb decline in on-land stocks was largely offset by a surge in oil on water' (on water +103 mb); cumulative 509 mb below end-February by end-Sep. These are the FIRST published values for the 2026-09 measures (the October edition is the first to report September), so first-release and latest coincide. NOTE: the edition revises the prior cumulative (Aug −507 + Sep −10 = −517 ≠ −509; prior months revised up ~8 mb in this edition) — the revision affects the anchor comparability, not the frozen scores, which use these first-release values."
+}

@@ -1,0 +1,174 @@
+{
+ "version": "v2026-10-15",
+ "issued": "2026-10-15",
+ "drafted_at": "2026-10-15T22:30:00Z",
+ "drafted_at_note": "UTC, when this version's assumptions were drafted. The issued records carry their own issuance timestamp in world-stocks.json (issued_at); the version date is 2026-10-15 (local).",
+ "description": "Second model version (v2), issued 2026-10-15 following the September 2026 audit (research/audits/2026-10-15-september-audit.md). v2 rebases the scenario paths from the EIA STEO September 9, 2026 edition (the v1/v2026-09-19 baseline) to the EIA STEO October 6, 2026 edition \u2014 the latest release, which reports September as a historical month (production 101.30 mb/d, consumption 104.24 mb/d) and carries the full 2026-2027 forward path. The rebase is the audit's central production finding: the EIA revised September production up by +1.89 mb/d between the two editions and the IEA independently reported a +2.5 mb/d m-o-m rise in global supply 'driven by Gulf producers', so the recovery is now inside the baseline. Per-scenario changes, each citing the audit finding: (1) corridor-holds sets the production adjustment to 0 across the horizon \u2014 the recovery the v1 path assumed ahead of the baseline is now IN the baseline, so 'holds' means at least as fast as the EIA; consumption set to 0 because September consumption was essentially flat vs the baseline (104.24 vs 104.21), so the v1 +0.25 demand support is not supported. (2) standoff holds world production flat at the September reported level (101.30 mb/d) through 2026, then non-Gulf growth (+0.0/0.17/0.33/0.5/0.67/0.83/1.0/1.17/1.33/1.5/1.67/1.83 across 2027, the v1 non-Gulf pace held as-is); because the EIA baseline now rises to ~111.5 by Dec 2027, 'no net Gulf recovery' runs BELOW the baseline (Oct 2026 -0.80 to Dec 2027 -8.36); consumption set to 0 (the v1 -0.5/-1.0/-0.5 demand convention is not supported by the flat September). (3) corridor-lapses is a counterfactual that the non-closure September did not test, so its production (the closure shut-in: -9/-12/-13.5 across Oct-Dec 2026, -13.5 Jan-Jun 2027, -16.217 Jul-Dec 2027) and consumption (-3.0 H2 2026 / -5.0 2027) are carried into v2 UNCHANGED; only the baseline they are applied to is the Oct 6 edition. v2 is a REBASED forecast: it starts at the observed September (IEA global observed cumulative -509 mb, the -2 mb change vs the frozen August anchor) and is scored from October 2026 onward; the record keeps the shared frozen August anchor (-507) as its chart zero and carries a rebase_start (2026-09, -509) as its computation anchor. October 2026 is partly elapsed as of the 2026-10-15 issue date, so November 2026 is the first clean test of v2. The September 2026 score stands against v1 (v2026-09-19), frozen at first release. No assumption is tuned to reproduce September's result.",
+ "baseline": {
+  "source": "EIA Short-Term Energy Outlook (STEO), released 6 Oct 2026 (workbook retrieved 6 Oct 2026)",
+  "archive": "research/sources/eia-steo-2026-10-06.xlsx (sha256 54989362410da4aff5673580396380c3a8f4f111fa6d01c6d4fab05ef90efbf4); narrative: research/data/steo/steo-2026-10/STEO-oct26.pdf (archived 7 Oct 2026)",
+  "workbook_url": "https://www.eia.gov/outlooks/steo/xls/STEO_m.xlsx (moving URL \u2014 always the latest release)",
+  "series": {
+   "production_mb_d": "papr_world (Table 3a, World total)",
+   "consumption_mb_d": "patc_world (Table 3a, World total)"
+  },
+  "choice_rationale": "The Oct 6 STEO is the same world series (Table 3a) as the v1 baseline but is the latest release and now reports September 2026 as a historical month (production 101.30, consumption 104.24 mb/d), so it is the comparable source for both the September audit and the forward path. Rebasining to it keeps the scenario adjustments incremental relative to the most current EIA view. The IEA remains an independent benchmark, not a scenario baseline (its free summaries publish no monthly balance path).",
+  "rebase_note": "v1 (v2026-09-19) was built on the Sep 9 STEO (research/sources/eia-steo-2026-09-17.xlsx). The Sep 9 edition's September production (99.41) was revised up to 101.30 in the Oct 6 edition; v2 uses the Oct 6 edition throughout.",
+  "stated_assumptions": [
+   "September 2026 (now historical in this edition): world production 101.30 mb/d, world consumption 104.24 mb/d, balance -2.94 mb/d (-88 mb for the month).",
+   "Forward path: world production rises from 102.10 (Oct 2026) to a 2027 peak of 111.82 (Nov 2027) and 111.49 (Dec 2027); world consumption 102.78 (Oct 2026) to 106.33 (Dec 2027). The EIA's own baseline therefore already embeds a recovering Middle East supply and a large 2027 build-up.",
+   "Price context (this edition, quarterly Table 2 from the archived PDF): Brent 2026 Q1 81.11 / Q2 102.93 / Q3 95.95 / Q4 104.69; 2026 average 96.32."
+  ],
+  "disruption_events_after_baseline_date": "The Oct 6 baseline post-dates the mid-September supply events (the Petroline suspension and the Yanbu halt) and already embeds their net effect plus evolving workarounds. Scenario production adjustments are incremental relative to this baseline's own path, so no event already inside the baseline is subtracted twice."
+ },
+ "evidence": {
+  "audit": "research/audits/2026-10-15-september-audit.md \u2014 the September 2026 audit that motivates this version. Production finding: the EIA revised September production up +1.89 mb/d and the IEA reported +2.5 mb/d m-o-m 'driven by Gulf producers'; the non-closure scenarios understated the recovery. Consumption finding: September consumption was essentially flat vs the baseline, so no v1 demand adjustment is supported.",
+  "gulf_production_ceiling": "The EIA shut-in table's 'Production' column totals 25.2 mb/d across the seven Hormuz-dependent countries \u2014 the hard ceiling on any closure-related shut-in (carried from v1; unchanged).",
+  "on_water_mix": "The IEA's October edition reports the September global observed change as -10 mb = on-land -113 mb + on-water +103 mb (reconciles exactly). The on-water surge is part of the total inventory change, not a separate correction to the P-C balance; it is why the EIA's P-C residual (-88 mb) and the IEA's observed total (-10 mb) are different measures and not directly comparable."
+ },
+ "accounting": {
+  "rules": [
+   "scenario production = baseline production + production adjustment",
+   "scenario consumption = baseline consumption + consumption adjustment",
+   "daily stock change = scenario production - scenario consumption",
+   "cumulative change = previous cumulative change + daily stock change x days in month",
+   "All values mb/d and months of calendar days; sign convention: positive = stocks increased. v2 is a rebased forecast: the record's shared chart anchor is the frozen 2026-08 cumulative (-507 mb, IEA observed); the computation anchor (rebase_start) is the observed 2026-09 cumulative (-509 mb), and forecast months run from 2026-10 through the horizon.",
+   "Government stock releases have zero direct contribution to combined global stock change - they move barrels between holders, not out of the aggregate. No release is counted as production or as a loss."
+  ]
+ },
+ "scenarios": [
+  {
+   "id": "corridor-holds",
+   "name": "Corridor holds",
+   "color": "#3d6b64",
+   "definition": "The shipping agreement works and tanker traffic returns to normal over one to two quarters (crisis model, Sep 16 odds table). Brent moves toward $70-80.",
+   "production_adjustment_mb_d": {
+    "2026-09": 0.0,
+    "2026-10": 0.0,
+    "2026-11": 0.0,
+    "2026-12": 0.0,
+    "2027-01": 0.0,
+    "2027-02": 0.0,
+    "2027-03": 0.0,
+    "2027-04": 0.0,
+    "2027-05": 0.0,
+    "2027-06": 0.0,
+    "2027-07": 0.0,
+    "2027-08": 0.0,
+    "2027-09": 0.0,
+    "2027-10": 0.0,
+    "2027-11": 0.0,
+    "2027-12": 0.0
+   },
+   "consumption_adjustment_mb_d": {
+    "2026-09": 0.0,
+    "2026-10": 0.0,
+    "2026-11": 0.0,
+    "2026-12": 0.0,
+    "2027-01": 0.0,
+    "2027-02": 0.0,
+    "2027-03": 0.0,
+    "2027-04": 0.0,
+    "2027-05": 0.0,
+    "2027-06": 0.0,
+    "2027-07": 0.0,
+    "2027-08": 0.0,
+    "2027-09": 0.0,
+    "2027-10": 0.0,
+    "2027-11": 0.0,
+    "2027-12": 0.0
+   },
+   "rationale": "v2 change (audit finding 1, production): the recovery the v1 path assumed ahead of the baseline is now inside the Oct 6 baseline (production 102.10 in Oct 2026, rising through 2027), so 'corridor holds' - at least as fast as the EIA - is the baseline itself; the adjustment is 0 across the horizon. v2 change (audit finding 2, consumption): September consumption was essentially flat vs the baseline (104.24 vs 104.21), so the v1 +0.25 demand support is not supported; consumption is 0. corridor-holds is therefore identical to the EIA baseline path in v2.",
+   "validity_horizon": "2027-12 (full baseline horizon)"
+  },
+  {
+   "id": "standoff",
+   "name": "Standoff",
+   "color": "#b4690e",
+   "definition": "The war continues at current intensity: tanker attacks persist, the repaired Saudi bypass operates at a reduced rate (restarted at a reduced rate per the September 22 report), and the strait remains partly open (crisis model, Sep 16). No net Gulf recovery: world production is held at the September reported level and only non-Gulf additions accrue.",
+   "production_adjustment_mb_d": {
+    "2026-09": 0.0,
+    "2026-10": -0.8009,
+    "2026-11": -1.7879,
+    "2026-12": -2.4052,
+    "2027-01": -3.2916,
+    "2027-02": -4.6768,
+    "2027-03": -5.4665,
+    "2027-04": -6.5983,
+    "2027-05": -7.6957,
+    "2027-06": -7.9289,
+    "2027-07": -8.2793,
+    "2027-08": -8.2635,
+    "2027-09": -8.3025,
+    "2027-10": -8.3873,
+    "2027-11": -8.6786,
+    "2027-12": -8.1907
+   },
+   "consumption_adjustment_mb_d": {
+    "2026-09": 0.0,
+    "2026-10": 0.0,
+    "2026-11": 0.0,
+    "2026-12": 0.0,
+    "2027-01": 0.0,
+    "2027-02": 0.0,
+    "2027-03": 0.0,
+    "2027-04": 0.0,
+    "2027-05": 0.0,
+    "2027-06": 0.0,
+    "2027-07": 0.0,
+    "2027-08": 0.0,
+    "2027-09": 0.0,
+    "2027-10": 0.0,
+    "2027-11": 0.0,
+    "2027-12": 0.0
+   },
+   "rationale": "v2 change (audit finding 1, production): 'no net Gulf recovery' is now expressed as BELOW the Oct 6 baseline rather than flat-at-the-old-baseline, because the EIA baseline itself now recovers (102.10 Oct 2026 rising to ~111.5 by Dec 2027). The intended world path is flat at the September reported level (101.30 mb/d) through 2026, then non-Gulf growth only (+0.17/0.33/0.5/0.67/0.83/1.0/1.17/1.33/1.5/1.67/1.83/2.0 across 2027 \u2014 Jan 2027 +1/6 through Dec 2027 +12/6, the v1 non-Gulf pace held exactly (0.5 mb/d per quarter), NOT shifted), reaching 103.30 by Dec 2027. NOTE: holding the Gulf flat for the unelapsed months (Oct 2026-Dec 2027) is a FORWARD JUDGMENT - the v1 \"no net Gulf recovery\" choice re-anchored to the reported September level - not a result demonstrated by September alone. The monthly adjustment is DERIVED (intended minus the Oct 6 baseline): 0.0 in Sep 2026, -0.80 in Oct 2026, widening to -8.19 by Dec 2027 (the gap is the EIA's assumed Gulf recovery that this scenario says does not happen). v2 change (audit finding 2, consumption): September consumption was flat vs the baseline, so the v1 -0.5/-1.0/-0.5 demand convention is not supported by September; consumption is set to 0. NOTE: one flat month is a FORWARD JUDGMENT for the unelapsed 2026-2027 months, not a September-validated result; the choice to track the baseline is documented as such. The monthly P-C balance is negative in every forecast month.",
+   "validity_horizon": "2027-12 (full baseline horizon)"
+  },
+  {
+   "id": "corridor-lapses",
+   "name": "Corridor lapses",
+   "color": "#b3261e",
+   "definition": "The agreement breaks down or comes under attack: the strait is effectively closed and the bypass, Abqaiq, and Jazan stay offline for months (crisis model, Sep 16). Brent rises above $130.",
+   "production_adjustment_mb_d": {
+    "2026-09": -6.0,
+    "2026-10": -9.0,
+    "2026-11": -12.0,
+    "2026-12": -13.5,
+    "2027-01": -13.5,
+    "2027-02": -13.5,
+    "2027-03": -13.5,
+    "2027-04": -13.5,
+    "2027-05": -13.5,
+    "2027-06": -13.5,
+    "2027-07": -16.217,
+    "2027-08": -16.217,
+    "2027-09": -16.217,
+    "2027-10": -16.217,
+    "2027-11": -16.217,
+    "2027-12": -16.217
+   },
+   "consumption_adjustment_mb_d": {
+    "2026-09": -3.0,
+    "2026-10": -3.0,
+    "2026-11": -3.0,
+    "2026-12": -3.0,
+    "2027-01": -5.0,
+    "2027-02": -5.0,
+    "2027-03": -5.0,
+    "2027-04": -5.0,
+    "2027-05": -5.0,
+    "2027-06": -5.0,
+    "2027-07": -5.0,
+    "2027-08": -5.0,
+    "2027-09": -5.0,
+    "2027-10": -5.0,
+    "2027-11": -5.0,
+    "2027-12": -5.0
+   },
+   "rationale": "UNCHANGED from v1 (v2026-09-19). The audit treats the closure as a counterfactual that the non-closure September did not test, so neither the closure shut-in (production: -9/-12/-13.5 across Oct-Dec 2026, -13.5 Jan-Jun 2027, -16.217 Jul-Dec 2027) nor the closure demand destruction (consumption: -3.0 H2 2026, -5.0 2027) is revised. Only the baseline these adjustments are applied to is the Oct 6 edition. The 2027 production values (-13.5 / -16.217) are the v1 carried values, whose Q1-vs-H2 split reflects the Sep 9 baseline's 1Q27 shut-in schedule (2.717); they are a stated simplification carried forward, to be re-derived against the Oct 6 baseline's 2027 shut-in schedule if one becomes available. The implied cumulative withdrawal is a balance identity, not a physically validated stock forecast (see the v1 feasibility note, carried over).",
+   "validity_horizon": "2027-12 (full baseline horizon; the closure path is a conditional 'if the closure persists' path, not a central forecast)",
+   "feasibility_note": "Carried from v1: the implied cumulative withdrawal is on the order of a large share of reported OECD on-land stocks and is not physically validated by the available inventory evidence. The path is a balance identity, not a stock forecast."
+  }
+ ]
+}
