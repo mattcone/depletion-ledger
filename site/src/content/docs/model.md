@@ -242,6 +242,8 @@ A direct US strike on the Houthis would also prompt us to review the odds. How w
 
 ## How we check the predictions
 
+**September result:** The scenarios were less accurate than the recent-trend baseline in the first scored month. The IEA reported a 10 million barrel monthly withdrawal; its September cumulative total was 2 million barrels below the frozen August starting value, including revisions to earlier months. The September 19 assumptions and predictions below remain unchanged while we review the model.
+
 You can compare the scenarios with the **EIA forecast**, without our adjustments, or with **Recent trend** on the dashboard. Recent trend repeats the average of the IEA's June–August monthly changes: −143 million barrels divided by three, or about −47.7 million each month. It shows what would happen if that pace continued. This simple comparison is also called a *persistence baseline*.
 
 We save each prediction before the result is known. As the IEA reports new figures, we check how far off each prediction was, in millions of barrels. We score the monthly change and the running total separately, using the first figure the IEA publishes for each. If the IEA later revises a figure, we record the revision and keep the original score.

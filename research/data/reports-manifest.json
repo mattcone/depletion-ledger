@@ -5,9 +5,9 @@
     "at": "2026-10-06T16:02:20.758Z"
   },
   "wpsr": {
-    "lastWeekEnd": "2026-10-02",
-    "dir": "/home/mcone/depletion-ledger/research/data/wpsr/wpsr-2026-10-02",
-    "at": "2026-10-07T14:37:48.156Z"
+    "lastWeekEnd": "2026-10-09",
+    "dir": "/home/mcone/depletion-ledger/research/data/wpsr/wpsr-2026-10-09",
+    "at": "2026-10-15T16:31:00.395Z"
   },
   "omr": {
     "lastPub": "2026-05-13",
@@ -20,9 +20,9 @@
     "periods": {
       "CUUR0000SA0": "2026-09",
       "CUUR0000SA0L1E": "2026-09",
-      "WPUFD4": "2026-08"
+      "WPUFD4": "2026-09"
     },
     "dir": "/home/mcone/depletion-ledger/research/data/bls/bls-2026-09",
-    "at": "2026-10-14T12:39:20.649Z"
+    "at": "2026-10-15T22:49:09.299Z"
   }
 }

@@ -193,16 +193,25 @@ const wsBelowBandMonths = wsMb
   .filter((p) => p.period.startsWith("2026") && wsBand[p.period.slice(5)] && p.value < wsBand[p.period.slice(5)][0])
   .map((p) => monthFull[parseInt(p.period.slice(5), 10) - 1]);
 // Pre-rendered strings for the templates (Astro's {{ }} parser dislikes method calls).
-const wsBelowBandStr = wsBelowBandMonths.join(" and ");
+// Proper English list: 1 item as-is, 2 with "and", 3+ with commas and a final "and"
+// ("April and May and June" read wrong once June fell below the band too — Oct 15).
+const wsBelowBandStr = wsBelowBandMonths.length <= 1
+  ? wsBelowBandMonths.join("")
+  : wsBelowBandMonths.length === 2
+    ? wsBelowBandMonths.join(" and ")
+    : wsBelowBandMonths.slice(0, -1).join(", ") + " and " + wsBelowBandMonths[wsBelowBandMonths.length - 1];
 const wsMbFirstStr = wsMbFirst.value.toLocaleString();
 const wsMbLastStr = wsMbLast.value.toLocaleString();
+// The last month's name is derived, not re-typed — the series extends one month at a
+// time as the EIA publishes (Oct 15: May → June 2026), so no copy hard-codes it.
+const wsMbLastMonthStr = new Date(wsMbLast.period + "-15T12:00:00").toLocaleDateString("en-US", { month: "long", year: "numeric" });
 // aria-labels are built in the frontmatter: expressions don't expand inside quoted attributes.
 // Every figure in the aria text is derived from the data file, not re-typed.
 const wsDec22 = wsMb.find((p) => p.period === "2022-12")?.value ?? 0;
 const ws2325 = wsMb.filter((p) => p.period >= "2023-01" && p.period <= "2025-12");
 const ws2325Lo = Math.min(...ws2325.map((p) => p.value));
 const ws2325Hi = Math.max(...ws2325.map((p) => p.value));
-const wsPanelAAria = `OECD on-land oil stocks, commercial plus government-controlled, million barrels. The EIA's monthly levels from ${wsMbFirst.value.toLocaleString()} in January 2021, falling to ${wsDec22.toLocaleString()} by December 2022, then holding between ${ws2325Lo.toLocaleString()} and ${ws2325Hi.toLocaleString()} across 2023 to 2025, then dropping to ${wsMbLastStr} by May 2026 — the lowest month in the series. The shaded band is the same calendar month's range over 2021 to 2025, extended across 2026; ${wsBelowBandStr} 2026 fall below it. A dashed line marks the start of the war, February 28, 2026.`;
+const wsPanelAAria = `OECD on-land oil stocks, commercial plus government-controlled, million barrels. The EIA's monthly levels from ${wsMbFirst.value.toLocaleString()} in January 2021, falling to ${wsDec22.toLocaleString()} by December 2022, then holding between ${ws2325Lo.toLocaleString()} and ${ws2325Hi.toLocaleString()} across 2023 to 2025, then dropping to ${wsMbLastStr} by ${wsMbLastMonthStr} — the lowest month in the series. The shaded band is the same calendar month's range over 2021 to 2025, extended across 2026; ${wsBelowBandStr} 2026 fall below it. A dashed line marks the start of the war, February 28, 2026.`;
 // Forecast paths come from the forecast records — the stored targets are the source of truth,
 // so the copy, the chart, and the record can never drift apart.
 const wsEiaRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === "steo-2026-10-global-observed");
@@ -665,14 +674,14 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             <p class="font-mono text-[11px] text-faint tabular">Brent: selected observations and monthly averages. WTI: weekly FRED spot prices and recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent rises from about $76 before the war to $106.06 on Oct 14 on the December contract — a sixteenth session close above $100 — after a $126 intraday peak in March. WTI's November contract settles at $95.09 on Oct 14, up 1.0% on the same contract. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent rises from about $76 before the war to $105.92 on Oct 15 on the December contract — a seventeenth session close above $100 — after a $126 intraday peak in March. WTI's November contract settles at $97.97 on Oct 15, up 3.0% on the same contract. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Brent and West Texas Intermediate (WTI) are crude oil price benchmarks. On Oct 14,
-            Brent's December contract settled at $106.06 a barrel, up 0.4% from the Oct 13
-            close. WTI's November contract settled at $95.09, up 1.0%. Analysts cited fund
-            buying and stronger demand for US barrels as possible reasons for its larger rise
-            (Bloomberg via Rigzone, Oct 14).
+            Brent and West Texas Intermediate (WTI) are crude oil price benchmarks. On Oct 15,
+            Brent's December contract settled at $105.92 a barrel, down 0.1% from the Oct 14
+            close — a seventeenth session close above $100. WTI's November contract settled at
+            $97.97, up 3.0%. The EIA reported an 8.6 million barrel weekly decline in US crude
+            stocks, helping support WTI while Brent barely moved (Reuters, Oct 15).
             The gray line shows WTI, which is also used in the fuel price spread chart beside this one.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
@@ -782,7 +791,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
 
         <!-- Panel A: OECD commercial stocks (levels) -->
         <div class="mt-12 mb-3">
-          <h2 class="text-xl font-bold tracking-tight">Oil stocks in OECD countries fell to a five-year low in May</h2>
+          <h2 class="text-xl font-bold tracking-tight">Oil stocks in OECD countries fell to a five-year low in { wsMbLastMonthStr }</h2>
           <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
             The Organisation for Economic Co-operation and Development (OECD) includes the US,
             Canada, Mexico, Japan, Korea, Australia, and much of Western Europe. This chart shows
@@ -791,7 +800,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             China isn't an OECD member, so its stockpiles aren't included.
           </p>
           <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
-            In May 2026, the latest month shown, stocks were at their lowest in the EIA data
+            In { wsMbLastMonthStr }, the latest month shown, stocks were at their lowest in the EIA data
             since January 2021. The shaded band shows the range for each calendar month from
             2021 through 2025. Stocks fell below that range in { wsBelowBandStr } 2026.
           </p>
@@ -801,7 +810,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         </div>
         <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
           Company and government oil stocks held on land. EIA international data,
-          monthly, January 2021–May 2026, in million barrels. Shaded range: 2021–2025.
+          monthly, January 2021–{ wsMbLastMonthStr }, in million barrels. Shaded range: 2021–2025.
           The vertical line marks the start of the war on February 28, 2026.
         </p>
 
@@ -809,6 +818,13 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
              shared anchor (0 = the anchor month's reported level). -->
         <div class="mt-12 mb-3">
           <h2 class="text-xl font-bold tracking-tight">How oil in storage could change through 2027</h2>
+          <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
+            These are the original September 19 projections, which remain under review.
+            The scenarios were less accurate than the recent-trend baseline in the first scored month.
+            The IEA reported a 10 million barrel withdrawal in September. Its cumulative total
+            was 2 million barrels below our saved August starting value; revisions to earlier
+            months account for the difference. We have not adopted revised model paths.
+          </p>
           <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
             The three lines show how oil in storage could change if shipping recovers,
             the standoff continues, or the corridor closes. For each scenario, we make assumptions
@@ -913,17 +929,18 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         </div>
         <div class="mb-6 max-w-[65ch] text-[13px]">
           <p class="text-[13px] leading-relaxed text-ink/80">
-            These stocks exclude the Strategic Petroleum Reserve (SPR). They stood at 424.1 million
-            barrels on Oct 2, up from 404.5 million on Jul 24. The EIA's Oct 7 report shows
-            stocks fell by 3.2 million barrels, the first weekly decline after two increases. Crude
-            imports rose by 1.1 million barrels a day that week, to 6.8 million a day. Stocks were
-            3.9 million barrels above the same week last year. SPR releases
+            These stocks exclude the Strategic Petroleum Reserve (SPR). They stood at 415.6 million
+            barrels on Oct 9, up from 404.5 million on Jul 24. The EIA's Oct 15 report shows
+            stocks fell by 8.6 million barrels, the second straight weekly decline and the
+            second-largest weekly withdrawal of 2026. Crude imports fell by 0.8 million barrels a day that
+            week, to 6.0 million a day. Stocks were 8.2 million barrels below the same week
+            last year. SPR releases
             have helped supply commercial oil users this year. Moving oil from the reserve to
             commercial storage leaves the combined amount unchanged.
           </p>
         </div>
         <div class="relative h-72">
-          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus the same weeks in 2025: 2026 stocks rose from 419.1 million in early January to a peak of 465.7 million on Apr 17, fell to 404.5 million on Jul 24 — the lowest level since the war began and 22.2 million barrels below the same week in 2025 — rose again to 428.9 million on Aug 21, eased over the next three weeks, rose for a second straight week to 427.3 million on Sep 25, then fell 3.2 million barrels to 424.1 million on Oct 2, 3.9 million barrels above the 2025 level of 420.3 million."></canvas>
+          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus the same weeks in 2025: 2026 stocks rose from 419.1 million in early January to a peak of 465.7 million on Apr 17, fell to 404.5 million on Jul 24 — the lowest level since the war began and 22.2 million barrels below the same week in 2025 — rose again to 428.9 million on Aug 21, eased over the next three weeks, rose for a second straight week to 427.3 million on Sep 25, then fell 3.2 million barrels to 424.1 million on Oct 2 and fell 8.6 million more to 415.6 million on Oct 9 — back under the 2025 line (423.8 million) for the first time since Sep 4."></canvas>
         </div>
 
         <p class="mt-3 font-mono text-[11px] text-faint">EIA weekly stocks, excluding the SPR, in million barrels. The Jul 24 low was 22.2M below the same week in 2025.</p>
@@ -937,9 +954,10 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           <p class="text-[13px] leading-relaxed text-ink/80">
             The Strategic Petroleum Reserve (SPR) is the US government's emergency supply of crude
             oil. It was created after the energy shortages of the 1970s. The reserve held 415.4 million
-            barrels when the war began. The latest report, for the week ending Oct 2, puts it at
-            283.0 million, down 0.8 million barrels — the second straight week at that pace.
-            Withdrawals have slowed from 3.1 million barrels in the week ending Aug 28.
+            barrels when the war began. The latest report, for the week ending Oct 9, puts it at
+            283.0 million, unchanged on the week after a 0.8 million barrel decline the week
+            before. Weekly withdrawals have slowed from 3.1 million barrels in the week ending
+            Aug 28.
             For comparison, the reserve peaked at 727 million barrels in December 2009
             and stood at 270.5 million in August 1982. The releases help make up for
             supplies that can't leave the Gulf.
@@ -961,23 +979,23 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
                   d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
                 />
               </svg>
-              SPR withdrawals could pause even if the crisis continues
+              SPR deliveries depend on contracts and schedules
             </h3>
             <p id="sprChartAssumptions" class="mt-1.5 text-[13px] leading-relaxed text-ink/70">
-              The Department of Energy releases oil from the SPR through contracts and scheduled
-              deliveries. A supply shortage doesn't automatically trigger withdrawals. On Sep 29,
-              DOE offered companies loans of up to 40 million barrels, with bids due Oct 6 and
-              deliveries under awarded contracts scheduled for November and December. As of
-              Oct 9, no award has been announced, so withdrawals could pause as earlier
-              deliveries end. Withdrawals averaged about 112,000 barrels a day in the latest
-              reported week.
-              The pace can change with each release decision.
+              SPR stocks were unchanged in the week ending Oct 9, after falling by about
+              112,000 barrels a day the week before. A flat week doesn't establish that future
+              deliveries have stopped. DOE's September offering scheduled deliveries for
+              November–December. <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="https://www.argusmedia.com/en/news-and-insights/latest-market-news/2890203-us-awards-up-to-25mn-bl-spr-crude-sources">Argus reported</a>
+              awards of 20–25 million barrels on Oct 13, citing sources; DOE had not confirmed them.
+              Separately, <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="https://www.energy.gov/articles/energy-department-authorizes-strategic-petroleum-reserve-exchange-address-supply">DOE authorized</a>
+              hurricane-related exchanges of up to 4 million barrels on Oct 10, including
+              accelerated deliveries under an existing award.
             </p>
           </div>
         </div>
         <!-- SPR chart (full width) -->
         <div class="relative h-96">
-            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 283.0 million on Oct 2. Model thresholds at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
+            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 283.0 million on Oct 9. Model thresholds at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
             <div
               id="sprFloorTip"
               class="pointer-events-none absolute z-10 hidden max-w-[300px] border border-rule bg-[rgba(255,255,248,0.97)] px-3 py-2 text-[12px] leading-snug text-ink shadow-sm"
@@ -1232,16 +1250,16 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
               US refineries operated above 95% of their available capacity every week from
               Jun 5 through Sep 11, reaching 98.0% in the week ending Aug 28. In the week
-              ending Oct 2, they used 92.7% of their capacity and processed 223,000 more barrels
+              ending Oct 9, they used 93.5% of their capacity and processed 135,000 more barrels
               a day than the week before. For the January–October weeks shown, refineries used
-              an average of 90.8% of their capacity in 2025
+              an average of 90.7% of their capacity in 2025
               and 93.6% in 2026.
               Fuel exports also reached a record 8 million barrels per day in August, according to
               OPEC. US plants are working close to capacity, but shortages in Europe, Asia, and
               Russia continue to put pressure on fuel supplies.
             </p>
             <div class="relative h-96">
-              <canvas id="refineryChart" role="img" aria-label={`US refinery utilization, percent of operable capacity, weekly: the 2026 line runs above the 2025 line in 38 of the 40 comparable weeks — below it only in the weeks ending Jul 31 and Aug 7 — a dip to 88.6 percent in late February, then a climb from 95.3 on Jun 5 to a 98.0 peak on Aug 28, easing to 96.8 on Sep 11, slipping to 94.0 on Sep 18, falling to 92.5 on Sep 25, and rising slightly to 92.7 on Oct 2 — ${refineryStreak} straight week${refineryStreak === 1 ? "" : "s"} below 95%; the same period in 2025 ranged from 83.5 to 96.9.`}></canvas>
+              <canvas id="refineryChart" role="img" aria-label={`US refinery utilization, percent of operable capacity, weekly: the 2026 line runs above the 2025 line in 39 of the 41 comparable weeks — below it only in the weeks ending Jul 31 and Aug 7 — a dip to 88.6 percent in late February, then a climb from 95.3 on Jun 5 to a 98.0 peak on Aug 28, easing to 96.8 on Sep 11, slipping to 94.0 on Sep 18, falling to 92.5 on Sep 25, and edging up to 93.5 on Oct 9 — ${refineryStreak} straight week${refineryStreak === 1 ? "" : "s"} below 95%; the same period in 2025 ranged from 83.5 to 96.9.`}></canvas>
             </div>
             <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
               EIA Weekly Petroleum Status Report (WPULEUS3), weeks ending Friday. Utilization is the
@@ -1432,9 +1450,9 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             <h3 class="text-lg font-bold tracking-tight">The Fed raised rates on Sep 16</h3>
             <p class="mt-2 max-w-prose text-[13px] leading-relaxed text-faint">
               The Federal Reserve can cut interest rates to help a slowing economy, but inflation
-              makes that harder when prices are still rising too quickly. August producer prices rose 5.4% from a year earlier.
-              Consumer inflation held at 3.4%, with energy up 16.3%, while core inflation eased to
-              2.4%.
+              makes that harder when prices are still rising too quickly. September producer prices rose 6.3% from a year
+              earlier — the largest annual increase since December 2022 — with energy prices up 10.8% for the month alone.
+              Consumer inflation ran 3.7% in September, with core inflation at 2.6%.
             </p>
             <p class="mt-3 max-w-prose text-[13px] leading-relaxed text-faint">
               On Sep 16, the Fed voted 12-to-0 to raise rates by a quarter of a percentage point,
@@ -1499,9 +1517,9 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             </div>
             <div>
               <h3 class="text-lg font-bold tracking-tight">US producer prices are rising faster than consumer prices</h3>
-              <p class="mt-2 font-mono text-[11px] text-faint">CPI (retail, amber) + PPI final demand (wholesale, blue) · % year-over-year · monthly (BLS) · CPI Jan – Sep; PPI Jan – Aug.</p>
+              <p class="mt-2 font-mono text-[11px] text-faint">CPI (retail, amber) + PPI final demand (wholesale, blue) · % year-over-year · monthly (BLS) · CPI Jan – Sep; PPI Jan – Sep.</p>
               <div class="mt-4 h-72">
-                <canvas id="cpiChart" role="img" aria-label="US price inflation, 2026, percent year-over-year: consumer prices (CPI) 2.39 in January and 2.41 in February before the war, jumping to 3.3 in March and 3.8 in April, peaking at 4.2 in May, easing to 3.4 in July and August, then rising to 3.7 in September as gasoline prices ran 34% above a year earlier; wholesale prices (PPI) rising from 3.1 in January to a May peak of 5.9, at 5.4 in August. Reference line at the Fed's 2 percent target."></canvas>
+                <canvas id="cpiChart" role="img" aria-label="US price inflation, 2026, percent year-over-year: consumer prices (CPI) 2.39 in January and 2.41 in February before the war, jumping to 3.3 in March and 3.8 in April, peaking at 4.2 in May, easing to 3.4 in July and August, then rising to 3.7 in September as gasoline prices ran 34% above a year earlier; wholesale prices (PPI) rising from 3.1 in January to a September peak of 6.3, the largest annual gain since December 2022 (May's reading was 5.9, August 5.6). Reference line at the Fed's 2 percent target."></canvas>
               </div>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 Consumer inflation rose from about 2.4% to 4.2% in three months as fuel became more
@@ -1510,10 +1528,15 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
                 earlier (BLS, Oct 14; AP). Core inflation, which excludes food and energy, rose
                 to 2.6% from 2.4% over the year. Core prices rose 0.3% in September,
                 matching August’s monthly increase.
-                Producer prices rose faster, peaking at 5.9% in May and increasing 5.4% in August
-                compared with a year earlier. July's reading was revised to 4.8%. Energy explains
-                much of the increase, with diesel up 24.1%. Businesses can face these higher costs
-                before consumers see them in prices (BLS, Sep 10–11).
+              </p>
+              <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+                Producer prices rose 6.3% in September compared with a year earlier,
+                the largest annual increase since December 2022.
+                The seasonally adjusted monthly rise was 1.3%, the largest since March 2022.
+                Goods prices rose 2.6% for the month, led by energy (+10.8%) and gasoline (+20.3%).
+                Prices excluding food, energy and trade services rose 5.0% over the year
+                (BLS, Oct 15). Businesses can face these higher costs before
+                consumers see them in prices.
               </p>
             </div>
           </div>
@@ -1993,9 +2016,9 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           plugins: [
             crosshair,
             directLabels([
-              // The two lines converge at the right end (92.7 vs 92.4 — under 6px on a
-              // 20-pt y-scale): 2026's value stays above its line, 2025's drops below,
-              // or the two labels print on top of each other. Halos knock the lines out
+              // Endpoint values: 2026 ends 93.5, 2025 ends 85.7 — the lines diverged in
+              // Oct (the 2025 step down), so the old collision fix (2026's value above its
+              // line, 2025's below) stays harmlessly in place. Halos knock the lines out
               // under the glyphs (the lines run into every label here).
               // Positional overrides come AFTER the ...endpoint spread — the spread
               // carries align/dx/dy and clobbers anything placed before it (the old
@@ -2094,8 +2117,9 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               { dataset: 0, index: 0, text: "2026", ...endpoint, align: "left", dx: 40, dy: -44 },
               { dataset: 0, index: cc26.length - 1, text: cc26[cc26.length - 1].y.toFixed(1), ...endpoint, dy: -16, halo: "#f2f1ec" },
               { dataset: 1, index: 0, text: "2025", ...endpoint, align: "left", dx: 40, dy: 30, color: "#8a867a" },
-              // Same convergence as the refinery chart: 2026 ends 424.1, 2025 ends 420.3
-              // (~15px apart) — 2026's value above its line, 2025's below.
+              // Endpoint values: 2026 ends 415.6, 2025 ends 423.8 — the lines diverged in
+              // Oct (2026 now ~33px below 2025), so the old collision fix stays harmlessly in
+              // place: 2026's value above its line, 2025's below.
               { dataset: 1, index: cc25.length - 1, text: cc25[cc25.length - 1].y.toFixed(1), ...endpoint, dy: 16, color: "#8a867a", halo: "#f2f1ec" },
               // Short form: the long YoY version clipped at 390px; the caption carries it.
               { dataset: 0, index: 29, text: "Jul 24 low: 404.5M", align: "center", dy: 18, color: "#b3261e" },
@@ -2774,8 +2798,8 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // Inflation chart: monthly points fall at month-END, so month ticks must sit at
       // month-end too — gasXScale ticks at month-start, which reads one month ahead for
       // end-of-month points (the Aug point would land just left of the "Sep" tick).
-      const inflMonthEnds = [30, 58, 89, 119, 149, 179, 210, 241];
-      const inflMonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
+      const inflMonthEnds = [30, 58, 89, 119, 149, 179, 210, 241, 272];
+      const inflMonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"];
       const cpiXScale = {
         ...moneyXScale,
         min: 28,
@@ -2949,8 +2973,9 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // Oct 10 AAA → Oct 9 settle 91.85 (Oct 10 is a weekend — no same-day settlement);
       // Oct 11 AAA → Oct 9 settle 91.85 (Oct 11 Sunday — still no new settle);
       // Oct 12 AAA → Oct 12 settle 93.74 (same-day); Oct 13 AAA → Oct 13 settle 94.14 (same-day);
-      // Oct 14 AAA → Oct 14 settle 95.09 (same-day); Oct 15 AAA → Oct 14 settle 95.09
-      // (Oct 15 settles later in the day — no same-day settlement at this pass).
+      // Oct 14 AAA → Oct 14 settle 95.09 (same-day); Oct 15 AAA → Oct 15 settle 97.97
+      // (same-day, added this pass after the 14:30 ET settlement); Oct 16 AAA → Oct 15
+      // settle 97.97 (no same-day settlement yet — today's session settles later).
       const wtiNonFred = new Set(wtiNonFredDates);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
       // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 (the record is
@@ -3198,7 +3223,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             y: {
               type: "linear" as const,
               min: 1.8,
-              max: 6.4,
+              max: 6.8, // widened Oct 15: the Sep PPI point (6.3) sat 0.1 below the old 6.4 max
               afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
                 scale.ticks = [2, 3, 4, 5, 6].map((v) => ({ value: v }));
               },
@@ -3239,8 +3264,8 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             { dataset: 0, index: 1, text: "Feb · 2.4% — pre-war", dy: 18, color: "#8a867a", halo: "#f2f1ec" },
             { dataset: 0, index: 4, text: "May · 4.2% — CPI peak", dy: 18, color: "#1c1b17", halo: "#f2f1ec" },
             { dataset: 0, index: cpiYtd.length - 1, text: "Sep · 3.7% — up", ...endpoint, dy: 18, color: "#1c1b17", halo: "#f2f1ec" },
-            { dataset: 1, index: 4, text: "May · 5.9% — PPI peak", dy: -14, color: "#1c1b17", halo: "#f2f1ec" },
-            { dataset: 1, index: ppiYtd.length - 1, text: "Aug · 5.4% — latest", ...endpoint, color: "#1c1b17", halo: "#f2f1ec" },
+            { dataset: 1, index: 4, text: "May · 5.9% — prior high", dy: -14, color: "#1c1b17", halo: "#f2f1ec" },
+            { dataset: 1, index: ppiYtd.length - 1, text: "Sep · 6.3% — latest", ...endpoint, color: "#1c1b17", halo: "#f2f1ec" },
           ]),
         ],
       });
@@ -3312,7 +3337,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           ]),
           directLabels([
             // Actuals endpoint
-            { dataset: 0, index: anchorIdx, text: "283.0M · Oct 2", align: "right", dx: -12, dy: 16, font: "600 11.5px Georgia, serif" },
+            { dataset: 0, index: anchorIdx, text: "283.0M · Oct 9", align: "right", dx: -12, dy: 16, font: "600 11.5px Georgia, serif" },
           ]),
         ],
       });
@@ -3359,8 +3384,8 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
 
       // Panel A: OECD on-land stocks (commercial + government-controlled) — EIA monthly
       // levels (mb) + same-calendar-month 2021–2025 range (extended across 2026).
-      // Reported observations. The x-axis ends where the data ends (May 2026); later
-      // months were unavailable in the sources retrieved.
+      // Reported observations. The x-axis ends where the data ends (June 2026 as of the
+      // Oct 15 pass); it extends one month at a time as the EIA publishes.
       {
         const months: string[] = ws.series.oecd_onland_mb.points.map((p) => p.period);
         const mbVals: number[] = ws.series.oecd_onland_mb.points.map((p) => p.value);
@@ -3457,7 +3482,12 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
                     const m = months[items[0].dataIndex];
                     return new Date(m + "-15T12:00:00").toLocaleDateString("en-US", { month: "long", year: "numeric" });
                   },
-                  label: (ctx) => ` On-land stocks: ${Number(ctx.parsed.y).toLocaleString()} mb (EIA monthly, retrieved Sep 17 2026)`,
+                  label: (ctx) => {
+                    // Per-point provenance: each point carries its own retrieved date, so a
+                    // series with mixed vintages (e.g. the Oct 15 June pull) stays honest.
+                    const p = (ws.series.oecd_onland_mb.points as any[])[ctx.dataIndex];
+                    return ` On-land stocks: ${Number(ctx.parsed.y).toLocaleString()} mb (EIA monthly, retrieved ${p?.retrieved ?? "n/a"})`;
+                  },
                 },
               },
             },

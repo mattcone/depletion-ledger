@@ -681,6 +681,16 @@
      "published": null,
      "retrieved": "2026-09-17",
      "note": null
+    },
+    {
+     "period": "2026-06",
+     "value": 3781.8,
+     "status": "reported",
+     "source_id": "eia-intl-activity5-oecd",
+     "source_url": "https://api.eia.gov/v2/international/data",
+     "published": null,
+     "retrieved": "2026-10-15",
+     "note": "EIA international dataset, activityId=5 (Stocks, OECD), monthly. Raw API value 3781.782725, rounded to 0.1 as the stored series. Pulled 2026-10-15 (afternoon pass) — the latest month available; extends the series from May to June 2026. Note: the EIA's current value for May is 3853.678243 vs the stored 3854.1 (retrieved 2026-09-17) — a 0.4 mb source revision, kept as-is per the per-point retrieved provenance convention."
     }
    ]
   },
