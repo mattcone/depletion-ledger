@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-10-15";
+export const DATA_AS_OF = "2026-10-16";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -230,6 +230,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-10-13", value: 4.3413, note: "AAA — down $0.0143" },
   { date: "2026-10-14", value: 4.3333, note: "AAA — down $0.0080" },
   { date: "2026-10-15", value: 4.3344, note: "AAA release, Oct 15" },
+  { date: "2026-10-16", value: 4.3271, note: "AAA release, Oct 16" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -282,6 +283,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-10-13", value: 6.2787, note: "AAA — up $0.0122, ending the two-day decline; still $0.25 below the Sep 22 record" },
   { date: "2026-10-14", value: 6.2997, note: "AAA — second straight rise, +$0.0210; still $0.23 below the Sep 22 record" },
   { date: "2026-10-15", value: 6.3173, note: "AAA — third straight rise, +$0.0176; still $0.21 below the Sep 22 record" },
+  { date: "2026-10-16", value: 6.3261, note: "AAA — fourth straight rise, +$0.0088; still $0.20 below the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
@@ -626,7 +628,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
       { item: "Whether Saudi oil supplies keep moving. The Oct 13 attack on Aramco’s Dhahran headquarters damaged an administrative building. The ministry reported a limited fire and no casualties; Reuters sources described extensive damage across several floors. No production damage has been reported, and the Shedgum strike claim remains unconfirmed (Reuters, Oct 14). Saudi September crude output was 8.372M barrels a day. The East–West pipeline carried 5.8M barrels a day on Oct 6 (OPEC; Bloomberg, Oct 12).", why: "Watch for confirmed production losses and whether tanker loadings keep up with pipeline flows. Damage to offices does not establish lost oil output." },
       { item: "Whether the US and Iran agree on reopening the strait. Tehran was still reviewing Washington’s response to its seven-point proposal on Oct 12 (CBS). Vance says a deal requires a meaningful reduction in Iran’s enrichment capacity (Reuters, Oct 6). Trump says the US won’t strike Iran before the midterms but might afterward (CBS, TIME).", why: "Watch for a signed deal, a change in the blockade, or renewed strikes. Any could change how much oil gets through." },
       { item: "Whether the Yemen offensive changes Red Sea shipping. The coalition’s claim that it cleared Bab al-Mandeb remains unverified. Riyadh’s airport is closed through Oct 17 after repeated attacks. On Oct 13 the coalition struck Houthi fuel facilities in Sanaa, Hodeidah and Dhamar (ABC, Guardian). Trump hasn’t ruled out US strikes and said he might seek Turkish help. The Houthis threatened a swift response if the US joins the fighting (AFP).", why: "Watch whether the US joins the strikes or shipping routes become safer. A confirmed Houthi attack on non-Saudi shipping could send container traffic back around Africa." },
-      { item: "Whether oil keeps moving through Hormuz despite attacks. The IMO’s list (fetched Oct 15) lists GFS Pride as sunk after an Oct 13 incident and Al Maqam as damaged in an Oct 11 incident. It does not identify the attacker. GFS Pride’s 21 crew escaped safely, and GFS Giselle reached safe anchorage with all 22 crew safe (Singapore maritime authority, Oct 14). Cape Dao was also reported sunk (Reuters, Oct 14). Two Petro Dolphin crew remain missing after the Oct 11 attack. On Oct 15, Iran’s navy reported an unnamed tanker on fire in the Gulf of Oman, saying it had attempted to cross what Iran calls a prohibited zone with its tracking off. The cause and crew’s condition were not reported; the report has not been independently confirmed.", why: "Watch for crew updates, further losses, and safe passage. UKMTO had issued no new warning as of 11:00 MDT Oct 15. Regional exports include bypass routes and do not establish that Hormuz is back to normal." },
+      { item: "Whether oil keeps moving through Hormuz despite attacks. CENTCOM said on Oct 15 that an IRGC projectile struck GFS Pride, which sank while being towed to shore. It rejected Iran’s naval-mine claim; all 21 crew were evacuated. BBC Verify counted 12 vessels reporting attacks Oct 5–11, the most in a week since the war began. Kpler put flows through the strait at about 12.6M barrels a day on Oct 13, down from 15M in late September (BBC, Oct 16). Two Petro Dolphin crew remain missing after the Oct 11 attack. On Oct 15, Iran’s navy reported an unnamed tanker on fire in the Gulf of Oman; the report has not been independently confirmed.", why: "Watch for crew updates, further losses, and safe passage. Our Oct 16 check of UKMTO’s feed found no new reports. Regional exports include bypass routes and do not establish that Hormuz is back to normal." },
       { item: "Whether the Russian diesel deal turns into deliveries. Russia says it partially lifted its export ban; Novak’s schedule rises from 300,000 tons in October to 1M in December, potentially 3M a month later (Interfax, Oct 12). US Treasury license 135 permits transactions under US sanctions. Ukraine struck the Ryazan refinery overnight Oct 15, starting a fire, Russian officials said (AP). Zelensky said Kyiv would resume refinery strikes after a three-day pause (FT, Oct 15). The Minerva Zen, initially reported as a diesel cargo, carried fertilizer (TankerTrackers).", why: "Watch for actual deliveries and whether resumed strikes push Russia back toward a full ban. Refineries would need time to recover; analysts expect little effect on US diesel prices (Reuters, Oct 11)." },
     ],
   },
@@ -1178,7 +1180,7 @@ export const ukmtoReportsBeforeWindow = Math.min(...ukmtoIncidents.map((i) => i.
 
 // Capture bounds are explicit: a quiet day must not shorten the covered period.
 export const ukmtoCoverageStart = "2026-07-01";
-export const ukmtoCoverageEnd = "2026-10-15";
+export const ukmtoCoverageEnd = "2026-10-16";
 
 // Include every Monday–Sunday week, even when it has no attack reports.
 // Partial weeks cover fewer than seven days and don't enter full-week comparisons.

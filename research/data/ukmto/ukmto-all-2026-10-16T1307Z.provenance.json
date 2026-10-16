@@ -1,0 +1,8 @@
+{
+  "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+  "retrieved": "2026-10-16T13:07Z (07:07 MDT)",
+  "entries": 30,
+  "numberRange": "143-173",
+  "note": "Oct 16 daily pass. No new entries. API cards drifted for #166 (card Oct 12 vs report body 'Incident Date: 11 Oct 2026' -> Oct 11 kept) and #172/#173 (card Oct 14 vs original warnings 'Incident Date: 13 OCT 2026' -> Oct 13 kept; originals archived research/sources/ukmto-2026-10-14-review/). Known, documented drift - not auto-applied.",
+  "sha256": "94698468d78fe462e0fccf47ff409fe206fdd094fbae70d5fb7468dacae3f3f0"
+}
