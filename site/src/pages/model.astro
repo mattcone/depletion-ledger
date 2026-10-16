@@ -27,31 +27,68 @@ const sections = [
   ["how-we-check-the-predictions", "Checking the predictions"],
   ["where-the-data-comes-from", "Data sources"],
   ["where-the-spr-fits-now", "Where the SPR fits now"],
-  ["september-2026-scorecard", "The September 2026 scorecard"],
+  ["forecast-results", "Forecast results"],
 ];
 
-// The full September 2026 scorecard (finding 4): every scored line, frozen at
-// first release. Target/observed are rebased to the frozen August anchor (−507);
-// the reported September change was −10 mb, but the observed shown is the
-// cumulative (−509) rebased → −2.
-const wsV1Anchor = -507;
-const wsV1Obs = -2.0;
-const v1ScoreDefs: [string, string][] = [
-  ["scenario-standoff-2026-09-19-global-observed", "Standoff (Sep 19)"],
-  ["scenario-corridor-holds-2026-09-19-global-observed", "Corridor holds (Sep 19)"],
-  ["scenario-corridor-lapses-2026-09-19-global-observed", "Corridor lapses (Sep 19)"],
-  ["steo-2026-10-global-observed", "EIA estimate (Oct 6)"],
-  ["persistence-2026-09-global-observed", "Recent trend (persistence)"],
-];
-const v1ScoreRows = v1ScoreDefs
-  .map(([rid, name]) => {
-    const rec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === rid);
-    const t = rec?.targets?.find((t: any) => t.period === "2026-09");
-    if (!t) return null;
-    const target = +(t.target_cumulative_mb - wsV1Anchor).toFixed(1);
-    return { name, target, observed: wsV1Obs, miss: +Math.abs(target - wsV1Obs).toFixed(1) };
+// The full score history (moved from the dashboard Oct 16): a continuing ledger of
+// EVERY scored month, oldest first. Every released version of each scenario is shown
+// for each month it scores, so a future revision never drops the original lines from
+// the ledger. The two known drafts — Sep 17 and Sep 18, superseded within a day or two
+// of the Sep 19 release — are excluded by a named list, not inferred from elapsed time
+// (a time rule would retrospectively hide any genuine version revised quickly). The
+// benchmarks are the latest EIA STEO edition with an outcome for the month and the
+// persistence baseline. Values are rebased to the frozen August anchor, like the
+// original chart below; each figure is frozen at first release.
+const wsLedgerAnchor = (worldStocksData as any).forecast_records
+  .find((r: any) => r.record_id === "scenario-corridor-holds-2026-09-19-global-observed")?.anchor ?? { value_mb: -507 };
+const wsLedgerRebase = (v: number) => v - wsLedgerAnchor.value_mb;
+const wsLedgerMonthStr = (ym: string) => new Date(ym + "-15T12:00:00").toLocaleDateString("en-US", { month: "long", year: "numeric" });
+const wsScenarioVersions: { scenario: string; issued: string }[] = (worldStocksData as any).forecast_records
+  .filter((r: any) => typeof r.record_id === "string" && r.record_id.startsWith("scenario-"))
+  .map((r: any) => {
+    const m = r.record_id.match(/^scenario-(.+)-(\d{4}-\d{2}-\d{2})-global-observed$/);
+    return m ? { scenario: m[1], issued: m[2] } : null;
   })
-  .filter((r): r is { name: string; target: number; observed: number; miss: number } => r != null);
+  .filter((v: any) => v)
+  .sort((a: any, b: any) => a.issued.localeCompare(b.issued) || a.scenario.localeCompare(b.scenario));
+const wsDraftIssues = new Set(["2026-09-17", "2026-09-18"]);
+type wsLedgerRow = { name: string; target: number; observed: number; miss: number };
+type wsLedgerMonth = { monthStr: string; rows: wsLedgerRow[] };
+const wsScoreHistory: wsLedgerMonth[] = (() => {
+  const scored = new Set<string>();
+  for (const r of (worldStocksData as any).forecast_records)
+    for (const t of (r.targets || []))
+      if (t.outcome_first_release?.cumulative_mb != null) scored.add(t.period);
+  const byId = (id: string) => (worldStocksData as any).forecast_records.find((r: any) => r.record_id === id);
+  const push = (rows: wsLedgerRow[], rec: any, name: string, mk: string) => {
+    const t = (rec?.targets || []).find((t: any) => t.period === mk && t.outcome_first_release?.cumulative_mb != null);
+    if (!t) return;
+    const target = wsLedgerRebase(t.target_cumulative_mb);
+    const observed = wsLedgerRebase(t.outcome_first_release.cumulative_mb);
+    rows.push({ name, target, observed, miss: Math.abs(target - observed) });
+  };
+  return [...scored].sort()
+    .map((mk) => {
+      const rows: wsLedgerRow[] = [];
+      for (const [sc, label] of [["standoff", "Standoff"], ["corridor-holds", "Corridor holds"], ["corridor-lapses", "Corridor lapses"]] as [string, string][]) {
+        for (const v of wsScenarioVersions.filter((x: any) => x.scenario === sc)) {
+          if (wsDraftIssues.has(v.issued)) continue;
+          push(rows, byId(`scenario-${sc}-${v.issued}-global-observed`), `${label} (${v.issued})`, mk);
+        }
+      }
+      const steo = (worldStocksData as any).forecast_records
+        .filter((r: any) => typeof r.record_id === "string" && r.record_id.startsWith("steo-") && (r.targets || []).some((t: any) => t.period === mk && t.outcome_first_release?.cumulative_mb != null))
+        .sort((a: any, b: any) => b.record_id.localeCompare(a.record_id));
+      if (steo.length) {
+        const ed = new Date(steo[0].issued + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" });
+        push(rows, steo[0], `EIA estimate (${ed} edition)`, mk);
+      }
+      const pers = (worldStocksData as any).forecast_records.find((r: any) => typeof r.record_id === "string" && r.record_id.startsWith("persistence-") && (r.targets || []).some((t: any) => t.period === mk && t.outcome_first_release?.cumulative_mb != null));
+      if (pers) push(rows, pers, "Recent trend (persistence)", mk);
+      return { monthStr: wsLedgerMonthStr(mk), rows };
+    })
+    .filter((m: wsLedgerMonth) => m.rows.length > 0);
+})();
 ---
 
 <ArticleShell current="model" title={entry.data.title} description={entry.data.description}>
@@ -77,30 +114,33 @@ const v1ScoreRows = v1ScoreDefs
   <div class="grid grid-cols-[minmax(0,1fr)] gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-14">
     <article class="prose-oil model-copy min-w-0">
       <Content />
-      <!-- The September 2026 scorecard + the original September 19 chart (finding 4):
-           keep the original chart and the full first score on the model page. The
-           dashboard's ghost toggle and 2-version scorecard don't archive them. -->
-      <section id="september-2026-scorecard" class="mt-12 border-t border-rule pt-8">
-        <h2 class="text-xl font-bold tracking-tight">The September 2026 scorecard, and the original September 19 chart</h2>
+      <!-- Forecast results (the full score history, moved from the dashboard Oct 16)
+           + the original September 19 chart: the dashboard keeps a one-line
+           disclosure and links here; the ledger and the v1 archive live on this page. -->
+      <section id="forecast-results" class="mt-12 border-t border-rule pt-8">
+        <h2 class="text-xl font-bold tracking-tight">Forecast results and the original chart</h2>
         <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
-          The audit above discusses the September miss; this is the full first scorecard
-          (every line, September 2026) and the chart the September 19 (v1) assumptions
-          produced. Values are in million barrels relative to the saved August 2026 anchor.
+          Here you can compare every published line with the reported results, month by
+          month, and see the original September 19 (v1) paths. Every scored month appears
+          below, oldest first; when a scenario is revised, the original lines stay in the
+          ledger for the months they scored. Figures are in million barrels, measured from
+          the saved August 2026 starting value.
           The scenarios were less accurate than the recent-trend baseline in the first
           scored month.
         </p>
 
-        <h3 class="mt-6 text-base font-bold tracking-tight">The September 2026 scorecard</h3>
+        <h3 class="mt-6 text-base font-bold tracking-tight">The scorecard</h3>
         <p class="mt-2 max-w-prose text-xs leading-relaxed text-faint">
-          Target and observed are rebased to the August 2026 anchor; miss is the absolute
-          difference. The reported September change was −10 mb; the −2 observed shown is the
-          September cumulative (−509) minus the frozen August anchor (−507) — the 8 mb gap
-          from the monthly −10 is the IEA's revision to earlier months.
+          “Target” is the prediction and “Observed” is the reported result. “Miss” is the
+          distance between them. September's reported withdrawal was 10 million barrels.
+          The −2 shown here compares September's running total (−509) with our saved August
+          value (−507). Revisions to earlier months account for the 8 million barrel difference.
         </p>
         <div class="mt-3 max-w-2xl overflow-x-auto">
           <table class="w-full border-collapse text-left text-[13px]">
             <thead>
               <tr class="border-b border-rule text-faint">
+                <th class="pb-2 pr-4 font-semibold">Month</th>
                 <th class="pb-2 pr-4 font-semibold">Line</th>
                 <th class="pb-2 pr-4 text-right font-semibold">Target</th>
                 <th class="pb-2 pr-4 text-right font-semibold">Observed</th>
@@ -108,23 +148,34 @@ const v1ScoreRows = v1ScoreDefs
               </tr>
             </thead>
             <tbody>
-              {v1ScoreRows.map((r) => (
-                <tr class="border-b border-rule/60">
-                  <td class="py-2 pr-4">{r.name}</td>
-                  <td class="py-2 pr-4 text-right tabular-nums">{r.target > 0 ? "+" : ""}{r.target.toFixed(1)}</td>
-                  <td class="py-2 pr-4 text-right tabular-nums">{r.observed > 0 ? "+" : ""}{r.observed.toFixed(1)}</td>
-                  <td class="py-2 text-right font-semibold tabular-nums">{r.miss.toFixed(1)}</td>
-                </tr>
+              {wsScoreHistory.map((m) => (
+                m.rows.map((r, i) => (
+                  <tr class="border-b border-rule/60">
+                    <td class="py-2 pr-4">{i === 0 ? m.monthStr : ""}</td>
+                    <td class="py-2 pr-4">{r.name}</td>
+                    <td class="py-2 pr-4 text-right tabular-nums">{r.target > 0 ? "+" : ""}{r.target.toFixed(1)}</td>
+                    <td class="py-2 pr-4 text-right tabular-nums">{r.observed > 0 ? "+" : ""}{r.observed.toFixed(1)}</td>
+                    <td class="py-2 text-right font-semibold tabular-nums">{r.miss.toFixed(1)}</td>
+                  </tr>
+                ))
               ))}
             </tbody>
           </table>
         </div>
+        <p class="mt-3 max-w-prose text-xs leading-relaxed text-faint">
+          Each figure is frozen at first publication; a published month is never
+          re-scored. The scenario targets are EIA-based and the observed line is the IEA's
+          reported total — different measures, so part of the apparent miss is an
+          unresolved difference between the agencies' figures, not a measured forecast
+          error: in the first scored month the recent-trend baseline missed by 46 million
+          barrels, and every scenario missed by more. The September standoff miss (94
+          million) is broken down in <a class="underline decoration-rule underline-offset-2 hover:text-ink" href="#the-september-2026-audit">the September audit</a>.
+        </p>
 
         <h3 class="mt-8 text-base font-bold tracking-tight">The original September 19 chart</h3>
         <p class="mt-2 max-w-prose text-xs leading-relaxed text-faint">
-          The three scenario paths the September 19 (v1) assumptions produced, rebased to the
-          August 2026 anchor and starting there. The current (October 15, v2) paths are on the
-          dashboard; this is the original set, preserved.
+          These are the original September 19 (v1) paths, starting at August's zero.
+          You can see the revised October 15 (v2) paths on the dashboard.
         </p>
         <div class="relative mt-4 h-80 sm:h-[380px]">
           <canvas id="v1Chart" role="img" aria-label="Line chart of the original September 19 (v1) scenario paths, in million barrels relative to the saved August 2026 anchor, from September 2026 to December 2027. Corridor holds (solid) reaches +1,736 by December 2027; standoff (dashed) reaches −1,326; corridor lapses (long dashed) reaches −2,988."></canvas>

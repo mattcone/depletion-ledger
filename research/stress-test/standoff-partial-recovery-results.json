@@ -1,0 +1,473 @@
+{
+  "meta": {
+    "title": "Illustrative partial-recovery sensitivity (v2 standoff, Oct 6 baseline)",
+    "kind": "NOT issued, NOT published. Comparison line only: for each month, production halfway between the published v2 standoff production and the EIA baseline production; consumption identical to the v2 standoff; same September starting observation. Labeled 'illustrative partial recovery' \u2014 not 'half the Gulf recovery'. Nothing in the evidence locates the likely outcome halfway between the paths.",
+    "generated_utc": "2026-10-16T15:50:53Z",
+    "formula": {
+      "prod": "P_sens(m) = (P_standoff(m) + P_EIA(m)) / 2 = P_EIA(m) + dP_issued(m)/2",
+      "cons": "C_sens(m) = C_standoff(m) = C_EIA(m) + dC_issued(m), with dC_issued(m) = 0 for all months (asserted)",
+      "balance": "balance(m) = (P_sens(m) - C_sens(m)) * days(m)",
+      "cumulative": "starts at the v2 rebase_start (2026-09, -509 mb, observed); adds monthly balances, Oct 2026 .. Dec 2027"
+    },
+    "workbook": {
+      "path": "research/sources/eia-steo-2026-10-06.xlsx",
+      "sha256": "54989362410da4aff5673580396380c3a8f4f111fa6d01c6d4fab05ef90efbf4"
+    },
+    "assumptions_snapshot": {
+      "path": "site/src/data/world-stocks-assumptions-v2026-10-15.json",
+      "sha256": "8ea801e2776cdd35ae84fc7cb64de1623f265c82a69fb28f9fbc11bf7f6bbf1d"
+    },
+    "issued_record": {
+      "record_id": "scenario-standoff-2026-10-15-global-observed",
+      "issued": "2026-10-15",
+      "endpoint_cumulative_mb": -1547.79850375
+    },
+    "reference_endpoints_cumulative_mb": {
+      "corridor_holds_v2": 1218.2395962499993,
+      "eia_baseline_same_start": 1218.2395962499993
+    },
+    "endpoint_cumulative_mb": -164.77945375000084,
+    "endpoint_diff_vs_issued_standoff_mb": 1383.0190499999992,
+    "endpoint_diff_vs_corridor_holds_mb": -1383.01905,
+    "endpoint_frames": {
+      "convention_note": "Stored cumulatives are relative to the end-Feb 2026 level (the site's Day 0). The dashboard chart rebases to the frozen Aug 2026 anchor, so displayed values differ from stored values by - anchor value.",
+      "august_anchor_mb": -507.0,
+      "sensitivity": {
+        "vs_end_feb_2026_level_mb": -164.77945375000084,
+        "vs_august_anchor_mb": 342.2205462499992
+      },
+      "issued_standoff": {
+        "vs_end_feb_2026_level_mb": -1547.79850375,
+        "vs_august_anchor_mb": -1040.79850375
+      },
+      "corridor_holds": {
+        "vs_end_feb_2026_level_mb": 1218.2395962499993,
+        "vs_august_anchor_mb": 1725.2395962499993
+      },
+      "sensitivity_dec_2026_trough_mb": -649.1462251200005,
+      "interpretation_note": "The sensitivity line ends 2027 still BELOW the end-Feb 2026 (pre-crisis) level but ABOVE the Aug 2026 anchor: inventories rebuild during 2027 (from the Dec 2026 trough) without recovering to the pre-crisis level. Rebuilding during the forecast and recovering to the prewar level are different statements; the midpoint's position halfway between the endpoints is a consequence of the construction (identical consumption and starting point), not independent evidence that a half recovery is likely."
+    },
+    "evidence_framing": {
+      "bypass_note": "The 5.8 mb/d East-West figure (Saudi energy minister, 6 Oct 2026; original wording archived in research/logs/2026-10-06.md) is treated as a reported operating rate as of that date, with an unverified sustained average. Context for why a partial-recovery comparison is worth showing \u2014 not an input to any number in this output.",
+      "momentum_note": "September's rebound does not establish uninterrupted momentum (EIA Table 3c: Saudi Jul 2026 9.35 mb/d > Sep 2026 9.29 mb/d), and the four-country table excludes the UAE, Bahrain, Qatar and Oman.",
+      "flat_judgment_note": "The published v2 standoff's flat level is the judgment 'the recovery stops at the reported September level'. This line measures how much that judgment matters by Dec 2027: it is exactly half the gap between the issued path and the EIA baseline's own balance from the same starting point."
+    }
+  },
+  "months": [
+    "2026-10",
+    "2026-11",
+    "2026-12",
+    "2027-01",
+    "2027-02",
+    "2027-03",
+    "2027-04",
+    "2027-05",
+    "2027-06",
+    "2027-07",
+    "2027-08",
+    "2027-09",
+    "2027-10",
+    "2027-11",
+    "2027-12"
+  ],
+  "issued_standoff": [
+    {
+      "period": "2026-10",
+      "baseline_prod_mb_d": 102.10465956,
+      "delta_p_mb_d": -0.8009,
+      "prod_mb_d": 101.30375956,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 102.77556996,
+      "days": 31,
+      "monthly_mb": -45.62612239999986,
+      "cumulative_mb": -554.6261223999999
+    },
+    {
+      "period": "2026-11",
+      "baseline_prod_mb_d": 103.09166235,
+      "delta_p_mb_d": -1.7879,
+      "prod_mb_d": 101.30376235,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 103.56289495,
+      "days": 30,
+      "monthly_mb": -67.77397800000003,
+      "cumulative_mb": -622.4001003999999
+    },
+    {
+      "period": "2026-12",
+      "baseline_prod_mb_d": 103.70898529,
+      "delta_p_mb_d": -2.4052,
+      "prod_mb_d": 101.30378529000001,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 104.63472641,
+      "days": 31,
+      "monthly_mb": -103.25917471999973,
+      "cumulative_mb": -725.6592751199996
+    },
+    {
+      "period": "2027-01",
+      "baseline_prod_mb_d": 104.76212018,
+      "delta_p_mb_d": -3.2916,
+      "prod_mb_d": 101.47052018,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 101.98181787,
+      "days": 31,
+      "monthly_mb": -15.850228390000197,
+      "cumulative_mb": -741.5095035099998
+    },
+    {
+      "period": "2027-02",
+      "baseline_prod_mb_d": 106.3172707,
+      "delta_p_mb_d": -4.6768,
+      "prod_mb_d": 101.6404707,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 104.30499527,
+      "days": 28,
+      "monthly_mb": -74.60668796000033,
+      "cumulative_mb": -816.1161914700001
+    },
+    {
+      "period": "2027-03",
+      "baseline_prod_mb_d": 107.26700082,
+      "delta_p_mb_d": -5.4665,
+      "prod_mb_d": 101.80050082000001,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 103.07930722,
+      "days": 31,
+      "monthly_mb": -39.6429983999998,
+      "cumulative_mb": -855.7591898699999
+    },
+    {
+      "period": "2027-04",
+      "baseline_prod_mb_d": 108.5687878,
+      "delta_p_mb_d": -6.5983,
+      "prod_mb_d": 101.9704878,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 103.98138053,
+      "days": 30,
+      "monthly_mb": -60.326781899999844,
+      "cumulative_mb": -916.0859717699998
+    },
+    {
+      "period": "2027-05",
+      "baseline_prod_mb_d": 109.83623341,
+      "delta_p_mb_d": -7.6957,
+      "prod_mb_d": 102.14053341,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 104.11720404,
+      "days": 31,
+      "monthly_mb": -61.27678953000003,
+      "cumulative_mb": -977.3627612999999
+    },
+    {
+      "period": "2027-06",
+      "baseline_prod_mb_d": 110.22940707,
+      "delta_p_mb_d": -7.9289,
+      "prod_mb_d": 102.30050707,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 105.70967606,
+      "days": 30,
+      "monthly_mb": -102.27506970000036,
+      "cumulative_mb": -1079.6378310000002
+    },
+    {
+      "period": "2027-07",
+      "baseline_prod_mb_d": 110.74984096,
+      "delta_p_mb_d": -8.2793,
+      "prod_mb_d": 102.47054096,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 105.60003454,
+      "days": 31,
+      "monthly_mb": -97.01430098000006,
+      "cumulative_mb": -1176.6521319800004
+    },
+    {
+      "period": "2027-08",
+      "baseline_prod_mb_d": 110.90402392,
+      "delta_p_mb_d": -8.2635,
+      "prod_mb_d": 102.64052391999999,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 105.43422754,
+      "days": 31,
+      "monthly_mb": -86.60481222000007,
+      "cumulative_mb": -1263.2569442000004
+    },
+    {
+      "period": "2027-09",
+      "baseline_prod_mb_d": 111.10299542,
+      "delta_p_mb_d": -8.3025,
+      "prod_mb_d": 102.80049542,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 105.57247559,
+      "days": 30,
+      "monthly_mb": -83.15940509999976,
+      "cumulative_mb": -1346.4163493
+    },
+    {
+      "period": "2027-10",
+      "baseline_prod_mb_d": 111.35784047,
+      "delta_p_mb_d": -8.3873,
+      "prod_mb_d": 102.97054047,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 104.4145764,
+      "days": 31,
+      "monthly_mb": -44.76511382999995,
+      "cumulative_mb": -1391.18146313
+    },
+    {
+      "period": "2027-11",
+      "baseline_prod_mb_d": 111.81914952,
+      "delta_p_mb_d": -8.6786,
+      "prod_mb_d": 103.14054952,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 105.2304951,
+      "days": 30,
+      "monthly_mb": -62.698367400000166,
+      "cumulative_mb": -1453.8798305300002
+    },
+    {
+      "period": "2027-12",
+      "baseline_prod_mb_d": 111.4912152,
+      "delta_p_mb_d": -8.1907,
+      "prod_mb_d": 103.3005152,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 106.33014982,
+      "days": 31,
+      "monthly_mb": -93.91867321999987,
+      "cumulative_mb": -1547.79850375
+    }
+  ],
+  "sensitivity": [
+    {
+      "period": "2026-10",
+      "baseline_prod_mb_d": 102.10465956,
+      "delta_p_mb_d": -0.40045,
+      "prod_mb_d": 101.70420956,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 102.77556996,
+      "days": 31,
+      "monthly_mb": -33.2121724000001,
+      "cumulative_mb": -542.2121724000001
+    },
+    {
+      "period": "2026-11",
+      "baseline_prod_mb_d": 103.09166235,
+      "delta_p_mb_d": -0.89395,
+      "prod_mb_d": 102.19771234999999,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 103.56289495,
+      "days": 30,
+      "monthly_mb": -40.95547800000034,
+      "cumulative_mb": -583.1676504000004
+    },
+    {
+      "period": "2026-12",
+      "baseline_prod_mb_d": 103.70898529,
+      "delta_p_mb_d": -1.2026,
+      "prod_mb_d": 102.50638529,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 104.63472641,
+      "days": 31,
+      "monthly_mb": -65.97857472000005,
+      "cumulative_mb": -649.1462251200005
+    },
+    {
+      "period": "2027-01",
+      "baseline_prod_mb_d": 104.76212018,
+      "delta_p_mb_d": -1.6458,
+      "prod_mb_d": 103.11632018,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 101.98181787,
+      "days": 31,
+      "monthly_mb": 35.16957161000006,
+      "cumulative_mb": -613.9766535100005
+    },
+    {
+      "period": "2027-02",
+      "baseline_prod_mb_d": 106.3172707,
+      "delta_p_mb_d": -2.3384,
+      "prod_mb_d": 103.97887069999999,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 104.30499527,
+      "days": 28,
+      "monthly_mb": -9.131487960000527,
+      "cumulative_mb": -623.108141470001
+    },
+    {
+      "period": "2027-03",
+      "baseline_prod_mb_d": 107.26700082,
+      "delta_p_mb_d": -2.73325,
+      "prod_mb_d": 104.53375082000001,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 103.07930722,
+      "days": 31,
+      "monthly_mb": 45.087751600000146,
+      "cumulative_mb": -578.0203898700008
+    },
+    {
+      "period": "2027-04",
+      "baseline_prod_mb_d": 108.5687878,
+      "delta_p_mb_d": -3.29915,
+      "prod_mb_d": 105.2696378,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 103.98138053,
+      "days": 30,
+      "monthly_mb": 38.64771810000008,
+      "cumulative_mb": -539.3726717700008
+    },
+    {
+      "period": "2027-05",
+      "baseline_prod_mb_d": 109.83623341,
+      "delta_p_mb_d": -3.84785,
+      "prod_mb_d": 105.98838341000001,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 104.11720404,
+      "days": 31,
+      "monthly_mb": 58.006560470000224,
+      "cumulative_mb": -481.36611130000057
+    },
+    {
+      "period": "2027-06",
+      "baseline_prod_mb_d": 110.22940707,
+      "delta_p_mb_d": -3.96445,
+      "prod_mb_d": 106.26495707,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 105.70967606,
+      "days": 30,
+      "monthly_mb": 16.658430299999623,
+      "cumulative_mb": -464.70768100000095
+    },
+    {
+      "period": "2027-07",
+      "baseline_prod_mb_d": 110.74984096,
+      "delta_p_mb_d": -4.13965,
+      "prod_mb_d": 106.61019096,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 105.60003454,
+      "days": 31,
+      "monthly_mb": 31.31484902000004,
+      "cumulative_mb": -433.3928319800009
+    },
+    {
+      "period": "2027-08",
+      "baseline_prod_mb_d": 110.90402392,
+      "delta_p_mb_d": -4.13175,
+      "prod_mb_d": 106.77227392,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 105.43422754,
+      "days": 31,
+      "monthly_mb": 41.47943778000027,
+      "cumulative_mb": -391.91339420000065
+    },
+    {
+      "period": "2027-09",
+      "baseline_prod_mb_d": 111.10299542,
+      "delta_p_mb_d": -4.15125,
+      "prod_mb_d": 106.95174542,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 105.57247559,
+      "days": 30,
+      "monthly_mb": 41.37809489999995,
+      "cumulative_mb": -350.5352993000007
+    },
+    {
+      "period": "2027-10",
+      "baseline_prod_mb_d": 111.35784047,
+      "delta_p_mb_d": -4.19365,
+      "prod_mb_d": 107.16419047,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 104.4145764,
+      "days": 31,
+      "monthly_mb": 85.23803616999977,
+      "cumulative_mb": -265.29726313000094
+    },
+    {
+      "period": "2027-11",
+      "baseline_prod_mb_d": 111.81914952,
+      "delta_p_mb_d": -4.3393,
+      "prod_mb_d": 107.47984952,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 105.2304951,
+      "days": 30,
+      "monthly_mb": 67.48063260000009,
+      "cumulative_mb": -197.81663053000085
+    },
+    {
+      "period": "2027-12",
+      "baseline_prod_mb_d": 111.4912152,
+      "delta_p_mb_d": -4.09535,
+      "prod_mb_d": 107.3958652,
+      "delta_c_mb_d": 0.0,
+      "cons_mb_d": 106.33014982,
+      "days": 31,
+      "monthly_mb": 33.03717678000001,
+      "cumulative_mb": -164.77945375000084
+    }
+  ],
+  "baseline_balance_same_start": [
+    {
+      "period": "2026-09",
+      "cumulative_mb": -509.0
+    },
+    {
+      "period": "2026-10",
+      "cumulative_mb": -529.7982223999999
+    },
+    {
+      "period": "2026-11",
+      "cumulative_mb": -543.9352004000001
+    },
+    {
+      "period": "2026-12",
+      "cumulative_mb": -572.63317512
+    },
+    {
+      "period": "2027-01",
+      "cumulative_mb": -486.4438035100002
+    },
+    {
+      "period": "2027-02",
+      "cumulative_mb": -430.1000914700005
+    },
+    {
+      "period": "2027-03",
+      "cumulative_mb": -300.2815898700004
+    },
+    {
+      "period": "2027-04",
+      "cumulative_mb": -162.6593717700004
+    },
+    {
+      "period": "2027-05",
+      "cumulative_mb": 14.630538699999647
+    },
+    {
+      "period": "2027-06",
+      "cumulative_mb": 150.22246899999925
+    },
+    {
+      "period": "2027-07",
+      "cumulative_mb": 309.8664680199994
+    },
+    {
+      "period": "2027-08",
+      "cumulative_mb": 479.43015579999957
+    },
+    {
+      "period": "2027-09",
+      "cumulative_mb": 645.3457506999996
+    },
+    {
+      "period": "2027-10",
+      "cumulative_mb": 860.5869368699996
+    },
+    {
+      "period": "2027-11",
+      "cumulative_mb": 1058.2465694699995
+    },
+    {
+      "period": "2027-12",
+      "cumulative_mb": 1218.2395962499993
+    }
+  ]
+}

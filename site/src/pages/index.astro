@@ -229,39 +229,6 @@ const wsScenarioVersion = (worldStocksData as any).forecast_records
     const m = r.record_id.match(/-(\d{4}-\d{2}-\d{2})-global-observed$/);
     return m && m[1] > max ? m[1] : max;
   }, "");
-// All published scenario versions (one entry per scenario+version record), sorted by
-// issue date. The scorecard takes the two most recent per scenario (active +
-// immediately-preceding) so v1 and v2 stay visible side-by-side when v2 scores — the
-// audit compares v1 against the updated EIA framework, and the scorecard must not
-// silently drop v1 (nor show the superseded Sep 17/18 drafts, which are excluded by
-// taking only the two most recent). First-release values: a later IEA revision records
-// but never changes a score. Empty before the first OMR scores (the block hides itself).
-const wsScenarioVersions: { scenario: string; issued: string }[] = (worldStocksData as any).forecast_records
-  .filter((r: any) => typeof r.record_id === "string" && r.record_id.startsWith("scenario-"))
-  .map((r: any) => {
-    // derive the scenario key from the record_id (hyphenated), not the title-case
-    // `scenario` display field — the row lookup below builds record_ids from this key.
-    const m = r.record_id.match(/^scenario-(.+)-(\d{4}-\d{2}-\d{2})-global-observed$/);
-    return m ? { scenario: m[1], issued: m[2] } : null;
-  })
-  .filter((v: any) => v)
-  .sort((a: any, b: any) => a.issued.localeCompare(b.issued) || a.scenario.localeCompare(b.scenario));
-const wsScoreMonthKey: string | null = (() => {
-  let key: string | null = null;
-  for (const r of (worldStocksData as any).forecast_records) {
-    if (typeof r.record_id !== "string" || !r.record_id.startsWith("scenario-")) continue;
-    for (const t of (r.targets as any[]) || []) {
-      if (t.outcome_first_release?.cumulative_mb != null && (!key || t.period > key)) key = t.period;
-    }
-  }
-  return key;
-})();
-const wsScenarioVersionsByScenario: Record<string, { scenario: string; issued: string }[]> = {
-  "corridor-holds": [], standoff: [], "corridor-lapses": [],
-};
-for (const v of wsScenarioVersions) {
-  if (wsScenarioVersionsByScenario[v.scenario]) wsScenarioVersionsByScenario[v.scenario].push(v);
-}
 const wsScHoldsRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === `scenario-corridor-holds-${wsScenarioVersion}-global-observed`);
 const wsScStandoffRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === `scenario-standoff-${wsScenarioVersion}-global-observed`);
 const wsScLapseRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === `scenario-corridor-lapses-${wsScenarioVersion}-global-observed`);
@@ -313,89 +280,6 @@ const wsObsLast = wsObsCum[wsObsCum.length - 1];
 const wsObsLastMonthStr = new Date(wsObsLast.period + "-15T12:00:00").toLocaleDateString("en-US", { month: "long", year: "numeric" });
 const wsObsLastRebased = Math.round(wsObsLast.value - wsFcAnchorRec.value_mb);
 const wsObsSinceAnchorStr = ` ${Math.abs(wsObsLastRebased)} mb ${wsObsLastRebased < 0 ? "below" : "above"} the ${wsFcAnchorMonthStr} starting point`;
-type wsScoreRowType = { name: string; periodStr: string; periodMonth: string; target: number; observed: number; miss: number; edition: string };
-const wsScoreRows: wsScoreRowType[] = [];
-if (wsScoreMonthKey) {
-  const mk = wsScoreMonthKey;
-  const pushRow = (rec: any, name: string) => {
-    const t = (rec.targets || []).find((t: any) => t.period === mk && t.outcome_first_release?.cumulative_mb != null);
-    if (!t) return;
-    const target = wsRebase(t.target_cumulative_mb);
-    const observed = wsRebase(t.outcome_first_release.cumulative_mb);
-    wsScoreRows.push({
-      name,
-      periodStr: wsMonthStr(t.period),
-      periodMonth: new Date(t.period + "-15T12:00:00").toLocaleDateString("en-US", { month: "long" }),
-      target,
-      observed,
-      miss: Math.abs(target - observed),
-      edition: String(t.outcome_first_release.cumulative_published),
-    });
-  };
-  for (const [sc, label] of [["standoff", "Standoff"], ["corridor-holds", "Corridor holds"], ["corridor-lapses", "Corridor lapses"]] as [string, string][]) {
-    for (const v of wsScenarioVersionsByScenario[sc].slice(-2)) {
-      const rec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === `scenario-${sc}-${v.issued}-global-observed`);
-      if (!rec) continue;
-      pushRow(rec, `${label} (scenario, ${v.issued})`);
-    }
-  }
-  pushRow(wsEiaRec, "EIA estimate (Oct 6 edition)");
-  pushRow(wsPersRec, "Recent trend (persistence)");
-}
-// ── Score history: a continuing ledger of EVERY scored month (added Oct 16) ─────
-// Unlike the latest-month scorecard rows above, this lists every scored month so the
-// ledger grows one group per OMR edition and never drops the original v1 when a newer
-// version is issued (the review's "v3 would displace v1" concern). A "released" version
-// is one not superseded by a later version within 7 days — the Sep 17/18 drafts were
-// superseded within a day or two of the Sep 19 release and are excluded; every released
-// version (v1, v2, …) is kept for each month it scores. Benchmarks: the latest EIA STEO
-// edition with an outcome for the month, and the persistence baseline.
-const wsIsReleased = (sc: string, issued: string): boolean => {
-  const list = wsScenarioVersionsByScenario[sc] || [];
-  const i = list.findIndex((v: any) => v.issued === issued);
-  if (i < 0) return false;
-  const next = list[i + 1];
-  if (!next) return true; // the latest version is always a release
-  const days = (Date.parse(next.issued) - Date.parse(issued)) / 86400000;
-  return days > 7; // superseded within a week → a draft of the next release
-};
-type wsHistRow = { name: string; target: number; observed: number; miss: number; edition: string };
-type wsHistMonth = { monthKey: string; monthStr: string; rows: wsHistRow[] };
-const wsScoreHistory: wsHistMonth[] = (() => {
-  const scored = new Set<string>();
-  for (const r of (worldStocksData as any).forecast_records)
-    for (const t of (r.targets || []))
-      if (t.outcome_first_release?.cumulative_mb != null) scored.add(t.period);
-  const byId = (id: string) => (worldStocksData as any).forecast_records.find((r: any) => r.record_id === id);
-  const push = (rows: wsHistRow[], rec: any, name: string, mk: string) => {
-    const t = (rec?.targets || []).find((t: any) => t.period === mk && t.outcome_first_release?.cumulative_mb != null);
-    if (!t) return;
-    const target = wsRebase(t.target_cumulative_mb);
-    const observed = wsRebase(t.outcome_first_release.cumulative_mb);
-    rows.push({ name, target, observed, miss: Math.abs(target - observed), edition: String(t.outcome_first_release.cumulative_published) });
-  };
-  return [...scored].sort()
-    .map((mk) => {
-      const rows: wsHistRow[] = [];
-      for (const [sc, label] of [["standoff", "Standoff"], ["corridor-holds", "Corridor holds"], ["corridor-lapses", "Corridor lapses"]] as [string, string][]) {
-        for (const v of wsScenarioVersionsByScenario[sc] || []) {
-          if (!wsIsReleased(sc, v.issued)) continue;
-          push(rows, byId(`scenario-${sc}-${v.issued}-global-observed`), `${label} (${v.issued})`, mk);
-        }
-      }
-      const steo = (worldStocksData as any).forecast_records
-        .filter((r: any) => typeof r.record_id === "string" && r.record_id.startsWith("steo-") && (r.targets || []).some((t: any) => t.period === mk && t.outcome_first_release?.cumulative_mb != null))
-        .sort((a: any, b: any) => b.record_id.localeCompare(a.record_id));
-      if (steo.length) {
-        const ed = new Date(steo[0].issued + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" });
-        push(rows, steo[0], `EIA estimate (${ed} edition)`, mk);
-      }
-      const pers = (worldStocksData as any).forecast_records.find((r: any) => typeof r.record_id === "string" && r.record_id.startsWith("persistence-") && (r.targets || []).some((t: any) => t.period === mk && t.outcome_first_release?.cumulative_mb != null));
-      if (pers) push(rows, pers, "Recent trend (persistence)", mk);
-      return { monthKey: mk, monthStr: wsMonthStr(mk), rows };
-    })
-    .filter((m: wsHistMonth) => m.rows.length > 0);
-})();
 const wsPanelBAria = `Line chart of the change in global oil inventories since ${wsFcAnchorMonthStr}, in million barrels, starting at zero in ${wsFcAnchorMonthStr} — zero means inventories unchanged since that month, not empty storage. Three scenarios, revised on 15 October 2026 after September's reported values — rebased to the Oct 6, 2026 EIA production and consumption forecast and starting at the observed September (the solid dark line), with assumptions explained on the model page: corridor holds (solid) reaches ${wsHoldsEndStr} by ${wsHoldsEndMonthStr}; standoff (dashed) reaches ${wsStandoffEndStr}; corridor lapses (long dashed) reaches ${wsLapseEndStr} by ${wsLapseEndMonthStr}, the final month calculated. Two optional comparisons, hidden until selected: the EIA Short-Term Energy Outlook (Oct 6, 2026 release), with a September estimate and forecasts from October, calculated from production minus consumption, ${wsEiaEndStr} by ${wsMonthStr(wsEiaEnd.period)}; and the recent trend, which repeats the June–August 2026 average monthly change (${wsPersMonthlyStr} million barrels a month), ${wsPersEndStr} by ${wsMonthStr(wsPersEnd.period)}. The solid dark line is the IEA's reported global observed inventories, rebased to the same anchor: through ${wsObsLastMonthStr}, ${wsSigned(wsObsLastRebased)} mb — the reported months so far. A fourth optional comparison, hidden until selected, shows the original September 19 (v1) scenario paths as faded lines for comparison against the revised v2 paths. All lines combine crude oil and refined fuels, and none counts government stock releases as a loss.`;
 
 // Watch list as flat ledger rows (date column + text). Tufte: structure from the date
@@ -949,26 +833,14 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         <div class="mt-12 mb-3">
           <h2 class="text-xl font-bold tracking-tight">How oil in storage could change through 2027</h2>
           <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
-            The three lines show how oil in storage could change if shipping recovers,
-            the standoff continues, or the corridor closes. For each scenario, we make assumptions
-            about how much oil the world produces and uses.
+            These scenarios show how global oil stocks could change if shipping recovers,
+            the standoff continues, or the corridor closes. Zero marks the { wsFcAnchorMonthStr } stock
+            level, not empty tanks. The revised paths start at September's reported value; the
+            dark line tracks reported stocks.
           </p>
           <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
-            Each line starts at zero in { wsFcAnchorMonthStr }.
-            Values below zero mean less oil in storage than in that month; values above zero
-            mean more. Zero means no change, not empty storage.
-          </p>
-          <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
-            The solid dark line shows the IEA's reported global inventories relative to the
-            saved starting point. Through { wsObsLastMonthStr }, they were{
-            wsObsSinceAnchorStr }. This comparison includes revisions to earlier months,
-            so it can differ from the IEA's reported monthly change.
-          </p>
-          <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
-            The scenario lines use our October 15 revision (v2), rebased to the EIA's October 6
-            outlook and starting at the observed September. They don't account for further cuts
-            in oil use as stocks fall.
-            You can read the assumptions and see how we check the predictions on <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/model/">the model page</a>.
+            We revised the paths on October 15 after September's results. The scenarios were
+            less accurate than the recent-trend baseline in the first scored month. <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/model/">See forecast results, assumptions and model changes</a>.
           </p>
         </div>
         <div class="h-80 sm:h-[380px]">
@@ -989,11 +861,9 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           </label>
         </div>
         <p class="mt-1 max-w-prose text-xs leading-relaxed text-faint">
-          These paths were revised on 15 October after September's reported values; the original
-          September 19 lines remain available for comparison. Select a comparison to see the EIA's
-          October 6 outlook or what would happen if the June–August 2026 trend continued
-          ({ wsPersMonthlyStr } million barrels a month). Both use the same starting point as the
-          scenarios.
+          Select a comparison to see the EIA's October 6 outlook, the June–August trend
+          ({ wsPersMonthlyStr } million barrels a month), or the original September 19 paths.
+          All use the same August reference level.
         </p>
         <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
           Change since { wsFcAnchorMonthStr }, in million barrels. We adjust production and
@@ -1002,64 +872,9 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           uses its October 6 outlook: a September estimate followed by forecasts from October.
           Recent trend repeats IEA-reported changes. The solid dark line is the IEA's reported
           global observed inventories (October 14, 2026 edition), through September 2026.
-          The two agencies' figures cover different sets of oil stocks.
+          The two agencies' figures cover different sets of oil stocks. The scenarios don't
+          calculate further cuts in oil use as stocks fall.
         </p>
-        { wsScoreHistory.length > 0 && (
-          <div class="mt-8">
-            <h3 id="stocks-scorecard" class="text-base font-bold tracking-tight">Score history</h3>
-            <p class="mt-2 max-w-prose text-xs leading-relaxed text-faint">
-              Every scored month, oldest first. The original September 19 (v1) lines stay
-              visible for each month they score, so a future revision never drops them from
-              the ledger.
-            </p>
-            <table class="mt-3 w-full max-w-2xl border-collapse text-[13px]">
-              <thead>
-                <tr class="text-left font-mono text-[11px] tracking-wide text-faint">
-                  <th class="pb-2 font-medium">Month</th>
-                  <th class="pb-2 font-medium">Published line</th>
-                  <th class="pb-2 text-right font-medium">Target</th>
-                  <th class="pb-2 text-right font-medium">Observed</th>
-                  <th class="pb-2 text-right font-medium">Miss</th>
-                </tr>
-              </thead>
-              <tbody class="tabular">
-                { wsScoreHistory.map((m: any) => (
-                  m.rows.map((r: any, i: number) => (
-                    <tr class="border-t border-rule">
-                      <td class="py-1.5 pr-3">{ i === 0 ? m.monthStr : "" }</td>
-                      <td class="py-1.5 pr-3">{ r.name }</td>
-                      <td class="py-1.5 text-right">{ wsSigned(r.target) }</td>
-                      <td class="py-1.5 text-right">{ wsSigned(r.observed) }</td>
-                      <td class="py-1.5 text-right font-semibold">{ Math.round(r.miss).toLocaleString() }</td>
-                    </tr>
-                  ))
-                )) }
-              </tbody>
-            </table>
-            <p class="mt-3 max-w-prose text-xs leading-relaxed text-faint">
-              Values are in million barrels relative to the saved { wsFcAnchorMonthStr }
-              starting point. The reported September change was −10 mb; the −2 shown here is the
-              September cumulative (−509) minus the frozen August anchor (−507) — the 8 mb gap
-              from the monthly −10 is the IEA's revision to earlier months. Each row is frozen
-              per scored month, and both the September 19 (v1) and October 15 (v2) rows stay
-              visible for a given month — v2 is scored from October (its first scored month,
-              partly elapsed at issue), and November is its first full future month. The
-              scenarios were less accurate than the recent-trend baseline in the first scored
-              month. The scores compare the EIA-based scenario targets against the IEA's
-              reported observed line; these are different measures, so part of the apparent miss
-              is an unresolved difference between the agencies' figures, not a measured forecast
-              error — the recent-trend baseline missed by 46 mb, and every scenario missed by more.
-              The September standoff miss (94 mb) decomposes in
-              <a class="underline decoration-rule
-              underline-offset-2 hover:text-ink" href="/model#the-september-2026-audit">the
-              September audit</a> into 8.2 mb within the EIA framework, 78.1 mb cross-measure,
-              and 8.0 mb prior-revision. A published month is never re-scored: the IEA's October
-              edition revised earlier months by ~8 mb and the EIA's October 6 figure is a
-              retrospective estimate. Observed uses the IEA's first published cumulative total for
-              { wsScoreRows[0].periodMonth } ({ wsScoreRows[0].edition }).
-            </p>
-          </div>
-        ) }
 
       <!-- Likely outcomes -->
       <section class="mt-12">
@@ -1179,10 +994,10 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               SPR stocks were unchanged in the week ending Oct 9, after falling by about
               112,000 barrels a day the week before. A flat week doesn't establish that future
               deliveries have stopped. DOE's September offering scheduled deliveries for
-              November–December. <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="https://www.argusmedia.com/en/news-and-insights/latest-market-news/2890203-us-awards-up-to-25mn-bl-spr-crude-sources">Argus reported</a>
-              awards of 20–25 million barrels on Oct 13, citing sources; DOE had not confirmed them.
-              Separately, <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="https://www.energy.gov/articles/energy-department-authorizes-strategic-petroleum-reserve-exchange-address-supply">DOE authorized</a>
-              hurricane-related exchanges of up to 4 million barrels on Oct 10, including
+              November–December. <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="https://www.argusmedia.com/en/news-and-insights/latest-market-news/2890203-us-awards-up-to-25mn-bl-spr-crude-sources">Argus reported</a> awards of
+              20–25 million barrels on Oct 13, citing sources; DOE had not confirmed them.
+              Separately, <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="https://www.energy.gov/articles/energy-department-authorizes-strategic-petroleum-reserve-exchange-address-supply">DOE authorized</a> hurricane-related
+              exchanges of up to 4 million barrels on Oct 10, including
               accelerated deliveries under an existing award.
             </p>
           </div>
@@ -1406,12 +1221,10 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             (21 Oct 2025), using IEA data; table on printed p96, definitions on p9
             (PDF pages 98 and 11). Annotation: IEA Oil Market Report, 11 Sep 2026
             (August 2026 data); it marks the total loss, not a single grade. Gulf
-            export-grade properties:
-            <a href="https://en.wikipedia.org/wiki/List_of_crude_oil_products">Wikipedia</a>
-            (Arab Light, Arab Medium) and
-            <a href="https://www.petro-logistics.com/blog/posts/basrah-medium-iraqs-new-flagship-grade-as-basrah-light-stops-being-exported/">Petro-Logistics</a>
-            (Basrah Medium, 27.9° API / 3.0% S, Iraq's main export grade since 2021;
-            Basrah Light export stopped in Jan 2022).
+            export-grade properties: <a href="https://en.wikipedia.org/wiki/List_of_crude_oil_products">Wikipedia</a> (Arab
+            Light, Arab Medium) and <a href="https://www.petro-logistics.com/blog/posts/basrah-medium-iraqs-new-flagship-grade-as-basrah-light-stops-being-exported/">Petro-Logistics</a> (Basrah
+            Medium, 27.9° API / 3.0% S, Iraq's main export grade since 2021; Basrah
+            Light export stopped in Jan 2022).
             Gulf losses also include lighter grades such as Murban and heavier grades such as
             Arab and Basrah heavy.
             Refinery configuration:{" "}

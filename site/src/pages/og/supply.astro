@@ -54,6 +54,9 @@ const axisSet = new Set<string>();
 for (const r of [recHolds, recStandoff, recLapses, recEia]) {
   axisSet.add(r.anchor.period);
   for (const t of r.targets) axisSet.add(t.period);
+  // rebased (v2) records restart at the observed rebase_start month — it must be
+  // on the axis or the September point of the scenario lines silently disappears
+  if (r.rebase_start) axisSet.add(r.rebase_start.period);
 }
 const labels = [...axisSet].sort();
 const line = (rec: any): (number | null)[] =>
@@ -178,6 +181,9 @@ const endMonthStr = new Date(labels[labels.length - 1] + "-15T12:00:00").toLocal
         for (const r of [recHolds, recStandoff, recLapses]) {
           axisSet.add(r.anchor.period);
           for (const t of r.targets) axisSet.add(t.period);
+          // rebase_start (the observed September) must be on the axis too, or the
+          // scenario lines would start at October — same rule as the frontmatter
+          if (r.rebase_start) axisSet.add(r.rebase_start.period);
         }
         const labels = [...axisSet].sort();
         const line = (rec: any): (number | null)[] =>
