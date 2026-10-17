@@ -1,0 +1,98 @@
+[
+  {
+    "series": "Global refinery runs forecast",
+    "period": "2026",
+    "value": 81.7,
+    "unit": "mb/d",
+    "section": "Highlights",
+    "quote": "Global runs will drop by 2.3 mb/d, to 81.7 mb/d, this year, and rise by 2.8 mb/d in 2027."
+  },
+  {
+    "series": "Global refinery runs annual decrease magnitude",
+    "period": "2026 vs 2025",
+    "value": 2.3,
+    "unit": "mb/d",
+    "section": "Highlights",
+    "quote": null
+  },
+  {
+    "series": "Global refinery runs forecast",
+    "period": "October 2026",
+    "value": 81.3,
+    "unit": "mb/d",
+    "section": "Highlights",
+    "quote": null
+  },
+  {
+    "series": "Global refinery runs forecast",
+    "period": "year-end 2026",
+    "value": 84.6,
+    "unit": "mb/d",
+    "section": "Highlights",
+    "quote": null
+  },
+  {
+    "series": "Global refinery runs annual increase forecast",
+    "period": "2027",
+    "value": 2.8,
+    "unit": "mb/d",
+    "section": "Highlights",
+    "quote": null
+  },
+  {
+    "series": "Global gasoil exports average",
+    "period": "January–September 2026",
+    "value": 4.7,
+    "unit": "mb/d",
+    "section": "Gasoil and diesel market tightness set to extend into 2027",
+    "quote": null
+  },
+  {
+    "series": "Global gasoil exports preliminary",
+    "period": "September 2026",
+    "value": 4.7,
+    "unit": "mb/d",
+    "section": "Gasoil and diesel market tightness set to extend into 2027",
+    "quote": null
+  },
+  {
+    "series": "Global gasoil exports annual decrease magnitude (nearly)",
+    "period": "September 2026",
+    "value": 700,
+    "unit": "kb/d",
+    "section": "Gasoil and diesel market tightness set to extend into 2027",
+    "quote": null
+  },
+  {
+    "series": "Global gasoil production",
+    "period": "2Q26",
+    "value": 26.4,
+    "unit": "mb/d",
+    "section": "Gasoil and diesel market tightness set to extend into 2027",
+    "quote": null
+  },
+  {
+    "series": "Global gasoil production annual decrease magnitude",
+    "period": "2Q26",
+    "value": 1.5,
+    "unit": "mb/d",
+    "section": "Gasoil and diesel market tightness set to extend into 2027",
+    "quote": null
+  },
+  {
+    "series": "Global gasoil production estimate",
+    "period": "3Q26",
+    "value": 27.2,
+    "unit": "mb/d",
+    "section": "Gasoil and diesel market tightness set to extend into 2027",
+    "quote": null
+  },
+  {
+    "series": "Global gasoil production annual decrease magnitude",
+    "period": "3Q26",
+    "value": 1.7,
+    "unit": "mb/d",
+    "section": "Gasoil and diesel market tightness set to extend into 2027",
+    "quote": null
+  }
+]

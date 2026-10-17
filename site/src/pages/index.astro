@@ -684,18 +684,18 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       <div class="mt-12 grid gap-10 lg:grid-cols-2">
         <div class="min-w-0">
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">Brent and WTI prices are up about 40%</h2>
+            <h2 class="text-xl font-bold tracking-tight">Brent and WTI prices are up more than 40%</h2>
             <p class="font-mono text-[11px] text-faint tabular">Brent: selected observations and monthly averages. WTI: weekly FRED spot prices and recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent rises from about $76 before the war to $105.92 on Oct 15 on the December contract — a seventeenth session close above $100 — after a $126 intraday peak in March. WTI's November contract settles at $97.97 on Oct 15, up 3.0% on the same contract. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent rises from about $76 before the war to $109.86 on Oct 16 on the December contract — an eighteenth session close above $100 — after a $126 intraday peak in March. WTI's November contract settles at $101.41 on Oct 16, up 3.5% on the same contract. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            Brent and West Texas Intermediate (WTI) are crude oil price benchmarks. On Oct 15,
-            Brent's December contract settled at $105.92 a barrel, down 0.1% from the Oct 14
-            close — a seventeenth session close above $100. WTI's November contract settled at
-            $97.97, up 3.0%. The EIA reported an 8.6 million barrel weekly decline in US crude
-            stocks, helping support WTI while Brent barely moved (Reuters, Oct 15).
+            Brent and West Texas Intermediate (WTI) are crude oil price benchmarks. On Oct 16,
+            Brent's December contract settled at $109.86 a barrel, up 3.7%, its highest settlement since May 19. It touched $110 during trading
+            for the first time since May 20. WTI's November contract settled at $101.41, up 3.5%, its highest since
+            Sep 17. The rally came amid increased attacks near Hormuz and renewed Ukrainian strikes
+            on Russian refineries (Rigzone, Reuters, Oct 16).
             The gray line shows WTI, which is also used in the fuel price spread chart beside this one.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
@@ -715,7 +715,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         </div>
         <div class="min-w-0">
           <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight">The gap between diesel and crude prices has doubled</h2>
+            <h2 class="text-xl font-bold tracking-tight">The gap between diesel and crude prices has nearly doubled</h2>
             <p class="font-mono text-[11px] text-faint tabular">Retail fuel price minus WTI, dollars per barrel. EIA/AAA fuel prices; FRED and recent futures closes for WTI.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
@@ -725,7 +725,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             This chart subtracts the price of WTI crude oil from the retail price of fuel, both in
             dollars per barrel. The gap includes refining, transportation, and retailing costs.
             It helps explain why prices at the pump can keep rising even when crude gets cheaper. The diesel gap peaked at $181.8 a barrel on Sep 23 and had
-            eased to ${dieCrackLast.value.toFixed(1)} by {shortDate(dieCrackLast.date)} — still about twice January's $89.
+            eased to ${dieCrackLast.value.toFixed(1)} by {shortDate(dieCrackLast.date)} — still nearly twice January's $89.
             The gasoline gap was ${gasCrackLast.value.toFixed(1)} on {shortDate(gasCrackLast.date)}, up from about $59 in January.
             The gaps can narrow when crude prices rise faster than pump prices, as they did on Sep 10.
           </p>
@@ -1235,13 +1235,13 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           </p>
         </div>
 
-        <!-- OECD refinery intake and output, June 2026 vs June 2025 (IEA Monthly Oil Statistics) -->
+        <!-- OECD refinery intake and output, July 2026 vs July 2025 (IEA Monthly Oil Statistics, October 2026 edition) -->
         <div class="mb-3">
           <h2 class="text-xl font-bold tracking-tight">OECD refineries made less gasoline and diesel than a year earlier</h2>
           <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
-            In June 2026, total refinery output in OECD countries was about 1% lower
-            than in June 2025. Gasoline and diesel output fell. Jet fuel and other
-            kerosene rose. The comparison doesn't tell us how much of the change
+            In July 2026, total refinery output in OECD countries was essentially
+            unchanged from July 2025. Gasoline and diesel output fell. Jet fuel and
+            other kerosene rose. The comparison doesn't tell us how much of the change
             was caused by the war.
           </p>
         </div>
@@ -1339,7 +1339,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
                 through Oct 31 (government decree; Moscow Times, Reuters); on Oct 10, Moscow said
                 the ban was partially lifted with immediate effect. Novak said deliveries could rise from
                 300,000 tons in October to 1M in December, potentially reaching
-                3M tons a month later (Interfax, Oct 12).
+                3M tons a month in the medium term (Interfax, Oct 12).
                 The jet-fuel export ban, in force since Jun 1, ends on
                 Nov 30. Damaged refineries also leave Russia with less fuel for its own gas
                 stations and military as winter approaches.
@@ -1374,6 +1374,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
                 had cost Russia about 1% of GDP. In the US, President Trump has blamed
                 the refinery strikes for the diesel-price surge: "This isn't really a Middle
                 Eastern problem; this is more of a Russia problem" (Fox News, Sep 27).
+                After the strikes resumed, he called them "a disgrace" (Newsmax, Oct 15).
               </p>
             </div>
           </div>
@@ -1443,14 +1444,14 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           <div>
             <h3 class="text-lg font-bold tracking-tight">Estimates of US recession risk</h3>
             <p class="mt-2 max-w-prose text-[13px] leading-relaxed text-faint">
-              These estimates, published between June and September 2026, put the chance of a US
-              recession over the next 12 months at 15% to 50%. Goldman Sachs has kept its estimate at 15%
-              since Jun 26, down from 30% in late March. It repeated that estimate on Sep 14. <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="https://polymarket.com/event/us-recession-by-end-of-2027-20260807185409760" target="_blank" rel="noopener">Polymarket</a> priced its recession contract at about 34% on Oct 14. It runs through the end of 2027
+              These estimates, published between June and October 2026, put the chance of a US
+              recession at 13% to 50%, with different forecast windows. Goldman Sachs has kept its estimate at 15%
+              since Jun 26, down from 30% in late March. It repeated that estimate on Sep 14. <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="https://polymarket.com/event/us-recession-by-end-of-2027-20260807185409760" target="_blank" rel="noopener">Polymarket</a> priced its recession contract at about 34% on Oct 16. It runs through the end of 2027
               and resolves on either two consecutive quarters of falling real GDP or a recession
               announcement by the National Bureau of Economic Research. Its window and rules differ from the forecasts above.
             </p>
             <div class="mt-5 h-72">
-              <canvas id="recessionChart" role="img" aria-label="Dot plot of US recession odds with different forecast windows: Moody's 50 percent, JPMorgan 35, New York Fed model 25, TD Securities 25, Wall Street Journal poll of 74 economists 25, Goldman Sachs 15, and Polymarket 34 percent for the longer window through end-2027."></canvas>
+              <canvas id="recessionChart" role="img" aria-label="Dot plot of US recession odds with different forecast windows: Moody's 50 percent, JPMorgan 35, Polymarket 34 percent for the longer window through end-2027, TD Securities 25, Wall Street Journal poll of 71 economists 24, Goldman Sachs 15, and the New York Fed yield-curve model 13."></canvas>
             </div>
           </div>
           <div>
@@ -2645,11 +2646,13 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           plugins: {
             tooltip: {
               filter: (item: { datasetIndex: number }) => item.datasetIndex === 0,
+              // Same shape as the gas tooltips: price + short source tip, no commentary.
+              // The full per-day provenance stays in the data as `note`.
               callbacks: {
                 title: (items: { dataIndex: number }[]) => fmt(dieselYtd[items[0].dataIndex].date),
                 label: (ctx) =>
                   ctx.datasetIndex === 0
-                    ? ` $${ctx.parsed.y.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}${dieselYtd[ctx.dataIndex].note ? " — " + dieselYtd[ctx.dataIndex].note : ""}`
+                    ? ` $${ctx.parsed.y.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} — ${dieselYtd[ctx.dataIndex].tip || dieselYtd[ctx.dataIndex].note || "AAA"}`
                     : null,
               },
             },
@@ -2981,8 +2984,8 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // Oct 11 AAA → Oct 9 settle 91.85 (Oct 11 Sunday — still no new settle);
       // Oct 12 AAA → Oct 12 settle 93.74 (same-day); Oct 13 AAA → Oct 13 settle 94.14 (same-day);
       // Oct 14 AAA → Oct 14 settle 95.09 (same-day); Oct 15 AAA → Oct 15 settle 97.97
-      // (same-day, added this pass after the 14:30 ET settlement); Oct 16 AAA → Oct 15
-      // settle 97.97 (no same-day settlement yet — today's session settles later).
+      // (same-day); Oct 16 AAA → Oct 16 settle 101.41 (same-day, added this pass after the
+      // 14:30 ET settlement — the Oct 16 crack re-paired down from the Oct 15 basis).
       const wtiNonFred = new Set(wtiNonFredDates);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
       // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 (the record is

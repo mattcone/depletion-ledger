@@ -1,0 +1,31 @@
+Source: https://www.iea.org/reports/oil-market-report-october-2026
+Publication date: 14 October 2026
+Reader access succeeded; no 403.
+This is an access inventory, NOT a complete verbatim extraction. Copyright limits prevent full reproduction. JSON quote=null means quotation omitted for copyright limits, not inaccessible source text. One exact sentence is included in JSON.
+
+Highlights: accessible.
+Fragile rebound: accessible overview essay about supply, demand, stocks and prices.
+Gasoil/diesel feature: accessible beyond highlights, discussing demand, production, exports, inventories and outlook.
+OPEC+ production table: accessible inline.
+Executive Summary: [section not accessible]
+Supply: [section not accessible]
+Demand: [section not accessible]
+Inventories: [section not accessible]
+Refining: [section not accessible]
+Prices: [section not accessible]
+These named full-report sections were absent from public reader output, though their topics appear in the overview and feature.
+September global refinery runs and annual comparison: not found. No figures reconstructed.
+No key-data link exposed.
+Download PDF control returned the report page; no direct report PDF or free-version URL exposed.
+
+All five linked chart pages opened. Reader exposed metadata and download controls, but no plotted numerical series. All showed update date 14 Oct 2026 and unavailable data download. No direct PNG URL exposed. Export charts cite Kpler. Balance chart notes that 2026 and 2027 are estimates.
+https://www.iea.org/data-and-statistics/charts/quaterly-global-gasoil-balance-2022-2027
+https://www.iea.org/data-and-statistics/charts/global-gasoil-and-diesel-demand-2024-2027
+https://www.iea.org/data-and-statistics/charts/global-seaborne-gasoil-and-diesel-net-exports-2023-2026
+https://www.iea.org/data-and-statistics/charts/annual-change-of-global-gasoil-and-diesel-exports-by-country-or-region-september-2025-september-2026
+https://www.iea.org/data-and-statistics/charts/oecd-total-gasoil-and-diesel-stocks-2023-2026
+Methodology PDF (not report PDF):
+https://iea.blob.core.windows.net/assets/b6542edd-41b7-4a11-988f-4ffbc0a28e3b/IEARefineryMarginMethodologyAugust2024.pdf
+Generic navigation links:
+https://www.iea.org/data-and-statistics
+https://www.iea.org/data-and-statistics/charts

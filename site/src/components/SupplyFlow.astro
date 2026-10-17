@@ -19,6 +19,9 @@ const K = 12 / 7.33;
 const rate = (kt: number, days: number) => kt / days / 1000; // mmtd/day
 const change = (current: number, previous: number) => {
   const percent = (current / previous - 1) * 100;
+  // Display rounding: within 0.05 percentage points of flat, show 0.0% instead of
+  // "+0.0%"/"−0.0%" (July 2026's output band sits at −0.006%).
+  if (Math.abs(percent) < 0.05) return "0.0%";
   return `${percent < 0 ? "−" : "+"}${Math.abs(percent).toFixed(1)}%`;
 };
 const amount = (v: number) => v.toLocaleString("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -70,22 +73,22 @@ const branch = fuels.map((f, i) => {
   const span = 1440 - (NODE_X + NODE_W);
   return { ...f, e, d: `M ${NODE_X + NODE_W} ${s.toFixed(2)} C ${(NODE_X + NODE_W + 0.45 * span).toFixed(1)} ${s.toFixed(2)}, ${(NODE_X + NODE_W + 0.55 * span).toFixed(1)} ${e}, 1440 ${e}` };
 });
-const desc = `OECD, June 2026 versus June 2025, estimated million barrels per day. We convert metric tonnes using UN conversion factors. The crude oil factor approximates the mixed refinery intake; "other products" uses an assumed 8.0 barrels per tonne. ${[crude, output, ...fuels]
+const desc = `OECD, July 2026 versus July 2025, estimated million barrels per day. We convert metric tonnes using UN conversion factors. The crude oil factor approximates the mixed refinery intake; "other products" uses an assumed 8.0 barrels per tonne. ${[crude, output, ...fuels]
   .map(s => `${s.name}: ${amount(s.current)}, ${s.change} versus a year earlier`)
   .join(". ")}. Band widths are proportional to volume on one shared scale, so the product bands add up to the refinery output band.`;
 ---
 
 <section id="supply-flow" class="supply-flow">
   <figure>
-    <p class="flow-sub">Estimated million barrels per day · June 2026, change vs June 2025</p>
+    <p class="flow-sub">Estimated million barrels per day · July 2026, change vs July 2025</p>
 
     <div class="flow-bleed">
       <div class="flow-diagram">
         <svg viewBox="0 0 1440 520" class="flow-chart" role="img" aria-labelledby="supply-flow-title supply-flow-desc">
-          <title id="supply-flow-title">OECD refinery intake and oil product output, June 2026, change versus June 2025</title>
+          <title id="supply-flow-title">OECD refinery intake and oil product output, July 2026, change versus July 2025</title>
           <desc id="supply-flow-desc">{desc}</desc>
 
-          <!-- June 2026: edge to edge -->
+          <!-- July 2026: edge to edge -->
           <rect x="0" y={Y - crude.w / 2} width="660" height={crude.w} fill={crude.color} />
           <rect x={NODE_X} y={Y - output.w / 2} width={NODE_W} height={output.w} fill={output.color} />
           {branch.map(b => <path d={b.d} stroke={b.color} stroke-width={b.w} fill="none" />)}
@@ -108,7 +111,7 @@ const desc = `OECD, June 2026 versus June 2025, estimated million barrels per da
       </div>
 
       <!-- A readable, vertical version of the same comparisons on small screens. -->
-      <div class="flow-mobile" aria-label="OECD refinery comparisons, June 2026 versus June 2025, estimated million barrels per day">
+      <div class="flow-mobile" aria-label="OECD refinery comparisons, July 2026 versus July 2025, estimated million barrels per day">
         {[crude, output, ...fuels].map((s, i) => (
           <div class="flow-m-stage">
             {i === 0 && <p class="flow-m-group">Oil coming in</p>}
@@ -130,15 +133,15 @@ const desc = `OECD, June 2026 versus June 2025, estimated million barrels per da
       Band widths show estimated daily volumes on the same scale. The four product
       bands add up to refinery output. Output is higher than input because refined
       products are less dense than crude oil, so a refinery yields more barrels than
-      it takes in. Refiners call this processing gain. Percentages compare June 2026
-      with June 2025.
+      it takes in. Refiners call this processing gain. Percentages compare July 2026
+      with July 2025.
       We convert the IEA's figures from metric tonnes using{" "}
       <a href="https://unstats.un.org/unsd/energy/yearbook/conversion.htm">UN conversion factors</a>:
       7.32 barrels per tonne for oil entering refineries, 8.50 for gasoline, 7.23 for
       diesel, and 7.77 for kerosene. The 7.32 factor is an approximation because
       refinery intake includes crude and other raw materials. For the mixed
       "other products" category, we assume 8.0 barrels per tonne. Source:{" "}
-      <a href={supplyShape.source.url}>IEA Monthly Oil Statistics</a>, September 2026,
+      <a href={supplyShape.source.url}>IEA Monthly Oil Statistics</a>, {supplyShape.source.edition},
       tables 1 and 7. The figures include estimates.
     </figcaption>
   </figure>

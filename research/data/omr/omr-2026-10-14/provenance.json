@@ -1,0 +1,44 @@
+{
+  "report": "IEA Oil Market Report (public summary page)",
+  "edition": "2026-10-14",
+  "editionNote": "Published 14 October 2026. Supersedes the omr-2026-10-01/ directory (same edition, same URL; the 2026-10-01 label was a fetcher mislabel — the page prints '14 October 2026').",
+  "url": "https://www.iea.org/reports/oil-market-report-october-2026",
+  "retrievals": [
+    {
+      "retrievedAt": "2026-10-14T13:11:19.386Z",
+      "method": "iea-fetch skill web reader (direct HTTP is Cloudflare-blocked from this machine)",
+      "file": "omr-summary-overview.txt"
+    },
+    {
+      "retrievedAt": "2026-10-17T03:20:00Z",
+      "method": "iea-fetch skill web reader",
+      "files": ["omr-summary.txt", "omr-figures.json"]
+    }
+  ],
+  "files": [
+    {
+      "file": "omr-summary-overview.txt",
+      "sha256": "64b94ff05c6fc9f38ef0255aa5fc4f941ed232db6706c4c82ce2d7eca0b22bbe",
+      "bytes": 1806
+    },
+    {
+      "file": "omr-summary.txt",
+      "sha256": "90c3395f0e1edf78ea883e82f107f4f6a8d009acb9efd0d42946815bc2fc9cd0",
+      "bytes": 2282
+    },
+    {
+      "file": "omr-figures.json",
+      "sha256": "28ea2f9c27a139c98e6107f5070d08120e0d9ae9d41db9323150b2324056a5ec",
+      "bytes": 2557
+    }
+  ],
+  "keyFigures": {
+    "globalRuns2026ForecastMbd": 81.7,
+    "globalRuns2026ChangeVs2025Mbd": -2.3,
+    "globalRunsOctober2026Mbd": 81.3,
+    "globalRunsYearEnd2026Mbd": 84.6,
+    "globalRuns2027ChangeMbd": 2.8,
+    "exactQuote": "Global runs will drop by 2.3 mb/d, to 81.7 mb/d, this year, and rise by 2.8 mb/d in 2027."
+  },
+  "limitation": "Public summary only. The full Refining section (including September 2026 global observed refinery runs) is subscription-only — not on the public page, not reconstructed."
+}

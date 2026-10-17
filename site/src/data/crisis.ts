@@ -62,6 +62,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-10-13", value: 105.69, tip: "settlement · down 0.9% (Reuters)", note: "Settlement (Reuters wire, December contract; −$0.96 vs Oct 12 — the Yahoo BZ=F bar of 106.22 ran off the wire again; the wire value is plotted) — a fifteenth session close above $100, easing after a three-session rally. The Houthi missile that hit Aramco's headquarters complex in Dhahran and two further UKMTO-logged projectile strikes in the strait (a container ship, a tanker) came in after the London close." },
   { date: "2026-10-14", value: 106.06, tip: "settlement · up 0.4% (Rigzone)", note: "Settlement (Rigzone wire, December contract; +$0.37 vs Oct 13 — the Yahoo BZ=F bar of 106.06 matches) — a sixteenth session close above $100. The first full settlement after the Dhahran strike and the above-forecast Sep CPI: the GFS Pride sank and the Cape Dao was later reported sunk near the strait, a third ship (the GFS Giselle) was hit, and two senior Iranian officials told Reuters Iran is using new attack tactics to keep prices high ahead of the US midterms (Reuters, Oct 14)." },
   { date: "2026-10-15", value: 105.92, tip: "settlement · down $0.14 (CNBC)", note: "Settlement (CNBC/Newsquawk wire, December contract; −$0.14 vs Oct 14 — the Yahoo BZ=F bar of 105.54 ran off the wire; the wire value is plotted) — a seventeenth session close above $100. A divergence day: WTI jumped 3% on the week's 8M-barrel US crude draw and the renewed strait attacks while Brent barely moved, and the IEA agreed to accelerate the remaining ~100M barrels of its March program, including over 20M of diesel (Reuters, Oct 15)." },
+  { date: "2026-10-16", value: 109.86, tip: "settlement · up $3.94 (Rigzone/Reuters)", note: "Settlement (Rigzone/Reuters wire, December contract; +$3.94 vs Oct 15, +3.7%) — the highest settlement since May 19 and an eighteenth session close above $100; intraday it touched $110, the first time since May 20. Up on the week's surge in strait attacks — two ships sank this week and the MT ST 3 crude tanker was struck off Oman on Oct 16 — plus Ukraine's resumption of Russian refinery strikes; Bloomberg says prospects for imminent supply relief have faded. Data quality: the Yahoo BZ=F bar of 109.69 ran $0.17 off the wire; the wire value is plotted (Rigzone, Reuters, Oct 16)." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -153,6 +154,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { fred: false, date: "2026-10-13", value: 94.14, note: "Settlement (Reuters wire, November contract; +$0.40 vs Oct 12 — the Yahoo CL=F bar of 94.59 is a post-settlement last trade; the wire value is plotted) — erased the session's early losses; the dollar and the 10-year yield slipped from their highs (Reuters, Oct 13)." },
   { fred: false, date: "2026-10-14", value: 95.09, note: "Settlement (Rigzone wire, November contract; +$0.95 vs Oct 13 — the Yahoo CL=F bar of 95.17 is a post-settlement last trade; the wire value is plotted) — WTI outpaced Brent; analysts cited fund buying and stronger demand for US barrels as freight conditions shifted (Bloomberg via Rigzone, Oct 14)." },
   { fred: false, date: "2026-10-15", value: 97.97, note: "Settlement (CNBC/Newsquawk wire, November contract; +$2.88 vs Oct 14, +3.0%) — up on the week's 8M-barrel US crude draw, the renewed strait attacks, and reports of US planning for new strikes on Iran including the MOAB (CNBC, Oct 15). Data quality: the Yahoo CL=F bar of 96.11 is an artifact (its session high of 96.39 is below the wire settlement); the wire value is plotted." },
+  { fred: false, date: "2026-10-16", value: 101.41, note: "Settlement (Rigzone/Reuters wire, November contract; +$3.44 vs Oct 15, +3.5%) — the highest settlement since Sep 17, on the strait-attack surge (two ships sank this week; the MT ST 3 crude tanker struck off Oman) and the week's 8.6M-barrel US crude draw. Data quality: the Yahoo CL=F bar of 99.04 ran $2.37 below the wire settlement; the wire value is plotted (Rigzone, Reuters, Oct 16)." },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -236,54 +238,54 @@ export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
 // ---------- US retail diesel, $/gal — AAA national (sourced points) ----------
 export const dieselYtd: SeriesPoint[] = [
-  { date: "2026-01-15", value: 3.52, approx: true, note: "Jan monthly (C.H. Robinson)" },
-  { date: "2026-02-09", value: 3.688, note: "AAA" },
-  { date: "2026-02-27", value: 3.72, note: "Feb monthly" },
-  { date: "2026-03-30", value: 5.62, note: "TIME Mar 31: +49% since war began" },
-  { date: "2026-05-15", value: 5.6, approx: true, note: "May peak" },
-  { date: "2026-06-22", value: 5.13, note: "FleetOwner" },
-  { date: "2026-08-21", value: 5.37, approx: true, note: "Aug avg (The Hill)" },
-  { date: "2026-09-03", value: 5.78, note: "AAA" },
-  { date: "2026-09-04", value: 5.85, note: "all-time record — breaks Jun 2022 record" },
-  { date: "2026-09-06", value: 5.9, note: "AAA record" },
-  { date: "2026-09-09", value: 5.94, note: "AAA record" },
-  { date: "2026-09-10", value: 5.9773, note: "AAA record" },
-  { date: "2026-09-11", value: 6.0556, note: "AAA record" },
-  { date: "2026-09-12", value: 6.1602, note: "AAA record" },
-  { date: "2026-09-13", value: 6.2040, note: "AAA record" },
-  { date: "2026-09-14", value: 6.2301, note: "AAA record" },
-  { date: "2026-09-15", value: 6.2694, note: "AAA record" },
-  { date: "2026-09-16", value: 6.3103, note: "AAA record" },
-  { date: "2026-09-17", value: 6.3956, note: "AAA record" },
-  { date: "2026-09-18", value: 6.4476, note: "AAA record" },
-  { date: "2026-09-19", value: 6.4866, note: "AAA record" },
-  { date: "2026-09-20", value: 6.505, note: "AAA record — first above $6.50" },
-  { date: "2026-09-21", value: 6.5107, note: "AAA record" },
-  { date: "2026-09-22", value: 6.5276, note: "AAA record" },
-  { date: "2026-09-23", value: 6.5217, note: "AAA — first decline since the Sep 4 record streak began" },
-  { date: "2026-09-24", value: 6.5141, note: "AAA — second straight decline off the Sep 22 record" },
-  { date: "2026-09-25", value: 6.5019, note: "AAA — third straight decline off the Sep 22 record" },
-  { date: "2026-09-26", value: 6.4839, note: "AAA — fourth straight decline off the Sep 22 record" },
-  { date: "2026-09-27", value: 6.4709, note: "AAA — fifth straight decline off the Sep 22 record" },
-  { date: "2026-09-28", value: 6.4531, note: "AAA — sixth straight decline off the Sep 22 record" },
-  { date: "2026-09-29", value: 6.4391, note: "AAA — seventh straight decline off the Sep 22 record" },
-  { date: "2026-09-30", value: 6.4139, note: "AAA — eighth straight decline off the Sep 22 record" },
-  { date: "2026-10-01", value: 6.3895, note: "AAA — ninth straight decline off the Sep 22 record" },
-  { date: "2026-10-02", value: 6.3726, note: "AAA — tenth straight decline off the Sep 22 record" },
-  { date: "2026-10-03", value: 6.3554, note: "AAA — eleventh straight decline off the Sep 22 record" },
-  { date: "2026-10-04", value: 6.3434, note: "AAA — twelfth straight decline off the Sep 22 record" },
-  { date: "2026-10-05", value: 6.3207, note: "AAA release, Oct 5" },
-  { date: "2026-10-06", value: 6.3151, note: "AAA — fourteenth straight decline off the Sep 22 record" },
-  { date: "2026-10-07", value: 6.3015, note: "AAA — fifteenth straight decline off the Sep 22 record" },
-  { date: "2026-10-08", value: 6.2847, note: "AAA — sixteenth straight decline off the Sep 22 record" },
-  { date: "2026-10-09", value: 6.2785, note: "AAA — seventeenth straight decline off the Sep 22 record" },
-  { date: "2026-10-10", value: 6.2824, note: "AAA — up $0.0039, the first rise in 18 days and the end of the seventeen-day decline off the Sep 22 record" },
-  { date: "2026-10-11", value: 6.2771, note: "AAA — the Oct 10 uptick didn't hold (−$0.0053); still $0.25 below the Sep 22 record" },
-  { date: "2026-10-12", value: 6.2665, note: "AAA — second straight decline" },
-  { date: "2026-10-13", value: 6.2787, note: "AAA — up $0.0122, ending the two-day decline; still $0.25 below the Sep 22 record" },
-  { date: "2026-10-14", value: 6.2997, note: "AAA — second straight rise, +$0.0210; still $0.23 below the Sep 22 record" },
-  { date: "2026-10-15", value: 6.3173, note: "AAA — third straight rise, +$0.0176; still $0.21 below the Sep 22 record" },
-  { date: "2026-10-16", value: 6.3261, note: "AAA — fourth straight rise, +$0.0088; still $0.20 below the Sep 22 record" },
+  { date: "2026-01-15", value: 3.52, approx: true, tip: "Jan monthly (C.H. Robinson)", note: "Jan monthly (C.H. Robinson)" },
+  { date: "2026-02-09", value: 3.688, tip: "AAA", note: "AAA" },
+  { date: "2026-02-27", value: 3.72, tip: "Feb monthly", note: "Feb monthly" },
+  { date: "2026-03-30", value: 5.62, tip: "TIME (Mar 31)", note: "TIME Mar 31: +49% since war began" },
+  { date: "2026-05-15", value: 5.6, approx: true, tip: "May peak", note: "May peak" },
+  { date: "2026-06-22", value: 5.13, tip: "FleetOwner", note: "FleetOwner" },
+  { date: "2026-08-21", value: 5.37, approx: true, tip: "Aug avg (The Hill)", note: "Aug avg (The Hill)" },
+  { date: "2026-09-03", value: 5.78, tip: "AAA", note: "AAA" },
+  { date: "2026-09-04", value: 5.85, tip: "AAA", note: "all-time record — breaks Jun 2022 record" },
+  { date: "2026-09-06", value: 5.9, tip: "AAA", note: "AAA record" },
+  { date: "2026-09-09", value: 5.94, tip: "AAA", note: "AAA record" },
+  { date: "2026-09-10", value: 5.9773, tip: "AAA", note: "AAA record" },
+  { date: "2026-09-11", value: 6.0556, tip: "AAA", note: "AAA record" },
+  { date: "2026-09-12", value: 6.1602, tip: "AAA", note: "AAA record" },
+  { date: "2026-09-13", value: 6.2040, tip: "AAA", note: "AAA record" },
+  { date: "2026-09-14", value: 6.2301, tip: "AAA", note: "AAA record" },
+  { date: "2026-09-15", value: 6.2694, tip: "AAA", note: "AAA record" },
+  { date: "2026-09-16", value: 6.3103, tip: "AAA", note: "AAA record" },
+  { date: "2026-09-17", value: 6.3956, tip: "AAA", note: "AAA record" },
+  { date: "2026-09-18", value: 6.4476, tip: "AAA", note: "AAA record" },
+  { date: "2026-09-19", value: 6.4866, tip: "AAA", note: "AAA record" },
+  { date: "2026-09-20", value: 6.505, tip: "AAA", note: "AAA record — first above $6.50" },
+  { date: "2026-09-21", value: 6.5107, tip: "AAA", note: "AAA record" },
+  { date: "2026-09-22", value: 6.5276, tip: "AAA", note: "AAA record" },
+  { date: "2026-09-23", value: 6.5217, tip: "AAA", note: "AAA — first decline since the Sep 4 record streak began" },
+  { date: "2026-09-24", value: 6.5141, tip: "AAA", note: "AAA — second straight decline off the Sep 22 record" },
+  { date: "2026-09-25", value: 6.5019, tip: "AAA", note: "AAA — third straight decline off the Sep 22 record" },
+  { date: "2026-09-26", value: 6.4839, tip: "AAA", note: "AAA — fourth straight decline off the Sep 22 record" },
+  { date: "2026-09-27", value: 6.4709, tip: "AAA", note: "AAA — fifth straight decline off the Sep 22 record" },
+  { date: "2026-09-28", value: 6.4531, tip: "AAA", note: "AAA — sixth straight decline off the Sep 22 record" },
+  { date: "2026-09-29", value: 6.4391, tip: "AAA", note: "AAA — seventh straight decline off the Sep 22 record" },
+  { date: "2026-09-30", value: 6.4139, tip: "AAA", note: "AAA — eighth straight decline off the Sep 22 record" },
+  { date: "2026-10-01", value: 6.3895, tip: "AAA", note: "AAA — ninth straight decline off the Sep 22 record" },
+  { date: "2026-10-02", value: 6.3726, tip: "AAA", note: "AAA — tenth straight decline off the Sep 22 record" },
+  { date: "2026-10-03", value: 6.3554, tip: "AAA", note: "AAA — eleventh straight decline off the Sep 22 record" },
+  { date: "2026-10-04", value: 6.3434, tip: "AAA", note: "AAA — twelfth straight decline off the Sep 22 record" },
+  { date: "2026-10-05", value: 6.3207, tip: "AAA", note: "AAA release, Oct 5" },
+  { date: "2026-10-06", value: 6.3151, tip: "AAA", note: "AAA — fourteenth straight decline off the Sep 22 record" },
+  { date: "2026-10-07", value: 6.3015, tip: "AAA", note: "AAA — fifteenth straight decline off the Sep 22 record" },
+  { date: "2026-10-08", value: 6.2847, tip: "AAA", note: "AAA — sixteenth straight decline off the Sep 22 record" },
+  { date: "2026-10-09", value: 6.2785, tip: "AAA", note: "AAA — seventeenth straight decline off the Sep 22 record" },
+  { date: "2026-10-10", value: 6.2824, tip: "AAA", note: "AAA — up $0.0039, the first rise in 18 days and the end of the seventeen-day decline off the Sep 22 record" },
+  { date: "2026-10-11", value: 6.2771, tip: "AAA", note: "AAA — the Oct 10 uptick didn't hold (−$0.0053); still $0.25 below the Sep 22 record" },
+  { date: "2026-10-12", value: 6.2665, tip: "AAA", note: "AAA — second straight decline" },
+  { date: "2026-10-13", value: 6.2787, tip: "AAA", note: "AAA — up $0.0122, ending the two-day decline; still $0.25 below the Sep 22 record" },
+  { date: "2026-10-14", value: 6.2997, tip: "AAA", note: "AAA — second straight rise, +$0.0210; still $0.23 below the Sep 22 record" },
+  { date: "2026-10-15", value: 6.3173, tip: "AAA", note: "AAA — third straight rise, +$0.0176; still $0.21 below the Sep 22 record" },
+  { date: "2026-10-16", value: 6.3261, tip: "AAA", note: "AAA — fourth straight rise, +$0.0088; still $0.20 below the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
@@ -326,7 +328,7 @@ export const dieselPriorStreak = (() => {
   };
 })();
 export const stats = [
-  { label: "Brent", value: "$105.92", sub: "Oct 15 settlement · down $0.14 on the December contract · seventeenth session close above $100 · +39% vs pre-crisis ~$76" },
+  { label: "Brent", value: "$109.86", sub: "Oct 16 settlement · up $3.94 on the December contract · eighteenth session close above $100 · +45% vs pre-crisis ~$76 · highest since May 19" },
   { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : (dieselStreak === 1 ? "down again" : `${wordNum(dieselStreak)} consecutive daily declines`)) + " · " : lastDiesel.value > dieselYtd[dieselYtd.length - 2].value && dieselPriorStreak.days > 0 ? `first rise after ${wordNum(dieselPriorStreak.days)} straight declines${dieselPriorStreak.fromRecord ? ` off the ${shortStatDate(dieselRecord.date)} record` : ""} · ` : ""}+${dieselUpPct}% vs pre-war $3.72` },
   { label: "US gasoline (AAA)", value: `$${lastGasoline.value.toFixed(2)}`, sub: `${shortStatDate(lastGasoline.date)} · +${gasUpPct}% vs Jan $2.81 (AAA)` },
   { label: "SPR", value: "283.0M", sub: "Oct 9 · unchanged on the week · down 132.4M from pre-war 415.4M · lowest since Nov 1982" },
@@ -629,7 +631,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
       { item: "Whether the US and Iran agree on reopening the strait. Tehran was still reviewing Washington’s response to its seven-point proposal on Oct 12 (CBS). Vance says a deal requires a meaningful reduction in Iran’s enrichment capacity (Reuters, Oct 6). Trump says the US won’t strike Iran before the midterms but might afterward (CBS, TIME).", why: "Watch for a signed deal, a change in the blockade, or renewed strikes. Any could change how much oil gets through." },
       { item: "Whether the Yemen offensive changes Red Sea shipping. The coalition’s claim that it cleared Bab al-Mandeb remains unverified. Riyadh’s airport is closed through Oct 17 after repeated attacks. On Oct 13 the coalition struck Houthi fuel facilities in Sanaa, Hodeidah and Dhamar (ABC, Guardian). Trump hasn’t ruled out US strikes and said he might seek Turkish help. The Houthis threatened a swift response if the US joins the fighting (AFP).", why: "Watch whether the US joins the strikes or shipping routes become safer. A confirmed Houthi attack on non-Saudi shipping could send container traffic back around Africa." },
       { item: "Whether oil keeps moving through Hormuz despite attacks. CENTCOM said on Oct 15 that an IRGC projectile struck GFS Pride, which sank while being towed to shore. It rejected Iran’s naval-mine claim; all 21 crew were evacuated. BBC Verify counted 12 vessels reporting attacks Oct 5–11, the most in a week since the war began. Kpler put flows through the strait at about 12.6M barrels a day on Oct 13, down from 15M in late September (BBC, Oct 16). Two Petro Dolphin crew remain missing after the Oct 11 attack. On Oct 15, Iran’s navy reported an unnamed tanker on fire in the Gulf of Oman; the report has not been independently confirmed.", why: "Watch for crew updates, further losses, and safe passage. Our Oct 16 check of UKMTO’s feed found no new reports. Regional exports include bypass routes and do not establish that Hormuz is back to normal." },
-      { item: "Whether the Russian diesel deal turns into deliveries. Russia says it partially lifted its export ban; Novak’s schedule rises from 300,000 tons in October to 1M in December, potentially 3M a month later (Interfax, Oct 12). US Treasury license 135 permits transactions under US sanctions. Ukraine struck the Ryazan refinery overnight Oct 15, starting a fire, Russian officials said (AP). Zelensky said Kyiv would resume refinery strikes after a three-day pause (FT, Oct 15). The Minerva Zen, initially reported as a diesel cargo, carried fertilizer (TankerTrackers).", why: "Watch for actual deliveries and whether resumed strikes push Russia back toward a full ban. Refineries would need time to recover; analysts expect little effect on US diesel prices (Reuters, Oct 11)." },
+      { item: "Whether the Russian diesel deal turns into deliveries. Russia partially lifted its export ban on Oct 10. Novak’s schedule rises from 300,000 tons in October to 1M in December, potentially 3M a month in the medium term (Interfax, Oct 12). US Treasury license 135 permits Russian diesel transactions through Apr 7, 2027. Ukraine has resumed attacks: a strike shut a processing unit at Ryazan on Oct 15, and a fire followed an attack on an industrial site near Surgut on Oct 16. The Minerva Zen, initially reported as a diesel cargo, carried fertilizer (TankerTrackers).", why: "Watch for deliveries and further refinery shutdowns. The IEA’s October report says limited operating refinery capacity constrains Russian exports, so easing restrictions may do little to relieve the diesel shortage." },
     ],
   },
   {
@@ -643,7 +645,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
 // ---------- Breaking-points cascade (§11, compressed twice) ----------
 export const cascade = [
   { date: "Each weekly EIA report (next: Oct 21)", region: "US East Coast", trigger: "US diesel and heating-oil stocks stood at 102.6M barrels in the week ending Oct 9, down 2.5 million on the week and 12.3% below last year. At the four-week average rate of about 4.0M barrels a day, those stocks are equivalent to about 26 days of use. East Coast stocks are 22% below last year." },
-  { date: "Oct 31", region: "Russia", trigger: "Russia’s diesel export ban for producers runs through Oct 31 (Interfax, Sep 30). Trump announced a diesel supply deal on Oct 9, and the US Treasury permitted transactions under General License 135. That US permission doesn’t lift Russia’s ban. On Oct 10, Russia said it had partially lifted the ban with immediate effect; Novak’s schedule runs from 300,000 tons this month to 1M in December, potentially reaching 3M tons a month later (Interfax, Oct 12). With more than 30% of refining capacity damaged, Russia may have little fuel available to export." },
+  { date: "Oct 31", region: "Russia", trigger: "Russia’s diesel export ban for producers runs through Oct 31 (Interfax, Sep 30). Trump announced a diesel supply deal on Oct 9, and the US Treasury permitted transactions under General License 135 (through Apr 7, 2027). That US permission doesn’t lift Russia’s ban. On Oct 10, Russia said it had partially lifted the ban with immediate effect; Novak’s schedule runs from 300,000 tons this month to 1M in December, potentially 3M tons a month in the medium term (Interfax, Oct 12). With more than 30% of refining capacity damaged, Russia may have little fuel available to export — the IEA’s October report (Oct 14) calls the easing 'unlikely to materially alter the global gasoil balance.'" },
   { date: "≈ mid-October", region: "China", trigger: "Commercial oil stocks could begin to fall faster than normal." },
   { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, making it harder for traders to find supplies. If the strait closes fully, this could happen by mid-October." },
   { date: "≈ late October", region: "Europe, at the pump", trigger: "Consumers could face fuel shortages and higher prices, increasing pressure on governments to respond." },
@@ -684,7 +686,7 @@ export const russiaCurrentSpread = { date: "2026-10-04", low: 46, high: 80 };
 // plant-specific confirmation (Reuters, a governor, an industry source). Ufa has
 // the strike and the fire but no confirmed halt as of Sep 26 — if one lands, the
 // flag's wording is the only thing that changes.
-const russiaStrikeWindow = { start: "Sep 20", end: "Oct 15" };
+const russiaStrikeWindow = { start: "Sep 20", end: "Oct 16" };
 const russiaStruckRefineries = [
   { plant: "Moscow refinery", date: "Sep 20" },
   { plant: "Kuibyshev, near Samara", date: "Sep 21–22" },
@@ -696,7 +698,8 @@ const russiaStruckRefineries = [
   { plant: "Gazprom Neftekhim Salavat, one of Russia's largest", date: "Oct 8" },
   { plant: "Omsk, Russia's largest, ~440 kb/d — second hit", date: "Oct 8" },
   { plant: "Lukoil Ukhta, Komi", date: "Oct 9" },
-  { plant: "Ryazan, offline since Sep 6 — repeat strike", date: "Oct 15" },
+  { plant: "Ryazan, processing unit shut — repeat strike", date: "Oct 15" },
+  { plant: "Surgut district, Khanty-Mansi — condensate plant per UA tracking (unverified)", date: "Oct 16" },
 ];
 // Oct 14 (NOT counted above — the array's criterion is a confirmed strike/fire): Novak
 // said Ukrainian drones attacked refineries in the Saratov and Ryazan REGIONS (he named
@@ -705,36 +708,45 @@ const russiaStruckRefineries = [
 // governor Malkov; Russian Defense Ministry; AP) — a repeat strike on a plant already
 // offline since Sep 6, struck the first night Ukraine resumed attacks after its
 // three-day pause (Zelensky, FT, Oct 15) → counted above. The Saratov claim remains
-// unconfirmed as of the Oct 15 pass. (An Oct 14 evening addition was removed the same
+// unconfirmed as of the Oct 16 pass. (An Oct 14 evening addition was removed the same
 // evening after the accuracy review flagged the count inflation.)
+// Oct 16 (counted): a drone strike hit an "industrial facility in the Surgut district"
+// of Khanty-Mansi, Russia's largest oil-producing region — fire confirmed by governor
+// Kukharuk; Ukrainian tracking (Sternenko) identifies the Surgut Condensate Stabilization
+// Plant, which processes condensate into motor and aviation fuel. The identification is
+// unverified (Kyiv Independent) and no Ukrainian claim of responsibility has come
+// (Bloomberg, Moscow Times, Kyiv Independent, Oct 16). Counted on the strike-plus-fire
+// criterion; any halt is unverified.
 export const russiaSnapshot = [
   { name: "Capacity out of service", value: "51%", delta: "UA Defense Ministry, Oct 4 (Khmara) — up from >45% (Sep 21) and ~30% (Aug 29, Moscow Times)", flag: "Russian Forbes: 54% (Sep 9) · IEA: more than 20% · Dallas Fed: as much as 60% over summer 2026 · Kpler: refineries operating at 60% of capacity (Oct 10, FT); estimates vary month to month · the 51% claim can't be independently verified (AP)" },
-  { name: `Refineries struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} plants`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Volgograd halted crude processing after the Oct 2 strike (Reuters, Oct 6). Five other listed plants have confirmed shutdowns; halts at Ufa, Salavat, Omsk and Ukhta remain unverified. No restarts have been reported for the confirmed shutdowns. The Oct 15 Ryazan strike (fire confirmed by the region’s governor; AP) is a repeat hit on a plant already offline since Sep 6; damage is being assessed. The Oct 14 Saratov claim remains unconfirmed. Zelensky said Ukraine would resume refinery strikes after a three-day pause (FT, Oct 15). Export terminals have also been hit. Seven of twelve tanks at the Novoshakhtinsk refinery’s separate Rostov loading terminal were reportedly out of action by Oct 12 (Astra; Moscow Times; Euromaidan Press). Reports differ on whether the fire was extinguished; later fire reports remain unconfirmed. Terminal damage is not a new refinery shutdown." },
-  { name: "Major refineries still offline", value: "both out", delta: "Kirishi, Russia's second-largest, ~404 kb/d, halted since early September (UA.NEWS, Sep 2) · Ryazan, Moscow's main supplier, ~344 kb/d, offline since Sep 6 (Reuters, Sep 10)", flag: "Nameplate capacity, not measured lost output." },
+  { name: `Refineries and industrial sites struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} plants`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Volgograd halted crude processing after the Oct 2 strike (Reuters, Oct 6). Halts at Ufa, Salavat and Ukhta remain unverified. Reuters reported an Omsk shutdown in July, affecting units representing about three-quarters of capacity; its current operating status is unverified. At Ryazan, the Oct 15 attack shut CDU-6 and damaged pipelines, but three other primary processing units remain operational (Reuters, Oct 16). Near Surgut, the governor confirmed a fire at an industrial facility; reports identifying it as a condensate plant remain unverified. The Oct 14 Saratov claim is not counted. Separately, reports said the fire at the Novoshakhtinsk refinery’s Rostov loading terminal had spread to eight of twelve tanks by Oct 14. Terminal damage is not a new refinery shutdown." },
+  { name: "Major refinery outages", value: "Ryazan partly operating", delta: "Kirishi, Russia's second-largest, ~404 kb/d, reported halted in early September (UA.NEWS, Sep 2) · Ryazan, Moscow's main supplier, ~344 kb/d: CDU-6 shut after the Oct 15 strike; three other primary units operating (Reuters, Oct 16)", flag: "Capacity figures describe the whole plants, not measured lost output. Kirishi’s current operating status has not been verified." },
   { name: "Gasoline shortages at gas stations", value: "45–53%", delta: "Share of stations without AI-92 (45%) or AI-95 (53%) gasoline, mid-September (gdebenzin, via UNN, Sep 22); rationing has returned in about two-thirds of regions (Independent, Sep 22)", flag: "Gasoline prices +21% YTD (Moscow Times, Sep 14) · IEA: diesel output down about 30%, with waits of up to 40 hours (Oct 5)" },
   { name: "Jet fuel now imported", value: "military + civilian", delta: "Russia is importing Jet A-1 from South Korea and Egypt (UA military intelligence, Aug 29); no jet fuel or gasoline has left Russia by sea for two straight weeks (S&P Global CAS, Oct 1)", flag: "ISW (Sep 26): Geran drones use jet fuel; a kerosene shortage would limit their use" },
 ];
 
 export const russiaBanCascade = [
-  { date: "Oct 31, 2026", what: "diesel exports by producers — extended through Oct 31 by government decree (Sep 30; Moscow Times, Reuters). The US Treasury’s Oct 9 license permits transactions in Russian diesel under US sanctions; it doesn’t lift Russia’s ban. On Oct 10, the government said it had partially lifted the ban with immediate effect, ahead of the deadline; Novak’s schedule is 300,000 tons in October, 500,000 in November, 1M in December, potentially 3M a month (Interfax, Oct 12). See “What to watch next” for the announced delivery schedule." },
+  { date: "Oct 31, 2026", what: "diesel exports by producers — extended through Oct 31 by government decree (Sep 30; Moscow Times, Reuters). The US Treasury’s Oct 9 license (GL 135) permits transactions in Russian diesel under US sanctions through Apr 7, 2027; it doesn’t lift Russia’s ban. On Oct 10, the government said it had partially lifted the ban with immediate effect, ahead of the deadline; Novak’s schedule is 300,000 tons in October, 500,000 in November, 1M in December, potentially 3M a month in the medium term (Interfax, Oct 12). See “What to watch next” for the announced delivery schedule." },
   { date: "Nov 30, 2026", what: "jet fuel exports" },
   { date: "Jan 31, 2027", what: "gasoline exports and diesel exports by non-producers" },
 ];
 
 // ---------- Second-order effects (recession / rates / food — report macro channel + §11B) ----------
-// 12-mo US recession odds, July–Sep 2026. Polymarket is "by end-2027" (longer window, ~15 months).
+// 12-mo US recession odds, Jun–Oct 2026. Polymarket is "by end-2027" (longer window, ~15 months).
 // Ordered by pct desc (chart plots in array order, first = top).
 // Goldman: 25% (Mar 12) → 30% (Mar 25) → 25% (May 11) → 15% (Jun 26, current). The Sep 14
 // "raised this week" quote (Hatzius, Bloomberg TV) restated the 15% with a caveat that the
 // odds could be higher given the oil shock — not a new revision. See logs/2026-09-14.md.
+// NY Fed yield-curve model (newyorkfed.org prob_rec.pdf): printed 25 in early Sep; 12.76%
+// for the Sep 2027 horizon using data through Sep 2026, checked Oct 16 → dot at 13.
 export const recessionOdds = [
   { name: "Moody's", pct: 50, note: "highest estimate" },
   { name: "JPMorgan", pct: 35, note: "" },
-  { name: "Polymarket (by end-2027)", pct: 34, note: "covers a longer period · Oct 14" },
-  { name: "NY Fed model", pct: 25, note: "" },
+  { name: "Polymarket (by end-2027)", pct: 34, note: "covers a longer period · Oct 16" },
   { name: "TD Securities", pct: 25, note: "Sep 7" },
-  { name: "WSJ poll (74 economists)", pct: 25, note: "33% in April" },
+  { name: "WSJ poll (71 economists)", pct: 24, note: "Oct 11 · Jul 25% · Apr 33%" },
   { name: "Goldman Sachs", pct: 15, note: "since Jun 26 · restated Sep 14" },
+  { name: "NY Fed model", pct: 13, note: "yield-curve model · data through Sep" },
 ];
 
 export const ratesStats = [
@@ -938,6 +950,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-10-13", value: 5.217, note: "session close (Yahoo ^TNX) · fourteenth straight close above 5% — the first cash close since Oct 9 (the market was closed Oct 12 for Columbus Day; the bar is a real session, not a flat carryover)" },
   { date: "2026-10-14", value: 5.19, note: "session close (Yahoo ^TNX) · fifteenth straight close above 5% — the above-forecast Sep CPI (3.7% YoY) kept yields near their highs; intraday high 5.33 (Yahoo bar), and Fed's Daly said further hikes were likely needed but saw no urgency for an October move (Reuters, Oct 14)" },
   { date: "2026-10-15", value: 5.089, note: "session close (Yahoo ^TNX) · sixteenth straight close above 5% — yields eased from their highs even with the hot Sep PPI (6.3% YoY, released this morning) and a 3% WTI rally; intraday low 5.04 (Yahoo bar), and the Fed's October-hike odds slipped to ~20% (OilPrice, Oct 15)" },
+  { date: "2026-10-16", value: 5.098, note: "session close (Yahoo ^TNX) · seventeenth straight close above 5% — a normal Friday session; yields steady even with Brent at its highest settlement since May 19 and the strait attacks escalating (Yahoo, Oct 16)" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)

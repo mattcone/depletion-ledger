@@ -8,5 +8,6 @@ When asked to verify or fact-check changes:
 - Separate confirmed factual errors, misleading wording, source disagreements, and unresolved verification. Show the exact claim and supporting evidence for material findings. Do not present a partial review as complete or imply that every concern blocks publication.
 - If later evidence changes a finding, explicitly withdraw or narrow it and update the handoff file so another agent does not act on stale objections.
 - Finish the verification before delivering a verdict; do not rely on the user to request repeated searches to uncover readily available supporting evidence.
+- Log every factual edit in a dated research review handoff for Qwen. Include the original claim, replacement, supporting sources, reasoning, and unresolved uncertainty. Treat the correction as reviewable, not infallible, and link the handoff in the final response.
 
 For copyediting, follow the project's style guide if one is available to you; otherwise match the conventions visible in the existing site copy (see `site/src/pages/index.astro` and `site/src/data/crisis.ts`). Preserve the substance, figures, attribution, and uncertainty. Unless authorized to change data or model assumptions, report those corrections separately for the user or for whichever agent made the change.

@@ -10,11 +10,11 @@
     "at": "2026-10-15T16:31:00.395Z"
   },
   "omr": {
-    "lastPub": "2026-05-13",
-    "dir": "/home/mcone/depletion-ledger/research/data/omr/omr-2026-05-13",
-    "at": "2026-10-14T13:11:19.386Z",
-    "lastSummary": "2026-10-01",
-    "summaryDir": "/home/mcone/depletion-ledger/research/data/omr/omr-2026-10-01"
+    "lastPub": "2026-06-17",
+    "dir": "/home/mcone/depletion-ledger/research/data/omr/omr-2026-06-17",
+    "at": "2026-10-17T02:14:14.715Z",
+    "lastSummary": "2026-10-14",
+    "summaryDir": "/home/mcone/depletion-ledger/research/data/omr/omr-2026-10-14"
   },
   "bls": {
     "periods": {

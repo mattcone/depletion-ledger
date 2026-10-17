@@ -1,0 +1,13 @@
+{
+  "report": "IEA Oil Market Report (free version)",
+  "publication": "2026-06-17",
+  "url": "https://iea.blob.core.windows.net/assets/51c76f0c-a266-4918-9e67-b0705fef95d6/-17JUN2026__OilMarketReport.pdf",
+  "retrievedAt": "2026-10-17T02:14:14.715Z",
+  "files": [
+    {
+      "file": "OMR.pdf",
+      "sha256": "409bac13764e7c22e55e5f3d85b6e620f1d3699d35c8bd6266e4a8e2950fa61f",
+      "bytes": 3139636
+    }
+  ]
+}
