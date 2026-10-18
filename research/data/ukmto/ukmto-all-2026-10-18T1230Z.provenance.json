@@ -1,0 +1,7 @@
+{
+  "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+  "retrieved_at": "2026-10-18T12:30Z (06:30 MDT)",
+  "method": "curl with browser UA",
+  "note": "New entry #177 (attack, 2026-10-18, tug NE of Khor Fakkan, UAE, 2 projectiles, damage, 1 minor casualty). #166/#172/#173 API date reclassifications again flagged; adjudicated in the 2026-10-17 pass (explicit report-body incident dates / logged dates stand).",
+  "sha256": "0da146b1fc9caeeccfbe03f2d1960f15dc9054238333c16321ef22dde3e0d5f9"
+}
