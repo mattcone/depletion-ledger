@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-10-17";
+export const DATA_AS_OF = "2026-10-18";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -234,6 +234,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-10-15", value: 4.3344, note: "AAA release, Oct 15" },
   { date: "2026-10-16", value: 4.3271, note: "AAA release, Oct 16" },
   { date: "2026-10-17", value: 4.3085, note: "AAA release, Oct 17" },
+  { date: "2026-10-18", value: 4.2988, note: "AAA release, Oct 18" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -288,6 +289,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-10-15", value: 6.3173, tip: "AAA", note: "AAA — third straight rise, +$0.0176; still $0.21 below the Sep 22 record" },
   { date: "2026-10-16", value: 6.3261, tip: "AAA", note: "AAA — fourth straight rise, +$0.0088; still $0.20 below the Sep 22 record" },
   { date: "2026-10-17", value: 6.3276, tip: "AAA", note: "AAA — fifth straight rise, +$0.0015; still $0.20 below the Sep 22 record" },
+  { date: "2026-10-18", value: 6.3224, tip: "AAA", note: "AAA — down $0.0052 after five straight rises; $0.2052 below the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
@@ -329,9 +331,21 @@ export const dieselPriorStreak = (() => {
     fromRecord: s === dieselYtd.indexOf(dieselRecord),
   };
 })();
+// The rise streak ending the day BEFORE the latest reading (consecutive strictly
+// higher readings, one calendar day apart) — for the "down after N straight rises"
+// sub-line when the latest reading ends a rise streak with a one-day dip.
+export const dieselPriorRise = (() => {
+  let n = 0;
+  for (let i = dieselYtd.length - 2; i > 0; i--) {
+    const gap = (Date.parse(dieselYtd[i].date) - Date.parse(dieselYtd[i - 1].date)) / 86400000;
+    if (dieselYtd[i].value > dieselYtd[i - 1].value && gap === 1) n++;
+    else break;
+  }
+  return n;
+})();
 export const stats = [
   { label: "Brent", value: "$109.86", sub: "Oct 16 settlement · up $3.94 on the December contract · eighteenth session close above $100 · +45% vs pre-crisis ~$76 · highest since May 19" },
-  { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : (dieselStreak === 1 ? "down again" : `${wordNum(dieselStreak)} consecutive daily declines`)) + " · " : lastDiesel.value > dieselYtd[dieselYtd.length - 2].value && dieselPriorStreak.days > 0 ? `first rise after ${wordNum(dieselPriorStreak.days)} straight declines${dieselPriorStreak.fromRecord ? ` off the ${shortStatDate(dieselRecord.date)} record` : ""} · ` : ""}+${dieselUpPct}% vs pre-war $3.72` },
+  { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : (dieselStreak === 1 ? (dieselPriorRise > 0 ? `down after ${wordNum(dieselPriorRise)} straight rise${dieselPriorRise === 1 ? "" : "s"}` : "down again") : `${wordNum(dieselStreak)} consecutive daily declines`)) + " · " : lastDiesel.value > dieselYtd[dieselYtd.length - 2].value && dieselPriorStreak.days > 0 ? `first rise after ${wordNum(dieselPriorStreak.days)} straight declines${dieselPriorStreak.fromRecord ? ` off the ${shortStatDate(dieselRecord.date)} record` : ""} · ` : ""}+${dieselUpPct}% vs pre-war $3.72` },
   { label: "US gasoline (AAA)", value: `$${lastGasoline.value.toFixed(2)}`, sub: `${shortStatDate(lastGasoline.date)} · +${gasUpPct}% vs Jan $2.81 (AAA)` },
   { label: "SPR", value: "283.0M", sub: "Oct 9 · unchanged on the week · down 132.4M from pre-war 415.4M · lowest since Nov 1982" },
   { label: "US diesel & heating oil", value: "102.6M", sub: "Oct 9 · down 2.5M in a week · 12.3% below last year · East Coast stocks 22% below last year" },
@@ -632,7 +646,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
       { item: "Whether Saudi oil supplies keep moving. The Oct 13 attack on Aramco’s Dhahran headquarters damaged an administrative building. The ministry reported a limited fire and no casualties; Reuters sources described extensive damage across several floors. No production damage has been reported, and the Shedgum strike claim remains unconfirmed (Reuters, Oct 14). Saudi September crude output was 8.372M barrels a day. The East–West pipeline carried 5.8M barrels a day on Oct 6 (OPEC; Bloomberg, Oct 12).", why: "Watch for confirmed production losses and whether tanker loadings keep up with pipeline flows. Damage to offices does not establish lost oil output." },
       { item: "Whether the US and Iran agree on reopening the strait. Tehran was still reviewing Washington’s response to its seven-point proposal on Oct 12 (CBS). Vance says a deal requires a meaningful reduction in Iran’s enrichment capacity (Reuters, Oct 6). Trump says the US won’t strike Iran before the midterms but might afterward (CBS, TIME).", why: "Watch for a signed deal, a change in the blockade, or renewed strikes. Any could change how much oil gets through." },
       { item: "Whether the Yemen offensive changes Red Sea shipping. The coalition’s claim that it cleared Bab al-Mandeb remains unverified. Riyadh’s airport is closed through Oct 17 after repeated attacks. On Oct 13 the coalition struck Houthi fuel facilities in Sanaa, Hodeidah and Dhamar (ABC, Guardian). Trump hasn’t ruled out US strikes and said he might seek Turkish help. The Houthis threatened a swift response if the US joins the fighting (AFP).", why: "Watch whether the US joins the strikes or shipping routes become safer. A confirmed Houthi attack on non-Saudi shipping could send container traffic back around Africa." },
-      { item: "Whether oil keeps moving through Hormuz despite attacks. CENTCOM said on Oct 15 that an IRGC projectile struck GFS Pride, which sank while being towed to shore. It rejected Iran’s naval-mine claim; all 21 crew were evacuated. BBC Verify counted 12 vessels reporting attacks Oct 5–11, the most in a week since the war began. Kpler put flows through the strait at about 12.6M barrels a day on Oct 13, down from 15M in late September (BBC, Oct 16). Two Petro Dolphin crew remain missing after the Oct 11 attack. On Oct 15, Iran’s navy reported an unnamed tanker on fire in the Gulf of Oman; the report has not been independently confirmed.", why: "Watch for crew updates, further losses, and safe passage. UKMTO reported two Oct 16 tanker attacks northeast of Al Jubayl, Saudi Arabia: one by an unidentified projectile, the other by a rocket-propelled grenade fired from a small boat. Crews were reported safe. Regional exports include bypass routes and do not establish that Hormuz is back to normal." },
+      { item: "Whether oil keeps moving through Hormuz despite attacks. CENTCOM said on Oct 15 that an IRGC projectile struck GFS Pride, which sank while being towed to shore. It rejected Iran's naval-mine claim; all 21 crew were evacuated. BBC Verify counted 12 vessels reporting attacks Oct 5–11, the most in a week since the war began. Kpler put flows through the strait at about 12.6M barrels a day on Oct 13, down from 15M in late September (BBC, Oct 16). Two Petro Dolphin crew remain missing after the Oct 11 attack. On Oct 15, Iran's navy reported an unnamed tanker on fire in the Gulf of Oman; the report has not been independently confirmed.", why: "Watch for crew updates, further losses, and safe passage. UKMTO reported two tanker attacks off Al Jubayl on Oct 16, with crews safe. On Oct 18, a tug was hit northeast of Khor Fakkan, UAE; it continued despite damage, and one person was reported slightly injured. India’s shipping minister said on Oct 16 that MT ST 3 had been struck that day; all 15 Indian seafarers were safe. Regional exports include bypass routes and do not establish that Hormuz is back to normal." },
       { item: "Whether the Russian diesel deal turns into deliveries. Russia partially lifted its export ban on Oct 10. Novak’s schedule rises from 300,000 tons in October to 1M in December, potentially 3M a month in the medium term (Interfax, Oct 12). US Treasury license 135 permits Russian diesel transactions through Apr 7, 2027. Ukraine has resumed attacks: a strike shut a processing unit at Ryazan on Oct 15, and a fire followed an attack on an industrial site near Surgut on Oct 16. The Minerva Zen, initially reported as a diesel cargo, carried fertilizer (TankerTrackers).", why: "Watch for deliveries and further refinery shutdowns. The IEA’s October report says limited operating refinery capacity constrains Russian exports, so easing restrictions may do little to relieve the diesel shortage." },
     ],
   },
@@ -721,7 +735,7 @@ const russiaStruckRefineries = [
 // criterion; any halt is unverified.
 export const russiaSnapshot = [
   { name: "Capacity out of service", value: "51%", delta: "UA Defense Ministry, Oct 4 (Khmara) — up from >45% (Sep 21) and ~30% (Aug 29, Moscow Times)", flag: "Russian Forbes: 54% (Sep 9) · IEA: more than 20% · Dallas Fed: as much as 60% over summer 2026 · Kpler: refineries operating at 60% of capacity (Oct 10, FT); estimates vary month to month · the 51% claim can't be independently verified (AP)" },
-  { name: `Refineries and industrial sites struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} plants`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Volgograd halted crude processing after the Oct 2 strike (Reuters, Oct 6). Halts at Ufa, Salavat and Ukhta remain unverified. Reuters reported an Omsk shutdown in July, affecting units representing about three-quarters of capacity; its current operating status is unverified. At Ryazan, the Oct 15 attack shut CDU-6 and damaged pipelines, but three other primary processing units remain operational (Reuters, Oct 16). Near Surgut, the governor confirmed a fire at an industrial facility; reports identifying it as a condensate plant remain unverified. The Oct 14 Saratov claim is not counted. Separately, reports said the fire at the Novoshakhtinsk refinery’s Rostov loading terminal had spread to eight of twelve tanks by Oct 14. Terminal damage is not a new refinery shutdown." },
+  { name: `Refineries and industrial sites struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} plants`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Volgograd halted crude processing after the Oct 2 strike (Reuters, Oct 6). Halts at Ufa, Salavat and Ukhta remain unverified. Reuters reported an Omsk shutdown in July, affecting units representing about three-quarters of capacity; its current operating status is unverified. At Ryazan, the Oct 15 attack shut CDU-6 and damaged pipelines, but three other primary processing units remain operational (Reuters, Oct 16). Near Surgut, the governor confirmed a fire at an industrial facility; reports identifying it as a condensate plant remain unverified. The Oct 14 Saratov claim is not counted. Separately, reports said the fire at the Novoshakhtinsk refinery’s Rostov loading terminal had spread to eight of twelve tanks by Oct 14. An overnight attack on Oct 18 caused fires at the St. Petersburg oil terminal and Ruchyi oil depot. The governor reported one person killed and five injured. Terminal damage is not a new refinery shutdown." },
   { name: "Major refinery outages", value: "Ryazan partly operating", delta: "Kirishi, Russia's second-largest, ~404 kb/d, reported halted in early September (UA.NEWS, Sep 2) · Ryazan, Moscow's main supplier, ~344 kb/d: CDU-6 shut after the Oct 15 strike; three other primary units operating (Reuters, Oct 16)", flag: "Capacity figures describe the whole plants, not measured lost output. Kirishi’s current operating status has not been verified." },
   { name: "Gasoline shortages at gas stations", value: "45–53%", delta: "Share of stations without AI-92 (45%) or AI-95 (53%) gasoline, mid-September (gdebenzin, via UNN, Sep 22); rationing has returned in about two-thirds of regions (Independent, Sep 22)", flag: "Gasoline prices +21% YTD (Moscow Times, Sep 14) · IEA: diesel output down about 30%, with waits of up to 40 hours (Oct 5)" },
   { name: "Jet fuel now imported", value: "military + civilian", delta: "Russia is importing Jet A-1 from South Korea and Egypt (UA military intelligence, Aug 29); no jet fuel or gasoline has left Russia by sea for two straight weeks (S&P Global CAS, Oct 1)", flag: "ISW (Sep 26): Geran drones use jet fuel; a kerosene shortage would limit their use" },
@@ -1187,6 +1201,7 @@ export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisor
   { num: 174, type: "attack", date: "2026-10-16" },
   { num: 175, type: "attack", date: "2026-10-16" },
   { num: 176, type: "attack", date: "2026-10-17" },
+  { num: 177, type: "attack", date: "2026-10-18" },
   { num: 28082035, type: "advisory", date: "2026-10-10" },
 ];
 
@@ -1198,7 +1213,7 @@ export const ukmtoReportsBeforeWindow = Math.min(...ukmtoIncidents.map((i) => i.
 
 // Capture bounds are explicit: a quiet day must not shorten the covered period.
 export const ukmtoCoverageStart = "2026-07-01";
-export const ukmtoCoverageEnd = "2026-10-17";
+export const ukmtoCoverageEnd = "2026-10-18";
 
 // Include every Monday–Sunday week, even when it has no attack reports.
 // Partial weeks cover fewer than seven days and don't enter full-week comparisons.
