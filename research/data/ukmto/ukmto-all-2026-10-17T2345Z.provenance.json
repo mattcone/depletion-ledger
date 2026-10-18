@@ -1,0 +1,14 @@
+{
+  "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+  "retrieved_utc": "2026-10-17T23:45:00Z",
+  "retrieved_local": "2026-10-17 17:45 MDT",
+  "entries": 33,
+  "new_this_fetch": [
+    176
+  ],
+  "flags": [
+    "#166 utcDateOfIncident now 10-12 but report body states 'Incident Date: 11 Oct 2026' (explicit date wins, array keeps 10-11)",
+    "#172/#173 utcDateOfIncident moved 10-13 -> 10-14 (time-late registration times; no explicit incident date in body; logged dates stand)"
+  ],
+  "sha256": "56d0cb3cebd992209b4bc0d78289a5d358cbda688b52e6affa0ba385b23512c4"
+}

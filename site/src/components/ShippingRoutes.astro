@@ -5,7 +5,7 @@ import shipping from "../data/shipping-routes.json";
 <section class="shipping-section" aria-labelledby="shipping-title">
   <h2 id="shipping-title" class="text-xl font-bold tracking-tight">Oil shipments through Hormuz fell 77%</h2>
   <p class="intro">EIA estimates that crude oil shipments through Hormuz fell from 15.9 million barrels a day in late 2025 to 3.7 million in April–June 2026. Refined fuel shipments fell too. Crude shipments through Bab el-Mandeb rose, while traffic through the Suez Canal and Egypt's SUMED pipeline stayed near its late-2025 level.</p>
-  <p class="intro">These April–June figures are from before the Red Sea closed in July. For more recent traffic, see Kpler's ship counts in the map caption at the top of the page.</p>
+  <p class="intro">These April–June figures are from before the Red Sea closed in July. For more recent traffic, see the Kpler 7-day averages labeled on the map at the top of the page.</p>
   <p class="chart-note">Million barrels per day · Annual averages for 2023–24; quarterly averages from 2025</p>
   <div class="shipping-grid">
     {shipping.routes.map(route => (
@@ -18,6 +18,9 @@ import shipping from "../data/shipping-routes.json";
     ))}
   </div>
   <p class="source-note">Sources: EIA <a href={shipping.sources.annual.url}>World Oil Transit Chokepoints</a> (March 3, 2026) and <a href={shipping.sources.quarterly.url}>Global Energy Security Data</a> (August 12, 2026). Hollow dots mark EIA estimates: annual averages for 2023–24 and quarterly averages from 2025. Lines connect those averages. All three charts use the same scale. The 77% headline uses EIA's total for Hormuz, 21.6 to 4.9 million barrels a day; the two rounded components shown add to 4.8 in April–June. The figures cover global traffic, and a cargo can pass through more than one route. Ship tracking became less reliable around Hormuz in 2026, so those estimates may miss some traffic.</p>
+  <p class="intro">Kpler's map figures cover crude and other oil-related cargoes, excluding LNG, NGLs and Iranian-origin strait transits. Verified movements without tracking signals can be included. The pre-war baselines use March 2025–February 2026 averages with the same definitions. They differ from the EIA's periods and coverage, so the percentages aren't directly comparable. Kpler says recent preliminary figures have typically risen 1.5–2 times as more cargoes were confirmed; that is a historical pattern, not a forecast range.</p>
+  <p class="intro">Adding ship-to-ship transfers in the Gulf of Oman raises Kpler's Hormuz total from 7.6M to 9.3M barrels a day, 46% below its 17.1M baseline. Tanker crossings averaged 13 a day versus 50 pre-war; only 3 were confirmed for Oct 12.</p>
+  <p class="intro">Red Sea flows include rerouted Saudi exports. They don't measure traffic through Bab el-Mandeb alone: Yanbu lies north of the strait, so cargoes can leave the port without passing through it. Kpler reported two tankers at Yanbu on Oct 10. Separately, Reuters reported 49 crossings over Sep 26–27, with no tracked Saudi oil shipments.</p>
 </section>
 
 <script>

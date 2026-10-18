@@ -1186,6 +1186,7 @@ export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisor
   { num: 173, type: "attack", date: "2026-10-13" },
   { num: 174, type: "attack", date: "2026-10-16" },
   { num: 175, type: "attack", date: "2026-10-16" },
+  { num: 176, type: "attack", date: "2026-10-17" },
   { num: 28082035, type: "advisory", date: "2026-10-10" },
 ];
 
