@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-10-19";
+export const DATA_AS_OF = "2026-10-20";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -238,6 +238,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-10-17", value: 4.3085, note: "AAA release, Oct 17" },
   { date: "2026-10-18", value: 4.2988, note: "AAA release, Oct 18" },
   { date: "2026-10-19", value: 4.2953, note: "AAA release, Oct 19" },
+  { date: "2026-10-20", value: 4.2786, note: "AAA release, Oct 20" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -294,6 +295,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-10-17", value: 6.3276, tip: "AAA", note: "AAA — fifth straight rise, +$0.0015; still $0.20 below the Sep 22 record" },
   { date: "2026-10-18", value: 6.3224, tip: "AAA", note: "AAA — down $0.0052 after five straight rises; $0.2052 below the Sep 22 record" },
   { date: "2026-10-19", value: 6.3187, tip: "AAA", note: "AAA — second straight decline, down $0.0037" },
+  { date: "2026-10-20", value: 6.3199, tip: "AAA", note: "AAA — up $0.0012, ending the two-day decline; still $0.21 below the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
@@ -348,7 +350,7 @@ export const dieselPriorRise = (() => {
   return n;
 })();
 export const stats = [
-  { label: "Brent", value: "$109.86", sub: "Oct 16 settlement · up $3.94 on the December contract · eighteenth session close above $100 · +45% vs pre-crisis ~$76 · highest since May 19" },
+  { label: "Brent", value: "$109.55", sub: "Oct 19 settlement · down $0.31 · December contract · +44% vs pre-crisis ~$76" },
   { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : (dieselStreak === 1 ? (dieselPriorRise > 0 ? `down after ${wordNum(dieselPriorRise)} straight rise${dieselPriorRise === 1 ? "" : "s"}` : "down again") : `down ${wordNum(dieselStreak)} days in a row`)) + " · " : lastDiesel.value > dieselYtd[dieselYtd.length - 2].value && dieselPriorStreak.days > 0 ? `first rise after ${wordNum(dieselPriorStreak.days)} straight declines${dieselPriorStreak.fromRecord ? ` off the ${shortStatDate(dieselRecord.date)} record` : ""} · ` : ""}+${dieselUpPct}% vs pre-war $3.72` },
   { label: "US gasoline (AAA)", value: `$${lastGasoline.value.toFixed(2)}`, sub: `${shortStatDate(lastGasoline.date)} · +${gasUpPct}% vs Jan $2.81 (AAA)` },
   { label: "SPR", value: "283.0M", sub: "Oct 9 · unchanged on the week · down 132.4M from pre-war 415.4M · lowest since Nov 1982" },
@@ -648,8 +650,8 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     when: "Any day",
     items: [
       { item: "Whether Saudi oil supplies keep moving. The Oct 13 attack damaged Aramco’s offices; no production damage has been reported (Reuters, Oct 14). The coalition said it intercepted a missile aimed at Yanbu on Oct 16; it didn’t identify the attacker (Yemen Monitor). Yanbu is the Red Sea outlet for the East–West pipeline, reported at 5.8M barrels a day on Oct 6; its sustained average is unverified (Bloomberg, Oct 12).", why: "Watch for confirmed production losses, terminal damage at Yanbu, and whether tanker loadings keep up with pipeline flows." },
-      { item: "Whether the US accepts Iran’s offer to reopen the strait. Araghchi restated the seven-day proposal on Oct 18: reopen on day six and resume talks on day seven if the US meets Iran’s conditions. Iran is reviewing US comments; no agreement has been announced (Reuters). Lavrov arrived in Tehran on Oct 19 as Russia sought a mediation role (Moscow Times).", why: "Watch for an agreement, a change in the blockade, or renewed strikes. Any could change how much oil gets through." },
-      { item: "Whether the Yemen offensive changes Red Sea shipping. Egypt’s parliament postponed a vote on military support for Saudi Arabia; assistance would depend on a Saudi request (EgyptToday, Oct 19). A Houthi attack on a Yemeni government camp in Shabwa killed at least 18 on Oct 19, sources told Reuters. The coalition’s claim that it cleared Bab al-Mandeb remains unverified.", why: "Watch whether Egypt or the US joins the fighting, and whether shipping routes become safer. A confirmed Houthi attack on non-Saudi shipping could send container traffic back around Africa." },
+      { item: "Whether the US accepts Iran’s offer to reopen the strait. Iran is reviewing US comments on its seven-day proposal; no agreement has been announced (Reuters, Oct 18). Iranian officials described a push to raise oil prices before the US midterms (Washington Post, Oct 19).", why: "Watch for an agreement, a change in the blockade, or renewed strikes. Any could change how much oil gets through." },
+      { item: "Whether the Yemen offensive changes Red Sea shipping. Britain said on Oct 20 that RAF Typhoons will fly defensive missions to protect Saudi cities and infrastructure, without striking the Houthis (UK Ministry of Defence). Egypt’s parliament has postponed its vote on military support, which would depend on a Saudi request (Al Jazeera, Oct 19).", why: "Watch whether more countries provide military support and whether shipping routes become safer. A confirmed Houthi attack on non-Saudi shipping could send container traffic back around Africa." },
       { item: "Whether oil keeps moving through Hormuz despite attacks. UKMTO’s latest weekly assessment recorded 12 attacks and warned that some go unreported (Splash247, Oct 19). UKMTO counted 254 transits in the week to Oct 14, about 70% below pre-war (Guardian, Oct 19). Iranian mine-strike and tanker-fire claims remain unverified. Two Petro Dolphin crew remain missing after the Oct 11 attack.", why: "Watch for crew updates, confirmed losses, and safe passage. Passing without being hit doesn’t establish normal traffic volumes; regional exports also include bypass routes." },
       { item: "Whether Russian diesel reaches buyers. US Treasury license 135 permits diesel transactions through Apr 7, 2027. An Oct 16 order also waived the new Graham Act measures, leaving existing sanctions in place (White House). Novak reported an oil tanker’s departure from Dikson on Oct 17, but its cargo and destination are unverified (Anadolu). That doesn’t establish a diesel delivery.", why: "Watch for verified diesel cargoes and further refinery shutdowns. The IEA says limited operating capacity constrains Russian exports, so easing restrictions may do little to relieve the shortage." },
     ],
@@ -668,7 +670,7 @@ export const cascade = [
   { date: "Oct 31", region: "Russia", trigger: "Russia’s diesel export ban for producers runs through Oct 31, although the government announced a partial lifting on Oct 10. Novak’s delivery schedule rises from 300,000 tons in October to 1M in December (Interfax, Oct 12). US permission doesn’t lift Russia’s restrictions. The IEA’s October report says limited operating refinery capacity makes the easing unlikely to materially change global diesel supplies." },
   { date: "≈ mid-October", region: "China", trigger: "Commercial oil stocks could begin to fall faster than normal." },
   { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, making it harder for traders to find supplies. If the strait closes fully, this could happen by mid-October." },
-  { date: "≈ late October", region: "Europe, at the pump", trigger: "Consumers could face fuel shortages and higher prices, increasing pressure on governments to respond." },
+  { date: "Oct 17–20", region: "France, at the pump", trigger: "Cost-of-living and education protests turned violent over the weekend; parts of Paris, Bordeaux and Nice imposed curfews (Euronews, Oct 20). Saudi Arabia, the UAE and Bahrain agreed to sell France diesel equivalent to about 10% of its consumption in the coming weeks, according to Elysee sources (Anadolu, Oct 20)." },
   { date: "Nov 10–30", region: "Air travel", trigger: "Russia's jet-fuel export ban, in force since Jun 1, is due to end Nov 30. An extension would keep those export restrictions in place." },
 ];
 
@@ -1207,6 +1209,7 @@ export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisor
   { num: 175, type: "attack", date: "2026-10-16" },
   { num: 176, type: "attack", date: "2026-10-17" },
   { num: 177, type: "attack", date: "2026-10-18" },
+  { num: 178, type: "advisory", date: "2026-10-20" },
   { num: 28082035, type: "advisory", date: "2026-10-10" },
 ];
 
@@ -1218,7 +1221,7 @@ export const ukmtoReportsBeforeWindow = Math.min(...ukmtoIncidents.map((i) => i.
 
 // Capture bounds are explicit: a quiet day must not shorten the covered period.
 export const ukmtoCoverageStart = "2026-07-01";
-export const ukmtoCoverageEnd = "2026-10-19";
+export const ukmtoCoverageEnd = "2026-10-20";
 
 // Include every Monday–Sunday week, even when it has no attack reports.
 // Partial weeks cover fewer than seven days and don't enter full-week comparisons.
