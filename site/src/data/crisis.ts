@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-10-20";
+export const DATA_AS_OF = "2026-10-21";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -241,6 +241,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-10-18", value: 4.2988, note: "AAA release, Oct 18" },
   { date: "2026-10-19", value: 4.2953, note: "AAA release, Oct 19" },
   { date: "2026-10-20", value: 4.2786, note: "AAA release, Oct 20" },
+  { date: "2026-10-21", value: 4.2644, note: "AAA release, Oct 21" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -298,6 +299,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-10-18", value: 6.3224, tip: "AAA", note: "AAA — down $0.0052 after five straight rises; $0.2052 below the Sep 22 record" },
   { date: "2026-10-19", value: 6.3187, tip: "AAA", note: "AAA — second straight decline, down $0.0037" },
   { date: "2026-10-20", value: 6.3199, tip: "AAA", note: "AAA — up $0.0012, ending the two-day decline; still $0.21 below the Sep 22 record" },
+  { date: "2026-10-21", value: 6.3174, tip: "AAA", note: "AAA — down $0.0025 after a one-day rise; still $0.21 below the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
@@ -353,7 +355,7 @@ export const dieselPriorRise = (() => {
 })();
 export const stats = [
   { label: "Brent", value: "$108.79", sub: "Oct 20 settlement · December contract · down $0.76" },
-  { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : (dieselStreak === 1 ? (dieselPriorRise > 0 ? `down after ${wordNum(dieselPriorRise)} straight rise${dieselPriorRise === 1 ? "" : "s"}` : "down again") : `down ${wordNum(dieselStreak)} days in a row`)) + " · " : lastDiesel.value > dieselYtd[dieselYtd.length - 2].value && dieselPriorStreak.days > 0 ? `first rise after ${wordNum(dieselPriorStreak.days)} straight declines${dieselPriorStreak.fromRecord ? ` off the ${shortStatDate(dieselRecord.date)} record` : ""} · ` : ""}+${dieselUpPct}% vs pre-war $3.72` },
+  { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : (dieselStreak === 1 ? (dieselPriorRise > 0 ? (dieselPriorRise === 1 ? "down after yesterday’s rise" : `down after ${wordNum(dieselPriorRise)} straight rises`) : "down again") : `down ${wordNum(dieselStreak)} days in a row`)) + " · " : lastDiesel.value > dieselYtd[dieselYtd.length - 2].value && dieselPriorStreak.days > 0 ? `first rise after ${wordNum(dieselPriorStreak.days)} straight declines${dieselPriorStreak.fromRecord ? ` off the ${shortStatDate(dieselRecord.date)} record` : ""} · ` : ""}+${dieselUpPct}% vs pre-war $3.72` },
   { label: "US gasoline (AAA)", value: `$${lastGasoline.value.toFixed(2)}`, sub: `${shortStatDate(lastGasoline.date)} · +${gasUpPct}% vs Jan $2.81 (AAA)` },
   { label: "SPR", value: "283.0M", sub: "Oct 9 · unchanged on the week · down 132.4M from pre-war 415.4M · lowest since Nov 1982" },
   { label: "US diesel & heating oil", value: "102.6M", sub: "Oct 9 · down 2.5M in a week · 12.3% below last year · East Coast stocks 22% below last year" },
@@ -652,9 +654,9 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     when: "Any day",
     items: [
       { item: "Whether Saudi oil supplies keep moving. The Oct 13 attack damaged Aramco’s offices; no production damage has been reported (Reuters, Oct 14). The coalition said it intercepted a missile aimed at Yanbu on Oct 16; it didn’t identify the attacker (Yemen Monitor). Yanbu is the Red Sea outlet for the East–West pipeline, reported at 5.8M barrels a day on Oct 6; its sustained average is unverified (Bloomberg, Oct 12).", why: "Watch for confirmed production losses, terminal damage at Yanbu, and whether tanker loadings keep up with pipeline flows." },
-      { item: "Whether a new proposal leads to a US–Iran agreement. Qatar and Pakistan submitted a compromise plan, sources told The New Arab on Oct 20. Pakistan’s army chief reportedly delivered it in Tehran. No agreement has been officially announced.", why: "Watch for an agreement, a change in the blockade, or renewed strikes. Any could change how much oil gets through." },
-      { item: "Whether the Yemen offensive changes Red Sea shipping. Britain said on Oct 20 that RAF Typhoons will fly defensive missions to protect Saudi cities and infrastructure, without striking the Houthis (UK Ministry of Defence). Egypt’s parliament has postponed its vote on military support, which would depend on a Saudi request (Al Jazeera, Oct 19).", why: "Watch whether more countries provide military support and whether shipping routes become safer. A confirmed Houthi attack on non-Saudi shipping could send container traffic back around Africa." },
-      { item: "Whether oil keeps moving through Hormuz despite attacks. Kpler put crude exports at about 82% of pre-war levels and refined products at 44% (DPA, Oct 20). UKMTO’s latest weekly assessment recorded 12 attacks (Splash247, Oct 19). Iranian mine-strike claims remain unverified. Two Petro Dolphin crew remain missing after the Oct 11 attack.", why: "Watch for crew updates, confirmed losses, and safe passage. Export volumes and ship counts measure different things; this report doesn’t replace the map’s earlier Kpler reading." },
+      { item: "Whether a new proposal leads to a US–Iran agreement. Qatar and Pakistan submitted a compromise plan involving nuclear inspections and access to frozen Iranian funds, sources told The New Arab on Oct 20. The sources described positive responses from both sides; no agreement has been officially announced.", why: "Watch for an agreement, a change in the blockade, or renewed strikes. Any could change how much oil gets through." },
+      { item: "Whether the Yemen offensive changes Red Sea shipping. RAF Typhoons will fly defensive missions to protect Saudi cities and infrastructure, without striking the Houthis (UK Ministry of Defence, Oct 20). Egypt’s proposed military support still requires parliamentary approval and a Saudi request. Houthi claims of strikes on the Shaybah oilfield remain unverified (Reuters, Oct 20).", why: "Watch whether more countries provide military support and whether shipping routes become safer. A confirmed Houthi attack on non-Saudi shipping could send container traffic back around Africa." },
+      { item: "Whether oil keeps moving through Hormuz despite attacks. A tanker fire off Bukha, Oman, was extinguished on Oct 21; a second tanker reported a projectile strike off Al Faw, Iraq, on Oct 20. Both crews are safe, according to UKMTO. Kpler put crude exports at 82% of pre-war levels and refined products at 44% (DPA, Oct 20). Bloomberg separately reports preliminary regional oil exports just above pre-war levels (Oct 20).", why: "Watch for safe passage and sustained volumes. Regional exports include routes beyond Hormuz; attacks can continue while more oil gets out. Two Petro Dolphin crew remain missing after the Oct 11 attack." },
       { item: "Whether Russian diesel reaches buyers. US Treasury license 135 permits diesel transactions through Apr 7, 2027. An Oct 16 order also waived the new Graham Act measures, leaving existing sanctions in place (White House). Novak reported an oil tanker’s departure from Dikson on Oct 17, but its cargo and destination are unverified (Anadolu). That doesn’t establish a diesel delivery.", why: "Watch for verified diesel cargoes and further refinery shutdowns. The IEA says limited operating capacity constrains Russian exports, so easing restrictions may do little to relieve the shortage." },
     ],
   },
@@ -1113,6 +1115,17 @@ export const wtiNonFred = wtiWeekly.filter((p) => !p.fred).map((p) => p.date);
 // times, which is impossible. The warnings are the primary source; the API field is
 // wrong. Rows date the INCIDENT (Oct 13), not the report issuance (Oct 14, time-late).
 // Originals archived: research/sources/ukmto-2026-10-14-review/ (PDFs + provenance).
+// #180 (Oct 21 fetch): UKMTO WARNING 180-26, time-late report — tanker struck by an
+// unknown projectile 30NM southeast of Al Faw, Iraq (northern Arabian Gulf), 20 Oct
+// 1830 UTC (explicit "Incident Date: 20 Oct 2026" in the body); crew safe, no reported
+// damage/environmental impact. Registered Oct 21 10:26 UTC. (QC Intel's "near Duqm"
+// headline is a misplacement — the UKMTO record says Al Faw; primary source wins.)
+// 28082035 (Oct 21 fetch): the API REPLACED this record — the Oct 10 advisory (tanker
+// and military forces, Gulf of Oman, sitecoreId 996a55c6) is gone; the slot now holds
+// UKMTO WARNING 179-26: tanker struck by an unknown projectile 11NM west of Bukha,
+// Oman (Strait of Hormuz), 21 Oct 0145 UTC (explicit in body), fire extinguished, at
+// anchor, all crew safe. New sitecoreId e89b2678. Mirrored here as attack/2026-10-21;
+// the internal warning number 179-26 explains the publicly missing #179.
 // NOTE: keep this array's body to entry lines only — ukmto-fetch.mjs parses each line
 // strictly and rewrites the whole array on --apply, so inline comments would break it.
 export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisory" | "suspicious activity"; date: string }[] = [
@@ -1213,7 +1226,8 @@ export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisor
   { num: 176, type: "attack", date: "2026-10-17" },
   { num: 177, type: "attack", date: "2026-10-18" },
   { num: 178, type: "advisory", date: "2026-10-20" },
-  { num: 28082035, type: "advisory", date: "2026-10-10" },
+  { num: 180, type: "attack", date: "2026-10-20" },
+  { num: 28082035, type: "attack", date: "2026-10-21" },
 ];
 
 // Reports that existed before the captured window — the smallest number present,
@@ -1224,7 +1238,7 @@ export const ukmtoReportsBeforeWindow = Math.min(...ukmtoIncidents.map((i) => i.
 
 // Capture bounds are explicit: a quiet day must not shorten the covered period.
 export const ukmtoCoverageStart = "2026-07-01";
-export const ukmtoCoverageEnd = "2026-10-20";
+export const ukmtoCoverageEnd = "2026-10-21";
 
 // Include every Monday–Sunday week, even when it has no attack reports.
 // Partial weeks cover fewer than seven days and don't enter full-week comparisons.

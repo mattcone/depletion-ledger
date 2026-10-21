@@ -1,0 +1,7 @@
+{
+ "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+ "fetched_utc": "2026-10-21T1318Z",
+ "method": "curl with browser UA (Cloudflare)",
+ "note": "archived manually \u2014 ukmto-fetch.mjs pass had new entry #180 but did not write the archive",
+ "sha256": "085248ba25f359ee98df2b889f58329a5bbffe4e0862e794ec80f71bf3f8806f"
+}
