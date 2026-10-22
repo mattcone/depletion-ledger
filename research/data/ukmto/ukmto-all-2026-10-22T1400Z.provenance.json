@@ -1,0 +1,7 @@
+{
+ "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+ "fetched_utc": "2026-10-22T1400Z",
+ "method": "curl with browser UA (Cloudflare)",
+ "note": "archived during the Oct 22 data-correction pass — confirms the API dropped the 28082035 advisory slot and re-issued WARNING 179-26 (Bukha, sitecoreId e89b2678) under sequential #179; 37 entries, all sequential #143-#180",
+ "sha256": "3d6b455ebc13bb17501344e69de458f96a018bc315d776512d242fb2d4a63eae"
+}

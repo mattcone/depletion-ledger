@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-10-21";
+export const DATA_AS_OF = "2026-10-22";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -65,6 +65,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-10-16", value: 109.86, tip: "settlement · up $3.94 (Rigzone/Reuters)", note: "Settlement (Rigzone/Reuters wire, December contract; +$3.94 vs Oct 15, +3.7%) — the highest settlement since May 19 and an eighteenth session close above $100; intraday it touched $110, the first time since May 20. Up on the week's surge in strait attacks — two ships sank this week and the MT ST 3 crude tanker was struck off Oman on Oct 16 — plus Ukraine's resumption of Russian refinery strikes; Bloomberg says prospects for imminent supply relief have faded. Data quality: the Yahoo BZ=F bar of 109.69 ran $0.17 off the wire; the wire value is plotted (Rigzone, Reuters, Oct 16)." },
   { date: "2026-10-19", value: 109.55, tip: "settlement", note: "December contract settlement, down $0.31 (0.3%) from Oct 16 (CNBC). Yahoo BZ=F close: $109.26." },
   { date: "2026-10-20", value: 108.79, tip: "settlement · down $0.76 (eOption/AFP)", note: "Settlement (eOption closing wrap, December contract; −$0.76 vs Oct 19 — AFP and Reuters-derived reporting agree; the Yahoo BZ=F bar closed at 109.12, the settlement is plotted per the Oct 13/16 precedent). A twentieth session close above $100. AFP reports an intraday high of $111.99; EnergyNow’s earlier indicated price was $111.57. Prices later eased amid reports of a new US–Iran proposal (The New Arab, Oct 20; no official agreement announced)." },
+  { date: "2026-10-21", value: 108.82, tip: "settlement · up $0.03 (Newsquawk/CNBC)", note: "Settlement (Newsquawk/CNBC wire, December contract; +$0.03 vs Oct 20 — the Yahoo BZ=F bar matches). A twenty-first session close above $100; eOption independently reports the same settlement and daily change." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -158,7 +159,8 @@ export const wtiWeekly: SeriesPoint[] = [
   { fred: false, date: "2026-10-15", value: 97.97, note: "Settlement (CNBC/Newsquawk wire, November contract; +$2.88 vs Oct 14, +3.0%) — up on the week's 8M-barrel US crude draw, the renewed strait attacks, and reports of US planning for new strikes on Iran including the MOAB (CNBC, Oct 15). Data quality: the Yahoo CL=F bar of 96.11 is an artifact (its session high of 96.39 is below the wire settlement); the wire value is plotted." },
   { fred: false, date: "2026-10-16", value: 101.41, note: "Settlement (Rigzone/Reuters wire, November contract; +$3.44 vs Oct 15, +3.5%) — the highest settlement since Sep 17, on the strait-attack surge (two ships sank this week; the MT ST 3 crude tanker struck off Oman) and the week's 8.6M-barrel US crude draw. Data quality: the Yahoo CL=F bar of 99.04 ran $2.37 below the wire settlement; the wire value is plotted (Rigzone, Reuters, Oct 16)." },
   { date: "2026-10-19", value: 103.66, note: "November contract settlement, up $2.25 (2.2%) from Oct 16 (CNBC). December settled at $98.54. The lower Yahoo CL=F reading requires a contract-roll check before it can be classified as a feed error." },
-  { date: "2026-10-20", value: 98.10, note: "December front-month close (Yahoo CL=F bar) — the front month ROLLED today: the November contract's final settlement was $101.79 (MarketScreener, Oct 20), down $1.87 from its Oct 19 close. The step down from Oct 19's $103.66 is the contract switch plus the November contract's own decline, not a single-contract move. December’s prior settlement was $98.54; today’s Yahoo close is $0.44 lower. The Yahoo close is not independently verified as the official settlement." },
+  { date: "2026-10-20", value: 97.82, note: "December front-month settlement (Reuters, Oct 20 — the AP NYMEX table and DOB/LSEG agree; supersedes the unverified $98.10 Yahoo CL=F close that was plotted Oct 21) — the front month ROLLED today: the November contract's final settlement was $101.79 (MarketScreener, Oct 20). The step down from Oct 19's $103.66 is the contract switch plus the November contract's own decline, not a single-contract move. December's prior settlement was $98.54, so the December contract itself fell $0.72." },
+  { date: "2026-10-21", value: 97.15, note: "Settlement (Newsquawk/CNBC wire, December contract; −$0.67 vs the Oct 20 settlement — the Yahoo CL=F bar matches; eOption independently reports the same settlement and daily change)." },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -242,6 +244,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-10-19", value: 4.2953, note: "AAA release, Oct 19" },
   { date: "2026-10-20", value: 4.2786, note: "AAA release, Oct 20" },
   { date: "2026-10-21", value: 4.2644, note: "AAA release, Oct 21" },
+  { date: "2026-10-22", value: 4.2701, note: "AAA release, Oct 22" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -300,6 +303,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-10-19", value: 6.3187, tip: "AAA", note: "AAA — second straight decline, down $0.0037" },
   { date: "2026-10-20", value: 6.3199, tip: "AAA", note: "AAA — up $0.0012, ending the two-day decline; still $0.21 below the Sep 22 record" },
   { date: "2026-10-21", value: 6.3174, tip: "AAA", note: "AAA — down $0.0025 after a one-day rise; still $0.21 below the Sep 22 record" },
+  { date: "2026-10-22", value: 6.3090, tip: "AAA", note: "AAA — down $0.0084, second consecutive daily decline; $0.22 below the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
@@ -354,7 +358,7 @@ export const dieselPriorRise = (() => {
   return n;
 })();
 export const stats = [
-  { label: "Brent", value: "$108.79", sub: "Oct 20 settlement · December contract · down $0.76" },
+  { label: "Brent", value: "$108.82", sub: "Oct 21 settlement · December contract · up $0.03 · 21st close above $100" },
   { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : (dieselStreak === 1 ? (dieselPriorRise > 0 ? (dieselPriorRise === 1 ? "down after yesterday’s rise" : `down after ${wordNum(dieselPriorRise)} straight rises`) : "down again") : `down ${wordNum(dieselStreak)} days in a row`)) + " · " : lastDiesel.value > dieselYtd[dieselYtd.length - 2].value && dieselPriorStreak.days > 0 ? `first rise after ${wordNum(dieselPriorStreak.days)} straight declines${dieselPriorStreak.fromRecord ? ` off the ${shortStatDate(dieselRecord.date)} record` : ""} · ` : ""}+${dieselUpPct}% vs pre-war $3.72` },
   { label: "US gasoline (AAA)", value: `$${lastGasoline.value.toFixed(2)}`, sub: `${shortStatDate(lastGasoline.date)} · +${gasUpPct}% vs Jan $2.81 (AAA)` },
   { label: "SPR", value: "282.7M", sub: "Oct 16 · down 0.3M on the week · down 132.7M from pre-war 415.4M · lowest since Nov 1982" },
@@ -658,17 +662,28 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "Whether Saudi oil supplies keep moving. The Oct 13 attack damaged Aramco’s offices; no production damage has been reported (Reuters, Oct 14). The coalition said it intercepted a missile aimed at Yanbu on Oct 16; it didn’t identify the attacker (Yemen Monitor). Yanbu is the Red Sea outlet for the East–West pipeline, reported at 5.8M barrels a day on Oct 6; its sustained average is unverified (Bloomberg, Oct 12).", why: "Watch for confirmed production losses, terminal damage at Yanbu, and whether tanker loadings keep up with pipeline flows." },
-      { item: "Whether a new proposal leads to a US–Iran agreement. Qatar and Pakistan submitted a compromise plan involving nuclear inspections and access to frozen Iranian funds, sources told The New Arab on Oct 20. The sources described positive responses from both sides; no agreement has been officially announced.", why: "Watch for an agreement, a change in the blockade, or renewed strikes. Any could change how much oil gets through." },
-      { item: "Whether the Yemen offensive changes Red Sea shipping. RAF Typhoons will fly defensive missions to protect Saudi cities and infrastructure, without striking the Houthis (UK Ministry of Defence, Oct 20). Egypt’s proposed military support still requires parliamentary approval and a Saudi request. Houthi claims of strikes on the Shaybah oilfield remain unverified (Reuters, Oct 20).", why: "Watch whether more countries provide military support and whether shipping routes become safer. A confirmed Houthi attack on non-Saudi shipping could send container traffic back around Africa." },
-      { item: "Whether oil keeps moving through Hormuz despite attacks. A tanker fire off Bukha, Oman, was extinguished on Oct 21; a second tanker reported a projectile strike off Al Faw, Iraq, on Oct 20. Both crews are safe, according to UKMTO. Kpler put crude exports at 82% of pre-war levels and refined products at 44% (DPA, Oct 20). Bloomberg separately reports preliminary regional oil exports just above pre-war levels (Oct 20).", why: "Watch for safe passage and sustained volumes. Regional exports include routes beyond Hormuz; attacks can continue while more oil gets out. Two Petro Dolphin crew remain missing after the Oct 11 attack." },
-      { item: "Whether Russian diesel reaches buyers. US Treasury license 135 permits diesel transactions through Apr 7, 2027. An Oct 16 order also waived the new Graham Act measures, leaving existing sanctions in place (White House). Novak reported an oil tanker’s departure from Dikson on Oct 17, but its cargo and destination are unverified (Anadolu). That doesn’t establish a diesel delivery.", why: "Watch for verified diesel cargoes and further refinery shutdowns. The IEA says limited operating capacity constrains Russian exports, so easing restrictions may do little to relieve the shortage." },
+      { item: "Whether attacks on Saudi Arabia disrupt oil supplies. The Dammam airport attack on Oct 21 killed two people and injured eight, according to an updated Saudi aviation authority statement (Gulf News, Oct 22). Drone debris killed two people near Shaybah, but the Saudi Energy Ministry said oil operations were unaffected (Bloomberg). The US ordered non-emergency diplomatic staff and families to leave Saudi Arabia on Oct 21.", why: "Watch for confirmed production or terminal damage and interruptions to tanker loadings." },
+      { item: "Whether the US and Iran reach an agreement or resume strikes. Trump said on Oct 21 that the US was “not negotiating” and something would happen “fairly soon” (Anadolu). White House spokesperson Anna Kelly separately told Drop Site that the US would not attack Iran before the Nov 3 midterms. No agreement has been announced.", why: "Watch for an official agreement, changes to the blockade, or renewed strikes." },
+      { item: "Whether oil keeps moving through Hormuz despite attacks. The Kuwait-flagged Al Dasma was hit off Bukha on Oct 21; UKMTO said all crew were safe. Iran claimed seven tankers were hit or damaged overnight into Oct 22; the claim remains unverified (AP). Separately, Kpler reported regional oil flows above prewar levels for the week ending Oct 18 (WSJ).", why: "Watch for sustained volumes and safe passage. Regional flows include routes beyond Hormuz. Two Petro Dolphin crew remain missing after the Oct 11 attack." },
+      { item: "Whether Russian diesel reaches buyers. Deputy Prime Minister Alexander Novak said a tanker carrying 40,000 metric tons was scheduled to leave for the US on Oct 22 (Anadolu, Oct 21). US Treasury license 135 permits diesel transactions through Apr 7, 2027.", why: "Watch for a verified departure and delivery. The IEA says refinery constraints could limit how much diesel Russia can export." },
     ],
   },
   {
-    when: "Oct 21",
+    when: "Oct 23",
     items: [
-      { item: "The Oct 21 EIA report put SPR stocks at 282.7M barrels for the week ending Oct 16, down 0.3M. Diesel and heating-oil stocks rose to 104.3M but remained 9.7% below last year; East Coast stocks were 22% lower. DOE sought bids for an exchange of up to 17M barrels on Oct 16. Argus separately reported awards of 20–25M on Oct 13, citing sources; DOE confirmation remains unverified. The next EIA report is due Oct 28 at 10:30 a.m. Eastern.", why: "Watch whether SPR withdrawals continue and whether diesel stocks keep recovering. Deliveries from the sixth offering are scheduled for November–December." },
+      { item: "Turkey plans to host foreign ministers from Egypt, Pakistan, Saudi Arabia, Britain, France, and Germany in Istanbul on Oct 23, a diplomatic source told Reuters. Their agenda includes Hormuz, Yemen, and other regional conflicts. This is the first meeting in this seven-country format.", why: "Watch for concrete shipping or security commitments. A meeting alone doesn't establish progress toward a US–Iran agreement." },
+    ],
+  },
+  {
+    when: "Oct 26",
+    items: [
+      { item: "Egypt’s parliament is due to consider military support for Saudi Arabia on Oct 26, after postponing the vote (Reuters, Oct 19). Sisi says the proposed support would defend Saudi territory, not attack Yemen.", why: "Watch what parliament authorizes and whether Saudi Arabia requests help. Approval alone would not establish a deployment or a change in shipping conditions." },
+    ],
+  },
+  {
+    when: "Oct 28",
+    items: [
+      { item: "The next EIA weekly report is due Oct 28 at 10:30 a.m. Eastern, covering the week ending Oct 23. The previous report put SPR stocks at 282.7M barrels, down 0.3M; diesel and heating-oil stocks were 104.3M, 9.7% below last year. East Coast stocks were 22% lower.", why: "Watch whether SPR withdrawals continue and diesel stocks keep recovering. Deliveries from the sixth offering are scheduled for November–December." },
     ],
   },
 ];
@@ -677,9 +692,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
 export const cascade = [
   { date: "Each weekly EIA report (next: Oct 28)", region: "US East Coast", trigger: "US diesel and heating-oil stocks rose by 1.7M barrels to 104.3M in the week ending Oct 16, but remained 9.7% below last year. East Coast stocks were 22% below last year. The national total was equivalent to about 27 days of use at the four-week average rate of 3.9M barrels a day; that is a comparison, not a countdown to empty tanks." },
   { date: "Oct 31", region: "Russia", trigger: "Russia’s diesel export ban for producers runs through Oct 31, although the government announced a partial lifting on Oct 10. Novak’s delivery schedule rises from 300,000 tons in October to 1M in December (Interfax, Oct 12). US permission doesn’t lift Russia’s restrictions. The IEA’s October report says limited operating refinery capacity makes the easing unlikely to materially change global diesel supplies." },
-  { date: "≈ mid-October", region: "China", trigger: "Commercial oil stocks could begin to fall faster than normal." },
-  { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, making it harder for traders to find supplies. If the strait closes fully, this could happen by mid-October." },
-  { date: "Oct 17–20", region: "France, at the pump", trigger: "Cost-of-living and education protests turned violent over the weekend; parts of Paris, Bordeaux and Nice imposed curfews (Euronews, Oct 20). Saudi Arabia, the UAE and Bahrain agreed to sell France diesel equivalent to about 10% of its diesel consumption in the coming weeks, according to Elysee sources (Anadolu, Oct 20)." },
+  { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, making it harder for traders to find supplies." },
   { date: "Nov 10–30", region: "Air travel", trigger: "Russia's jet-fuel export ban, in force since Jun 1, is due to end Nov 30. An extension would keep those export restrictions in place." },
 ];
 
@@ -858,6 +871,7 @@ export const gasTtf: GasPt[] = [
   { date: "2026-09-25", value: 24.1, assessed: true, tip: "JOGMEC (pub. Sep 28), Oct delivery", note: "Global LNG Hub (JOGMEC, published Sep 28) — USD 24.1/MBtu, Oct delivery; down from 26.7 on Sep 18 as forecasts turned warmer and traders hoped US–Iran talks would ease tensions" },
   { date: "2026-10-02", value: 24.6, assessed: true, tip: "JOGMEC (pub. Oct 5), Nov delivery", note: "Global LNG Hub (JOGMEC, published Oct 5) — USD 24.6/MBtu, Nov delivery; up from 24.1 on Sep 25 as the front month rolled to November and traders refocused on winter supply risks and storage well below the prior year's level" },
   { date: "2026-10-09", value: 26.7, assessed: true, tip: "JOGMEC (pub. Oct 13), Nov delivery", note: "Global LNG Hub (JOGMEC, published Oct 13) — USD 26.7/MBtu on Oct 9, Nov delivery; up from the 24.6 assessment of Oct 2 on tanker attacks in the strait, colder European weather, and constraints at Norway's Dvalin and Heidrun fields. Swapped in for the Oct 9 CFD market quote (25.7)." },
+  { date: "2026-10-16", value: 28.9, assessed: true, tip: "JOGMEC (pub. Oct 19), Nov delivery", note: "Global LNG Hub (JOGMEC, published Oct 19) — USD 28.9/MBtu on Oct 16, Nov delivery; up from 26.7 on Oct 9 on tight spot LNG supply, reduced Norwegian gas supply, colder European weather, and Strait of Hormuz supply concerns." },
 ];
 
 export const gasJkm: GasPt[] = [
@@ -899,6 +913,7 @@ export const gasJkm: GasPt[] = [
   { date: "2026-09-25", value: 25.2, assessed: true, tip: "JOGMEC: low-$25s · Nov delivery · pub. Sep 28", note: "assessed: low-USD 25s (JOGMEC, published Sep 28, Nov delivery; down from low-USD 27s on Sep 18)" },
   { date: "2026-10-02", value: 24.8, assessed: true, tip: "JOGMEC: high-$24s · Nov delivery · pub. Oct 5", note: "assessed: high-USD 24s (JOGMEC, published Oct 5, Nov delivery; down from low-USD 25s on Sep 25 as East Asian buying stayed subdued and winter outlooks turned mild)" },
   { date: "2026-10-09", value: 26.2, assessed: true, tip: "JOGMEC: low-$26s · Nov delivery · pub. Oct 13", note: "assessed: low-USD 26s (JOGMEC, published Oct 13, Nov delivery; up from high-USD 24s on Oct 2 as renewed attacks in the strait and Middle East tensions lifted LNG supply concerns)" },
+  { date: "2026-10-16", value: 29.8, assessed: true, tip: "JOGMEC: high-$29s · Dec delivery · pub. Oct 19", note: "assessed: high-USD 29s (JOGMEC, published Oct 19, Dec delivery; up from low-USD 26s on Oct 9 as the delivery month rolled to December and spot procurement by South Korea and Thailand picked up on Middle East supply risks)" },
 ];
 
 export const gasPreClosure = { ttf: 10.99, jkm: 10.66 };
@@ -984,6 +999,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-10-16", value: 5.098, note: "session close (Yahoo ^TNX) · seventeenth straight close above 5% — a normal Friday session; yields steady even with Brent at its highest settlement since May 19 and the strait attacks escalating (Yahoo, Oct 16)" },
   { date: "2026-10-19", value: 5.136, note: "session close (Yahoo, same-day) · eighteenth straight close above 5%" },
   { date: "2026-10-20", value: 5.117, note: "session close (Yahoo, same-day) · nineteenth straight close above 5%" },
+  { date: "2026-10-21", value: 5.146, note: "session close (Yahoo, same-day) · twentieth straight close above 5%" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
@@ -1125,12 +1141,22 @@ export const wtiNonFred = wtiWeekly.filter((p) => !p.fred).map((p) => p.date);
 // 1830 UTC (explicit "Incident Date: 20 Oct 2026" in the body); crew safe, no reported
 // damage/environmental impact. Registered Oct 21 10:26 UTC. (QC Intel's "near Duqm"
 // headline is a misplacement — the UKMTO record says Al Faw; primary source wins.)
-// 28082035 (Oct 21 fetch): the API REPLACED this record — the Oct 10 advisory (tanker
-// and military forces, Gulf of Oman, sitecoreId 996a55c6) is gone; the slot now holds
-// UKMTO WARNING 179-26: tanker struck by an unknown projectile 11NM west of Bukha,
-// Oman (Strait of Hormuz), 21 Oct 0145 UTC (explicit in body), fire extinguished, at
-// anchor, all crew safe. New sitecoreId e89b2678. Mirrored here as attack/2026-10-21;
-// the internal warning number 179-26 explains the publicly missing #179.
+// 28082035: an ADVISORY-SCHEME slot (advisories carry both a sequential number
+// and a separate large ID — the Oct 10 tanker-and-military-forces advisory is #163
+// in the sequential scheme and 28082035 in the advisory scheme; same sitecoreId
+// 996a55c6). Oct 21 fetch: the API REPURPOSED the 28082035 slot to hold UKMTO
+// WARNING 179-26: tanker struck by an unknown projectile 11NM west of Bukha, Oman
+// (Strait of Hormuz), 21 Oct 0145 UTC (explicit in body), fire extinguished, at
+// anchor, all crew safe (sitecoreId e89b2678). Mirrored here as attack/2026-10-21;
+// the internal warning number 179-26 explains the publicly missing #179. The
+// advisory itself still stands, as #163.
+// Oct 22 follow-up: the API DROPPED the 28082035 slot and re-issued the identical
+// record (same sitecoreId e89b2678, same created timestamp Oct 21 12:07 UTC) under
+// the sequential number #179. The Oct 22 run then appended #179 as a "new"
+// incident and the Bukha attack was double-counted (rows 179 and 28082035). The
+// attack is counted ONCE, under #179; the 28082035 row was removed Oct 22 (see
+// log 2026-10-22, "Data corrections"). The Oct 10 advisory was withdrawn by
+// UKMTO itself; its payload remains in the archive.
 // NOTE: keep this array's body to entry lines only — ukmto-fetch.mjs parses each line
 // strictly and rewrites the whole array on --apply, so inline comments would break it.
 export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisory" | "suspicious activity"; date: string }[] = [
@@ -1231,8 +1257,8 @@ export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisor
   { num: 176, type: "attack", date: "2026-10-17" },
   { num: 177, type: "attack", date: "2026-10-18" },
   { num: 178, type: "advisory", date: "2026-10-20" },
+  { num: 179, type: "attack", date: "2026-10-21" },
   { num: 180, type: "attack", date: "2026-10-20" },
-  { num: 28082035, type: "attack", date: "2026-10-21" },
 ];
 
 // Reports that existed before the captured window — the smallest number present,
@@ -1243,7 +1269,7 @@ export const ukmtoReportsBeforeWindow = Math.min(...ukmtoIncidents.map((i) => i.
 
 // Capture bounds are explicit: a quiet day must not shorten the covered period.
 export const ukmtoCoverageStart = "2026-07-01";
-export const ukmtoCoverageEnd = "2026-10-21";
+export const ukmtoCoverageEnd = "2026-10-22";
 
 // Include every Monday–Sunday week, even when it has no attack reports.
 // Partial weeks cover fewer than seven days and don't enter full-week comparisons.
