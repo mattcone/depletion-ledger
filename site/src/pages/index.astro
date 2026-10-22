@@ -6,14 +6,16 @@ import TopNav from "../components/TopNav.astro";
 import ShippingRoutes from "../components/ShippingRoutes.astro";
 import UkmtoChart from "../components/UkmtoChart.astro";
 import SupplyFlow from "../components/SupplyFlow.astro";
-import BranchWeightRow from "../components/BranchWeightRow.astro";
+// Oct 21, 2026: BranchWeightRow and the corridor-odds section were removed from the
+// dashboard (the odds remain published on the model page and in the dated research
+// logs; the probability history stays in crisis.ts's branchWeights, untouched).
 import {
   stats, brentYtd, brentMonthlyAvgs, wtiWeekly, gasolineYtd, gasolinePreCrisis,
   dieselYtd, dieselOldRecord, dieselPreWar, sprWeekly, sprFloors,
   wordNum, ordinal, lastGasoline as lastGas, lastDiesel, gasUpPct, dieselUpPct, dieselStreak,
   treasury10y, worldBalance, usRefineryUtil2026,
   treasuryAbove5Streak, refineryBelow95Streak, treasuryNonFred,
-  branchWeights, branchTracks, watchGroups, cascade,
+  watchGroups, cascade,
   DATA_AS_OF, CRISIS_DAY_1,
   russiaCapacityAnchors, russiaCurrentSpread, russiaSnapshot, russiaBanCascade,
   globalRefining, demandDecline,
@@ -171,13 +173,6 @@ const flipAria =
   `Above zero, production exceeded consumption and stocks grew. ` +
   `Below zero, consumption exceeded production and stocks fell.`;
 
-// Odds history: keep the most recent changes visible and fold the older ones into a
-// collapsed "earlier" block, so the section reads as a recent trajectory, not an
-// archive. (The full sourced history lives in research/logs/.)
-const RECENT_BRANCHES = 4;
-const recentBranch = branchWeights.slice(-RECENT_BRANCHES).reverse();
-const earlierBranch = branchWeights.slice(0, -RECENT_BRANCHES).reverse();
-
 // ── World oil stocks panels (below the flip chart) ─────────────────────────────
 // Every computed number in the panel copy/captions is derived from the data file,
 // not re-typed — re-typed arithmetic already produced one wrong residual.
@@ -216,22 +211,12 @@ const wsPanelAAria = `OECD on-land oil stocks, commercial plus government-contro
 // so the copy, the chart, and the record can never drift apart.
 const wsEiaRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === "steo-2026-10-global-observed");
 const wsPersRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === "persistence-2026-09-global-observed");
-// The scenario names and colors live in the assumptions file, not in the chart code.
-import worldStocksAssumptions from "../data/world-stocks-assumptions.json";
-// Active scenario version: the newest version date among the scenario records
-// (record_id = scenario-<sid>-<YYYY-MM-DD>-global-observed). The same rule is used
-// by the chart code below and by research/scoring/regen-scenarios.py (checker +
-// table generator). Older versions stay in the data for scoring; the page — copy,
-// captions, aria, and plotted lines — always uses the active version.
-const wsScenarioVersion = (worldStocksData as any).forecast_records
-  .filter((r: any) => typeof r.record_id === "string" && r.record_id.startsWith("scenario-"))
-  .reduce((max: string, r: any) => {
-    const m = r.record_id.match(/-(\d{4}-\d{2}-\d{2})-global-observed$/);
-    return m && m[1] > max ? m[1] : max;
-  }, "");
-const wsScHoldsRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === `scenario-corridor-holds-${wsScenarioVersion}-global-observed`);
-const wsScStandoffRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === `scenario-standoff-${wsScenarioVersion}-global-observed`);
-const wsScLapseRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === `scenario-corridor-lapses-${wsScenarioVersion}-global-observed`);
+// Oct 21, 2026: the scenario paths were withdrawn from the dashboard (the dated
+// correction on the model page explains why). The records remain in
+// world-stocks.json untouched, for scoring and the archive; the page no longer
+// plots them, so it no longer needs their records or the assumptions file's
+// scenario colors/names. research/scoring/regen-scenarios.py still owns the
+// active-version rule for the archived records.
 const wsPersF = worldStocksData.series.persistence_baseline_mb.points;
 // The copy's anchor comes from the SAVED record, not the latest observation: when the
 // observation is revised or extended (e.g. September publishes), the description of the
@@ -243,26 +228,19 @@ const wsMonthStr = (ym: string) => new Date(ym + "-15T12:00:00").toLocaleDateStr
 // anchor. That is a DISPLAY transform only — the stored records are the source of truth
 // and are never modified. All five paths must agree on the anchor before any of them can
 // be compared on one shared zero.
-const wsAnchorRecords = [wsEiaRec, wsPersRec, wsScHoldsRec, wsScStandoffRec, wsScLapseRec];
+const wsAnchorRecords = [wsEiaRec, wsPersRec];
 if (!wsAnchorRecords.every((r: any) => r.anchor.period === wsFcAnchorRec.period && r.anchor.value_mb === wsFcAnchorRec.value_mb)) {
   throw new Error("Panel B: forecast records disagree on the anchor period/value; the rebased paths would not share a zero.");
 }
 const wsRebase = (v: number) => v - wsFcAnchorRec.value_mb;
 const wsPersMonthly = wsPersF[0].value;
 // Endpoint values come from the records' final stored targets, rebased to the shared
-// anchor — the lapse record's final target is its validity horizon (Dec 2027 for the
-// v2026-09-18 conditional extension), so every month name is derived, not re-typed.
-const wsScHoldsEnd = wsScHoldsRec.targets[wsScHoldsRec.targets.length - 1];
-const wsScStandoffEnd = wsScStandoffRec.targets[wsScStandoffRec.targets.length - 1];
-const wsScLapseEnd = wsScLapseRec.targets[wsScLapseRec.targets.length - 1];
+// anchor, so every month name is derived, not re-typed. (The scenario records' end
+// points left the page with the Oct 21 withdrawal; the records themselves are
+// untouched.)
 const wsEiaEnd = wsEiaRec.targets[wsEiaRec.targets.length - 1];
 const wsPersEnd = wsPersRec.targets[wsPersRec.targets.length - 1];
-const wsLapseEndMonthStr = wsMonthStr(wsScLapseEnd.period);
 const wsSigned = (v: number) => `${v > 0 ? "+" : "−"}${Math.abs(Math.round(v)).toLocaleString()}`;
-const wsHoldsEndStr = wsSigned(wsRebase(wsScHoldsEnd.target_cumulative_mb));
-const wsStandoffEndStr = wsSigned(wsRebase(wsScStandoffEnd.target_cumulative_mb));
-const wsLapseEndStr = wsSigned(wsRebase(wsScLapseEnd.target_cumulative_mb));
-const wsHoldsEndMonthStr = wsMonthStr(wsScHoldsEnd.period);
 const wsEiaEndStr = wsSigned(wsRebase(wsEiaEnd.target_cumulative_mb));
 const wsPersEndStr = wsSigned(wsRebase(wsPersEnd.target_cumulative_mb));
 const wsPersMonthlyStr = `−${Math.abs(wsPersMonthly).toFixed(1)}`;
@@ -280,7 +258,11 @@ const wsObsLast = wsObsCum[wsObsCum.length - 1];
 const wsObsLastMonthStr = new Date(wsObsLast.period + "-15T12:00:00").toLocaleDateString("en-US", { month: "long", year: "numeric" });
 const wsObsLastRebased = Math.round(wsObsLast.value - wsFcAnchorRec.value_mb);
 const wsObsSinceAnchorStr = ` ${Math.abs(wsObsLastRebased)} mb ${wsObsLastRebased < 0 ? "below" : "above"} the ${wsFcAnchorMonthStr} starting point`;
-const wsPanelBAria = `Line chart of the change in global oil inventories since ${wsFcAnchorMonthStr}, in million barrels, starting at zero in ${wsFcAnchorMonthStr} — zero means inventories unchanged since that month, not empty storage. Three scenarios, revised on 15 October 2026 after September's reported values — rebased to the Oct 6, 2026 EIA production and consumption forecast and starting at the observed September (the solid dark line), with assumptions explained on the model page: corridor holds (solid) reaches ${wsHoldsEndStr} by ${wsHoldsEndMonthStr}; standoff (dashed) reaches ${wsStandoffEndStr}; corridor lapses (long dashed) reaches ${wsLapseEndStr} by ${wsLapseEndMonthStr}, the final month calculated. Two optional comparisons, hidden until selected: the EIA Short-Term Energy Outlook (Oct 6, 2026 release), with a September estimate and forecasts from October, calculated from production minus consumption, ${wsEiaEndStr} by ${wsMonthStr(wsEiaEnd.period)}; and the recent trend, which repeats the June–August 2026 average monthly change (${wsPersMonthlyStr} million barrels a month), ${wsPersEndStr} by ${wsMonthStr(wsPersEnd.period)}. The solid dark line is the IEA's reported global observed inventories, rebased to the same anchor: through ${wsObsLastMonthStr}, ${wsSigned(wsObsLastRebased)} mb — the reported months so far. A fourth optional comparison, hidden until selected, shows the original September 19 (v1) scenario paths as faded lines for comparison against the revised v2 paths. All lines combine crude oil and refined fuels, and none counts government stock releases as a loss.`;
+// Oct 21, 2026: the beta layer's public checkbox, dataset and /beta/ method page
+// were removed with the scenario withdrawal. The beta research artifacts (the
+// dated data files, generator, tests and method document under research/) are
+// preserved and no longer referenced by the public pages.
+const wsPanelBAria = `Line chart of the change in global oil inventories since ${wsFcAnchorMonthStr}, in million barrels, starting at zero in ${wsFcAnchorMonthStr} — zero means inventories unchanged since that month, not empty storage. Three lines, all shown: the solid dark line is the IEA's reported global observed inventories, through ${wsObsLastMonthStr} (${wsSigned(wsObsLastRebased)} mb from the starting level); the dashed line is the EIA Short-Term Energy Outlook (Oct 6, 2026 release), with a September estimate and forecasts from October, ${wsEiaEndStr} by ${wsMonthStr(wsEiaEnd.period)}; the dotted line is the recent trend, an extrapolation that repeats the June–August 2026 average monthly change (${wsPersMonthlyStr} million barrels a month), ${wsPersEndStr} by ${wsMonthStr(wsPersEnd.period)}. The scenario lines previously shown here were withdrawn on October 21, 2026; the original forecasts, assumptions, and results remain in the forecast archive. All lines combine crude oil and refined fuels, and none counts government stock releases as a loss.`;
 
 // Watch list as flat ledger rows (date column + text). Tufte: structure from the date
 // column and whitespace, not boxes or shaded bands.
@@ -498,18 +480,16 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               make things like the clothes we wear.
             </p>
             <p>
-              Since the US and Israel went to war with Iran in February 2026, the world has been
-              using more oil than it produces. Saudi Arabia's bypass pipeline has restarted,
-              but attacks and restrictions still disrupt shipping. Russian refinery strikes and
-              export bans add to fuel shortages. Brent's December contract was above $100
-              a barrel on Oct 20. Stored oil makes up the supply shortfall;
-              the US Strategic Petroleum Reserve is at its lowest level since 1982.
+              The war with Iran disrupted oil production and shipping. Gulf exports have since
+              recovered despite continued attacks, but moving oil remains expensive. The International
+              Energy Agency reported declining inventories through September. Russian refinery strikes
+              and export bans add to fuel shortages, and the US Strategic Petroleum Reserve
+              is at its lowest level since 1982.
             </p>
             <p>
               The Depletion Ledger tracks oil supplies, fuel prices, and effects on people and
-              businesses. The charts show what's changed and how storage could change under three
-              possible outcomes, with odds for each. We save the predictions so you can check them
-              against what happens.
+              businesses. The charts distinguish reported data from estimates and agency
+              forecasts, with sources and dates so you can follow what's changing.
             </p>
           </div>
           <p class="mt-4 font-mono text-xs text-faint tabular">
@@ -735,32 +715,31 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           <h2 class="text-2xl font-bold tracking-tight">Supply</h2>
           <p class="mt-3 max-w-3xl text-[13px] leading-relaxed text-ink/70">
             When the world uses more oil than it produces, the difference comes out of storage.
-            These charts show changes in stored oil, how stocks could rise or fall under different
-            scenarios, and how much oil remains in the US emergency reserve.
+            These charts show the reported record of changes in stored oil since the war began
+            and how much oil remains in the US emergency reserve.
           </p>
         </div>
 
         <!-- World oil balance: the flip (moved from the old #flip section — now leads Supply) -->
         <div class="mb-3">
+          <!-- Oct 21, 2026 (later pass): the IEA dated-statement headline added earlier
+               today was reverted to the production heading by owner instruction; the
+               dated-statement editorial rule remains recorded in MODEL.md and the
+               research log, suspended for display. -->
           <h2 class="text-xl font-bold tracking-tight">The world is using more oil than it produces</h2>
           <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
-            Before the war, the world produced about 4 million more barrels of oil per day than
-            it used. Since the war began, it has used stored oil to cover the shortfall in most
+            Before the war, the world produced about 4 million more barrels of oil per day than it
+            used. Since the war began, it has used stored oil to cover the shortfall in most
             months. The EIA estimates that stocks rose slightly in July.
-            The IEA's October 14 report estimates a full-year supply loss of 5.8 million barrels per day,
-            about 6% of the world's oil, and expects Middle East oil flows to remain below normal
-            until 2027. The EIA estimates global production at 100.4 million barrels per day in
-            August. The IEA’s September report estimated that more than 10 million barrels per day of Gulf
-            production remained shut down in August. Saudi production alone fell by 2.3 million barrels per day that month, to 5.97 million.
+            The IEA's October 14 report estimates a full-year supply loss of 5.8 million
+            barrels per day, about 6% of the world's oil. It expects Middle East oil flows
+            to remain below normal until 2027, though later shipping reports show a recovery.
           </p>
           <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
             The IEA has coordinated a release of 400 million barrels from 32 countries.
-            Withdrawals from China's commercial stockpiles are estimated at about 2–3 million
-            barrels a day, based on customs data, while its official reserve remains untouched.
-            In its Sep 9 report, the EIA separately estimates that global commercial stocks have
-            fallen about 400 million barrels this year; that figure and the IEA's estimate of
-            509 million barrels withdrawn from the end of February through September cover different sets of stocks over
-            different periods.
+            Its reported inventory decline of 509 million barrels from the end of February
+            through September includes stocks held by companies, governments, and ships.
+            That inventory change is separate from the announced release program.
           </p>
         </div>
         <div class="h-80 sm:h-[400px]">
@@ -794,6 +773,23 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           aria={ukmtoAria}
         />
 
+        <!-- Oct 21, 2026 (later pass): the "cost of moving oil" snapshot section was
+             removed — four scattered point-in-time observations don't yet make a
+             dashboard feature, and the volume-vs-cost point survives in the one
+             sentence below. The full snapshot (freight ~$37.37/bbl, war-risk up to
+             10% of vessel value vs <3% prewar, >24M b/d week e/Oct 18 vs 23.3M
+             prewar, strait ~14M b/d ~82% prewar, bypass share 40% vs 17%, the
+             Kaneva quote, and the definitions note separating the three Kpler
+             measures) is preserved in the dated research log. A cost chart or
+             section may return only with a consistent, comparable series — a
+             dated user decision. -->
+        <p class="mt-6 max-w-prose text-sm leading-relaxed text-ink/80">
+          Kpler reported Middle East oil flows above 24 million barrels a day in the week
+          ending October 18, exceeding the prewar average of 23.3 million despite continued
+          attacks. Freight and war-risk insurance remain expensive
+          (<a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="https://www.wsj.com/world/middle-east/more-oil-is-now-coming-out-of-the-persian-gulf-than-before-the-iran-war-6a6d1670">Wall Street Journal, Oct 20</a>).
+        </p>
+
         <!-- Panel A: OECD commercial stocks (levels) -->
         <div class="mt-12 mb-3">
           <h2 class="text-xl font-bold tracking-tight">Oil stocks in OECD countries fell to a five-year low in { wsMbLastMonthStr }</h2>
@@ -819,109 +815,40 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           The vertical line marks the start of the war on February 28, 2026.
         </p>
 
-        <!-- Panel B: change in global inventories under the three scenarios, rebased to the
-             shared anchor (0 = the anchor month's reported level). -->
+        <!-- Panel B: the reported inventory record + the two forward comparisons, rebased
+             to the shared anchor (0 = the anchor month's reported level). All three
+             lines are on by default (no toggles). Oct 21, 2026: the scenario paths and
+             the beta layer were withdrawn from this chart (the dated correction on the
+             model page explains why); the archived records are untouched. -->
         <div class="mt-12 mb-3">
-          <h2 class="text-xl font-bold tracking-tight">How oil in storage could change through 2027</h2>
+          <h2 class="text-xl font-bold tracking-tight">Oil inventories: observations and outlook</h2>
           <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
-            These scenarios show how global oil stocks could change if shipping recovers,
-            the standoff continues, or the corridor closes. Zero marks the { wsFcAnchorMonthStr } stock
-            level, not empty tanks. The revised paths start at September's reported value; the
-            dark line tracks reported stocks.
+            The chart compares IEA-reported inventories with the EIA outlook and a
+            continuation of the recent trend. Zero marks the { wsFcAnchorMonthStr } stock
+            level, not empty tanks. The agencies' figures cover different sets of stocks.
           </p>
           <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
-            We revised the paths on October 15 after September's results. The scenarios were
-            less accurate than the recent-trend baseline in the first scored month. <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/model/">See forecast results, assumptions and model changes</a>.
+            We withdrew our scenario projections on October 21; the original forecasts,
+            assumptions, and results remain in <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/model/">the forecast archive</a>.
           </p>
         </div>
         <div class="h-80 sm:h-[380px]">
           <canvas id="globalObservedChart" role="img" aria-label={ wsPanelBAria }></canvas>
         </div>
-        <div class="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2">
-          <label class="flex cursor-pointer select-none items-center gap-2 text-sm text-ink/90">
-            <input type="checkbox" id="toggleEia" class="h-4 w-4 cursor-pointer accent-[#6b675c]" />
-            EIA forecast
-          </label>
-          <label class="flex cursor-pointer select-none items-center gap-2 text-sm text-ink/90">
-            <input type="checkbox" id="toggleTrend" class="h-4 w-4 cursor-pointer accent-[#a39d8f]" />
-            Recent trend
-          </label>
-          <label class="flex cursor-pointer select-none items-center gap-2 text-sm text-ink/90">
-            <input type="checkbox" id="toggleV1" class="h-4 w-4 cursor-pointer accent-[#8a867a]" />
-            September 19 paths (v1)
-          </label>
-        </div>
-        <p class="mt-1 max-w-prose text-xs leading-relaxed text-faint">
-          Select a comparison to see the EIA's October 6 outlook, the June–August trend
-          ({ wsPersMonthlyStr } million barrels a month), or the original September 19 paths.
-          All use the same August reference level.
-        </p>
-        <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
-          Change since { wsFcAnchorMonthStr }, in million barrels. We adjust production and
-          consumption from the EIA's October 6 outlook for each scenario — the October 15 v2
-          revision, starting at the observed September. The EIA comparison
-          uses its October 6 outlook: a September estimate followed by forecasts from October.
-          Recent trend repeats IEA-reported changes. The solid dark line is the IEA's reported
-          global observed inventories (October 14, 2026 edition), through September 2026.
-          The two agencies' figures cover different sets of oil stocks. The scenarios don't
-          calculate further cuts in oil use as stocks fall.
+        <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular max-w-prose">
+          Change since { wsFcAnchorMonthStr }, in million barrels. Dark line: the IEA's
+          reported global observed inventories (Oct 14, 2026 edition), through September 2026.
+          Dashed: the EIA Short-Term Energy Outlook, Oct 6, 2026 release — a September
+          estimate plus forecasts from October. Dotted: the recent trend, repeating the
+          June–August average monthly change ({ wsPersMonthlyStr } million barrels a month).
+          All lines combine crude oil and refined fuels. Transfers from government reserves
+          to commercial stocks do not reduce the combined total.
         </p>
 
-      <!-- Likely outcomes -->
-      <section class="mt-12">
-        <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-          <h2 class="text-xl font-bold tracking-tight">The model's odds for each outcome</h2>
-          <p class="font-mono text-[11px] text-faint">Our estimates, updated when events meet the rules on the model page.</p>
-        </div>
-        <p class="mb-5 max-w-3xl text-sm leading-relaxed text-ink/80">
-          The bars show our estimated chance of each outcome and how those estimates have changed.
-          The colors match the three lines above. A higher percentage means we think that outcome
-          is more likely. It doesn't tell you how accurate the storage projection will be.
-        </p>
-        <div class="space-y-3">
-          {recentBranch.map((b) => (
-            <BranchWeightRow weight={b} />
-          ))}
-        </div>
-        <div class="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-xs text-faint">
-          <span><span class="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm bg-calm"></span>corridor holds</span>
-          <span><span class="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm bg-crude"></span>standoff</span>
-          <span><span class="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm bg-alarm"></span>corridor lapses</span>
-        </div>
-        {earlierBranch.length > 0 && (
-          <details class="mt-5">
-            <summary class="cursor-pointer select-none text-xs font-medium text-faint hover:text-ink/80">
-              Show earlier odds ({earlierBranch[earlierBranch.length - 1].date}–{earlierBranch[0].date})
-            </summary>
-            <div class="mt-3 space-y-3">
-              {earlierBranch.map((b) => (
-                <BranchWeightRow weight={b} />
-              ))}
-            </div>
-          </details>
-        )}
-
-        <!-- What the tracks are -->
-        <div class="mt-8 grid gap-6 md:grid-cols-3">
-          {branchTracks.map((t) => (
-            <div class={`border-l-2 pl-4 ${t.border}`}>
-              <div class="flex items-baseline justify-between gap-2">
-                <p class="font-semibold">{t.name}</p>
-                <p class="tabular font-mono text-sm font-semibold">{t.weight}</p>
-              </div>
-              <p class="mt-1.5 text-[13px] leading-relaxed text-ink/75">{t.what}</p>
-              <p class="mt-1.5 text-[13px] leading-relaxed text-faint">{t.path}</p>
-            </div>
-          ))}
-        </div>
-
-        <!-- How the weights work — full mechanism moved to the model page (Sep 11 pass) -->
-        <p class="mt-8 max-w-4xl text-[13px] leading-relaxed text-ink/75">
-          We use judgment to assign these odds and set rules in advance for changing them.
-          A pipeline restarting or a shipping agreement breaking down could prompt a change;
-          a quiet week alone wouldn't. You can read the rules and see what we're watching on <a class="underline decoration-rule underline-offset-4 hover:decoration-crude" href="/model/">the model page</a>.
-        </p>
-      </section>
+        <!-- Oct 21, 2026: the "Likely outcomes" (corridor odds) section was removed from
+             the dashboard. The probability history, outcome definitions and change rules
+             remain on the model page and in the dated research logs; the data stay in
+             crisis.ts (branchWeights/branchTracks) untouched. -->
 
         <!-- Commercial crude inventories: the supply-side ledger, above the SPR -->
         <div class="mt-12 mb-4 flex flex-wrap items-baseline justify-between gap-2">
@@ -929,18 +856,18 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         </div>
         <div class="mb-6 max-w-[65ch] text-[13px]">
           <p class="text-[13px] leading-relaxed text-ink/80">
-            These stocks exclude the Strategic Petroleum Reserve (SPR). They stood at 415.6 million
-            barrels on Oct 9, up from 404.5 million on Jul 24. The EIA's Oct 15 report shows
-            stocks fell by 8.6 million barrels, the second straight weekly decline and the
-            second-largest weekly withdrawal of 2026. Crude imports fell by 0.8 million barrels a day that
-            week, to 6.0 million a day. Stocks were 8.2 million barrels below the same week
+            These stocks exclude the Strategic Petroleum Reserve (SPR). They stood at 412.5 million
+            barrels on Oct 16, up from 404.5 million on Jul 24. The EIA's Oct 21 report shows
+            stocks fell by 3.1 million barrels, the third straight weekly decline.
+            Crude imports fell by 0.3 million barrels a day that
+            week, to 5.8 million a day. Stocks were 10.3 million barrels below the same week
             last year. SPR releases
             have helped supply commercial oil users this year. Moving oil from the reserve to
             commercial storage leaves the combined amount unchanged.
           </p>
         </div>
         <div class="relative h-72">
-          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus the same weeks in 2025: 2026 stocks rose from 419.1 million in early January to a peak of 465.7 million on Apr 17, fell to 404.5 million on Jul 24 — the lowest level since the war began and 22.2 million barrels below the same week in 2025 — rose again to 428.9 million on Aug 21, eased over the next three weeks, rose for a second straight week to 427.3 million on Sep 25, then fell 3.2 million barrels to 424.1 million on Oct 2 and fell 8.6 million more to 415.6 million on Oct 9 — back under the 2025 line (423.8 million) for the first time since Sep 4."></canvas>
+          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus the same weeks in 2025: 2026 stocks rose from 419.1 million in early January to a peak of 465.7 million on Apr 17, fell to 404.5 million on Jul 24 — the lowest level since the war began and 22.2 million barrels below the same week in 2025 — rose again to 428.9 million on Aug 21, eased over the next three weeks, rose for a second straight week to 427.3 million on Sep 25, then fell 3.2 million barrels to 424.1 million on Oct 2, fell 8.6 million more to 415.6 million on Oct 9 — back under the 2025 line (423.8 million) for the first time since Sep 4 — and fell 3.1 million more to 412.5 million on Oct 16, 10.3 million below the same week in 2025 (422.8 million)."></canvas>
         </div>
 
         <p class="mt-3 font-mono text-[11px] text-faint">EIA weekly stocks, excluding the SPR, in million barrels. The Jul 24 low was 22.2M below the same week in 2025.</p>
@@ -954,10 +881,9 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           <p class="text-[13px] leading-relaxed text-ink/80">
             The Strategic Petroleum Reserve (SPR) is the US government's emergency supply of crude
             oil. It was created after the energy shortages of the 1970s. The reserve held 415.4 million
-            barrels when the war began. The latest report, for the week ending Oct 9, puts it at
-            283.0 million, unchanged on the week after a 0.8 million barrel decline the week
-            before. Weekly withdrawals have slowed from 3.1 million barrels in the week ending
-            Aug 28.
+            barrels when the war began. The latest report, for the week ending Oct 16, puts it
+            at 282.7 million, down 0.3 million on the week after a flat week. Weekly
+            withdrawals have slowed from 3.1 million barrels in the week ending Aug 28.
             For comparison, the reserve peaked at 727 million barrels in December 2009
             and stood at 270.5 million in August 1982. The releases help make up for
             supplies that can't leave the Gulf.
@@ -996,7 +922,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         </div>
         <!-- SPR chart (full width) -->
         <div class="relative h-96">
-            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 283.0 million on Oct 9. Model thresholds at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
+            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 282.7 million on Oct 16. Reference levels at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
             <div
               id="sprFloorTip"
               class="pointer-events-none absolute z-10 hidden max-w-[300px] border border-rule bg-[rgba(255,255,248,0.97)] px-3 py-2 text-[12px] leading-snug text-ink shadow-sm"
@@ -1004,7 +930,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             ></div>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            The red lines mark the model's reserve thresholds, or <em>floors</em>. At about <span class="font-semibold text-ink">300M</span> barrels, some caverns risk damage and
+            The red lines mark reserve reference levels, or <em>floors</em>. At about <span class="font-semibold text-ink">300M</span> barrels, some caverns risk damage and
             can't safely be refilled after a withdrawal. The first report below that threshold
             was for the week ending Aug 7, at 298.7 million barrels. The other floors are <span class="font-semibold text-ink">250M</span>, the GEF minimum
             for sustained withdrawals; <span class="font-semibold text-ink">180M</span>, the hard
@@ -1552,7 +1478,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
             The timeline uses delays seen after energy prices rose in 2007–08 and 2022 to show
             when food prices could rise. It's a rough comparison with those periods, not a
-            forecast from this model.
+            forecast of food prices.
           </p>
           <div class="mt-5 grid grid-cols-1 border border-rule sm:grid-cols-3">
             {
@@ -1641,9 +1567,10 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // World stocks panels: provenance per point lives in this file (see research/world-stocks-research.md)
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       import ws from "../data/world-stocks.json";
-      // Scenario colors/names live in the assumptions file (single source for both).
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      import worldStocksAssumptions from "../data/world-stocks-assumptions.json";
+      // Oct 21, 2026: the beta v3 data file and the scenario-assumptions file are no longer
+      // read here — the beta layer's dataset/checkbox and the scenario paths were withdrawn
+      // from the public chart. Both data files remain in site/src/data/ untouched (the beta
+      // is a dated research artifact; the scenario records live in world-stocks.json).
 
       // ---- Tufte chart treatment (tufte-data-viz skill) ----
       // No legends (direct labels), no gridlines (hover crosshair), no animation,
@@ -2117,8 +2044,8 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               { dataset: 0, index: 0, text: "2026", ...endpoint, align: "left", dx: 40, dy: -44 },
               { dataset: 0, index: cc26.length - 1, text: cc26[cc26.length - 1].y.toFixed(1), ...endpoint, dy: -16, halo: "#f2f1ec" },
               { dataset: 1, index: 0, text: "2025", ...endpoint, align: "left", dx: 40, dy: 30, color: "#8a867a" },
-              // Endpoint values: 2026 ends 415.6, 2025 ends 423.8 — the lines diverged in
-              // Oct (2026 now ~33px below 2025), so the old collision fix stays harmlessly in
+              // Endpoint values: 2026 ends 412.5, 2025 ends 422.8 — the lines diverged in
+              // Oct (2026 now ~50px below 2025), so the old collision fix stays harmlessly in
               // place: 2026's value above its line, 2025's below.
               { dataset: 1, index: cc25.length - 1, text: cc25[cc25.length - 1].y.toFixed(1), ...endpoint, dy: 16, color: "#8a867a", halo: "#f2f1ec" },
               // Short form: the long YoY version clipped at 390px; the caption carries it.
@@ -3276,7 +3203,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // Plain-language explanations for the four red floor lines — shown in an HTML
       // tooltip when the cursor is within a few pixels of a line (below).
       const floorExplains: Record<number, string> = {
-        300: "300M — the model's cavern-damage threshold. Below it, caverns can't safely be refilled after withdrawals. First report below this level: week ending Aug 7.",
+        300: "300M — cavern-damage reference level. Below it, caverns can't safely be refilled after withdrawals. First report below this level: week ending Aug 7.",
         250: "250M — the operational minimum cited by the reserve's operators. No projected date: withdrawals run through DOE contracts and scheduled deliveries, and they could pause.",
         180: "180M — hard operable limit",
         70: "70M — the DOE's stated safe minimum: the draw stops here, it does not continue",
@@ -3339,7 +3266,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           ]),
           directLabels([
             // Actuals endpoint
-            { dataset: 0, index: anchorIdx, text: "283.0M · Oct 9", align: "right", dx: -12, dy: 16, font: "600 11.5px Georgia, serif" },
+            { dataset: 0, index: anchorIdx, text: "282.7M · Oct 16", align: "right", dx: -12, dy: 16, font: "600 11.5px Georgia, serif" },
           ]),
         ],
       });
@@ -3508,33 +3435,22 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
 
       }
 
-      // Panel B: the change in global inventories under the three scenarios, rebased to the
-      // shared anchor (0 = the anchor month's reported level). The historical bars and
-      // cumulative dots are no longer drawn — their data stays in the file; this chart shows
-      // the three scenario lines by default, with the EIA and persistence paths as opt-in
-      // overlays (checkboxes), drawn more lightly. Rebased values are a DISPLAY transform
-      // only: displayed = stored − stored anchor; the records are never modified. Checkbox
-      // visibility is chart state only — scoring reads the records, not the chart.
+      // Panel B: the change in global inventories, rebased to the shared anchor
+      // (0 = the anchor month's reported level). Oct 21, 2026: the three scenario
+      // lines, the v1 ghost lines and the beta v3 layer were withdrawn from this
+      // chart (the dated correction on the model page explains why) — their records
+      // remain in world-stocks.json and the dated beta file, untouched, for scoring
+      // and the archive. What remains: the IEA reported observed line (always on)
+      // plus two opt-in overlays, the EIA outlook and the recent-trend extrapolation,
+      // drawn more lightly. Rebased values are a DISPLAY transform only: displayed =
+      // stored − stored anchor; the records are never modified. Checkbox visibility
+      // is chart state only — it never touches the records.
       {
         const eiaRec = (ws as any).forecast_records.find((r: any) => r.record_id === "steo-2026-10-global-observed");
         const persRec = (ws as any).forecast_records.find((r: any) => r.record_id === "persistence-2026-09-global-observed");
-        // Phase 3 scenario records + colors (from the assumptions file's scenario list).
-        const scColor = (id: string) => (worldStocksAssumptions as any).scenarios.find((s: any) => s.id === id)?.color ?? "#8a867a";
-        const scName = (id: string) => (worldStocksAssumptions as any).scenarios.find((s: any) => s.id === id)?.name ?? id;
-        // Active scenario version — same rule as the page frontmatter and the drift
-        // checker: the newest version date among the scenario record ids.
-        const activeVersion = (ws as any).forecast_records
-          .filter((r: any) => typeof r.record_id === "string" && r.record_id.startsWith("scenario-"))
-          .reduce((max: string, r: any) => {
-            const m = r.record_id.match(/-(\d{4}-\d{2}-\d{2})-global-observed$/);
-            return m && m[1] > max ? m[1] : max;
-          }, "");
-        const scHoldsRec = (ws as any).forecast_records.find((r: any) => r.record_id === `scenario-corridor-holds-${activeVersion}-global-observed`);
-        const scStandoffRec = (ws as any).forecast_records.find((r: any) => r.record_id === `scenario-standoff-${activeVersion}-global-observed`);
-        const scLapseRec = (ws as any).forecast_records.find((r: any) => r.record_id === `scenario-corridor-lapses-${activeVersion}-global-observed`);
-        // One shared anchor for all five paths — verify before comparing them on one zero.
-        const anchorRec = scHoldsRec.anchor;
-        for (const rec of [eiaRec, persRec, scHoldsRec, scStandoffRec, scLapseRec]) {
+        // One shared anchor for the plotted paths — verify before comparing on one zero.
+        const anchorRec = eiaRec.anchor;
+        for (const rec of [eiaRec, persRec]) {
           if (rec.anchor.period !== anchorRec.period || rec.anchor.value_mb !== anchorRec.value_mb) {
             throw new Error("globalObservedChart: records disagree on the anchor; the rebased paths would not share a zero.");
           }
@@ -3545,7 +3461,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         // Axis: the records' anchor month through their shared horizon — derived from the
         // records (anchor period + every target month), not re-typed.
         const axisSet = new Set<string>();
-        for (const rec of [eiaRec, persRec, scHoldsRec, scStandoffRec, scLapseRec]) {
+        for (const rec of [eiaRec, persRec]) {
           axisSet.add(rec.anchor.period);
           if (rec.rebase_start) axisSet.add(rec.rebase_start.period); // v2: the observed month the path restarts from
           for (const t of rec.targets) axisSet.add(t.period);
@@ -3573,80 +3489,9 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           });
         const eiaLine = fcLine(eiaRec);
         const persLine = fcLine(persRec);
-        const holdsLine = fcLine(scHoldsRec);
-        const standoffLine = fcLine(scStandoffRec);
-        const lapseLine = fcLine(scLapseRec);
-        // Ghost lines: the newest scenario version STRICTLY OLDER than the active one (the
-        // original September 19 v1 paths). Shown as faded lines only when the user toggles
-        // them on — an opt-in comparison against the revised v2 main lines, not a default.
-        const allScenVersions = (ws as any).forecast_records
-          .filter((r: any) => typeof r.record_id === "string" && r.record_id.startsWith("scenario-"))
-          .map((r: any) => r.record_id.match(/-(\d{4}-\d{2}-\d{2})-global-observed$/)?.[1])
-          .filter(Boolean).sort();
-        const ghostVersion = (allScenVersions.filter((v: string) => v < activeVersion).pop() ?? null) as string | null;
-        const ghostHoldsRec = ghostVersion ? (ws as any).forecast_records.find((r: any) => r.record_id === `scenario-corridor-holds-${ghostVersion}-global-observed`) : null;
-        const ghostStandoffRec = ghostVersion ? (ws as any).forecast_records.find((r: any) => r.record_id === `scenario-standoff-${ghostVersion}-global-observed`) : null;
-        const ghostLapseRec = ghostVersion ? (ws as any).forecast_records.find((r: any) => r.record_id === `scenario-corridor-lapses-${ghostVersion}-global-observed`) : null;
-        const ghostHoldsLine = ghostHoldsRec ? fcLine(ghostHoldsRec) : [];
-        const ghostStandoffLine = ghostStandoffRec ? fcLine(ghostStandoffRec) : [];
-        const ghostLapseLine = ghostLapseRec ? fcLine(ghostLapseRec) : [];
-        // Fade a hex scenario color to a low-alpha rgba (the ghosts are lighter than the main lines).
-        const fade = (hex: string, a: number) => {
-          const h = hex.replace("#", "");
-          const r = parseInt(h.slice(0, 2), 16), g = parseInt(h.slice(2, 4), 16), b = parseInt(h.slice(4, 6), 16);
-          return `rgba(${r},${g},${b},${a})`;
-        };
-        // The v1 ghost datasets: same dash identities as the main scenarios, lighter and thinner,
-        // OFF by default. Only present when a ghost (older) version exists.
-        const ghostDatasets: any[] = ghostVersion ? [
-          {
-            type: "line" as const,
-            label: `Corridor holds (v1 ${ghostVersion}, mb since ${anchorMonthShort})`,
-            data: ghostHoldsLine,
-            borderColor: fade(scColor("corridor-holds"), 0.4),
-            borderWidth: 0.8,
-            pointRadius: 1.5,
-            pointHoverRadius: 3,
-            pointBackgroundColor: "#faf9f5",
-            pointBorderColor: fade(scColor("corridor-holds"), 0.4),
-            pointBorderWidth: 0.8,
-            tension: 0,
-            hidden: true,
-          },
-          {
-            type: "line" as const,
-            label: `Standoff (v1 ${ghostVersion}, mb since ${anchorMonthShort})`,
-            data: ghostStandoffLine,
-            borderColor: fade(scColor("standoff"), 0.4),
-            borderWidth: 0.8,
-            borderDash: [5, 3],
-            pointRadius: 1.5,
-            pointHoverRadius: 3,
-            pointBackgroundColor: "#faf9f5",
-            pointBorderColor: fade(scColor("standoff"), 0.4),
-            pointBorderWidth: 0.8,
-            tension: 0,
-            hidden: true,
-          },
-          {
-            type: "line" as const,
-            label: `Corridor lapses (v1 ${ghostVersion}, mb since ${anchorMonthShort})`,
-            data: ghostLapseLine,
-            borderColor: fade(scColor("corridor-lapses"), 0.4),
-            borderWidth: 0.8,
-            borderDash: [10, 4],
-            pointRadius: 1.5,
-            pointHoverRadius: 3,
-            pointBackgroundColor: "#faf9f5",
-            pointBorderColor: fade(scColor("corridor-lapses"), 0.4),
-            pointBorderWidth: 0.8,
-            tension: 0,
-            hidden: true,
-          },
-        ] : [];
-        // The ghost datasets occupy indices 4..(4+ghostOffset-1); every overlay/observed
-        // endpoint label and the checkbox wiring below must shift by this amount.
-        const ghostOffset = ghostVersion ? 3 : 0;
+        // Oct 21, 2026: the scenario lines (the v2 main lines and the v1 ghost lines)
+        // and the beta v3 central line were withdrawn from this chart. Their records
+        // are untouched in the data files; nothing here reads them.
         // Observed actuals: the IEA's reported global observed cumulative, rebased to the
         // frozen anchor (same display transform as the scenario lines — 0 is the same zero).
         // Only axis periods at/after the anchor with a reported value; nulls elsewhere and
@@ -3660,6 +3505,18 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           return p ? rebase(p.value) : null;
         });
         const signFmt = (v: number) => `${v > 0 ? "+" : "−"}${Math.abs(Math.round(v)).toLocaleString()}`;
+        // Y range: sized to the plotted data (observed + the two comparisons), then
+        // rounded OUTWARD to a clean step so the axis limits and every tick are round
+        // integers — the raw data limits (e.g. the EIA endpoint at 1,639.110824…) must
+        // never appear on the axis. This is display-only: the stored targets and the
+        // rebased values are untouched; only the visible range is rounded.
+        const plotVals = [...eiaLine, ...persLine, ...obsLine].filter((v): v is number => v != null);
+        const rawLo = Math.min(0, ...plotVals);
+        const rawHi = Math.max(0, ...plotVals);
+        const rawSpan = rawHi - rawLo;
+        const axStep = rawSpan > 3000 ? 500 : rawSpan > 1200 ? 250 : rawSpan > 500 ? 100 : 50;
+        const axMin = Math.floor((rawLo - rawSpan * 0.15) / axStep) * axStep;
+        const axMax = Math.ceil((rawHi + rawSpan * 0.15) / axStep) * axStep;
         const pbCanvas = document.getElementById("globalObservedChart")!;
         new Chart(pbCanvas, {
           type: "line",
@@ -3675,88 +3532,40 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
                 pointRadius: 0,
                 fill: false,
               },
-              // The three scenarios: the site's scenario colors, thin lines with hollow
-              // markers. Distinguishable patterns, not color alone: solid / short dash /
-              // long dash.
+              // The two forward comparisons: ON by default (no toggles since the Oct 21
+              // simplification), drawn more lightly than the observed line — thinner,
+              // lighter, smaller markers; distinct dash patterns, not color alone.
               {
                 type: "line" as const,
-                label: `Corridor holds (mb since ${anchorMonthShort})`,
-                data: holdsLine,
-                borderColor: scColor("corridor-holds"),
-                borderWidth: 1.2,
-                pointRadius: 2,
-                pointHoverRadius: 3.5,
-                pointBackgroundColor: "#faf9f5",
-                pointBorderColor: scColor("corridor-holds"),
-                pointBorderWidth: 1,
-                tension: 0,
-              },
-              {
-                type: "line" as const,
-                label: `Standoff (mb since ${anchorMonthShort})`,
-                data: standoffLine,
-                borderColor: scColor("standoff"),
-                borderWidth: 1.2,
-                borderDash: [5, 3],
-                pointRadius: 2,
-                pointHoverRadius: 3.5,
-                pointBackgroundColor: "#faf9f5",
-                pointBorderColor: scColor("standoff"),
-                pointBorderWidth: 1,
-                tension: 0,
-              },
-              {
-                type: "line" as const,
-                label: `Corridor lapses (mb since ${anchorMonthShort})`,
-                data: lapseLine,
-                borderColor: scColor("corridor-lapses"),
-                borderWidth: 1.2,
-                borderDash: [10, 4],
-                pointRadius: 2,
-                pointHoverRadius: 3.5,
-                pointBackgroundColor: "#faf9f5",
-                pointBorderColor: scColor("corridor-lapses"),
-                pointBorderWidth: 1,
-                tension: 0,
-              },
-              // v1 ghost lines (faded, OFF by default) — the original September 19 paths for
-              // comparison against the revised v2 lines above.
-              ...ghostDatasets,
-              // Opt-in overlays, OFF by default and drawn more lightly than the scenarios:
-              // thinner, lighter, smaller markers. Same dash identities as before.
-              {
-                type: "line" as const,
-                label: `EIA forecast (mb since ${anchorMonthShort})`,
+                label: `EIA outlook, Oct 6 release (mb since ${anchorMonthShort})`,
                 data: eiaLine,
-                borderColor: "rgba(107,103,92,0.55)",
-                borderWidth: 1,
+                borderColor: "rgba(107,103,92,0.75)",
+                borderWidth: 1.2,
                 borderDash: [7, 4],
                 pointRadius: 1.5,
                 pointHoverRadius: 3,
                 pointBackgroundColor: "#faf9f5",
-                pointBorderColor: "rgba(107,103,92,0.55)",
+                pointBorderColor: "rgba(107,103,92,0.75)",
                 pointBorderWidth: 1,
                 tension: 0,
-                hidden: true,
               },
               {
                 type: "line" as const,
-                label: `Recent trend (mb since ${anchorMonthShort})`,
+                label: `Recent trend, extrapolation (mb since ${anchorMonthShort})`,
                 data: persLine,
-                borderColor: "rgba(163,157,143,0.7)",
-                borderWidth: 1,
+                borderColor: "rgba(163,157,143,0.85)",
+                borderWidth: 1.2,
                 borderDash: [2, 3],
                 pointRadius: 1.5,
                 pointHoverRadius: 3,
                 pointBackgroundColor: "#faf9f5",
-                pointBorderColor: "rgba(163,157,143,0.7)",
+                pointBorderColor: "rgba(163,157,143,0.85)",
                 pointBorderWidth: 1,
                 tension: 0,
-                hidden: true,
               },
               // The reported path (always on, not an overlay): solid, thickest, FILLED
               // markers — the page convention for observations (hollow = projections).
-              // Drawn last = on top, so reality stays visible against the scenarios.
+              // Drawn last = on top, so reality stays visible against the overlays.
               {
                 type: "line" as const,
                 label: `Observed (IEA OMR, mb since ${anchorMonthShort})`,
@@ -3781,7 +3590,9 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             scales: {
               // The zero's reference lives in the horizontal reference label and the prose;
               // the full sentence clipped at mobile widths when it was in the axis title.
-              y: yScale(-3600, 2100, (v) => `${v}`, 6, "Change in inventories, million barrels"),
+              // Clean rounded bounds + explicit step (see the axMin/axMax/axStep block
+              // above) — every tick is a round integer; the callback formats as-is.
+              y: yScale(axMin, axMax, (v) => `${Math.round(v as number)}`, 9, "Change in inventories, million barrels"),
               x: {
                 grid: { display: false },
                 border: { display: true, color: "#d8d4c6", width: 0.5 },
@@ -3818,21 +3629,11 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
                     }),
                   label: (ctx) => {
                     if (ctx.parsed.y === null) return null;
-                    if (ctx.datasetIndex >= 1 && ctx.datasetIndex <= 3) {
-                      const sid = ["corridor-holds", "standoff", "corridor-lapses"][ctx.datasetIndex - 1];
-                      return ` ${scName(sid)} (scenario published ${activeVersion}; adjusts the Oct 6 EIA forecast): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
-                    }
-                    // Ghost (faded v1) datasets occupy 4..(4+ghostOffset-1) when a ghost is
-                    // present — they shift the EIA/trend/observed datasets to 4+ghostOffset.
-                    if (ghostOffset > 0 && ctx.datasetIndex >= 4 && ctx.datasetIndex < 4 + ghostOffset) {
-                      const gsid = ["corridor-holds", "standoff", "corridor-lapses"][ctx.datasetIndex - 4];
-                      return ` ${scName(gsid)} (v1 ${ghostVersion} — pre-revision, for comparison): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
-                    }
-                    if (ctx.datasetIndex === 4 + ghostOffset)
+                    if (ctx.datasetIndex === 1)
                       return ` EIA October 6 outlook (September estimate; forecasts from October, production minus consumption): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
-                    if (ctx.datasetIndex === 5 + ghostOffset)
-                      return ` Recent trend (Jun–Aug 2026 average, repeated): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
-                    if (ctx.datasetIndex === 6 + ghostOffset) {
+                    if (ctx.datasetIndex === 2)
+                      return ` Recent trend (Jun–Aug 2026 average, repeated — an extrapolation, not a forecast): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
+                    if (ctx.datasetIndex === 3) {
                       const p = obsPts.find((p) => p.period === labelsB[ctx.dataIndex]);
                       const ed = p?.published ? String(p.published).match(/[A-Z][a-z]+ \d{4}/)?.[0] + " edition" : "";
                       return ` Observed (IEA OMR${ed ? " " + ed : ""}): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
@@ -3848,61 +3649,28 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             refLabels([{ value: 0, text: `0 — no change since ${anchorMonthStr}`, color: "#8a867a", align: "right" }]),
             directLabels(
               // Endpoint labels — values read from the records' stored final targets (rebased),
-              // positioned by period, not index. Overlay labels (datasets 4–5) are skipped
-              // automatically while the dataset is hidden (the plugin checks visibility).
+              // positioned by period, not index. Overlay labels are skipped automatically
+              // while the dataset is hidden (the plugin checks visibility).
               (() => {
                 const out: { dataset: number; index: number; text: string; dy: number; color: string; font: string; align?: "right" | "left"; dx?: number }[] = [];
-                const holdsEndP = scHoldsRec.targets[scHoldsRec.targets.length - 1].period;
-                out.push({ dataset: 1, index: axisIdx(holdsEndP), text: `${signFmt(holdsLine[axisIdx(holdsEndP)]!)} — corridor holds`, align: "right" as "right" | "left", dx: -4, dy: -14, color: scColor("corridor-holds"), font: "10.5px Georgia, serif" });
-                const standEndP = scStandoffRec.targets[scStandoffRec.targets.length - 1].period;
-                out.push({ dataset: 2, index: axisIdx(standEndP), text: `${signFmt(standoffLine[axisIdx(standEndP)]!)} — standoff`, align: "right" as "right" | "left", dx: -4, dy: 18, color: scColor("standoff"), font: "10.5px Georgia, serif" });
-                const lapseEndP = scLapseRec.targets[scLapseRec.targets.length - 1].period;
-                // Below its endpoint: above, the label crossed the descending approach
-                // segment (the line arrives from above). The y range leaves bottom room.
-                out.push({ dataset: 3, index: axisIdx(lapseEndP), text: `${signFmt(lapseLine[axisIdx(lapseEndP)]!)} — corridor lapses`, align: "right" as "right" | "left", dx: -4, dy: 18, color: scColor("corridor-lapses"), font: "10.5px Georgia, serif" });
                 const eiaDec26 = eiaRec.targets.find((t: any) => t.period === "2026-12");
                 if (eiaDec26)
-                  out.push({ dataset: 4 + ghostOffset, index: axisIdx("2026-12"), text: `${signFmt(eiaLine[axisIdx("2026-12")]!)} — EIA (Dec 2026)`, dy: 18, color: "#8a867a", font: "10.5px Georgia, serif" });
+                  out.push({ dataset: 1, index: axisIdx("2026-12"), text: `${signFmt(eiaLine[axisIdx("2026-12")]!)} — EIA (Dec 2026)`, dy: 18, color: "#8a867a", font: "10.5px Georgia, serif" });
                 const eiaEnd = eiaRec.targets[eiaRec.targets.length - 1].period;
-                out.push({ dataset: 4 + ghostOffset, index: axisIdx(eiaEnd), text: `${signFmt(eiaLine[axisIdx(eiaEnd)]!)} — EIA forecast`, align: "right" as "right" | "left", dx: -4, dy: 16, color: "#8a867a", font: "10.5px Georgia, serif" });
+                out.push({ dataset: 1, index: axisIdx(eiaEnd), text: `${signFmt(eiaLine[axisIdx(eiaEnd)]!)} — EIA outlook`, align: "right", dx: -4, dy: 16, color: "#8a867a", font: "10.5px Georgia, serif" });
                 const persEnd = persRec.targets[persRec.targets.length - 1].period;
-                out.push({ dataset: 5 + ghostOffset, index: axisIdx(persEnd), text: `${signFmt(persLine[axisIdx(persEnd)]!)} — recent trend`, align: "right" as "right" | "left", dx: -4, dy: 18, color: "#8a867a", font: "10.5px Georgia, serif" });
-                // Observed endpoint: the last reported month so far (Sep 2026 at the Oct 15
-                // pass), labeled above the point — below is where the scenarios diverge.
+                out.push({ dataset: 2, index: axisIdx(persEnd), text: `${signFmt(persLine[axisIdx(persEnd)]!)} — recent trend`, align: "right", dx: -4, dy: 18, color: "#8a867a", font: "10.5px Georgia, serif" });
+                // Observed endpoint: the last reported month so far, labeled above the point.
                 const obsLastP = obsPts[obsPts.length - 1]?.period;
                 if (obsLastP && labelsB.includes(obsLastP)) {
                   const obsMonthShort = new Date(obsLastP + "-15T12:00:00").toLocaleDateString("en-US", { month: "short" });
-                  out.push({ dataset: 6 + ghostOffset, index: axisIdx(obsLastP), text: `${signFmt(obsLine[axisIdx(obsLastP)]!)} — observed (${obsMonthShort})`, dy: -14, color: "#1c1b17", font: "10.5px Georgia, serif" });
+                  out.push({ dataset: 3, index: axisIdx(obsLastP), text: `${signFmt(obsLine[axisIdx(obsLastP)]!)} — observed (${obsMonthShort})`, dy: -14, color: "#1c1b17", font: "10.5px Georgia, serif" });
                 }
                 return out;
               })()
             ),
           ],
         });
-        // Opt-in overlays. Visibility is chart state only — it never touches the records,
-        // so scoring (which reads the records) is unaffected by what is on screen.
-        const wireOverlay = (id: string, ds: number) => {
-          const el = document.getElementById(id) as HTMLInputElement | null;
-          el?.addEventListener("change", () => {
-            const c = Chart.getChart(pbCanvas);
-            if (!c) return;
-            c.setDatasetVisibility(ds, el.checked);
-            c.update();
-          });
-        };
-        wireOverlay("toggleEia", 4 + ghostOffset);
-        wireOverlay("toggleTrend", 5 + ghostOffset);
-        // v1 ghost toggle: show all three faded v1 lines together (they form one comparison
-        // against the revised v2 main lines). Off by default; chart state only.
-        if (ghostVersion) {
-          const el = document.getElementById("toggleV1") as HTMLInputElement | null;
-          el?.addEventListener("change", () => {
-            const c = Chart.getChart(pbCanvas);
-            if (!c) return;
-            for (let i = 4; i < 4 + ghostOffset; i++) c.setDatasetVisibility(i, el.checked);
-            c.update();
-          });
-        }
       }
 
       // UKMTO attack frequency (Supply section). Weekly bars from the ukmtoIncidents

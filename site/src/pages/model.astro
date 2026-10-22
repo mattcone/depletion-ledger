@@ -1,32 +1,24 @@
 ---
 import { getEntry, render } from "astro:content";
 import ArticleShell from "../components/ArticleShell.astro";
-import {
-  DATA_AS_OF,
-  branchWeights,
-} from "../data/crisis.ts";
+import { DATA_AS_OF } from "../data/crisis.ts";
 import worldStocksData from "../data/world-stocks.json";
 
 const entry = await getEntry("docs", "model");
 if (!entry) throw new Error("model entry missing");
 const { Content } = await render(entry);
 
-const odds = branchWeights[branchWeights.length - 1];
 const fmtDate = (d: Date) =>
   d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 const asOf = fmtDate(new Date(`${DATA_AS_OF}T00:00:00Z`));
 const sections = [
-  ["what-the-model-tells-you", "What the model tells you"],
-  ["how-to-read-the-chart", "How to read the chart"],
-  ["how-the-paths-are-calculated", "How the paths are calculated"],
-  ["what-each-scenario-assumes", "Scenario assumptions"],
+  ["how-to-read-this-archive", "Reading the archive"],
   ["the-september-2026-audit", "The September audit"],
-  ["the-september-19-assumptions-preserved", "The September 19 assumptions"],
-  ["what-the-model-leaves-out", "What the model leaves out"],
-  ["how-the-odds-change", "How the odds change"],
-  ["how-we-check-the-predictions", "Checking the predictions"],
-  ["where-the-data-comes-from", "Data sources"],
-  ["where-the-spr-fits-now", "Where the SPR fits now"],
+  ["what-each-scenario-assumes", "October 15 assumptions (v2)"],
+  ["the-september-19-assumptions-preserved", "September 19 assumptions (v1)"],
+  ["limits-of-the-forecasts", "Forecast limits"],
+  ["how-the-odds-change", "Historical corridor odds"],
+  ["sources-and-calculation-checks", "Sources and checks"],
   ["forecast-results", "Forecast results"],
 ];
 
@@ -95,15 +87,15 @@ const wsScoreHistory: wsLedgerMonth[] = (() => {
   <!-- Hero: finding title + lead, dashboard type -->
   <header class="border-b border-rule py-12">
     <p class="text-[11px] font-semibold uppercase tracking-[0.12em] text-faint">
-      Model · updated {asOf}
+      Forecast archive · updated {asOf}
     </p>
     <h1 class="mt-3 max-w-4xl text-3xl font-extrabold leading-[1.08] tracking-tight sm:text-4xl">
-      How the model works
+      The storage forecast archive
     </h1>
     <p class="mt-4 max-w-3xl text-[15px] leading-relaxed text-ink/80">
-      How could the world's oil stocks change if shipping recovers, the standoff
-      continues, or the disruption gets worse? Here's what goes into each scenario,
-      where we make assumptions, and how we check the results.
+      We withdrew our storage scenarios on October 21, 2026. You can still check
+      the original assumptions, calculations, and results here. New outcomes will
+      be scored against the forecasts as issued.
     </p>
   </header>
 
@@ -120,13 +112,9 @@ const wsScoreHistory: wsLedgerMonth[] = (() => {
       <section id="forecast-results" class="mt-12 border-t border-rule pt-8">
         <h2 class="text-xl font-bold tracking-tight">Forecast results and the original chart</h2>
         <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
-          Here you can compare every published line with the reported results, month by
-          month, and see the original September 19 (v1) paths. Every scored month appears
-          below, oldest first; when a scenario is revised, the original lines stay in the
-          ledger for the months they scored. Figures are in million barrels, measured from
-          the saved August 2026 starting value.
-          The scenarios were less accurate than the recent-trend baseline in the first
-          scored month.
+          Compare the saved predictions with reported outcomes below. Every scored month
+          stays in the ledger, including earlier forecast versions. Figures are in millions
+          of barrels relative to the saved August 2026 value.
         </p>
 
         <h3 class="mt-6 text-base font-bold tracking-tight">The scorecard</h3>
@@ -163,19 +151,15 @@ const wsScoreHistory: wsLedgerMonth[] = (() => {
           </table>
         </div>
         <p class="mt-3 max-w-prose text-xs leading-relaxed text-faint">
-          Each figure is frozen at first publication; a published month is never
-          re-scored. The scenario targets are EIA-based and the observed line is the IEA's
-          reported total — different measures, so part of the apparent miss is an
-          unresolved difference between the agencies' figures, not a measured forecast
-          error: in the first scored month the recent-trend baseline missed by 46 million
-          barrels, and every scenario missed by more. The September standoff miss (94
-          million) is broken down in <a class="underline decoration-rule underline-offset-2 hover:text-ink" href="#the-september-2026-audit">the September audit</a>.
+          Scores keep the first reported outcome. Every scenario missed by more than
+          the recent-trend baseline in September. The EIA-based predictions and IEA
+          observations have different coverage; <a class="underline decoration-rule underline-offset-2 hover:text-ink" href="#the-september-2026-audit">the September audit</a>{" "}explains the unresolved gap between them.
         </p>
 
         <h3 class="mt-8 text-base font-bold tracking-tight">The original September 19 chart</h3>
         <p class="mt-2 max-w-prose text-xs leading-relaxed text-faint">
           These are the original September 19 (v1) paths, starting at August's zero.
-          You can see the revised October 15 (v2) paths on the dashboard.
+          The October 15 (v2) calculations are preserved in the tables above.
         </p>
         <div class="relative mt-4 h-80 sm:h-[380px]">
           <canvas id="v1Chart" role="img" aria-label="Line chart of the original September 19 (v1) scenario paths, in million barrels relative to the saved August 2026 anchor, from September 2026 to December 2027. Corridor holds (solid) reaches +1,736 by December 2027; standoff (dashed) reaches −1,326; corridor lapses (long dashed) reaches −2,988."></canvas>
@@ -187,25 +171,16 @@ const wsScoreHistory: wsLedgerMonth[] = (() => {
       <p class="text-[11px] font-semibold uppercase tracking-[0.12em] text-faint">
         On this page
       </p>
-      <nav aria-label="Model sections" class="mt-4">
+      <nav aria-label="Archive sections" class="mt-4">
         <ul class="space-y-2">
           {sections.map(([id, label]) => (
             <li><a class="text-[13px] text-ink/70 hover:text-ink hover:underline" href={`#${id}`}>{label}</a></li>
           ))}
         </ul>
       </nav>
-      <p class="mt-6 text-xs text-faint">Scenario probabilities · {odds.date}</p>
-      <dl class="mt-3 space-y-3">
-        {[["Corridor holds", odds.holds], ["Standoff", odds.standoff], ["Corridor lapses", odds.lapse]].map(([label, value]) => (
-          <div class="flex items-baseline justify-between gap-3">
-            <dt class="text-[13px] leading-snug text-ink/70">{label}</dt>
-            <dd class="tabular whitespace-nowrap font-mono text-[13px] font-semibold text-ink">{value}%</dd>
-          </div>
-        ))}
-      </dl>
       <p class="mt-6 text-xs leading-relaxed text-faint">
-        These percentages show how likely we consider each outcome. They don't tell
-        you how accurate the storage figures will be.
+        Issued September 19 and October 15, 2026. Withdrawn from the dashboard
+        October 21. Original predictions are preserved for scoring.
       </p>
     </aside>
   </div>

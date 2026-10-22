@@ -1,0 +1,280 @@
+{
+  "version": "beta-v3-2026-10-21",
+  "issued": "2026-10-21",
+  "experimental": true,
+  "description": "Beta storage forecast assumptions (beta-v3-2026-10-21), issued 2026-10-21 (data cutoff 2026-10-17). EXPERIMENTAL: a shipping-responsive beta layered over the issued v2026-10-15 forecast, which remains unchanged and authoritative. Same baseline (EIA STEO Oct 6 edition, frozen workbook), same reference frame (chart anchor 2026-08/-507; rebase_start 2026-09/-509), same production-minus-consumption calculation (the published pipeline's own compute function). Two differences from v2: (1) the standoff branch allows PARTIAL Gulf recovery through alternative routes while attacks continue and the strait stays restricted \u2014 world production = September 2026 world production in the frozen EIA baseline (101.3038 mb/d, read from the workbook's 2026-09 column at build time) + gulf increment g (0 -> +0.5 by end-2026 -> +2.0 by end-2027 \u2014 a JUDGMENT bounded by the demonstrated bypass ROUTING increment above prewar routing; routing is not production, see route_basis) + non-Gulf growth at the issued v2 pace (0 in 2026; +1/6 mb/d per month in 2027); consumption 0 (the v2 convention). By Dec 2027 the beta standoff's world production (105.30) sits BETWEEN the issued v2 standoff (103.30 = September level + non-Gulf) and the EIA baseline (111.49, which assumes a large 2027 recovery): more production recovery than the issued standoff allows, far less than the EIA base case. (2) the central projection is weighted by the BETA odds (the reviewed candidate spec at the freshest same-definition inputs), not the published judgment odds. The corridor-holds and corridor-lapses paths are identical to the issued v2 paths (same scenario definitions; the lapse closure path was not tested in September and is not re-invented here).",
+  "supersedes_sha256": {
+    "world-stocks-assumptions-beta-v3-2026-10-21.json": "7008ef995b96d50210a06edb0a2457419fc1b0cb6cac4807545889c6fbf9ed79",
+    "world-stocks-beta-v3-2026-10-21.json": "98ff76737221072e157c60919fc203e8c11d9a65cbaa9bcf0beb36764aaefe86"
+  },
+  "supersession_chain": [
+    {
+      "sha256": "7008ef995b96d50210a06edb0a2457419fc1b0cb6cac4807545889c6fbf9ed79",
+      "replaced_by": "beta-v3-2026-10-21",
+      "replaced_on": "2026-10-21"
+    }
+  ],
+  "issue_note": "re-issue of this same vintage (same date): the first bytes carried a hand-entered anchor of 102.10 mb/d \u2014 the workbook's 2026-10 value, not 2026-09's 101.3038. The anchor is now read from the 2026-09 column at build time; the route_basis and revision-rule text were also corrected (Sidi Kerir origin attribution withdrawn; the OPEC comparison reframed as a manual-review screen). The first bytes were never deployed to production. See the method doc's correction log.",
+  "baseline": {
+    "source": "EIA Short-Term Energy Outlook (STEO), released 6 Oct 2026 (workbook retrieved 6 Oct 2026)",
+    "archive": "research/sources/eia-steo-2026-10-06.xlsx (sha256 54989362410da4aff5673580396380c3a8f4f111fa6d01c6d4fab05ef90efbf4)",
+    "series": {
+      "production_mb_d": "papr_world (Table 3a, World total oil production)",
+      "consumption_mb_d": "dmand_world (Table 3a, World total oil consumption)"
+    },
+    "note": "identical to the issued v2 baseline (same frozen workbook, same sha256)"
+  },
+  "production_connection": {
+    "anchor_level_mb_d": 101.3037931,
+    "anchor_basis": "September 2026 world production in the frozen EIA STEO (Oct 6 edition) baseline \u2014 101.3038 mb/d, read from the workbook's 2026-09 column at build time (full precision; never hand-entered). The 2026-10 column in the same workbook is 102.1047 mb/d: a different month. The first bytes of this vintage hand-entered the 2026-10 value and were re-issued (see issue_note and the method doc's correction log).",
+    "gulf_increment_mb_d": {
+      "2026-10": 0.166667,
+      "2026-11": 0.333333,
+      "2026-12": 0.5,
+      "2027-01": 0.625,
+      "2027-02": 0.75,
+      "2027-03": 0.875,
+      "2027-04": 1.0,
+      "2027-05": 1.125,
+      "2027-06": 1.25,
+      "2027-07": 1.375,
+      "2027-08": 1.5,
+      "2027-09": 1.625,
+      "2027-10": 1.75,
+      "2027-11": 1.875,
+      "2027-12": 2.0
+    },
+    "non_gulf_mb_d": {
+      "2026-10": 0.0,
+      "2026-11": 0.0,
+      "2026-12": 0.0,
+      "2027-01": 0.166667,
+      "2027-02": 0.333333,
+      "2027-03": 0.5,
+      "2027-04": 0.666667,
+      "2027-05": 0.833333,
+      "2027-06": 1.0,
+      "2027-07": 1.166667,
+      "2027-08": 1.333333,
+      "2027-09": 1.5,
+      "2027-10": 1.666667,
+      "2027-11": 1.833333,
+      "2027-12": 2.0
+    },
+    "intended_world_production_mb_d": {
+      "2026-10": 101.4705,
+      "2026-11": 101.6371,
+      "2026-12": 101.8038,
+      "2027-01": 102.0955,
+      "2027-02": 102.3871,
+      "2027-03": 102.6788,
+      "2027-04": 102.9705,
+      "2027-05": 103.2621,
+      "2027-06": 103.5538,
+      "2027-07": 103.8455,
+      "2027-08": 104.1371,
+      "2027-09": 104.4288,
+      "2027-10": 104.7205,
+      "2027-11": 105.0121,
+      "2027-12": 105.3038
+    },
+    "route_basis": {
+      "source": "Kpler media briefing 19 Oct 2026 (flow data to 17 Oct 2026; archived at research/data/kpler/kpler-briefing-2026-10-19/)",
+      "fujairah_oman_kbd": {
+        "current_7d_avg": 4563,
+        "prewar": 3416,
+        "increment": 1147
+      },
+      "red_sea_kbd": {
+        "current_7d_avg": 4304,
+        "prewar": 2803,
+        "increment": 1501,
+        "caveat": "includes cargo with no confirmed load terminal; Sidi Kerir (Sumed) ~1 mb/d \u2014 the source does NOT establish the cargo origin: the Sumed pipeline connects the Red Sea to the Mediterranean, so a Mediterranean loading port does not exclude Gulf origin"
+      },
+      "gulf_attributable_increment_kbd": [
+        1147,
+        2648
+      ],
+      "gulf_attributable_note": "This is a demonstrated ROUTING increment above prewar, NOT a measured production increment. New production available through bypass beyond September is bounded above by the increment above the routing level September was already using \u2014 at most the full prewar-vs-now increment (2,648 kbd) \u2014 and the lower bound keeps all of the Red Sea increment unattributed. Some of the increment may be route substitution of EXISTING production or inventory drawdown rather than new production. The g caps (0.5 / 2.0) are a JUDGMENT inside this routing bound, not a demonstrated production level.",
+      "go_o_sts_kbd": {
+        "current_7d_avg": 2280,
+        "prewar": 0,
+        "treatment": "NOT counted \u2014 a transloading activity; the cargo still transits the strait (no double-counting)"
+      },
+      "strait_treatment": "the strait stays at its observed restricted level (no normalization \u2014 that is the corridor-holds branch); no further strait decline assumed",
+      "component_sums": "10,173 (strait clearance) = 7,894 (strait) + 2,280 (STS); 19,041 (regional) = 10,173 + 4,563 + 4,304 \u2014 component sums reproduce the briefing's totals"
+    },
+    "inventory_bridge": "stated assumption (bounded \u00b10.5 mb/d equivalent): Gulf domestic use flat, Gulf regional inventories roughly flat, so Gulf production growth tracks Gulf export growth on the bypass channel. An assumption, not a measurement. The alternative reading \u2014 that the increment draws down Gulf inventory rather than new production \u2014 would put the true production path BELOW the beta standoff; the issued beta shows a single central line and does not represent that sensitivity. See the revision rule."
+  },
+  "scenarios": [
+    {
+      "id": "corridor-holds",
+      "name": "Corridor holds",
+      "color": "#3d6b64",
+      "definition": "The shipping agreement works and tanker traffic returns to normal over one to two quarters (crisis model, Sep 16 odds table). Brent moves toward $70-80.",
+      "production_adjustment_mb_d": {
+        "2026-09": 0.0,
+        "2026-10": 0.0,
+        "2026-11": 0.0,
+        "2026-12": 0.0,
+        "2027-01": 0.0,
+        "2027-02": 0.0,
+        "2027-03": 0.0,
+        "2027-04": 0.0,
+        "2027-05": 0.0,
+        "2027-06": 0.0,
+        "2027-07": 0.0,
+        "2027-08": 0.0,
+        "2027-09": 0.0,
+        "2027-10": 0.0,
+        "2027-11": 0.0,
+        "2027-12": 0.0
+      },
+      "consumption_adjustment_mb_d": {
+        "2026-09": 0.0,
+        "2026-10": 0.0,
+        "2026-11": 0.0,
+        "2026-12": 0.0,
+        "2027-01": 0.0,
+        "2027-02": 0.0,
+        "2027-03": 0.0,
+        "2027-04": 0.0,
+        "2027-05": 0.0,
+        "2027-06": 0.0,
+        "2027-07": 0.0,
+        "2027-08": 0.0,
+        "2027-09": 0.0,
+        "2027-10": 0.0,
+        "2027-11": 0.0,
+        "2027-12": 0.0
+      },
+      "rationale": "v2 change (audit finding 1, production): the recovery the v1 path assumed ahead of the baseline is now inside the Oct 6 baseline (production 102.10 in Oct 2026, rising through 2027), so 'corridor holds' - at least as fast as the EIA - is the baseline itself; the adjustment is 0 across the horizon. v2 change (audit finding 2, consumption): September consumption was essentially flat vs the baseline (104.24 vs 104.21), so the v1 +0.25 demand support is not supported; consumption is 0. corridor-holds is therefore identical to the EIA baseline path in v2.",
+      "validity_horizon": "2027-12 (full baseline horizon)"
+    },
+    {
+      "id": "standoff",
+      "name": "Standoff",
+      "color": "#b4690e",
+      "definition": "Attacks continue and the strait stays restricted at its observed level; Gulf production recovers PARTIALLY through alternative routes (Fujairah/Oman, Saudi west coast via the Red Sea) \u2014 the substantive difference from the issued v2 standoff, which allows no net Gulf recovery. The beta path allows the demonstrated bypass increment to convert to production at the capped pace g(t); by Dec 2027 its world production (105.30) sits between the issued v2 standoff (103.30) and the EIA baseline (111.49).",
+      "production_adjustment_mb_d": {
+        "2026-10": -0.6342,
+        "2026-11": -1.454536,
+        "2026-12": -1.905192,
+        "2027-01": -2.66666,
+        "2027-02": -3.930144,
+        "2027-03": -4.588208,
+        "2027-04": -5.598328,
+        "2027-05": -6.574107,
+        "2027-06": -6.675614,
+        "2027-07": -6.904381,
+        "2027-08": -6.766897,
+        "2027-09": -6.674202,
+        "2027-10": -6.637381,
+        "2027-11": -6.807023,
+        "2027-12": -6.187422,
+        "2026-09": 0.0
+      },
+      "consumption_adjustment_mb_d": {
+        "2026-09": 0.0,
+        "2026-10": 0.0,
+        "2026-11": 0.0,
+        "2026-12": 0.0,
+        "2027-01": 0.0,
+        "2027-02": 0.0,
+        "2027-03": 0.0,
+        "2027-04": 0.0,
+        "2027-05": 0.0,
+        "2027-06": 0.0,
+        "2027-07": 0.0,
+        "2027-08": 0.0,
+        "2027-09": 0.0,
+        "2027-10": 0.0,
+        "2027-11": 0.0,
+        "2027-12": 0.0
+      },
+      "rationale": "beta-v3 change (the shipping-to-production connection): the v2 standoff holds world production at the September level (101.3038 mb/d) plus the non-Gulf pace \u2014 i.e. no net Gulf recovery \u2014 because no Gulf field/terminal damage was confirmed and the bypass was demonstrably working (8.87 mb/d, +43% vs prewar, Kpler Oct 19). The beta standoff instead allows the demonstrated bypass routing increment to convert to NEW Gulf production at a capped pace: g = 0 at the September anchor -> +0.167 at 2026-10 -> +0.5 at end-2026 -> +2.0 at end-2027, a JUDGMENT bounded by (not equal to) the routing increment (1,147\u20132,648 kbd above prewar, of which the Sidi Kerir ~1 mb/d has no established origin and some may be route substitution of existing production). delta-P is computed against the frozen EIA baseline exactly like the v2 records (negative in 2027 because the EIA baseline itself recovers to ~111.5).",
+      "validity_horizon": "2027-12 (full baseline horizon)"
+    },
+    {
+      "id": "corridor-lapses",
+      "name": "Corridor lapses",
+      "color": "#b3261e",
+      "definition": "The agreement breaks down or comes under attack: the strait is effectively closed and the bypass, Abqaiq, and Jazan stay offline for months (crisis model, Sep 16). Brent rises above $130.",
+      "production_adjustment_mb_d": {
+        "2026-09": -6.0,
+        "2026-10": -9.0,
+        "2026-11": -12.0,
+        "2026-12": -13.5,
+        "2027-01": -13.5,
+        "2027-02": -13.5,
+        "2027-03": -13.5,
+        "2027-04": -13.5,
+        "2027-05": -13.5,
+        "2027-06": -13.5,
+        "2027-07": -16.217,
+        "2027-08": -16.217,
+        "2027-09": -16.217,
+        "2027-10": -16.217,
+        "2027-11": -16.217,
+        "2027-12": -16.217
+      },
+      "consumption_adjustment_mb_d": {
+        "2026-09": -3.0,
+        "2026-10": -3.0,
+        "2026-11": -3.0,
+        "2026-12": -3.0,
+        "2027-01": -5.0,
+        "2027-02": -5.0,
+        "2027-03": -5.0,
+        "2027-04": -5.0,
+        "2027-05": -5.0,
+        "2027-06": -5.0,
+        "2027-07": -5.0,
+        "2027-08": -5.0,
+        "2027-09": -5.0,
+        "2027-10": -5.0,
+        "2027-11": -5.0,
+        "2027-12": -5.0
+      },
+      "rationale": "UNCHANGED from v1 (v2026-09-19). The audit treats the closure as a counterfactual that the non-closure September did not test, so neither the closure shut-in (production: -9/-12/-13.5 across Oct-Dec 2026, -13.5 Jan-Jun 2027, -16.217 Jul-Dec 2027) nor the closure demand destruction (consumption: -3.0 H2 2026, -5.0 2027) is revised. Only the baseline these adjustments are applied to is the Oct 6 edition. The 2027 production values (-13.5 / -16.217) are the v1 carried values, whose Q1-vs-H2 split reflects the Sep 9 baseline's 1Q27 shut-in schedule (2.717); they are a stated simplification carried forward, to be re-derived against the Oct 6 baseline's 2027 shut-in schedule if one becomes available. The implied cumulative withdrawal is a balance identity, not a physically validated stock forecast (see the v1 feasibility note, carried over).",
+      "validity_horizon": "2027-12 (full baseline horizon; the closure path is a conditional 'if the closure persists' path, not a central forecast)",
+      "feasibility_note": "Carried from v1: the implied cumulative withdrawal is on the order of a large share of reported OECD on-land stocks and is not physically validated by the available inventory evidence. The path is a balance identity, not a stock forecast."
+    }
+  ],
+  "odds": {
+    "spec": "beta odds spec v3 = the reviewed candidate filter (branch_filter_candidate.py), unchanged \u2014 prior 0.10/0.50/0.40; volume lognormal 15.0/8.5/2.0 sigma 0.35 w=1.0; transits Poisson 20/10/2 w=0.5 (hypothesis); tankers Poisson 0.2/1.5/4.0 w=0.5; brent NOT a state observation; the documented state->horizon transition table",
+    "spec_ref": "research/model/candidate/beta-odds-evaluation-2026-10-21.md (section: Selected beta odds spec)",
+    "inputs": {
+      "transits": 10,
+      "transits_date": "2026-10-17",
+      "tankers": 1,
+      "volume": 7.894,
+      "volume_date": "2026-10-17",
+      "brent_context": 108.79,
+      "brent_note": "context only \u2014 not a state observation in the beta odds"
+    },
+    "prior": [
+      0.1,
+      0.5,
+      0.4
+    ],
+    "state_unrounded": [
+      0.005704079541552356,
+      0.9942928912881577,
+      3.0291702900156754e-06
+    ],
+    "horizon_unrounded": [
+      0.15256653287666957,
+      0.49885797242357355,
+      0.34857549469975696
+    ],
+    "mapping_note": "The HORIZON row is the issue-date estimate of the corridor regime for the forecast horizon; the state->horizon transition is already folded in ONCE. It weights the three scenario paths with a FIXED weight across the whole horizon \u2014 no time-varying re-transition (that would double-count the transition). The HORIZON is NOT a confidence interval over the storage lines."
+  },
+  "revision_rules": [
+    "REVIEW SCREEN (the export->production bridge): the OPEC November MOMR (~Nov 10) is the first direct observation. An October OPEC aggregate at or below the September aggregate (21.49 mb/d \u2014 a Reuters-survey-based September OPEC estimate) SCREENS IN a dated human review of the bridge. The comparison is a screen, not a determination: the agency and measurement bases differ, and an OPEC aggregate at or below that threshold does not by itself establish Gulf or world production. If the review finds the production evidence does not support the bridge, the next vintage's standoff schedule reverts to the issued v2026-10-15 standoff schedule (its exact frozen delta-P) \u2014 the beta standoff then coincides with the issued v2 standoff path. Nothing resets automatically.",
+    "RE-EXAMINATION (the stored illustrative condition, verbatim): two consecutive Kpler briefings with the regional 7-day avg at or above 19 mb/d (data dates at least 7 days apart) AND a comparable-basis confirmation of the 'total Middle East flows at/above prewar' print (definition + window printed). If it fires, a HUMAN decision (dated, logged) issues a new vintage with a standoff schedule between the beta standoff and the EIA baseline \u2014 no automatic promotion.",
+    "MOOT: confirmed damage to named Gulf fields/terminals makes the EIA-baseline-based paths questionable; the beta vintages are then re-anchored by explicit decision.",
+    "NEW VINTAGE: any material new observation (Kpler edition, OMR, MOMR, STEO) issues a NEW dated beta file; this vintage is frozen and is never rewritten. The generator refuses to write over an earlier vintage's bytes; a same-vintage re-issue requires an explicit flag and records the superseded bytes' hash here."
+  ],
+  "scoring": "November 2026 is the first clean score for this vintage. Scoring is a MANUAL procedure for now (read the November print, compute the delta from each record's targets, append to the score history in research/). No automatic scoring adapter for beta files exists yet; do not claim one."
+}

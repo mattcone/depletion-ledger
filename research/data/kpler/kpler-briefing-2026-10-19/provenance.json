@@ -1,0 +1,53 @@
+{
+  "report": "Kpler Media Briefing — Middle East Energy and Maritime Disruptions",
+  "edition": "kpler-briefing-2026-10-19",
+  "publishedAt": "2026-10-19",
+  "flowDataAsOf": "2026-10-17 (T-2, preliminary floors; typically settle 1.5-2x higher as confirmations land)",
+  "retrievedAt": "2026-10-21T12:24:00Z",
+  "retrievedVia": "downloaded to /tmp/kpler-2026-10-19.pdf on Oct 21 (same URL family as the 2026-10-14 edition, Kpler marketing hubfs); archived from /tmp",
+  "files": [
+    {
+      "file": "kpler-briefing-2026-10-19.pdf",
+      "sha256": "966d68db82c99f0b7d997eaeca9251995ed4bf400e8961cdaded08dddc6c017e",
+      "bytes": 1108286
+    },
+    {
+      "file": "kpler-briefing-2026-10-19.txt",
+      "sha256": "4f07017c1dccb0cc9aa362d8053ae7fe2887677ac1b12f06690110efd9815c6d",
+      "bytes": 14996,
+      "note": "prose extracted from the PDF (chart/vector streams dropped); local extraction, not part of the published briefing"
+    }
+  ],
+  "keyFigures": {
+    "straitTransitsDayKbd": { "date": "2026-10-17", "value": 7363, "note": "confirmed floor, preliminary tier" },
+    "straitTransits7dAvgKbd": 7894,
+    "straitTransitsPreWarBaselineKbd": 17267,
+    "straitTransitsVsBaselinePct": -54.3,
+    "straitTransitsVsBaselineOf": 45.7,
+    "tankerCrossingsDay": { "2026-10-17": 6 },
+    "tankerCrossings7dAvgPerDay": 10,
+    "tankerCrossingsPreWarPerDay": 50,
+    "tankerCrossingsDarkShareOct14to17": "34 of 43 crossings (79%) classed dark or unknown-route",
+    "hormuzTotalClearanceDayKbd": { "date": "2026-10-17", "value": 9867, "range4dKbd": [9867, 13067] },
+    "hormuzTotalClearance7dAvgKbd": 10173,
+    "hormuzTotalClearancePreWarBaselineKbd": 17267,
+    "hormuzTotalClearanceVsBaselinePct": -41,
+    "regional7dAvgKbd": 19041,
+    "regionalVsBaselinePct": -19,
+    "gulfOfOmanStsNetExports7dAvgKbd": 2280,
+    "fujairahOmanLoadings7dAvgKbd": 4563,
+    "fujairahOmanVsBaselinePct": 34,
+    "redSea7dAvgKbd": 4304,
+    "redSeaPreWarBaselineKbd": 2803,
+    "redSeaVsBaselinePct": 54,
+    "attacks": "at least 18 vessels reportedly attacked over 2 weeks (Kpler Insight, Oct 19; not attributed)",
+    "bypass": "East-West pipeline (Petroline) ~5.8 mbd on Oct 12 (industry sources); 42 mb west-coast loadings Sep 17 - Oct 4; Saudi plans to lift capacity 7 -> 10 mbd, up to 3 years",
+    "diesel": "global diesel deficit ~1 mbd (Kpler Insight); gasoil +9.5% week to Oct 9 vs Brent +2.4%; CTAs back at 100% long ULSD",
+    "asianImports": "Asian crude imports 26 mbd in H1 October, within 1% of pre-war (earlier Gulf cargoes arriving)",
+    "note": "pre-war baseline = average March 2025 to February 2026 (baseline figure for the strait measure moved from 17,145 in the Oct 14 edition to 17,267 here - same definition, updated baseline window); oil only (Crude/Co, CPP, DPP, Chem/Bio), excludes NGLs/LNG; Iranian-origin transits excluded from strait figures only; same definitions as the 2026-10-14 edition"
+  },
+  "reconciliation": {
+    "vsOct14Edition": "same measures, same definitions; strait 7-day avg 7,627 (data to Oct 12) -> 7,894 (data to Oct 17); baseline 17,145 -> 17,267; Total Hormuz Clearance 9,275 -> 10,173; regional 16,894 -> 19,041",
+    "vsOct20WirePrints": "ENB (Oct 20): 'transits ~7.9M b/d vs 17.3M pre-war' = this edition's 7,894 / 17,267 figures. DPA (Oct 20): '7-day avg crude 82% of pre-war, products ~44%' is a CRUDE-ONLY / PRODUCTS split of a different scope - not the strait total-oil measure; 82% of 17,267 would be ~14.2M, which no Kpler total-oil print supports (~46% = 7,894/17,267). The two prints measure different things and must not be combined (conflation flagged in the Oct 21 log correction)."
+  }
+}

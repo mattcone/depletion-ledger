@@ -36,9 +36,9 @@ const md = readFileSync(join(SRC, "MODEL.md"), "utf8");
 writeFileSync(
   join(OUT, "docs", "model.md"),
   withFrontmatter(md, {
-    title: "How the Model Works",
+    title: "Forecast Archive",
     description:
-      "How the Depletion Ledger models changes in global oil storage: three shipping scenarios, their assumptions, and how the predictions are checked.",
+      "Why the Depletion Ledger withdrew its storage scenarios, with the original assumptions, forecasts, and continuing scores.",
   })
 );
 console.log("docs: MODEL.md -> src/content/docs/model.md");

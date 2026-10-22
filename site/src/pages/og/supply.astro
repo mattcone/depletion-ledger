@@ -1,6 +1,6 @@
 ---
-// Share card source page: the "How oil in storage could change through 2027"
-// scenario chart as a 1200x630 Open Graph image.
+// Share card: observed inventories, EIA outlook and recent trend, matching
+// the dashboard after the October 21 scenario withdrawal.
 // NOT a site page — excluded from the sitemap and robots. scripts/make-og.mjs
 // renders this route with headless Chrome to /og-supply.png after each build.
 // Keep it self-contained: fixed size, no animation, no tooltips, fonts via the
@@ -9,14 +9,8 @@
 // Data: the SAME forecast records the dashboard's Panel B draws
 // (src/data/world-stocks.json), rebased to the shared anchor exactly like the
 // dashboard (displayed = stored − stored anchor; records are never modified).
-// Scenario names/colors come from world-stocks-assumptions.json, same as the
-// dashboard. Updated 2026-09-19: replaced the old SPR card (the user wants
-// the world-inventories scenario graph on the share card).
 import { DATA_AS_OF, CRISIS_DAY_1 } from "../../data/crisis.ts";
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 import ws from "../../data/world-stocks.json";
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-import worldStocksAssumptions from "../../data/world-stocks-assumptions.json";
 
 const dayNum = Math.round(
   (Date.parse(DATA_AS_OF) - Date.parse(CRISIS_DAY_1)) / 86400000
@@ -30,32 +24,20 @@ const asOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", {
 
 // ---- Same record selection + rebasing as the dashboard's Panel B ----
 const records = (ws as any).forecast_records;
-const activeVersion = records
-  .filter((r: any) => typeof r.record_id === "string" && r.record_id.startsWith("scenario-"))
-  .reduce((max: string, r: any) => {
-    const m = r.record_id.match(/-(\d{4}-\d{2}-\d{2})-global-observed$/);
-    return m && m[1] > max ? m[1] : max;
-  }, "");
 const byId = (id: string) => records.find((r: any) => r.record_id === id);
-const recHolds = byId(`scenario-corridor-holds-${activeVersion}-global-observed`);
-const recStandoff = byId(`scenario-standoff-${activeVersion}-global-observed`);
-const recLapses = byId(`scenario-corridor-lapses-${activeVersion}-global-observed`);
 const recEia = byId("steo-2026-10-global-observed");
-if (!recHolds || !recStandoff || !recLapses || !recEia)
-  throw new Error("og card: missing a forecast record");
-
-const anchor = recHolds.anchor;
-for (const r of [recStandoff, recLapses, recEia])
-  if (r.anchor.period !== anchor.period || r.anchor.value_mb !== anchor.value_mb)
-    throw new Error("og card: records disagree on the anchor");
+const recTrend = byId("persistence-2026-09-global-observed");
+if (!recEia || !recTrend) throw new Error("og card: missing comparison record");
+const anchor = recEia.anchor;
+if (recTrend.anchor.period !== anchor.period || recTrend.anchor.value_mb !== anchor.value_mb)
+  throw new Error("og card: comparison records disagree on the anchor");
 const rebase = (v: number) => v - anchor.value_mb;
 
 const axisSet = new Set<string>();
-for (const r of [recHolds, recStandoff, recLapses, recEia]) {
+for (const r of [recEia, recTrend]) {
   axisSet.add(r.anchor.period);
   for (const t of r.targets) axisSet.add(t.period);
-  // rebased (v2) records restart at the observed rebase_start month — it must be
-  // on the axis or the September point of the scenario lines silently disappears
+  // Include any saved restart month in addition to the comparison targets.
   if (r.rebase_start) axisSet.add(r.rebase_start.period);
 }
 const labels = [...axisSet].sort();
@@ -70,23 +52,16 @@ const line = (rec: any): (number | null)[] =>
     if (m === rec.anchor.period) return 0;
     return null;
   });
-const holdsLine = line(recHolds);
-const standoffLine = line(recStandoff);
-const lapsesLine = line(recLapses);
-
-const scMeta = (id: string) => (worldStocksAssumptions as any).scenarios.find((s: any) => s.id === id);
-const scColor = (id: string) => scMeta(id)?.color ?? "#8a867a";
-
+const eiaLine = line(recEia);
+const trendLine = line(recTrend);
 const anchorMonthStr = new Date(anchor.period + "-15T12:00:00").toLocaleDateString("en-US", {
   month: "long",
   year: "numeric",
 });
 const signFmt = (v: number) => `${v > 0 ? "+" : "−"}${Math.abs(Math.round(v)).toLocaleString()}`;
 const end = (l: (number | null)[]) => l[labels.length - 1] as number;
-const holdsEnd = end(holdsLine);
-const standoffEnd = end(standoffLine);
-const lapsesEnd = end(lapsesLine);
-const eiaEnd = end(line(recEia));
+const eiaEnd = end(eiaLine);
+const trendEnd = end(trendLine);
 const endMonthStr = new Date(labels[labels.length - 1] + "-15T12:00:00").toLocaleDateString("en-US", {
   month: "long",
   year: "numeric",
@@ -133,12 +108,12 @@ const endMonthStr = new Date(labels[labels.length - 1] + "-15T12:00:00").toLocal
         THE DEPLETION LEDGER · HORMUZ & RED SEA · DAY {dayNum}
       </div>
       <h1 style="margin: 10px 0 0; font-size: 38px; line-height: 1.05; font-weight: 800; letter-spacing: -0.02em;">
-        How oil in storage could change through 2027
+        Oil inventories: observations and outlook
       </h1>
       <p class="faint" style="margin: 8px 0 0; font-size: 14.5px;">
         Change in global oil inventories since {anchorMonthStr}, in million barrels. Zero means
-        unchanged since then — not empty storage. Scenarios adjust the EIA's October 6 forecast
-        and start at the observed September. Updated {asOf}.
+        unchanged stocks, not empty tanks. Dark: IEA observations through September. Dashed:
+        EIA October 6 outlook. Dotted: June–August trend continued. Coverage differs. Updated {asOf}.
       </p>
 
       <div style="position: relative; flex: 1; margin-top: 16px;">
@@ -150,66 +125,50 @@ const endMonthStr = new Date(labels[labels.length - 1] + "-15T12:00:00").toLocal
         style="display: flex; justify-content: space-between; font-size: 12.5px; margin-top: 12px;"
       >
         <span>
-          {endMonthStr}: {signFmt(holdsEnd)} <span style="color:{scColor('corridor-holds')}">holds</span> · {signFmt(standoffEnd)} <span style="color:{scColor('standoff')}">standoff</span> · {signFmt(lapsesEnd)} <span style="color:{scColor('corridor-lapses')}">lapses</span> · EIA forecast {signFmt(eiaEnd)} (million barrels)
+          {endMonthStr}: EIA {signFmt(eiaEnd)} · recent trend {signFmt(trendEnd)} million barrels
         </span>
         <span>depletion.org</span>
       </div>
 
       <script>
         import Chart from "chart.js/auto";
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         import ws from "../../data/world-stocks.json";
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        import worldStocksAssumptions from "../../data/world-stocks-assumptions.json";
 
-        // Same record selection + rebasing as the frontmatter (for the legend/footer)
-        // and the dashboard's Panel B.
+        // Same saved comparison records and display transform as dashboard Panel B.
         const records = (ws as any).forecast_records;
-        const activeVersion = records
-          .filter((r: any) => typeof r.record_id === "string" && r.record_id.startsWith("scenario-"))
-          .reduce((max: string, r: any) => {
-            const m = r.record_id.match(/-(\d{4}-\d{2}-\d{2})-global-observed$/);
-            return m && m[1] > max ? m[1] : max;
-          }, "");
         const byId = (id: string) => records.find((r: any) => r.record_id === id);
-        const recHolds = byId(`scenario-corridor-holds-${activeVersion}-global-observed`);
-        const recStandoff = byId(`scenario-standoff-${activeVersion}-global-observed`);
-        const recLapses = byId(`scenario-corridor-lapses-${activeVersion}-global-observed`);
-        const anchor = recHolds.anchor;
+        const recEia = byId("steo-2026-10-global-observed");
+        const recTrend = byId("persistence-2026-09-global-observed");
+        const anchor = recEia.anchor;
         const rebase = (v: number) => v - anchor.value_mb;
         const axisSet = new Set<string>();
-        for (const r of [recHolds, recStandoff, recLapses]) {
+        for (const r of [recEia, recTrend]) {
           axisSet.add(r.anchor.period);
           for (const t of r.targets) axisSet.add(t.period);
-          // rebase_start (the observed September) must be on the axis too, or the
-          // scenario lines would start at October — same rule as the frontmatter
           if (r.rebase_start) axisSet.add(r.rebase_start.period);
         }
         const labels = [...axisSet].sort();
-        const line = (rec: any): (number | null)[] =>
-          labels.map((m) => {
-            const t = rec.targets.find((t: any) => t.period === m);
-            if (t) return rebase(t.target_cumulative_mb);
-            // rebased (v2) records restart at the observed rebase_start (Sep, −2);
-            // no value before it — August is null, not 0
-            if (rec.rebase_start && m === rec.rebase_start.period) return rebase(rec.rebase_start.value_mb);
-            if (rec.rebase_start && m < rec.rebase_start.period) return null;
-            if (m === rec.anchor.period) return 0;
-            return null;
-          });
-        const holdsLine = line(recHolds);
-        const standoffLine = line(recStandoff);
-        const lapsesLine = line(recLapses);
-        const scMeta = (id: string) =>
-          (worldStocksAssumptions as any).scenarios.find((s: any) => s.id === id);
-        const colors = {
-          holds: scMeta("corridor-holds")?.color ?? "#8a867a",
-          standoff: scMeta("standoff")?.color ?? "#8a867a",
-          lapses: scMeta("corridor-lapses")?.color ?? "#8a867a",
-        };
+        const line = (rec: any): (number | null)[] => labels.map((m) => {
+          const t = rec.targets.find((t: any) => t.period === m);
+          if (t) return rebase(t.target_cumulative_mb);
+          if (rec.rebase_start && m === rec.rebase_start.period) return rebase(rec.rebase_start.value_mb);
+          if (rec.rebase_start && m < rec.rebase_start.period) return null;
+          return m === rec.anchor.period ? 0 : null;
+        });
+        const eiaLine = line(recEia);
+        const trendLine = line(recTrend);
+        const observed = (ws as any).series.global_observed_cumulative_mb.points;
+        const obsLine = labels.map((m) => {
+          const p = observed.find((p: any) => p.period === m && p.value != null);
+          return p ? rebase(p.value) : null;
+        });
+        const vals = [...eiaLine, ...trendLine, ...obsLine].filter((v): v is number => v != null);
+        const lo = Math.min(0, ...vals), hi = Math.max(0, ...vals);
+        const pad = (hi - lo) * 0.15;
+        const axisMin = Math.floor((lo - pad) / 250) * 250;
+        const axisMax = Math.ceil((hi + pad) / 250) * 250;
         const anchorMonth = new Date(anchor.period + "-15T12:00:00").toLocaleDateString("en-US", {
-          month: "long",
-          year: "numeric",
+          month: "long", year: "numeric",
         });
 
         // Zero reference line with its label (the zero's meaning lives on the chart,
@@ -230,7 +189,7 @@ const endMonthStr = new Date(labels[labels.length - 1] + "-15T12:00:00").toLocal
           },
         };
 
-        const scenarioDs = (
+        const comparisonDs = (
           data: (number | null)[],
           color: string,
           dash: number[] | undefined
@@ -257,9 +216,9 @@ const endMonthStr = new Date(labels[labels.length - 1] + "-15T12:00:00").toLocal
                 borderWidth: 1,
                 pointRadius: 0,
               },
-              scenarioDs(holdsLine, colors.holds, undefined),
-              scenarioDs(standoffLine, colors.standoff, [5, 3]),
-              scenarioDs(lapsesLine, colors.lapses, [10, 4]),
+              { ...comparisonDs(eiaLine, "#6b675c", [7, 4]), label: "EIA outlook" },
+              { ...comparisonDs(trendLine, "#a39d8f", [2, 3]), label: "Recent trend" },
+              { ...comparisonDs(obsLine, "#1c1b17", undefined), label: "Observed (IEA)", pointRadius: 3, spanGaps: false },
             ],
           },
           options: {
@@ -270,16 +229,21 @@ const endMonthStr = new Date(labels[labels.length - 1] + "-15T12:00:00").toLocal
             layout: { padding: { top: 14, right: 12, bottom: 4 } },
             scales: {
               y: {
-                min: -3600,
-                max: 2100,
+                min: axisMin,
+                max: axisMax,
+                afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
+                  const ticks = new Set([axisMin, axisMax]);
+                  for (let v = Math.ceil(axisMin / 500) * 500; v <= axisMax; v += 500) ticks.add(v);
+                  scale.ticks = [...ticks].sort((a, b) => a - b).map(value => ({ value }));
+                },
                 grid: { display: false },
                 border: { display: false },
                 ticks: {
                   color: "#8a867a",
                   padding: 8,
-                  stepSize: 1500,
+                  stepSize: 500,
                   font: { family: "'IBM Plex Mono', monospace", size: 12 },
-                  callback: (v: unknown) => `${v}`,
+                  callback: (v: unknown) => Math.round(Number(v)).toLocaleString("en-US"),
                 },
               },
               x: {

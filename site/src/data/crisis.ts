@@ -357,8 +357,8 @@ export const stats = [
   { label: "Brent", value: "$108.79", sub: "Oct 20 settlement · December contract · down $0.76" },
   { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : (dieselStreak === 1 ? (dieselPriorRise > 0 ? (dieselPriorRise === 1 ? "down after yesterday’s rise" : `down after ${wordNum(dieselPriorRise)} straight rises`) : "down again") : `down ${wordNum(dieselStreak)} days in a row`)) + " · " : lastDiesel.value > dieselYtd[dieselYtd.length - 2].value && dieselPriorStreak.days > 0 ? `first rise after ${wordNum(dieselPriorStreak.days)} straight declines${dieselPriorStreak.fromRecord ? ` off the ${shortStatDate(dieselRecord.date)} record` : ""} · ` : ""}+${dieselUpPct}% vs pre-war $3.72` },
   { label: "US gasoline (AAA)", value: `$${lastGasoline.value.toFixed(2)}`, sub: `${shortStatDate(lastGasoline.date)} · +${gasUpPct}% vs Jan $2.81 (AAA)` },
-  { label: "SPR", value: "283.0M", sub: "Oct 9 · unchanged on the week · down 132.4M from pre-war 415.4M · lowest since Nov 1982" },
-  { label: "US diesel & heating oil", value: "102.6M", sub: "Oct 9 · down 2.5M in a week · 12.3% below last year · East Coast stocks 22% below last year" },
+  { label: "SPR", value: "282.7M", sub: "Oct 16 · down 0.3M on the week · down 132.7M from pre-war 415.4M · lowest since Nov 1982" },
+  { label: "US diesel & heating oil", value: "104.3M", sub: "Oct 16 · up 1.7M in a week · 9.7% below last year · East Coast stocks 22% below last year" },
 ];
 
 // ---------- SPR, million bbl — EIA weekly ending stocks (verified) ----------
@@ -404,6 +404,7 @@ export const sprWeekly: { date: string; level: number }[] = [
   { date: "2026-09-25", level: 283.767 },
   { date: "2026-10-02", level: 282.983 },
   { date: "2026-10-09", level: 282.983 },
+  { date: "2026-10-16", level: 282.683 },
 ];
 // US commercial crude inventories, EXCLUDING the SPR (EIA WPSR, week ending Friday),
 // million barrels. Source: EIA API series WCESTUS1 ("U.S. Ending Stocks excluding SPR of
@@ -433,6 +434,7 @@ export const commercialCrude2026: { date: string; value: number }[] = [
   { date: "2026-09-25", value: 427.320 },
   { date: "2026-10-02", value: 424.134 },
   { date: "2026-10-09", value: 415.577 },
+  { date: "2026-10-16", value: 412.517 },
 ];
 // Same weeks in 2025 (each 2026 week matched to its nearest 2025 week-ending date).
 export const commercialCrude2025: { date: string; value: number }[] = [
@@ -457,6 +459,7 @@ export const commercialCrude2025: { date: string; value: number }[] = [
   { date: "2025-09-12", value: 415.361 }, { date: "2025-09-19", value: 414.754 },
   { date: "2025-09-26", value: 416.546 }, { date: "2025-10-03", value: 420.261 },
   { date: "2025-10-10", value: 423.785 },
+  { date: "2025-10-17", value: 422.824 }, // WPSR table1 w/e 2025-10-17: total crude 831.388 − SPR 408.564
 ];
 export const sprFloors = [
   { level: 300, name: "Cavern damage risk: about 300M barrels (first report below: week ending Aug 7)" },
@@ -465,6 +468,11 @@ export const sprFloors = [
   { level: 70, name: "DOE stated safe minimum: 70M barrels" },
 ];
 // ---------- Branch weights: the three tracks ----------
+// Oct 21, 2026: the per-track `path` sentences (Brent ranges and storage
+// directions) were removed from the public page with the scenario withdrawal —
+// the odds now describe the shipping corridor only. The full issued scenario
+// definitions, including those price/storage implications, remain archived in
+// the research logs (Sep 19 / Oct 15 vintages) and on the model page.
 export const branchTracks = [
   {
     name: "Corridor holds",
@@ -472,7 +480,6 @@ export const branchTracks = [
     border: "border-l-calm",
     weight: "10%",
     what: "Tankers can pass through Hormuz under an Iran–Oman agreement or with US escorts. Traffic gradually returns to normal over one to two quarters.",
-    path: "In this scenario, Brent moves toward $70–80.",
   },
   {
     name: "Standoff",
@@ -480,7 +487,6 @@ export const branchTracks = [
     border: "border-l-crude",
     weight: "50%",
     what: "Fighting continues at the current level. Tanker attacks and shipping restrictions continue, some Iranian facilities remain out of service, and the repaired Saudi bypass operates at a reduced rate. The strait stays partly open.",
-    path: "Brent stays in the $100–120 range. Oil stocks keep falling through 2027. We assume Gulf production stays at the same level.",
   },
   {
     name: "Corridor lapses",
@@ -488,7 +494,6 @@ export const branchTracks = [
     border: "border-l-alarm",
     weight: "40%",
     what: "The shipping route closes for a prolonged period or the fighting gets worse. More tankers are lost, shipping restrictions remain, and the bypass, Abqaiq, and Jazan stay out of service for months.",
-    path: "Brent rises above $130. Shortages spread from the US East Coast to Russia, Europe, China, and aviation fuel.",
   },
 ];
 
@@ -663,14 +668,14 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Oct 21",
     items: [
-      { item: "The next weekly EIA report is due Oct 21 at 10:30 a.m. Eastern, covering the week ending Oct 16. The latest report put SPR stocks at 283.0M barrels — unchanged on the week — and diesel and heating-oil stocks at 102.6M, 12.3% below last year. On Oct 16, DOE sought bids to exchange up to 17M barrels. Separately, Argus reported awards of 20–25M barrels on Oct 13, citing sources; that report remains unconfirmed by DOE in the sources reviewed.", why: "Watch whether SPR stocks fall again and whether fuel stocks fall further. Deliveries from the sixth offering are scheduled for November–December." },
+      { item: "The Oct 21 EIA report put SPR stocks at 282.7M barrels for the week ending Oct 16, down 0.3M. Diesel and heating-oil stocks rose to 104.3M but remained 9.7% below last year; East Coast stocks were 22% lower. DOE sought bids for an exchange of up to 17M barrels on Oct 16. Argus separately reported awards of 20–25M on Oct 13, citing sources; DOE confirmation remains unverified. The next EIA report is due Oct 28 at 10:30 a.m. Eastern.", why: "Watch whether SPR withdrawals continue and whether diesel stocks keep recovering. Deliveries from the sixth offering are scheduled for November–December." },
     ],
   },
 ];
 
 // ---------- Breaking-points cascade (§11, compressed twice) ----------
 export const cascade = [
-  { date: "Each weekly EIA report (next: Oct 21)", region: "US East Coast", trigger: "US diesel and heating-oil stocks stood at 102.6M barrels in the week ending Oct 9, down 2.5 million on the week and 12.3% below last year. At the four-week average rate of about 4.0M barrels a day, those stocks are equivalent to about 26 days of use. East Coast stocks are 22% below last year." },
+  { date: "Each weekly EIA report (next: Oct 28)", region: "US East Coast", trigger: "US diesel and heating-oil stocks rose by 1.7M barrels to 104.3M in the week ending Oct 16, but remained 9.7% below last year. East Coast stocks were 22% below last year. The national total was equivalent to about 27 days of use at the four-week average rate of 3.9M barrels a day; that is a comparison, not a countdown to empty tanks." },
   { date: "Oct 31", region: "Russia", trigger: "Russia’s diesel export ban for producers runs through Oct 31, although the government announced a partial lifting on Oct 10. Novak’s delivery schedule rises from 300,000 tons in October to 1M in December (Interfax, Oct 12). US permission doesn’t lift Russia’s restrictions. The IEA’s October report says limited operating refinery capacity makes the easing unlikely to materially change global diesel supplies." },
   { date: "≈ mid-October", region: "China", trigger: "Commercial oil stocks could begin to fall faster than normal." },
   { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, making it harder for traders to find supplies. If the strait closes fully, this could happen by mid-October." },

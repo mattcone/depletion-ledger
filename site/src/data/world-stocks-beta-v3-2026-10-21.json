@@ -1,0 +1,1793 @@
+{
+  "version": "beta-v3-2026-10-21",
+  "issued": "2026-10-21",
+  "data_cutoff": "2026-10-17",
+  "experimental": true,
+  "published_forecast_unchanged": true,
+  "description": "Beta v3 storage forecast, issued 2026-10-21 (data cutoff 2026-10-17). EXPERIMENTAL: a shipping-responsive beta layer over the issued v2026-10-15 forecast, which remains unchanged and authoritative. The probability-weighted central line is the beta odds (holds 0.1526 / standoff 0.4989 / lapses 0.3486, frozen at issue from shipping data through 2026-10-17) applied to three conditional paths \u2014 two of which (holds, lapses) are identical to the issued v2 paths and one of which (the standoff branch) allows partial Gulf recovery through alternative routes while attacks continue: a DIFFERENT path from the published standoff line (September level + non-Gulf, no Gulf increment). World production in the beta standoff reaches 105.30 mb/d by Dec 2027 \u2014 between the issued v2 standoff (103.30) and the EIA baseline (111.49). Reference frame: zero = the frozen August 2026 anchor (\u2212507 mb vs end-Feb 2026); the paths restart at the observed September (\u2212509). October 2026 is partly elapsed at issue; November 2026 is the first clean month. A new observation issues a NEW dated vintage; this file is frozen. Method: /beta/ (research/beta-forecast-v3-2026-10-21.md). Dashboard: the 'Beta storage forecast (v3)' checkbox, off by default.",
+  "odds": {
+    "spec": "beta odds spec v3 = the reviewed candidate filter (branch_filter_candidate.py), unchanged \u2014 prior 0.10/0.50/0.40; volume lognormal 15.0/8.5/2.0 sigma 0.35 w=1.0; transits Poisson 20/10/2 w=0.5 (hypothesis); tankers Poisson 0.2/1.5/4.0 w=0.5; brent NOT a state observation; the documented state->horizon transition table",
+    "spec_ref": "research/model/candidate/beta-odds-evaluation-2026-10-21.md (section: Selected beta odds spec)",
+    "inputs": {
+      "transits": 10,
+      "transits_date": "2026-10-17",
+      "tankers": 1,
+      "volume": 7.894,
+      "volume_date": "2026-10-17",
+      "brent_context": 108.79,
+      "brent_note": "context only \u2014 not a state observation in the beta odds"
+    },
+    "prior": [
+      0.1,
+      0.5,
+      0.4
+    ],
+    "state_unrounded": [
+      0.005704079541552356,
+      0.9942928912881577,
+      3.0291702900156754e-06
+    ],
+    "horizon_unrounded": [
+      0.15256653287666957,
+      0.49885797242357355,
+      0.34857549469975696
+    ],
+    "mapping_note": "The HORIZON row is the issue-date estimate of the corridor regime for the forecast horizon; the state->horizon transition is already folded in ONCE. It weights the three scenario paths with a FIXED weight across the whole horizon \u2014 no time-varying re-transition (that would double-count the transition). The HORIZON is NOT a confidence interval over the storage lines."
+  },
+  "baseline_ref": {
+    "source": "EIA STEO, released 6 Oct 2026",
+    "archive": "research/sources/eia-steo-2026-10-06.xlsx",
+    "sha256": "54989362410da4aff5673580396380c3a8f4f111fa6d01c6d4fab05ef90efbf4",
+    "note": "identical to the issued v2 baseline"
+  },
+  "anchor": {
+    "period": "2026-08",
+    "value_mb": -507.0,
+    "basis": "IEA OMR Sep 2026 web: cumulative change in global observed stocks since end-Feb 2026"
+  },
+  "rebase_start": {
+    "period": "2026-09",
+    "value_mb": -509
+  },
+  "assumptions_ref": {
+    "path": "site/src/data/world-stocks-assumptions-beta-v3-2026-10-21.json",
+    "sha256": "9a32c89025098bc226e87fdd79d828d709c0ae9b9fbe5821373d74c33bb10885",
+    "note": "frozen at issue \u2014 this record validates only against this snapshot"
+  },
+  "supersession_chain": [
+    {
+      "sha256": "98ff76737221072e157c60919fc203e8c11d9a65cbaa9bcf0beb36764aaefe86",
+      "replaced_by": "beta-v3-2026-10-21",
+      "replaced_on": "2026-10-21"
+    }
+  ],
+  "series": {
+    "beta_scenario_corridor_holds_cumulative_mb": {
+      "points": [
+        {
+          "period": "2026-10",
+          "value_mb": -529.7982223999999,
+          "status": "model-projection"
+        },
+        {
+          "period": "2026-11",
+          "value_mb": -543.9352004000001,
+          "status": "model-projection"
+        },
+        {
+          "period": "2026-12",
+          "value_mb": -572.63317512,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-01",
+          "value_mb": -486.4438035100002,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-02",
+          "value_mb": -430.1000914700005,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-03",
+          "value_mb": -300.2815898700004,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-04",
+          "value_mb": -162.6593717700004,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-05",
+          "value_mb": 14.630538699999647,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-06",
+          "value_mb": 150.22246899999925,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-07",
+          "value_mb": 309.8664680199994,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-08",
+          "value_mb": 479.43015579999957,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-09",
+          "value_mb": 645.3457506999996,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-10",
+          "value_mb": 860.5869368699996,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-11",
+          "value_mb": 1058.2465694699995,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-12",
+          "value_mb": 1218.2395962499993,
+          "status": "model-projection"
+        }
+      ]
+    },
+    "beta_scenario_standoff_cumulative_mb": {
+      "points": [
+        {
+          "period": "2026-10",
+          "value_mb": -549.4584224000001,
+          "status": "model-projection"
+        },
+        {
+          "period": "2026-11",
+          "value_mb": -607.2314804000005,
+          "status": "model-projection"
+        },
+        {
+          "period": "2026-12",
+          "value_mb": -694.9904071200003,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-01",
+          "value_mb": -691.4674955100003,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-02",
+          "value_mb": -745.1678154700005,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-03",
+          "value_mb": -757.5837618700002,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-04",
+          "value_mb": -787.91138377,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-05",
+          "value_mb": -814.4187903,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-06",
+          "value_mb": -879.0952800000002,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-07",
+          "value_mb": -933.4870919800001,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-08",
+          "value_mb": -973.6972111999999,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-09",
+          "value_mb": -1008.0076762999996,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-10",
+          "value_mb": -998.5253011299999,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-11",
+          "value_mb": -1005.07635853,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-12",
+          "value_mb": -1036.89341375,
+          "status": "model-projection"
+        }
+      ]
+    },
+    "beta_scenario_corridor_lapses_cumulative_mb": {
+      "points": [
+        {
+          "period": "2026-10",
+          "value_mb": -715.7982223999999,
+          "status": "model-projection"
+        },
+        {
+          "period": "2026-11",
+          "value_mb": -999.9352004000001,
+          "status": "model-projection"
+        },
+        {
+          "period": "2026-12",
+          "value_mb": -1354.13317512,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-01",
+          "value_mb": -1531.4438035100002,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-02",
+          "value_mb": -1713.1000914700005,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-03",
+          "value_mb": -1846.7815898700005,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-04",
+          "value_mb": -1964.1593717700005,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-05",
+          "value_mb": -2050.3694613000002,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-06",
+          "value_mb": -2169.7775310000006,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-07",
+          "value_mb": -2357.8605319800004,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-08",
+          "value_mb": -2536.0238442,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-09",
+          "value_mb": -2706.6182492999997,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-10",
+          "value_mb": -2839.1040631299998,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-11",
+          "value_mb": -2977.9544305299996,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-12",
+          "value_mb": -3165.6884037499995,
+          "status": "model-projection"
+        }
+      ]
+    },
+    "beta_central_cumulative_mb": {
+      "points": [
+        {
+          "period": "2026-10",
+          "value_mb": -604.4409119235968,
+          "status": "model-projection"
+        },
+        {
+          "period": "2026-11",
+          "value_mb": -734.4614798858443,
+          "status": "model-projection"
+        },
+        {
+          "period": "2026-12",
+          "value_mb": -906.0838048947411,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-01",
+          "value_mb": -952.9828987611616,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-02",
+          "value_mb": -1034.4964971405388,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-03",
+          "value_mb": -1067.482426731991,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-04",
+          "value_mb": -1102.5300764316921,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-05",
+          "value_mb": -1118.7557251590624,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-06",
+          "value_mb": -1171.9560439491734,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-07",
+          "value_mb": -1240.2946266761307,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-08",
+          "value_mb": -1296.587385969187,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-09",
+          "value_mb": -1347.8552971085628,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-10",
+          "value_mb": -1356.4676452477704,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-11",
+          "value_mb": -1377.9792831298048,
+          "status": "model-projection"
+        },
+        {
+          "period": "2027-12",
+          "value_mb": -1434.8813559921864,
+          "status": "model-projection"
+        }
+      ]
+    }
+  },
+  "records": [
+    {
+      "record_id": "beta-scenario-corridor-holds-2026-10-21-global-observed",
+      "type": "model-projection",
+      "scenario": "Corridor holds (v2 path)",
+      "beta_of": "world-stocks v2026-10-15 (issued; unchanged)",
+      "baseline": "EIA STEO, released 6 Oct 2026 (frozen workbook, sha256 54989362410da4aff5673580396380c3a8f4f111fa6d01c6d4fab05ef90efbf4) + beta v3 adjustments (assumptions version beta-v3-2026-10-21, sha256 9a32c89025098bc226e87fdd79d828d709c0ae9b9fbe5821373d74c33bb10885)",
+      "issued": "2026-10-21",
+      "issued_before_outcome": true,
+      "model_version": "beta-v3 (2026-10-21, experimental \u2014 not the published forecast)",
+      "scope": "global \u2014 beta v3 path over the EIA STEO world total (all liquids, balance-implied). EXPERIMENTAL beta layer over the issued v2026-10-15 forecast (which is unchanged). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
+      "anchor": {
+        "period": "2026-08",
+        "value_mb": -507.0,
+        "basis": "IEA OMR Sep 2026 web: cumulative change in global observed stocks since end-Feb 2026"
+      },
+      "anchor_observation": {
+        "series": "global_observed_cumulative_mb",
+        "period": "2026-09",
+        "value_mb": -509,
+        "edition": "IEA OMR, October 2026 ed (published 14 Oct 2026)"
+      },
+      "rebase_start": {
+        "period": "2026-09",
+        "value_mb": -509
+      },
+      "assumptions_ref": {
+        "path": "site/src/data/world-stocks-assumptions-beta-v3-2026-10-21.json",
+        "sha256": "9a32c89025098bc226e87fdd79d828d709c0ae9b9fbe5821373d74c33bb10885",
+        "note": "frozen at issue \u2014 this record validates only against this snapshot"
+      },
+      "targets": [
+        {
+          "period": "2026-10",
+          "target_monthly_mb": -20.7982223999999,
+          "target_cumulative_mb": -529.7982223999999,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2026-11",
+          "target_monthly_mb": -14.136978000000227,
+          "target_cumulative_mb": -543.9352004000001,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2026-12",
+          "target_monthly_mb": -28.697974719999934,
+          "target_cumulative_mb": -572.63317512,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-01",
+          "target_monthly_mb": 86.18937160999988,
+          "target_cumulative_mb": -486.4438035100002,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-02",
+          "target_monthly_mb": 56.34371203999967,
+          "target_cumulative_mb": -430.1000914700005,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-03",
+          "target_monthly_mb": 129.8185016000001,
+          "target_cumulative_mb": -300.2815898700004,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-04",
+          "target_monthly_mb": 137.6222181,
+          "target_cumulative_mb": -162.6593717700004,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-05",
+          "target_monthly_mb": 177.28991047000005,
+          "target_cumulative_mb": 14.630538699999647,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-06",
+          "target_monthly_mb": 135.5919302999996,
+          "target_cumulative_mb": 150.22246899999925,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-07",
+          "target_monthly_mb": 159.64399902000014,
+          "target_cumulative_mb": 309.8664680199994,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-08",
+          "target_monthly_mb": 169.56368778000018,
+          "target_cumulative_mb": 479.43015579999957,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-09",
+          "target_monthly_mb": 165.9155949000001,
+          "target_cumulative_mb": 645.3457506999996,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-10",
+          "target_monthly_mb": 215.24118616999993,
+          "target_cumulative_mb": 860.5869368699996,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-11",
+          "target_monthly_mb": 197.65963259999992,
+          "target_cumulative_mb": 1058.2465694699995,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-12",
+          "target_monthly_mb": 159.9930267799999,
+          "target_cumulative_mb": 1218.2395962499993,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        }
+      ]
+    },
+    {
+      "record_id": "beta-scenario-standoff-2026-10-21-global-observed",
+      "type": "model-projection",
+      "scenario": "Standoff (partial recovery)",
+      "beta_of": "world-stocks v2026-10-15 (issued; unchanged)",
+      "baseline": "EIA STEO, released 6 Oct 2026 (frozen workbook, sha256 54989362410da4aff5673580396380c3a8f4f111fa6d01c6d4fab05ef90efbf4) + beta v3 adjustments (assumptions version beta-v3-2026-10-21, sha256 9a32c89025098bc226e87fdd79d828d709c0ae9b9fbe5821373d74c33bb10885)",
+      "issued": "2026-10-21",
+      "issued_before_outcome": true,
+      "model_version": "beta-v3 (2026-10-21, experimental \u2014 not the published forecast)",
+      "scope": "global \u2014 beta v3 path over the EIA STEO world total (all liquids, balance-implied). EXPERIMENTAL beta layer over the issued v2026-10-15 forecast (which is unchanged). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
+      "anchor": {
+        "period": "2026-08",
+        "value_mb": -507.0,
+        "basis": "IEA OMR Sep 2026 web: cumulative change in global observed stocks since end-Feb 2026"
+      },
+      "anchor_observation": {
+        "series": "global_observed_cumulative_mb",
+        "period": "2026-09",
+        "value_mb": -509,
+        "edition": "IEA OMR, October 2026 ed (published 14 Oct 2026)"
+      },
+      "rebase_start": {
+        "period": "2026-09",
+        "value_mb": -509
+      },
+      "assumptions_ref": {
+        "path": "site/src/data/world-stocks-assumptions-beta-v3-2026-10-21.json",
+        "sha256": "9a32c89025098bc226e87fdd79d828d709c0ae9b9fbe5821373d74c33bb10885",
+        "note": "frozen at issue \u2014 this record validates only against this snapshot"
+      },
+      "targets": [
+        {
+          "period": "2026-10",
+          "target_monthly_mb": -40.45842240000012,
+          "target_cumulative_mb": -549.4584224000001,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2026-11",
+          "target_monthly_mb": -57.77305800000036,
+          "target_cumulative_mb": -607.2314804000005,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2026-12",
+          "target_monthly_mb": -87.75892671999992,
+          "target_cumulative_mb": -694.9904071200003,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-01",
+          "target_monthly_mb": 3.5229116100000937,
+          "target_cumulative_mb": -691.4674955100003,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-02",
+          "target_monthly_mb": -53.700319960000286,
+          "target_cumulative_mb": -745.1678154700005,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-03",
+          "target_monthly_mb": -12.41594639999974,
+          "target_cumulative_mb": -757.5837618700002,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-04",
+          "target_monthly_mb": -30.327621899999855,
+          "target_cumulative_mb": -787.91138377,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-05",
+          "target_monthly_mb": -26.507406529999898,
+          "target_cumulative_mb": -814.4187903,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-06",
+          "target_monthly_mb": -64.67648970000027,
+          "target_cumulative_mb": -879.0952800000002,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-07",
+          "target_monthly_mb": -54.391811979999886,
+          "target_cumulative_mb": -933.4870919800001,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-08",
+          "target_monthly_mb": -40.21011921999984,
+          "target_cumulative_mb": -973.6972111999999,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-09",
+          "target_monthly_mb": -34.31046509999973,
+          "target_cumulative_mb": -1008.0076762999996,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-10",
+          "target_monthly_mb": 9.482375169999784,
+          "target_cumulative_mb": -998.5253011299999,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-11",
+          "target_monthly_mb": -6.551057400000104,
+          "target_cumulative_mb": -1005.07635853,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-12",
+          "target_monthly_mb": -31.817055220000043,
+          "target_cumulative_mb": -1036.89341375,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        }
+      ]
+    },
+    {
+      "record_id": "beta-scenario-corridor-lapses-2026-10-21-global-observed",
+      "type": "model-projection",
+      "scenario": "Corridor lapses (v2 path)",
+      "beta_of": "world-stocks v2026-10-15 (issued; unchanged)",
+      "baseline": "EIA STEO, released 6 Oct 2026 (frozen workbook, sha256 54989362410da4aff5673580396380c3a8f4f111fa6d01c6d4fab05ef90efbf4) + beta v3 adjustments (assumptions version beta-v3-2026-10-21, sha256 9a32c89025098bc226e87fdd79d828d709c0ae9b9fbe5821373d74c33bb10885)",
+      "issued": "2026-10-21",
+      "issued_before_outcome": true,
+      "model_version": "beta-v3 (2026-10-21, experimental \u2014 not the published forecast)",
+      "scope": "global \u2014 beta v3 path over the EIA STEO world total (all liquids, balance-implied). EXPERIMENTAL beta layer over the issued v2026-10-15 forecast (which is unchanged). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
+      "anchor": {
+        "period": "2026-08",
+        "value_mb": -507.0,
+        "basis": "IEA OMR Sep 2026 web: cumulative change in global observed stocks since end-Feb 2026"
+      },
+      "anchor_observation": {
+        "series": "global_observed_cumulative_mb",
+        "period": "2026-09",
+        "value_mb": -509,
+        "edition": "IEA OMR, October 2026 ed (published 14 Oct 2026)"
+      },
+      "rebase_start": {
+        "period": "2026-09",
+        "value_mb": -509
+      },
+      "assumptions_ref": {
+        "path": "site/src/data/world-stocks-assumptions-beta-v3-2026-10-21.json",
+        "sha256": "9a32c89025098bc226e87fdd79d828d709c0ae9b9fbe5821373d74c33bb10885",
+        "note": "frozen at issue \u2014 this record validates only against this snapshot"
+      },
+      "targets": [
+        {
+          "period": "2026-10",
+          "target_monthly_mb": -206.7982223999999,
+          "target_cumulative_mb": -715.7982223999999,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2026-11",
+          "target_monthly_mb": -284.1369780000002,
+          "target_cumulative_mb": -999.9352004000001,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2026-12",
+          "target_monthly_mb": -354.19797471999993,
+          "target_cumulative_mb": -1354.13317512,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-01",
+          "target_monthly_mb": -177.31062839000012,
+          "target_cumulative_mb": -1531.4438035100002,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-02",
+          "target_monthly_mb": -181.65628796000033,
+          "target_cumulative_mb": -1713.1000914700005,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-03",
+          "target_monthly_mb": -133.6814983999999,
+          "target_cumulative_mb": -1846.7815898700005,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-04",
+          "target_monthly_mb": -117.3777819,
+          "target_cumulative_mb": -1964.1593717700005,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-05",
+          "target_monthly_mb": -86.21008952999996,
+          "target_cumulative_mb": -2050.3694613000002,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-06",
+          "target_monthly_mb": -119.4080697000004,
+          "target_cumulative_mb": -2169.7775310000006,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-07",
+          "target_monthly_mb": -188.08300097999984,
+          "target_cumulative_mb": -2357.8605319800004,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-08",
+          "target_monthly_mb": -178.1633122199998,
+          "target_cumulative_mb": -2536.0238442,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-09",
+          "target_monthly_mb": -170.59440509999988,
+          "target_cumulative_mb": -2706.6182492999997,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-10",
+          "target_monthly_mb": -132.48581383000004,
+          "target_cumulative_mb": -2839.1040631299998,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-11",
+          "target_monthly_mb": -138.85036740000004,
+          "target_cumulative_mb": -2977.9544305299996,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-12",
+          "target_monthly_mb": -187.73397322000005,
+          "target_cumulative_mb": -3165.6884037499995,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        }
+      ]
+    },
+    {
+      "record_id": "beta-central-2026-10-21-global-observed",
+      "type": "model-projection",
+      "scenario": "Beta central (probability-weighted)",
+      "beta_of": "world-stocks v2026-10-15 (issued; unchanged)",
+      "baseline": "EIA STEO, released 6 Oct 2026 (frozen workbook, sha256 54989362410da4aff5673580396380c3a8f4f111fa6d01c6d4fab05ef90efbf4) + beta v3 adjustments (assumptions version beta-v3-2026-10-21, sha256 9a32c89025098bc226e87fdd79d828d709c0ae9b9fbe5821373d74c33bb10885)",
+      "issued": "2026-10-21",
+      "issued_before_outcome": true,
+      "model_version": "beta-v3 (2026-10-21, experimental \u2014 not the published forecast)",
+      "scope": "global \u2014 beta v3 path over the EIA STEO world total (all liquids, balance-implied). EXPERIMENTAL beta layer over the issued v2026-10-15 forecast (which is unchanged). Anchored to the IEA's cumulative observed level for visual comparison only; EIA coverage is broader than the IEA's observed pool. Scores against the IEA series must carry that coverage mismatch.",
+      "anchor": {
+        "period": "2026-08",
+        "value_mb": -507.0,
+        "basis": "IEA OMR Sep 2026 web: cumulative change in global observed stocks since end-Feb 2026"
+      },
+      "anchor_observation": {
+        "series": "global_observed_cumulative_mb",
+        "period": "2026-09",
+        "value_mb": -509,
+        "edition": "IEA OMR, October 2026 ed (published 14 Oct 2026)"
+      },
+      "rebase_start": {
+        "period": "2026-09",
+        "value_mb": -509
+      },
+      "assumptions_ref": {
+        "path": "site/src/data/world-stocks-assumptions-beta-v3-2026-10-21.json",
+        "sha256": "9a32c89025098bc226e87fdd79d828d709c0ae9b9fbe5821373d74c33bb10885",
+        "note": "frozen at issue \u2014 this record validates only against this snapshot"
+      },
+      "targets": [
+        {
+          "period": "2026-10",
+          "target_monthly_mb": -95.44091192359679,
+          "target_cumulative_mb": -604.4409119235968,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2026-11",
+          "target_monthly_mb": -130.02056796224747,
+          "target_cumulative_mb": -734.4614798858443,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2026-12",
+          "target_monthly_mb": -171.62232500889684,
+          "target_cumulative_mb": -906.0838048947411,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-01",
+          "target_monthly_mb": -46.89909386642046,
+          "target_cumulative_mb": -952.9828987611616,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-02",
+          "target_monthly_mb": -81.5135983793773,
+          "target_cumulative_mb": -1034.4964971405388,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-03",
+          "target_monthly_mb": -32.98592959145208,
+          "target_cumulative_mb": -1067.482426731991,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-04",
+          "target_monthly_mb": -35.047649699701196,
+          "target_cumulative_mb": -1102.5300764316921,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-05",
+          "target_monthly_mb": -16.2256487273703,
+          "target_cumulative_mb": -1118.7557251590624,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-06",
+          "target_monthly_mb": -53.20031879011094,
+          "target_cumulative_mb": -1171.9560439491734,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-07",
+          "target_monthly_mb": -68.33858272695738,
+          "target_cumulative_mb": -1240.2946266761307,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-08",
+          "target_monthly_mb": -56.29275929305618,
+          "target_cumulative_mb": -1296.587385969187,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-09",
+          "target_monthly_mb": -51.26791113937588,
+          "target_cumulative_mb": -1347.8552971085628,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-10",
+          "target_monthly_mb": -8.612348139207597,
+          "target_cumulative_mb": -1356.4676452477704,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-11",
+          "target_monthly_mb": -21.511637882034393,
+          "target_cumulative_mb": -1377.9792831298048,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        },
+        {
+          "period": "2027-12",
+          "target_monthly_mb": -56.9020728623816,
+          "target_cumulative_mb": -1434.8813559921864,
+          "issued_before_outcome": true,
+          "issued_before_outcome_note": "issued during or before this month; the month's print is pending \u2014 frozen at issue, scored exactly once",
+          "outcome_first_release": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null
+          },
+          "outcome_latest": {
+            "monthly_mb": null,
+            "monthly_published": null,
+            "cumulative_mb": null,
+            "cumulative_published": null,
+            "revisions": 0,
+            "published_date": null
+          }
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "holds_reproduces_issued_v2_endpoint": true,
+    "lapses_reproduce_issued_v2_endpoint": true,
+    "same_compute_reproduces_issued_v2_standoff_endpoint": true,
+    "anchor_is_workbook_2026_09_not_2026_10": true,
+    "standoff_matches_stated_schedule_every_month": true,
+    "intended_2027_12_is_anchor_plus_caps": true,
+    "positioning_v2_lt_beta_lt_eia_dec2027": true,
+    "central_is_probability_weighted_sum_monthly": true,
+    "anchors_agree_with_published": true,
+    "endpoints_dec2027_feb2026_basis_mb": {
+      "corridor-holds": 1218.24,
+      "standoff": -1036.893,
+      "corridor-lapses": -3165.688,
+      "central": -1434.881
+    }
+  }
+}
