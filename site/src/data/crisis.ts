@@ -66,6 +66,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-10-19", value: 109.55, tip: "settlement", note: "December contract settlement, down $0.31 (0.3%) from Oct 16 (CNBC). Yahoo BZ=F close: $109.26." },
   { date: "2026-10-20", value: 108.79, tip: "settlement · down $0.76 (eOption/AFP)", note: "Settlement (eOption closing wrap, December contract; −$0.76 vs Oct 19 — AFP and Reuters-derived reporting agree; the Yahoo BZ=F bar closed at 109.12, the settlement is plotted per the Oct 13/16 precedent). A twentieth session close above $100. AFP reports an intraday high of $111.99; EnergyNow’s earlier indicated price was $111.57. Prices later eased amid reports of a new US–Iran proposal (The New Arab, Oct 20; no official agreement announced)." },
   { date: "2026-10-21", value: 108.82, tip: "settlement · up $0.03 (Newsquawk/CNBC)", note: "Settlement (Newsquawk/CNBC wire, December contract; +$0.03 vs Oct 20 — the Yahoo BZ=F bar matches). A twenty-first session close above $100; eOption independently reports the same settlement and daily change." },
+  { date: "2026-10-22", value: 113.17, tip: "settlement · up $4.35 (CNBC/Newsquawk/AP)", note: "Settlement (CNBC/Newsquawk/AP wire, December contract; +$4.35 vs Oct 21, +4.0% — the highest level since May 4 (AP's market wrap names the date directly); the Yahoo BZ=F bar closed at 112.87, the wire value is plotted). A twenty-second session close above $100. Up on the Houthi attacks that killed four in Saudi Arabia (Dammam airport, the Shaybah field), the NYT report that US and Israeli militaries have drawn up plans for renewed strikes after the midterms, the IRGC threat to \"extend confrontation to US bases\" (Al Jazeera), and Aramco telling staff to leave its Dhahran headquarters (Reuters)." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -161,6 +162,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-10-19", value: 103.66, note: "November contract settlement, up $2.25 (2.2%) from Oct 16 (CNBC). December settled at $98.54. The lower Yahoo CL=F reading requires a contract-roll check before it can be classified as a feed error." },
   { date: "2026-10-20", value: 97.82, note: "December front-month settlement (Reuters, Oct 20 — the AP NYMEX table and DOB/LSEG agree; supersedes the unverified $98.10 Yahoo CL=F close that was plotted Oct 21) — the front month ROLLED today: the November contract's final settlement was $101.79 (MarketScreener, Oct 20). The step down from Oct 19's $103.66 is the contract switch plus the November contract's own decline, not a single-contract move. December's prior settlement was $98.54, so the December contract itself fell $0.72." },
   { date: "2026-10-21", value: 97.15, note: "Settlement (Newsquawk/CNBC wire, December contract; −$0.67 vs the Oct 20 settlement — the Yahoo CL=F bar matches; eOption independently reports the same settlement and daily change)." },
+  { fred: false, date: "2026-10-22", value: 99.47, note: "Settlement (CNBC/Newsquawk/Investrade/Rigzone wire, December contract; +$2.32 vs Oct 21, +2.4% — the Yahoo CL=F bar closed at 99.10, the wire value is plotted). Touched $100 intraday (session high 100.17, Newsquawk) on the same drivers as Brent: the Houthi attacks on Saudi infrastructure and the NYT report of planned post-midterm strikes (Reuters, CNBC, Oct 22)." },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -358,7 +360,7 @@ export const dieselPriorRise = (() => {
   return n;
 })();
 export const stats = [
-  { label: "Brent", value: "$108.82", sub: "Oct 21 settlement · December contract · up $0.03 · 21st close above $100" },
+  { label: "Brent", value: "$113.17", sub: "Oct 22 settlement · December contract · up $4.35 · 22nd close above $100" },
   { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : (dieselStreak === 1 ? (dieselPriorRise > 0 ? (dieselPriorRise === 1 ? "down after yesterday’s rise" : `down after ${wordNum(dieselPriorRise)} straight rises`) : "down again") : `down ${wordNum(dieselStreak)} days in a row`)) + " · " : lastDiesel.value > dieselYtd[dieselYtd.length - 2].value && dieselPriorStreak.days > 0 ? `first rise after ${wordNum(dieselPriorStreak.days)} straight declines${dieselPriorStreak.fromRecord ? ` off the ${shortStatDate(dieselRecord.date)} record` : ""} · ` : ""}+${dieselUpPct}% vs pre-war $3.72` },
   { label: "US gasoline (AAA)", value: `$${lastGasoline.value.toFixed(2)}`, sub: `${shortStatDate(lastGasoline.date)} · +${gasUpPct}% vs Jan $2.81 (AAA)` },
   { label: "SPR", value: "282.7M", sub: "Oct 16 · down 0.3M on the week · down 132.7M from pre-war 415.4M · lowest since Nov 1982" },
@@ -664,8 +666,8 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     items: [
       { item: "Whether attacks on Saudi Arabia disrupt oil supplies. The Dammam airport attack on Oct 21 killed two people and injured eight, according to an updated Saudi aviation authority statement (Gulf News, Oct 22). Drone debris killed two people near Shaybah, but the Saudi Energy Ministry said oil operations were unaffected (Bloomberg). The US ordered non-emergency diplomatic staff and families to leave Saudi Arabia on Oct 21.", why: "Watch for confirmed production or terminal damage and interruptions to tanker loadings." },
       { item: "Whether the US and Iran reach an agreement or resume strikes. Trump said on Oct 21 that the US was “not negotiating” and something would happen “fairly soon” (Anadolu). White House spokesperson Anna Kelly separately told Drop Site that the US would not attack Iran before the Nov 3 midterms. No agreement has been announced.", why: "Watch for an official agreement, changes to the blockade, or renewed strikes." },
-      { item: "Whether oil keeps moving through Hormuz despite attacks. The Kuwait-flagged Al Dasma was hit off Bukha on Oct 21; UKMTO said all crew were safe. Iran claimed seven tankers were hit or damaged overnight into Oct 22; the claim remains unverified (AP). Separately, Kpler reported regional oil flows above prewar levels for the week ending Oct 18 (WSJ).", why: "Watch for sustained volumes and safe passage. Regional flows include routes beyond Hormuz. Two Petro Dolphin crew remain missing after the Oct 11 attack." },
-      { item: "Whether Russian diesel reaches buyers. Deputy Prime Minister Alexander Novak said a tanker carrying 40,000 metric tons was scheduled to leave for the US on Oct 22 (Anadolu, Oct 21). US Treasury license 135 permits diesel transactions through Apr 7, 2027.", why: "Watch for a verified departure and delivery. The IEA says refinery constraints could limit how much diesel Russia can export." },
+      { item: "Whether oil keeps moving through Hormuz despite attacks. UKMTO said all crew were safe after the Al Dasma was hit off Bukha on Oct 21. Iran's claim that seven tankers were hit or damaged overnight into Oct 22 remains unverified (AP). Kpler reported regional flows above prewar levels for the week ending Oct 18 and estimated that Iran's floating stockpile near Malaysia and Singapore was depleted by mid-October (WSJ).", why: "Watch for sustained shipments and safe passage. Regional flows include routes beyond Hormuz. The depleted stockpile had supplied China. Two Petro Dolphin crew remain missing after the Oct 11 attack." },
+      { item: "Whether Russian diesel reaches buyers. Novak said a tanker carrying 40,000 metric tons would leave for the US on Oct 22. Putin later gave a departure window of Oct 23–24 (TASS via Kyiv Post, Oct 21). US Treasury license 135 permits diesel transactions through Apr 7, 2027.", why: "Watch for a verified departure and delivery. The IEA says refinery constraints could limit how much diesel Russia can export." },
     ],
   },
   {
@@ -930,6 +932,7 @@ export interface Y10Pt {
   value: number;
   note?: string;
   fred?: boolean; // true = FRED DGS10 close; unset = Yahoo ^TNX session close
+  usDaily?: boolean; // true = US Treasury daily par yield (Oct 22+); overrides fred
 }
 export const treasury10y: Y10Pt[] = [
   { fred: true, date: "2026-01-02", value: 4.19 },
@@ -1000,6 +1003,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-10-19", value: 5.136, note: "session close (Yahoo, same-day) · eighteenth straight close above 5%" },
   { date: "2026-10-20", value: 5.117, note: "session close (Yahoo, same-day) · nineteenth straight close above 5%" },
   { date: "2026-10-21", value: 5.146, note: "session close (Yahoo, same-day) · twentieth straight close above 5%" },
+  { date: "2026-10-22", value: 4.96, usDaily: true, note: "US Treasury daily par yield (official curve — per Treasury methodology, an interpolated estimate from indicative bid-side quotations, not actual transactions; Yahoo last trade 4.953, a CNBC-attributed wrap quoted 4.972) · first close below 5% after twenty straight above (Sep 23–Oct 21, official series) — safe-haven bond demand on the AI/tech stock selloff (Nasdaq's worst day since June) even as oil spiked (AP, Oct 22)" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
@@ -1095,6 +1099,9 @@ export const refineryBelow95Streak = belowStreak(usRefineryUtil2026, 95);
 // 10-yr points that are Yahoo session closes, not FRED — the panel's source sub-line
 // lists them (was a hand-typed date list; it went stale for the same reason wtiNonFred did)
 export const treasuryNonFred = treasury10y.filter((p) => !p.fred).map((p) => p.date);
+// 10-yr points that are US Treasury daily par yields (not FRED, not Yahoo) — the
+// panel's source sub-line and the tooltip label these separately (Oct 22 onward)
+export const treasuryUsDaily = treasury10y.filter((p) => p.usDaily).map((p) => p.date);
 // same for WTI — the tooltip source label ("front-month futures close" vs "FRED weekly spot")
 export const wtiNonFred = wtiWeekly.filter((p) => !p.fred).map((p) => p.date);
 

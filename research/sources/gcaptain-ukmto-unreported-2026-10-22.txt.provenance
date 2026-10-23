@@ -1,0 +1,9 @@
+source: https://gcaptain.com/fog-of-war-deepens-in-hormuz-as-ukmto-says-most-ship-attacks-go-unreported/
+retrieved: 2026-10-22 ~22:30Z (~6:30 PM MDT), HTTP 200
+sha256: 986d2d4e37034df3084650baa7c4dbaf68b98e64cae0e6b464e2e9aace4ce49c
+corroboration: Seatrade Maritime Oct 18 (https://www.seatrade-maritime.com/security/ukmto-struggling-to-accurately-report-hormuz-attacks,
+Cloudflare-gated to this machine — verified via search snippet), Splash247, Middle East Eye (all same UKMTO admission).
+Primary claim: UKMTO's weekly overview published Friday (Oct 16) — "struggling to establish the true number of
+attacks because the majority of vessels targeted are refusing to submit reports"; "aware of additional incidents
+through other sources but cannot include them in its reporting without sufficient verification."
+Used for: chart caveat (UkmtoChart.astro), MODEL-internal.md §6 interpretation rule, SUMMARY.md.

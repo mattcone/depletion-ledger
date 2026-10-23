@@ -113,6 +113,7 @@ At any "nothing-changes" pace the SPR crosses the 180M floor within 6–12 month
 
 - This is a **stress test, not a forecast** — the value is the *ordering* of breaks, not the dates.
 - Traffic figures are a range (3–29 transits/day verified; claimed 8.6–10M bpd dark flows unverified). Model on the verified floor.
+- **The UKMTO feed can undercount attacks.** Its Oct 16, 2026 weekly overview said UKMTO is struggling to establish the true number of attacks — the majority of targeted vessels refuse to report, and it knows of additional incidents it cannot publish without verification (gCaptain Oct 16; Seatrade Oct 18). Interpretation rule: a quiet feed or falling report counts is NOT evidence of improved security — missing reports widen uncertainty and must not be read as de-escalation. This is an interpretation guardrail, not a reweight trigger: the attack count is not a filter channel, and no input changed.
 - ARA depletion path is an interpolation (GEF publishes the December endpoint, not weekly stock); late-October floor crossing ±3 weeks.
 - Every Chinese number is an estimate; China discloses nothing.
 - Infrastructure figures: Abqaiq ~7M bpd offline is an upper bound (social-media-derived); South Pars "40% restored" is an Iranian self-report.

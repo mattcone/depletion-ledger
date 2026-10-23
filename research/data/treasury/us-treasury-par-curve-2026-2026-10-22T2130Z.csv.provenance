@@ -1,0 +1,20 @@
+source: https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all?type=daily_treasury_yield_curve
+retrieved: 2026-10-22 ~21:30Z (~5:30 PM MDT)
+sha256: 973de534a24d9295249fa4bdfd455cc183c37ecfc9a52f3ed4df47b1507e01e6
+note: Official US Treasury daily par yield curve, 2026 YTD. Rows MM/DD/YYYY, 13th column = 10-yr.
+Oct 22 2026: 4.96 (published settlement; the Oct 22 row WAS present at retrieval —
+the curve for a given day is posted after that day's settlement).
+Oct 21: 5.13 · Oct 20: 5.12 · Oct 19: 5.15 · Oct 16: 5.09.
+Streak check: consecutive above-5% closes Sep 23 (5.11) through Oct 21 (5.13) = exactly 20.
+Oct 22 (4.96) = first below-5% close of the run.
+Cross-references for the Oct 22 10-yr: Yahoo ^TNX last trade 4.953 (fetched earlier same
+day; re-fetch later got HTTP 429); CNBC-attributed Boston Report wrap quotes 4.972.
+Official settlement 4.96 is the plotted value (settlement-only rule).
+CORRECTION (Oct 22, ~18:40 MDT, per review recheck + Treasury methodology page
+https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily):
+these daily par yields are INTERPOLATED ESTIMATES derived from indicative,
+bid-side market price quotations (not actual transactions) obtained by the
+Federal Reserve Bank of New York at or near 3:30 PM each trading day. They are
+NOT exchange settlements. The plotted value is labeled "US Treasury daily par
+yield" in the chart caption, tooltip, and data note. The 4.96 value and the
+20-close streak check are unaffected.

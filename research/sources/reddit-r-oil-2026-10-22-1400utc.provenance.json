@@ -1,0 +1,9 @@
+{
+  "source": "r/oil RSS feed (Atom)",
+  "url": "https://www.reddit.com/r/oil/.rss",
+  "fetchedAt": "2026-10-22T14:00:00Z",
+  "file": "reddit-r-oil-2026-10-22-1400utc.xml",
+  "entries": 25,
+  "note": "Fetched during the Oct 22 daily pass (reddit.com/r/oil.rss check). 25 entries, Oct 18-22. Items of note: Iran floating storage depletion (WSJ/Kpler), Putin 2-3 day diesel timeline (TASS via Kyiv Post), Rosneft Bloomberg feature, Nikolskoye/Tambov Druzhba pumping station (already on site), Brent >$111 intraday (not settlement - not used).",
+  "sha256": "e6cbce304d4166687ae2607eb65f4d15754e18ad173a591511bb9cd6ff00fa5c"
+}
