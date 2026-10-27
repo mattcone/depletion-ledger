@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-10-26";
+export const DATA_AS_OF = "2026-10-27";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -255,6 +255,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-10-24", value: 4.2957, note: "AAA release, Oct 24" },
   { date: "2026-10-25", value: 4.2892, note: "AAA release, Oct 25" },
   { date: "2026-10-26", value: 4.2858, note: "AAA release, Oct 26" },
+  { date: "2026-10-27", value: 4.2661, note: "AAA release, Oct 27" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -318,6 +319,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-10-24", value: 6.3374, note: "AAA release, Oct 24" },
   { date: "2026-10-25", value: 6.3474, note: "AAA release, Oct 25" },
   { date: "2026-10-26", value: 6.3492, note: "AAA release, Oct 26" },
+  { date: "2026-10-27", value: 6.3521, note: "AAA release, Oct 27" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
@@ -688,9 +690,9 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "Whether attacks on Saudi Arabia disrupt oil supplies. The coalition reported intercepting missiles toward Riyadh on Oct 25 and 26. The Houthis claimed attacks on Riyadh's airport and oil pumping stations on Oct 26; Saudi Arabia has not confirmed those strikes (CNBC). Aramco has reported East–West pipeline capacity of 7M barrels/day. Capacity isn't measured throughput, and the current operating rate remains unverified here.", why: "Watch for an official Aramco statement on pipeline throughput, Yanbu loading data, and confirmed production or terminal damage." },
-      { item: "Whether the US and Iran reach an agreement or resume strikes. CNN reports US forces could begin major operations within 96 hours of a presidential order. Officials cited by CNN expect an order most likely after the Nov 3 midterms, but Trump has not made a decision. Iranian officials say diplomacy remains possible. Two Iranian security officials told Reuters on Oct 23 that Iran has plans to target Gulf undersea communications cables if attacked again.", why: "Watch for renewed strikes or an official agreement. Reported preparations and target lists don't establish a decision; Iran's seven conditions conveyed through mediators remain unpublished." },
-      { item: "Whether oil keeps moving through Hormuz despite attacks. The IRGC's Oct 23 two-supertanker mine claim remains unverified. UKMTO's Oct 26 warning describes an Oct 23 projectile strike that disabled an outbound tanker; its crew were safe, with no damage assessment available. A separate tanker struck on Oct 22 continued its voyage. Regional Gulf exports include routes beyond Hormuz and cannot be compared directly with strait-only volumes.", why: "Watch for verified tanker losses and sustained shipments. Two Petro Dolphin crew remain missing after the Oct 11 attack." },
+      { item: "Whether attacks on Saudi Arabia disrupt oil supplies. The Houthis claimed a missile attack on the Ras Tanura refinery on Oct 27. Bloomberg reported that a fire near the export terminal was contained; Saudi Arabia has not confirmed the attack. The refinery's damage and the pipeline's current operating rate remain unverified here.", why: "Watch for Aramco damage assessments, pipeline throughput and loading data, and whether Saudi Arabia requests the support Egypt authorized on Oct 26." },
+      { item: "Whether the US and Iran resume strikes or reach an agreement. CNN reports US forces could begin operations within 96 hours of a presidential order; Trump has not made a decision. Bessent said on Oct 26 that Kharg Island loadings had stopped and Iranian production was faltering. Those are US official claims, not verified loading or production data.", why: "Watch for renewed strikes or an agreement. Iran's seven conditions for resuming talks remain unpublished; reported preparations don't establish a strike decision." },
+      { item: "Whether oil keeps moving through Hormuz despite attacks. In remarks reported Oct 27, Iran's armed forces chief called the strait closed to ships outside Iranian rules. That claim doesn't establish a halt in traffic. Separately, experts linked the widening UAE oil spill to the Gem No.2 (Reuters, Oct 26); authorities haven't named the tanker.", why: "Watch for verified losses and shipments. JMIC estimated about 492 vessels waiting outside the strait on Oct 25; its estimate uses ship-position signals and excludes ships sailing without them." },
       { item: "Whether Russian diesel reaches buyers. The Agioi Fanendes, the first Russian diesel cargo under the US deal, loaded 40,000 metric tons at Primorsk on Oct 22 and is expected in New York around Nov 7 (Reuters/LSEG, Oct 23). US Treasury license 135 permits diesel transactions through Apr 7, 2027.", why: "Watch for delivery and follow-on cargoes. The IEA says refinery constraints could limit how much diesel Russia can export." },
     ],
   },
@@ -701,16 +703,16 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     ],
   },
   {
-    when: "Oct 26",
-    items: [
-      { item: "Egypt's parliament authorized President el-Sisi to provide military support if Saudi Arabia requests it (Reuters, Oct 26). Sisi says any action would defend Saudi territory, not attack Yemen.", why: "Watch whether Saudi Arabia requests help and what form assistance takes. Authorization alone would not establish a deployment or a change in shipping conditions." },
-    ],
-  },
-  {
     when: "Oct 28",
     items: [
       { item: "The next EIA weekly report is due Oct 28 at 10:30 a.m. Eastern, covering the week ending Oct 23. The previous report put SPR stocks at 282.7M barrels, down 0.3M; diesel and heating-oil stocks were 104.3M, 9.7% below last year. East Coast stocks were 22% lower.", why: "Watch whether SPR withdrawals continue and diesel stocks keep recovering. Deliveries from the sixth offering are scheduled for November–December." },
       { item: "The Fed's rate decision is due Oct 28 at 2:00 p.m. Eastern. The Fed raised rates a quarter percentage point to 3.75–4.00% on Sep 16; 16 of 18 participants projected at least one more increase this year. The site's recorded forecast assigns a 60% chance of an increase at this meeting.", why: "Watch the decision and guidance. Bond yields will also depend on how they compare with market expectations." },
+    ],
+  },
+  {
+    when: "Nov 1",
+    items: [
+      { item: "Seven OPEC+ members are due to meet online on Nov 1 (OPEC). Sources told Reuters on Oct 27 that December output targets are likely to stay unchanged; no final decision has been made.", why: "Watch the decision and any 2027-quota statement. A steady-targets announcement doesn't establish actual output — several members already produce below their targets." },
     ],
   },
 ];
@@ -1028,6 +1030,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-10-21", value: 5.146, note: "session close (Yahoo, same-day) · twentieth straight close above 5%" },
   { date: "2026-10-22", value: 4.96, usDaily: true, note: "US Treasury daily par yield (official curve — per Treasury methodology, an interpolated estimate from indicative bid-side quotations, not actual transactions; Yahoo last trade 4.953, a CNBC-attributed wrap quoted 4.972) · first close below 5% after twenty straight above (Sep 23–Oct 21, official series) — safe-haven bond demand on the AI/tech stock selloff (Nasdaq's worst day since June) even as oil spiked (AP, Oct 22)" },
   { date: "2026-10-23", value: 4.99, note: "session close (Yahoo ^TNX 4.988; the official Treasury daily par CSV was unavailable at publication time) · second straight close below 5%" },
+  { date: "2026-10-26", value: 4.986, note: "session close (Yahoo ^TNX) · third straight close below 5%" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
@@ -1303,7 +1306,7 @@ export const ukmtoReportsBeforeWindow = Math.min(...ukmtoIncidents.map((i) => i.
 
 // Capture bounds are explicit: a quiet day must not shorten the covered period.
 export const ukmtoCoverageStart = "2026-07-01";
-export const ukmtoCoverageEnd = "2026-10-26";
+export const ukmtoCoverageEnd = "2026-10-27";
 
 // Include every Monday–Sunday week, even when it has no attack reports.
 // Partial weeks cover fewer than seven days and don't enter full-week comparisons.
