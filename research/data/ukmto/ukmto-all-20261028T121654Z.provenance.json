@@ -1,0 +1,6 @@
+{
+ "fetched_at": "20261028T121654Z",
+ "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+ "sha256": "777d384e48a920effd6bf3b4d4325e2a3865173c33b34e25c52ed0eb4e32783a",
+ "note": "manual re-fetch to archive pass with new entry #184 (script archives only on new entries)"
+}
