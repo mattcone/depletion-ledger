@@ -1,0 +1,6 @@
+{
+ "fetched_at": "20261029T130209Z",
+ "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+ "sha256": "126adebe98a2a3eb310a8c4e925eb65e1a6df4a135a186300943d2d76fc443d6",
+ "note": "manual re-fetch to archive pass with new entry #185 (vessel on fire, 9NM north of Khasab; review flagged the Oct 29 payload as unarchived)"
+}

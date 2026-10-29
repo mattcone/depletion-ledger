@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-10-28";
+export const DATA_AS_OF = "2026-10-29";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -261,6 +261,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-10-26", value: 4.2858, note: "AAA release, Oct 26" },
   { date: "2026-10-27", value: 4.2661, note: "AAA release, Oct 27" },
   { date: "2026-10-28", value: 4.2471, note: "AAA release, Oct 28" },
+  { date: "2026-10-29", value: 4.2258, note: "AAA release, Oct 29" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -326,6 +327,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-10-26", value: 6.3492, note: "AAA release, Oct 26" },
   { date: "2026-10-27", value: 6.3521, note: "AAA release, Oct 27" },
   { date: "2026-10-28", value: 6.3499, note: "AAA — first decline after five straight rises off the Oct 22 low ($6.3090)" },
+  { date: "2026-10-29", value: 6.3347, note: "AAA — second straight decline" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
@@ -700,9 +702,9 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "Whether attacks on Saudi Arabia disrupt oil supplies. Saudi Arabia reported intercepting five Houthi missiles and four drones on Oct 27; falling debris caused damage, with no casualties reported (Gulf News). The Houthi claim of a Ras Tanura refinery strike remains unverified, as do refinery damage and the pipeline's operating rate.", why: "Watch for Aramco damage assessments, pipeline throughput and loading data, and whether Saudi Arabia requests the support Egypt authorized on Oct 26." },
-      { item: "Whether the US and Iran reach an agreement or resume strikes. Iran is considering Qatar's Oct 25 draft, an official told Reuters. On Oct 28, Araghchi said mediators were discussing Iran's seven-day proposal; that doesn't establish acceptance of Qatar's draft. Separately, the WSJ reports US preparations for a possible campaign after the Nov 3 midterms.", why: "Watch for Iran's expected response by week's end, an agreement or a strike decision. Talks and military preparations establish neither outcome." },
-      { item: "Whether oil keeps moving through Hormuz despite attacks. The US Navy's Oct 28 notice advises vessels without a need to transit the area to stay clear, warning of delays during blockade enforcement. It doesn't announce an end to assisted transits. UKMTO's Oct 23 disabled-tanker incident still lacks a damage assessment.", why: "Watch for verified losses and shipments. JMIC recorded 101 US-assisted transits over Oct 22–24; the 2025 baseline of about 138 a day covers broader traffic. Its Oct 25 estimate of 492 waiting vessels excludes ships sailing without position signals." },
+      { item: "Whether Houthi attacks disrupt Gulf oil supplies. Yemen's military said missiles struck Aden airport on Oct 28, injuring civilians (Arab News). On Oct 29, the Saudi-led coalition reported intercepting a missile aimed at the Eastern Province. The Ras Tanura strike claim remains unverified, as do refinery damage and the pipeline's operating rate.", why: "Watch for Aramco damage assessments, pipeline throughput and loading data, and whether Saudi Arabia requests the support Egypt authorized on Oct 26." },
+      { item: "Whether the US and Iran reach an agreement or resume strikes. On Oct 28, Araghchi said Tehran was discussing Iran's seven-day proposal with mediators; another Iranian official called the latest ideas unacceptable (Reuters). AP separately reported US warnings to regional partners about possible military action after the Nov 3 midterms.", why: "Watch for Iran's response to Qatar's new draft, an agreement or a strike decision. Neither diplomatic statements nor military preparations establish an outcome." },
+      { item: "Whether oil keeps moving through Hormuz despite attacks. UKMTO's Oct 29 suspicious-activity report describes a tanker on fire near Khasab, Oman; Vanguard Tech reported a projectile strike and relayed a sighting of the tanker mostly submerged (Seatrade Maritime) — a possible loss, unconfirmed by UKMTO or authorities. Iran separately claimed three tankers hit mines that day; CENTCOM's Oct 28 statement had rejected earlier mine claims.", why: "Watch for the vessel's identity, crew status, damage assessments and verified shipments. JMIC counted 101 US-assisted transits over Oct 22–24; its 2025 baseline of about 138 a day covers broader traffic. Its Oct 25 estimate of 492 waiting vessels excludes ships sailing without position signals." },
       { item: "Whether Russian diesel reaches buyers. The Agioi Fanendes, the first Russian diesel cargo under the US deal, loaded 40,000 metric tons at Primorsk on Oct 22 and is expected in New York around Nov 7 (Reuters/LSEG, Oct 23). US Treasury license 135 permits diesel transactions through Apr 7, 2027.", why: "Watch for delivery and follow-on cargoes. Reuters sources report recovering refinery output, but potential export supply is not confirmed delivery." },
     ],
   },
@@ -1309,6 +1311,7 @@ export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisor
   { num: 182, type: "attack", date: "2026-10-23" },
   { num: 183, type: "suspicious activity", date: "2026-10-26" },
   { num: 184, type: "advisory", date: "2026-10-28" },
+  { num: 185, type: "suspicious activity", date: "2026-10-29" },
 ];
 
 // Reports that existed before the captured window — the smallest number present,
@@ -1319,7 +1322,7 @@ export const ukmtoReportsBeforeWindow = Math.min(...ukmtoIncidents.map((i) => i.
 
 // Capture bounds are explicit: a quiet day must not shorten the covered period.
 export const ukmtoCoverageStart = "2026-07-01";
-export const ukmtoCoverageEnd = "2026-10-28";
+export const ukmtoCoverageEnd = "2026-10-29";
 
 // Include every Monday–Sunday week, even when it has no attack reports.
 // Partial weeks cover fewer than seven days and don't enter full-week comparisons.
