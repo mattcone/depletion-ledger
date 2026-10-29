@@ -70,6 +70,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-10-23", value: 116.72, tip: "settlement · up $3.55 (Reuters/CNBC)", note: "Settlement (Reuters wire, December contract; +$3.55 vs Oct 22, +3.1% — the highest settlement since April 29; the Yahoo BZ=F bar closed at 111.66, off the wire again, the wire value is plotted). A twenty-third session close above $100. Up on the Houthi attacks on Saudi targets (four drones downed over Riyadh and Medina on Oct 22), the UAE closing beaches to a tanker oil spill, and Iran's seven-conditions statement on reopening the strait (Rezaei, ISNA via Anadolu). DOE authorization of an emergency 400K-barrel SPR swap to Phillips 66's Lake Charles refinery put some pressure on prices (Newsquawk)." },
   { date: "2026-10-26", value: 115.81, tip: "settlement · down $0.91 (CNBC)", note: "Settlement (CNBC wire, December contract; −$0.91 vs Oct 23 — briefly topped $117 intraday, the Yahoo BZ=F bar closed at 110.27, far off the wire again, the wire value is plotted). A twenty-fourth session close above $100. Eased on the confirmed Tehran meeting — Saudi Defense Minister Khalid bin Salman met President Pezeshkian and Security Council secretary Rezaei (CNBC) — while the Houthis claimed Monday's missile at Riyadh's airport and drones at oil pumping stations (the Saudis have not confirmed those strikes, CNBC)." },
   { date: "2026-10-27", value: 113.88, tip: "settlement · down $1.93 (CNBC)", note: "Settlement (CNBC wire, December contract; −$1.93 vs Oct 26, −1.7%; the Yahoo BZ=F bar closed at 113.88, matching the wire). A twenty-fifth session close above $100. Second straight down session on the renewed diplomatic push: Iran's Supreme Leader Khamenei met top security official Rezaei to discuss the conditions for ending the war, calling the current state of 'neither war nor peace' something that needs to end (CNBC) — the day after the Saudi-Iran Tehran talks. The Ras Tanura refinery claim stayed unverified in the coverage (CNBC, Oct 27)." },
+  { date: "2026-10-28", value: 115.32, tip: "settlement · up $1.44 (CNBC)", note: "Settlement (CNBC wire, December contract; +$1.44 vs Oct 27, +1.3% — the Yahoo BZ=F bar ran far off the wire again, the wire value is plotted). A twenty-sixth session close above $100. Up on the US Navy advisory for vessels that do not need to transit the area to remain well clear of Hormuz (USNAVCENT, Oct 28) and Israel's inconclusive election (Reuters/CNBC, Oct 28)." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -169,6 +170,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { date: "2026-10-23", value: 103.27, note: "Settlement (Reuters wire, December contract; +$3.80 vs Oct 22, +3.8% — back above $100 after three closes below; the Yahoo CL=F bar closed at 103.44, the wire value is plotted). Up on the same drivers as Brent: the Houthi attacks on Saudi targets, the UAE oil spill, and the unverified seven-tanker claim (Reuters, Oct 23)." },
   { date: "2026-10-26", value: 101.76, note: "Settlement (CNBC wire, December contract; −$1.51 vs Oct 23 — slipped below $101 early, then recovered into the close; the Yahoo CL=F bar closed at 101.25, the wire value is plotted). Down from the six-month highs (Bloomberg/Rigzone) on the Tehran meeting and renewed US–Iran diplomatic effort; prices have gained about 12% this month (CNBC)." },
   { date: "2026-10-27", value: 99.9, note: "Settlement (CNBC wire, December contract; −$1.86 vs Oct 26, −1.8%; the Yahoo CL=F bar closed at 99.90, matching the wire). Back below $100 after two closes above it; December WTI last settled below $100 on Oct 22 ($99.47). Second straight down session on the renewed US–Iran diplomatic push (CNBC, Oct 27)." },
+  { fred: false, date: "2026-10-28", value: 102.78, note: "Settlement (CNBC wire, December contract; +$2.88 vs Oct 27, +2.9% — the Yahoo CL=F bar closed at 101.95, below the wire settlement, the wire value is plotted). Back above $100 after one close below it (CNBC, Oct 28)." },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -390,11 +392,11 @@ export const dieselRiseStreak = (() => {
   return n;
 })();
 export const stats = [
-  { label: "Brent", value: "$113.88", sub: "Oct 27 settlement · December contract · down $1.93 · 25th close above $100" },
+  { label: "Brent", value: "$115.32", sub: "Oct 28 settlement · December contract · up $1.44 · 26th close above $100" },
   { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : (dieselStreak === 1 ? (dieselPriorRise > 0 ? (dieselPriorRise === 1 ? "down after yesterday’s rise" : `down after ${wordNum(dieselPriorRise)} straight rises`) : "down again") : `down ${wordNum(dieselStreak)} days in a row`)) + " · " : dieselRiseStreak === 1 && dieselPriorStreak.days > 0 ? `first rise after ${wordNum(dieselPriorStreak.days)} straight declines${dieselPriorStreak.fromRecord ? ` off the ${shortStatDate(dieselRecord.date)} record` : ""} · ` : dieselRiseStreak >= 2 ? `${wordNum(dieselRiseStreak)} straight rises from the ${shortStatDate(dieselYtd[dieselYtd.length - 1 - dieselRiseStreak].date)} low $${dieselYtd[dieselYtd.length - 1 - dieselRiseStreak].value.toFixed(4)} · ` : ""}+${dieselUpPct}% vs pre-war $3.72` },
   { label: "US gasoline (AAA)", value: `$${lastGasoline.value.toFixed(2)}`, sub: `${shortStatDate(lastGasoline.date)} · +${gasUpPct}% vs Jan $2.81 (AAA)` },
-  { label: "SPR", value: "282.7M", sub: "Oct 16 · down 0.3M on the week · down 132.7M from pre-war 415.4M · lowest since Nov 1982" },
-  { label: "US diesel & heating oil", value: "104.3M", sub: "Oct 16 · up 1.7M in a week · 9.7% below last year · East Coast stocks 22% below last year" },
+  { label: "SPR", value: "282.6M", sub: "Oct 23 · down 0.1M on the week · down 132.9M from pre-war 415.4M · lowest since Nov 1982" },
+  { label: "US diesel & heating oil", value: "102.8M", sub: "Oct 23 · down 1.5M in a week · 8.3% below last year · East Coast stocks 14.3% below last year" },
 ];
 
 // ---------- SPR, million bbl — EIA weekly ending stocks (verified) ----------
@@ -441,6 +443,7 @@ export const sprWeekly: { date: string; level: number }[] = [
   { date: "2026-10-02", level: 282.983 },
   { date: "2026-10-09", level: 282.983 },
   { date: "2026-10-16", level: 282.683 },
+  { date: "2026-10-23", level: 282.583 },
 ];
 // US commercial crude inventories, EXCLUDING the SPR (EIA WPSR, week ending Friday),
 // million barrels. Source: EIA API series WCESTUS1 ("U.S. Ending Stocks excluding SPR of
@@ -471,6 +474,7 @@ export const commercialCrude2026: { date: string; value: number }[] = [
   { date: "2026-10-02", value: 424.134 },
   { date: "2026-10-09", value: 415.577 },
   { date: "2026-10-16", value: 412.517 },
+  { date: "2026-10-23", value: 410.625 },
 ];
 // Same weeks in 2025 (each 2026 week matched to its nearest 2025 week-ending date).
 export const commercialCrude2025: { date: string; value: number }[] = [
@@ -650,7 +654,8 @@ export const usRefineryUtil2026: UtilPt[] = [
   { date: "2026-08-28", value: 98.0 }, { date: "2026-09-04", value: 97.8 },
   { date: "2026-09-11", value: 96.8 }, { date: "2026-09-18", value: 94.0 },
   { date: "2026-09-25", value: 92.5 }, { date: "2026-10-02", value: 92.7 },
-  { date: "2026-10-09", value: 93.5 },
+  { date: "2026-10-09", value: 93.5 }, { date: "2026-10-16", value: 93.4 },
+  { date: "2026-10-23", value: 92.8 },
 ];
 export const usRefineryUtil2025: UtilPt[] = [
   { date: "2025-01-03", value: 93.3 }, { date: "2025-01-10", value: 91.7 },
@@ -673,7 +678,8 @@ export const usRefineryUtil2025: UtilPt[] = [
   { date: "2025-08-29", value: 94.3 }, { date: "2025-09-05", value: 94.9 },
   { date: "2025-09-12", value: 93.3 }, { date: "2025-09-19", value: 93.0 },
   { date: "2025-09-26", value: 91.4 }, { date: "2025-10-03", value: 92.4 },
-  { date: "2025-10-10", value: 85.7 },
+  { date: "2025-10-10", value: 85.7 }, { date: "2025-10-17", value: 88.6 },
+  { date: "2025-10-24", value: 86.6 },
 ];
 
 // Global refining anchors — IEA Oil Market Report (runs: Sep 11 edition; 2026 forecast:
@@ -695,29 +701,35 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     when: "Any day",
     items: [
       { item: "Whether attacks on Saudi Arabia disrupt oil supplies. Saudi Arabia reported intercepting five Houthi missiles and four drones on Oct 27; falling debris caused damage, with no casualties reported (Gulf News). The Houthi claim of a Ras Tanura refinery strike remains unverified, as do refinery damage and the pipeline's operating rate.", why: "Watch for Aramco damage assessments, pipeline throughput and loading data, and whether Saudi Arabia requests the support Egypt authorized on Oct 26." },
-      { item: "Whether the US and Iran reach an agreement or resume strikes. Qatar presented Iran with a draft deal on Oct 25; an official told Reuters Tehran is considering it and is expected to respond by week's end. Separately, the WSJ reports US warnings to Gulf states about a possible military campaign after the Nov 3 midterms.", why: "Watch for a response, an agreement or a strike decision. A draft deal is not an agreement, and military preparations don't establish an order to attack." },
-      { item: "Whether oil keeps moving through Hormuz despite attacks. UKMTO's Oct 26 report describes an Oct 23 projectile strike that disabled an outbound tanker; its crew were safe, but no damage assessment was available. CENTCOM denies abandoning the strait. Iran's claim that it is closed to ships outside Iranian rules doesn't establish a traffic halt.", why: "Watch for verified losses and shipments. JMIC recorded 101 US-assisted transits over Oct 22–24; its 2025 comparison of about 138 a day covers broader traffic. Its Oct 25 estimate of 492 waiting vessels excludes ships sailing without position signals." },
+      { item: "Whether the US and Iran reach an agreement or resume strikes. Iran is considering Qatar's Oct 25 draft, an official told Reuters. On Oct 28, Araghchi said mediators were discussing Iran's seven-day proposal; that doesn't establish acceptance of Qatar's draft. Separately, the WSJ reports US preparations for a possible campaign after the Nov 3 midterms.", why: "Watch for Iran's expected response by week's end, an agreement or a strike decision. Talks and military preparations establish neither outcome." },
+      { item: "Whether oil keeps moving through Hormuz despite attacks. The US Navy's Oct 28 notice advises vessels without a need to transit the area to stay clear, warning of delays during blockade enforcement. It doesn't announce an end to assisted transits. UKMTO's Oct 23 disabled-tanker incident still lacks a damage assessment.", why: "Watch for verified losses and shipments. JMIC recorded 101 US-assisted transits over Oct 22–24; the 2025 baseline of about 138 a day covers broader traffic. Its Oct 25 estimate of 492 waiting vessels excludes ships sailing without position signals." },
       { item: "Whether Russian diesel reaches buyers. The Agioi Fanendes, the first Russian diesel cargo under the US deal, loaded 40,000 metric tons at Primorsk on Oct 22 and is expected in New York around Nov 7 (Reuters/LSEG, Oct 23). US Treasury license 135 permits diesel transactions through Apr 7, 2027.", why: "Watch for delivery and follow-on cargoes. Reuters sources report recovering refinery output, but potential export supply is not confirmed delivery." },
-    ],
-  },
-  {
-    when: "Oct 28",
-    items: [
-      { item: "The next EIA weekly report is due Oct 28 at 10:30 a.m. Eastern, covering the week ending Oct 23. The previous report put SPR stocks at 282.7M barrels, down 0.3M; diesel and heating-oil stocks were 104.3M, 9.7% below last year. East Coast stocks were 22% lower.", why: "Watch whether SPR withdrawals continue and diesel stocks keep recovering. Deliveries from the sixth offering are scheduled for November–December." },
-      { item: "The Fed's rate decision is due Oct 28 at 2:00 p.m. Eastern. The Fed raised rates a quarter percentage point to 3.75–4.00% on Sep 16; 16 of 18 participants projected at least one more increase this year. The site's recorded forecast assigns a 60% chance of an increase at this meeting.", why: "Watch the decision and guidance. Bond yields will also depend on how they compare with market expectations." },
     ],
   },
   {
     when: "Nov 1",
     items: [
       { item: "Seven OPEC+ members are due to meet online on Nov 1 (OPEC). Sources told Reuters on Oct 27 that December output targets are likely to stay unchanged; no final decision has been made.", why: "Watch the decision and any 2027-quota statement. A steady-targets announcement doesn't establish actual output — several members already produce below their targets." },
+      { item: "Iran's Persian Gulf Strait Authority threatened legal action against Sinokor vessels from Nov 1 over alleged violations of its Hormuz crossing rules (FT, Oct 27).", why: "Watch for independently verified detentions, fines or boardings. A threat or an unspecified enforcement claim doesn't establish what happened to a vessel." },
+    ],
+  },
+  {
+    when: "Nov 4",
+    items: [
+      { item: "The next EIA weekly report is due Nov 4, covering the week ending Oct 30. The Oct 28 report put SPR stocks at 282.6M barrels, down 0.1M; diesel and heating-oil stocks were 102.8M, 8.3% below last year. East Coast stocks were 14.3% lower.", why: "Watch whether SPR withdrawals continue and diesel stocks keep falling. Deliveries from the sixth offering are scheduled for November–December." },
+    ],
+  },
+  {
+    when: "Nov 10",
+    items: [
+      { item: "October CPI is due Nov 10 at 8:30 a.m. Eastern (BLS). September's annual inflation rate was 3.7%. The Fed held rates at 3.75–4.00% on Oct 28; two members preferred a quarter-point increase.", why: "Watch how inflation changes and what the Fed says about its December decision. A hold in October doesn't settle the next decision." },
     ],
   },
 ];
 
 // ---------- Breaking-points cascade (§11, compressed twice) ----------
 export const cascade = [
-  { date: "Each weekly EIA report (next: Oct 28)", region: "US East Coast", trigger: "US diesel and heating-oil stocks rose by 1.7M barrels to 104.3M in the week ending Oct 16, but remained 9.7% below last year. East Coast stocks were 22% below last year. The national total was equivalent to about 27 days of use at the four-week average rate of 3.9M barrels a day; that is a comparison, not a countdown to empty tanks." },
+  { date: "Each weekly EIA report (next: Nov 4)", region: "US East Coast", trigger: "US diesel and heating-oil stocks fell by 1.5M barrels to 102.8M in the week ending Oct 23, 8.3% below last year. East Coast stocks rose to 21.8M but remained 14.3% below last year. National stocks were equivalent to about 26 days of use at the four-week average of 4.0M barrels a day; this comparison isn't a countdown to empty tanks." },
   { date: "Oct 31", region: "Russia", trigger: "Russia’s diesel export ban for producers runs through Oct 31, although the government announced a partial lifting on Oct 10. Novak’s delivery schedule rises from 300,000 tons in October to 1M in December (Interfax, Oct 12). US permission doesn’t lift Russia’s restrictions. The IEA’s October report says limited operating refinery capacity makes the easing unlikely to materially change global diesel supplies." },
   { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, making it harder for traders to find supplies." },
   { date: "Nov 10–30", region: "Air travel", trigger: "Russia's jet-fuel export ban, in force since Jun 1, is due to end Nov 30. An extension would keep those export restrictions in place." },
@@ -819,8 +831,8 @@ export const recessionOdds = [
 ];
 
 export const ratesStats = [
-  { label: "Fed's target rate, Sep 16", value: "3.75–4.00%", sub: "Up 0.25 percentage points in a 12-to-0 vote · statement: 'Inflation remains elevated. … The Committee will deliver price stability.'" },
-  { label: "Odds of a rate increase, Oct 27–28", value: "60%", sub: "Our estimate, published Sep 16 · 16 of 18 Fed officials projected another increase this year · we'll check this prediction after the October decision" },
+  { label: "Fed's target rate, Oct 28", value: "3.75–4.00%", sub: "Held in a 10-to-2 vote — two members wanted a quarter-point increase · statement: 'Inflation remains elevated. … The Committee will deliver price stability.'" },
+  { label: "Odds of an increase, Oct 27–28 (resolved)", value: "Held", sub: "We estimated 60% odds (published Sep 16) · the Fed held · Brier score 0.36 — running average 0.2009 over four resolved forecasts" },
   { label: "September producer prices (BLS, Oct 15)", value: "6.3% YoY", sub: "+1.3% for the month, the largest since Mar 2022 · goods +2.6% for the month — energy +10.8%, gasoline +20.3% · Aug revised to 5.6% annually" },
 ];
 
@@ -1030,6 +1042,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-10-23", value: 4.99, note: "session close (Yahoo ^TNX 4.988; the official Treasury daily par CSV was unavailable at publication time) · second straight close below 5%" },
   { date: "2026-10-26", value: 4.986, note: "session close (Yahoo ^TNX) · third straight close below 5%" },
   { date: "2026-10-27", value: 4.993, note: "session close (Yahoo ^TNX) · fourth straight close below 5%" },
+  { date: "2026-10-28", value: 5.045, note: "session close (Yahoo ^TNX) · back above 5% after four straight closes below it (Oct 22–27); first close above 5% since Oct 21 (5.146)" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)

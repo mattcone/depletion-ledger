@@ -112,6 +112,21 @@ const t10Last = lastPt(treasury10y);
 const t10PostWar = treasury10y.filter((p) => p.date > "2026-02-28");
 const t10High = t10PostWar.reduce((a, b) => (b.value > a.value ? b : a), t10PostWar[0]);
 const t10Streak = treasuryAbove5Streak;
+// When the streak just resumed after a run of below-5% closes, "first straight close"
+// reads wrong — report the resumption instead (Oct 28: 5.045 after four closes below 5%).
+const t10BelowBefore = (() => {
+  let n = 0;
+  for (let i = treasury10y.length - 2; i >= 0; i--) {
+    if (treasury10y[i].value <= 5) n++;
+    else break;
+  }
+  return n;
+})();
+const t10StreakPhrase = t10Streak > 0
+  ? t10Streak === 1 && t10BelowBefore > 0
+    ? `back above 5% after ${wordNum(t10BelowBefore)} straight closes below it`
+    : `its ${ordinal(t10Streak)} straight close above 5%`
+  : "back below 5%";
 const t10HighClause = t10High === t10Last
   ? " — the highest close of the war"
   : ` — still below the war's high close of ${t10High.value}% on ${shortDate(t10High.date)}`;
@@ -672,11 +687,11 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             <p class="font-mono text-[11px] text-faint tabular">Brent: selected observations and monthly averages. WTI: weekly FRED spot prices and recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent settled at $113.88 on Oct 27, down $1.93, its twenty-fifth consecutive close above $100. December WTI settled at $99.90, down $1.86 (CNBC). The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent settled at $115.32 on Oct 28, up $1.44, its twenty-sixth consecutive close above $100. December WTI settled at $102.78, up $2.88 (CNBC). The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            On Oct 27, Brent settled at $113.88, down $1.93, and December WTI at $99.90,
-            down $1.86. CNBC linked the second straight decline to renewed diplomacy with Iran.
+            On Oct 28, Brent settled at $115.32, up $1.44, and December WTI at $102.78,
+            up $2.88 (CNBC). The US Navy warned ships to expect delays during blockade enforcement.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Brent combines selected observations and monthly averages; gray WTI combines
@@ -859,18 +874,15 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         </div>
         <div class="mb-6 max-w-[65ch] text-[13px]">
           <p class="text-[13px] leading-relaxed text-ink/80">
-            These stocks exclude the Strategic Petroleum Reserve (SPR). They stood at 412.5 million
-            barrels on Oct 16, up from 404.5 million on Jul 24. The EIA's Oct 21 report shows
-            stocks fell by 3.1 million barrels, the third straight weekly decline.
-            Crude imports fell by 0.3 million barrels a day that
-            week, to 5.8 million a day. Stocks were 10.3 million barrels below the same week
-            last year. SPR releases
-            have helped supply commercial oil users this year. Moving oil from the reserve to
-            commercial storage leaves the combined amount unchanged.
+            Commercial crude stocks exclude the Strategic Petroleum Reserve (SPR). They fell
+            by 1.9 million barrels to 410.6 million in the week ending Oct 23, the fourth
+            straight decline, despite imports rising to 6.4 million barrels a day (EIA).
+            Stocks were 5.3 million barrels below the same week last year. Moving oil from
+            the SPR to commercial storage leaves their combined total unchanged.
           </p>
         </div>
         <div class="relative h-72">
-          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus the same weeks in 2025: 2026 stocks rose from 419.1 million in early January to a peak of 465.7 million on Apr 17, fell to 404.5 million on Jul 24 — the lowest level since the war began and 22.2 million barrels below the same week in 2025 — rose again to 428.9 million on Aug 21, eased over the next three weeks, rose for a second straight week to 427.3 million on Sep 25, then fell 3.2 million barrels to 424.1 million on Oct 2, fell 8.6 million more to 415.6 million on Oct 9 — back under the 2025 line (423.8 million) for the first time since Sep 4 — and fell 3.1 million more to 412.5 million on Oct 16, 10.3 million below the same week in 2025 (422.8 million)."></canvas>
+          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus corresponding weeks in 2025. Stocks peaked at 465.7 million on Apr 17 and reached a wartime low of 404.5 million on Jul 24. On Oct 23 they fell for a fourth straight week to 410.6 million, down 1.9 million in a week and 5.3 million below the corresponding 2025 week."></canvas>
         </div>
 
         <p class="mt-3 font-mono text-[11px] text-faint">EIA weekly stocks, excluding the SPR, in million barrels. The Jul 24 low was 22.2M below the same week in 2025.</p>
@@ -884,8 +896,8 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           <p class="text-[13px] leading-relaxed text-ink/80">
             The Strategic Petroleum Reserve (SPR) is the US government's emergency supply of crude
             oil. It was created after the energy shortages of the 1970s. The reserve held 415.4 million
-            barrels when the war began. The latest report, for the week ending Oct 16, puts it
-            at 282.7 million, down 0.3 million on the week after a flat week. Weekly
+            barrels when the war began. The latest report, for the week ending Oct 23, puts it
+            at 282.6 million, down 0.1 million on the week after a 0.3 million decline. Weekly
             withdrawals have slowed from 3.1 million barrels in the week ending Aug 28.
             For comparison, the reserve peaked at 727 million barrels in December 2009
             and stood at 270.5 million in August 1982. The releases help make up for
@@ -925,7 +937,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         </div>
         <!-- SPR chart (full width) -->
         <div class="relative h-96">
-            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 282.7 million on Oct 16. Reference levels at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
+            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 282.6 million on Oct 23. Reference levels at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
             <div
               id="sprFloorTip"
               class="pointer-events-none absolute z-10 hidden max-w-[300px] border border-rule bg-[rgba(255,255,248,0.97)] px-3 py-2 text-[12px] leading-snug text-ink shadow-sm"
@@ -1176,18 +1188,13 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               <p class="font-mono text-[11px] text-faint">Share of available refinery capacity in use, weekly.</p>
             </div>
             <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
-              US refineries operated above 95% of their available capacity every week from
-              Jun 5 through Sep 11, reaching 98.0% in the week ending Aug 28. In the week
-              ending Oct 9, they used 93.5% of their capacity and processed 135,000 more barrels
-              a day than the week before. For the January–October weeks shown, refineries used
-              an average of 90.7% of their capacity in 2025
-              and 93.6% in 2026.
-              Fuel exports also reached a record 8 million barrels per day in August, according to
-              OPEC. US plants are working close to capacity, but shortages in Europe, Asia, and
-              Russia continue to put pressure on fuel supplies.
+              US refineries used 92.8% of their available capacity in the week ending Oct 23,
+              their sixth straight week below 95%. They processed 123,000 fewer barrels a day
+              than the week before. Across the January–October weeks shown, utilization
+              averaged 93.5% in 2026 and 90.5% in 2025. It peaked at 98.0% on Aug 28.
             </p>
             <div class="relative h-96">
-              <canvas id="refineryChart" role="img" aria-label={`US refinery utilization, percent of operable capacity, weekly: the 2026 line runs above the 2025 line in 39 of the 41 comparable weeks — below it only in the weeks ending Jul 31 and Aug 7 — a dip to 88.6 percent in late February, then a climb from 95.3 on Jun 5 to a 98.0 peak on Aug 28, easing to 96.8 on Sep 11, slipping to 94.0 on Sep 18, falling to 92.5 on Sep 25, and edging up to 93.5 on Oct 9 — ${refineryStreak} straight week${refineryStreak === 1 ? "" : "s"} below 95%; the same period in 2025 ranged from 83.5 to 96.9.`}></canvas>
+              <canvas id="refineryChart" role="img" aria-label={`US refinery utilization, percent of operable capacity, weekly through Oct 23. The 2026 line is above 2025 in 41 of 43 comparable weeks. Utilization peaked at 98.0% on Aug 28 and fell to 92.8% on Oct 23, its ${ordinal(refineryStreak)} straight week below 95%. The corresponding 2025 reading is 86.6%. Weekly averages for the periods shown are 93.5% in 2026 and 90.5% in 2025.`}></canvas>
             </div>
             <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
               EIA Weekly Petroleum Status Report (WPULEUS3), weeks ending Friday. Utilization is the
@@ -1376,7 +1383,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             </div>
           </div>
           <div>
-            <h3 class="text-lg font-bold tracking-tight">The Fed raised rates on Sep 16</h3>
+            <h3 class="text-lg font-bold tracking-tight">The Fed held rates on Oct 28</h3>
             <p class="mt-2 max-w-prose text-[13px] leading-relaxed text-faint">
               The Federal Reserve can cut interest rates to help a slowing economy, but inflation
               makes that harder when prices are still rising too quickly. September producer prices rose 6.3% from a year
@@ -1384,10 +1391,11 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               Consumer inflation ran 3.7% in September, with core inflation at 2.6%.
             </p>
             <p class="mt-3 max-w-prose text-[13px] leading-relaxed text-faint">
-              On Sep 16, the Fed voted 12-to-0 to raise rates by a quarter of a percentage point,
-              citing elevated inflation. According to the Wall Street Journal, 16 of the 18
-              officials projected at least one more increase this year. Higher borrowing costs
-              add to the pressure from rising energy prices.
+              On Oct 28, the Fed voted 10-to-2 to hold rates at 3.75–4.00%, six weeks after
+              its Sep 16 increase. Two members, Cook and Hammack, voted for a quarter-point
+              increase. The statement said inflation remained elevated and that the Committee
+              "will deliver price stability," citing geopolitical uncertainty. Higher borrowing
+              costs add to the pressure from rising energy prices.
             </p>
             <div class="mt-5 grid grid-cols-1 border border-rule sm:grid-cols-3">
               {
@@ -1410,9 +1418,9 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         <div class="mt-12">
           <h3 class="text-lg font-bold tracking-tight">Borrowing costs and inflation</h3>
           <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
-            Borrowing costs and everyday prices are both at multi-year highs. In its Sep 16
-            rate decision, the Fed said inflation remained high and the economy was growing
-            at a solid pace.
+            Borrowing costs and everyday prices are both at multi-year highs. In its Oct 28
+            decision, the Fed said inflation remained elevated and that it would deliver
+            price stability.
           </p>
 
           <div class="mt-6 grid gap-10 lg:grid-cols-2">
@@ -1420,7 +1428,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               <h3 class="text-lg font-bold tracking-tight">US 10-year Treasury yield</h3>
               <p class="mt-2 font-mono text-[11px] text-faint">10-year US Treasury yield, % · chart through {shortDate(t10Last.date)} · weekly closes (FRED) · {t10NonFredLine}: Yahoo closing values{t10UsDailyLine ? ` · ${t10UsDailyLine}: US Treasury daily par yield (indicative estimate, not transactions)` : ""}.</p>
               <div class="mt-4 h-72">
-                <canvas id="treasury10yChart" role="img" aria-label={`US 10-year Treasury yield, 2026: 4.19% on Jan 2, 3.97% on Feb 27 before the war, and ${t10Last.value}% on ${shortDate(t10Last.date)}, ${t10Streak > 0 ? `its ${ordinal(t10Streak)} straight close above 5%` : "back below 5%"}; ${t10High.value}% on ${shortDate(t10High.date)} ${t10High === t10Last ? "is" : "remains"} the highest close of the war. The Sep 16 close of 5.006% is the first above 5% since the war began. Reference lines mark the pre-war 3.97% and the January 2025 high of 4.8%`}></canvas>
+                <canvas id="treasury10yChart" role="img" aria-label={`US 10-year Treasury yield, 2026: 4.19% on Jan 2, 3.97% on Feb 27 before the war, and ${t10Last.value}% on ${shortDate(t10Last.date)}, ${t10StreakPhrase}; ${t10High.value}% on ${shortDate(t10High.date)} ${t10High === t10Last ? "is" : "remains"} the highest close of the war. The Sep 16 close of 5.006% is the first above 5% since the war began. Reference lines mark the pre-war 3.97% and the January 2025 high of 4.8%`}></canvas>
               </div>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 The 10-year Treasury yield is the rate the US government pays to borrow for a decade.
@@ -1431,7 +1439,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
                 refinanced by year-end.
               </p>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-                The 10-year yield closed at {t10Last.value}% on {shortDate(t10Last.date)}, {t10Streak > 0 ? `its ${ordinal(t10Streak)} straight close above 5%` : "back below 5%"}
+                The 10-year yield closed at {t10Last.value}% on {shortDate(t10Last.date)}, {t10StreakPhrase}
                 {t10HighClause}. Its quarterly increase was the largest since 1994,
                 helping push US mortgage rates above 7% (Wall Street Journal, Oct 1).
                 On Oct 2, the G7 reserve-release announcement and a weak September jobs report
@@ -1948,7 +1956,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           plugins: [
             crosshair,
             directLabels([
-              // Endpoint values: 2026 ends 93.5, 2025 ends 85.7 — the lines diverged in
+              // Endpoint values: 2026 ends 92.8, 2025 ends 86.6 — the lines diverged in
               // Oct (the 2025 step down), so the old collision fix (2026's value above its
               // line, 2025's below) stays harmlessly in place. Halos knock the lines out
               // under the glyphs (the lines run into every label here).
@@ -2922,10 +2930,11 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // (same-day — re-paired from the Oct 23 basis once the settlement
       // landed, afternoon pass); Oct 27 AAA → Oct 26 WTI settle 101.76 (no same-day
       // settlement at publication); Oct 27 AAA → Oct 27 WTI settle 99.90 (re-paired
-      // from the Oct 26 basis once the Oct 27 settlement landed, Oct 28 pass);
-      // Oct 28 AAA → Oct 27 WTI settle 99.90 (no same-day settlement yet). This
-      // retail-minus-WTI chart does not use heating-oil futures: Oct 28 diesel gap
-      // = 166.8; gasoline gap = 78.5 dollars per barrel (Oct 27, re-paired: 166.9 / 79.3).
+      // from the Oct 26 basis once the Oct 27 settlement landed, Oct 28 morning pass);
+      // Oct 28 AAA → Oct 28 WTI settle 102.78 (re-paired from the Oct 27 basis once the
+      // Oct 28 settlement landed, Oct 28 afternoon pass). This retail-minus-WTI chart
+      // does not use heating-oil futures: Oct 28 diesel gap = 163.9; gasoline gap = 75.6
+      // dollars per barrel (Oct 27: 166.9 / 79.3 on the 99.90 settle).
       const wtiNonFred = new Set(wtiNonFredDates);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
       // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 (the record is
@@ -3294,7 +3303,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           ]),
           directLabels([
             // Actuals endpoint
-            { dataset: 0, index: anchorIdx, text: "282.7M · Oct 16", align: "right", dx: -12, dy: 16, font: "600 11.5px Georgia, serif" },
+            { dataset: 0, index: anchorIdx, text: "282.6M · Oct 23", align: "right", dx: -12, dy: 16, font: "600 11.5px Georgia, serif" },
           ]),
         ],
       });

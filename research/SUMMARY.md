@@ -1,6 +1,6 @@
 # Oil crisis — current research summary
 
-*Updated October 28, 2026 (morning pass). Sources and decisions: [daily log](logs/2026-10-28.md), [judgment history](judgment-history.md).*
+*Updated October 28, 2026 (afternoon pass, after WPSR and FOMC). Sources and decisions: [daily log](logs/2026-10-28.md), [judgment history](judgment-history.md).*
 
 ## Public forecast status
 
@@ -8,13 +8,13 @@ The site withdrew storage scenarios and dashboard corridor odds on October 21. I
 
 ## Latest readings
 
-- October 27 settlements: Brent $113.88 and December WTI $99.90, down $1.93 and $1.86. WTI returned below $100 after two closes above it. The 10-year market yield was 4.993%, its fourth close below 5%.
-- Qatar presented Iran with a draft deal on October 25. An official told Reuters Tehran is considering it and is expected to respond by week's end. Separately, the WSJ reports US warnings to Gulf states about a possible military campaign after the November 3 midterms. Neither report establishes an agreement or strike order.
-- Three industry sources told Reuters Russian refining recovered to about 5M barrels/day in late October, 25% above early October. Their diesel-output estimate was 225,000 tonnes/day, with about 80,000 potentially available for export. These are estimates, not confirmed deliveries or a new capacity-outage percentage.
-- Saudi Arabia reported intercepting five Houthi missiles and four drones on October 27. Falling debris caused damage, with no casualties reported. The Ras Tanura strike claim remains unverified.
-- UKMTO added a Gulf of Aden piracy advisory, not an attack. The newly archived feed also confirms the October 23 disabled-tanker report and October 26 vessel-fire classification.
-- AAA October 28: gasoline $4.2471 and diesel $6.3499 per gallon. Diesel fell after five rises. The latest reported SPR stock remains 282.7M barrels for the week ending October 16; the next EIA report is due October 28 at 10:30 a.m. Eastern.
+- October 28 settlements: Brent $115.32 and December WTI $102.78, up $1.44 and $2.88. The 10-year market yield was 5.045%, back above 5% after four closes below it.
+- The Fed held rates at 3.75–4.00%, voting 10–2. Cook and Hammack preferred a quarter-point increase. The site's 60% hike forecast resolved as no hike: Brier 0.36, running average 0.2009 over four resolved forecasts.
+- EIA, week ending October 23: SPR 282.583M barrels, down 0.1M; commercial crude 410.625M, down 1.892M for a fourth weekly decline. Distillates fell to 102.824M, 8.3% below last year. East Coast stocks rose to 21.832M but remained 14.3% below last year. No future SPR depletion date follows from this week's withdrawal.
+- Araghchi said mediators were discussing Iran's seven-day proposal. This doesn't establish acceptance of Qatar's new draft; an official told Reuters a response to that draft is expected by week's end. WSJ reporting about US military preparations likewise doesn't establish a strike order.
+- The Navy warned vessels about delays during blockade enforcement and advised those without a need to transit to stay clear. This is not an announced withdrawal of assisted passage. Iran's Sinokor enforcement threat starts November 1; actual vessel-level action needs verification.
+- AAA October 28: gasoline $4.2471 and diesel $6.3499 per gallon. Diesel fell after five rises; retail-minus-WTI comparisons are 163.9 and 75.6 dollars per barrel respectively for diesel and gasoline.
 
 ## What to watch
 
-Watch for Iran's response, verified Saudi damage reports and fresh shipping data. The Fed decision is due October 28 at 2:00 p.m. Eastern; OPEC's seven-country meeting is November 1. The Russian diesel cargo is expected around November 7; CPI is due November 10. Sources and qualifications are in the [review handoff](logs/review-2026-10-28.md) and daily log.
+Watch Iran's response, verified Saudi damage reports and fresh shipping data. OPEC's meeting and the Sinokor deadline are November 1; the next EIA report is November 4. The Russian diesel cargo is expected around November 7; October CPI is due November 10. Sources, corrections and remaining verification limits are in the [review handoff](logs/review-2026-10-28.md) and daily log.
