@@ -638,42 +638,37 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         <div class="grid gap-10 lg:grid-cols-2">
           <div>
             <div class="mb-4">
-              <h2 class="text-xl font-bold tracking-tight">Europe’s latest assessed gas price is up about 160%</h2>
+              <h2 class="text-xl font-bold tracking-tight">Europe’s assessed gas price is up about 180% since February</h2>
               <p class="mt-2 font-mono text-[11px] text-faint">TTF, $/MMBtu. Filled dots: EIA weekly futures averages. Hollow dots: assessments and market quotes, including converted euro quotes. Sep 14 uses a contract for difference (CFD), which tracks gas prices. Contracts and delivery periods differ; comparisons are approximate.</p>
             </div>
             <div class="h-72">
-              <canvas id="gasTtfChart" role="img" aria-label="TTF, Europe's gas benchmark, 2026 year to date: $12.40 in January, $11.00 before the closure, spiking to a three-year high of $18.89 on Mar 20, easing to $14.10 after the June ceasefire, $19.90 on Jul 31, then trading above $28 on Sep 10, its highest level since December 2022, and $27.00 on Sep 11, about $27.80 on Sep 14, $26.70 on Sep 18 (JOGMEC, published Sep 24), $24.10 on Sep 25 (JOGMEC, published Sep 28), and $24.60 on Oct 2 (JOGMEC, published Oct 5), $26.70 on Oct 9 (JOGMEC, published Oct 13), and $28.90 on Oct 16 in the assessment published Oct 19. Reference line at the pre-closure week's $10.99."></canvas>
+              <canvas id="gasTtfChart" role="img" aria-label="European gas benchmark TTF, 2026: the Oct 23 assessment was $30.80 per MMBtu for November delivery, up from $28.90 on Oct 16 and about 180% above the pre-closure reference of $10.99. Source: JOGMEC report dated Oct 26, via Global LNG Hub. The chart mixes weekly futures averages, assessments and market quotes; contracts and delivery periods differ. Filled and hollow dots distinguish these sources."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-              TTF tracks natural gas prices in Europe. JOGMEC's assessment for Oct 16,
-              published Oct 19, was $28.90 for November delivery, up from $26.70 on Oct 9
-              and about 160% above the pre-closure price. JOGMEC linked the higher prices to
-              tight spot LNG supply, reduced Norwegian gas supply, colder European weather,
-              and Strait of Hormuz supply concerns.
-              </p>
-              <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-              By January 20, European gas storage had fallen to 48%, compared with a five-year
-              average of 63%. With less gas in storage, Europe was buying liquefied natural gas (LNG)
-              for immediate delivery during the season when the strait closed.
+              TTF is Europe’s gas benchmark. JOGMEC’s report dated Oct 26 put the Oct 23
+              price at $30.80 per MMBtu for November delivery, up from $28.90 a week earlier.
+              It cited Norwegian supply disruptions, colder weather forecasts and Middle East tensions
+              (<a href="https://globallnghub.com/natural-gas-prices-weekly-update-jkm-ttf-and-henry-hub-26-october-2026/" class="underline decoration-rule underline-offset-2 hover:text-ink">Global LNG Hub</a>).
+            </p>
+            <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+              EU gas storage was 74.6% full on Oct 23, below last year and the five-year average,
+              leaving less stored gas available as winter approaches.
             </p>
           </div>
           <div>
             <div class="mb-4">
-              <h2 class="text-xl font-bold tracking-tight">Natural gas prices in Asia are up about 180%</h2>
+              <h2 class="text-xl font-bold tracking-tight">Asia’s assessed LNG price is up about 200% since February</h2>
               <p class="mt-2 font-mono text-[11px] text-faint">JKM, $/MMBtu. Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: assessed spot prices and market quotes (May–Oct). Contracts and delivery periods differ, so comparisons are approximate.</p>
             </div>
             <div class="h-72">
-              <canvas id="gasJkmChart" role="img" aria-label="JKM, Asia's LNG benchmark, 2026 year to date: $10.66 before the closure, spiking to $20.67 on Mar 20, easing to $15.20 on Jun 26, then climbing to $24.50 on Aug 28, the high-$28s on Sep 10 — its highest level in about two and a half years — about $28.50 on Sep 11, the low-$27s (about $27.20) on Sep 18 in the assessment published Sep 24, the low-$25s (about $25.20) on Sep 25 in the assessment published Sep 28, the high-$24s (about $24.80) on Oct 2 in the assessment published Oct 5, the low-$26s (about $26.20) on Oct 9 (JOGMEC, published Oct 13), and the high-$29s (about $29.80) on Oct 16 in the assessment published Oct 19. Reference line at the pre-closure week's $10.66."></canvas>
+              <canvas id="gasJkmChart" role="img" aria-label="Asian LNG benchmark JKM, 2026: the Oct 23 assessment for December delivery was in the high-$31s per MMBtu, plotted at approximately $31.80, up from the high-$29s on Oct 16 and about 200% above the pre-closure reference of $10.66. Source: JOGMEC report dated Oct 26, via Global LNG Hub. Filled dots are weekly futures averages; hollow dots are assessments and market quotes. Contracts and delivery periods differ."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-              JKM tracks the price of liquefied natural gas (LNG) delivered to Asia. JOGMEC’s
-              Oct 19 report put the Oct 16 price in the high-$29s, shown here as about $29.80,
-              up from the low-$26s on Oct 9 and about 180% above the pre-closure price.
-              The delivery month has rolled to December, and JOGMEC reported more spot
-              buying by South Korea and Thailand amid Middle East supply risks.
-              Damaged units at Qatar’s Ras Laffan complex represent about 17% of the country’s
-              LNG export capacity and are expected to remain offline for 3–5 years.
-              Low inventories leave buyers with less to fall back on when supplies are disrupted.
+              JKM tracks liquefied natural gas (LNG) delivered to Asia. JOGMEC’s report dated
+              Oct 26 put the Oct 23 price for December delivery in the high-$31s per MMBtu,
+              plotted here at about $31.80, up from the high-$29s a week earlier. It cited
+              increased buying by China, South Korea and India and concerns about winter supply
+              (<a href="https://globallnghub.com/natural-gas-prices-weekly-update-jkm-ttf-and-henry-hub-26-october-2026/" class="underline decoration-rule underline-offset-2 hover:text-ink">Global LNG Hub</a>).
             </p>
           </div>
         </div>
@@ -687,11 +682,12 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             <p class="font-mono text-[11px] text-faint tabular">Brent: selected observations and monthly averages. WTI: weekly FRED spot prices and recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent settled at $115.32 on Oct 28, up $1.44, its twenty-sixth consecutive close above $100. December WTI settled at $102.78, up $2.88 (CNBC). The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent settled at $114.88 on Oct 29, down $0.44, its twenty-seventh consecutive close above $100. December WTI settled at $102.00, down $0.78 (DTNPF/CNBC). The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            On Oct 28, Brent settled at $115.32, up $1.44, and December WTI at $102.78,
-            up $2.88 (CNBC). The US Navy warned ships to expect delays during blockade enforcement.
+            On Oct 29, Brent settled at $114.88, down $0.44, and December WTI at $102.00,
+            down $0.78 (DTNPF/CNBC). Prices eased on prospects of renewed US–Iran talks as Iran
+            reported further tanker incidents in the strait.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Brent combines selected observations and monthly averages; gray WTI combines
@@ -2666,7 +2662,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           maintainAspectRatio: false,
           interaction: { mode: "index", intersect: false },
           layout: { padding: { top: 20 } },
-          scales: { y: gasYScale(30, [0, 5, 10, 15, 20, 25, 30]), x: gasXScale },
+          scales: { y: gasYScale(35, [0, 5, 10, 15, 20, 25, 30, 35]), x: gasXScale },
           plugins: { tooltip: gasTooltip(gasTtf) },
         },
         plugins: [
@@ -2711,7 +2707,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           maintainAspectRatio: false,
           interaction: { mode: "index", intersect: false },
           layout: { padding: { top: 20 } },
-          scales: { y: yScale(0, 30, (v) => `$${v}`, 6), x: gasXScale },
+          scales: { y: yScale(0, 35, (v) => `$${v}`, 8), x: gasXScale },
           plugins: { tooltip: gasTooltip(gasJkm) },
         },
         plugins: [
@@ -2933,9 +2929,12 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // from the Oct 26 basis once the Oct 27 settlement landed, Oct 28 morning pass);
       // Oct 28 AAA → Oct 28 WTI settle 102.78 (re-paired from the Oct 27 basis once the
       // Oct 28 settlement landed, Oct 28 afternoon pass); Oct 29 AAA → Oct 28 WTI
-      // settle 102.78 (no same-day settlement at publication). This retail-minus-WTI
-      // chart does not use heating-oil futures: Oct 29 diesel gap = 163.3; gasoline
-      // gap = 74.7 dollars per barrel (Oct 28: 163.9 / 75.6 on the 102.78 settle).
+      // settle 102.78 (no same-day settlement at publication); Oct 29 AAA → Oct 29 WTI
+      // settle 102.00 (re-paired from the Oct 28 basis once the Oct 29 settlement landed,
+      // Oct 30 morning pass); Oct 30 AAA → Oct 29 WTI settle 102.00 (no same-day settlement
+      // at publication). This retail-minus-WTI chart does not use heating-oil futures:
+      // Oct 30 diesel gap = 163.5; gasoline gap = 74.6 dollars per barrel (Oct 29: 164.1 / 75.5
+      // on the 102.00 settle).
       const wtiNonFred = new Set(wtiNonFredDates);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
       // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 (the record is

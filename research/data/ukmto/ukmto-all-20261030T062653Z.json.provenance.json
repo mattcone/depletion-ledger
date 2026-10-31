@@ -1,0 +1,7 @@
+{
+ "fetched_at": "20261030T062653Z",
+ "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+ "method": "curl with browser UA (Cloudflare)",
+ "sha256": "bd5ddd0cc8ae1b31e00132c82a64c379337c9573df563f89881fea02065a23bd",
+ "note": "archived during the Oct 30 daily pass \u2014 new entries #186 (Attack, incident 2026-10-29T17:50Z, tanker struck by unknown projectile on outbound transit, no injuries) and #187 (Suspicious Activity, incident 2026-10-29T22:12Z, vessel on fire 25NM NE of Khasab, cause unknown in API; UKMTO's updated warning per SAFETY4SEA/Seatrade adds a small boat attaching two explosive devices to the hull, engine-room fire, tanker temporarily disabled); 44 entries #143-#187"
+}
