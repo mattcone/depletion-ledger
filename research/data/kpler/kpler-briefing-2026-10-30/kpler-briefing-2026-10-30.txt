@@ -1,0 +1,234 @@
+kpler 
+Kpler Media Briefing, 30 October 2026 
+Page 1 
+kpler 
+Kpler Media Briefing 
+Middle East Energy and Maritime Disruptions 
+Flow data as of Wednesday, 28 October 2026 (T-2, to reduce day-to-day revision noise) 
+Prepared Friday, 30 October 2026. Kpler Insight and Kpler platform data only 
+ 
+1. Executive summary and key price drivers 
+Oil flows through the Strait of Hormuz remain well below pre-war levels. Total Hormuz clearance averaged 8,462 kbd 
+over the 7 days to 28 October, about 49% of the pre-war baseline of 17,147 kbd. The latest 4 days are preliminary 
+floors, ranging from 4,346 kbd on 28 October to 12,202 kbd on 27 October. Such readings have typically settled 1.5 to 
+2 times higher, because each transit is confirmed against more than one source. The 7-day average smooths day-to-
+day timing noise, but it covers the same recent days that are still preliminary, so it can also revise upward. Bypass 
+routes are offsetting part of the loss, with Fujairah and Oman terminal loadings averaging 4,634 kbd over 7 days, 
+about 36% above their pre-war baseline. Kpler Insight reports that Saudi East Coast loadings are holding up, with 9 
+VLCCs at berth on 28 October. 
+Explore these flows in the new Middle East Flows dashboard in the Kpler terminal. It brings Strait of Hormuz transits, 
+Gulf of Oman ship-to-ship net exports, Gulf of Oman terminal loadings and Red Sea exports together in one view. 
+Middle East Regional Flows (kbd) 
+ 
+Three cumulative measures of confirmed clearance move outward from the strait itself (1) to Gulf of Oman and Fujairah/Oman terminal loadings (2) 
+and then Red Sea volumes (3). Iranian-origin transits are excluded throughout. Figures are oil only, covering Crude/Co, CPP, DPP and Chem/Bio 
+and excluding NGLs and LNG. Source, Kpler. 
+
+kpler 
+Kpler Media Briefing, 30 October 2026 
+Page 2 
+kpler 
+Middle East Regional Flows, daily series from 11 June to 28 October 
+ 
+ 
+ 
+Stacked bars are the confirmed components of each cumulative measure; the solid line is the 7-day average and the dashed line the pre-war 
+baseline. Shaded bands mark the provisional (8 to 14 days) and preliminary (last 7 days) recency tiers, which have typically settled 1.5 to 2 times 
+higher as later confirmations land. The late-June peak reflects the evacuation of cargoes stranded by the outbreak of the war. Source, Kpler. 
+
+kpler 
+Kpler Media Briefing, 30 October 2026 
+Page 3 
+kpler 
+Table and chart methodology and caveats 
+● 
+Every figure is a confirmed floor and can revise upward at any horizon. The recency tiers mark where 
+revisions concentrate, not where they stop. 
+● 
+Reported figures are older than 14 days, provisional figures are 8 to 14 days old, and preliminary figures 
+cover the last 7 days. Preliminary figures have typically settled 1.5 to 2 times higher once confirmations land. 
+● 
+Gulf of Oman, Kutch Light and Red Sea volumes with no confirmed load terminal capture ship-to-ship cargo 
+net of unmatched arrivals, and they carry no origin attribution. The Iranian-origin exclusion therefore applies to 
+strait transits only. 
+● 
+Pre-war baselines are averages over March 2025 to February 2026 on the same definitions and product-
+bucket selection. 
+● 
+Strait crossings are dated by transit, unattributed ship-to-ship cargo by the date it surfaces or departs, and 
+berth loadings by loading date. Daily totals therefore mix event timings, and the 7-day averages absorb most 
+of that noise. 
+Primary drivers 
+● 
+Clearance through the strait remains about half of the pre-war baseline on a 7-day basis, while Fujairah and 
+Oman terminal loadings run above theirs. Section 2 sets out the detail. 
+● 
+Gulf barrels are finding routes around Hormuz and loosening physical markets, while escalation risk ahead of 
+the US midterms on 3 November keeps futures supported. Section 3 covers the risks to Gulf transits. 
+● 
+Saudi East Coast loadings are recovering but remain well below pre-war levels, and returning Middle Eastern 
+barrels are pressuring European sour differentials. Section 4 covers Saudi export routes and grade effects. 
+● 
+Asia-bound Saudi flows through Bab el-Mandeb have subsided on security concerns, and Egypt’s Sidi Kerir is 
+now the main bypass route. Section 2 covers the Red Sea. 
+● 
+Clean tanker freight from the Mideast Gulf to Japan is at very high levels, which squeezes arbitrages. 
+Sections 3 and 5 give the freight and product readings. 
+● 
+Trend-following funds have been fully long Dubai since September. Further softening in prompt balances 
+could trigger sharp liquidation. 
+● 
+Refined product cracks are diverging by region, with European gasoline cracks sharply lower and Singapore 
+HSFO cracks firm. Section 5 gives the benchmark moves. 
+2. Chokepoint and transit metrics 
+A. Strait of Hormuz 
+Strait transits excluding Iranian-origin vessels averaged 7,195 kbd over 7 days, about 42% of the pre-war baseline of 
+17,147 kbd. The latest 4 days, all preliminary, ranged from 2,472 kbd on 28 October to 8,918 kbd on 27 October. 
+Such readings have typically settled 1.5 to 2 times higher as confirmations land. Gulf of Oman ship-to-ship net exports 
+ranged from negative 2,979 kbd on 26 October to 3,284 kbd on 27 October. Net exports turn negative when ship-to-
+ship imports exceed exports on the day. Crude averaged 7,290 kbd of clearance over 7 days, well above the 1,172 
+kbd of products. Tanker crossings averaged 11 over 7 days, against a pre-war level of 50. The count of 8 on 28 
+October is the freshest day. Many transits are dark, so confirmation takes longer and the latest count is the most likely 
+to change. 
+Bypass routes continue to offset part of the loss. Fujairah and Oman terminal loadings averaged about 36% above the 
+pre-war baseline of 3,417 kbd over 7 days. Kpler Insight reports that Basrah exports are back to 3 mbd, about 300 
+kbd below pre-war levels, and that Kirkuk loadings from Ceyhan reached 420 kbd in October. Total Iraqi oil exports 
+are back to pre-war levels. The UAE has told Asian refiners that Upper Zakum crude will flow through an accelerated 
+pipeline to Fujairah in early 2027, which doubles ADNOC’s capacity to bypass Hormuz. 
+
+kpler 
+Kpler Media Briefing, 30 October 2026 
+Page 4 
+kpler 
+B. Bab el-Mandeb and Red Sea 
+The 7-day average of Red Sea volumes, at 3,017 kbd, sits about 8% above the pre-war baseline of 2,804 kbd. The 
+latest 4 days, all preliminary, ranged from 771 kbd on 28 October to 7,524 kbd on 25 October. The series covers 
+Saudi cargoes and unattributed ship-to-ship volumes with no confirmed load terminal. Daily readings swing widely, 
+and ship-to-ship cargo is dated by the day it surfaces or departs, so recent days can revise upward. 
+On 29 October, Kpler Insight reported that actualised Saudi West Coast loadings were near 2.6 mbd in October to 
+date, about 400 kbd lower than in September. Asia-bound flows through Bab el-Mandeb have subsided on security 
+concerns, to about 250 kbd from a peak of about 3.4 mbd in June. Egypt’s Sidi Kerir is now the main bypass route to 
+Asia, with loadings near 1.5 mbd. More than half of October Sidi Kerir loadings are expected to reach Asian 
+customers, on a voyage of around 55 days via the Cape of Good Hope. 
+3. Maritime risk and fleet status 
+On 23 October, Kpler Insight cited the IMO as reporting at least 10 attacks on VLCCs in October alone. That is a third 
+of the 32 incidents recorded across the conflict. Kpler Insight reports only a slight recovery in clean product flows 
+through the Strait of Hormuz and the Gulf of Oman this month, given the attacks on vessels in October. It also reports 
+that Tehran proposed shortening Iran’s Hormuz reopening plan to 4 to 5 days if Washington lifts its blockade. Iran has 
+threatened legal action against Sinokor from next week, and Sinokor carries nearly 40% of Hormuz crude. Kpler 
+Insight says that threat amplifies freight and insurance risks. 
+Kpler Insight reports that clean freight from the Mideast Gulf to Japan has reached very high levels. LR2 tankers 
+shifting to crude this year have trimmed clean vessel availability. Kpler classed 32 of the 38 oil tanker crossings 
+recorded from 25 to 28 October as dark or unknown route. 
+Illustrative Mideast Gulf tanker crossings, 25 to 28 October 
+ 
+Illustrative sample, not the full crossing log. Source, Kpler, Strait of Hormuz Tanker Crossings dashboard. 
+Where AIS coverage lapses, Kpler applies a dark-transit methodology, cross-referencing satellite imagery and human 
+intelligence against a binary confirmation standard before attributing a movement. See the full methodology note at 
+the end of this briefing. 
+
+kpler 
+Kpler Media Briefing, 30 October 2026 
+Page 5 
+kpler 
+4. Critical infrastructure status 
+Saudi infrastructure, Petroline and Yanbu 
+Kpler Insight reports that Saudi crude exports are averaging 6.15 mbd in October to date, against 7.16 mbd in 
+September. East Coast loadings of 3.49 mbd have recovered from the mid-year low but remain well below the 5 to 6 
+mbd seen before the March 2026 disruption. Juaymah accounts for about 71% of East Coast exports. On 27 October, 
+the Houthis claimed a ballistic missile strike on the Ras Tanura refinery. Sentinel-2 imagery from 28 October 
+nonetheless shows 9 VLCCs at Juaymah and Ras Tanura, with Ras Tanura at its busiest in loadings since early 
+2025. On 22 October, Kpler Insight reported that Aramco’s East-West Pipeline, known as Petroline, resumed 
+operations on 22 September after a drone attack on 10 September forced a halt. Aramco continues to offer spot 
+cargoes from Yanbu and Sidi Kerir. Kpler Insight says returning Middle Eastern barrels are pressuring sour grades in 
+Europe. The Johan Sverdrup premium to Dated Brent has slid to $0.25/bbl, from a record $24/bbl in mid-September. 
+The November Dated to Frontline spread has eased to about $5.9/bbl. 
+ 
+Sources, Kpler Insight publications dated 14 September, 22 October, 23 October and 29 October 2026. 
+5. Refined products and bunker fuel impact 
+Kpler Insight reports that weakening demand and improving supply are pressuring refined products, while geopolitical 
+disruptions limit the downside across the barrel. US Gulf Coast gasoline cracks rose by $2.3/bbl and RBOB cracks by 
+$3.6/bbl, despite a large sell-off late the week before. US gasoline inventories rose by nearly 4 mb to 209.2 mb, back 
+inside the seasonal range for the first time in 25 weeks. In Europe, the Northwest Europe gasoline crack fell by 
+$5.3/bbl as maintenance winds down and blending demand dries up. 
+France is offering volumes from its strategic reserves as part of a 10 mb release over 3 months from November. 
+Russian refinery run rates have improved to an estimated 5 mbd, which should ease values across West of Suez 
+markets. More clean exports from Yanbu on LR2 tankers are offsetting the slight recovery in Hormuz flows, with most 
+heading to the Mediterranean or Northwest Europe. Clean freight from the Mideast Gulf to Japan has reached very 
+high levels, because LR2 tankers shifting to crude this year have trimmed clean vessel availability. 
+
+kpler 
+Kpler Media Briefing, 30 October 2026 
+Page 6 
+kpler 
+Kpler Insight reports that Asian 180 cst and 380 cst high sulphur fuel oil (HSFO) cracks have firmed to about $12 to 
+$13/bbl against Brent. Tight HSFO inflows into Singapore and Malaysia, tight floating storage and deep prompt 
+backwardation sustain strength. Potential Iraqi arrivals, including tenders by SOMO for 2.5 mt of November and 
+December fuel oil, may cap the upside. Kpler Insight sees slight downside risk for Singapore very low sulphur fuel oil 
+(VLSFO) as Al Zour exports resume. 
+ 
+Source, Kpler Insight, Refined Products, published 29 October 2026. 
+6. Sources and notes 
+This briefing draws exclusively on Kpler Insight research and Kpler platform data. No external or third-party sources 
+were used. 
+Kpler Insight citations 
+● 
+Johannes Rauball, Homayoun Falakshahi and Naveen Das, “Barrels find a way, physical markets loosen 
+despite the risk premium”, Crude Oil, published 29 October 2026. 
+https://terminal.kpler.com/insight/research/reports/barrels-find-a-way-physical-markets-loosen-despite-the-
+risk-premium  
+● 
+Nils Jenson, Ines Goncalves, George Shaw, Emril Jamil and Saarthak Goel, “Supply pressure builds but risks 
+persist”, Refined Products, published 29 October 2026. 
+https://terminal.kpler.com/insight/research/reports/supply-pressure-builds-but-risks-persist  
+● 
+Nhway Khin Soe and Yui Torikata, “Saudi East Coast Crude Loadings Hold Up as Sentinel-2 Imagery Shows 
+Nine VLCCs at Berth a Day After Houthi Strike Claim”, News, published 29 October 2026. 
+https://terminal.kpler.com/insight/news/saudi-east-coast-crude-loadings-hold-up-as-sentinel-2-imagery-shows-
+nine-vlccs-at-berth-a-day-after-houthi-strike-claim  
+● 
+Panagiotis Krontiras, “A revival in Yanbu flows to Europe could once again redraw the tanker trade map”, 
+Tankers Weekly, published 23 October 2026. https://terminal.kpler.com/insight/research/reports/a-revival-in-
+yanbu-flows-to-europe-could-once-again-redraw-the-tanker-trade-map  
+● 
+Johannes Rauball, Naveen Das and Muyu Xu, “Physical tightness eases as Saudi’s Yanbu exports recover”, 
+Crude Oil, published 22 October 2026. https://terminal.kpler.com/insight/research/reports/physical-tightness-
+eases-as-saudis-yanbu-exports-recover  
+● 
+Homayoun Falakshahi, Ivan Ryabov, Panagiotis Krontiras and Andon Pavlov, “Petroline down, exports 
+pivoting east, key scenarios and where the differentials go”, Market Pulse, published 14 September 2026. 
+https://terminal.kpler.com/insight/research/research-updates/petroline-down-exports-pivoting-east-key-
+scenarios-and-where-the-differentials-go  
+
+kpler 
+Kpler Media Briefing, 30 October 2026 
+Page 7 
+kpler 
+Kpler platform data 
+● 
+Kpler Insight search API (reports and short-form content), published-by-date range from 28 October to 30 
+October 2026. Uses a 48-hour rolling window on Wednesday to Friday editions, extended back to the prior 
+Friday on Monday and Tuesday editions to include weekend publications. 
+● 
+Kpler internal flow-tracking data, “Middle East Regional Flows” measures (Total Hormuz Clearance and Strait 
+of Hormuz Tanker Crossings panel), flow data to 28 October 2026, compiled by the Insight team. 
+● 
+Kpler, Strait of Hormuz Tanker Crossings dashboard, illustrative vessel sample, 25 to 28 October 2026. 
+ 
+Standing methodology note, vessel and cargo tracking 
+Kpler compiles vessel and cargo tracking data from 3 complementary sources. Automatic Identification System (AIS) 
+signals form the backbone, providing real-time position data whenever a vessel's transponder is active. A gap in that 
+signal is informative but not conclusive on its own. Satellite imagery, both optical and synthetic aperture radar (SAR), 
+corroborates vessel presence and laden state at terminals and along transit routes. SAR can see through cloud cover 
+where optical imagery cannot. These streams are supplemented by human intelligence, meaning market sources 
+reporting loading events, ship-to-ship transfer scheduling and port call activity. This intelligence often flags a 
+movement before satellite imagery can confirm it. 
+The 3 streams are cross-referenced against a binary confirmation standard. An event is recorded only when 
+consistent evidence from more than one source supports it, not through probabilistic attribution or a single source. 
+Where AIS coverage lapses, such as during a dark transit, analysts look for satellite imagery placing a vessel inside a 
+region on one date and outside it on another. They also draw on human intelligence and discharge-side confirmation 
+that corroborates timing and cargo grade. Volumes that cannot be independently verified this way are classified as 
+unknown origin rather than attributed by inference, a deliberately conservative approach that favours accuracy over 
+completeness. 
+Source, Middle East and Gulf of Oman dark crude exports methodology, Kpler Help Centre. https://help.kpler.com/en/articles/15462913-middle-
+east-and-gulf-of-oman-dark-crude-exports-methodology  

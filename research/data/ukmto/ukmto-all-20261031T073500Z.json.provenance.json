@@ -1,0 +1,7 @@
+{
+ "fetched_at": "20261031T073500Z",
+ "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+ "method": "curl with browser UA (Cloudflare)",
+ "sha256": "9a1668e7fe0d88e4c17bc1fb8582bf5b3f17c738082fcc702a8cde0784e51c5c",
+ "note": "archived during the Oct 31 post-review verification \u2014 current API state: 46 entries #143-#189; #187 reclassified suspicious activity -> attack (Louise 1 limpet-mines warning per GlobalSecurity/UKMTO updated warning); #188 attack (incident 2026-10-30T19:01Z, 40NM south of Lavan Island); #189 attack (API utcDateOfIncident 2026-10-30T20:11Z = registration time; UKMTO Warning 189-26 PDF face states incident date 28 October 2026, time TBC, source Verified, per REGULAS SHIPPING PDF transcription and Iran International restate \u2014 see research/logs/2026-10-31.md addendum). Supersedes ukmto-all-20261030T062653Z.json for the current API state."
+}

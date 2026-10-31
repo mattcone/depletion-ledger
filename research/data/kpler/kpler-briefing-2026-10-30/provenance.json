@@ -1,0 +1,58 @@
+{
+  "report": "Kpler Media Briefing — Middle East Energy and Maritime Disruptions",
+  "edition": "kpler-briefing-2026-10-30",
+  "publishedAt": "2026-10-30",
+  "flowDataAsOf": "2026-10-28 (T-2; latest 4 days preliminary floors, typically settle 1.5-2x higher as confirmations land)",
+  "retrievedAt": "2026-10-31T08:08:00Z",
+  "retrievedVia": "downloaded to /tmp/kpler-30-Oct.pdf on Oct 31 (URL family: marketing.kpler.com/hubfs/Media Briefings pdfs/Kpler media briefing {DD Mon} 2026.pdf; same family as the 2026-10-14 and 2026-10-19 editions); archived from /tmp",
+  "files": [
+    {
+      "file": "kpler-briefing-2026-10-30.pdf",
+      "sha256": "cf388226f8d8fb5f73e175107f86cb46fab27bd20a67ef60abb5ac6ca55c9cc1",
+      "bytes": 1209535
+    },
+    {
+      "file": "kpler-briefing-2026-10-30.txt",
+      "sha256": "b7e9005b8485ac4716399b6bfb73074a64bb23012f4bf2c0ecec0eb0726fe16b",
+      "bytes": 16167,
+      "note": "prose extracted from the PDF (chart/vector streams dropped); local extraction, not part of the published briefing"
+    }
+  ],
+  "keyFigures": {
+    "straitTransits7dAvgKbd": 7195,
+    "straitTransitsLatest4dRangeKbd": "2,472 (28 Oct) to 8,918 (27 Oct), all preliminary",
+    "straitTransitsPreWarBaselineKbd": 17147,
+    "straitTransitsVsBaselineOf": 42,
+    "straitTransitsVsBaselinePct": -58.0,
+    "tankerCrossings7dAvgPerDay": 11,
+    "tankerCrossingsLatestDay": { "2026-10-28": 8 },
+    "tankerCrossingsPreWarPerDay": 50,
+    "tankerCrossingsDarkShareOct25to28": "32 of 38 crossings (84%) classed dark or unknown route",
+    "hormuzTotalClearance7dAvgKbd": 8462,
+    "hormuzTotalClearance7dSplitKbd": { "crude": 7290, "products": 1172, "note": "edition text: 'Crude averaged 7,290 kbd of clearance over 7 days, well above the 1,172 kbd of products' — the split is of the CLEARANCE measure (7,290 + 1,172 = 8,462), not of the 7,195 strait figure" },
+    "hormuzTotalClearancePreWarBaselineKbd": 17147,
+    "hormuzTotalClearanceVsBaselineOf": 49,
+    "hormuzTotalClearanceLatest4dRangeKbd": "4,346 (28 Oct) to 12,202 (27 Oct), all preliminary",
+    "gulfOfOmanStsNetExportsRangeKbd": "-2,979 (26 Oct) to 3,284 (27 Oct); net turns negative when STS imports exceed exports on the day",
+    "fujairahOmanLoadings7dAvgKbd": 4634,
+    "fujairahOmanPreWarBaselineKbd": 3417,
+    "fujairahOmanVsBaselinePct": 36,
+    "redSea7dAvgKbd": 3017,
+    "redSeaPreWarBaselineKbd": 2804,
+    "redSeaVsBaselinePct": 8,
+    "redSeaLatest4dKbd": "771 (28 Oct) to 7,524 (25 Oct), all preliminary",
+    "saudiEastCoast": "9 VLCCs at berth on 28 Oct",
+    "iraq": "Basra exports recovered to 3 mbd (~300 kbd below pre-war); Kirkuk loadings from Ceyhan 420 kbd in October; total Iraqi oil exports back to pre-war levels (Kpler Insight)",
+    "sidiKerir": "loadings near 1.5 mbd; more than half of October loadings expected to reach Asia via the Cape (~55 days)",
+    "saudiWestCoast": "actualised loadings near 2.6 mbd in October to date, ~400 kbd lower than September (Kpler Insight, Oct 29)",
+    "asiaBoundViaBabElMandeb": "subsided to ~250 kbd from a June peak of ~3.4 mbd",
+    "attacks": "IMO, cited by Kpler Insight Oct 23: at least 10 attacks on VLCCs in October alone — a third of the 32 incidents recorded across the conflict",
+    "iranReopening": "Tehran proposed shortening its Hormuz reopening plan to 4-5 days if Washington lifts the blockade (Kpler Insight)",
+    "sinokor": "Iran has threatened legal action against Sinokor from next week; Sinokor carries nearly 40% of Hormuz crude (Kpler Insight)"
+  },
+  "reconciliation": {
+    "vsOct19Edition": "same measures, same definitions (oil only: Crude/Co, CPP, DPP, Chem/Bio; excludes NGLs/LNG; Iranian-origin transits excluded from strait figures only; pre-war baseline = average March 2025 - February 2026). Strait 7-day avg 7,894 (data to Oct 17) -> 7,195 (data to Oct 28); baseline 17,267 -> 17,147 (edition baseline refresh, same window); Total Hormuz Clearance 10,173 -> 8,462; tanker crossings 10/day -> 11/day (latest day 8); Red Sea 7-day avg 4,304 -> 3,017 (STS cargo dated by the day it surfaces, recent days preliminary and revise upward); Fujairah/Oman loadings 4,563 -> 4,634",
+    "vsOct30WirePrints": "CNBC (Oct 30): 'flows decline to 7.3 million bpd for the week ended Wednesday [Oct 28]' = the edition's CRUDE component of Total Hormuz Clearance (7,290 kbd of clearance, vs 1,172 kbd products), a crude-flow measure — NOT the strait-transit total-oil measure (7,195 kbd) the site's map labels and model --volume channel use. 'More than 40% below the prewar baseline' is consistent with the shared 17,147 kbd baseline (7,290 is 57.5% below it). Do not mix the two measures.",
+    "adoptedOct31": "Adopted into the site on Oct 31: map labels (Hormuz 7.2M b/d, 58% below pre-war; Red Sea 3.0M b/d, 8% above pre-war, data through Oct 28), ShippingRoutes Kpler paragraph, watch item, and model inputs (transits 10 -> 11, volume 7.894 -> 7.195). Filter re-run: HORIZON 15.0/50.0/35.0 (STATE 0.0/100.0/0.0) — unchanged (FLAT)."
+  }
+}
