@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-10-31";
+export const DATA_AS_OF = "2026-11-02";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -268,6 +268,8 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-10-29", value: 4.2258, note: "AAA release, Oct 29" },
   { date: "2026-10-30", value: 4.2046, note: "AAA release, Oct 30" },
   { date: "2026-10-31", value: 4.1837, note: "AAA release, Oct 31" },
+  { date: "2026-11-01", value: 4.1732, note: "AAA release, Nov 1" },
+  { date: "2026-11-02", value: 4.1694, note: "AAA release, Nov 2" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -336,6 +338,8 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-10-29", value: 6.3347, note: "AAA — second straight decline" },
   { date: "2026-10-30", value: 6.3204, note: "AAA — third straight decline" },
   { date: "2026-10-31", value: 6.3101, note: "AAA — fourth straight decline" },
+  { date: "2026-11-01", value: 6.3039, note: "AAA — fifth straight decline" },
+  { date: "2026-11-02", value: 6.2921, note: "AAA — sixth straight decline" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
@@ -711,16 +715,9 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     when: "Any day",
     items: [
       { item: "Whether Houthi attacks disrupt Gulf oil supplies. The Houthis claimed six attacks on Saudi oil facilities, airports and a military headquarters on Oct 29–30; damage remains unverified. Claimed targets included Ras Tanura, Rabigh and Abqaiq. The Saudi-led coalition reported intercepting a missile toward the Eastern Province (Oct 29).", why: "Watch for Aramco damage assessments, pipeline throughput and loading data, and whether Saudi Arabia requests the support Egypt authorized on Oct 26." },
-      { item: "Whether the US and Iran reach an agreement or resume strikes. Tasnim reported no Iranian reply to Vice President Vance's letter (Oct 29). CBS reported renewed Qatari mediation, while Senator Chris Murphy said he was briefed on plans for post-midterm strikes (Middle East Eye).", why: "Watch for an Iranian reply or a US strike decision. Diplomatic statements and military preparations don't establish an outcome." },
-      { item: "Whether oil keeps moving through Hormuz despite attacks. UKMTO issued two more attack reports on Oct 30, including a delayed report. The tanker Louise 1 resumed its voyage after an explosives attack. Oman evacuated 25 crew from the burning tanker RITI; its fate remains unconfirmed (Maritime Executive, Oct 30).", why: "Watch for damage assessments and verified shipments. Kpler's Oct 30 briefing puts strait flows at 7.2M barrels/day through Oct 28, or 8.5M including Gulf of Oman ship-to-ship transfers. Recent readings may revise upward. An evacuation alone doesn't establish a vessel loss." },
-      { item: "Whether Russian diesel reaches buyers. The Agioi Fanendes loaded 40,000 metric tons at Primorsk on Oct 22 and was expected in New York around Nov 7 (Reuters/LSEG). Novak said a decree extending the diesel export ban through January, with exceptions, was being drafted (TASS, Oct 30).", why: "Watch for the decree, deliveries and follow-on cargoes. US license 135 permits transactions through Apr 7, 2027; Russian export restrictions still apply." },
-    ],
-  },
-  {
-    when: "Nov 1",
-    items: [
-      { item: "Seven OPEC+ members are due to meet online on Nov 1 (OPEC). Sources told Reuters on Oct 27 that December output targets are likely to stay unchanged; no final decision has been made.", why: "Watch the decision and any 2027-quota statement. A steady-targets announcement doesn't establish actual output — several members already produce below their targets." },
-      { item: "Iran's Persian Gulf Strait Authority threatened legal action against Sinokor vessels from Nov 1 over alleged violations of its Hormuz crossing rules (FT, Oct 27).", why: "Watch for independently verified detentions, fines or boardings. A threat or an unspecified enforcement claim doesn't establish what happened to a vessel." },
+      { item: "Whether the US and Iran reach an agreement or resume strikes. Iran described a two-day Hormuz reopening proposal conditional on Washington meeting its demands (Al Jazeera, Nov 1). Rubio said Trump had made no decision on renewed strikes (Fox).", why: "Watch for agreement and implementation. MS NOW, citing Gulf officials, reported possible strikes as early as Nov 4; that is a reported contingency, not an announced operation." },
+      { item: "Whether oil keeps moving through Hormuz despite attacks. UKMTO issued two attack reports on Nov 1–2. Vanguard Tech identified the vessels as the tug Selat Storm and tanker Largo Atom, reporting partial sinking of the tug and loss of power on the tanker (Maritime Executive).", why: "Watch for crew updates, damage assessments and verified shipments. RITI's fate remains unconfirmed. Kpler's latest seven-day strait-flow average is 7.2M barrels/day through Oct 28; recent readings may revise upward." },
+      { item: "Whether Russian diesel reaches buyers. Russia extended its producer diesel export ban through Jan 31, 2027 (TASS, Oct 31). Novak said exceptions would remain for supplies to world markets. The Agioi Fanendes loaded at Primorsk on Oct 22 and is expected in New York around Nov 7 (Reuters/LSEG).", why: "Watch deliveries and the scope of the export exceptions. US license 135 permits transactions through Apr 7, 2027; Russian export restrictions still apply." },
     ],
   },
   {
@@ -740,7 +737,7 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
 // ---------- Breaking-points cascade (§11, compressed twice) ----------
 export const cascade = [
   { date: "Each weekly EIA report (next: Nov 4)", region: "US East Coast", trigger: "US diesel and heating-oil stocks fell by 1.5M barrels to 102.8M in the week ending Oct 23, 8.3% below last year. East Coast stocks rose to 21.8M but remained 14.3% below last year. National stocks were equivalent to about 26 days of use at the four-week average of 4.0M barrels a day; this comparison isn't a countdown to empty tanks." },
-  { date: "Oct 31", region: "Russia", trigger: "Russia’s diesel export ban for producers runs through Oct 31, although the government announced a partial lifting on Oct 10. Novak’s delivery schedule rises from 300,000 tons in October to 1M in December (Interfax, Oct 12). US permission doesn’t lift Russia’s restrictions. The IEA’s October report says limited operating refinery capacity makes the easing unlikely to materially change global diesel supplies." },
+  { date: "Jan 31, 2027", region: "Russia", trigger: "Russia extended the producer diesel export ban through Jan 31, with exceptions for global supplies (TASS, Oct 31). US authorization doesn't remove Russian restrictions. The IEA's October report says limited refinery capacity makes the easing unlikely to materially increase global diesel supplies." },
   { date: "≈ late October", region: "Europe's oil hubs", trigger: "Rotterdam-area diesel stocks could fall below 8.5–9M barrels, making it harder for traders to find supplies." },
   { date: "Nov 10–30", region: "Air travel", trigger: "Russia's jet-fuel export ban, in force since Jun 1, is due to end Nov 30. An extension would keep those export restrictions in place." },
 ];
@@ -787,11 +784,12 @@ export const russiaCurrentSpread = { date: "2026-10-04", low: 46, high: 80 };
 // Gazprom Neftekhim Salavat (Oct 8), Omsk ~440 kb/d — second hit (Oct 8), Lukoil
 // Ukhta (Oct 9), Ryazan — repeat strike (Oct 15), Surgut-district condensate plant
 // (Oct 16). See the Oct 24 log.
-const russiaStrikeWindow = { start: "Oct 24", end: "Oct 30" };
+const russiaStrikeWindow = { start: "Oct 24", end: "Nov 1" };
 const russiaStruckRefineries = [
   { plant: "Tolyattikauchuk, Tolyatti — petrochemical plant, fire reported", date: "Oct 24" },
   { plant: "Omsky Kauchuk, Omsk — petrochemical plant (synthetic rubber, MTBE), fire reported", date: "Oct 24" },
   { plant: "Novokuibyshevsk, Samara region — repeat strike (struck Sep 21–22), fire reported", date: "Oct 30" },
+  { plant: "Kstovo, Nizhny Novgorod region — refinery, fires reported", date: "Nov 1" },
 ];
 // Oct 14 (NOT counted above — the array's criterion is a confirmed strike/fire): Novak
 // said Ukrainian drones attacked refineries in the Saratov and Ryazan REGIONS (he named
@@ -811,14 +809,14 @@ const russiaStruckRefineries = [
 // criterion; any halt is unverified.
 export const russiaSnapshot = [
   { name: "Capacity out of service", value: "51%", delta: "UA Defense Ministry, Oct 4 (Khmara) — up from >45% (Sep 21) and ~30% (Aug 29, Moscow Times)", flag: "The 51% claim isn't independently verified (AP). Earlier estimates varied: Forbes 54% out (Sep 9), IEA more than 20%, and Kpler operating at 60% of capacity (Oct 10, FT). Reuters sources estimated processing recovered to about 5M barrels/day in late October, 25% above early October. These estimates don't establish a current capacity-outage percentage." },
-  { name: `Refineries and industrial sites struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} ${russiaStruckRefineries.length === 1 ? "plant" : "plants"}`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Tolyattikauchuk and Omsky Kauchuk are petrochemical plants, not crude refineries. A fire was reported at Novokuibyshevsk on Oct 30 (UNN/RBC-Ukraine). Novak separately reported attacks on three refineries and one gas-chemical complex, without naming them (Oct 30). Those unnamed sites aren't added to this count. No production halt is verified." },
+  { name: `Refineries and industrial sites struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} ${russiaStruckRefineries.length === 1 ? "plant" : "plants"}`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Tolyattikauchuk and Omsky Kauchuk are petrochemical plants. Fires were reported at Novokuibyshevsk on Oct 30 and Kstovo on Nov 1 (UNN/RBC-Ukraine). The governor confirmed damage to an unnamed industrial site at Kstovo. Novak's separate report of attacks on unnamed facilities isn't added to this count. No production halt is verified." },
   { name: "Major refinery outages", value: "Ryazan partly operating", delta: "Kirishi, Russia's second-largest, ~404 kb/d, reported halted in early September (UA.NEWS, Sep 2) · Ryazan, Moscow's main supplier, ~344 kb/d: CDU-6 shut after the Oct 15 strike; three other primary units operating (Reuters, Oct 16)", flag: "Capacity figures describe the whole plants, not measured lost output. Kirishi’s current operating status has not been verified." },
   { name: "Gasoline shortages at gas stations", value: "45–53%", delta: "Share of stations without AI-92 (45%) or AI-95 (53%) gasoline, mid-September (gdebenzin, via UNN, Sep 22); rationing has returned in about two-thirds of regions (Independent, Sep 22)", flag: "Gasoline prices +21% YTD (Moscow Times, Sep 14) · IEA: diesel output down about 30%, with waits of up to 40 hours (Oct 5) · Russia plans to import up to 620,000 tonnes of gasoline monthly over Oct–Dec (UNN, Oct 23)" },
   { name: "Jet fuel now imported", value: "military + civilian", delta: "Russia is importing Jet A-1 from South Korea and Egypt (UA military intelligence, Aug 29); no jet fuel or gasoline has left Russia by sea for two straight weeks (S&P Global CAS, Oct 1)", flag: "ISW (Sep 26): Geran drones use jet fuel; a kerosene shortage would limit their use" },
 ];
 
 export const russiaBanCascade = [
-  { date: "Oct 31, 2026", what: "diesel export ban's scheduled expiry; partially lifted Oct 10. Novak said a decree extending the ban through Jan 31, 2027, with exceptions for global supplies, was being drafted (TASS, Oct 30). The decree and its exceptions remain to be verified. US license 135 permits transactions through Apr 7, 2027; Russian export rules still apply." },
+  { date: "Jan 31, 2027", what: "diesel, marine-fuel and gasoil export ban for producers; extended Oct 31 (TASS). Novak said exceptions would remain for supplies to world markets. The extension announcement doesn't detail those exceptions. US license 135 permits transactions through Apr 7, 2027; Russian export rules still apply." },
   { date: "Nov 30, 2026", what: "jet fuel exports" },
   { date: "Jan 31, 2027", what: "gasoline exports and diesel exports by non-producers" },
 ];
@@ -1239,6 +1237,24 @@ export const wtiNonFred = wtiWeekly.filter((p) => !p.fred).map((p) => p.date);
 // Panamanian-flagged crude tanker RITI (IMO 9249075) had its 25 crew evacuated
 // by Oman on Oct 30 while burning — the strongest loss candidate, but no
 // confirmed sinking yet (tanker-loss input stays at 1 until confirmed).
+// #190 (Oct 31): a dhow boarded by unauthorised personnel in the Indian Ocean
+// (Gulf of Aden area, 9.9N 53.05E) — a piracy/PAG concern, NOT a Hormuz attack;
+// it still counts in the cumulative array. (Nov 1 fetch, payload archived at
+// research/data/ukmto/ukmto-all-20261101T134818Z.json.) Nov 2 fetch: the API
+// reclassified the entry "suspicious activity" → "hijack" — adopted (primary
+// source wins; payload research/data/ukmto/ukmto-all-20261102T133612Z.json).
+// #191/#192: Vanguard Tech identifies the vessels as Selat Storm (reported
+// partially sinking) and Largo Atom (reported loss of power), via Maritime
+// Executive, Nov 1 article updated with the overnight tanker report. UKMTO
+// does not name either vessel. #192 DATE EXCEPTION (resolved Nov 2, per
+// review-2026-11-02.md): the API's structured utcDateOfIncident field says
+// Nov 2 01:36 UTC (4 min before the warning's creation — a receipt time, not
+// the incident), but the face of Warning 192-26 gives incident date 1 Nov
+// 2026, time 2347 UTC, source Master — corroborated by two independent
+// accounts of the PDF (regulasshipping transcription; Defense & Tech citing
+// UKMTO). Incident-date-over-registration policy applies (same as #189):
+// row stands at 2026-11-01. This crosses the Monday weekly boundary — the
+// Oct 26–Nov 1 bar is 6, the Nov 2–8 bar 0.
 // NOTE: keep this array's body to entry lines only — ukmto-fetch.mjs parses each line
 // strictly and rewrites the whole array on --apply, so inline comments would break it.
 export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisory" | "suspicious activity"; date: string }[] = [
@@ -1350,6 +1366,9 @@ export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisor
   { num: 187, type: "attack", date: "2026-10-29" },
   { num: 188, type: "attack", date: "2026-10-30" },
   { num: 189, type: "attack", date: "2026-10-28" },
+  { num: 190, type: "hijack", date: "2026-10-31" },
+  { num: 191, type: "attack", date: "2026-11-01" },
+  { num: 192, type: "attack", date: "2026-11-01" },
 ];
 
 // Reports that existed before the captured window — the smallest number present,
@@ -1360,7 +1379,7 @@ export const ukmtoReportsBeforeWindow = Math.min(...ukmtoIncidents.map((i) => i.
 
 // Capture bounds are explicit: a quiet day must not shorten the covered period.
 export const ukmtoCoverageStart = "2026-07-01";
-export const ukmtoCoverageEnd = "2026-10-31";
+export const ukmtoCoverageEnd = "2026-11-02";
 
 // Include every Monday–Sunday week, even when it has no attack reports.
 // Partial weeks cover fewer than seven days and don't enter full-week comparisons.
