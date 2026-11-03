@@ -267,7 +267,7 @@
   },
   "3fcebe8b-d2d7-478d-a9c0-bf0258f4c25c": {
    "canonical": 188,
-   "warningNumber": null,
+   "warningNumber": "188-26",
    "firstSeen": "2026-10-31",
    "lastSeen": "2026-11-02"
   },
@@ -292,6 +292,12 @@
   "cf20ad27-fa3a-48e2-a581-70efad469506": {
    "canonical": 192,
    "warningNumber": "192-20",
+   "firstSeen": "2026-11-02",
+   "lastSeen": "2026-11-02"
+  },
+  "1785ed68-ec95-4079-9cc2-57d2986f7ba9": {
+   "canonical": 193,
+   "warningNumber": "193-26",
    "firstSeen": "2026-11-02",
    "lastSeen": "2026-11-02"
   }

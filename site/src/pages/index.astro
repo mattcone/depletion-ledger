@@ -638,37 +638,38 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         <div class="grid gap-10 lg:grid-cols-2">
           <div>
             <div class="mb-4">
-              <h2 class="text-xl font-bold tracking-tight">Europe’s assessed gas price is up about 180% since February</h2>
+              <h2 class="text-xl font-bold tracking-tight">Europe’s assessed gas price is up about 210% since February</h2>
               <p class="mt-2 font-mono text-[11px] text-faint">TTF, $/MMBtu. Filled dots: EIA weekly futures averages. Hollow dots: assessments and market quotes, including converted euro quotes. Sep 14 uses a contract for difference (CFD), which tracks gas prices. Contracts and delivery periods differ; comparisons are approximate.</p>
             </div>
             <div class="h-72">
-              <canvas id="gasTtfChart" role="img" aria-label="European gas benchmark TTF, 2026: the Oct 23 assessment was $30.80 per MMBtu for November delivery, up from $28.90 on Oct 16 and about 180% above the pre-closure reference of $10.99. Source: JOGMEC report dated Oct 26, via Global LNG Hub. The chart mixes weekly futures averages, assessments and market quotes; contracts and delivery periods differ. Filled and hollow dots distinguish these sources."></canvas>
+              <canvas id="gasTtfChart" role="img" aria-label="European gas benchmark TTF, 2026: the Oct 30 assessment was $34.00 per MMBtu for December delivery, up from $30.80 for November delivery on Oct 23 and about 210% above the pre-closure reference of $10.99. Source: JOGMEC, Nov 2. The chart mixes weekly futures averages, assessments and market quotes; contracts and delivery periods differ. Filled and hollow dots distinguish these sources."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-              TTF is Europe’s gas benchmark. JOGMEC’s report dated Oct 26 put the Oct 23
-              price at $30.80 per MMBtu for November delivery, up from $28.90 a week earlier.
-              It cited Norwegian supply disruptions, colder weather forecasts and Middle East tensions
-              (<a href="https://globallnghub.com/natural-gas-prices-weekly-update-jkm-ttf-and-henry-hub-26-october-2026/" class="underline decoration-rule underline-offset-2 hover:text-ink">Global LNG Hub</a>).
+              TTF is Europe’s gas benchmark. JOGMEC’s Nov 2 report put the Oct 30 price at
+              $34.00 per MMBtu for December delivery, up from $30.80 for November delivery
+              on Oct 23. It cited winter demand, Middle East supply concerns, an extended
+              Oseberg outage and the Freeport LNG shutdown
+              (<a href="https://journal.jogmec.go.jp/oilgas/nglng-en/index.html" class="underline decoration-rule underline-offset-2 hover:text-ink">JOGMEC</a>).
             </p>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-              EU gas storage was 74.6% full on Oct 23, below last year and the five-year average,
-              leaving less stored gas available as winter approaches.
+              EU gas storage was 74.7% full on Oct 30. Stored volume was 10.5% below last year
+              and 16.8% below its five-year average (JOGMEC).
             </p>
           </div>
           <div>
             <div class="mb-4">
-              <h2 class="text-xl font-bold tracking-tight">Asia’s assessed LNG price is up about 200% since February</h2>
+              <h2 class="text-xl font-bold tracking-tight">Asia’s assessed LNG price is up about 220% since February</h2>
               <p class="mt-2 font-mono text-[11px] text-faint">JKM, $/MMBtu. Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: assessed spot prices and market quotes (May–Oct). Contracts and delivery periods differ, so comparisons are approximate.</p>
             </div>
             <div class="h-72">
-              <canvas id="gasJkmChart" role="img" aria-label="Asian LNG benchmark JKM, 2026: the Oct 23 assessment for December delivery was in the high-$31s per MMBtu, plotted at approximately $31.80, up from the high-$29s on Oct 16 and about 200% above the pre-closure reference of $10.66. Source: JOGMEC report dated Oct 26, via Global LNG Hub. Filled dots are weekly futures averages; hollow dots are assessments and market quotes. Contracts and delivery periods differ."></canvas>
+              <canvas id="gasJkmChart" role="img" aria-label="Asian LNG benchmark JKM, 2026: the Oct 30 assessment for December delivery was in the low-$34s per MMBtu, plotted at approximately $34.00, up from the high-$31s on Oct 23 and about 220% above the pre-closure reference of $10.66. Source: JOGMEC, Nov 2. Filled dots are weekly futures averages; hollow dots are assessments and market quotes. Contracts and delivery periods differ."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-              JKM tracks liquefied natural gas (LNG) delivered to Asia. JOGMEC’s report dated
-              Oct 26 put the Oct 23 price for December delivery in the high-$31s per MMBtu,
-              plotted here at about $31.80, up from the high-$29s a week earlier. It cited
-              increased buying by China, South Korea and India and concerns about winter supply
-              (<a href="https://globallnghub.com/natural-gas-prices-weekly-update-jkm-ttf-and-henry-hub-26-october-2026/" class="underline decoration-rule underline-offset-2 hover:text-ink">Global LNG Hub</a>).
+              JKM tracks liquefied natural gas (LNG) delivered to Asia. JOGMEC’s Nov 2 report
+              put the Oct 30 December-delivery assessment in the low-$34s per MMBtu, plotted
+              here at about $34.00, up from the high-$31s on Oct 23. JOGMEC cited winter
+              demand and renewed Middle East supply concerns
+              (<a href="https://journal.jogmec.go.jp/oilgas/nglng-en/index.html" class="underline decoration-rule underline-offset-2 hover:text-ink">JOGMEC</a>).
             </p>
           </div>
         </div>
@@ -682,18 +683,19 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             <p class="font-mono text-[11px] text-faint tabular">Brent: selected observations and monthly averages. WTI: weekly FRED spot prices and recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: Brent settled at $117.64 on Oct 30, up $2.76, its twenty-eighth consecutive close above $100 — the final settlement of the December contract. December WTI settled at $104.12, up $2.12 (CNBC). The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly WTI spot prices and recent daily futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: January Brent settled at $104.77 on Nov 2, down $8.66 as a Doha peace proposal circulated; its twenty-ninth consecutive close above $100. December WTI settled at $96.46, down $7.66 (The Private Banker). The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly spot prices and recent futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            On Oct 30, December Brent settled at $117.64, up $2.76, and December WTI at
-            $104.12, up $2.12 (CNBC), amid further reported attacks on Gulf shipping.
+            On Nov 2, January Brent settled at $104.77, down $8.66 from its prior
+            settlement, and December WTI at $96.46, down $7.66 (The Private Banker).
+            Prices fell as a draft proposal to end the war circulated in Doha.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Brent combines selected observations and monthly averages; gray WTI combines
             weekly spot prices with recent futures closes. Hollow dots mark rounded estimates.
-            Earlier contract switches affect comparisons. December Brent expired Oct 30;
-            January settled at $113.43. The next Brent point will include the contract switch.
-            December WTI remains active until Nov 20.
+            Earlier contract switches affect comparisons. December Brent's final settlement
+            was $117.64 on Oct 30; the Nov 2 point uses January Brent. December WTI remains
+            the front month until Nov 20.
           </p>
         </div>
         <div class="min-w-0">
@@ -2927,13 +2929,12 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // settle 102.00 (re-paired from the Oct 28 basis once the Oct 29 settlement landed,
       // Oct 30 morning pass); Oct 30 AAA → Oct 30 WTI settle 104.12 (re-paired from the
       // Oct 29 basis once the Oct 30 settlement landed, Oct 31 morning pass); Oct 31 AAA →
-      // Oct 30 WTI settle 104.12 (no same-day settlement — Oct 31 is a Saturday); Nov 1 AAA →
-      // Oct 30 WTI settle 104.12 (Oct 31 and Nov 1 are Sat/Sun, no same-day settlement, Nov 1 pass);
-      // Nov 2 AAA → Oct 30 WTI settle 104.12 (no same-day settlement at publication — the Nov 2
-      // session settles 14:30 ET, after this pass, Nov 2 pass).
-      // This retail-minus-WTI chart does not use heating-oil futures: Nov 2 diesel gap = 160.1;
-      // gasoline gap = 71.0 dollars per barrel (Nov 1: 160.6 / 71.2; Oct 31: 160.9 / 71.6; Oct 30:
-      // 161.3 / 72.5 on the 104.12 settle).
+      // Oct 30 WTI settle 104.12 (no same-day settlement — Oct 31 is a Saturday); Nov 1 and Nov 2
+      // AAA → Nov 2 WTI settle 96.46 (re-paired from the Oct 30 basis once the Nov 2 settlement
+      // landed, Nov 2 evening pass).
+      // This retail-minus-WTI chart does not use heating-oil futures: Nov 2 diesel gap = 167.8;
+      // gasoline gap = 78.7 dollars per barrel (Nov 1: 168.3 / 78.8; Oct 31: 160.9 / 71.6;
+      // Oct 30: 161.3 / 72.5 — Oct 31 stays on the 104.12 settle, its nearest trading day).
       const wtiNonFred = new Set(wtiNonFredDates);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
       // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 (the record is

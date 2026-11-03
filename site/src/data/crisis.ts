@@ -73,6 +73,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-10-28", value: 115.32, tip: "settlement · up $1.44 (CNBC)", note: "Settlement (CNBC wire, December contract; +$1.44 vs Oct 27, +1.3% — the Yahoo BZ=F bar ran far off the wire again, the wire value is plotted). A twenty-sixth session close above $100. Up on the US Navy advisory for vessels that do not need to transit the area to remain well clear of Hormuz (USNAVCENT, Oct 28) and Israel's inconclusive election (Reuters/CNBC, Oct 28)." },
   { date: "2026-10-29", value: 114.88, tip: "settlement · down $0.44 (DTNPF/CNBC)", note: "Settlement (DTNPF/CNBC wire, December contract; −$0.44 vs Oct 28, −0.4% — the Yahoo BZ=F bar closed at 114.88, matching the wire). A twenty-seventh session close above $100. Down as prospects of renewed US–Iran peace negotiations eased supply-disruption fears (CNBC), as Iran reported two further tanker incidents in the strait and the UK maritime authority logged one of them as an attack." },
   { date: "2026-10-30", value: 117.64, tip: "settlement · up $2.76 (CNBC)", note: "Settlement (CNBC wire, December contract; +$2.76 vs Oct 29, +2.4% — the Yahoo BZ=F bar closed at 117.64, matching the wire). A twenty-eighth session close above $100. This was the December contract's FINAL settlement (its last trading day was Oct 30); the front month rolls to January, which settled at $113.43 (MarketScreener/CNBC, Oct 30) — the next point switches contracts, so the change will combine the switch with January's own move. Up on the renewed strait escalation: the UK maritime authority issued two more attack reports (one in the strait, one south of Lavan Island) and Oman evacuated the crew of the burning Panamanian-flagged tanker RITI, as the Houthis claimed strikes on Saudi refineries, airports and a military base (GlobalSecurity, Oct 31)." },
+  { date: "2026-11-02", value: 104.77, tip: "settlement · down $8.66 (The Private Banker wire, January contract)", note: "January settlement (The Private Banker wire): down $8.66 (7.6%) from its Oct 30 settlement of $113.43. Yahoo BZ=F closed at $104.44, so the wire value is plotted. This is the first session after December Brent's final settlement ($117.64); the chart's step down includes both the contract change and January's fall. Brent closed above $100 for a twenty-ninth straight session. Reports of the intraday low conflict and remain unverified (Guardian: $105.55; MarineLink: $104.49). Prices fell as a draft proposal to end the war circulated in Doha (Al Jazeera, Guardian, Nov 2)." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -175,6 +176,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { fred: false, date: "2026-10-28", value: 102.78, note: "Settlement (CNBC wire, December contract; +$2.88 vs Oct 27, +2.9% — the Yahoo CL=F bar closed at 101.95, below the wire settlement, the wire value is plotted). Back above $100 after one close below it (CNBC, Oct 28)." },
   { fred: false, date: "2026-10-29", value: 102.00, note: "Settlement (DTNPF wire, December contract; −$0.78 vs Oct 28, −0.76%; the Yahoo CL=F bar closed at 102.00, matching the wire). Intraday low $99.79." },
   { fred: false, date: "2026-10-30", value: 104.12, note: "Settlement (CNBC wire, December contract; +$2.12 vs Oct 29, +2.1% — the Yahoo CL=F bar closed at 104.12, matching the wire). December WTI remains active; its last trading day is Nov 20 under the CME contract rule. Up on the same drivers as Brent (GlobalSecurity, Oct 31)." },
+  { fred: false, date: "2026-11-02", value: 96.46, note: "December settlement (The Private Banker wire): down $7.66 (7.4%) from Oct 30. Yahoo CL=F closed at $96.41, so the wire value is plotted. WTI fell below $100 as a draft peace proposal circulated in Doha and Iran's president said the Supreme Leader had expanded the government's authority to negotiate (Al Jazeera, Nov 2). December remains the front month; its last trading day is Nov 20 under CME rules." },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -406,7 +408,7 @@ export const dieselRiseStreak = (() => {
   return n;
 })();
 export const stats = [
-  { label: "Brent", value: "$117.64", sub: "Oct 30 settlement · December contract (final) · up $2.76 · 28th close above $100" },
+  { label: "Brent", value: "$104.77", sub: "Nov 2 settlement · January contract · down $8.66 · 29th close above $100" },
   { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : (dieselStreak === 1 ? (dieselPriorRise > 0 ? (dieselPriorRise === 1 ? "down after yesterday’s rise" : `down after ${wordNum(dieselPriorRise)} straight rises`) : "down again") : `down ${wordNum(dieselStreak)} days in a row`)) + " · " : dieselRiseStreak === 1 && dieselPriorStreak.days > 0 ? `first rise after ${wordNum(dieselPriorStreak.days)} straight declines${dieselPriorStreak.fromRecord ? ` off the ${shortStatDate(dieselRecord.date)} record` : ""} · ` : dieselRiseStreak >= 2 ? `${wordNum(dieselRiseStreak)} straight rises from the ${shortStatDate(dieselYtd[dieselYtd.length - 1 - dieselRiseStreak].date)} low $${dieselYtd[dieselYtd.length - 1 - dieselRiseStreak].value.toFixed(4)} · ` : ""}+${dieselUpPct}% vs pre-war $3.72` },
   { label: "US gasoline (AAA)", value: `$${lastGasoline.value.toFixed(2)}`, sub: `${shortStatDate(lastGasoline.date)} · +${gasUpPct}% vs Jan $2.81 (AAA)` },
   { label: "SPR", value: "282.6M", sub: "Oct 23 · down 0.1M on the week · down 132.9M from pre-war 415.4M · lowest since Nov 1982" },
@@ -715,8 +717,8 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     when: "Any day",
     items: [
       { item: "Whether Houthi attacks disrupt Gulf oil supplies. The Houthis claimed six attacks on Saudi oil facilities, airports and a military headquarters on Oct 29–30; damage remains unverified. Claimed targets included Ras Tanura, Rabigh and Abqaiq. The Saudi-led coalition reported intercepting a missile toward the Eastern Province (Oct 29).", why: "Watch for Aramco damage assessments, pipeline throughput and loading data, and whether Saudi Arabia requests the support Egypt authorized on Oct 26." },
-      { item: "Whether the US and Iran reach an agreement or resume strikes. Iran described a two-day Hormuz reopening proposal conditional on Washington meeting its demands (Al Jazeera, Nov 1). Rubio said Trump had made no decision on renewed strikes (Fox).", why: "Watch for agreement and implementation. MS NOW, citing Gulf officials, reported possible strikes as early as Nov 4; that is a reported contingency, not an announced operation." },
-      { item: "Whether oil keeps moving through Hormuz despite attacks. UKMTO issued two attack reports on Nov 1–2. Vanguard Tech identified the vessels as the tug Selat Storm and tanker Largo Atom, reporting partial sinking of the tug and loss of power on the tanker (Maritime Executive).", why: "Watch for crew updates, damage assessments and verified shipments. RITI's fate remains unconfirmed. Kpler's latest seven-day strait-flow average is 7.2M barrels/day through Oct 28; recent readings may revise upward." },
+      { item: "Whether the US and Iran reach an agreement or resume strikes. Iranian negotiators left Doha with a draft proposal to end the war, which Tehran says it sent to Washington through Qatari mediators (Axios, Nov 2). Iran says the strait cannot reopen while the US naval blockade remains. Trump said the war would end 'very soon'; Axios reported Netanyahu is pressing for a strike after the midterms.", why: "Watch for Washington's response and any reopening plan. MS NOW, citing Gulf officials, reported possible strikes as early as Nov 4; this is a reported contingency, not an announced operation." },
+      { item: "Whether oil keeps moving through Hormuz despite attacks. UKMTO issued three attack reports on Nov 1–2. #193 (Nov 1, 20:20 UTC per Warning 193-26; reported Nov 2) describes an unnamed tanker struck near Lima, Oman. Vanguard Tech identified the earlier vessels as the tug Selat Storm and tanker Largo Atom, reporting partial sinking of the tug and loss of power on the tanker (Maritime Executive).", why: "Watch for crew updates, damage assessments and verified shipments. RITI's fate remains unconfirmed; Largo Atom's sustained disablement is unverified. Kpler's latest seven-day strait-flow average is 7.2M barrels/day through Oct 28; recent readings may revise upward." },
       { item: "Whether Russian diesel reaches buyers. Russia extended its producer diesel export ban through Jan 31, 2027 (TASS, Oct 31). Novak said exceptions would remain for supplies to world markets. The Agioi Fanendes loaded at Primorsk on Oct 22 and is expected in New York around Nov 7 (Reuters/LSEG).", why: "Watch deliveries and the scope of the export exceptions. US license 135 permits transactions through Apr 7, 2027; Russian export restrictions still apply." },
     ],
   },
@@ -771,11 +773,11 @@ export const russiaCurrentSpread = { date: "2026-10-04", low: 46, high: 80 };
 // are DERIVED from that list — never retype them into the row. The window label
 // degrades gracefully: a missed update stops being complete, never false. If the
 // strikes pause for a week and restart, start a fresh window (new start, cleared
-// list). The row says "struck", not "halted", on purpose: a strike plus a reported
-// fire is what the General Staff confirms for every entry, while a HALT requires
-// plant-specific confirmation (Reuters, a governor, an industry source). Ufa has
-// the strike and the fire but no confirmed halt as of Sep 26 — if one lands, the
-// flag's wording is the only thing that changes.
+// list). The row says "struck", not "halted", on purpose: entries require a
+// reported attack or strike and a reported fire; attribution and confirmation vary
+// by source. A HALT requires plant-specific confirmation (Reuters, a governor, an
+// industry source). Bloomberg reported the Ufa strike; OSINT reported a fire at
+// Novoil. Russian officials had not confirmed damage there as of Nov 2.
 // Window reset Oct 24: strikes paused ~8 days (last confirmed Oct 16), so per the
 // rule above a fresh window starts with a cleared list. The prior window (Sep 20–
 // Oct 16) held 12 entries: Moscow refinery (Sep 20), Kuibyshev near Samara (Sep
@@ -790,8 +792,9 @@ const russiaStruckRefineries = [
   { plant: "Omsky Kauchuk, Omsk — petrochemical plant (synthetic rubber, MTBE), fire reported", date: "Oct 24" },
   { plant: "Novokuibyshevsk, Samara region — repeat strike (struck Sep 21–22), fire reported", date: "Oct 30" },
   { plant: "Kstovo, Nizhny Novgorod region — refinery, fires reported", date: "Nov 1" },
+  { plant: "Ufa, Bashkortostan — Bashneft refinery complex; strike reported, fire at Novoil reported by OSINT", date: "Oct 31" },
 ];
-// Oct 14 (NOT counted above — the array's criterion is a confirmed strike/fire): Novak
+// Oct 14 (NOT counted above — the array's criterion is a reported strike/fire): Novak
 // said Ukrainian drones attacked refineries in the Saratov and Ryazan REGIONS (he named
 // regions, not individual plants); Ukraine denied it; damage unconfirmed (Interfax, TASS,
 // Bloomberg, Oct 14). Resolved Oct 15: the Ryazan refinery fire was CONFIRMED (Ryazan
@@ -809,7 +812,7 @@ const russiaStruckRefineries = [
 // criterion; any halt is unverified.
 export const russiaSnapshot = [
   { name: "Capacity out of service", value: "51%", delta: "UA Defense Ministry, Oct 4 (Khmara) — up from >45% (Sep 21) and ~30% (Aug 29, Moscow Times)", flag: "The 51% claim isn't independently verified (AP). Earlier estimates varied: Forbes 54% out (Sep 9), IEA more than 20%, and Kpler operating at 60% of capacity (Oct 10, FT). Reuters sources estimated processing recovered to about 5M barrels/day in late October, 25% above early October. These estimates don't establish a current capacity-outage percentage." },
-  { name: `Refineries and industrial sites struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} ${russiaStruckRefineries.length === 1 ? "plant" : "plants"}`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Tolyattikauchuk and Omsky Kauchuk are petrochemical plants. Fires were reported at Novokuibyshevsk on Oct 30 and Kstovo on Nov 1 (UNN/RBC-Ukraine). The governor confirmed damage to an unnamed industrial site at Kstovo. Novak's separate report of attacks on unnamed facilities isn't added to this count. No production halt is verified." },
+  { name: `Refineries and industrial sites struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} ${russiaStruckRefineries.length === 1 ? "plant" : "plants"}`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "Two entries are petrochemical plants. Fires were reported at Novokuibyshevsk (Oct 30) and Kstovo (Nov 1); Bloomberg reported a strike on the Ufa refinery complex, while OSINT reported a fire at Novoil. Russian officials have not confirmed damage in Ufa. Kstovo's governor confirmed damage to an unnamed industrial site. No production halt is verified." },
   { name: "Major refinery outages", value: "Ryazan partly operating", delta: "Kirishi, Russia's second-largest, ~404 kb/d, reported halted in early September (UA.NEWS, Sep 2) · Ryazan, Moscow's main supplier, ~344 kb/d: CDU-6 shut after the Oct 15 strike; three other primary units operating (Reuters, Oct 16)", flag: "Capacity figures describe the whole plants, not measured lost output. Kirishi’s current operating status has not been verified." },
   { name: "Gasoline shortages at gas stations", value: "45–53%", delta: "Share of stations without AI-92 (45%) or AI-95 (53%) gasoline, mid-September (gdebenzin, via UNN, Sep 22); rationing has returned in about two-thirds of regions (Independent, Sep 22)", flag: "Gasoline prices +21% YTD (Moscow Times, Sep 14) · IEA: diesel output down about 30%, with waits of up to 40 hours (Oct 5) · Russia plans to import up to 620,000 tonnes of gasoline monthly over Oct–Dec (UNN, Oct 23)" },
   { name: "Jet fuel now imported", value: "military + civilian", delta: "Russia is importing Jet A-1 from South Korea and Egypt (UA military intelligence, Aug 29); no jet fuel or gasoline has left Russia by sea for two straight weeks (S&P Global CAS, Oct 1)", flag: "ISW (Sep 26): Geran drones use jet fuel; a kerosene shortage would limit their use" },
@@ -919,6 +922,7 @@ export const gasTtf: GasPt[] = [
   { date: "2026-10-09", value: 26.7, assessed: true, tip: "JOGMEC (pub. Oct 13), Nov delivery", note: "Global LNG Hub (JOGMEC, published Oct 13) — USD 26.7/MBtu on Oct 9, Nov delivery; up from the 24.6 assessment of Oct 2 on tanker attacks in the strait, colder European weather, and constraints at Norway's Dvalin and Heidrun fields. Swapped in for the Oct 9 CFD market quote (25.7)." },
   { date: "2026-10-16", value: 28.9, assessed: true, tip: "JOGMEC (pub. Oct 19), Nov delivery", note: "Global LNG Hub (JOGMEC, published Oct 19) — USD 28.9/MBtu on Oct 16, Nov delivery; up from 26.7 on Oct 9 on tight spot LNG supply, reduced Norwegian gas supply, colder European weather, and Strait of Hormuz supply concerns." },
   { date: "2026-10-23", value: 30.8, assessed: true, tip: "JOGMEC (report dated Oct 26), Nov delivery", note: "Global LNG Hub (JOGMEC, report dated Oct 26) — USD 30.8/MBtu on Oct 23, Nov delivery; up from 28.9 on Oct 16 on supply disruptions at Norway's Troll and Asgard gas fields, colder European weather, and renewed Middle East tensions. EU underground storage was 74.6% on Oct 23, below the same period last year; the first net withdrawal of the winter season was recorded on Oct 20." },
+  { date: "2026-10-30", value: 34.0, assessed: true, tip: "JOGMEC (pub. Nov 2), Dec delivery", note: "Global LNG Hub (JOGMEC, published Nov 2) — USD 34.0/MBtu on Oct 30, Dec delivery; up from 30.8 on Oct 23 on Middle East supply concerns, colder European weather, the extension of Norway's Oseberg field outage, and the Freeport LNG shutdown." },
 ];
 
 export const gasJkm: GasPt[] = [
@@ -962,6 +966,7 @@ export const gasJkm: GasPt[] = [
   { date: "2026-10-09", value: 26.2, assessed: true, tip: "JOGMEC: low-$26s · Nov delivery · pub. Oct 13", note: "assessed: low-USD 26s (JOGMEC, published Oct 13, Nov delivery; up from high-USD 24s on Oct 2 as renewed attacks in the strait and Middle East tensions lifted LNG supply concerns)" },
   { date: "2026-10-16", value: 29.8, assessed: true, tip: "JOGMEC: high-$29s · Dec delivery · pub. Oct 19", note: "assessed: high-USD 29s (JOGMEC, published Oct 19, Dec delivery; up from low-USD 26s on Oct 9 as the delivery month rolled to December and spot procurement by South Korea and Thailand picked up on Middle East supply risks)" },
   { date: "2026-10-23", value: 31.8, assessed: true, tip: "JOGMEC: high-$31s · Dec delivery · report dated Oct 26", note: "assessed: high-USD 31s (JOGMEC, report dated Oct 26, Dec delivery; up from high-USD 29s on Oct 16 on stronger prompt demand from China, South Korea and India and winter-supply concerns amid continued Middle East uncertainty; Japan's power-generation LNG inventories fell 0.10M tonnes to 2.54M on Oct 18)" },
+  { date: "2026-10-30", value: 34.0, assessed: true, tip: "JOGMEC: low-$34s · Dec delivery · pub. Nov 2", note: "assessed: low-USD 34s (JOGMEC, published Nov 2, Dec delivery; up from high-USD 31s on Oct 23 on winter demand expectations and renewed Middle East supply concerns)" },
 ];
 
 export const gasPreClosure = { ttf: 10.99, jkm: 10.66 };
@@ -1056,6 +1061,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-10-28", value: 5.045, note: "session close (Yahoo ^TNX) · back above 5% after four straight closes below it (Oct 22–27); first close above 5% since Oct 21 (5.146)" },
   { date: "2026-10-29", value: 4.989, note: "session close (Yahoo) · back below 5%" },
   { date: "2026-10-30", value: 4.929, note: "session close (Yahoo ^TNX) · second straight close below 5%; back below 4.95 after the Oct 28 bounce to 5.045" },
+  { date: "2026-11-02", value: 4.894, note: "session close (Yahoo ^TNX) · third straight close below 5%" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
@@ -1254,7 +1260,19 @@ export const wtiNonFred = wtiWeekly.filter((p) => !p.fred).map((p) => p.date);
 // accounts of the PDF (regulasshipping transcription; Defense & Tech citing
 // UKMTO). Incident-date-over-registration policy applies (same as #189):
 // row stands at 2026-11-01. This crosses the Monday weekly boundary — the
-// Oct 26–Nov 1 bar is 6, the Nov 2–8 bar 0.
+// Oct 26–Nov 1 bar is 7 (with #193), the Nov 2–8 bar 0.
+// #193 DATE EXCEPTION (resolved Nov 2 evening): the API's utcDateOfIncident
+// says Nov 2 18:47 UTC — 2 minutes before the warning's creation (18:49),
+// a registration timestamp for a time-late report (same pattern as
+// #166–#169, #189, #192). Warning 193-26 covers this Lima incident — UKMTO's
+// own @UK_MTO post (Nov 2) is labeled "UKMTO WARNING 193-26", so the API
+// body's "192-26" label is a UKMTO copy-paste error. Two wire accounts of
+// the warning date the incident 20:20 UTC Sunday, Nov 1 (Arab Times, Nov 2:
+// "In Warning 193-26, UKMTO said it received a report of the incident at
+// 2020 UTC on Nov 1"; Anadolu, Nov 2: "at 2020GMT Sunday"). Incident-date-
+// over-registration policy applies: row stands at 2026-11-01. ukmto-fetch.mjs
+// will keep FLAGGING #193 against the API's registration timestamp — that is
+// EXPECTED; do not "fix" the row back to Nov 2.
 // NOTE: keep this array's body to entry lines only — ukmto-fetch.mjs parses each line
 // strictly and rewrites the whole array on --apply, so inline comments would break it.
 export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisory" | "suspicious activity"; date: string }[] = [
@@ -1369,6 +1387,7 @@ export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisor
   { num: 190, type: "hijack", date: "2026-10-31" },
   { num: 191, type: "attack", date: "2026-11-01" },
   { num: 192, type: "attack", date: "2026-11-01" },
+  { num: 193, type: "attack", date: "2026-11-01" },
 ];
 
 // Reports that existed before the captured window — the smallest number present,
