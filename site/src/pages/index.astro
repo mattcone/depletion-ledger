@@ -440,10 +440,13 @@ const cqAria = `Stacked area chart of world crude production by quality class, m
 // Order-independent (the script keeps the array sorted, but the copy must not
 // depend on it — same rule as ukmtoReportsBeforeWindow using Math.min).
 // The "reports #A through #B" range is over the sequential incident-report
-// series only: advisories use a separate ID scheme (e.g. 28082035, the Oct 10
-// tanker-and-military-forces advisory) that would otherwise swallow the range
-// ("#78 through #28082035") — bug caught on the Oct 11 prod verification.
-const ukmtoSeries = ukmtoIncidents.filter((i) => i.type !== "advisory");
+// series only: the advisory scheme uses a separate 8-digit ID (28082035, the
+// Oct 10 tanker-and-military-forces advisory) that would otherwise swallow the
+// range ("#78 through #28082035") — bug caught on the Oct 11 prod verification.
+// The Nov 2 Al Jusufi attack (Warning 194-26) also sits in advisory slot
+// 28082035 pending a re-slot to its sequential number, so the range filters on
+// the ID magnitude, not just the type.
+const ukmtoSeries = ukmtoIncidents.filter((i) => i.type !== "advisory" && i.num < 100000);
 const ukmtoFirst = ukmtoSeries.reduce((a, b) => (b.num < a.num ? b : a));
 const ukmtoLast = ukmtoSeries.reduce((a, b) => (b.num > a.num ? b : a));
 const ukmtoAttackTotal = ukmtoWeeklyAttacks.reduce((a, w) => a + w.count, 0);
@@ -683,18 +686,19 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             <p class="font-mono text-[11px] text-faint tabular">Brent: selected observations and monthly averages. WTI: weekly FRED spot prices and recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: January Brent settled at $104.77 on Nov 2, down $8.66 as a Doha peace proposal circulated; its twenty-ninth consecutive close above $100. December WTI settled at $96.46, down $7.66 (The Private Banker). The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly spot prices and recent futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: January Brent settled at $103.60 on Nov 3, down $1.17; its thirtieth consecutive close above $100. December WTI settled at $96.09, down $0.37 (Reuters). The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly spot prices and recent futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            On Nov 2, January Brent settled at $104.77, down $8.66 from its prior
-            settlement, and December WTI at $96.46, down $7.66 (The Private Banker).
-            Prices fell as a draft proposal to end the war circulated in Doha.
+            On Nov 3, January Brent settled at $103.60, down $1.17 from its prior
+            settlement, and December WTI at $96.09, down $0.37 (Reuters).
+            Brent had its lowest settlement since Oct 7 as markets weighed talks
+            to end the wars in Ukraine and Iran against supply-disruption concerns.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Brent combines selected observations and monthly averages; gray WTI combines
             weekly spot prices with recent futures closes. Hollow dots mark rounded estimates.
             Earlier contract switches affect comparisons. December Brent's final settlement
-            was $117.64 on Oct 30; the Nov 2 point uses January Brent. December WTI remains
+            was $117.64 on Oct 30; the November points use January Brent. December WTI remains
             the front month until Nov 20.
           </p>
         </div>
@@ -872,14 +876,14 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         <div class="mb-6 max-w-[65ch] text-[13px]">
           <p class="text-[13px] leading-relaxed text-ink/80">
             Commercial crude stocks exclude the Strategic Petroleum Reserve (SPR). They fell
-            by 1.9 million barrels to 410.6 million in the week ending Oct 23, the fourth
-            straight decline, despite imports rising to 6.4 million barrels a day (EIA).
-            Stocks were 5.3 million barrels below the same week last year. Moving oil from
+            by 0.9 million barrels to 409.8 million in the week ending Oct 30, the fifth
+            straight decline. Imports averaged 6.4 million barrels a day (EIA).
+            Stocks were 11.4 million barrels below the same week last year. Moving oil from
             the SPR to commercial storage leaves their combined total unchanged.
           </p>
         </div>
         <div class="relative h-72">
-          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus corresponding weeks in 2025. Stocks peaked at 465.7 million on Apr 17 and reached a wartime low of 404.5 million on Jul 24. On Oct 23 they fell for a fourth straight week to 410.6 million, down 1.9 million in a week and 5.3 million below the corresponding 2025 week."></canvas>
+          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus corresponding weeks in 2025. Stocks peaked at 465.7 million on Apr 17 and reached a wartime low of 404.5 million on Jul 24. On Oct 30 they fell for a fifth straight week to 409.8 million, down 0.9 million in a week and 11.4 million below the corresponding 2025 week."></canvas>
         </div>
 
         <p class="mt-3 font-mono text-[11px] text-faint">EIA weekly stocks, excluding the SPR, in million barrels. The Jul 24 low was 22.2M below the same week in 2025.</p>
@@ -891,14 +895,12 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         </div>
         <div class="mb-6 grid grid-cols-1 gap-x-14 gap-y-5 text-[13px] lg:grid-cols-2">
           <p class="text-[13px] leading-relaxed text-ink/80">
-            The Strategic Petroleum Reserve (SPR) is the US government's emergency supply of crude
-            oil. It was created after the energy shortages of the 1970s. The reserve held 415.4 million
-            barrels when the war began. The latest report, for the week ending Oct 23, puts it
-            at 282.6 million, down 0.1 million on the week after a 0.3 million decline. Weekly
-            withdrawals have slowed from 3.1 million barrels in the week ending Aug 28.
-            For comparison, the reserve peaked at 727 million barrels in December 2009
-            and stood at 270.5 million in August 1982. The releases help make up for
-            supplies that can't leave the Gulf.
+            The Strategic Petroleum Reserve (SPR) is the US government's emergency crude supply,
+            created after the energy shortages of the 1970s. It held 415.4 million barrels when
+            the war began; the Oct 30 report puts it at 282.2 million, down 0.4 million after a
+            0.1 million decline the week before. Weekly withdrawals have slowed from 3.1 million
+            barrels in the week ending Aug 28. It peaked at 727 million in 2009 and is now at its
+            lowest level since November 1982. SPR releases help offset supplies that cannot leave the Gulf.
           </p>
           <div>
             <h3 class="flex items-center gap-2 text-[13px] font-bold leading-relaxed text-ink/70">
@@ -934,7 +936,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         </div>
         <!-- SPR chart (full width) -->
         <div class="relative h-96">
-            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 282.6 million on Oct 23. Reference levels at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
+            <canvas id="sprChart" role="img" aria-describedby="sprChartAssumptions" aria-label="Strategic Petroleum Reserve, 2026 weekly: 415.4 million barrels pre-war, 282.2 million on Oct 30. Reference levels at 300, 250, 180, and 70 million barrels. Actual withdrawals depend on release decisions, contracts, and delivery schedules."></canvas>
             <div
               id="sprFloorTip"
               class="pointer-events-none absolute z-10 hidden max-w-[300px] border border-rule bg-[rgba(255,255,248,0.97)] px-3 py-2 text-[12px] leading-snug text-ink shadow-sm"
@@ -1185,13 +1187,13 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               <p class="font-mono text-[11px] text-faint">Share of available refinery capacity in use, weekly.</p>
             </div>
             <p class="mb-4 text-[13px] leading-relaxed text-ink/70">
-              US refineries used 92.8% of their available capacity in the week ending Oct 23,
-              their sixth straight week below 95%. They processed 123,000 fewer barrels a day
+              US refineries used 94.5% of their available capacity in the week ending Oct 30,
+              their seventh straight week below 95%. They processed 199,000 more barrels a day
               than the week before. Across the January–October weeks shown, utilization
-              averaged 93.5% in 2026 and 90.5% in 2025. It peaked at 98.0% on Aug 28.
+              averaged 93.6% in 2026 and 90.4% in 2025. It peaked at 98.0% on Aug 28.
             </p>
             <div class="relative h-96">
-              <canvas id="refineryChart" role="img" aria-label={`US refinery utilization, percent of operable capacity, weekly through Oct 23. The 2026 line is above 2025 in 41 of 43 comparable weeks. Utilization peaked at 98.0% on Aug 28 and fell to 92.8% on Oct 23, its ${ordinal(refineryStreak)} straight week below 95%. The corresponding 2025 reading is 86.6%. Weekly averages for the periods shown are 93.5% in 2026 and 90.5% in 2025.`}></canvas>
+              <canvas id="refineryChart" role="img" aria-label={`US refinery utilization, percent of operable capacity, weekly through Oct 30. The 2026 line is above 2025 in 42 of 44 comparable weeks. Utilization peaked at 98.0% on Aug 28 and has stayed below 95% for ${ordinal(refineryStreak)} straight weeks, ending at 94.5% on Oct 30. The corresponding 2025 reading is 86.0%. Weekly averages for the periods shown are 93.6% in 2026 and 90.4% in 2025.`}></canvas>
             </div>
             <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
               EIA Weekly Petroleum Status Report (WPULEUS3), weeks ending Friday. Utilization is the
@@ -1948,7 +1950,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           plugins: [
             crosshair,
             directLabels([
-              // Endpoint values: 2026 ends 92.8, 2025 ends 86.6 — the lines diverged in
+              // Endpoint values: 2026 ends 94.5, 2025 ends 86.0 — the lines diverged in
               // Oct (the 2025 step down), so the old collision fix (2026's value above its
               // line, 2025's below) stays harmlessly in place. Halos knock the lines out
               // under the glyphs (the lines run into every label here).
@@ -2931,10 +2933,13 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // Oct 29 basis once the Oct 30 settlement landed, Oct 31 morning pass); Oct 31 AAA →
       // Oct 30 WTI settle 104.12 (no same-day settlement — Oct 31 is a Saturday); Nov 1 and Nov 2
       // AAA → Nov 2 WTI settle 96.46 (re-paired from the Oct 30 basis once the Nov 2 settlement
-      // landed, Nov 2 evening pass).
-      // This retail-minus-WTI chart does not use heating-oil futures: Nov 2 diesel gap = 167.8;
-      // gasoline gap = 78.7 dollars per barrel (Nov 1: 168.3 / 78.8; Oct 31: 160.9 / 71.6;
-      // Oct 30: 161.3 / 72.5 — Oct 31 stays on the 104.12 settle, its nearest trading day).
+      // landed, Nov 2 evening pass); Nov 3 AAA → Nov 3 WTI settle 96.09 (re-paired from the
+      // Nov 2 basis once the Nov 3 settlement landed, Nov 3 evening pass); Nov 4 AAA → Nov 3 WTI
+      // settle 96.09 (no same-day settlement — the Nov 4 session had not settled at the Nov 4
+      // morning pass).
+      // This retail-minus-WTI chart does not use heating-oil futures: Nov 4 diesel gap = 167.5;
+      // gasoline gap = 77.1 dollars per barrel (Nov 3: 168.0 / 78.2; Nov 2: 167.8 / 78.7; Nov 1: 168.3 / 78.8;
+      // Oct 31: 160.9 / 71.6; Oct 30: 161.3 / 72.5 — Oct 31 stays on the 104.12 settle, its nearest trading day).
       const wtiNonFred = new Set(wtiNonFredDates);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
       // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 (the record is
@@ -3303,7 +3308,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           ]),
           directLabels([
             // Actuals endpoint
-            { dataset: 0, index: anchorIdx, text: "282.6M · Oct 23", align: "right", dx: -12, dy: 16, font: "600 11.5px Georgia, serif" },
+            { dataset: 0, index: anchorIdx, text: "282.2M · Oct 30", align: "right", dx: -12, dy: 16, font: "600 11.5px Georgia, serif" },
           ]),
         ],
       });

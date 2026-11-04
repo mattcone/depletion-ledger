@@ -1,0 +1,52 @@
+{
+  "report": "EIA WPSR",
+  "weekEnd": "2026-10-30",
+  "url": "https://www.eia.gov/petroleum/supply/weekly/",
+  "retrievedAt": "2026-11-04T15:56:57.564Z",
+  "files": [
+    {
+      "file": "table1.csv",
+      "sha256": "6e7111336bb6bdd0e8143c17a2cad49f7c0296444ef611ad1440cf320266efb8",
+      "bytes": 6594
+    },
+    {
+      "file": "table5.csv",
+      "sha256": "503e0ed71f1deda42ebbd7732a72ee7f82a6bd7b26949ed0aa2b4f6906f191be",
+      "bytes": 3708
+    },
+    {
+      "file": "table6.csv",
+      "sha256": "5c6f05287018f63d45b7859db5040da3d2ae494dd329023c6f1f9fd582f59426",
+      "bytes": 5932
+    },
+    {
+      "file": "table2.csv",
+      "sha256": "0ff717462191a6f854f05cfa613c8fe10b4e42b72ee243e9bf3e5bd40756a52d",
+      "bytes": 8375,
+      "url": "https://ir.eia.gov/wpsr/table2.csv",
+      "description": "refiner inputs & utilization (national + PADD), incl. percent utilization row"
+    },
+    {
+      "file": "table9.csv",
+      "sha256": "00c411b71081e77d3fb030a1a477ecdc9980258623a30e1d80b5785ead63c2ad",
+      "bytes": 46781,
+      "url": "https://ir.eia.gov/wpsr/table9.csv",
+      "description": "WPSR summary table: production, imports, exports, product supplied, stocks, 5-year comparison"
+    },
+    {
+      "file": "distillate-stocks-2026.csv",
+      "sha256": "04b90591974208e431561b6b972d466f12d094e249b847e9a0c892b5a30c1565",
+      "bytes": 861,
+      "url": "https://api.eia.gov/v2/petroleum/stoc/wstk/data/ (series WDISTUS1, weekly)",
+      "description": "US distillate fuel oil stocks, full 2026 series to w/e 2026-10-23 (API lags the Oct 30 week); supports the first-sub-100M-this-year check (prior 2026 low: 100,799k, w/e 2026-05-22)"
+    },
+    {
+      "file": "table1-2025-10-24-archive.pdf",
+      "sha256": "4fa1ca384ecb78b5dbad858aba6f988061ba585f1aad8c69c780f90d6619cf21",
+      "bytes": 90395,
+      "url": "https://www.eia.gov/petroleum/supply/weekly/archive/2025/2025_10_29/pdf/table1.pdf",
+      "description": "EIA WPSR table 1, week ending 2025-10-24 (released Oct 29, 2025) \u2014 source for the 2025 baseline point 416.0 (total crude 825.1 - SPR 409.1)"
+    }
+  ],
+  "retrievedAtNote": "table2/9 + distillate-stocks-2026 + 2025 archive PDF added 2026-11-04 ~09:30 MST per external review follow-up (archive gap closure)"
+}

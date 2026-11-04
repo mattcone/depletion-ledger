@@ -1,25 +1,29 @@
-# Oil crisis — current research summary
+# Crisis state — Nov 4 (morning + WPSR)
 
-*Updated 2026-11-02 evening (day 247). Sources and decisions: [daily log](logs/2026-11-02.md), [judgment history](judgment-history.md).*
+Sources and decisions: [Nov 4 daily log](logs/2026-11-04.md) · [judgment history](judgment-history.md)
 
-## Published prediction status
+## Current read
 
-The site withdrew the storage scenarios and dashboard corridor odds on Oct 21. Issued predictions and scores remain in the archives. The logged judgment is 10/50/40. The existing and candidate filter outputs are ~15/50/35 and 15.2/49.9/34.9; these are shadow diagnostics. Both runs use shipping data through Oct 28, five days old on Nov 2. Candidate state: 0.5/99.5/0.0; horizon: 15.2/49.9/34.9.
+**Judgment:** 10 / 50 / 40 — corridor holds / standoff / corridor lapses. No pre-committed trigger fired. Trump's Nov 3 Financial Times interview saying there were no immediate plans to strike Iran and the unverified IRGC mine claim are not triggers for changing the judgment.
 
-*Evening pass, Nov 2 — settled prices below supersede the morning's live readings.*
+**Filter (diagnostic, not public odds):** HORIZON **15.0 / 50.0 / 35.0**; STATE **0 / 100 / 0**. This is the 22nd unchanged run. Inputs: 11 transits, one tanker loss, Brent $103.60, and Kpler's 7.195M b/d through Oct 28 (seven days old).
 
-## Latest readings
+**Candidate shadow:** HORIZON **15.2 / 49.9 / 34.9**; STATE **0.5 / 99.5 / 0.0**. Not published. Re-running with the same inputs reproduces the same result; the seven-day age is reported as metadata and does not change the calculation.
 
-- **Settled, Nov 2:** January Brent (front month) $104.77, down $8.66 (−7.6%) from its Oct 30 settlement; December WTI $96.46, down $7.66 (−7.4%). Prices fell as a draft peace proposal circulated in Doha. Compare the next Brent reading with January; December WTI remains the front month until Nov 20.
-- AAA Nov 2: gasoline $4.1694 and diesel $6.2921 per gallon. Diesel fell for a sixth day. Retail-minus-WTI comparisons are $167.8 diesel and $78.7 gasoline per barrel, using the Nov 2 WTI settlement (re-paired from the Oct 30 basis).
-- **Shipping:** UKMTO's rolling API has 50 records; the site's cumulative July-onward chart has 112. The new report (#193) describes an unnamed tanker struck near Lima, Oman; the crew and vessel were reported safe. Dated Nov 1 (20:20 UTC) per Warning 193-26: two wire accounts of the warning (Arab Times, Anadolu) put the incident at 20:20 UTC Sunday, Nov 1, and UKMTO's own @UK_MTO post confirms the warning number 193-26 (the API body's "192-26" label is a copy-paste error; the API's Nov 2 date field is a registration timestamp). Weekly bar now reads Oct 26–Nov 1: 7, Nov 2–8: 0. RITI's 25 crew were evacuated; the vessel's fate remains unconfirmed. Kpler's latest strait-flow average is 7.2M barrels/day through Oct 28, with 11 crossings/day.
-- **OPEC+ (Nov 1):** seven participating countries kept December's required production at September levels. Next meeting Nov 29.
-- **US–Iran:** Iranian negotiators left Doha with a draft proposal to end the war, which Tehran says it sent to Washington through Qatari mediators (Axios, Nov 2). Iran says the strait cannot reopen while the US blockade remains. Trump said the war would end "very soon"; Axios reported Netanyahu is pressing for a strike after the midterms. MS NOW reported a possible Nov 4 strike, citing Gulf officials; no operation has been announced.
-- **Russia:** Bloomberg reported a strike on the Bashneft refinery complex in Ufa on Oct 31; OSINT reported a fire at Novoil. Russian officials have not confirmed damage. The Oct 24–Nov 1 tracker now lists five reported strike/fire sites; no new refinery halt is verified. Russia extended its producer diesel/marine-fuel export ban through Jan 31, 2027.
-- **Kazakhstan:** oil transport on the Atyrau–Samara pipeline was temporarily suspended at 06:09 Astana time on Nov 2 after a drone attack on the Samara dispatch hub. The Energy Ministry said it expected transport to resume shortly; the latest status is unverified.
-- **Sinokor:** Iran's strait authority reportedly targeted a "violating" vessel (Sabereen, unverified, unnamed); no independently verified detention, fine or boarding as of Nov 2 evening.
-- Latest WPSR week: Oct 23. SPR 282.583M barrels; distillates 102.824M, 8.3% below last year. Next print Nov 4 (w/e Oct 30).
+**Storage context:** the reference draw band remains 0.70M b/d at Brent $103.60. It implies about 278.7M barrels in the SPR by Nov 4, based on the Oct 30 WPSR figure of 282.184M; this is a reference estimate, not a new inventory report.
 
-## What to watch
+**Other model metrics:** elasticity sensitivity is −0.23 / −0.45 / −0.68 mb/d per $5 Brent move (ε 0.05 / 0.10 / 0.15). Calibration ledger: 4 resolved, 7 open.
 
-Watch for Washington's response to the Doha proposal, further shipping damage, identification of the #193 vessel, a Kazakh pipeline restart, refinery status, and updated flow data. The next WPSR is Nov 4, October CPI Nov 10, and the next IEA OMR Nov 13. Sources and caveats are in the daily log.
+## Market and shipping
+
+- **Midterms:** Democrats won control of both chambers (AP). Trump acknowledged the Iran war played a role in the loss; voter polling also cited high prices (Reuters/AP). He said the US would end $4B a year in aid to Israel in 2027 while continuing arms sales (AP).
+- **Settlements, Nov 3 (latest settled):** January Brent $103.60 (−$1.17; 30th close above $100); December WTI $96.09 (−$0.37). The 10-year closed at 4.952%. **Nov 4 was unsettled at this pass:** WTI ~$93.6, Brent ~$100.8, and the 10-year yield ~4.925% (oil was down about 2.5–2.8% from the prior settlements). Reuters linked the early oil decline to the election result and Trump's comments, amid volatile trading.
+- **AAA Nov 4 (applied):** gasoline $4.1239, diesel $6.2748 — diesel's eighth straight daily decline. Nov 4 retail-minus-WTI gaps: $167.5 diesel / $77.1 gasoline (paired to the Nov 3 settlement $96.09).
+- **Hormuz:** The IRGC claimed four tankers hit mines in the strait's southern section and two other vessels were stopped (Nov 4); the claims are unverified, and UKMTO has issued no matching warning. Its feed has five attack reports since Nov 1. Iran's parliamentary security committee vice-chair said ships from India, China, Iraq and Qatar were exempt from transit restrictions (Nov 3). Kpler's October strait crude-export average was about 11.1M b/d, roughly 2% below September (CNBC, Oct 30).
+- **Russian diesel:** Windward tracked three tankers carrying Russian diesel as US-bound; only the Agioi Fanendes (New York expected ~Nov 7) still appears headed for a US port, while the other two changed course. New Jersey's governor warned state ports to reject the fuel (Windward and CBS, Nov 3). License 135 authorizes covered transactions; the ships are not described as being “under” the license.
+- **Watch:** activation of CENTCOM's strike plan (NYT/WSJ: ready from Nov 4, no decision); Iran's response to the Doha proposal and its two-day reopening offer; verification of the IRGC mine claim; Agioi Fanendes delivery; Ufa (Bashneft) refinery halt confirmation.
+- **WPSR w/e Oct 30 (released Nov 4, 10:30 ET):** SPR 282.184M (−0.399M); commercial crude ex-SPR 409.760M (−0.865M — fifth straight weekly decline; 11.4M below the same week last year); **distillates 99.259M (−3.565M, 11.0% below last year) — the first weekly reading below 100M this year**; East Coast distillates 22.551M (+0.719M, still 14.5% below last year); refinery utilization 94.5% (seventh straight week below 95%, up 1.7 points). Four-week average distillate supplies 4.175M b/d → about 24 days of use. No judgment change: the tripwire was a research watch item, not a model trigger.
+
+## Next dates
+
+- EIA WPSR, Nov 12, noon ET (w/e Nov 6; holiday-adjusted schedule); October CPI, Nov 10; IEA OMR, Nov 13; OPEC+ meeting, Nov 29.
