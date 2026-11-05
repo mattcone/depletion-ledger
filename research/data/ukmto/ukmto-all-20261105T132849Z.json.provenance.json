@@ -1,0 +1,7 @@
+{
+  "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+  "fetched_utc": "20261105T132849Z",
+  "sha256": "70e10ac6ee553d522990ded6cc52ccede1837ccc8d363a279708365bc0eb75c6",
+  "note": "Nov 5 pass: 53 entries, max #196. API utcDateOfIncident for #196 is 2026-11-05T08:00Z; Reuters/AP report the incident time as 2026-11-04 23:20Z. Site event date follows the reported 23:20Z time; discrepancy retained here for review.",
+  "entries": 53
+}

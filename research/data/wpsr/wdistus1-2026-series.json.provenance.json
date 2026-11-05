@@ -1,0 +1,7 @@
+{
+ "url": "https://api.eia.gov/v2/petroleum/stoc/wstk/data/ (series WDISTUS1, weekly, 2026-01-01 onward)",
+ "fetched_utc": "20261105T142630Z",
+ "sha256": "651ed4e172e8fc836ae4749c587a6c2673a70aaefb6c0568e6013e72d1da22b4",
+ "entries": 44,
+ "note": "Full 2026 weekly US total distillate stocks (thousand barrels). Verifies the 'first weekly reading below 100M this year' claim: every 2026 reading Jan 2-Oct 23 >= 100,799 (thou); Oct 30 = 99,259 (thou) is the first. May 22 = 100,799 (thou) = 100.8M, matching the value cited in review-2026-11-05.md."
+}
