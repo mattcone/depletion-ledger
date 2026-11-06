@@ -2965,10 +2965,12 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // settle 88.12 (same-day — re-paired from the Nov 3 basis once the Nov 4 settlement landed,
       // Nov 5 morning pass); Nov 5 AAA → Nov 4 WTI settle 88.12 (no same-day settlement at the
       // Nov 5 morning pass); Nov 5 AAA → Nov 5 WTI settle 90.52 (same-day — re-paired down from
-      // the Nov 4 basis once the Nov 5 settlement landed, Nov 5 evening pass).
-      // This retail-minus-WTI chart does not use heating-oil futures: Nov 5 diesel gap = 172.2;
-      // gasoline gap = 81.7 dollars per barrel (Nov 4: 175.4 / 85.1; Nov 3: 168.0 / 78.2; Nov 2: 167.8 / 78.7;
-      // Nov 1: 168.3 / 78.8; Oct 31: 160.9 / 71.6; Oct 30: 161.3 / 72.5 — Oct 31 stays on the 104.12 settle, its nearest trading day).
+      // the Nov 4 basis once the Nov 5 settlement landed, Nov 5 evening pass); Nov 6 AAA → Nov 5
+      // WTI settle 90.52 (no same-day settlement at the Nov 6 morning pass — Nov 6 settles 14:30 ET).
+      // This retail-minus-WTI chart does not use heating-oil futures: Nov 6 diesel gap = 171.2;
+      // gasoline gap = 80.4 dollars per barrel (Nov 5: 172.2 / 81.7; Nov 4: 175.4 / 85.1;
+      // Nov 3: 168.0 / 78.2; Nov 2: 167.8 / 78.7; Nov 1: 168.3 / 78.8; Oct 31: 160.9 / 71.6 —
+      // Oct 31 stays on the 104.12 settle, its nearest trading day).
       const wtiNonFred = new Set(wtiNonFredDates);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
       // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 (the record is
