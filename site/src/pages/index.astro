@@ -217,13 +217,38 @@ const wsMbLastStr = wsMbLast.value.toLocaleString();
 // The last month's name is derived, not re-typed — the series extends one month at a
 // time as the EIA publishes (Oct 15: May → June 2026), so no copy hard-codes it.
 const wsMbLastMonthStr = new Date(wsMbLast.period + "-15T12:00:00").toLocaleDateString("en-US", { month: "long", year: "numeric" });
+// The series minimum and the last month's position relative to it, derived not re-typed:
+// the endpoint copy (heading, body, aria, chart label) must stay true as the series
+// extends even when the newest month is ABOVE the low (Nov 5: July = +23.6 mb vs revised June).
+const wsMbMinPt = wsMb.reduce((a, b) => (b.value < a.value ? b : a));
+const wsMbMinMonthStr = new Date(wsMbMinPt.period + "-15T12:00:00").toLocaleDateString("en-US", { month: "long", year: "numeric" });
+const wsMbLastIsMin = wsMbMinPt.period === wsMbLast.period;
+const wsMbLastGap = Math.round(wsMbLast.value - wsMbMinPt.value);
+const wsMbRank = wsMb.filter((p) => p.value < wsMbLast.value).length + 1;
+const wsOrdinal = (n: number) => {
+  const lastTwo = n % 100;
+  const suffix = lastTwo >= 11 && lastTwo <= 13 ? "th" : ({ 1: "st", 2: "nd", 3: "rd" } as Record<number, string>)[n % 10] ?? "th";
+  return `${n}${suffix}`;
+};
+const wsMbRankWord = wsMbRank === 1
+  ? "lowest"
+  : (["", "", "second-lowest", "third-lowest", "fourth-lowest"] as const)[wsMbRank] ?? `${wsOrdinal(wsMbRank)}-lowest`;
+const wsHeadingLowest = wsMbLastIsMin
+  ? `fell to a series low in ${wsMbLastMonthStr}`
+  : `were at their ${wsMbRankWord} level since January 2021 in ${wsMbLastMonthStr}`;
+const wsLowestSentence = wsMbLastIsMin
+  ? `The latest level is the lowest in the series.`
+  : `The latest level is ${wsMbLastGap} million barrels above the ${wsMbMinMonthStr} low.`;
+const wsAriaTrend = wsMbLastIsMin
+  ? `then dropping to ${wsMbLastStr} by ${wsMbLastMonthStr} — the lowest month in the series`
+  : `then dropping to ${wsMbMinPt.value.toLocaleString()} by ${wsMbMinMonthStr} and edging up to ${wsMbLastStr} by ${wsMbLastMonthStr} — ${wsMbMinMonthStr} is the lowest month in the series`;
 // aria-labels are built in the frontmatter: expressions don't expand inside quoted attributes.
 // Every figure in the aria text is derived from the data file, not re-typed.
 const wsDec22 = wsMb.find((p) => p.period === "2022-12")?.value ?? 0;
 const ws2325 = wsMb.filter((p) => p.period >= "2023-01" && p.period <= "2025-12");
 const ws2325Lo = Math.min(...ws2325.map((p) => p.value));
 const ws2325Hi = Math.max(...ws2325.map((p) => p.value));
-const wsPanelAAria = `OECD on-land oil stocks, commercial plus government-controlled, million barrels. The EIA's monthly levels from ${wsMbFirst.value.toLocaleString()} in January 2021, falling to ${wsDec22.toLocaleString()} by December 2022, then holding between ${ws2325Lo.toLocaleString()} and ${ws2325Hi.toLocaleString()} across 2023 to 2025, then dropping to ${wsMbLastStr} by ${wsMbLastMonthStr} — the lowest month in the series. The shaded band is the same calendar month's range over 2021 to 2025, extended across 2026; ${wsBelowBandStr} 2026 fall below it. A dashed line marks the start of the war, February 28, 2026.`;
+const wsPanelAAria = `OECD on-land oil stocks, commercial plus government-controlled, million barrels. The EIA's monthly levels from ${wsMbFirst.value.toLocaleString()} in January 2021, falling to ${wsDec22.toLocaleString()} by December 2022, then holding between ${ws2325Lo.toLocaleString()} and ${ws2325Hi.toLocaleString()} across 2023 to 2025, ${wsAriaTrend}. The shaded band is the same calendar month's range over 2021 to 2025, extended across 2026; ${wsBelowBandStr} 2026 fall below it. A dashed line marks the start of the war, February 28, 2026.`;
 // Forecast paths come from the forecast records — the stored targets are the source of truth,
 // so the copy, the chart, and the record can never drift apart.
 const wsEiaRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === "steo-2026-10-global-observed");
@@ -686,14 +711,16 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             <p class="font-mono text-[11px] text-faint tabular">Brent: selected observations and monthly averages. WTI: weekly FRED spot prices and recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: January Brent settled at $94.62 on Nov 4, down 8.7%, its first close below $100 since Sep 22 after thirty consecutive closes above it. December WTI settled at $88.12, down 8.3% (EnergyNow). The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly spot prices and recent futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: January Brent settled at $98.29 on Nov 5, up 3.9%; December WTI settled at $90.52, up 2.7% (Reuters). Brent's first close below $100 since Sep 22 was the previous day. The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly spot prices and recent futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            On Nov 4, January Brent settled at $94.62 (down 8.7%) and December
-            WTI at $88.12 (down 8.3%; EnergyNow, cross-checked against Yahoo).
-            Brent fell below $100 for the first time since Sep 22, ending a
-            30-session run above it. The selloff followed the midterm result;
-            markets read it as lowering the risk of renewed strikes.
+            On Nov 5, January Brent settled at $98.29 (up 3.9%) and December
+            WTI at $90.52 (up 2.7%; Reuters, cross-checked against Yahoo).
+            Shipping risks remained high: Reuters reported UKMTO had received
+            incidents involving at least five vessels since Sunday; UKMTO said
+            35 vessels were hit in October, a monthly record.
+            The move followed the post-midterm selloff that took Brent below
+            $100 for the first time since Sep 22.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Brent combines selected observations and monthly averages; gray WTI combines
@@ -812,7 +839,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
 
         <!-- Panel A: OECD commercial stocks (levels) -->
         <div class="mt-12 mb-3">
-          <h2 class="text-xl font-bold tracking-tight">Oil stocks in OECD countries fell to a five-year low in { wsMbLastMonthStr }</h2>
+          <h2 class="text-xl font-bold tracking-tight">Oil stocks in OECD countries { wsHeadingLowest }</h2>
           <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
             The Organisation for Economic Co-operation and Development (OECD) includes the US,
             Canada, Mexico, Japan, Korea, Australia, and much of Western Europe. This chart shows
@@ -821,8 +848,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             China isn't an OECD member, so its stockpiles aren't included.
           </p>
           <p class="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
-            In { wsMbLastMonthStr }, the latest month shown, stocks were at their lowest in the EIA data
-            since January 2021. The shaded band shows the range for each calendar month from
+            { wsLowestSentence } The shaded band shows the range for each calendar month from
             2021 through 2025. Stocks fell below that range in { wsBelowBandStr } 2026.
           </p>
         </div>
@@ -2937,10 +2963,11 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // landed, Nov 2 evening pass); Nov 3 AAA → Nov 3 WTI settle 96.09 (re-paired from the
       // Nov 2 basis once the Nov 3 settlement landed, Nov 3 evening pass); Nov 4 AAA → Nov 4 WTI
       // settle 88.12 (same-day — re-paired from the Nov 3 basis once the Nov 4 settlement landed,
-      // Nov 5 morning pass); Nov 5 AAA → Nov 4 WTI settle 88.12 (no same-day settlement — the Nov 5
-      // session had not settled at the Nov 5 morning pass).
-      // This retail-minus-WTI chart does not use heating-oil futures: Nov 5 diesel gap = 174.6;
-      // gasoline gap = 84.1 dollars per barrel (Nov 4: 175.4 / 85.1; Nov 3: 168.0 / 78.2; Nov 2: 167.8 / 78.7;
+      // Nov 5 morning pass); Nov 5 AAA → Nov 4 WTI settle 88.12 (no same-day settlement at the
+      // Nov 5 morning pass); Nov 5 AAA → Nov 5 WTI settle 90.52 (same-day — re-paired down from
+      // the Nov 4 basis once the Nov 5 settlement landed, Nov 5 evening pass).
+      // This retail-minus-WTI chart does not use heating-oil futures: Nov 5 diesel gap = 172.2;
+      // gasoline gap = 81.7 dollars per barrel (Nov 4: 175.4 / 85.1; Nov 3: 168.0 / 78.2; Nov 2: 167.8 / 78.7;
       // Nov 1: 168.3 / 78.8; Oct 31: 160.9 / 71.6; Oct 30: 161.3 / 72.5 — Oct 31 stays on the 104.12 settle, its nearest trading day).
       const wtiNonFred = new Set(wtiNonFredDates);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
@@ -3362,6 +3389,15 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       {
         const months: string[] = ws.series.oecd_onland_mb.points.map((p) => p.period);
         const mbVals: number[] = ws.series.oecd_onland_mb.points.map((p) => p.value);
+        // Endpoint label stays true when the newest month is above the series low
+        // (Nov 5: July 2026 = 2nd-lowest since Jan 2021, not the low).
+        const mbLastRank = mbVals.filter((v) => v < mbVals[mbVals.length - 1]).length + 1;
+        const mbRankSuffix = mbLastRank % 100 >= 11 && mbLastRank % 100 <= 13
+          ? "th"
+          : ({ 1: "st", 2: "nd", 3: "rd" } as Record<number, string>)[mbLastRank % 10] ?? "th";
+        const mbLastRankTxt = mbLastRank === 1
+          ? "lowest since Jan 2021"
+          : `${mbLastRank}${mbRankSuffix}-lowest since Jan 2021`;
         const band = ws.annotations.seasonal_band_2021_2025.by_month as Record<string, [number, number]>;
         const bandAt = (i: number): [number, number] | null => {
           const y = Number(months[i].slice(0, 4));
@@ -3472,7 +3508,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               // Inside the band on desktop; below the band's bottom edge on narrow screens,
               // where the 65-month line is dense and the in-band label reads as clutter.
               { dataset: 1, index: 1, text: "2021–2025 range", align: "left", dx: 4, dy: (chart) => (chart.width < 500 ? 12 : -31), color: "#8a6a1f" },
-              { dataset: 2, index: mbVals.length - 1, text: `${mbVals[mbVals.length - 1].toLocaleString()} — lowest since Jan 2021`, align: "right", dx: -8, dy: 18 },
+              { dataset: 2, index: mbVals.length - 1, text: `${mbVals[mbVals.length - 1].toLocaleString()} — ${mbLastRankTxt}`, align: "right", dx: -8, dy: 18 },
             ]),
           ],
         });
