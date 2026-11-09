@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-11-08";
+export const DATA_AS_OF = "2026-11-09";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -286,6 +286,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-11-06", value: 4.0688, note: "AAA release, Nov 6" },
   { date: "2026-11-07", value: 4.0371, note: "AAA release, Nov 7" },
   { date: "2026-11-08", value: 4.0203, note: "AAA release, Nov 8" },
+  { date: "2026-11-09", value: 4.0093, note: "AAA release, Nov 9" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -362,6 +363,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-11-06", value: 6.2305, note: "AAA — tenth straight decline; $0.24 below the Sep 22 record" },
   { date: "2026-11-07", value: 6.2075, tip: "AAA", note: "AAA — eleventh straight decline; $0.32 below the Sep 22 record" },
   { date: "2026-11-08", value: 6.1929, note: "AAA — twelfth straight decline" },
+  { date: "2026-11-09", value: 6.1723, note: "AAA — thirteenth straight daily decline since Oct 28; $0.36 below the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
@@ -743,8 +745,8 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
     when: "Any day",
     items: [
       { item: "The coalition said it intercepted two ballistic and two cruise missiles targeting Riyadh and other regions on Nov 8, plus another ballistic missile aimed at the south (AP). Falling shrapnel caused minor damage to an Aramco administrative building in Riyadh; no injuries were reported. Houthi authorities claim 33 killed and 39 wounded in strikes near Sanaa; the toll and responsibility remain unverified.", why: "Watch for confirmation of further attacks and damage." },
-      { item: "CENTCOM says it disabled the St. Kitts-flagged cargo ship Huda on Nov 7 after it ignored warnings and tried to leave following a visit to an Iranian port (AP). Task Force Iron Gate will coordinate efforts against weapons, sanctioned materials and revenue moving across Iran's land borders and the Caspian Sea. CENTCOM attributes more than $25 billion in prevented crude sales to the separate naval blockade. Iranian state media reported explosions in southern Iran late Nov 7; the cause was unclear and CENTCOM had not commented by AP's report. The IRGC's claim that it lifted its missile-range limit remains unverified.", why: "Watch for clarification of the explosions and the first actions of Task Force Iron Gate." },
-      { item: "UKMTO logged eight attack reports since Nov 1, plus advisory #198 and suspicious-activity report #199. Warnings #199 and #200 were issued Nov 8 for Nov 7 incidents: #200 says an outbound tanker was struck by an unknown projectile (crew safe); #199 reports a tanker fire northwest of Khasab and crew evacuation (crew status unknown). #197 was another outbound incident on Nov 6. Outside UKMTO's log, one crew member died when the unladen, inbound products tanker Velos Sapphire was hit by a suspected missile (Nov 5, Reuters); India's foreign ministry also reported one seafarer killed in the Nov 3 dhow attack. The IRGC's Nov 5–8 mine claims remain unconfirmed.", why: "Watch for UKMTO confirmation of the IRGC mine claims, the outcome of the #199 fire and the #200 struck tanker, and updates on the Velos Sapphire damage. Kpler's Oct 30 briefing put October crude flows at 11.1M b/d, about 2% below September." },
+      { item: "Trump said renewed strikes were unlikely if talks progress (CNN, Nov 8); he cited 38 Iranian bridges as possible targets, an unverified count. An unconfirmed Israel Hayom report, relayed by Bloomberg, said Iran dropped demands for control of Hormuz and transit fees. Rubio said the sides were far from a breakthrough. Iraq's foreign minister said a lane near Oman could allow Iraqi oil exports; the arrangement is not yet implemented. Explosions on Qeshm and in Bandar Abbas remain unexplained.", why: "Watch for verification of the Iran concessions report, any progress on the Iraq transit lane, and an explanation for the explosions." },
+      { item: "UKMTO's Nov 6 weekly overview counts 11 attacks: eight in the Strait of Hormuz and three in the Arabian Gulf. It says three vessels sank, five needed help, and three continued; it does not identify the vessels counted as sunk. The National reports 25 seafarers killed in tanker attacks in the strait since the war began (Nov 9, citing Tristar). The IRGC's latest fire and mine claims remain unverified.", why: "Watch for vessel identities and damage details, confirmation of the IRGC claims, and the next Kpler flow print." },
       { item: "Whether Russian diesel reaches buyers. Russia extended its producer diesel export ban through Jan 31, 2027; Novak said exceptions would remain for world markets (TASS, Oct 31). Windward tracked three tankers carrying Russian diesel as US-bound; only the Agioi Fanendes, loaded at Primorsk on Oct 22, still appears headed for a US port, and it was still en route as of Nov 8 with no confirmed delivery. The other two changed course (Nov 3).", why: "Watch for the Agioi Fanendes' arrival and updates on the diverted cargoes. New Jersey's governor warned state ports to reject the fuel and a legal dispute is under way (CBS, Nov 3); US license 135 permits covered transactions through Apr 7, 2027." },
     ],
   },
@@ -812,7 +814,7 @@ export const russiaCurrentSpread = { date: "2026-10-04", low: 46, high: 80 };
 // Gazprom Neftekhim Salavat (Oct 8), Omsk ~440 kb/d — second hit (Oct 8), Lukoil
 // Ukhta (Oct 9), Ryazan — repeat strike (Oct 15), Surgut-district condensate plant
 // (Oct 16). See the Oct 24 log.
-const russiaStrikeWindow = { start: "Oct 24", end: "Nov 7" };
+const russiaStrikeWindow = { start: "Oct 24", end: "Nov 9" };
 const russiaStruckRefineries = [
   { plant: "Tolyattikauchuk, Tolyatti — petrochemical plant, fire reported", date: "Oct 24" },
   { plant: "Omsky Kauchuk, Omsk — petrochemical plant (synthetic rubber, MTBE), fire reported", date: "Oct 24" },
@@ -823,6 +825,7 @@ const russiaStruckRefineries = [
   { plant: "Ryazan — Rosneft refinery (~344 kb/d, ~500 km from Ukraine); repeat strike reported (previously struck Oct 15), fire reported", date: "Nov 5" },
   { plant: "Afipsky, Krasnodar region — fire at an enterprise in Afipsky village; the refinery per Ukrainian outlets, an unnamed industrial site per Russian authorities", date: "Nov 6" },
   { plant: "Saratov — Saratov Oil Refinery; strike and fire reported by a Ukrainian monitoring channel, Russian authorities did not name the site (Kyiv Independent, Nov 7); repeat — previously struck Sep 11", date: "Nov 7" },
+  { plant: "Kirishi, Leningrad region — KINEF refinery, Russia's second-largest; governor confirmed the drone attack and fire, which was contained; local reports indicated possible hits to three units. A woman was killed by drone debris elsewhere in the region (Kyiv Independent, ABC, Nov 9)", date: "Nov 9" },
 ];
 // Oct 14 (NOT counted above — the array's criterion is a reported strike/fire): Novak
 // said Ukrainian drones attacked refineries in the Saratov and Ryazan REGIONS (he named
@@ -843,7 +846,7 @@ const russiaStruckRefineries = [
 export const russiaSnapshot = [
   { name: "Capacity out of service", value: "51%", delta: "UA Defense Ministry, Oct 4 (Khmara) — up from >45% (Sep 21) and ~30% (Aug 29, Moscow Times)", flag: "The 51% claim is unverified (AP). Other estimates use different measures: Forbes put capacity offline at 54% (Sep 9); the IEA said more than 20% was offline; Kpler said plants operated at 60% of capacity in early October. Reuters sources put processing at about 5M b/d in late October, 25% above early October. HUR says 15 of 38 major refineries were out of service at end-September and 12 more had cut output; combined processing at these facilities was down 55.4% from January (HUR, Nov 5). Six named remote refineries still operating processed 906 kb/d in September, 24% of the national total. These reports do not establish current national capacity offline." },
   { name: `Refineries and industrial sites struck, ${russiaStrikeWindow.start}–${russiaStrikeWindow.end}`, value: `${russiaStruckRefineries.length} ${russiaStruckRefineries.length === 1 ? "site" : "sites"}`, delta: russiaStruckRefineries.map((h) => `${h.plant} (${h.date})`).join(" · "), flag: "In Saratov, a Ukrainian monitoring channel reported the Saratov Oil Refinery set ablaze after the Nov 7 strike; the governor confirmed residential damage but did not name the refinery, and no halt is reported (Kyiv Independent, Nov 7). In Afipsky, regional authorities reported a fire at an enterprise in the village after drone debris; Ukrainian outlets identified the refinery, but the authorities did not name the site. The Yaroslavl governor confirmed a fire at Slavneft-YANOS on Nov 3; two employees were injured (Reuters). No production halt is confirmed; the tally also includes two petrochemical plants. Ufa damage, Kstovo's site, and the Ryazan plant identification remain unconfirmed (Reuters video analysis suggests the Nov 5 strike targeted the refinery; local authorities confirmed fires only at unnamed industrial sites)." },
-  { name: "Major refinery outages", value: "Ryazan partly operating", delta: "Ryazan, Moscow's main supplier, ~344 kb/d: struck again Nov 5, fire reported, no halt confirmed; CDU-6 shut after the Oct 15 strike, three other primary units operating (Reuters, Oct 16) · Kirishi, Russia's second-largest, ~404 kb/d, reported halted in early September (UA.NEWS, Sep 2)", flag: "Capacity figures describe the whole plants, not measured lost output. Kirishi’s current operating status has not been verified. No plant has reported a halt or curtailment in November so far (IntelliNews Missile War Monitor, Nov 5: 27 refineries hit, 212 dated strikes; no plant reported halted or cut in November)." },
+  { name: "Major refinery outages", value: "Kirishi status unclear", delta: "Kirishi, Russia's second-largest, ~404 kb/d: reported halted since Sep 15; Nov 9 strike and fire, fire contained, post-strike operations unverified (IntelliNews, Nov 9) · Ryazan, ~344 kb/d: struck Nov 5, no new halt confirmed; CDU-6 was shut after the Oct 15 strike (Reuters, Oct 16)", flag: "Capacity figures describe whole plants, not measured lost output. The Leningrad governor confirmed the Nov 9 Kirishi fire was contained but did not report its processing status. IntelliNews lists Kirishi as halted since Sep 15; no post-strike update is available. Ryazan's CDU-6 detail dates from October." },
   { name: "Gasoline shortages at gas stations", value: "45–53%", delta: "Share of stations without AI-92 (45%) or AI-95 (53%) gasoline, mid-September (gdebenzin, via UNN, Sep 22); rationing has returned in about two-thirds of regions (Independent, Sep 22)", flag: "Gasoline prices +21% YTD (Moscow Times, Sep 14) · IEA: diesel output down about 30%, with waits of up to 40 hours (Oct 5) · Russia plans to import up to 620,000 tonnes of gasoline monthly over Oct–Dec (UNN, Oct 23)" },
   { name: "Jet fuel now imported", value: "military + civilian", delta: "Russia is importing Jet A-1 from South Korea and Egypt (UA military intelligence, Aug 29); no jet fuel or gasoline has left Russia by sea for two straight weeks (S&P Global CAS, Oct 1)", flag: "ISW (Sep 26): Geran drones use jet fuel; a kerosene shortage would limit their use" },
 ];
@@ -1462,7 +1465,7 @@ export const ukmtoReportsBeforeWindow = Math.min(...ukmtoIncidents.map((i) => i.
 
 // Capture bounds are explicit: a quiet day must not shorten the covered period.
 export const ukmtoCoverageStart = "2026-07-01";
-export const ukmtoCoverageEnd = "2026-11-08";
+export const ukmtoCoverageEnd = "2026-11-09";
 
 // Include every Monday–Sunday week, even when it has no attack reports.
 // Partial weeks cover fewer than seven days and don't enter full-week comparisons.
