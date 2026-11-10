@@ -1,0 +1,13 @@
+[
+  {"series":"CPI-U all items (seasonally adjusted) MoM","period":"2026-10","value":0.4,"unit":"pct","quote":"The Consumer Price Index for All Urban Consumers (CPI-U) increased 0.4 percent on a seasonally adjusted basis in October after rising 0.6 percent in September, the U.S. Bureau of Labor Statistics reported today."},
+  {"series":"CPI-U all items 12-month change (unadjusted)","period":"2026-10","value":null,"unit":"pct","quote":"BLS did not collect survey data for October 2025 because of a lapse in appropriations. For most CPI series, BLS could not publish October 2025 indexes. As a result, BLS cannot publish 12-month percent changes for October 2026 for indexes where October 2025 data are unavailable."},
+  {"series":"CPI-U ex food & energy (seasonally adjusted) MoM","period":"2026-10","value":0.3,"unit":"pct","quote":"The index for all items less food and energy rose 0.3 percent in October, as it did in September and August."},
+  {"series":"CPI-U ex food & energy 12-month change (unadjusted)","period":"2026-10","value":null,"unit":"pct","quote":"BLS did not collect survey data for October 2025 because of a lapse in appropriations. For most CPI series, BLS could not publish October 2025 indexes. As a result, BLS cannot publish 12-month percent changes for October 2026 for indexes where October 2025 data are unavailable."},
+  {"series":"Energy index (seasonally adjusted) MoM","period":"2026-10","value":0.7,"unit":"pct","quote":"The index for energy increased 0.7 percent in October after rising 5.2 percent in September."},
+  {"series":"Gasoline (all types) (seasonally adjusted) MoM","period":"2026-10","value":1.0,"unit":"pct","quote":"The gasoline index increased 1.0 percent over the month, after advancing 9.1 percent the previous month."},
+  {"series":"Gasoline (all types) 12-month change (unadjusted)","period":"2026-10","value":37.4,"unit":"pct","quote":"Gasoline (all types) | 5.4 | 7.0 | -9.7 | -2.9 | 3.9 | 9.1 | 1.0 | 37.4"},
+  {"series":"Fuel oil (seasonally adjusted) MoM","period":"2026-10","value":2.0,"unit":"pct","quote":"Fuel oil | 5.8 | 3.8 | -9.2 | -1.7 | 10.1 | 15.3 | 2.0 | -"},
+  {"series":"Utility (piped) gas service (seasonally adjusted) MoM","period":"2026-10","value":-0.8,"unit":"pct","quote":"Utility (piped) gas service | -0.1 | -0.5 | 0.5 | 0.7 | -1.1 | -0.3 | -0.8 | -"},
+  {"series":"Electricity (seasonally adjusted) MoM","period":"2026-10","value":0.9,"unit":"pct","quote":"The index for electricity rose 0.9 percent over the month."},
+  {"series":"Food index (seasonally adjusted) MoM","period":"2026-10","value":0.5,"unit":"pct","quote":"The index for food rose 0.5 percent in October after being unchanged in September."}
+]

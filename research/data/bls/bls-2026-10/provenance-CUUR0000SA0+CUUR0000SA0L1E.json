@@ -1,0 +1,22 @@
+{
+  "report": "BLS CPI/PPI",
+  "period": "2026-10",
+  "newSeries": [
+    "CUUR0000SA0",
+    "CUUR0000SA0L1E"
+  ],
+  "allSeries": [
+    "CUUR0000SA0",
+    "CUUR0000SA0L1E",
+    "WPUFD4"
+  ],
+  "url": "https://api.bls.gov/publicAPI/v2/timeseries/data/",
+  "retrievedAt": "2026-11-10T13:34:06.755Z",
+  "files": [
+    {
+      "file": "snapshot-CUUR0000SA0+CUUR0000SA0L1E.json",
+      "sha256": "692f0cb181e10e7517796722c09aa23c0e283fa7d2fa0295bd0810810bf4fc41",
+      "bytes": 3910
+    }
+  ]
+}

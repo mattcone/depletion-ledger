@@ -1,0 +1,126 @@
+Consumer Price Index Summary
+
+Transmission of material in this release is embargoed until
+8:30 a.m. (ET) Tuesday, November 10, 2026      USDL-26-1685
+
+Technical information: (202) 691-7000  *  cpi_info@bls.gov  *  www.bls.gov/cpi
+Media contact:         (202) 691-5902  *  PressOffice@bls.gov
+
+CONSUMER PRICE INDEX - OCTOBER 2026
+The Consumer Price Index for All Urban Consumers (CPI-U) increased 0.4 percent on a seasonally adjusted basis in October after rising 0.6 percent in September, the U.S. Bureau of Labor Statistics reported today.
+
+The index for shelter rose 0.3 percent in October, accounting for over thirty percent of the monthly all items increase. The food index increased 0.5 percent in October, as the food at home index rose 0.4 percent and the food away from home index increased 0.5 percent. The index for energy increased 0.7 percent over the month following a 5.2-percent increase in September.
+
+The index for all items less food and energy rose 0.3 percent in October, as it did in September and August. Indexes that increased over the month include recreation, medical care, motor vehicle insurance, household furnishings and operations, and education. Conversely, the index for used cars and trucks and the index for communication were among the small number of major indexes that decreased in October.
+
+October 2026 12-Month Percent Changes
+
+BLS did not collect survey data for October 2025 because of a lapse in appropriations. For most CPI series, BLS could not publish October 2025 indexes. As a result, BLS cannot publish 12-month percent changes for October 2026 for indexes where October 2025 data are unavailable. Information about handling missing data is available online at www.bls.gov/cpi/factsheets/approximating-missing-data.htm
+
+Table A. Percent changes in CPI for All Urban Consumers (CPI-U): U.S. city average
+Seasonally adjusted changes from preceding month; Unadjusted 12-mos. ended Oct. 2026
+Series | Apr. 2026 | May 2026 | Jun. 2026 | Jul. 2026 | Aug. 2026 | Sep. 2026 | Oct. 2026 | 12-mos.
+All items | 0.6 | 0.5 | -0.4 | 0.1 | 0.4 | 0.6 | 0.4 | -
+Food | 0.5 | 0.2 | 0.2 | 0.1 | 0.1 | 0.0 | 0.5 | -
+Food at home | 0.7 | 0.1 | 0.2 | -0.1 | 0.0 | -0.1 | 0.4 | -
+Food away from home(1) | 0.2 | 0.3 | 0.2 | 0.3 | 0.3 | 0.2 | 0.5 | -
+Energy | 3.8 | 3.9 | -5.7 | -1.5 | 2.1 | 5.2 | 0.7 | -
+Energy commodities | 5.6 | 6.7 | -9.5 | -2.9 | 4.2 | 9.3 | 0.8 | -
+Gasoline (all types) | 5.4 | 7.0 | -9.7 | -2.9 | 3.9 | 9.1 | 1.0 | 37.4
+Fuel oil | 5.8 | 3.8 | -9.2 | -1.7 | 10.1 | 15.3 | 2.0 | -
+Energy services | 1.6 | 0.4 | -0.7 | 0.3 | -0.4 | 0.1 | 0.6 | -
+Electricity | 2.1 | 0.6 | -1.0 | 0.1 | -0.2 | 0.2 | 0.9 | -
+Utility (piped) gas service | -0.1 | -0.5 | 0.5 | 0.7 | -1.1 | -0.3 | -0.8 | -
+All items less food and energy | 0.4 | 0.2 | 0.0 | 0.2 | 0.3 | 0.3 | 0.3 | -
+Commodities less food and energy commodities | 0.0 | -0.1 | -0.1 | 0.2 | 0.1 | 0.3 | 0.2 | -
+New vehicles | -0.2 | -0.3 | 0.0 | 0.1 | 0.3 | 0.2 | 0.2 | 0.7
+Used cars and trucks | 0.0 | 0.1 | -0.2 | 0.4 | 0.4 | 0.7 | -1.2 | -3.3
+Apparel | 0.6 | 0.3 | -0.6 | 0.1 | 0.0 | 0.3 | 0.1 | -
+Medical care commodities(1) | -0.4 | -0.7 | -0.2 | -0.6 | -0.2 | -0.7 | 0.5 | -
+Services less energy services | 0.5 | 0.3 | 0.0 | 0.2 | 0.3 | 0.4 | 0.3 | -
+Shelter | 0.6 | 0.3 | 0.1 | 0.1 | 0.3 | 0.4 | 0.3 | -
+Transportation services | 0.3 | -0.6 | -0.3 | 0.3 | 0.5 | 0.6 | 0.8 | -
+Medical care services | 0.0 | 0.5 | -0.1 | 0.6 | -0.2 | 0.3 | 0.3 | -
+Footnotes: (1) Not seasonally adjusted.
+NOTE: The Oct 2025 data values are not available due to the 2025 lapse in appropriations.
+
+Food
+
+The index for food rose 0.5 percent in October after being unchanged in September. The food at home index increased 0.4 percent over the month. Four of the six major grocery store food group indexes increased in October, while one index decreased. The index for other food at home increased 0.7 percent in October, as the index for snacks rose 1.0 percent. The meats, poultry, fish, and eggs index increased 0.5 percent over the month, as the beef index rose 0.9 percent. The index for fruits and vegetables and the index for dairy and related products each increased 0.6 percent in October.
+
+In contrast, the nonalcoholic beverages index decreased 0.3 percent in October, after rising 0.9 percent in September. The index for cereals and bakery products was unchanged over the month. The food away from home index rose 0.5 percent. The index for full service meals rose 0.7 percent, and the index for limited service meals increased 0.4 percent over the month.
+
+Energy
+
+The index for energy increased 0.7 percent in October after rising 5.2 percent in September. The gasoline index increased 1.0 percent over the month, after advancing 9.1 percent the previous month. (Before seasonal adjustment, gasoline prices decreased 0.7 percent in October.) The index for electricity rose 0.9 percent over the month. In contrast, the natural gas index decreased 0.8 percent in October.
+
+All items less food and energy
+
+The index for all items less food and energy rose 0.3 percent in October, as it did in September and August. The shelter index increased 0.3 percent over the month after rising 0.4 percent in September. The index for owners' equivalent rent rose 0.3 percent in October, and the index for rent increased 0.2 percent. The lodging away from home index rose 0.6 percent in October after rising 2.0 percent the previous month.
+
+The index for recreation increased 0.8 percent over the month after rising 0.5 percent in September. The motor vehicle insurance index rose 0.7 percent in October, and the household furnishings and operations index increased 0.2 percent. The index for education increased 0.3 percent in October, and the index for new vehicles rose 0.2 percent. The personal care index, the airline fares index, and the apparel index also increased over the month.
+
+The medical care index increased 0.3 percent in October after rising 0.1 percent in September. The index for hospital services rose 0.8 percent over the month, and the index for physicians' services increased 0.4 percent. The prescription drugs index rose 0.3 percent in October.
+
+The index for used cars and trucks declined 1.2 percent in October after rising 0.7 percent in September. The communication index decreased 0.1 percent over the month.
+
+Not seasonally adjusted CPI measures
+
+The Consumer Price Index for All Urban Consumers (CPI-U) increased to an index level of 337.511 (1982-84=100). For the month, the index rose 0.2 percent prior to seasonal adjustment.
+The Consumer Price Index for Urban Wage Earners and Clerical Workers (CPI-W) increased to an index level of 331.147 (1982-84=100). For the month, the index increased 0.1 percent prior to seasonal adjustment.
+
+For the month, the Chained Consumer Price Index for All Urban Consumers (C-CPI-U) increased 0.2 percent on a not seasonally adjusted basis. Please note that the indexes for the past 10 to 12 months are subject to revision.
+
+The Consumer Price Index news release for November 2026 is scheduled to be published on Thursday, December 10, 2026, at 8:30 a.m. (ET).
+
+Upcoming Consumer Price Index Publication Changes
+
+With the publication of January 2027 CPI data on February 11, 2027, several index titles will change: "wireless telephone services" will change to "wireless telephone service"; "physicians' services" will change to "physician services"; and "music instruments and accessories" will change to "music instruments and accessories including instrument rentals." More information is available online at www.bls.gov/cpi/additional-resources/series-title-changes.htm
+
+Technical Note
+
+Brief Explanation of the CPI
+The Consumer Price Index (CPI) measures the change in prices paid by consumers for goods and services. The CPI reflects spending patterns for each of two population groups: all urban consumers and urban wage earners and clerical workers. The all urban consumer group represents over 90 percent of the total U.S. population. It is based on the expenditures of almost all residents of urban or metropolitan areas, including professionals, the self-employed, the poor, the unemployed, and retired people, as well as urban wage earners and clerical workers. Not included in the CPI are the spending patterns of people living in rural nonmetropolitan areas, farming families, people in the Armed Forces, and those in institutions, such as prisons and mental hospitals. Consumer inflation for all urban consumers is measured by two indexes, namely, the Consumer Price Index for All Urban Consumers (CPI-U) and the Chained Consumer Price Index for All Urban Consumers (C-CPI-U).
+
+The Consumer Price Index for Urban Wage Earners and Clerical Workers (CPI-W) is based on the expenditures of households included in the CPI-U definition that meet two requirements: more than one-half of the household's income must come from clerical or wage occupations, and at least one of the household's earners must have been employed for at least 37 weeks during the previous 12 months. The CPI-W population represents approximately 30 percent of the total U.S. population and is a subset of the CPI-U population.
+
+The CPIs are based on prices of food, clothing, shelter, fuels, transportation, doctors' and dentists' services, drugs, and other goods and services that people buy for day-to-day living. Prices are collected each month in 75 urban areas across the country from about 6,000 housing units and approximately 22,000 retail establishments (department stores, supermarkets, hospitals, and other types of stores and service establishments). All taxes directly associated with the purchase and use of items are included in the index. Prices of fuels and a few other items are obtained every month in all 75 locations. Prices of most other commodities and services are collected every month in the three largest geographic areas and every other month in other areas. Prices of most goods and services are obtained by personal visit, telephone call, web, or app collection by the Bureau's trained representatives.
+
+In calculating the index, price changes for the various items in each location are aggregated using weights, which represent their importance in the spending of the appropriate population group. Local data are then combined to obtain a U.S. city average. For the CPI-U and CPI-W, separate indexes are also published by size of city, by region of the country, for cross-classifications of regions and population-size classes, and for 23 selected local areas. Area indexes do not measure differences in the level of prices among cities; they only measure the average change in prices for each area since the base period. For the C-CPI-U, data are issued only at the national level. The CPI-U and CPI-W are considered final when released, but the C-CPI-U is issued in preliminary form and subject to three subsequent quarterly revisions.
+
+The index measures price change from a designed reference date. For most of the CPI-U and the CPI-W, the reference base is 1982-84 equals 100. The reference base for the C-CPI-U is December 1999 equals 100. An increase of 7 percent from the reference base, for example, is shown as 107.000. Alternatively, that relationship can also be expressed as the price of a base period market basket of goods and services rising from $100 to $107.
+
+Sampling Error in the CPI
+The CPI is a statistical estimate that is subject to sampling error because it is based upon a sample of retail prices and not the complete universe of all prices. BLS calculates and publishes estimates of the 1-month, 2-month, 6-month, and 12-month percent change standard errors annually for the CPI-U. These standard error estimates can be used to construct confidence intervals for hypothesis testing. For example, the estimated standard error of the 1-month percent change is 0.04 percent for the U.S. all items CPI. This means that if we repeatedly sample from the universe of all retail prices using the same methodology, and estimate a percentage change for each sample, then 95 percent of these estimates will be within 0.08 percent of the 1-month percentage change based on all retail prices. For example, for a 1-month change of 0.2 percent in the all items CPI-U, we are 95 percent confident that the actual percent change based on all retail prices would fall between 0.12 and 0.28 percent. For the latest data, including information on how to use the estimates of standard error, see www.bls.gov/cpi/tables/variance-estimates/home.htm.
+
+Calculating Index Changes
+Movements of the indexes from 1 month to another are usually expressed as percent changes rather than changes in index points, because index point changes are affected by the level of the index in relation to its base period, while percent changes are not. The following table shows an example of using index values to calculate percent changes:
+Item A | Item B | Item C
+Year I | 112.500 | 225.000 | 110.000
+Year II | 121.500 | 243.000 | 128.000
+Change in index points | 9.000 | 18.000 | 18.000
+Percent change | 9.0/112.500 x 100 = 8.0 | 18.0/225.000 x 100 = 8.0 | 18.0/110.000 x 100 = 16.4
+
+Use of Seasonally Adjusted and Unadjusted Data
+The Consumer Price Index (CPI) program produces both unadjusted and seasonally adjusted data. Seasonally adjusted data are computed using seasonal factors derived by the X-13ARIMA-SEATS seasonal adjustment method. These factors are updated each February, and the new factors are used to revise the previous 5 years of seasonally adjusted data. The factors are available at www.bls.gov/web/cpi/cpi-seasonal-factors.xlsx. For more information on data revision scheduling, please see the Seasonal Adjustment questions and answers page at www.bls.gov/cpi/seasonal-adjustment/questions-and-answers.htm and the Timeline of Seasonal Adjustment Methodological Changes at www.bls.gov/cpi/seasonal-adjustment/timeline-seasonal-adjustment-methodology-changes.htm.
+
+How to Use Seasonally Adjusted and Unadjusted Data
+For analyzing short-term price trends in the economy, seasonally adjusted changes are usually preferred since they eliminate the effect of changes that normally occur at the same time and in about the same magnitude every year-such as price movements resulting from weather events, production cycles, model changeovers, holidays, and sales. This allows data users to focus on changes that are not typical for the time of year. The unadjusted data are of primary interest to consumers concerned about the prices they actually pay. Unadjusted data are also used extensively for escalation purposes. Many collective bargaining contract agreements and pension plans, for example, tie compensation changes to the Consumer Price Index before adjustment for seasonal variation. BLS advises against the use of seasonally adjusted data in escalation agreements because seasonally adjusted series are revised annually for five years.
+
+Intervention Analysis
+The Bureau of Labor Statistics uses intervention analysis seasonal adjustment (IASA) for some CPI series. Sometimes extreme values or sharp movements can distort the underlying seasonal pattern of price change. Intervention analysis seasonal adjustment is a process by which the distortions caused by such unusual events are estimated and removed from the data prior to calculation of seasonal factors. The resulting seasonal factors, which more accurately represent the seasonal pattern, are then applied to the unadjusted data.
+
+For example, this procedure was used for the motor fuel series to offset the effects of the 2009 return to normal pricing after the worldwide economic downturn in 2008. Retaining this outlier data during seasonal factor calculation would distort the computation of the seasonal portion of the time series data for motor fuel, so it was estimated and removed from the data prior to seasonal adjustment. Following that, seasonal factors were calculated based on this "prior adjusted" data. These seasonal factors represent a clearer picture of the seasonal pattern in the data. The last step is for motor fuel seasonal factors to be applied to the unadjusted data. For the seasonal factors introduced for January 2026, BLS adjusted 57 series using intervention analysis seasonal adjustment, including selected food and beverage items, motor fuels and vehicles.
+
+Revision of Seasonally Adjusted Indexes
+Seasonally adjusted data, including the U.S. city average all items index levels, are subject to revision for up to 5 years after their original release. Every year, economists in the CPI calculate new seasonal factors for seasonally adjusted series and apply them to the last 5 years of data. Seasonally adjusted indexes beyond the last 5 years of data are considered to be final and not subject to revision. For January 2026, revised seasonal factors and seasonally adjusted indexes for 2021 to 2025 were calculated and published. For series which are directly adjusted using the Census X-13ARIMA-SEATS seasonal adjustment software, the seasonal factors for 2025 will be applied to data for 2026 to produce the seasonally adjusted 2026 indexes. Series which are indirectly seasonally adjusted by summing seasonally adjusted component series have seasonal factors which are derived and are therefore not available in advance.
+
+Determining Seasonal Status
+Each year the seasonal status of every series is reevaluated based upon certain statistical criteria. Using these criteria, BLS economists determine whether a series should change its status from "not seasonally adjusted" to "seasonally adjusted", or vice versa. If any of the 81 components of the U.S. city average all items index change their seasonal adjustment status from seasonally adjusted to not seasonally adjusted, not seasonally adjusted data will be used in the aggregation of the dependent series for the last 5 years, but the seasonally adjusted indexes before that period will not be changed. For 2026, 36 of the 81 components of the U.S. city average all items index are not seasonally adjusted.
+
+Contact Information
+For additional information about the CPI visit www.bls.gov/cpi or contact the CPI Information and Analysis Section at 202-691-7000 or cpi_info@bls.gov.
+For additional information on seasonal adjustment in the CPI visit www.bls.gov/cpi/seasonal-adjustment/home.htm
+If you are deaf, hard of hearing, or have a speech disability, please dial 7-1-1 to access telecommunications relay services.
+
+[Tables 1-7 and charts are present in the BLS full release, but the web reader did not expose their complete contents; section not accessible]

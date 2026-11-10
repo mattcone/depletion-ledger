@@ -711,19 +711,17 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             <p class="font-mono text-[11px] text-faint tabular">Brent: selected observations and monthly averages. WTI: weekly FRED spot prices and recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: January Brent settled at $98.32 on Nov 6, up three cents; December WTI settled at $90.83, up 31 cents (Reuters). The January Brent contract fell 13.3% from its Oct 30 settlement; per LSEG data cited by Reuters, the continuous front-month Brent series was on track for a 17% weekly decline, its steepest weekly percentage fall since the pandemic began. Brent's first close below $100 since Sep 22 was on Nov 4. The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly spot prices and recent futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: January Brent settled at $92.57 on Nov 9, down 5.9%; December WTI settled at $86.85, down 4.4% (Reuters). On Nov 10, Brent traded around $90, briefly below $90 intraday for the first time since Aug 31. The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly spot prices and recent futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            On Nov 6, January Brent settled at $98.32 (up three cents) and
-            December WTI at $90.83 (up 31 cents; Reuters, cross-checked
-            against Yahoo), ending a week in which the January Brent contract fell 13.3% from its
-            Oct 30 settlement of $113.43. Per LSEG data cited by Reuters, the Brent
-            benchmark — a different contract series — was on track for a 17% weekly
-            decline, its steepest weekly percentage fall since the start of the
-            pandemic and its biggest in absolute terms. Other news that day included a US strike on an
-            Iranian air-defense system near Qeshm Island and a suspected
-            missile attack on the unladen, inbound products tanker Velos
-            Sapphire, which killed one crew member (Reuters).
+            On Nov 9, January Brent settled at $92.57 (down 5.9%) and
+            December WTI at $86.85 (down 4.4%; Reuters, cross-checked
+            against Yahoo) amid diplomatic headlines. Trump said the war was
+            “militarily effectively over” (AP); separately, Israel Hayom reported an
+            unconfirmed proposal to release $8B in Iranian funds held in Qatar.
+            On Nov 10, Brent traded around $90, briefly below $90 intraday
+            for the first time since Aug 31 (CNBC); unsettled. The January
+            Brent contract is down 18.4% from its Oct 30 settlement of $113.43.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Brent combines selected observations and monthly averages; gray WTI combines
@@ -1419,7 +1417,9 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               its Sep 16 increase. Two members, Cook and Hammack, voted for a quarter-point
               increase. The statement said inflation remained elevated and that the Committee
               "will deliver price stability," citing geopolitical uncertainty. Higher borrowing
-              costs add to the pressure from rising energy prices.
+              costs add to the pressure from rising energy prices. After October CPI came in
+              above expectations on Nov 10, traders began pricing a possible December increase
+              (CNBC).
             </p>
             <div class="mt-5 grid grid-cols-1 border border-rule sm:grid-cols-3">
               {
@@ -1467,7 +1467,8 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
                 {t10HighClause}. Its quarterly increase was the largest since 1994,
                 helping push US mortgage rates above 7% (Wall Street Journal, Oct 1).
                 On Oct 2, the G7 reserve-release announcement and a weak September jobs report
-                cut expectations of another Fed hike.
+                cut expectations of another Fed hike. After the above-expected October CPI
+                release on Nov 10, the yield rose to about 4.9% in early trading (FT).
               </p>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 The 2-year yield was 4.63% on Sep 11, its highest since July 2024.
@@ -1480,7 +1481,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               <h3 class="text-lg font-bold tracking-tight">US producer prices are rising faster than consumer prices</h3>
               <p class="mt-2 font-mono text-[11px] text-faint">CPI (retail, amber) + PPI final demand (wholesale, blue) · % year-over-year · monthly (BLS) · CPI Jan – Sep; PPI Jan – Sep.</p>
               <div class="mt-4 h-72">
-                <canvas id="cpiChart" role="img" aria-label="US price inflation, 2026, percent year-over-year: consumer prices (CPI) 2.39 in January and 2.41 in February before the war, jumping to 3.3 in March and 3.8 in April, peaking at 4.2 in May, easing to 3.4 in July and August, then rising to 3.7 in September as gasoline prices ran 34% above a year earlier; wholesale prices (PPI) rising from 3.1 in January to a September peak of 6.3, the largest annual gain since December 2022 (May's reading was 5.9, August 5.6). Reference line at the Fed's 2 percent target."></canvas>
+                <canvas id="cpiChart" role="img" aria-label="US price inflation, 2026, percent year-over-year: consumer prices (CPI) 2.39 in January and 2.41 in February before the war, jumping to 3.3 in March and 3.8 in April, peaking at 4.2 in May, easing to 3.4 in July and August, then rising to 3.7 in September — the latest headline annual rate; BLS could not publish October's because October 2025 data were unavailable during last year's shutdown. Wholesale prices (PPI) rose from 3.1 in January to a September peak of 6.3, the largest annual gain since December 2022 (May 5.9, August 5.6). Reference line at the Fed's 2 percent target."></canvas>
               </div>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 Consumer inflation rose from about 2.4% to 4.2% in three months as fuel became more
@@ -1489,6 +1490,13 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
                 earlier (BLS, Oct 14; AP). Core inflation, which excludes food and energy, rose
                 to 2.6% from 2.4% over the year. Core prices rose 0.3% in September,
                 matching August’s monthly increase.
+              </p>
+              <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
+                October CPI rose 0.4% month over month, above the 0.3% consensus; core CPI rose
+                0.3% for a third straight month. BLS could not publish October's headline or
+                core annual rate because October 2025 data were unavailable during last year's
+                shutdown. September's 3.7% remains the latest headline rate. Gasoline's annual
+                change was still available: +37.4% (BLS, Nov 10).
               </p>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 Producer prices rose 6.3% in September compared with a year earlier,
@@ -2969,11 +2977,14 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // Nov 5 morning pass); Nov 5 AAA → Nov 4 WTI settle 88.12 (no same-day settlement at the
       // Nov 5 morning pass); Nov 5 AAA → Nov 5 WTI settle 90.52 (same-day — re-paired down from
       // the Nov 4 basis once the Nov 5 settlement landed, Nov 5 evening pass); Nov 6 AAA → Nov 5
-      // WTI settle 90.52 (no same-day settlement at the Nov 6 morning pass — Nov 6 settles 14:30 ET).
-      // This retail-minus-WTI chart does not use heating-oil futures: Nov 6 diesel gap = 171.2;
-      // gasoline gap = 80.4 dollars per barrel (Nov 5: 172.2 / 81.7; Nov 4: 175.4 / 85.1;
-      // Nov 3: 168.0 / 78.2; Nov 2: 167.8 / 78.7; Nov 1: 168.3 / 78.8; Oct 31: 160.9 / 71.6 —
-      // Oct 31 stays on the 104.12 settle, its nearest trading day).
+      // WTI settle 90.52 (no same-day settlement at the Nov 6 morning pass — Nov 6 settles 14:30 ET);
+      // Nov 7 and Nov 8 AAA → Nov 6 WTI settle 90.83 (weekend — no same-day settlement;
+      // re-paired from the Nov 5 basis once the Nov 6 settlement landed); Nov 9 AAA → Nov 6 WTI
+      // settle 90.83 (no same-day settlement at the Nov 10 morning pass — Nov 9 settles 14:30 ET);
+      // Nov 10 AAA → Nov 9 WTI settle 86.85 (no same-day settlement at publication).
+      // This retail-minus-WTI chart does not use heating-oil futures: Nov 10 diesel gap = 171.8;
+      // gasoline gap = 80.3 dollars per barrel (Nov 9: 168.4 / 77.6; Nov 8: 169.3 / 78.0;
+      // Nov 7: 169.9 / 78.7; Nov 6: 171.2 / 80.4).
       const wtiNonFred = new Set(wtiNonFredDates);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
       // thinned to story beats — diesel: pre-Sep 3 plus Sep 3, 6, 10, 14, 17 (the record is

@@ -6,7 +6,7 @@
 // real observation with a source; `approx: true` marks a source's rounded estimate
 // (e.g. "Brent near $80 on Jun 22") and renders as a hollow marker.
 
-export const DATA_AS_OF = "2026-11-09";
+export const DATA_AS_OF = "2026-11-10";
 // War began Feb 28, 2026 (report: "Pre-war (Feb 28)"; ACLED damage inventory "since Feb 28"; IEA supply loss "since Feb").
 // Day count = days elapsed since Feb 28 → Sep 9, 2026 = Day 193.
 export const CRISIS_DAY_1 = "2026-02-28";
@@ -78,6 +78,7 @@ export const brentYtd: SeriesPoint[] = [
   { date: "2026-11-04", value: 94.62, tip: "settlement · down 8.7% (EnergyNow wire, January contract)", note: "January settlement (EnergyNow wire; −$8.98, −8.7% vs Nov 3 — the Yahoo BZ=F bar closed at 94.62, matching the wire). First settlement below $100 since Sep 22, ending a run of thirty consecutive closes above it. The drop followed the US midterms (Democrats took both chambers), which the market read as a move toward ending the war (EnergyNow/Yahoo, Nov 4)." },
   { date: "2026-11-05", value: 98.29, tip: "settlement · up $3.67 (Reuters wire, January contract)", note: "January settlement (Reuters wire; +$3.67, +3.9% vs Nov 4; Yahoo BZ=F closed at 99.11). Shipping risks remained high: Reuters reported UKMTO had received incidents involving at least five vessels since Sunday and that 35 vessels were hit in October, a monthly record. Iranian claims of fires aboard tankers and a tugboat remain unverified. Citi warned that the White House could act through executive powers after the midterms; Eurasia Group lowered its November strike and deal estimates and raised its prolonged-standoff estimate (Reuters and The National, Nov 5)." },
   { date: "2026-11-06", value: 98.32, tip: "settlement · up $0.03 (Reuters wire, January contract)", note: "January settlement (Reuters wire; +$0.03 vs Nov 5 — the Yahoo BZ=F bar closed at 98.32, matching the wire). The January contract fell 13.3% from its Oct 30 settlement of $113.43. Per LSEG data cited by Reuters (Nov 6), the Brent benchmark was on track for a 17% weekly decline — its steepest weekly percentage fall since the start of the pandemic and its biggest in absolute terms; a different contract series than the January same-contract comparison. News that day included a US strike on an air-defense system near Qeshm Island, an unconfirmed IRGC claim of a US MQ-9 shootdown, and a suspected missile attack on an unladen, inbound products tanker that killed one crew member (Reuters). An Iranian lawmaker said ships linked to China, India, Iraq and Qatar were exempt from Iran's transit restrictions; the scope and US response remain unclear (Al Jazeera, Nov 6)." },
+  { date: "2026-11-09", value: 92.57, tip: "settlement · down $5.75 (Reuters wire, January contract)", note: "January settlement (Reuters wire; −$5.75, −5.9% vs Nov 6 — the Yahoo BZ=F bar closed at 92.57, matching the wire). The drop came amid diplomatic headlines: Trump said the war with Iran was “militarily effectively over” (Nov 9, AP). Separately, Israel Hayom reported an unconfirmed proposal to reopen Hormuz and release $8B in Iranian funds held in Qatar, citing two diplomatic sources. On Nov 10 Brent traded around $90, briefly below $90 intraday for the first time since Aug 31 (CNBC); live, unsettled. The January contract is down 18.4% from its Oct 30 settlement of $113.43." },
 ];
 export const brentMonthlyAvgs = [
   { month: "Mar", value: 103.0, src: "EIA" },
@@ -185,6 +186,7 @@ export const wtiWeekly: SeriesPoint[] = [
   { fred: false, date: "2026-11-04", value: 88.12, note: "December settlement (EnergyNow wire; Macrotrends agrees: $88.12 as of Nov 4; −$7.97, −8.3% vs Nov 3 — the Yahoo CL=F bar closed at 88.12, matching the wire). December remains the front month; its last trading day is Nov 20 under CME rules." },
   { fred: false, date: "2026-11-05", value: 90.52, note: "December settlement (Reuters wire; +$2.40, +2.7% vs Nov 4 — the Yahoo CL=F bar closed at 91.13, so the wire value is plotted). Reuters linked the rebound to shipping risks and post-midterm escalation concerns (Nov 5). December remains the front month; its last trading day is Nov 20 under CME rules." },
   { fred: false, date: "2026-11-06", value: 90.83, note: "December settlement (Reuters wire; +$0.31, +0.3% vs Nov 5 — the Yahoo CL=F bar closed at 90.83, matching the wire). Down 12.76% from the December contract's Oct 30 settlement of $104.12 (EnergyNow). December remains the front month; its last trading day is Nov 20 under CME rules." },
+  { fred: false, date: "2026-11-09", value: 86.85, note: "December settlement (Reuters wire; −$3.98, −4.4% vs Nov 6 — the Yahoo CL=F bar closed at 86.85, matching the wire). Down 16.6% from the December contract's Oct 30 settlement of $104.12. December remains the front month; its last trading day is Nov 20 under CME rules." },
 ];
 
 // ---------- US retail gasoline, $/gal — EIA weekly (verified); AAA daily Sep 10–14
@@ -287,6 +289,7 @@ export const gasolineYtd: SeriesPoint[] = [
   { date: "2026-11-07", value: 4.0371, note: "AAA release, Nov 7" },
   { date: "2026-11-08", value: 4.0203, note: "AAA release, Nov 8" },
   { date: "2026-11-09", value: 4.0093, note: "AAA release, Nov 9" },
+  { date: "2026-11-10", value: 3.9788, note: "AAA release, Nov 10" },
 ];
 export const gasolinePreCrisis = 2.81; // Jan 2026 monthly avg (BTS/EIA)
 
@@ -364,6 +367,7 @@ export const dieselYtd: SeriesPoint[] = [
   { date: "2026-11-07", value: 6.2075, tip: "AAA", note: "AAA — eleventh straight decline; $0.32 below the Sep 22 record" },
   { date: "2026-11-08", value: 6.1929, note: "AAA — twelfth straight decline" },
   { date: "2026-11-09", value: 6.1723, note: "AAA — thirteenth straight daily decline since Oct 28; $0.36 below the Sep 22 record" },
+  { date: "2026-11-10", value: 6.1572, tip: "AAA", note: "AAA — fourteenth straight daily decline since Oct 28; $0.37 below the Sep 22 record" },
 ];
 export const dieselOldRecord = 5.85; // June 2022 AAA record (broken Sep 4)
 export const dieselPreWar = 3.72; // Feb 27, just before the war — the "up NN%" baseline
@@ -430,7 +434,7 @@ export const dieselRiseStreak = (() => {
   return n;
 })();
 export const stats = [
-  { label: "Brent", value: "$98.32", sub: "Nov 6 settlement · January contract · +$0.03 on the day; −13.3% from Oct 30. Reuters: continuous front-month Brent on track for its biggest weekly drop since 2020" },
+  { label: "Brent", value: "$92.57", sub: "Nov 9 settlement · January contract · −$5.75 on the day (−5.9%); −18.4% from Oct 30. Live Nov 10: ~$90, briefly below $90 for the first time since Aug 31 (CNBC)" },
   { label: "US diesel (AAA)", value: `$${lastDiesel.value.toFixed(2)}`, sub: `${shortStatDate(lastDiesel.date)} · ${dieselStreak > 0 ? (dieselStreak === dieselYtd.length - 1 - dieselYtd.indexOf(dieselRecord) ? `${wordNum(dieselStreak)} straight drops from the ${shortStatDate(dieselRecord.date)} record $${dieselRecord.value.toFixed(4)}` : (dieselStreak === 1 ? (dieselPriorRise > 0 ? (dieselPriorRise === 1 ? "down after yesterday’s rise" : `down after ${wordNum(dieselPriorRise)} straight rises`) : "down again") : `down ${wordNum(dieselStreak)} days in a row`)) + " · " : dieselRiseStreak === 1 && dieselPriorStreak.days > 0 ? `first rise after ${wordNum(dieselPriorStreak.days)} straight declines${dieselPriorStreak.fromRecord ? ` off the ${shortStatDate(dieselRecord.date)} record` : ""} · ` : dieselRiseStreak >= 2 ? `${wordNum(dieselRiseStreak)} straight rises from the ${shortStatDate(dieselYtd[dieselYtd.length - 1 - dieselRiseStreak].date)} low $${dieselYtd[dieselYtd.length - 1 - dieselRiseStreak].value.toFixed(4)} · ` : ""}+${dieselUpPct}% vs pre-war $3.72` },
   { label: "US gasoline (AAA)", value: `$${lastGasoline.value.toFixed(2)}`, sub: `${shortStatDate(lastGasoline.date)} · +${gasUpPct}% vs Jan $2.81 (AAA)` },
   { label: "SPR", value: "282.2M", sub: "Oct 30 · down 0.4M on the week · down 133.2M from pre-war 415.4M · lowest since Nov 1982" },
@@ -744,22 +748,18 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
   {
     when: "Any day",
     items: [
-      { item: "The coalition said it intercepted two ballistic and two cruise missiles targeting Riyadh and other regions on Nov 8, plus another ballistic missile aimed at the south (AP). Falling shrapnel caused minor damage to an Aramco administrative building in Riyadh; no injuries were reported. Houthi authorities claim 33 killed and 39 wounded in strikes near Sanaa; the toll and responsibility remain unverified.", why: "Watch for confirmation of further attacks and damage." },
-      { item: "Trump said renewed strikes were unlikely if talks progress (CNN, Nov 8); he cited 38 Iranian bridges as possible targets, an unverified count. An unconfirmed Israel Hayom report, relayed by Bloomberg, said Iran dropped demands for control of Hormuz and transit fees. Rubio said the sides were far from a breakthrough. Iraq's foreign minister said a lane near Oman could allow Iraqi oil exports; the arrangement is not yet implemented. Explosions on Qeshm and in Bandar Abbas remain unexplained.", why: "Watch for verification of the Iran concessions report, any progress on the Iraq transit lane, and an explanation for the explosions." },
-      { item: "UKMTO's Nov 6 weekly overview counts 11 attacks: eight in the Strait of Hormuz and three in the Arabian Gulf. It says three vessels sank, five needed help, and three continued; it does not identify the vessels counted as sunk. The National reports 25 seafarers killed in tanker attacks in the strait since the war began (Nov 9, citing Tristar). The IRGC's latest fire and mine claims remain unverified.", why: "Watch for vessel identities and damage details, confirmation of the IRGC claims, and the next Kpler flow print." },
+      { item: "The coalition said it intercepted two ballistic and two cruise missiles targeting Riyadh and other regions on Nov 8, plus another ballistic missile aimed at the south (AP); falling shrapnel caused minor damage to an Aramco administrative building in Riyadh. On Nov 9 an attack on a target in the Medina region caused a “limited fire,” with no injuries and operations unaffected (Saudi Energy Ministry, Nov 9). Houthi authorities claim 33 killed and 39 wounded in strikes near Sanaa; the toll and responsibility remain unverified. On Nov 10 the GCC approved an advanced headquarters in Kuwait for its Unified Military Command and the allocation of forces; it did not specify when the headquarters would become operational.", why: "Watch for confirmation of further attacks and damage, and the GCC command's operational status." },
+      { item: "Trump said the war with Iran was “militarily effectively over” on Nov 9 after meeting the Qatari PM (AP). Separately, Israel Hayom reported that a proposed interim deal could reopen Hormuz and release $8B in Iranian funds held in Qatar; the report cites two diplomatic sources and is unconfirmed. Rubio said on Nov 8 the sides were far from a breakthrough. Task Force Iron Gate (CENTCOM, Nov 7) targets weapons, sanctioned materials and illicit revenue moving across Iran's land borders and the Caspian. Iraq's foreign minister said a lane near Oman could allow Iraqi oil exports; it is not yet implemented.", why: "Watch for corroboration of the reported proposal, Task Force Iron Gate's operational scope, and implementation of the Iraq transit lane." },
+      { item: "UKMTO's latest overview (week ending Nov 6) reports 170 outbound and 155 inbound transits, about 65% below pre-conflict levels. It counts 11 attacks: three vessels sank, five needed help, and three continued; it does not identify the vessels counted as sunk. UKMTO #199 reports a tanker fire near Khasab on Nov 7 and crew evacuation. Early reports tentatively identified it as the Navig8 Messi, but later AIS-based reporting challenged that identification. #200 was a separate outbound tanker attack; its crew were safe. UKMTO lists the LARGO ATOM as a named attack (#192). A suspected drone strike at Iraq's Khor Mor gas field suspended production, taking about 2,800 MW of generation offline; responsibility remains unconfirmed.", why: "Watch for the identity and fate of the tanker in #199, the identities of the three vessels UKMTO counted as sunk, Khor Mor attribution, and the next Kpler flow print." },
       { item: "Whether Russian diesel reaches buyers. Russia extended its producer diesel export ban through Jan 31, 2027; Novak said exceptions would remain for world markets (TASS, Oct 31). Windward tracked three tankers carrying Russian diesel as US-bound; only the Agioi Fanendes, loaded at Primorsk on Oct 22, still appears headed for a US port, and it was still en route as of Nov 8 with no confirmed delivery. The other two changed course (Nov 3).", why: "Watch for the Agioi Fanendes' arrival and updates on the diverted cargoes. New Jersey's governor warned state ports to reject the fuel and a legal dispute is under way (CBS, Nov 3); US license 135 permits covered transactions through Apr 7, 2027." },
+      { item: "The BLS reported Nov 10 that October consumer prices rose 0.4% for the month — above the 0.3% analysts expected — with core prices up 0.3%, the third straight month at that pace. It could not publish an annual rate: the 2025 government shutdown left no October 2025 data, so September's 3.7% remains the latest official annual figure. Gasoline prices ran 37.4% above a year earlier (BLS, Nov 10). Stock futures fell and traders began pricing a possible December Fed increase (CNBC).",
+        why: "Watch the Fed's December outlook and the next print (November CPI, Dec 10, 8:30 a.m. ET)." },
     ],
   },
   {
     when: "Nov 12",
     items: [
       { item: "The next weekly EIA report (noon ET). The Nov 4 report put SPR stocks at 282.2M barrels — down 0.4M for a fifth straight withdrawal — and distillate stocks at 99.3M, down 3.6M and 11.0% below last year, the first weekly reading below 100M this year. East Coast distillate stocks were 14.5% lower.", why: "Watch whether SPR withdrawals continue and distillate stocks keep falling. Deliveries from the sixth SPR offering are scheduled for November–December." },
-    ],
-  },
-  {
-    when: "Nov 10",
-    items: [
-      { item: "October CPI is due Nov 10 at 8:30 a.m. Eastern (BLS). September's annual inflation rate was 3.7%. The Fed held rates at 3.75–4.00% on Oct 28; two members preferred a quarter-point increase.", why: "Watch how inflation changes and what the Fed says about its December decision. A hold in October doesn't settle the next decision." },
     ],
   },
 ];
@@ -1099,6 +1099,7 @@ export const treasury10y: Y10Pt[] = [
   { date: "2026-11-04", value: 4.894, note: "session close (Yahoo ^TNX) · fifth straight close below 5% — yields eased with the post-midterm oil rout (the Fed's H.15 constant-maturity value for Nov 4 is not yet posted as of the Nov 5 morning pass)" },
   { date: "2026-11-05", value: 4.837, note: "session close (Yahoo ^TNX) · sixth straight close below 5% — yields eased further as oil rebounded (the Fed's H.15 constant-maturity value for Nov 5 is not yet posted as of the evening pass)" },
   { date: "2026-11-06", value: 4.859, note: "session close (Yahoo ^TNX) · seventh straight close below 5% — yields edged up 2bp as the oil rout continued (the Fed's H.15 constant-maturity value for Nov 6 is not yet posted as of the Nov 7 morning pass)" },
+  { date: "2026-11-09", value: 4.864, note: "session close (Yahoo ^TNX) · eighth straight close below 5% — yields little changed as oil sold off; after the above-expected October CPI release on Nov 10 the yield rose to ~4.9% in early trading (FT)" },
 ];
 export const treasuryPreWar = 3.97; // week of Feb 27, before the closure
 export const treasuryTestLevel = 4.8; // "the high reached in January 2025" — the level strategists watch (CNBC, Sep 7)
@@ -1453,7 +1454,7 @@ export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisor
   { num: 196, type: "attack", date: "2026-11-04" },
   { num: 197, type: "attack", date: "2026-11-06" },
   { num: 198, type: "advisory", date: "2026-11-07" },
-  { num: 199, type: "suspicious activity", date: "2026-11-07" },
+  { num: 199, type: "attack", date: "2026-11-07" },
   { num: 200, type: "attack", date: "2026-11-07" },
 ];
 
@@ -1465,7 +1466,7 @@ export const ukmtoReportsBeforeWindow = Math.min(...ukmtoIncidents.map((i) => i.
 
 // Capture bounds are explicit: a quiet day must not shorten the covered period.
 export const ukmtoCoverageStart = "2026-07-01";
-export const ukmtoCoverageEnd = "2026-11-09";
+export const ukmtoCoverageEnd = "2026-11-10";
 
 // Include every Monday–Sunday week, even when it has no attack reports.
 // Partial weeks cover fewer than seven days and don't enter full-week comparisons.

@@ -1,0 +1,8 @@
+{
+  "release": "USDL-26-1685",
+  "title": "Consumer Price Index Summary — October 2026",
+  "published": "2026-11-10T08:30:00-05:00",
+  "accessed": "2026-11-10",
+  "method": "BLS HTML release fetched via codex reader (BLS blocks plain HTTP bots); release text and extracted figures archived as release-cpi-202610.txt / release-cpi-202610-figures.json",
+  "note": "No 12-month change published for headline/core (no October 2025 index due to the 43-day 2025 government shutdown); gasoline 12-month change 37.4% is the only major published 12-month figure."
+}
