@@ -251,7 +251,7 @@ const ws2325Hi = Math.max(...ws2325.map((p) => p.value));
 const wsPanelAAria = `OECD on-land oil stocks, commercial plus government-controlled, million barrels. The EIA's monthly levels from ${wsMbFirst.value.toLocaleString()} in January 2021, falling to ${wsDec22.toLocaleString()} by December 2022, then holding between ${ws2325Lo.toLocaleString()} and ${ws2325Hi.toLocaleString()} across 2023 to 2025, ${wsAriaTrend}. The shaded band is the same calendar month's range over 2021 to 2025, extended across 2026; ${wsBelowBandStr} 2026 fall below it. A dashed line marks the start of the war, February 28, 2026.`;
 // Forecast paths come from the forecast records — the stored targets are the source of truth,
 // so the copy, the chart, and the record can never drift apart.
-const wsEiaRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === "steo-2026-10-global-observed");
+const wsEiaRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === "steo-2026-11-global-observed");
 const wsPersRec = (worldStocksData as any).forecast_records.find((r: any) => r.record_id === "persistence-2026-09-global-observed");
 // Oct 21, 2026: the scenario paths were withdrawn from the dashboard (the dated
 // correction on the model page explains why). The records remain in
@@ -304,7 +304,7 @@ const wsObsSinceAnchorStr = ` ${Math.abs(wsObsLastRebased)} mb ${wsObsLastRebase
 // were removed with the scenario withdrawal. The beta research artifacts (the
 // dated data files, generator, tests and method document under research/) are
 // preserved and no longer referenced by the public pages.
-const wsPanelBAria = `Line chart of the change in global oil inventories since ${wsFcAnchorMonthStr}, in million barrels, starting at zero in ${wsFcAnchorMonthStr} — zero means inventories unchanged since that month, not empty storage. Three lines, all shown: the solid dark line is the IEA's reported global observed inventories, through ${wsObsLastMonthStr} (${wsSigned(wsObsLastRebased)} mb from the starting level); the dashed line is the EIA Short-Term Energy Outlook (Oct 6, 2026 release), with a September estimate and forecasts from October, ${wsEiaEndStr} by ${wsMonthStr(wsEiaEnd.period)}; the dotted line is the recent trend, an extrapolation that repeats the June–August 2026 average monthly change (${wsPersMonthlyStr} million barrels a month), ${wsPersEndStr} by ${wsMonthStr(wsPersEnd.period)}. The scenario lines previously shown here were withdrawn on October 21, 2026; the original forecasts, assumptions, and results remain in the forecast archive. All lines combine crude oil and refined fuels, and none counts government stock releases as a loss.`;
+const wsPanelBAria = `Line chart of the change in global oil inventories since ${wsFcAnchorMonthStr}, in million barrels, starting at zero in ${wsFcAnchorMonthStr} — zero means inventories unchanged since that month, not empty storage. Three lines, all shown: the solid dark line is the IEA's reported global observed inventories, through ${wsObsLastMonthStr} (${wsSigned(wsObsLastRebased)} mb from the starting level); the dashed line is the EIA Short-Term Energy Outlook (Nov 10, 2026 release), with September–October estimates and forecasts from November, ${wsEiaEndStr} by ${wsMonthStr(wsEiaEnd.period)}; the dotted line is the recent trend, an extrapolation that repeats the June–August 2026 average monthly change (${wsPersMonthlyStr} million barrels a month), ${wsPersEndStr} by ${wsMonthStr(wsPersEnd.period)}. The scenario lines previously shown here were withdrawn on October 21, 2026; the original forecasts, assumptions, and results remain in the forecast archive. All lines combine crude oil and refined fuels, and none counts government stock releases as a loss.`;
 
 // Watch list as flat ledger rows (date column + text). Tufte: structure from the date
 // column and whitespace, not boxes or shaded bands.
@@ -666,37 +666,40 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         <div class="grid gap-10 lg:grid-cols-2">
           <div>
             <div class="mb-4">
-              <h2 class="text-xl font-bold tracking-tight">Europe’s assessed gas price is up about 210% since February</h2>
+              <h2 class="text-xl font-bold tracking-tight">Europe’s assessed gas price is up about 155% since February</h2>
               <p class="mt-2 font-mono text-[11px] text-faint">TTF, $/MMBtu. Filled dots: EIA weekly futures averages. Hollow dots: assessments and market quotes, including converted euro quotes. Sep 14 uses a contract for difference (CFD), which tracks gas prices. Contracts and delivery periods differ; comparisons are approximate.</p>
             </div>
             <div class="h-72">
-              <canvas id="gasTtfChart" role="img" aria-label="European gas benchmark TTF, 2026: the Oct 30 assessment was $34.00 per MMBtu for December delivery, up from $30.80 for November delivery on Oct 23 and about 210% above the pre-closure reference of $10.99. Source: JOGMEC, Nov 2. The chart mixes weekly futures averages, assessments and market quotes; contracts and delivery periods differ. Filled and hollow dots distinguish these sources."></canvas>
+              <canvas id="gasTtfChart" role="img" aria-label="European gas benchmark TTF, 2026: the Nov 6 assessment was $28.00 per MMBtu for December delivery, down from $34.00 on Oct 30 and about 155% above the pre-closure reference of $10.99. Source: JOGMEC, Nov 9. The chart mixes weekly futures averages, assessments and market quotes; contracts and delivery periods differ. Filled and hollow dots distinguish these sources."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-              TTF is Europe’s gas benchmark. JOGMEC’s Nov 2 report put the Oct 30 price at
-              $34.00 per MMBtu for December delivery, up from $30.80 for November delivery
-              on Oct 23. It cited winter demand, Middle East supply concerns, an extended
-              Oseberg outage and the Freeport LNG shutdown
+              TTF is Europe’s gas benchmark. JOGMEC’s Nov 9 report put the Nov 6 price at
+              $28.00 per MMBtu for December delivery, down around 18% from $34.00 on
+              Oct 30. Traders expected Middle East tensions to ease after a cautious US
+              stance on resuming strikes and the US midterm results. Europe also turned
+              more imported LNG back into gas (regasification), which added supply
               (<a href="https://journal.jogmec.go.jp/oilgas/nglng-en/index.html" class="underline decoration-rule underline-offset-2 hover:text-ink">JOGMEC</a>).
             </p>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-              EU gas storage was 74.7% full on Oct 30. Stored volume was 10.5% below last year
-              and 16.8% below its five-year average (JOGMEC).
+              EU gas storage was 73.0% full on Nov 6, down 12.6% from the same period last
+              year and 18.6% below its five-year average (AGSI+, via JOGMEC).
             </p>
           </div>
           <div>
             <div class="mb-4">
-              <h2 class="text-xl font-bold tracking-tight">Asia’s assessed LNG price is up about 220% since February</h2>
-              <p class="mt-2 font-mono text-[11px] text-faint">JKM, $/MMBtu. Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: assessed spot prices and market quotes (May–Oct). Contracts and delivery periods differ, so comparisons are approximate.</p>
+              <h2 class="text-xl font-bold tracking-tight">Asia’s assessed LNG price is up about 200% since February</h2>
+              <p class="mt-2 font-mono text-[11px] text-faint">JKM, $/MMBtu. Filled dots: EIA weekly futures averages (Jan–Apr). Hollow dots: assessed spot prices and market quotes (May–Nov). Contracts and delivery periods differ, so comparisons are approximate.</p>
             </div>
             <div class="h-72">
-              <canvas id="gasJkmChart" role="img" aria-label="Asian LNG benchmark JKM, 2026: the Oct 30 assessment for December delivery was in the low-$34s per MMBtu, plotted at approximately $34.00, up from the high-$31s on Oct 23 and about 220% above the pre-closure reference of $10.66. Source: JOGMEC, Nov 2. Filled dots are weekly futures averages; hollow dots are assessments and market quotes. Contracts and delivery periods differ."></canvas>
+              <canvas id="gasJkmChart" role="img" aria-label="Asian LNG benchmark JKM, 2026: the Nov 6 assessment for December delivery was in the low-$32s per MMBtu, plotted at approximately $32.20, down from the low-$34s on Oct 30 and about 200% above the pre-closure reference of $10.66. Source: JOGMEC, Nov 9. Filled dots are weekly futures averages; hollow dots are assessments and market quotes. Contracts and delivery periods differ."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-              JKM tracks liquefied natural gas (LNG) delivered to Asia. JOGMEC’s Nov 2 report
-              put the Oct 30 December-delivery assessment in the low-$34s per MMBtu, plotted
-              here at about $34.00, up from the high-$31s on Oct 23. JOGMEC cited winter
-              demand and renewed Middle East supply concerns
+              JKM tracks liquefied natural gas (LNG) delivered to Asia. JOGMEC’s Nov 9 report
+              put the Nov 6 December-delivery assessment in the low-$32s per MMBtu, plotted
+              here at about $32.20, down from the low-$34s on Oct 30 on hopes of an early
+              diplomatic resolution in the Middle East. The price touched the mid-$29s on
+              Nov 5, then rebounded as traders grew doubtful of a quick supply recovery.
+              Asian end-user buying remained weak
               (<a href="https://journal.jogmec.go.jp/oilgas/nglng-en/index.html" class="underline decoration-rule underline-offset-2 hover:text-ink">JOGMEC</a>).
             </p>
           </div>
@@ -711,17 +714,17 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             <p class="font-mono text-[11px] text-faint tabular">Brent: selected observations and monthly averages. WTI: weekly FRED spot prices and recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: January Brent settled at $92.57 on Nov 9, down 5.9%; December WTI settled at $86.85, down 4.4% (Reuters). On Nov 10, Brent traded around $90, briefly below $90 intraday for the first time since Aug 31. The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly spot prices and recent futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: January Brent settled at $91.49 on Nov 10, down 1.2%, after briefly trading below $90 for the first time since August; December WTI settled at $86.04, down 0.9% (Reuters). The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly spot prices and recent futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            On Nov 9, January Brent settled at $92.57 (down 5.9%) and
-            December WTI at $86.85 (down 4.4%; Reuters, cross-checked
-            against Yahoo) amid diplomatic headlines. Trump said the war was
-            “militarily effectively over” (AP); separately, Israel Hayom reported an
-            unconfirmed proposal to release $8B in Iranian funds held in Qatar.
-            On Nov 10, Brent traded around $90, briefly below $90 intraday
-            for the first time since Aug 31 (CNBC); unsettled. The January
-            Brent contract is down 18.4% from its Oct 30 settlement of $113.43.
+            On Nov 10, January Brent settled at $91.49 (down 1.2%) and
+            December WTI at $86.04 (down 0.9%; Reuters). During the day, Brent
+            briefly fell below $90 for the first time since August (CNBC). The
+            selling followed diplomatic headlines: on Nov 9, Trump said the war was
+            “militarily effectively over” and that further strikes would not be
+            necessary (AP). Separately, Israel Hayom reported an unconfirmed proposal
+            to release $8B in Iranian funds held in Qatar. The January Brent contract
+            is down 19.3% from its Oct 30 settlement of $113.43.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Brent combines selected observations and monthly averages; gray WTI combines
@@ -773,12 +776,18 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
           <!-- Oct 21, 2026 (later pass): the IEA dated-statement headline added earlier
                today was reverted to the production heading by owner instruction; the
                dated-statement editorial rule remains recorded in MODEL.md and the
-               research log, suspended for display. -->
-          <h2 class="text-xl font-bold tracking-tight">The world is using more oil than it produces</h2>
+               research log, suspended for display.
+               Nov 10, 2026 (later pass): tense fixed "is" → "has been" (owner OK) —
+               the STEO Nov 10 edition's October actual is a +1.7 surplus (first since
+               February), and the present-tense universal claim contradicted the latest
+               dot and the paragraph below it. Same thesis, period tense; the
+               dated-statement rule remains suspended. -->
+          <h2 class="text-xl font-bold tracking-tight">The world has been using more oil than it produces</h2>
           <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
             Before the war, the world produced about 4 million more barrels of oil per day than it
             used. Since the war began, it has used stored oil to cover the shortfall in most
-            months. The EIA estimates that stocks rose slightly in July.
+            months. The EIA's Nov 10 estimates show the world roughly in balance in July and
+            adding 1.7 million barrels per day to stocks in October.
             The IEA's October 14 report estimates a full-year supply loss of 5.8 million
             barrels per day, about 6% of the world's oil. It expects Middle East oil flows
             to remain below normal until 2027, though later shipping reports show a recovery.
@@ -885,8 +894,8 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular max-w-prose">
           Change since { wsFcAnchorMonthStr }, in million barrels. Dark line: the IEA's
           reported global observed inventories (Oct 14, 2026 edition), through September 2026.
-          Dashed: the EIA Short-Term Energy Outlook, Oct 6, 2026 release — a September
-          estimate plus forecasts from October. Dotted: the recent trend, repeating the
+          Dashed: the EIA Short-Term Energy Outlook, Nov 10, 2026 release — September–October
+          estimates plus forecasts from November. Dotted: the recent trend, repeating the
           June–August average monthly change ({ wsPersMonthlyStr } million barrels a month).
           All lines combine crude oil and refined fuels. Transfers from government reserves
           to commercial stocks do not reduce the combined total.
@@ -1226,8 +1235,8 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
               EIA Weekly Petroleum Status Report (WPULEUS3), weeks ending Friday. Utilization is the
               amount processed divided by available capacity. Both lines cover the same Jan–Oct period.
-              Monthly crude inputs to refineries ran 15.9–17.4 million barrels/day in the
-              January–September months (STEO Table 4a, Oct 6 release), above 2025 in every month.
+              Monthly crude inputs to refineries ran 15.9–17.5 million barrels/day in the
+              January–October months (STEO Table 4a, Nov 10 release), above 2025 in every month.
               The fuel price gap chart in Prices shows how fuel and crude prices compare.
             </p>
           </div>
@@ -1348,14 +1357,14 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         <div class="grid gap-10 lg:grid-cols-3">
           <div class="lg:col-span-2">
             <h3 class="text-lg font-bold tracking-tight">World oil use fell about 5% in May compared with last year</h3>
-            <p class="mt-2 font-mono text-[11px] text-faint">World oil and other liquid fuel use, million barrels/day. EIA STEO, Oct 6 release; January–September, 2026 vs 2025.</p>
+            <p class="mt-2 font-mono text-[11px] text-faint">World oil and other liquid fuel use, million barrels/day. EIA STEO, Nov 10 release; January–October, 2026 vs 2025.</p>
             <div class="mt-4 h-72">
-              <canvas id="demandChart" role="img" aria-label="World petroleum consumption, 2026 versus the same months of 2025, in million barrels per day: in line with last year through March, then falling away — 99.0 in May, 4.7 below the prior year, 101.8 in July, 3.9 below — recovering to 103.4 in August, within 1.1 of the year earlier, and 104.2 in September, 1.8 below."></canvas>
+              <canvas id="demandChart" role="img" aria-label="World petroleum consumption, 2026 versus the same months of 2025, in million barrels per day: in line with last year through March, then falling away — 98.9 in May, 4.8 below the prior year, 101.7 in July, 4.0 below — recovering to 103.4 in August, within 1.1 of the year earlier, 104.1 in September, 2.0 below, and 102.8 in October, 1.8 below."></canvas>
             </div>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-              World oil use fell 4.7 million barrels per day below last year's level in May, a
-              decline of about 5%. The gap narrowed to 3.9 million in July and 1.1 million in August,
-              then widened slightly to 1.8 million in September.
+              World oil use fell 4.8 million barrels per day below last year's level in May, a
+              decline of about 5%. The gap narrowed to 4.0 million in July and 1.1 million in August,
+              widened to 2.0 million in September, and eased slightly to 1.8 million in October.
               Using less oil helps contain prices, but it also reflects the strain on the economy.
             </p>
             <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
@@ -1368,9 +1377,9 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               2026. That's a difference of 2.9 million between the two forecasts.
             </p>
             <p class="mt-3 font-mono text-[11px] leading-relaxed text-ink/60 sm:text-xs tabular">
-              EIA STEO Table 3e, Oct 6 2026; forecast completed Oct 1. The release lists Jan–Sep
+              EIA STEO Table 3e, Nov 10 2026. The release lists Jan–Oct
               as historical data, though world and regional consumption figures are estimates.
-              They include fuel used by refineries and ships. Forecasts from Oct 2026 onward aren't shown.
+              They include fuel used by refineries and ships. Forecasts from Nov 2026 onward aren't shown.
             </p>
           </div>
           <div>
@@ -1468,7 +1477,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
                 helping push US mortgage rates above 7% (Wall Street Journal, Oct 1).
                 On Oct 2, the G7 reserve-release announcement and a weak September jobs report
                 cut expectations of another Fed hike. After the above-expected October CPI
-                release on Nov 10, the yield rose to about 4.9% in early trading (FT).
+                release on Nov 10, the yield closed at 4.98%, up from 4.86% the day before.
               </p>
               <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
                 The 2-year yield was 4.63% on Sep 11, its highest since July 2024.
@@ -1905,7 +1914,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               if (bMinNegIdx >= 0 && bMinNegIdx !== bLastIdx) specs.push({
                 dataset: 0, index: bMinNegIdx, text: `${bfmt(worldBalance[bMinNegIdx].value)} (${bMonth(worldBalance[bMinNegIdx].date)})`, dy: 18, color: "#8a867a",
               });
-              specs.push({ dataset: 0, index: bLastIdx, text: `${bfmt(worldBalance[bLastIdx].value)} (${bMonth(worldBalance[bLastIdx].date)}, latest)`, ...endpoint, color: "#b3261e" } as typeof specs[number]);
+              specs.push({ dataset: 0, index: bLastIdx, text: `${bfmt(worldBalance[bLastIdx].value)} (${bMonth(worldBalance[bLastIdx].date)}, latest)`, ...endpoint, color: worldBalance[bLastIdx].value > 0 ? "#8a867a" : "#b3261e" } as typeof specs[number]);
               return specs;
             })()), 
           ],
@@ -2109,8 +2118,8 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         };
         const w26 = worldConsumption2026.map((p) => ({ x: wdoy(p.date), y: p.value }));
         const w25 = worldConsumption2025.map((p) => ({ x: wdoy(p.date), y: p.value }));
-        const wTicks = [0, 31, 59, 90, 120, 151, 181, 212, 244];
-        const wNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"];
+        const wTicks = [0, 31, 59, 90, 120, 151, 181, 212, 244, 274];
+        const wNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"];
         new Chart(document.getElementById("demandChart")!, {
           type: "line",
           data: {
@@ -2144,7 +2153,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               x: {
                 type: "linear" as const,
                 min: 0,
-                max: 266,
+                max: 295,
                 grid: { display: false },
                 border: { display: true, color: "#d8d4c6", width: 0.5 },
                 afterBuildTicks: (scale: { ticks: { value: number }[] }) => {
@@ -2981,9 +2990,10 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // Nov 7 and Nov 8 AAA → Nov 6 WTI settle 90.83 (weekend — no same-day settlement;
       // re-paired from the Nov 5 basis once the Nov 6 settlement landed); Nov 9 AAA → Nov 6 WTI
       // settle 90.83 (no same-day settlement at the Nov 10 morning pass — Nov 9 settles 14:30 ET);
-      // Nov 10 AAA → Nov 9 WTI settle 86.85 (no same-day settlement at publication).
-      // This retail-minus-WTI chart does not use heating-oil futures: Nov 10 diesel gap = 171.8;
-      // gasoline gap = 80.3 dollars per barrel (Nov 9: 168.4 / 77.6; Nov 8: 169.3 / 78.0;
+      // Nov 10 AAA → Nov 10 WTI settle 86.04 (same-day — re-paired from the Nov 9 basis once
+      // the Nov 10 settlement landed, Nov 10 evening pass).
+      // This retail-minus-WTI chart does not use heating-oil futures: Nov 10 diesel gap = 172.6;
+      // gasoline gap = 81.1 dollars per barrel (Nov 9: 168.4 / 77.6; Nov 8: 169.3 / 78.0;
       // Nov 7: 169.9 / 78.7; Nov 6: 171.2 / 80.4).
       const wtiNonFred = new Set(wtiNonFredDates);
       // Both fuel lines draw every reading (the movement stays visible); the dots are
@@ -3542,7 +3552,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // stored − stored anchor; the records are never modified. Checkbox visibility
       // is chart state only — it never touches the records.
       {
-        const eiaRec = (ws as any).forecast_records.find((r: any) => r.record_id === "steo-2026-10-global-observed");
+        const eiaRec = (ws as any).forecast_records.find((r: any) => r.record_id === "steo-2026-11-global-observed");
         const persRec = (ws as any).forecast_records.find((r: any) => r.record_id === "persistence-2026-09-global-observed");
         // One shared anchor for the plotted paths — verify before comparing on one zero.
         const anchorRec = eiaRec.anchor;
@@ -3633,7 +3643,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
               // lighter, smaller markers; distinct dash patterns, not color alone.
               {
                 type: "line" as const,
-                label: `EIA outlook, Oct 6 release (mb since ${anchorMonthShort})`,
+                label: `EIA outlook, Nov 10 release (mb since ${anchorMonthShort})`,
                 data: eiaLine,
                 borderColor: "rgba(107,103,92,0.75)",
                 borderWidth: 1.2,
@@ -3726,7 +3736,7 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
                   label: (ctx) => {
                     if (ctx.parsed.y === null) return null;
                     if (ctx.datasetIndex === 1)
-                      return ` EIA October 6 outlook (September estimate; forecasts from October, production minus consumption): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
+                      return ` EIA Nov 10 outlook (Sep–Oct estimates; forecasts from November, production minus consumption): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
                     if (ctx.datasetIndex === 2)
                       return ` Recent trend (Jun–Aug 2026 average, repeated — an extrapolation, not a forecast): ${signFmt(ctx.parsed.y)} mb since ${anchorMonthStr}`;
                     if (ctx.datasetIndex === 3) {

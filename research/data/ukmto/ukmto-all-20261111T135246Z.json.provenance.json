@@ -1,0 +1,6 @@
+{
+ "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+ "retrieved_utc": "2026-11-11T13:53:35.123574Z",
+ "sha256": "19afac0bc23b7b9ae91d3f38abef0c4a54f70bc92f70f4ea3b458f793bac9437",
+ "note": "Nov 11 pass: 59 entries (#143-#202); new entry #202 (suspicious activity, 2026-11-11, WARNING 202-26, tanker, status undetermined). Date flags on #189/#192/#193/#194/#196/#199/#200 = adjudicated registration-timestamp pattern (see crisis.ts comment block above ukmtoIncidents + Nov 2/Nov 10 logs); no bar-affecting change (all in same weekly bins as adjudicated rows)."
+}

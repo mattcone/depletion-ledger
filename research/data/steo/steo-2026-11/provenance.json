@@ -1,0 +1,19 @@
+{
+  "report": "EIA STEO",
+  "edition": "steo-2026-11",
+  "url": "https://www.eia.gov/outlooks/steo/",
+  "workbook": "STEO_m.xlsx",
+  "retrievedAt": "2026-11-10T23:18:12.762Z",
+  "files": [
+    {
+      "file": "STEO_m.xlsx",
+      "sha256": "7d28012ff726ebeafd584905d842ded42bb3c9922550cb26e005af9cd4e27fb5",
+      "bytes": 1096645
+    },
+    {
+      "file": "steo-main.html",
+      "sha256": "a0f5d598bb0bcf5a2ec5be40a87eb9f8664bef9ea559a153bdc3a84d0fb22b21",
+      "bytes": 67738
+    }
+  ]
+}

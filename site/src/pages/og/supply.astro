@@ -25,7 +25,7 @@ const asOf = new Date(DATA_AS_OF + "T12:00:00").toLocaleDateString("en-US", {
 // ---- Same record selection + rebasing as the dashboard's Panel B ----
 const records = (ws as any).forecast_records;
 const byId = (id: string) => records.find((r: any) => r.record_id === id);
-const recEia = byId("steo-2026-10-global-observed");
+const recEia = byId("steo-2026-11-global-observed");
 const recTrend = byId("persistence-2026-09-global-observed");
 if (!recEia || !recTrend) throw new Error("og card: missing comparison record");
 const anchor = recEia.anchor;
@@ -113,7 +113,7 @@ const endMonthStr = new Date(labels[labels.length - 1] + "-15T12:00:00").toLocal
       <p class="faint" style="margin: 8px 0 0; font-size: 14.5px;">
         Change in global oil inventories since {anchorMonthStr}, in million barrels. Zero means
         unchanged stocks, not empty tanks. Dark: IEA observations through September. Dashed:
-        EIA October 6 outlook. Dotted: June–August trend continued. Coverage differs. Updated {asOf}.
+        EIA Nov 10 outlook. Dotted: June–August trend continued. Coverage differs. Updated {asOf}.
       </p>
 
       <div style="position: relative; flex: 1; margin-top: 16px;">
@@ -137,7 +137,7 @@ const endMonthStr = new Date(labels[labels.length - 1] + "-15T12:00:00").toLocal
         // Same saved comparison records and display transform as dashboard Panel B.
         const records = (ws as any).forecast_records;
         const byId = (id: string) => records.find((r: any) => r.record_id === id);
-        const recEia = byId("steo-2026-10-global-observed");
+        const recEia = byId("steo-2026-11-global-observed");
         const recTrend = byId("persistence-2026-09-global-observed");
         const anchor = recEia.anchor;
         const rebase = (v: number) => v - anchor.value_mb;
