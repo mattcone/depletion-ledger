@@ -1,0 +1,7 @@
+{
+  "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+  "fetched_at_utc": "2026-11-13T13:15:58.134144+00:00",
+  "fetched_by": "manual archive (ukmto-fetch.mjs --apply did not persist the payload)",
+  "sha256": "cefb1d6bf733b2125e7b33b1789d873bcb39f6baef84831ca7d750906d2293f7",
+  "note": "Pass 2026-11-13: new entry #204 (attack, 2026-11-11). Window #143\u2013#204."
+}

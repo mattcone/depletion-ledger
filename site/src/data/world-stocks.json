@@ -1210,7 +1210,17 @@
      "source_url": "https://www.iea.org/reports/oil-market-report-october-2026",
      "published": "IEA OMR, October 2026 ed (published 14 Oct 2026)",
      "retrieved": "2026-10-14",
-     "note": "October 2026 ed public page (full-page read via the codex reader, 2026-10-14): global observed inventories 509 mb below end-February levels by end-Sep \u2014 a 2.4 mb/d equivalent decline. NOTE: the edition revises the cumulative \u2014 Aug \u2212507 + Sep \u221210 = \u2212517 \u2260 \u2212509, so prior months were revised upward by ~8 mb in this edition. Plotted as published; the Aug point above is kept for the revision trail."
+     "note": "October 2026 ed public page (full-page read via the codex reader, 2026-10-14): global observed inventories 509 mb below end-February levels by end-Sep \u2014 a 2.4 mb/d equivalent decline. NOTE: the edition revises the cumulative \u2014 Aug \u2212507 + Sep \u221210 = \u2212517 \u2260 \u2212509, so prior months were revised upward by ~8 mb in this edition. Plotted as published; the Aug point above is kept for the revision trail. Superseded as the latest cumulative by the Nov 2026 ed below."
+    },
+    {
+     "period": "2026-10",
+     "value": -462,
+     "status": "reported",
+     "source_id": "iea-omr-web",
+     "source_url": "https://www.iea.org/reports/oil-market-report-november-2026",
+     "published": "IEA OMR, November 2026 ed (published 13 Nov 2026)",
+     "retrieved": "2026-11-13",
+     "note": "Nov 2026 ed public page (retrieved 2026-11-13): 'Observed global stocks have fallen by a cumulative 462 mb since the start of the war' — the war began Feb 28, the same end-February anchor the Oct ed used ('509 mb below end-February levels' by end-Sep). October observed change +52 mb (+1.7 mb/d) — the first increase since June. The 5 mb gap vs the value chained from the Oct ed (−509 + 52 = −457) is most plausibly the Nov ed's revision of the September point (the Oct ed itself revised prior months by ~8 mb); the paywalled PDF should confirm the month-by-month detail."
     }
    ],
    "residual_check": {

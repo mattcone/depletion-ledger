@@ -5,16 +5,16 @@
     "at": "2026-11-10T23:18:12.762Z"
   },
   "wpsr": {
-    "lastWeekEnd": "2026-10-30",
-    "dir": "/home/mcone/depletion-ledger/research/data/wpsr/wpsr-2026-10-30",
-    "at": "2026-11-04T15:56:57.564Z"
+    "lastWeekEnd": "2026-11-06",
+    "dir": "/home/mcone/depletion-ledger/research/data/wpsr/wpsr-2026-11-06",
+    "at": "2026-11-13T13:08:22.875Z"
   },
   "omr": {
     "lastPub": "2026-06-17",
     "dir": "/home/mcone/depletion-ledger/research/data/omr/omr-2026-06-17",
-    "at": "2026-10-17T02:14:14.715Z",
-    "lastSummary": "2026-10-14",
-    "summaryDir": "/home/mcone/depletion-ledger/research/data/omr/omr-2026-10-14"
+    "at": "2026-11-13T13:14:31.514Z",
+    "lastSummary": "2026-11-01",
+    "summaryDir": "/home/mcone/depletion-ledger/research/data/omr/omr-2026-11-01"
   },
   "bls": {
     "periods": {

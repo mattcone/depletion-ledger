@@ -1,0 +1,67 @@
+Oil Market Report - November 2026
+
+About this report
+The IEA Oil Market Report (OMR) is one of the world's most authoritative and timely sources of data, forecasts and analysis on the global oil market – including detailed statistics and commentary on oil supply, demand, inventories, prices and refining activity, as well as oil trade for IEA and selected non-IEA countries.
+
+Published 13 November 2026
+
+Highlights
+- World oil demand is forecast to fall by 2.7 mb/d in 2026, to 102.3 mb/d, before rebounding by 2 mb/d in 2027. The year-on-year decline is set to ease to 2.7 mb/d in 4Q26, from an average 4.4 mb/d over 2Q26 and 3Q26. LPG/ethane and naphtha will account for around 80% of the increase next year as supply chains normalise, while transport fuels will see very modest gain, as high prices accelerate electrification and fuel efficiencies across the global car fleet.
+- Following an increase of 3 mb/d in September, global oil supply rose by a further 2.3 mb/d to 105.4 mb/d in October on lofty Gulf exports despite ongoing attacks on energy infrastructure and tankers. The higher flows underpin a sharp upward revision to 4Q26 supply, while 2027 has been lowered due to constrained Iranian shipments. After a decline of 4.8 mb/d in 2026, oil supply is expected to rebound by 6.6 mb/d, reaching an average of 108.1 mb/d in 2027.
+- Global refinery runs fell by 1.3 mb/d m-o-m to a seasonal low of 81.3 mb/d in October and are forecast to rebound to 84.7 mb/d in December. Global throughputs are projected to rebound by 2.5 mb/d to 84.3 mb/d in 2027, following an average annual decline of 2.2 mb/d in 2026. Margins weakened almost everywhere in October as record freight costs hit Asian refiners. US refiners benefited from cheaper crude, but lower gasoline prices weighed on profits.
+- Observed oil inventories rebounded by 52 mb (+1.7 mb/d) in October, the first increase since June, as oil on water surged by 86 mb to its highest level since January on robust crude exports from the Gulf. On-land stocks continued to fall, however, and remain at their lowest level since at least 2016. OECD total stocks declined by 47 mb, with industry inventories down 41 mb. Observed global stocks have fallen by a cumulative 462 mb since the start of the war.
+- North Sea Dated crude oil prices tumbled by 32%, dropping from a high of $136/bbl in early October to $93/bbl at the time of writing, as a sustained recovery in Gulf exports eased market tightness. Diesel prices also fell by 11% in Europe over the same period but, at close to $180/bbl, remained 77% above pre-war levels. Freight rates for moving crude from the Middle East to Asia held near record levels, while the costs of Aframaxes and Suezmaxes eased.
+
+Straightening out
+The oil market is showing tentative signs of rebalancing, with global oil supplies surpassing demand for the first time since the outbreak of the war in Iran. Observed oil inventories rose by 52 mb, or 1.7 mb/d, in October as Gulf exports recovered much faster than global oil demand. North Sea Dated crude oil prices plunged by more than 30% from a high of $136/bbl on 8 October to around $93/bbl at the time of writing but remained $22/bbl above pre-war levels.
+
+Global oil supplies surged by 2.3 mb/d to 105.4 mb/d in October, lifting output by an extraordinary 5.3 mb/d since August. The sharp increase narrowed the year-on-year output decline to 2.9 mb/d, compared with an average 8 mb/d loss over the March-September period. Despite continued attacks on tankers, Gulf oil exports, excluding Oman, reached 18.4 mb/d last month, 26% below pre-war levels. The recent increase was led by crude, with flows rising to 15 mb/d, equivalent to 82% of pre-war levels in October.
+
+The higher export rates resulted in a significant uplift to our expectations for global oil supply for the remainder of the year, with 4Q26 estimates raised by 3.3 mb/d. The fourth quarter rebound helped trim the average annual 2026 decline to 4.8 mb/d, with losses from the Middle East and Russia partly offset by growth from producers outside the Gulf. Notably, the Americas Quintet – the United States, Canada, Brazil, Argentina and Guyana – are on track to boost output by 1.6 mb/d this year.
+
+In 2027, global supply is projected to recover by 6.6 mb/d to 108.1 mb/d, including a 5.3 mb/d increase in Gulf production and a further 1.1 mb/d gain from the Quintet.
+
+Global oil demand continues to be weighed down by ongoing disruptions to exports of refined products and LPG from the Gulf, remaining at roughly half of pre-war levels, and high fuel prices. The pace of the contraction is nevertheless set to narrow to 2.7 mb/d y-o-y in 4Q26, compared with declines of 5 mb/d in 2Q26 and 3.8 mb/d in 3Q26 – for an annual average fall of 2.7 mb/d.
+
+The shortfall versus 2025 levels is expected to ease further before shifting to growth around March next year, resulting in an overall increase of 2 mb/d in 2027. Petrochemical feedstocks – the products most affected by the war – will account for almost 80% of 2027 gains, while high prices, electrification and fuel efficiency in the global vehicle fleet dampen the rebound in road fuels demand.
+
+Our November supply and demand balances suggest that the global oil market will return to a surplus in 4Q26, with a more substantial build in 2027. As always, downside risks to the forecast persist, as attacks on shipping undermine maritime security, which is pivotal to a sustained recovery.
+
+For now, the severe tightness in product supply, especially for diesel, remains the overriding concern of the broader market and consumers. Persistent attacks on Russian energy infrastructure continue to choke off the country’s diesel supplies to international markets, adding to losses from the Middle East.
+
+At the same time, Atlantic Basin refineries, particularly in the United States, are running hard to capture high margins, while improved crude availability in Asia and fresh Chinese product export quotas could support higher refinery throughput rates in the region. Notably, the accelerated release of IEA emergency diesel stocks over the coming months will provide a critical bridge across the supply gap until the global refinery system and product output recover.
+
+OPEC+ crude oil production¹
+million barrels per day
+| Country/group | Sep 2026 Supply | Oct 2026 Supply | Oct 2026 vs Target | Oct 2026 Implied Target¹ | Sustainable Capacity² | Eff Spare Cap vs Oct³ |
+| Algeria | 0.98 | 0.98 | -0.03 | 1.01 | 1.01 | 0.03 |
+| Congo | 0.29 | 0.26 | -0.02 | 0.28 | 0.29 | 0.03 |
+| Equatorial Guinea | 0.03 | 0.03 | -0.04 | 0.07 | 0.04 | 0.01 |
+| Gabon | 0.19 | 0.22 | 0.04 | 0.18 | 0.23 | 0.01 |
+| Iraq | 4.06 | 4.6 | 0.17 | 4.43 | 4.87 | [blank] |
+| Kuwait | 1.58 | 2.03 | -0.65 | 2.68 | 2.88 | [blank] |
+| Nigeria | 1.48 | 1.44 | -0.06 | 1.5 | 1.52 | 0.08 |
+| Saudi Arabia | 8.93 | 9.99 | -0.48 | 10.48 | 12.11 | [blank] |
+| Total OPEC-8 | 17.54 | 19.55 | -1.07 | 20.62 | 22.94 | 0.16 |
+| Iran⁴ | 1.94 | 1.86 | [blank] | [blank] | 3.8 | [blank] |
+| Libya⁴ | 1.26 | 1.28 | [blank] | [blank] | 1.34 | 0.06 |
+| Venezuela⁴ | 1.16 | 1.14 | [blank] | [blank] | 1.12 | 0 |
+| Total OPEC | 21.89 | 23.83 | [blank] | [blank] | 29.21 | 0.22 |
+| Azerbaijan | 0.44 | 0.43 | -0.12 | 0.55 | 0.44 | 0.01 |
+| Kazakhstan | 1.88 | 1.76 | 0.13 | 1.63 | 1.94 | 0.18 |
+| Mexico⁵ | 1.38 | 1.37 | [blank] | [blank] | 1.41 | 0.04 |
+| Oman | 0.89 | 0.88 | 0.04 | 0.84 | 0.9 | [blank] |
+| Russia | 8.52 | 8.73 | -1.22 | 9.95 | 9.3 | [blank] |
+| Others⁶ | 0.7 | 0.72 | -0.15 | 0.87 | 0.86 | [blank] |
+| Total Non-OPEC | 13.81 | 13.89 | -1.32 | 13.84 | 14.85 | 0.23 |
+| OPEC+ 18 in Nov 2022 deal⁵ | 29.97 | 32.07 | -2.39 | 34.45 | 36.38 | 0.35 |
+| Total OPEC+ | 35.71 | 37.72 | [blank] | [blank] | 44.05 | 0.45 |
+
+¹ Includes extra voluntary curbs and revised, additional compensation cutback volumes. ² Capacity levels can be reached within 90 days and sustained for an extended period. ³ Excludes shut in Iranian, Russian crude. ⁴ Iran, Libya, Venezuela exempt from cuts. ⁵ Mexico excluded from OPEC+ compliance. ⁶ Bahrain, Brunei, Malaysia, Sudan and South Sudan.
+
+Oil Market Report Documentation
+Definitions of key terms used in the OMR.
+For more info on the methodology, download the PDF below.
+
+[section not accessible: report chapters beyond the overview, including detailed supply, demand, stocks, prices and refinery activity sections]
+[section not accessible: methodology PDF contents]
