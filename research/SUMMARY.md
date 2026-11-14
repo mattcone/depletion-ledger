@@ -67,8 +67,14 @@ the Nov 15 corridor-lapses binary set (5 rows) settles in 2 days.
   2025 shutdown left no October 2025 index), so September's 3.7% remains the
   latest official headline rate; gasoline's 12-month change was +37.4%. Futures
   fell; traders began pricing a possible December Fed increase (CNBC).
-  **October PPI was released Nov 13, 8:30 a.m. ET (before the pass) — the headline
-  is not yet verified; check via the BLS endpoint (WPUFD4) at the next pass.**
+  **October PPI (released Nov 13, verified from the BLS API):** headline
+  **+6.5% YoY — the largest since late 2022** (CNBC: "highest in nearly four
+  years") after **+0.3% MoM (SA)**; September was revised +1.3% → +1.4%. Core
+  (ex food, energy, trade) **+0.5% MoM (second straight month), +4.9% YoY**
+  (Babypips/finwire). BLS-reported 12-mo (WPUFD4, unadj): Oct 6.5, Sep 6.3
+  (unchanged), Aug revised 5.6 → 5.5. With the CPI's October annual rate
+  unpublished, 6.5% is now the latest official annual print — and the strongest
+  case yet for a December Fed hike (CNBC: "keeping pressure on the Fed").
   November CPI, Dec 10.
 - **AAA Nov 13 (applied):** gasoline **$3.8724**, diesel **$6.0640** — the
   **17th straight daily decline since Oct 28**, and **$0.46 below** AAA's Sep 22
@@ -176,8 +182,6 @@ the Nov 15 corridor-lapses binary set (5 rows) settles in 2 days.
 
 ## Next dates
 
-- **October PPI** (released Nov 13, 8:30 a.m. ET) — verify the headline via the
-  BLS endpoint at the next pass.
 - EIA WPSR, **Wed Nov 18, noon ET** (w/e Nov 13).
 - GlobalSecurity Day 259 (0800 ET cutoff) — ingest when published; the 48-hour US
   strike window closed ~11:30 ET Nov 13.
@@ -194,12 +198,14 @@ the Nov 15 corridor-lapses binary set (5 rows) settles in 2 days.
 - Watch: the Dominica Prosperity's fate (fire-fighting); the IRGC two-supertanker
   claim; the #199 tanker's identity; the Omsk/Volgograd production halts;
   corroboration of the Qatari two-week window and the Vance meeting; Khor Mor
-  attribution; Iraq transit-lane implementation; Fed December-hike pricing; the
-  October PPI; whether the 10-year holds above 5%; the OMR paywalled PDF for the
+  attribution; Iraq transit-lane implementation; the Fed's reaction to the 6.5%
+  PPI print (December-hike pricing); whether the 10-year holds above 5%; the OMR
+  paywalled PDF for the
   month-by-month inventory detail; 7 UKMTO entries (#189, #192, #193, #194,
   #196, #199, #200) changed dates on the API — manual review before re-typing.
-- **Prod:** `00f84515-5ad9-43f8-92c2-86c064b4720c` (bundle
-  `SNRnfRcr.js`) — the full Nov 13 state: the pass plus the external review's
+- **Prod:** `088023e0-c27e-4ddf-be85-bd1e2fd2f087` (bundle
+  `BW-Lfr6R.js`, deployed after the evening PPI pass and the external review's
+  PPI-copy fixes; previous `00f84515`) — the full Nov 13 state: the pass plus the external review's
   fixes (`logs/review-2026-11-13.md`) plus two data decisions: #202 re-typed as
   attack (per UKMTO's own UPDATE 001) and the world-stocks October point plotted
   at the published −462 (was the chained −457). Deployed on user green light

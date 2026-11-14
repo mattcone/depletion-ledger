@@ -770,8 +770,8 @@ export const watchGroups: { when: string; items: WatchItem[] }[] = [
       { item: "Gulf oil is flowing again, though not at pre-war levels. OPEC's monthly report (Nov 11) puts OPEC+ October output at 41.23M b/d, about 97% of February's 42.72M, based on outside estimates. Saudi Arabia told OPEC it pumped 10.563M b/d, but those outside estimates put it at 9.194M (Bloomberg via Rigzone). The IEA's own count is lower, 37.72M b/d of OPEC+ crude. It says Gulf exports excluding Oman reached 18.4M b/d in October, 26% below pre-war (OMR, Nov 13). Kpler data reported by Reuters put October crude exports through Hormuz at 10.3M b/d excluding Iran, vs 13.5M before the war. Iraq says it has a US understanding to export through a lane near Oman (Reuters, Nov 8).", why: "Watch for implementation of the Iraq–Oman lane and the next Kpler flow figures." },
       { item: "Tanker attacks continue near the strait. Nov 10: a tanker was hit by a projectile northeast of Lima, Oman (UKMTO #201, crew safe); ADNOC said a vessel run by its logistics arm was damaged in UAE waters; and the Fujairah Energy was struck in the Arabian Gulf, with injured crew taken ashore (#203, named by JMIC). Nov 11: UKMTO confirmed that a tanker in the strait was struck by a projectile, all crew safe (#202; JMIC names it the NCC Fajr). That evening the Dominica Prosperity, a Liberia-flagged crude tanker operated by Sinokor Maritime, was hit in the engine room 14 nm northwest of Ra's al Khaymah; the UAE Coast Guard evacuated all 22 crew and firefighting was under way (#204; UKMTO, gCaptain). Nov 12: the IRGC said explosions disabled two unnamed supertankers on the strait's southern route (Mehr); unverified. JMIC counts 181 incidents since Mar 1 and about 211 vessels waiting at anchorages east of Hormuz.", why: "Watch the fate of the Dominica Prosperity, whether the IRGC claim is corroborated, and the identities of the vessels UKMTO counted as sunk." },
       { item: "Whether Russian diesel reaches buyers. Russia's diesel exports roughly doubled in October, to 271,000 b/d from 135,000 in September (Kpler, via the FT), after an early-October US–Russia diesel deal and a pause in Ukrainian refinery strikes. None of the four tankers sent toward the US has delivered; the Agioi Fanendes is waiting off the East Coast for a buyer (FT, Nov 12). The strike pause is over (see the Russia section). Russia's producer diesel export ban runs through Jan 31, 2027, with exceptions (TASS). The IEA plans a further 71M-barrel release of emergency stocks by the end of February, about 15M of it diesel, and says it will help bridge the supply gap (OMR, Nov 13, via Business Upturn).", why: "Watch for the first US delivery and the pace of the IEA diesel release. New Jersey's governor warned state ports to reject the fuel and a legal dispute is under way (CBS, Nov 3); US license 135 permits covered transactions through Apr 7, 2027." },
-      { item: "The BLS reported Nov 10 that October consumer prices rose 0.4% for the month — above the 0.3% analysts expected — with core prices up 0.3%, the third straight month at that pace. It could not publish an annual rate: the 2025 government shutdown left no October 2025 data, so September's 3.7% remains the latest official annual figure. Gasoline prices ran 37.4% above a year earlier (BLS, Nov 10). Stock futures fell and traders began pricing a possible December Fed increase (CNBC); the 10-year yield closed back above 5% on Nov 12 (5.103). October PPI was due Nov 13, 8:30 a.m. ET (not yet verified at the morning pass); November CPI is due Dec 10.",
-        why: "Watch the Fed's December outlook, the October PPI print, and whether the 10-year holds above 5%." },
+      { item: "The BLS reported Nov 10 that October consumer prices rose 0.4% for the month — above the 0.3% analysts expected — with core prices up 0.3%, the third straight month at that pace. It could not publish an annual rate: the 2025 government shutdown left no October 2025 data, so September's 3.7% remains the latest official annual figure. Gasoline prices ran 37.4% above a year earlier (BLS, Nov 10). On Nov 13, the BLS said wholesale prices rose 0.3% in October and 6.5% from a year earlier, the largest annual gain since November 2022 (CNN, CNBC). Stock futures fell and after the CPI release, traders began pricing a possible December Fed increase (CNBC); the 10-year yield closed back above 5% on Nov 12 (5.103). November CPI is due Dec 10.",
+        why: "Watch the Fed's December outlook after the 6.5% PPI print, and whether the 10-year holds above 5%." },
     ],
   },
   {
@@ -1173,10 +1173,18 @@ export const ppiYtd: CpiPt[] = [
   { date: "2026-05-31", value: 5.9 },
   { date: "2026-06-30", value: 5.6 },
   { date: "2026-07-31", value: 4.9 },
-  { date: "2026-08-31", value: 5.6 },
+  // Aug 2026: revised 5.6 → 5.5 in the Nov 13 release (12-mo recomputed on the
+  // revised index; verified from index values 157.673 vs 149.466 = 5.49).
+  { date: "2026-08-31", value: 5.5 },
   // Sep 2026: BLS release Oct 15 — 6.3% YoY (unadj. 12-mo), largest since Dec 2022;
-  // +1.3% MoM SA, largest since Mar 2022. BLS index 159.613.
+  // +1.3% MoM SA, largest since Mar 2022. BLS index 159.613 (revised to 159.535 in
+  // the Nov release; 12-mo unchanged at 6.3).
   { date: "2026-09-30", value: 6.3 },
+  // Oct 2026: BLS release Nov 13 — 6.5% YoY (unadj. 12-mo, WPUFD4), the largest
+  // since late 2022 (CNBC: "highest in nearly four years"); +0.3% MoM SA (Sep
+  // revised +1.3% → +1.4%). Core (ex food, energy, trade) +0.5% MoM, +4.9% YoY.
+  // BLS index 160.248 (preliminary).
+  { date: "2026-10-31", value: 6.5 },
 ];
 
 // ---------- Streaks (derived, Oct 5) ----------
