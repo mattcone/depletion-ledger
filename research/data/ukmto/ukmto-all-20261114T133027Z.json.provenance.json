@@ -1,0 +1,12 @@
+{
+  "source": "UKMTO API (sccd.royalnavy.mod.uk/api/ukmto/all, same endpoint the site fetcher uses)",
+  "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+  "fetched_utc": "2026-11-14T13:30:28.109Z",
+  "entries": 61,
+  "first": 143,
+  "last": 204,
+  "coverageNote": "coverageEnd advanced to 2026-11-14 by ukmto-fetch.mjs --apply this pass (page verified current); no new entries (#204 remains the latest); 4 Iranian mine-strike claims of Nov 13-14 not in official channel (unverified)",
+  "file": "research/data/ukmto/ukmto-all-20261114T133027Z.json",
+  "size_bytes": 65425,
+  "sha256": "cefb1d6bf733b2125e7b33b1789d873bcb39f6baef84831ca7d750906d2293f7"
+}
