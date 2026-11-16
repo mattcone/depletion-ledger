@@ -329,8 +329,10 @@ def load_rows():
 
 
 def save_rows(rows):
+    # lineterminator="\n": csv's default writes CRLF, which would rewrite every
+    # line of an LF file on each resolve (Nov 15 review — the whole-file diff).
     with open(CALIBRATION, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=CSV_HEADER)
+        w = csv.DictWriter(f, fieldnames=CSV_HEADER, lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
 

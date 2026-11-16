@@ -1,63 +1,75 @@
-# Crisis state — Nov 14 (morning pass)
+# Crisis state — Nov 15 (morning pass)
 
-Sources and decisions: [Nov 14 daily log](logs/2026-11-14.md) · [Nov 13 daily log](logs/2026-11-13.md) · [judgment history](judgment-history.md)
+Sources and decisions: [Nov 15 daily log](logs/2026-11-15.md) · [Nov 14 daily log](logs/2026-11-14.md) · [judgment history](judgment-history.md)
 
 ## Current read
 
 **Judgment:** 10 / 50 / 40 — corridor holds / standoff / corridor lapses. **HOLD; any
-reweight remains a user decision.** UKMTO: **no new entries** this pass (61,
-#143–#204; coverage to Nov 14). The four Iranian mine-strike claims of Nov 13–14
-(an LNG carrier on the southern US-escorted route, two oil tankers, and a tanker
-east of the strait) are **unverified — state media only** (IRNA, Tasnim; no vessel
-names); ISW-CTP sees no indicators of re-mining and the US military says it has
-cleared the routes (Reuters, CBS). CENTCOM rejected the IRGC's Nov 13 claim on a
-US early-warning radar in Bahrain — two drones launched, both shot down, "no
-injuries or damage" (AP, ANI) — the first US-confirmed Iranian launch at a Gulf
-host state since early September (ISW-CTP). The Washington Institute counts at
-least 10 ships hit in the first 10 days of November, after 37 attacks in October.
-#204 (Dominica Prosperity, Nov 11) remains the latest confirmed tanker casualty —
-no update on the fire this pass. #199's burning tanker remains Reuters-verified as
+reweight remains a user decision.** UKMTO: **one new entry** this pass — #205
+(Nov 15: tanker attacked while transiting eastbound in the Arabian Gulf before
+entering the strait, crew safe, damage unknown; 62 entries, #143–#205, coverage
+to Nov 15). UKMTO's **Nov 13 weekly overview** supersedes the Nov 6 one: 139
+outbound / 169 inbound transits for the week to Nov 11 (≈65% below pre-war
+levels), 8 incidents (two of unknown outcome, none sunk), 163 conflict-related
+incidents since Feb 28 (Al Jazeera, Gulf News). The Iranian mine-strike claims
+have grown to **at least six vessels** (Nov 13–15) and remain **unverified —
+state media only** (IRNA, Tasnim; no vessel names); ISW-CTP sees no indicators
+of re-mining and the US military says it has cleared the routes (Reuters, CBS).
+The IRGC claimed a **second strike on the US radar at the Riffa base, Bahrain**
+in the early hours of Nov 15 (six drones, per Fars); Bahrain issued its first
+nationwide threat alert in months and says it intercepted them; CENTCOM had not
+commented as of the morning of Nov 15 (Al Jazeera, RFE/RL). **Trump, Xi and
+Putin meet in Shenzhen on Nov 19** (Kremlin and White House confirmed; CBS,
+CNN, Le Monde); the stated focus is nuclear arms, and officials say the Iran
+war will also be discussed (Al Jazeera). #204 (Dominica
+Prosperity, Nov 11) remains the latest confirmed tanker casualty — no update on
+the fire this pass. #199's burning tanker remains Reuters-verified as
 Navig8-managed with identity unresolved; no sinking confirmed.
 
 **Filter (diagnostic, not public odds):** HORIZON **15.0 / 50.0 / 35.0**; STATE
-**0.1 / 99.9 / 0.0** (35th run — Brent $95.84, the Nov 13 settlement, still in the
-$90–100 band; identical to run 34). Inputs: 11 transits (to Oct 30, 15 days stale),
-one tanker loss (the #199 burning tanker — the model input; the site copy does not
-call it a confirmed loss), Brent **$95.84**, and Kpler's 7.195M b/d through Oct 28
-(17 days stale, basis not switched).
+**0.1 / 99.9 / 0.0** (36th run — inputs unchanged since run 35; weekend, no new
+settlement). Inputs: 11 transits (to Oct 30, 16 days stale), one tanker loss (the
+#199 burning tanker — the model input; the site copy does not call it a confirmed
+loss), Brent **$95.84** (Nov 13 settlement, still in the $90–100 band), and
+Kpler's 7.195M b/d through Oct 28 (18 days stale, basis not switched).
 
 **Candidate shadow:** HORIZON **15.2 / 49.9 / 34.9** (0.152362 / 0.498948 /
 0.348689); STATE **0.5 / 99.5 / 0.0** (0.005250 / 0.994746 / 0.000004).
 Not published. Identical to the Nov 6–14 runs (no new Kpler print; Brent is
-context, not a state observation, in the candidate).
+context, not a state observation, in the candidate). Vintage: volume 18 days
+old, transits 16.
 
 **Storage context:** the reference draw band is 0.45M b/d (the $90–100 band) at
-Brent $95.84. It implies about 275.9M barrels in the SPR by Nov 14, based on the
-Nov 6 WPSR figure of 279.535M and eight elapsed days. Reference estimate, not a
+Brent $95.84. It implies about 275.5M barrels in the SPR by Nov 15, based on the
+Nov 6 WPSR figure of 279.535M and nine elapsed days. Reference estimate, not a
 new inventory report; the 250M operational floor sits around Jan 11, 2027 at band
 pace.
 
 **Other model metrics:** elasticity sensitivity is −0.26 / −0.52 / −0.78 mb/d per
 +$5 Brent move (ε 0.05 / 0.10 / 0.15, marginal from the Nov 6 settle $98.32) —
-unchanged. **Polymarket weekly cross-check (last: Nov 14):** "Hormuz normal by
-Dec 31" = **5.5%** (was 8.5% Nov 10, 12% Oct 15); "by Nov 30" = **1.2%** (was 3%)
-— further movement toward closure. This market asks whether Hormuz will be
-"normal" by a date, which is not the same event as the model's corridor-state
-categories. Calibration ledger: 4 resolved, 7 open (Brier 0.2009); the Nov 15
-corridor-lapses binary set (5 rows) settles in 1 day.
+unchanged. **Polymarket weekly cross-check (last: Nov 15, gamma API):** "Hormuz
+normal by Dec 31" = **4.5%** (5.5% Nov 14, 8.5% Nov 10, 12% Oct 15); "by Nov 30"
+= **1.65%** (1.2% Nov 14, 3% Nov 10) — thin market, noise around the same
+level. This market asks whether Hormuz will be "normal" by a date, which is not
+the same event as the model's corridor-state categories. **Calibration ledger:
+9 resolved, 2 open (running Brier 0.2724)** — the Nov 15 corridor-lapses binary
+set (5 rows: filter v2.1 at p=0.828 plus the four judgment rows) settled this
+pass, all **0** (no lapse — the strait is open: 139/169 transits the week to Nov
+11, bypass operating since Sep 29); the judgment row (10/50/40) scored 0.1600,
+the best of the set; the filter v2.1 row at 0.6856 is the worst. Open: ceasefire
+by Sep 30 (p=0.15, source market unrecoverable) and by Dec 31 (p=0.579).
 
 ## Markets, shipping, and stocks
 
-- **Prices:** Nov 13 settlements now plotted — Brent **$95.84** (January contract,
-  +$0.02; Rigzone; Yahoo BZ=F matched) and WTI **$88.56** (December contract,
-  −$0.18; Rigzone; Yahoo CL=F matched; $7.28 below January Brent). Both were on
-  course for a second straight weekly decline (Brent about −2.4% for the week, per
-  HDFC Sky citing Reuters); oil touched intraday highs after Axios reported the
-  Mossad director was in Washington for Iran talks. Brent is down 15.5% from the
-  Oct 30 settlement of $113.43. The December WTI contract's last trading day is
-  Nov 20 — the series rolls to January after that. 10-yr: the Nov 13 close is
-  **5.154** — second straight close above 5% (Nov 12: 5.103, the first since
-  Oct 28).
+- **Prices (weekend — no new settlements):** Brent **$95.84** (January contract,
+  Nov 13; Rigzone; Yahoo BZ=F matched) and WTI **$88.56** (December contract,
+  Nov 13; $7.28 below January Brent) remain the latest plotted; Brent posted a
+  second straight weekly decline (about −2.4% for the week, per HDFC Sky citing
+  Reuters) and is down 15.5% from the Oct 30 settlement of $113.43. The
+  December WTI contract's last trading day is **Nov 20 (Friday)** — the series
+  rolls to January after that. 10-yr: the Nov 13 close of **5.154** (second
+  straight close above 5%; Nov 12: 5.103, the first since Oct 28) is unchanged —
+  the next session is Mon Nov 16.
 - **CPI (released Nov 10, BLS USDL-26-1685):** October consumer prices **+0.4% MoM
   (SA)** — above the +0.3% consensus — and core **+0.3%**, the third straight
   month at that pace. **No headline or core 12-month rate was published** (the
@@ -73,18 +85,21 @@ corridor-lapses binary set (5 rows) settles in 1 day.
   unpublished, 6.5% is the latest official annual print — and the strongest
   case yet for a December Fed hike (CNBC: "keeping pressure on the Fed").
   November CPI, Dec 10.
-- **AAA Nov 14 (applied):** gasoline **$3.8406**, diesel **$6.0366** — the
-  **18th straight daily decline since Oct 28**, and **$0.49 below** AAA's Sep 22
-  record of $6.5276. Nov 14 retail-minus-WTI gap (paired to the Nov 13 settlement
-  $88.56, derived): **$165.0 diesel / $72.7 gasoline** (Nov 13: 166.1 / 74.1
-  same-day; Nov 12 re-paired to its own settlement: 167.4 / 75.4).
-- **Hormuz:** UKMTO's latest overview (week ending Nov 6) is still the operative
-  figure: 170 outbound / 155 inbound transits, about 65% below pre-conflict
-  levels, 11 attacks (three counted as sunk, unnamed); 88 projectile strikes since
-  July 6. **No new UKMTO entries this pass** (coverage to Nov 14); JMIC's Nov 12
-  advisory counts 181 incidents since Mar 1 and about 211 vessels waiting at
-  anchorages east of Hormuz. New this pass (unverified, state media): Iran's four
-  mine-strike claims (Nov 13–14) — see Current read. Kpler's latest full-month
+- **AAA Nov 15 (applied):** gasoline **$3.8242**, diesel **$6.0198** — the
+  **19th straight daily decline since Oct 28**, and **$0.51 below** AAA's Sep 22
+  record of $6.5276. Nov 15 retail-minus-WTI gap (paired to the Nov 13 settlement
+  $88.56 — Sunday, no same-day settlement; derived): **$164.3 diesel / $72.1
+  gasoline** (Nov 14: 165.0 / 72.7; Nov 13: 166.1 / 74.1 same-day).
+- **Hormuz:** UKMTO's **Nov 13 weekly overview** is now the operative figure:
+  **139 outbound / 169 inbound transits** for the week to Nov 11 (≈65% below
+  pre-war levels), 8 incidents in the Strait / Arabian Gulf / Gulf of Oman (two
+  of unknown outcome, none sunk), 163 conflict-related incidents since Feb 28
+  (Al Jazeera, Gulf News). **New entry #205 (Nov 15):** tanker attacked while
+  transiting eastbound in the Arabian Gulf before entering the strait, crew
+  safe, damage unknown (UKMTO, via AA). JMIC's Nov 12 advisory counts 181
+  incidents since Mar 1 and about 211 vessels waiting at anchorages east of
+  Hormuz. The Iranian mine-strike claims (≥6 vessels since Nov 13) remain
+  unverified, state media only — see Current read. Kpler's latest full-month
   figure put October crude flows at 11.1M b/d (~2% below September); Kpler (Nov
   11) puts total Gulf exports incl. bypass routes at 16.7M b/d since early October
   vs ~17M pre-war; Kpler data reported by Reuters (Nov 9) put October crude
@@ -102,10 +117,19 @@ corridor-lapses binary set (5 rows) settles in 1 day.
   Rubio said strait oil/fuel flows had reached 80–85% of pre-conflict levels on
   some nights, the gap being Iranian oil (AP). Iraq's lane near Oman is not yet
   implemented.
-- **Iran / US:** neither side is moving toward a deal, but the channels moved.
-  **CENTCOM denied the IRGC's Nov 13 radar claim** (two drones toward Bahrain
-  shot down, no damage — AP, ANI; ISW-CTP: first confirmed launch at a Gulf host
-  state since early September). **Mossad director Gofman in Washington** (Nov 13):
+- **Iran / US:** neither side is moving toward a deal, but the channels moved
+  and the strikes continued. **CENTCOM denied the IRGC's Nov 13 radar claim**
+  (two drones toward Bahrain shot down, no damage — AP, ANI; ISW-CTP: first
+  confirmed launch at a Gulf host state since early September). **Early Nov 15
+  the IRGC claimed a second strike on the same Riffa radar** (six drones, per
+  Fars); Bahrain issued its first nationwide threat alert in months and says it
+  intercepted them; CENTCOM had not commented as of the morning of Nov 15 (Al
+  Jazeera, RFE/RL). **The Trump–Xi–Putin trilateral is set for Nov 19 in
+  Shenzhen** (Kremlin and White House confirmed; on the sidelines of APEC with
+  nuclear arms-reduction talks — CBS, CNN, Le Monde); the stated focus is
+  nuclear arms, and officials say the Iran war will also be discussed (Al
+  Jazeera). IEA: Iranian October production fell to **1.86M b/d** —
+  below the country's own refinery needs (via Iran International). **Mossad director Gofman in Washington** (Nov 13):
   met Ratcliffe, expected to meet Witkoff in Miami; Netanyahu pressing for a
   resumed war, Trump refusing ("I could end it immediately"; the Saudis want the
   status quo — Iran is "disintegrating" — Axios). Bessent: the campaign is
@@ -120,16 +144,26 @@ corridor-lapses binary set (5 rows) settles in 1 day.
   **one drone at King Khalid International Airport** (Houthi spokesman Sarea, Al
   Masirah); no Saudi confirmation. Their **Lahij offensive advanced ~12 km**
   before Saudi forces retook the ground on Nov 13, with Saudi close air support in
-  Lahij and southern Taiz (Critical Threats, Khaleej Times). CBS: at least 20
-  killed in attacks on Saudi Arabia since early October. The GCC's Kuwait unified
+  Lahij and southern Taiz (Critical Threats, Khaleej Times). The coalition says at
+  least 26 killed in the Kingdom since Sep 23 (Saudi authorities, via Al
+  Jazeera, Nov 15 — re-verified post-review); Nov 14–15 it intercepted two
+  Houthi ballistic missiles aimed at Riyadh (Nov 15) and three drones over the
+  eastern region (Reuters, Gulf News). The GCC's Kuwait unified
   command (assigned Nov 10) has no operational date.
 - **Iraqi Kurdistan:** the suspected drone attack on the **Khor Mor gas field**
   (late Nov 8 / Nov 9) suspended production (~2,800 MW of generation offline);
   **no claim of responsibility as of Nov 11**.
-- **Russia:** no new strikes this pass — the tally stands at **12 sites**
-  (window Oct 24–Nov 13, latest: **Volgograd, Nov 12–13** — four workers killed,
-  refinery itself not officially confirmed hit; **Omsk, Nov 11** — Russia's
-  largest refinery, ~440 kb/d, third strike). New this pass: **Reuters reported
+- **Russia:** **new confirmed strike: TAIF-NK at Nizhnekamsk, Tatarstan**
+  (Russia's sixth-largest refinery; heavy oil and condensate) — Ukraine's General
+  Staff said the plant's only primary crude-distillation unit (ELOU-AVT-7) was
+  hit, fire reported; the adjacent Nizhnekamskneftekhim petrochemical complex
+  was also hit (Ukrinform, Kyiv Post, Kyiv Independent, Nov 15 report on the
+  overnight wave). **Volgograd: Ukraine's General Staff says it struck** the
+  Lukoil refinery's oil-processing units (Nov 13 claim; four workers killed; city
+  gasoline prices rose ~50 kopeks/l overnight — Moscow Times). Russian officials
+  have not confirmed the refinery was hit. The site tally
+  stands at **13 sites** (window Oct 24–Nov 15; latest: **Omsk, Nov 11** —
+  Russia's largest refinery, ~440 kb/d, third strike). Standing: **Reuters reported
   Nov 12 that fuel shortages have returned in at least six regions** (via National
   Security Journal); long queues at Volgograd petrol stations (Archyde); Moscow
   claimed 1,198 drones downed in the Nov 12–13 overnight wave; CERAC's October
@@ -173,40 +207,55 @@ corridor-lapses binary set (5 rows) settles in 1 day.
 
 ## Next dates
 
-- **Nov 15** — the corridor-lapses binary settles (proxy: sustained ~0 verified
-  transits; 11/day to Oct 30 argue against lapse); Israeli security cabinet
-  (Netanyahu briefing aftermath); the Witkoff–Gofman Miami meeting outcome.
-- **Nov 16** — next JOGMEC TTF/JKM assessed print.
+- **Nov 16** — US markets reopen (Mon; the first session after the Nov 13
+  close of 5.154%); next JOGMEC TTF/JKM assessed print; the Witkoff–Gofman
+  Miami meeting outcome; CENTCOM response to the Nov 15 Riffa claim; the
+  Dominica Prosperity fire (day 4).
 - EIA WPSR, **Wed Nov 18, noon ET** (w/e Nov 13).
-- **WTI December-contract roll after Nov 20**; OPEC+ meeting, Nov 29; STEO Dec
-  edition, ~Dec 11 (next scheduled EIA–market spread check); **CPI, Dec 10**.
+- **Nov 19** — **Trump–Xi–Putin trilateral, Shenzhen** (Iran on the agenda per
+  the White House); the Dec WTI contract's last trading day is Nov 20.
+- **WTI December-contract roll after Nov 20**; OPEC+ ministerial, Nov 29 (2027
+  policy); STEO Dec edition, ~Dec 11 (next scheduled EIA–market spread check);
+  **CPI, Dec 10**.
 - **The standing reweight condition remains met** after the Nov 8 review. This
-  pass added no confirmed loss (the four mine claims are state media only); the
-  next Kpler print is the clean physical reweight point; **open question: the
+  pass added no confirmed loss (the mine claims — now ≥6 vessels — are state
+  media only; #205 was an attack, crew safe, damage unknown); the next Kpler
+  print is the clean physical reweight point; **open question: the
   model's volume basis (7.195M total-oil vs the Reuters-reported 10.3M
   crude-only) — a basis change moves the STATE/HORIZON rows and needs an
   explicit decision.**
-- Watch: the Dominica Prosperity's fate; corroboration of the four Iranian mine
-  claims (UKMTO confirmation or vessel names); the #199 tanker's identity; the
-  Omsk/Volgograd production halts; the Qatari two-week window; Khor Mor
-  attribution; Iraq transit-lane implementation; the Fed's reaction to the 6.5%
+- Watch: the Dominica Prosperity's fate; corroboration of the Iranian mine
+  claims (≥6 vessels; UKMTO confirmation or vessel names); the #199 tanker's
+  identity; the Nov 19 trilateral; the Riffa CENTCOM response; the
+  Omsk/Volgograd/Nizhnekamsk production halts; the Qatari two-week window; Khor
+  Mor attribution; Iraq transit-lane implementation; the Fed's reaction to the 6.5%
   PPI print (December-hike pricing); whether the 10-year holds above 5% (two
   straight closes now); the OMR paywalled PDF for the month-by-month inventory
   detail; 7 UKMTO entries (#189, #192, #193, #194, #196, #199, #200) changed
   dates on the API — manual review before re-typing.
-- **Prod:** `fe4ed14d-7a86-40c1-9d08-4a9239ea9874` (bundle `wDA6wXGh.js`) — full
-  Nov 14 state + both external-review rounds (5 copy fixes, six cut claims
-  restored, Diplomacy re-grouping with the direct JPost “disintegrating” quote
-  and the Stephen A. Smith interview attribution; “released Nov 13” corrected —
-  the interview came out Nov 12). Live-verified PASS 07:40.
-- (prior prod `088023e0` — Nov 13 state, superseded.)
-- **Staging:** `120a258d-728c-4878-a16d-624de2e95983` (bundle `wDA6wXGh.js`) —
-  full Nov 14 state plus the external review's 5 copy fixes (second-straight-
-  weekly-decline wording, Mossad-name/mine-claim removal, Reuters "first claimed
-  attack" wording, Volgograd gas-station-lines (Meduza), core-PPI measure
-  labeled) and the six cut claims restored in condensed form with found links
-  (Trump "end it immediately"/disintegrating (JPost, INN); Bessent "squeezing
-  the regime" (ABC); Qalibaf–Putin (AP); Lahij 12 km (ISW); Washington Institute 10 ships
-  (Hindu/Baird); ISW no re-mining). Live-verified PASS.
-- (prior staging `6199fbaf` — superseded.)
-- **Prod and staging are in sync** after the 07:34–07:40 prod deploy.
+- **Prod:** `c47af500-f4fc-469b-9ab6-44ee80148667` (bundle `DIY8ek_M.js`) —
+  full Nov 15 state (AAA Nov 15 diesel $6.0198 / gasoline $3.8242; UKMTO #205
+  + coverage to Nov 15; TAIF-NK Nizhnekamsk strike + 13-site tally; Volgograd
+  as a General-Staff claim; shortened watch items) PLUS the external review's
+  fixes: trilateral attribution ("officials say the Iran war will be
+discussed"), death toll as "at least 26 people have been killed since Sep 23,
+  23 of them in airport strikes (Saudi authorities; Al Jazeera, Arab News)" +
+  CBS's 20, and the Nov 15 intercepts as "two ballistic missiles … plus drones
+  over the east; reports differ on how many". Deployed on the user's explicit
+  go-ahead, 07:54. Live-verified PASS (depletion.org + custom domain).
+- (prior prod `fe4ed14d` — Nov 14 state, superseded; `088023e0` — Nov 13
+  state, superseded.)
+- **Staging:** `9d7aebaf-d454-46cd-bdd3-3fe95e8a2fd0` — full Nov 15 state
+  (AAA Nov 15 diesel $6.0198 / gasoline $3.8242; UKMTO #205 + coverage to Nov 15;
+  TAIF-NK Nizhnekamsk strike + 13-site tally + window to Nov 15; Volgograd as a
+  General-Staff claim; watchlist: Riffa Nov 15 attack, Nov 19 trilateral, UKMTO
+  Nov 13 weekly overview, mine claims ≥6, Houthi Nov 14–15 interceptions) PLUS
+  the external review's 5 fixes (trilateral attribution, dual death-toll
+  figures, Volgograd claim wording, crack comment 164.3/72.1, calibration.csv
+  LF) and the death-toll re-verification (26 = Saudi authorities via Al
+  Jazeera, not Gulf News). Live-verified PASS.
+- (prior staging `b9cfd56d` — Nov 15 state before the review's fixes,
+  superseded; `120a258d` — Nov 14 state, superseded.)
+- **Prod is now current** — `c47af500` is live on depletion.org (deployed 07:54
+  on the user's explicit go-ahead), one step ahead of staging `9d7aebaf`, which
+  predates the two 07:40 Houthi-copy fixes (death-toll wording, drone count).
