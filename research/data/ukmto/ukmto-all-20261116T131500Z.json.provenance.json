@@ -1,0 +1,12 @@
+{
+  "source": "UKMTO API (sccd.royalnavy.mod.uk/api/ukmto/all, same endpoint the site fetcher uses)",
+  "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+  "fetched_utc": "2026-11-16T13:15:00+00:00",
+  "entries": 64,
+  "first": 143,
+  "last": 207,
+  "coverageNote": "Nov 16 pass archive (ukmto-fetch.mjs --apply appended #206/#207 and advanced coverageEnd to 2026-11-16; provenance file added post-review per review-2026-11-16.md — the Nov 16 pass shipped without one). Sliding window: 64 entries over #143–#207 (one number in the range is outside the current window).",
+  "file": "research/data/ukmto/ukmto-all-20261116T131500Z.json",
+  "size_bytes": 68707,
+  "sha256": "ea176d58dd24b55956a1781066f5ffb35f56c3a53f8a29677330d4317ee751d2"
+}
