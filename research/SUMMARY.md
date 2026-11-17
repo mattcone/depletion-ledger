@@ -1,55 +1,62 @@
-# Crisis state — Nov 16 (full pass)
+# Crisis state — Nov 17 (full pass)
 
-Sources and decisions: [Nov 16 daily log](logs/2026-11-16.md) · [Nov 15 daily log](logs/2026-11-15.md) · [judgment history](judgment-history.md)
+Sources and decisions: [Nov 17 daily log](logs/2026-11-17.md) · [Nov 16 daily log](logs/2026-11-16.md) · [judgment history](judgment-history.md)
 
 ## Current read
 
 **Judgment:** 10 / 50 / 40 — corridor holds / standoff / corridor lapses. **HOLD; any
-reweight remains a user decision.** UKMTO: **two new entries** this pass — #206
-(Nov 16: suspicious activity, 430NM east of Socotra) and #207 (Nov 16: attack, Strait of Hormuz, outbound tanker, engine-room fire);
-126 entries, #143–#207, coverage to Nov 16. All 8 date-drift flags adjudicated
-as the expected registration-timestamp pattern — none applied. UKMTO's **Nov 13
-weekly overview** remains the operative figure: 139 outbound / 169 inbound
-transits for the week to Nov 11 (≈65% below pre-war levels), 8 incidents (two
-of unknown outcome, none sunk), 163 conflict-related incidents since Feb 28.
-The Iranian tanker-strike claims have grown to **at least seven vessels**
-(Nov 13–15) and remain **unverified — state media only**; the newest claim
-(Nov 15, IRGC): two more tankers struck, one a **supertanker (≥2M bbl) that
-"sank"** — no UKMTO warning, no hull name, no wreckage photos; the tanker-loss
-input stays at 1. **Bahrain:** CENTCOM's only Riffa statement (Nov 13) confirms
-two drones shot down by the F-35C at the Al-Riffa radar station, the rest
-"accounted for by the Kingdom of Bahrain," no injuries or damage; the IRGC's
-Nov 16 claim that the radar itself was hit by **six drones** is still
-unanswered by CENTCOM as of this pass. **A THIRD US carrier group (USS
-Theodore Roosevelt, CVW-11) is now in the region** (third carrier since the
-blockade began) — the largest naval escalation signal of the week. **Trump, Xi
-and Putin meet in Shenzhen on Nov 19** (confirmed; APEC sidelines). #204
-(Dominica Prosperity, Nov 11) is on day 4: still burning, salvage underway
-(Copernicus EU satellite), crew evacuated. #199's burning tanker remains
-Reuters-verified as Navig8-managed with identity unresolved; no sinking
-confirmed.
+reweight remains a user decision.** UKMTO: **one new entry** this pass — #209 (Nov 13:
+attack on an eastbound tanker in the Arabian Gulf before the strait, 26.5N 56.33E —
+time-late report; crew safe, damage unknown); 128 entries, #143–#209, coverage to Nov 17. The 8 date-drift flags
+stand adjudicated (registration-timestamp pattern) — none applied; the API also
+re-classed #202's type (flagged, not applied). UKMTO's **Nov 13 weekly overview**
+remains the operative figure: 139 outbound / 169 inbound transits for the week to
+Nov 11 (≈65% below pre-war levels), 8 incidents (two of unknown outcome, none sunk),
+163 conflict-related incidents since Feb 28. The Iranian tanker-strike claims have
+grown to **at least seven vessels** (Nov 12–15), with more mine hits claimed
+since (state media only) — all **unverified**; the Nov 15 supertanker
+claim (≥2M bbl, "sank") still has no UKMTO warning, no hull name, no wreckage
+photos; the tanker-loss input stays at 1. Trade press identified the week's two
+tankers: **Al Dhannah** (IMO 9783734, ADNOC-linked), hit Nov 15 in the Arabian Gulf
+(steering gear), turned back to Dubai; Live-AIS says it is UKMTO #205. **ON Phoenix**
+(IMO 9893228), hit Nov 16 about 3 NM off Oman (engine-room fire, crew uninjured;
+Vanguard Tech); no UKMTO number confirmed (Maritime Executive). **#208 UPDATE 001
+(Nov 17 07:45Z): a second strike and fire; crew currently unaccounted for.** **Bahrain:** on Nov 17 the IRGC launched more drones and
+claimed a US radar hit; CENTCOM called it **false**: the drones "were intercepted
+without any damage to US equipment or injury to American personnel" (Gulf News,
+CBS News). This addresses the Nov 17 launch; a specific US response to the Nov 15
+Riffa claim is still not found. The Nov 13 CENTCOM
+statement (two drones shot down at the Riffa base) remains the only US-confirmed
+host-state launch since early September (ISW-CTP); separately the IRGC claimed
+Nov 16 that it captured a US MQM-170 drone — no US confirmation. **A THIRD US carrier group
+(USS Theodore Roosevelt, CVW-11) is in the region** — the largest naval escalation
+signal of the week. **Trump, Xi and Putin meet in Shenzhen on Nov 19** (confirmed;
+APEC sidelines). #204 (Dominica Prosperity, Nov 11) is on day 5: still burning,
+salvage underway, crew evacuated. #199's burning tanker remains Reuters-verified as
+Navig8-managed with identity unresolved; no sinking confirmed.
 
-**Filter (diagnostic, not public odds):** HORIZON **15.0 / 50.0 / 35.0**; STATE
-**0.1 / 99.9 / 0.0** (37th run — inputs unchanged since run 36; no new
-settlement at pass time, no new Kpler print, no new confirmed loss). Inputs: 11 transits (to Oct 30, 16 days stale), one tanker loss (the
+**Filter (diagnostic, not public odds):** HORIZON **15.1 / 50.0 / 34.9**
+(0.151153 / 0.500128 / 0.348720); STATE **0.2 / 99.8 / 0.0** (39th run — no
+trigger: the Nov 16 settlement ($92.44) is in the same $90–100 band as the Nov 13
+$95.84; no new Kpler print, no new confirmed loss). Inputs: 11 transits (to Oct 30, 18 days stale), one tanker loss (the
 #199 burning tanker — the model input; the site copy does not call it a confirmed
-loss), Brent **$95.84** (Nov 13 settlement, still in the $90–100 band), and
-Kpler's 7.195M b/d through Oct 28 (18 days stale, basis not switched).
+loss), Brent **$92.44** (Nov 16 settlement, in the $90–100 band), and
+Kpler's 7.195M b/d through Oct 28 (20 days stale, basis not switched).
 
 **Candidate shadow:** HORIZON **15.2 / 49.9 / 34.9** (0.152362 / 0.498948 /
 0.348689); STATE **0.5 / 99.5 / 0.0** (0.005250 / 0.994746 / 0.000004).
-Not published. Identical to the Nov 6–15 runs (no new Kpler print; Brent is
-context, not a state observation, in the candidate). Vintage: volume 19 days
-old, transits 17.
+Not published. Identical to the Nov 6–16 runs (no new Kpler print; Brent is
+context, not a state observation, in the candidate). Vintage: volume 20 days
+old, transits 18.
 
 **Storage context:** the reference draw band is 0.45M b/d (the $90–100 band) at
-Brent $95.84. It implies about 275.0M barrels in the SPR by Nov 16, based on the
-Nov 6 WPSR figure of 279.535M and ten elapsed days. Reference estimate, not a
+Brent $92.44. It implies about **274.6M** barrels in the SPR by Nov 17, based on the
+Nov 6 WPSR figure of 279.535M and eleven elapsed days. Reference estimate, not a
 new inventory report; the 250M operational floor sits around Jan 11, 2027 at band
-pace (~56 days).
+pace (~55 days).
 
-**Other model metrics:** elasticity sensitivity is −0.26 / −0.52 / −0.78 mb/d per
-+$5 Brent move (ε 0.05 / 0.10 / 0.15, marginal from the Nov 6 settle $98.32) —
+**Other model metrics:** elasticity sensitivity is −0.27 / −0.53 / −0.80 mb/d per
++$5 Brent move (ε 0.05 / 0.10 / 0.15, marginal from the Nov 13 settle $95.84) —
 unchanged. **Polymarket weekly cross-check (last: Nov 15, gamma API):** "Hormuz
 normal by Dec 31" = **4.5%** (5.5% Nov 14, 8.5% Nov 10, 12% Oct 15); "by Nov 30"
 = **1.65%** (1.2% Nov 14, 3% Nov 10) — thin market, noise around the same
@@ -64,16 +71,14 @@ by Sep 30 (p=0.15, source market unrecoverable) and by Dec 31 (p=0.579).
 
 ## Markets, shipping, and stocks
 
-- **Prices (Mon Nov 16 — settlement not yet printed at pass time):** Brent
-  **$95.84** (January contract, Nov 13 settlement; Rigzone; Yahoo BZ=F matched)
-  and WTI **$88.56** (December contract, Nov 13; $7.28 below January Brent)
-  remain the latest plotted. Nov 16 intraday: WTI ~$87.76, Brent ~$94.68 —
-  **both below the Nov 13 settlements; NOT plotted** (settles ~14:30 ET, after
-  the pass). Brent is down 15.5% from the Oct 30 settlement of $113.43. The
-  December WTI contract's last trading day is **Nov 20 (Friday)** — the series
-  rolls to January after that. 10-yr: the Nov 16 session is incomplete at pass
-  time — the Nov 13 close of **5.154** (second straight close above 5%;
-  Nov 12: 5.103, the first since Oct 28) remains the latest bar.
+- **Prices (Nov 16 settles are the latest; Nov 17 settle not yet printed at pass time):**
+  Brent **$92.44** (January contract, −3.6% vs the Nov 13 $95.84; Yahoo BZ=F
+  match) and WTI **$85.72** (December contract; $6.72 below January Brent)
+  plotted. Nov 17 intraday (06:20 ET): WTI $86.360, Brent $93.120 — **NOT
+  plotted** (settles ~14:30 ET, after the pass). Brent is down 18.5% from the
+  Oct 30 settlement of $113.43. The December WTI contract's last trading day is
+  **Nov 20 (Friday)** — the series rolls to January after that. 10-yr: **Nov 16
+  close 5.121** — third straight close above 5% (Nov 13: 5.154, Nov 12: 5.103).
 - **CPI (released Nov 10, BLS USDL-26-1685):** October consumer prices **+0.4% MoM
   (SA)** — above the +0.3% consensus — and core **+0.3%**, the third straight
   month at that pace. **No headline or core 12-month rate was published** (the
@@ -89,23 +94,30 @@ by Sep 30 (p=0.15, source market unrecoverable) and by Dec 31 (p=0.579).
   unpublished, 6.5% is the latest official annual print — and the strongest
   case yet for a December Fed hike (CNBC: "keeping pressure on the Fed").
   November CPI, Dec 10.
-- **AAA Nov 16 (applied):** gasoline **$3.8118**, diesel **$5.9989** — the
-  **20th straight daily decline since Oct 28**, and **$0.53 below** AAA's Sep 22
-  record of $6.5276 (−8.1% from the record). Nov 16 retail-minus-WTI gap (paired
-to the Nov 13 settlement $88.56 — no same-day settlement; derived): **$163.4
-diesel / $71.5 gasoline** (Nov 15: 164.3 / 72.1; Nov 13: 166.1 / 74.1
-  same-day).
+- **AAA Nov 17 (applied):** gasoline **$3.7818**, diesel **$5.9848** — the
+  **21st straight daily decline since Oct 28**, and **$0.54 below** AAA's Sep 22
+  record of $6.5276 (−8.3% from the record). Nov 17 retail-minus-WTI gap (paired
+to the Nov 16 settlement $85.72 — no same-day settlement; derived): **$165.6
+diesel / $73.1 gasoline** (Nov 16: 166.2 / 74.4 same-day; Nov 15: 167.1 / 74.9 — both
+  re-paired to the Nov 16 settlement).
 - **Hormuz:** UKMTO's **Nov 13 weekly overview** is now the operative figure:
   **139 outbound / 169 inbound transits** for the week to Nov 11 (≈65% below
   pre-war levels), 8 incidents in the Strait / Arabian Gulf / Gulf of Oman (two
   of unknown outcome, none sunk), 163 conflict-related incidents since Feb 28
-  (Al Jazeera, Gulf News). **New entries this pass: #206 (Nov 16, suspicious
-  activity east of Socotra) and #207 (Nov 16, attack in the Strait of Hormuz)** — no confirmed loss;
-  #205 (Nov 15) remains the last attack entry. The IRGC's Nov 15 supertanker
+  (Al Jazeera, Gulf News). **New entry this pass: #209 (Nov 13, time-late —
+  attack on an eastbound tanker before the strait; crew safe; damage
+  unknown)**; 128 entries, coverage to Nov 17. The week's two tankers are now
+  identified in trade press: **Al Dhannah** (IMO 9783734, ADNOC-linked) =
+  #205 per Live-AIS; **ON Phoenix** (IMO 9893228, fire, crew uninjured), no UKMTO
+  number confirmed (Maritime Executive) — both already in the feed. **Kpler (Nov 17):
+  5 tracked transits Saturday, zero Sunday, vs 31 the prior weekend** — a
+  weekend pattern plus a tracking gap, not a state observation; Windward: 7 on
+  Nov 16 (one in dark mode). The IRGC's Nov 15 supertanker
   claim (≥2M bbl, "sank") is unverified — see Current read. JMIC's Nov 12
   advisory counts 181
   incidents since Mar 1 and about 211 vessels waiting at anchorages east of
-  Hormuz. The Iranian mine-strike claims (≥6 vessels since Nov 13) remain
+  Hormuz; IMO (Nov 17) puts the count at 136 incidents Mar 1–Nov 11, 35 in
+  October (different body/window — not reconciled). The Iranian mine-strike claims (≥6 vessels since Nov 13) remain
   unverified, state media only — see Current read. Kpler's latest full-month
   figure put October crude flows at 11.1M b/d (~2% below September); Kpler (Nov
   11) puts total Gulf exports incl. bypass routes at 16.7M b/d since early October
@@ -131,9 +143,10 @@ diesel / $71.5 gasoline** (Nov 15: 164.3 / 72.1; Nov 13: 166.1 / 74.1
   via MEE/RFE/RL; AP) — the first confirmed launch at a Gulf host state since
   early September (ISW-CTP). On Nov 15, the IRGC claimed six drones targeted a
   US radar at the Riffa helicopter base; Bahrain said it intercepted the attack
-  and issued its first nationwide alert since September. CENTCOM had not
-  commented on the Nov 15 claim by the morning of Nov 16 (Al Jazeera, CBS
-  News). **A THIRD US carrier group (USS Theodore
+  and issued its first nationwide alert since September. **On Nov 17 CENTCOM called a
+  new IRGC radar claim false** — the drones "were intercepted without any damage
+  to US equipment or injury to American personnel" (Gulf News, CBS News); the IRGC separately claimed a Nov 16 MQM-170 drone capture —
+  no US confirmation. **A THIRD US carrier group (USS Theodore
   Roosevelt, CVW-11) is now in the region** — the largest naval escalation of
   the week. **The Trump–Xi–Putin trilateral is confirmed for Nov 19 in
   Shenzhen** (Kremlin and White House; APEC sidelines, nuclear-arms focus;
@@ -167,15 +180,18 @@ diesel / $71.5 gasoline** (Nov 15: 164.3 / 72.1; Nov 13: 166.1 / 74.1
 - **Iraqi Kurdistan:** the suspected drone attack on the **Khor Mor gas field**
   (late Nov 8 / Nov 9) suspended production (~2,800 MW of generation offline);
   **no claim of responsibility as of Nov 11**.
-- **Russia:** **new to the tally: Ilsky Oil Refinery (Krasnodar Krai, 6.6 Mt/yr)** —
-  struck Nov 15–16, a repeat of the Sep 26 strike (three killed); the site
-  tally now stands at **14 sites** (window Oct 24–Nov 16). **Zelensky (Nov 15
+- **Russia:** **new to the tally: Gazprom Neftekhim Salavat (Bashkortostan,
+  refinery and petrochemical complex, ~10 Mt/yr)** — struck overnight Nov 16–17,
+  a repeat of the Oct 8 strike; no critical damage reported (Moscow Times);
+  the site tally now stands at **15 sites** (window Oct 24–Nov 17). Ilsky Oil Refinery (Krasnodar Krai, 6.6 Mt/yr) was added
+  Nov 15–16 (repeat of the Sep 26 strike, three killed). **Zelensky (Nov 15
   address): "more than 55% of Russia's oil refining capacity" neutralized** — up from the Oct
   4 figure of 51% (Defense Ministry) and the Sep 9 Forbes ~54%; Ukraine's claim,
   not independently verifiable — it now sets the LOW end of the spread (45–80%
-  remaining). The overnight wave was a **record 1,336 drones**; the **Crimean
-  Bridge was struck** (car traffic restricted; Kremlin: minor damage); it has
-  been hit before (Oct 2022, Jul 2023). Prior entries stand: TAIF-NK at Nizhnekamsk (Nov 15, the plant's only
+  remaining). A **second record drone wave: 1,441 UAVs downed Nov 16–17** (the
+  prior record was 1,336 on Nov 15–16); the **Crimean
+  Bridge was struck** Nov 15–16 (car traffic restricted; Kremlin: minor damage);
+  it has been hit before (Oct 2022, Jul 2023). Prior entries stand: TAIF-NK at Nizhnekamsk (Nov 15, the plant's only
   ELOU-AVT-7 unit hit); Volgograd (Nov 13 General-Staff claim; four killed);
   Omsk (Nov 11, third strike). Standing: **Reuters reported Nov 12 that fuel
   shortages have returned in at least six regions** (via National Security
@@ -193,8 +209,10 @@ diesel / $71.5 gasoline** (Nov 15: 164.3 / 72.1; Nov 13: 166.1 / 74.1
 - **Gas (TTF/JKM):** unchanged — TTF **$28.0/MMBtu** and JKM **$32.2/MMBtu** (Dec
   delivery, Nov 6 values, per the Global LNG Hub post of Nov 9) remain the latest
   plotted JOGMEC-assessed prices; **no new assessed print as of this pass**
-  (last known JKM–TTF spread 51.1¢/MMBtu, Nov 12, Platts); EU carbon slipped
-  below €90 on the free-permit deal — context, not a plotted series.
+  (last known JKM–TTF spread 51.1¢/MMBtu, Nov 12, Platts); a weekly bunker
+  snapshot (engine.online) shows January JKM trading around **$29.60/MMBtu** —
+  a traded CFD value, not an assessment; NOT plotted. EU carbon slipped below
+  €90 on the free-permit deal — context, not a plotted series.
 - **WPSR w/e Nov 6 (released Nov 12; ingested Nov 13):** SPR **279.535M
   (−2.649M)** — the largest weekly withdrawal since the week ending Aug 28
   (−3.122M); per Reuters the lowest since Oct 1982. Commercial crude ex-SPR
@@ -223,54 +241,58 @@ diesel / $71.5 gasoline** (Nov 15: 164.3 / 72.1; Nov 13: 166.1 / 74.1
 
 ## Next dates
 
-- **Nov 16 (evening) — pending at pass time:** the Nov 16 WTI/Brent
-  settlement (~14:30 ET) → apply + plot at the next pass (intraday at pass
-  time: WTI ~87.76 / Brent ~94.68, both below the Nov 13 settles); the 10-yr
-  Nov 16 close (site ends Nov 13 at 5.154); the next JOGMEC TTF/JKM assessed
-  print (not yet published — last spread 51.1¢/MMBtu, Nov 12); a CENTCOM
-  response to the IRGC's six-drone Riffa claim; the Dominica Prosperity
-  salvage (day 4).
+- **Nov 17 (evening) — pending at pass time:** the Nov 17 WTI/Brent settlement
+  (~14:30 ET) → apply + plot at the next pass (intraday at pass time: WTI
+  $86.360 / Brent $93.120); the 10-yr Nov 17 close; the next JOGMEC TTF/JKM
+  assessed print (not yet published — last spread 51.1¢/MMBtu, Nov 12; January
+  JKM trading ~$29.60/MMBtu per a CFD snapshot); the Dominica Prosperity
+  salvage (day 5).
 - EIA WPSR, **Wed Nov 18, noon ET** (w/e Nov 13; expected: SPR w/e Nov 13,
   utilization, world balance).
 - **Nov 19** — **Trump–Xi–Putin trilateral, Shenzhen** (Iran on the agenda per
   the White House).
 - **Nov 20** — the Dec WTI contract's last trading day; roll to January after.
+  OFAC's general licenses HH/II/III (crude, products, petrochemicals — incl.
+  the diesel deal) EXPIRE end of Nov 20.
 - OPEC+ ministerial, Nov 29 (2027 policy); STEO Dec edition, ~Dec 11 (next
   scheduled EIA–market spread check); **CPI, Dec 10**.
 - **The standing reweight condition remains met** after the Nov 8 review. This
-  pass added no confirmed loss (#206/#207 are suspicious activity / an attack
-  with no confirmed loss; the IRGC supertanker claim is state media only —
-  no UKMTO warning, no hull name); the next Kpler print is the clean physical
-  reweight point; **open question: the model's volume basis (7.195M total-oil
-  vs the Reuters-reported 10.3M crude-only) — a basis change moves the
-  STATE/HORIZON rows and needs an explicit decision.**
+  pass added no confirmed loss (#209 is an attack of unknown outcome; the
+  weekend's four-tanker claims and the supertanker claim are state media only —
+  no UKMTO warning, no wreckage photos); the next Kpler print is the clean
+  physical reweight point; **open question: the model's volume basis (7.195M
+  total-oil vs the Reuters-reported 10.3M crude-only) — a basis change moves
+  the STATE/HORIZON rows and needs an explicit decision.**
 - Watch: corroboration of the IRGC supertanker claim (hull name, AIS, photos);
-  the CENTCOM response to the six-drone Riffa claim (and whether the third CSG
-  brings strikes); the Nov 19 trilateral outcome; the Dominica Prosperity
-  salvage and any independent confirmation of the 400,000 bbl release; the #199
-  tanker's identity; the Qatari two-week window; Khor Mor attribution; Iraq
-  transit-lane implementation; the Fed's reaction to the 6.5% PPI print
-  (December-hike pricing); whether the 10-year holds above 5% (two straight
-  closes now); the OMR paywalled PDF for the month-by-month inventory detail;
-  10 UKMTO entries (#166, #172, #173, #189, #192, #193, #194, #196, #199,
-  #200) carry API date drift against the adjudicated incident dates
-  (registration-timestamp pattern; #166 stands on its explicit report date) —
-  none applied.
-- **Prod:** `507004c9-172a-445d-9fd0-a0220e3d2f6f` (bundle `C4d9n6nC.js`,
-  byte-identical to staging `a33c4932`) — full Nov 16 state + post-review
-  corrections, deployed on the user's explicit go-ahead (07:35 Nov 16).
-  Live-verified PASS (depletion.org + custom domain); corrected strings
-  confirmed live (7/7 present, 0 old errors). Supersedes `c47af500` (Nov 15).
-- **Staging:** `a33c4932-beaf-423a-a4cb-3f00801b5349` (bundle `C4d9n6nC.js`) —
-  full Nov 16 state **plus the post-review corrections** (AAA Nov 16 diesel
-  $5.9989 / gasoline $3.8118; UKMTO #206/#207 + coverage to Nov 16; Ilsky
-  [Krasnodar Krai] strike + 14-site tally + window to Nov 16; Zelensky 55%-
-  capacity anchor + 45–80% spread; Riffa [Nov 13 CENTCOM two drones / Nov 15
-  six-drone claim, CENTCOM silent] + 3rd CSG Theodore Roosevelt; IRGC
-  supertanker claim; Dominica Prosperity day 4; Gofman [ToI version]; Houthi
-  Bab el-Mandeb pullback [direction corrected]; record-wave casualties [Moscow
-  Times]; wholesale gasoline sales −31%; DATA_AS_OF 2026-11-16). Geometry gate
-  + verify-live PASS on shipped bytes (all 22 charts, 7 endpoint dots, no
-  console errors); all nine corrected strings confirmed live in the HTML.
-- **Staging and prod are in sync** — both at the Nov 16 + corrections state
-  (staging `a33c4932`, prod `507004c9`; same bundle `C4d9n6nC.js`).
+  the MQM-170 drone-capture claim (no US
+  confirmation) and whether the third CSG brings strikes; the Nov 19 trilateral
+  outcome; the Dominica Prosperity salvage and any independent confirmation of
+  the 400,000 bbl release; the #199 tanker's identity; the Qatari two-week
+  window; Khor Mor attribution; Iraq transit-lane implementation; the Fed's
+  reaction to the 6.5% PPI print (December-hike pricing); whether the 10-year
+  holds above 5% (three straight closes now); the OMR paywalled PDF for the
+  month-by-month inventory detail; the Volgograd halt (wire confirmation of the
+  General-Staff claim still open); 10 UKMTO entries (#166, #172, #173, #189,
+  #192, #193, #194, #196, #199, #200) carry API date drift against the
+  adjudicated incident dates (registration-timestamp pattern; #166 stands on
+  its explicit report date) — none applied; #202's API type was re-classed
+  (flagged, not applied).
+- **Prod:** `b776607d-54ca-42f3-8c06-385e66a23354` (bundle `059ScX_G.js`,
+  identical to the verified staging build) — full Nov 17 state + the external
+  review's corrections, deployed 07:31 Nov 17 on the user's explicit green
+  light. verify-live prod PASS (all 22 charts, 7 endpoint dots, no console
+  errors); 9/9 corrected strings confirmed live, all first-pass errors absent.
+  Supersedes `b4adef73` (Nov 16 evening); staging and prod now in sync.
+- **Staging:** `bcf09269-6387-49b0-b8fd-8bd36988f89d` (bundle `059ScX_G.js`;
+  first pass `205bdfea`) — full Nov 17 state: AAA Nov 17 + DATA_AS_OF
+  2026-11-17; UKMTO #209 (Nov 13 time-late, 26.5N 56.33E) + coverage to
+  Nov 17; Salavat strike + 15-site tally + window to Nov 17; CENTCOM denial
+  of the Nov 17 radar claim + MQM-170 capture claim; Al Dhannah (#205,
+  Nov 15) / ON Phoenix (Nov 16, uninjured, no confirmed UKMTO number)
+  identities + Kpler weekend 5/0 (newsletter-attributed) + #209 in the tanker
+  watch + #208 second-strike/crew note; 1,441-UAV second record wave; crack
+  pairing note Nov 17 (165.6/73.1). Includes the external review's verified
+  corrections (logs/review-2026-11-17.md). Geometry gate + verify-live PASS on
+  shipped bytes (all 22 charts, 7 endpoint dots, no console errors); corrected
+  strings spot-checked live, first-pass errors absent. Prod now matches (see
+  above).
