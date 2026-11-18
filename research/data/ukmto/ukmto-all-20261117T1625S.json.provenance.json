@@ -1,0 +1,6 @@
+{
+  "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+  "retrieved_at": "2026-11-17T16:25:00-07:00",
+  "sha256": "7a7415bd4c0bd39dec9c52447ccb0bca4957becf9284afa99659d978b1882b3f",
+  "note": "Evening archive pass Nov 17 (post-review). 67 entries, #143-#210. New entry #210: Attempted Boarding (level 2), cargo vessel, Gulf of Aden 50NM SW of Al Mukalla (Yemen), 13.67N 48.5E; skiff repelled after warning shots, no casualties. utcDateOfIncident 2026-11-17T14:09Z, registered 2026-11-17T14:12:50Z. The API type was added to the site vocabulary (was mapped to hijack in the first evening pass; re-typed in post-review). Supersedes the morning file ukmto-all-20261117T0622S.json (66 entries, #143-#209)."
+}

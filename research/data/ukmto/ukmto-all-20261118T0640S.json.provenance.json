@@ -1,0 +1,6 @@
+{
+  "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+  "retrieved_at": "2026-11-18T06:37:03-07:00",
+  "sha256": "68549e3d61fb30746a8c1adab2f40ade008479c111d498a7183299189b44589b",
+  "note": "Morning archive pass Nov 18. 68 entries, #143-#211. New entry #211: Attack (level 1), tanker, Strait of Hormuz 13NM north of Khasab (Oman), 26.42N 56.32E; time-late report — tanker struck by an unknown projectile, fire occurred and has since been extinguished, one crew member missing/unaccounted for. utcDateOfIncident 2026-11-18T09:50Z is a registration-time placeholder (3 min before utcDateCreated 2026-11-18T09:53:09Z — the #172/#173 pattern); the report body contains NO explicit incident date, so per the ukmto-fetch.mjs reconciliation gate the site carries the API date 2026-11-18 (flagged, not reconciled). External reporting (Reuters, The National, gCaptain, ADNOC) puts the ADNOC L&S strike on the evening of Nov 17, one crew missing, 11 injured — consistent with #211, but UKMTO has not named the vessel and ADNOC gives no location beyond the Strait of Hormuz, so the match is likely but unconfirmed. If the match is confirmed with an explicit Nov 17 incident date, reconcile to 2026-11-17 via RECONCILED_DATES. Supersedes ukmto-all-20261117T1625S.json (67 entries, #143-#210)."
+}

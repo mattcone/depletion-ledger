@@ -714,14 +714,15 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             <p class="font-mono text-[11px] text-faint tabular">Brent: selected observations and monthly averages. WTI: weekly FRED spot prices and recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: January Brent settled at $92.44 on Nov 16, down $3.40, and December WTI settled at $85.72, down $2.84 (Rigzone). The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly spot prices and recent futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: January Brent settled at $93.14 on Nov 17, up $0.70, and December WTI settled at $86.01, up $0.29 (Newsquawk). The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly spot prices and recent futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            On Nov 16, January Brent settled at $92.44 (down $3.40, or −3.6%) and
-            December WTI at $85.72 (down $2.84, or −3.2%; Rigzone). Crude fell as
-            recovering Middle East exports reinforced the IEA's forecast that supply will
-            exceed demand by about 1.7 million barrels a day in the fourth quarter
-            (Reuters). The January Brent contract is down 18.5% from its
+            On Nov 17, January Brent settled at $93.14 (up $0.70, or +0.8%) and
+            December WTI at $86.01 (up $0.29, or +0.3%; Newsquawk crude wrap). Prices
+            rose after Iranian drones were launched at Bahrain and a second strike near
+            the strait forced the crew of the LPG carrier Tara Gas to abandon ship
+            (Reuters). Later that day, the US struck an IRGC missile site on Iran's
+            Qeshm Island. The January Brent contract is down 17.9% from its
             Oct 30 settlement of $113.43.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
@@ -909,15 +910,14 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
         </div>
         <div class="mb-6 max-w-[65ch] text-[13px]">
           <p class="text-[13px] leading-relaxed text-ink/80">
-            Commercial crude stocks exclude the Strategic Petroleum Reserve (SPR). They fell
-            by 0.9 million barrels to 409.8 million in the week ending Oct 30, the fifth
-            straight decline. Imports averaged 6.4 million barrels a day (EIA).
-            Stocks were 11.4 million barrels below the same week last year. Moving oil from
-            the SPR to commercial storage leaves their combined total unchanged.
+            Commercial crude stocks exclude the Strategic Petroleum Reserve (SPR). They rose
+            by 4.7 million barrels to 414.4 million in the week ending Nov 6, ending five
+            straight weekly declines (EIA). Moving oil from the SPR to commercial storage
+            leaves their combined total unchanged.
           </p>
         </div>
         <div class="relative h-72">
-          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus corresponding weeks in 2025. Stocks peaked at 465.7 million on Apr 17 and reached a wartime low of 404.5 million on Jul 24. On Oct 30 they fell for a fifth straight week to 409.8 million, down 0.9 million in a week and 11.4 million below the corresponding 2025 week."></canvas>
+          <canvas id="commercialCrudeChart" role="img" aria-label="US commercial crude inventories excluding the Strategic Petroleum Reserve, weekly, million barrels, 2026 versus corresponding weeks in 2025. Stocks peaked at 465.7 million on Apr 17 and reached a wartime low of 404.5 million on Jul 24. In the week ending Nov 6 they rose 4.7 million to 414.4 million, ending five straight weekly declines."></canvas>
         </div>
 
         <p class="mt-3 font-mono text-[11px] text-faint">EIA weekly stocks, excluding the SPR, in million barrels. The Jul 24 low was 22.2M below the same week in 2025.</p>
@@ -2999,11 +2999,11 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // settle 88.56 (Nov 14 is a Saturday — no same-day settlement); Nov 15 AAA → Nov 13 WTI
       // settle 88.56 (Nov 15 is a Sunday — no same-day settlement); Nov 16 AAA → Nov 16 WTI
       // settle 85.72 (same-day — re-paired from the Nov 13 basis once the Nov 16 settlement
-      // landed, Nov 16 evening pass); Nov 17 AAA → Nov 16 WTI settle 85.72 (Nov 17 has no
-      // same-day settlement yet — it settles 14:30 ET; diesel 165.6 / gasoline 73.1, Nov 17
-      // morning pass).
-      // This retail-minus-WTI chart does not use heating-oil futures: Nov 17 diesel gap = 165.6;
-      // gasoline gap = 73.1 dollars per barrel (Nov 16: 166.2 / 74.4 same-day; Nov 15: 167.1 /
+      // landed, Nov 16 evening pass); Nov 17 AAA → Nov 17 WTI settle 86.01 (same-day —
+      // re-paired from the Nov 16 basis once the Nov 17 settlement landed, Nov 17 evening
+      // pass; diesel 165.4 / gasoline 72.8).
+      // This retail-minus-WTI chart does not use heating-oil futures: Nov 17 diesel gap = 165.4;
+      // gasoline gap = 72.8 dollars per barrel (Nov 16: 166.2 / 74.4 same-day; Nov 15: 167.1 /
       // 74.9 — re-paired to the Nov 16 settlement, the nearer trading day, once it landed;
       // Nov 14: 165.0 / 72.7; Nov 13: 166.1 / 74.1 same-day; Nov 12: 167.4 / 75.4 same-day,
       // 169.6 / 77.6 on the Nov 11 basis; Nov 11: 171.0 / 79.1).

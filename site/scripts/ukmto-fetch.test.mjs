@@ -38,7 +38,7 @@ const rec = (num, sitecoreId, type, date, otherDetails = "") => ({
   otherDetails,
 });
 
-const crisisTemplate = (entries) => `export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisory" | "suspicious activity"; date: string }[] = [
+const crisisTemplate = (entries) => `export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "attempted boarding" | "advisory" | "suspicious activity"; date: string }[] = [
 ${entries.map((e) => `  { num: ${e.num}, type: "${e.type}", date: "${e.date}" },`).join("\n")}
 ];
 

@@ -67,14 +67,14 @@ import path from "node:path";
 const API_URL = "https://sccd.royalnavy.mod.uk/api/ukmto/all";
 const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
-const KNOWN_TYPES = new Set(["attack", "hijack", "advisory", "suspicious activity"]);
+const KNOWN_TYPES = new Set(["attack", "hijack", "attempted boarding", "advisory", "suspicious activity"]);
 const CRISIS_PATH = process.env.UKMTO_CRISIS_PATH
   ?? path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "src", "data", "crisis.ts");
 // Test hooks (used by the mock-input checks in the Oct 5 review):
 //   UKMTO_CRISIS_PATH — crisis.ts to read/write instead of the repo copy
 //   UKMTO_MOCK_FILE   — read a local JSON file instead of calling the API
 const ARRAY_RE = /export const ukmtoIncidents[^=]*=\s*\[([\s\S]*?)\n\];/;
-const ARRAY_HEADER = 'export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "advisory" | "suspicious activity"; date: string }[] = [';
+const ARRAY_HEADER = 'export const ukmtoIncidents: { num: number; type: "attack" | "hijack" | "attempted boarding" | "advisory" | "suspicious activity"; date: string }[] = [';
 const ENTRY_RE = /\{\s*num:\s*(\d+),\s*type:\s*"([^"]+)",\s*date:\s*"([^"]+)"\s*\}/;
 // Reconciled date exceptions: the API's utcDateOfIncident is a registration-time
 // placeholder for these records; the original UKMTO warnings print the incident
