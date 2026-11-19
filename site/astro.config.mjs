@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
+import { unified } from "@astrojs/markdown-remark";
 
 // Drop table headers that carry no text (the "label | value" tables in the
 // markdown use an empty header row: `| | |` + `|---|---|`).
@@ -34,6 +35,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   markdown: {
-    rehypePlugins: [removeEmptyThead],
+    processor: unified({ rehypePlugins: [removeEmptyThead] }),
   },
 });
