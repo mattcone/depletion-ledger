@@ -1,0 +1,17 @@
+{
+ "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+ "retrieved_utc": "2026-11-19T13:45:00Z",
+ "retrieved_local": "2026-11-19T06:45MST",
+ "entries": 69,
+ "range": "#143-#212",
+ "sha256": "769a4c616ad094425b9e4365b8172d150cfd4ac0324b2f6a97e6dfa123965a38",
+ "new_this_pass": [
+  {
+   "incidentNumber": 212,
+   "type": "attack",
+   "apiDateOfIncident": "2026-11-18T22:25:00Z",
+   "utcDateCreated": "2026-11-18T22:27:18Z",
+   "note": "Time-late report: tanker struck by unknown projectile in engine room, 6NM north of Khasab, outbound Hormuz transit; crew safe and accounted for. Report body gives no explicit incident date; API date (22:25Z, 2 min before registration) is a registration-time stamp per the standing pattern (cf. #211). Gulf News places the strike at 1645 UTC Nov 18 \u2014 same calendar day, so the API date stands as-is."
+  }
+ ]
+}
