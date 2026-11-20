@@ -1,0 +1,220 @@
+ 
+Kpler Media Briefing, 13 November 2026 
+Page 1 
+ 
+Kpler Media Briefing 
+Middle East Energy and Maritime Disruptions 
+Flow data as of Wednesday, 11 November 2026 (T-2, to reduce day-to-day revision noise) 
+Prepared Friday, 13 November 2026. Kpler Insight and Kpler platform data only 
+ 
+1. Executive summary and key price drivers 
+Total Hormuz Clearance averaged 8,264 kbd over the 7 days to 11 November, about 48% of the pre -war level of 
+17,148 kbd. Strait of Hormuz transits made up 5,660 kbd of that average, and Gulf of Oman ship -to-ship net exports 
+added 2,604 kbd. Adding Fujairah and Oman terminal loadings lifts the 7-day average to 12,357 kbd, or 60% of the 
+pre-war level of 20,508 kbd. Those terminal loadings averaged 4,093 kbd, about 20% above their pre -war level. 
+Adding Red Sea volumes gives a regional total of 16,793 kbd, or 72% of the pre-war level of 23,312 kbd. The latest 4 
+days are preliminary and have typically settled 1.5 to 2 times higher, so the 7-day average is the better guide. Kpler 
+data show Middle East crude and condensate outages of about 3.8 mbd in early November, against about 13 mbd in 
+late March. 
+Explore these flows in the new Middle East Flows dashboard in the Kpler terminal. It brings Strait of Hormuz transits, 
+Gulf of Oman ship-to-ship net exports, Gulf of Oman terminal loadings and Red Sea exports together in one view.  
+Middle East Regional Flows (kbd) 
+ 
+Three cumulative measures of confirmed clearance move outward from the strait itself (1) to Gulf of Oman and Fujairah/Oman terminal loadings (2) 
+and then Red Sea volumes (3). Iranian-origin transits are excluded throughout. Figures are oil only, covering Crude/Co, CPP, DPP and Chem/Bio 
+and excluding NGLs and LNG. Source, Kpler. 
+
+ 
+Kpler Media Briefing, 13 November 2026 
+Page 2 
+ 
+Middle East Regional Flows, daily series from 11 June to 11 November 
+ 
+ 
+ 
+Stacked bars are the confirmed components of each cumulative measure; the solid line is the 7-day average and the dashed line the pre-war 
+baseline. Shaded bands mark the provisional (8 to 14 days) and preliminary (last 7 days) recency tiers, which have typically settled 1.5 to 2 times 
+higher as later confirmations land. The late-June peak reflects the evacuation of cargoes stranded by the outbreak of the war. Source, Kpler. 
+
+ 
+Kpler Media Briefing, 13 November 2026 
+Page 3 
+ 
+Month-on-month comparison, 7-day average by day of month 
+ 
+ 
+ 
+Each line is one month of the 7-day average, plotted by day of month so months can be compared directly. June starts on 17 June, when the first 7-
+day average is available. November runs to 11 November. The dashed line is the pre-war baseline. The latest 7 days are preliminary, so the final 
+points are confirmed floors. Source, Kpler. 
+Table and chart methodology and caveats 
+● Every figure is a confirmed floor and can revise upward at any horizon. The recency tiers mark where 
+revisions concentrate, not where they stop. 
+● Reported figures are older than 14 days, provisional figures are 8 to 14 days old, and preliminary figures 
+cover the last 7 days. Preliminary figures have typically settled 1.5 to 2 times higher once confirmations land.  
+● Gulf of Oman, Kutch Light and Red Sea volumes with no confirmed load terminal capture ship -to-ship cargo 
+net of unmatched arrivals, and they carry no origin attribution. The Iranian-origin exclusion therefore applies to 
+strait transits only. 
+
+ 
+Kpler Media Briefing, 13 November 2026 
+Page 4 
+ 
+● Pre-war baselines are averages over March 2025 to February 2026 on the same definitions and product -
+bucket selection. 
+● Strait crossings are dated by transit, unattributed ship-to-ship cargo by the date it surfaces or departs, and 
+berth loadings by loading date. Daily totals therefore mix event timings, and the 7-day averages absorb most 
+of that noise. 
+Primary drivers 
+● Clearance through the strait remains well below the pre-war baseline on a 7-day basis, while Fujairah, Oman 
+and Red Sea volumes run above theirs. Section 2 sets out the detail. 
+● The latest 4 days of flow data are preliminary and typically revise upward, so the 7 -day average is the better 
+guide. Sections 1 and 2 explain the confirmation lag. 
+● Saudi and Iraqi crude output is back near pre-war levels, and OPEC+ output reached a wartime high in 
+October. Section 4 covers Saudi export routes. 
+● Crude sold off on signals of US and Iran de-escalation, and Brent turned higher on 12 November. Section 5 
+gives the price and product readings. 
+● Mideast Gulf crude discounts have deepened as Dubai’s prompt premium collapsed, and Asian refiners 
+turned to Atlantic barrels. Section 5 gives the detail. 
+● Vessels continue to come under attack in and around the strait, and a vessel in the ADNOC Logistics and 
+Services fleet was damaged on 10 November. Section 3 covers maritime risk.  
+2. Chokepoint and transit metrics 
+A. Strait of Hormuz 
+Strait of Hormuz transits, excluding Iranian-origin cargoes, averaged 5,660 kbd over the 7 days to 11 November. That 
+is about 33% of the pre-war level of 17,148 kbd. Gulf of Oman ship-to-ship net exports averaged 2,604 kbd against a 
+pre-war baseline of 0 kbd. Together they gave Total Hormuz Clearance a 7-day average of 8,264 kbd, or 48% of the 
+pre-war level. The latest 4 days are preliminary. Total Hormuz Clearance was 1,801 kbd on 8 November, 5,029 kbd 
+on 9 November, 4,088 kbd on 10 November and 12,827 kbd on 11 November. The 11 November reading includes 
+6,353 kbd of Gulf of Oman ship-to-ship net exports. Such readings have typically settled 1.5 to 2 times higher, 
+because each transit is confirmed against more than one source. Adding Fujairah and Oman termi nal loadings lifts the 
+7-day average to 12,357 kbd, or 60% of the pre-war level of 20,508 kbd. Adding Red Sea volumes gives 16,793 kbd, 
+or 72% of the pre-war level of 23,312 kbd. 
+Strait of Hormuz tanker crossings averaged 11 a day over the same 7 days, against 50 before the war. Entries into 
+the Mideast Gulf averaged 6 a day and exits averaged 5, each against 25 before the war. The latest day, 11 
+November, shows 8 crossings. That is the freshest count. Many transits are dark, so confirmation takes longer and 
+the latest count is the most likely to change. Kpler data show Japan is on course to receive 2.81 mbd of crude in 
+November, the highest monthly volume since the war began. Supply loaded outside the strait is on course to make up 
+54% of those arrivals, against 12% in February. 
+B. Bab el-Mandeb and Red Sea 
+Red Sea volumes averaged 4,436 kbd over the 7 days to 11 November, about 58% above the pre -war level of 2,804 
+kbd. The latest 4 days are preliminary. They were 3,850 kbd on 8 November, 4,867 kbd on 9 November and 5,507 
+kbd on 10 November. The reading for 11 November is 0 kbd, which is the freshest and the most likely to change. 
+Kpler data show Saudi crude flows through Bab el-Mandeb fell to about 460 kbd in October. Suez Canal transits of 
+Saudi crude reached a record 930 kbd, with 62% bound for Europe. Rece ipts at Ain Sukhna along the SUMED 
+corridor reached 1.9 mbd. 
+ 
+Kpler Media Briefing, 13 November 2026 
+Page 5 
+ 
+3. Maritime risk and fleet status 
+Kpler recorded 27 liquids crossings of the strait from 8 to 11 November. Of these, 24 were dark or unknown route 
+transits and 3 followed Iranian routes. ADNOC Logistics and Services confirmed that a vessel in its fleet was 
+damaged in an attack in UAE territorial waters on 10 November. Kpler analysis notes that vessels are reportedly 
+coming under attack almost daily in and around the strait. It also notes reports of explosions that halted 2 laden 
+supertankers in the strait late on 11 November. Kpler analysis points to the US keeping its blockade on Iran while 
+avoiding, for now, another round of direct strikes. The security situation in the Gulf remains highly volatile.  
+Illustrative Mideast Gulf tanker crossings, 8 to 11 November 
+ 
+Illustrative sample, not the full crossing log. Source, Kpler, Strait of Hormuz Tanker Crossings dashboard. 
+Where AIS coverage lapses, Kpler applies a dark-transit methodology, cross-referencing satellite imagery and human 
+intelligence against a binary confirmation standard before attributing a movement. See the full methodology note at 
+the end of this briefing. 
+4. Critical infrastructure status 
+Saudi infrastructure, Petroline and Yanbu 
+Kpler data show Saudi crude exports averaged 7 mbd in October, above the 6.2 mbd pre -war baseline, for a second 
+consecutive month. East Coast loadings averaged 3.8 mbd, and West Coast exports held near 3 mbd. Saudi crude 
+only output averaged 10.02 mbd in October against 10.1 mbd before the war. Middle East crude and condensate 
+outages have fallen to about 3.8 mbd, and Kuwait remains about 660 kbd below its pre -war output. Iran accounts for 
+over half of the remaining outage, at about 2.04 mbd. 
+
+ 
+Kpler Media Briefing, 13 November 2026 
+Page 6 
+ 
+ 
+Source, Kpler research and platform data dated 14 September to 11 November 2026. 
+5. Refined products and bunker fuel impact 
+Crude weakened sharply after the US signalled on 10 November that further attacks on Iran were highly unlikely. 
+Brent fell to $91.49/bbl and WTI to $84.86/bbl that day, as trend-following funds sold about 50,000 lots across crude 
+and products. Brent turned higher on 12 November after the US said it no longer needed a deal with Iran. A 4.7 mb 
+build in US crude stocks capped the bounce. OPEC+ output reached a wartime high of 37.42 mbd in October on 
+Kpler estimates, led by a 1.5 mbd recovery in Saudi production. 
+Mideast Gulf crude discounts have deepened as Asian refiners turn to Atlantic barrels. Dubai’s prompt premium, 
+measured by the M1 to M3 spread, narrowed from $11.03/bbl on 6 October to $1.03/bbl on 12 November. Saudi 
+Arabia and Kuwait have cut December official selling prices by $2/bbl. Kpler analysis is slightly bearish on Dubai 
+structure, as fears of imminent military escalation recede and Middle Eastern supply rises.  
+The sell-off was uneven across products. RBOB fell 6.1% and Singapore fuel oil 6.3%, both faster than crude, while 
+gasoil lost only 1.7%, so diesel cracks widened. Russia has extended its export ban through January after Ukrainian 
+strikes on its refineries resumed on 30 October. Kpler expects Russian runs to stay constrained around 4 mbd. In 
+Singapore, the 95R gasoline crack added $3.6/bbl on the week. Singapore fuel oil lost its prompt tightness as Middle 
+Eastern supply picked up. Late October arrivals from the Middle East built high sulfur floating storage volumes. Kpler 
+analysis is slightly bullish on Singapore low sulfur fuel oil for November, on prompt demand and inventory draws. 
+Middle East refinery runs recovered to 7.7 mbd in October, and Kpler expects a slower rise of about 63 kbd in 
+November. 
+
+ 
+Kpler Media Briefing, 13 November 2026 
+Page 7 
+ 
+ 
+Source, Kpler analysis published 11 and 12 November 2026. 
+6. Sources and notes 
+This briefing draws exclusively on Kpler Insight research and Kpler platform data. No external or third -party sources 
+were used. 
+Kpler Insight citations 
+● “Inflation reprices the commo board”, Cross Commodity Weekly, published 12 November 2026. 
+https://terminal.kpler.com/insight/research/reports/inflation-reprices-the-commo-board 
+● “Weaker physical prices to spur demand in next trade cycle”, Crude Oil, published 12 November 2026. 
+https://terminal.kpler.com/insight/research/reports/weaker-physical-prices-to-spur-demand-in-next-trade-cycle 
+● “Russian supply risks lift diesel as gasoline faces seasonal pressure”, Refined Products, published 12 
+November 2026. https://terminal.kpler.com/insight/research/reports/russian-supply-risks-lift-diesel-as-
+gasoline-faces-seasonal-pressure 
+● “Mideast Gulf crude discounts deepen as Asian refiners turn to Atlantic barrels”, Market Pulse, published 12 
+November 2026. https://terminal.kpler.com/insight/research/research-updates/mideast-gulf-crude-discounts-
+deepen-as-asian-refiners-turn-to-atlantic-barrels 
+● “Japan’s November crude imports on course for post-war high as bypass routes and ship-to-ship transfers 
+rebuild supply”, News, published 11 November 2026. https://terminal.kpler.com/insight/news/japans-
+november-crude-imports-on-course-for-post-war-high-as-bypass-routes-and-ship-to-ship-transfers-rebuild-
+supply 
+● “OPEC+ oil production hits wartime High”, Market Pulse, published 11 November 2026. 
+https://terminal.kpler.com/insight/research/research-updates/opec-oil-production-hits-wartime-high 
+● “Middle Eastern outages fall below 4 mbd as Saudi, Iraq hit pre-war levels”, Market Pulse, published 11 
+November 2026. https://terminal.kpler.com/insight/research/research-updates/middle-eastern-outages-fall-
+below-4-mbd-as-saudi-iraq-hit-pre-war-levels 
+● “Gasoil and RBOB CTAs flip net short as crude liquidation deepens”, Market Pulse, published 11 November 
+2026. https://terminal.kpler.com/insight/research/research-updates/gasoil-and-rbob-ctas-flip-net-short-as-
+crude-liquidation-deepens 
+● “Pipeline Strike Threatens Red Sea Bypass as Saudi Loadings Pivot to Ras Tanura”, News, published 14 
+September 2026. https://terminal.kpler.com/insight/news/pipeline-strike-threatens-red-sea-bypass-as-saudi-
+loadings-pivot-to-ras-tanura 
+Kpler platform data 
+● Kpler Insight search API (reports and short-form content), published-by-date range from 11 November 2026 
+to 13 November 2026. Uses a 48-hour rolling window on Wednesday to Friday editions, extended back to the 
+prior Friday on Monday and Tuesday editions to include weekend publications. 
+
+ 
+Kpler Media Briefing, 13 November 2026 
+Page 8 
+ 
+● Kpler internal flow-tracking data, “Middle East Regional Flows” measures (Total Hormuz Clearance and Strait 
+of Hormuz Tanker Crossings panel), flow data to 11 November 2026, compiled by the Insight team.  
+● Kpler, Strait of Hormuz Tanker Crossings dashboard, illustrative vessel sample, crossings dated 8 to 11 
+November 2026. 
+ 
+Standing methodology note, vessel and cargo tracking 
+Kpler compiles vessel and cargo tracking data from 3 complementary sources. Automatic Identification System (AIS) 
+signals form the backbone, providing real-time position data whenever a vessel's transponder is active. A gap in that 
+signal is informative but not conclusive on its own. Satellite imagery, both optical and synthetic aperture radar (SAR), 
+corroborates vessel presence and laden state at terminals and along transit routes. SAR can see through cloud cover 
+where optical imagery cannot. These streams are supplemented by human intelligence, meaning market sources 
+reporting loading events, ship-to-ship transfer scheduling and port call activity. This intelligence often flags a 
+movement before satellite imagery can confirm it. 
+The 3 streams are cross-referenced against a binary confirmation standard. An event is recorded only when 
+consistent evidence from more than one source supports it, not through probabilistic attribution or a single source. 
+Where AIS coverage lapses, such as during a dark transit, analysts look for satellite imagery placing a vessel inside a 
+region on one date and outside it on another. They also draw on human intelligence and discharge -side confirmation 
+that corroborates timing and cargo grade. Volumes that cannot be independently verified this way are classified as 
+unknown origin rather than attributed by inference, a deliberately conservative approach that favours accuracy over 
+completeness. 
+Source, Middle East and Gulf of Oman dark crude exports methodology, Kpler Help Centre. https://help.kpler.com/en/articles/15462913-middle-
+east-and-gulf-of-oman-dark-crude-exports-methodology 

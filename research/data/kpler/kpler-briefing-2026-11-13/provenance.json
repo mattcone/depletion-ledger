@@ -1,0 +1,50 @@
+{
+  "report": "Kpler Media Briefing — Middle East Energy and Maritime Disruptions",
+  "edition": "kpler-briefing-2026-11-13",
+  "publishedAt": "2026-11-13",
+  "flowDataAsOf": "2026-11-11 (T-2; latest 4 days preliminary, 'typically settle 1.5-2 times higher'; edition: 'all figures are confirmed floors and may be revised upward at any horizon')",
+  "retrievedAt": "2026-11-19T21:26:00Z",
+  "retrievedVia": "https://marketing.kpler.com/hubfs/Media%20Briefings%20pdfs/Kpler%20media%20briefing%2013%20Nov%202026.pdf (downloaded to /tmp at the Nov 19 evening pass, adopted into the site that pass; re-downloaded at ~21:26 on Nov 19 and archived here after the research review flagged the missing archive — the /tmp copy had been cleaned up). Same URL family as the 2026-10-14, 2026-10-19 and 2026-10-30 editions.",
+  "files": [
+    {
+      "file": "kpler-briefing-2026-11-13.pdf",
+      "sha256": "d731640a1c850c7061b0e041c75b6e7cdb5fb6749d9441a9b6b8903d406dace0",
+      "bytes": 1584700
+    },
+    {
+      "file": "kpler-briefing-2026-11-13.txt",
+      "sha256": "628ddd40f54751ce279fd7cc6b8db78830a63051029c5e508466390c3ef89d3e",
+      "bytes": 15781,
+      "note": "prose extracted from the PDF via pypdf (chart/vector streams dropped); local extraction, not part of the published briefing"
+    }
+  ],
+  "keyFigures": {
+    "straitTransits7dAvgKbd": 5660,
+    "straitTransitsPreWarBaselineKbd": 17148,
+    "straitTransitsVsBaselinePct": -67.0,
+    "straitTransitsLatest4dNote": "latest 4 days (8-11 Nov) preliminary; daily Total Clearance 1,801 (8 Nov) / 5,029 (9 Nov) / 4,088 (10 Nov) / 12,827 (11 Nov) kbd",
+    "tankerCrossings7dAvgPerDay": 11,
+    "tankerCrossingsLatestDay": { "2026-11-11": 8 },
+    "tankerCrossingsPreWarPerDay": 50,
+    "gulfEntriesExitsPerDay": "entries 6/day, exits 5/day (each vs 25 pre-war)",
+    "gulfOfOmanStsNetExports7dAvgKbd": 2604,
+    "gulfOfOmanStsPreWarKbd": 0,
+    "hormuzTotalClearance7dAvgKbd": 8264,
+    "hormuzTotalClearanceVsBaselinePct": 48,
+    "hormuzPlusFujairahOman7dAvgKbd": 12357,
+    "hormuzPlusFujairahOmanPreWarBaselineKbd": 20508,
+    "hormuzPlusFujairahOmanVsBaselinePct": 60,
+    "fujairahOmanTerminalLoadings7dAvgKbd": 4093,
+    "fujairahOmanTerminalLoadingsVsBaselinePct": 20,
+    "redSea7dAvgKbd": 4436,
+    "redSeaPreWarBaselineKbd": 2804,
+    "redSeaVsBaselinePct": 58,
+    "redSeaLatest4dKbd": "3,850 (8 Nov) / 4,867 (9 Nov) / 5,507 (10 Nov) / 0 (11 Nov, freshest, most likely to change)",
+    "imfPortWatch": "11 tanker transits Nov 1-15 (0.7/day vs 665 in 2025), cited by Kpler"
+  },
+  "reconciliation": {
+    "vsOct30Edition": "same measures, same definitions (oil only: Crude/Co, CPP, DPP, Chem/Bio; excludes NGLs/LNG; Iranian-origin transits excluded from strait figures only; pre-war baseline = average March 2025 - February 2026). Strait 7-day avg 7,195 (data to Oct 28) -> 5,660 (data to Nov 11); baseline 17,147 -> 17,148 (1 kbd rounding, same window); Total Hormuz Clearance 8,462 -> 8,264 (STS net 1,267 -> 2,604); tanker crossings 11/day -> 11/day (latest day 8 -> 8); Red Sea 7-day avg 3,017 -> 4,436 (58% ABOVE pre-war, was 8% above — the edition attributes the surge to rerouted Saudi exports and record Suez transits of Saudi crude, 930 kbd)",
+    "vsNov19BloombergPrint": "Bloomberg (Nov 19) read of Kpler data: 7-day MA of Hormuz transits + net Gulf of Oman STS 'eased to about 10M b/d by Nov 10, down from about 13.4M at the start of the month', 'recent data remains provisional'. The primary T-2-confirmed clearance here is 8,264 kbd through Nov 11. Same measure family, different vintage/provisionality: the four preliminary days (1,801-12,827 kbd range) are exactly where the gap sits, and Kpler expects them to settle 1.5-2x higher. The primary edition is the adopted basis; the Bloomberg figure is cited on the site as the provisional read. Do not mix.",
+    "adoptedNov19": "Adopted into the site on Nov 19 (evening pass): map labels (Hormuz 5.7M b/d, 67% below pre-war; Red Sea 4.4M b/d, 58% above pre-war, data through Nov 11), figcaption + aria-label re-typed with the preliminary-four-days caveat, Gulf-oil watch item cites the primary edition, model inputs (transits 11 unchanged, volume 7.195 -> 5.66, same strait-transit total-oil basis, no basis switch). Filter re-run (44th): HORIZON 15.0/50.0/35.0 (STATE 0.1/99.9/0.0) — the displayed row shifted 0.1pp toward lapse off the 43rd run; candidate 15.1/50.0/35.0 (0.150772/0.499626/0.349602), STATE 0.2/99.8/0.0. Judgment 10/50/40 unchanged; no reweight clause fired. Staging 12834fc5; prod b466c1e1 was current until the prod deploy of the reviewed build."
+  }
+}
