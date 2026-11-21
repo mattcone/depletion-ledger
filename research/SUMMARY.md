@@ -1,12 +1,30 @@
-# Crisis state — Nov 19 (afternoon pass + Kpler update)
+# Crisis state — Nov 20 (morning pass + follow-up ~07:10 MST: review fixes, UKMTO #213, prod deploy)
 
-Sources and decisions: [Nov 19 daily log](logs/2026-11-19.md) · [Nov 18 daily log](logs/2026-11-18.md) · [Nov 17 daily log](logs/2026-11-17.md) · [judgment history](judgment-history.md)
+Sources and decisions: [Nov 20 daily log](logs/2026-11-20.md) · [Nov 19 daily log](logs/2026-11-19.md) · [Nov 18 daily log](logs/2026-11-18.md) · [judgment history](judgment-history.md)
 
 ## Current read
 
 **Judgment:** 10 / 50 / 40 — corridor holds / standoff / corridor lapses. **HOLD;
-any reweight remains a user decision.** UKMTO: **no new entries** this pass —
-131 entries, #143–#212, coverage to Nov 19; the latest is #212 (attack,
+any reweight remains a user decision. Nov 19–20:** a tanker took on Iranian crude by
+ship-to-ship transfer in the Gulf on Nov 19 (TankerTrackers to Reuters; Iran
+International, Nov 19) — if it clears the blockade, the first seaborne Iranian
+crude export since mid-July; the Saudi Gazette headline says Iran is readying a
+tanker convoy at Kharg Island (paywalled, not read); Araghchi's "must be
+broken" line is found only on OSINT613 (unconfirmed); the IRGC claims two
+supertankers (4M+ barrels) struck mines on "unauthorized" routes (Nov 19, state
+media, unverified); an IRGC aerospace adviser (Ali Belali) said Iran faces
+no limits on missile numbers, positions or facilities (Nov 20, via Al Jazeera/
+News.az; no doctrine review found); the NYT (Nov 18)
+reports Netanyahu is pressing for a new four- to seven-day strike operation and
+Western officials told Bloomberg (Nov 19) the risk of large-scale US strikes
+is rising; Japan agreed to buy up to 8M barrels of Saudi crude for its national
+reserve, market conditions permitting, and gave Saudi Arabia temporary use of
+16M more barrels of storage in Japan (joint statement, Nov 20); the coalition has launched a major air assault across
+Houthi-held territory (CBS). No confirmed loss and no new settled observation,
+so no model input changed. UKMTO: **no new entries** this pass —
+132 entries, #143–#213, coverage to Nov 20; #213 is a Nov 20 "suspicious
+activity" in the Gulf of Aden (yellow pin, no description, not an attack); the
+latest attack is #212 (attack,
 dated Nov 18, a time-late report of a tanker "struck by an unknown
 projectile in its engine room" ~6 NM north of Khasab while outbound through
 the strait — all crew safe and accounted for, extent of damage unknown,
@@ -25,9 +43,11 @@ plus nearly all Democrats for; Tillis (R-NC) against this time; mostly a
 signaling vote — AP, CBS, The Hill, Guardian); **CENTCOM (Adm. Cooper) called
 Iran's mine-strike claims "FALSE" and said the primary transit routes
 "remain free and clear of Iranian sea mines,"** while ISW assesses Iran
-makes mine claims to "undermine US operations" (Iran's navy claim (Nov 19,
-state media, unverified) that three tankers struck mines east of the strait
-Wednesday stands unverified); **Kpler's Nov 13 media briefing (flow data through Nov 11) puts the 7-day
+makes mine claims to "undermine US operations" (Iran's mine claims stand
+unverified — two separate state-media claims, both Nov 19: three tankers
+struck mines east of the strait on Wednesday (Nov 18), on fire and unable to
+sail, and two supertankers (4M+ barrels) struck mines on an "unauthorized"
+route); **Kpler's Nov 13 media briefing (flow data through Nov 11) puts the 7-day
 average of strait transits, excluding Iranian-origin cargoes, at 5.66M b/d —
 67% below pre-war — with tanker crossings at 11 a day, and total clearance
 including net Gulf of Oman STS at 8.3M b/d, 48% of pre-war; the latest four
@@ -61,8 +81,9 @@ now $64M per transit** (acting Navy Secretary Hung Cao to the Senate, Nov 17
 hearing; ~$54,000 pre-war).
 
 **Filter (diagnostic, not public odds):** HORIZON **15.0 / 50.0 / 35.0**
-(44th run); STATE **0.1 / 99.9 / 0.0** — the only input that moved off the
-43rd run is the Kpler volume 7.195 → **5.66M b/d** (the Nov 13 media
+(45th run, 2026-11-20 — inputs unchanged since the 44th); STATE **0.1 / 99.9 /
+0.0** — the only input that moved off the 43rd run is the Kpler volume 7.195 →
+**5.66M b/d** (the Nov 13 media
 briefing, flow data through Nov 11 — the same strait-transit total-oil
 basis; the map's 22-day-stale vintage is now 8 days old). The displayed row
 shifts 0.1pp toward lapse (the volume likelihood is graded per state; 5.66M
@@ -77,13 +98,13 @@ loss), Brent **$91.98** (Nov 19 settlement, in the $90–100 band). Judgment
 Not published. Moved the same 0.1pp as the published row on the refreshed
 inputs (Brent is context, not a state observation, in the candidate). Both
 shadow runs (identical inputs; refreshed inputs) return this row. Vintage:
-volume 8 days old (through Nov 11), transits 8 days old.
+volume 9 days old (through Nov 11), transits 9 days old (as of Nov 20).
 
 **Storage context:** the WPSR w/e Nov 13 put the SPR at **276.361M (−3.174M
 w/w)** — a reported pace of 0.453M b/d, right at the model's $90–100 band
-pace (0.45M at Brent $91.98). Re-baselined at band pace: ≈**273.7M as of
-Nov 19**; 250M operational floor ≈ Jan 11, 2027 (~53 days); 180M ≈ Jun 15
-(~208 days); 70M ≈ Feb 15, 2028 (~453 days).
+pace (0.45M at Brent $91.98). Re-baselined at band pace: ≈**273.7M as of Nov 19, ≈273.2M as of Nov 20**;
+250M operational floor ≈ Jan 11, 2027 (~52 days as of Nov 20); 180M ≈ Jun 15
+(~207 days); 70M ≈ Feb 15, 2028 (~452 days).
 
 **Other model metrics:** elasticity level −1.40 / −2.80 / −4.20 mb/d (ε
 0.05 / 0.10 / 0.15); marginal −0.27 / −0.53 / −0.80 mb/d per +$5 Brent move
@@ -106,11 +127,17 @@ oil move. **Calibration ledger: 9 resolved, 2 open (running Brier
   90.70 sat under the settlement — an artifact bar), so the wire settlement
   is plotted; the CL=F bar closed at 83.13, ~$0.08 below the wire.** Brent
   is down 18.9% from the Oct 30 settlement of $113.43. The **December WTI
-  contract's last trading day is Nov 20** — tomorrow's settlement is the
-  first January-contract point in the series (roll to confirm at the next
-  pass). 10-yr: **Nov 19 close 5.052** (O 5.101 / H 5.107 / L 5.042) —
+  contract's last trading day is today, Nov 20** — tonight's settlement will
+  be the first January-contract point in the series (roll to confirm at the
+  next pass). **No new settlement is plotted as of this morning pass** (US
+  session pre-open). Yahoo BZ=F's Nov 20 LIVE bar read $88.75 (−3.5%), but the
+  wire at 07:20 GMT had Brent Jan futures at $92.57 (+59c) — a suspected
+  live-feed artifact (the BZ=F live bar has sat below the wire on Sep 25, Sep
+  28 and Nov 19); re-check at settlement (catalyst check if a real settlement
+  move ≥5%). 10-yr: **Nov 19 close 5.052** (O 5.101 / H 5.107 / L 5.042) —
   **sixth straight close above 5%** (Nov 12: 5.103, Nov 13: 5.154, Nov 16:
-  5.121, Nov 17: 5.103, Nov 18: 5.066, Nov 19: 5.052).
+  5.121, Nov 17: 5.103, Nov 18: 5.066, Nov 19: 5.052); the Nov 20 close comes
+  tonight.
 - **CPI (released Nov 10, BLS USDL-26-1685):** October consumer prices **+0.4% MoM
   (SA)** — above the +0.3% consensus — and core **+0.3%**, the third straight
   month at that pace. **No headline or core 12-month rate was published** (the
@@ -126,11 +153,12 @@ oil move. **Calibration ledger: 9 resolved, 2 open (running Brier
   unpublished, 6.5% is the latest official annual print — and the strongest
   case yet for a December Fed hike (CNBC: "keeping pressure on the Fed").
   November CPI, Dec 10.
-- **AAA Nov 19 (applied):** gasoline **$3.7212**, diesel **$5.9298** — the
-  **23rd straight daily decline since Oct 28**, and **$0.5978 below** AAA's
-  Sep 22 record of $6.5276 (−9.2% from the record). Retail-minus-WTI gap now
-  pairs the Nov 19 AAA against the Nov 18 settlement $83.26: **≈ $165.8 diesel
-  / $73.0 gasoline** (Nov 18: ≈164.3 / 71.5).
+- **AAA Nov 20 (applied):** gasoline **$3.6898**, diesel **$5.8982** — the
+  **24th straight daily decline since Oct 28**, and **$0.6294 below** AAA's
+  Sep 22 record of $6.5276 (−9.6% from the record). Retail-minus-WTI gap now
+  pairs the Nov 20 AAA against the Nov 19 settlement $83.21 (no same-day
+  settlement yet): **≈ $164.5 diesel / $71.8 gasoline** (Nov 19: ≈165.8 /
+  73.0).
 - **Hormuz:** UKMTO's **Nov 13 weekly overview** is now the operative figure:
   **139 outbound / 169 inbound transits** for the week to Nov 11 (≈65% below
   pre-war levels), 8 incidents in the Strait / Arabian Gulf / Gulf of Oman (two
@@ -143,11 +171,16 @@ oil move. **Calibration ledger: 9 resolved, 2 open (running Brier
   (ADNOC did not name the ship; Riviera), so the naming is contradictory and
   unconfirmed; #211 (the likely ADNOC L&S ship; fire
   extinguished, one crew missing) and the Tara Gas (#208, still unaccounted
-  for) stand; no confirmed loss; **131 entries, coverage to Nov 19**. **CENTCOM
+  for) stand; no confirmed loss; **132 entries, coverage to Nov 20 (one new
+  since the morning pass: #213, a Nov 20 "suspicious activity" in the Gulf of
+  Aden — yellow pin, no description, not an attack)**. **CENTCOM
   extended the blockade to ship-to-ship transfers (Nov 18 advisory)** —
   vessels receiving Iranian cargo at sea may be stopped, boarded, diverted or
   captured even without entering an Iranian port (it targets the LPG/jet-fuel
-  exports Iran has sustained since July). **Hormuz war-risk insurance is now
+  exports Iran has sustained since July). **The rule is being tested: on Nov 19 a tanker
+  took on Iranian crude via STS in the Gulf — if it clears the blockade, the
+  first seaborne Iranian crude export since mid-July (TankerTrackers to
+  Reuters).** **Hormuz war-risk insurance is now
   $64M per transit** (acting Navy Secretary Cao, Senate hearing Nov 17; ~$54,000
   pre-war). Prior entries stand: #209 (Nov 13 time-late, attack,
   crew safe) and #210 (Nov 17, "attempted boarding", Gulf of Aden — skiff
@@ -163,7 +196,10 @@ oil move. **Calibration ledger: 9 resolved, 2 open (running Brier
   advisory counts 181
   incidents since Mar 1 and about 211 vessels waiting at anchorages east of
   Hormuz; IMO (Nov 17) puts the count at 136 incidents Mar 1–Nov 11, 35 in
-  October (different body/window — not reconciled). The Iranian mine-strike claims (≥6 vessels since Nov 13) remain
+  October (different body/window — not reconciled). **OFAC's general licenses
+  HH/II/III (crude, products, petrochemicals — incl. the diesel deal) EXPIRE
+  end of today, Nov 20** — no extension announced as of the morning pass.
+  The Iranian mine-strike claims (≥6 vessels since Nov 13) remain
   unverified, state media only — see Current read. Kpler's latest full-month
   figure put October crude flows at 11.1M b/d (~2% below September); Kpler (Nov
   11) puts total Gulf exports incl. bypass routes at 16.7M b/d since early October
@@ -189,9 +225,17 @@ oil move. **Calibration ledger: 9 resolved, 2 open (running Brier
   some nights, the gap being Iranian oil (AP). Iraq's lane near Oman is not yet
   implemented; **on Nov 17 Iraq restarted the long-idle (~12 years) Kirkuk–Ceyhan
   pipeline to Turkey at 120 kb/d, with plans to reach 500 kb/d** (Reuters, oil
-  minister) — a pre-war bypass route back online.
+  minister) — a pre-war bypass route back online. On Nov 20, Japan agreed
+  to buy up to 8M barrels of Saudi crude for its national reserve (market
+  conditions permitting) and gave Saudi Arabia temporary use of 16M more
+  barrels of storage in Japan, on top of the 8M it already uses (joint
+  statement, via SPA / Japan Times / NHK).
 - **Iran / US:** neither side is moving toward a deal, but the channels moved
-  and the strikes continued. **Nov 19 updates:** the **Shenzhen trilateral
+  and the strikes continued. **Nov 18–20:** the NYT (Nov 18) reports
+  Netanyahu is pressing Trump to join a four- to seven-day air campaign;
+  Western officials told Bloomberg (Nov 19) the risk of large-scale US strikes
+  is rising; on Nov 20 an IRGC aerospace adviser said Iran faces no limits on
+  missile numbers, positions or facilities (via Al Jazeera). **Nov 19 updates:** the **Shenzhen trilateral
   (first Trump–Xi–Putin meeting)** produced UN-reform and nuclear-risk
   language plus a pledge to increase production and supply of refined
   petroleum products and "maintaining stable energy flows" (declaration text
@@ -204,8 +248,10 @@ oil move. **Calibration ledger: 9 resolved, 2 open (running Brier
   region** (5th→7th Fleet transition; two US carriers remain in the CENTCOM
   area). CENTCOM (Nov 19): "No American forces were injured during any of
   Iran's attempted attacks this week." **Iran's navy claims three tankers hit
-  by naval mines east of the strait Wednesday** (state media, unverified —
-  echoing the Nov 14 tanker claim; ISW sees no re-mining). **Acting SecNav
+  by naval mines east of the strait on Wednesday (Nov 18)** (reported Nov 19,
+  state media, unverified — echoing the Nov 14 tanker claim; ISW sees no
+  re-mining). A separate Nov 19 claim — two supertankers (4M+ barrels) struck
+  mines on an "unauthorized" route — is in the tanker item. **Acting SecNav
   Cao: war-risk insurance for one Hormuz transit now costs $64M** (was ~$54,000
   pre-war). **Riffa, Bahrain (verified timeline):** On Nov 13,
   CENTCOM said the IRGC launched two one-way attack drones toward Bahrain and
@@ -385,26 +431,24 @@ towards" the line); unconfirmed, no Saudi-side damage report — the Yanbu route
 
 ## Next dates
 
-- **Today** — the Nov 18 settlements **landed and are plotted** (Brent $91.95 /
-  WTI $83.26; catalyst = the EIA build, +3.4M vs an expected ~58k — the
-  settlement moves were far smaller than the intraday rout; WTI's lowest close
-  since Aug 26); the 10-yr settle is **5.066 — fifth straight close above 5%
-  (the Nov 18 log's "streak would END" line was a LIVE-value error, corrected)**;
-  the Shenzhen trilateral was held (no Iran deliverable); the PIF Tower strike
-  (Houthi missile, Riyadh). Next JOGMEC TTF/JKM assessed print still not
-  published (last spread 51.1¢/MMBtu, Nov 12); the Dominica Prosperity salvage
-  (day 8).
-- **Nov 20** — the Dec WTI contract's last trading day — tomorrow's settlement
-  is the first **January-contract** point in the WTI series (re-type the
-  front-month note). OFAC's general licenses HH/II/III (crude, products,
-  petrochemicals — incl. the diesel deal) EXPIRE end of Nov 20.
+- **Today (Nov 20)** — the **Dec WTI contract's last trading day**: tonight's
+  settlement is the first **January-contract** point in the WTI series
+  (re-type the front-month note); the Brent settlement — check the BZ=F
+  live-bar divergence ($88.75 live vs $92.57 wire at 07:20 GMT; suspected feed
+  artifact; catalyst check if a real settlement moves ≥5%); the 10-year close
+  (a seventh straight above 5%?). **OFAC's general licenses HH/II/III EXPIRE
+  end of day** — extended or lapsed? The next Kpler flow edition (the
+  preliminary days may settle 1.5–2× higher); the next TTF/JKM assessed print
+  (site values are still the Nov 6 figures); whether the Iranian-loaded ship
+  transits and how CENTCOM responds.
 - OPEC+ ministerial, Nov 29 (2027 policy); STEO Dec edition, ~Dec 11 (next
   scheduled EIA–market spread check); **CPI, Dec 10**.
 - **The standing reweight condition remains met** after the Nov 8 review. This
   pass added no confirmed loss (#212 is a damaged tanker with all crew safe —
   not lost; #211's missing crew member still unaccounted for; the Tara Gas
-  remains unaccounted for; Iran's Nov 19 claim of three tankers hit by mines
-  east of the strait is state media only, unverified); the STS blockade
+  remains unaccounted for; #213 is a Gulf of Aden "suspicious activity", not
+  an attack; Iran's mine claims — three tankers Wednesday (Nov 18) and two
+  supertankers (4M+ barrels) Nov 19 — are state media only, unverified); the STS blockade
   extension and the PIF Tower strike are regime-level escalations, not
   physical inputs; **the next Kpler print is the clean transits/volume
   reweight point** (the Nov 13 edition was adopted in-place on the existing
@@ -415,9 +459,11 @@ towards" the line); unconfirmed, no Saudi-side damage report — the Yanbu route
   October crude-only) — any basis change moves the STATE/HORIZON rows and
   needs an explicit decision.**
 - Watch: **Iran's next move after the PIF Tower strike and the STS blockade
-  extension** (judgment entry, user's call); **Iran's "three tankers hit by
-  mines east of the strait" claim (Nov 19, state media) — any corroboration
-  (names, AIS, wreckage)**; **the Tara Gas — confirmed lost/sunk or salvage, and
+  extension** (judgment entry, user's call); **the tanker that took on Iranian crude
+  by STS on Nov 19 (first export since mid-July if it clears)
+  — does it transit, and how does CENTCOM respond to it**; **Iran's mine
+  claims — three tankers Wednesday (Nov 18) and two supertankers (4M+ barrels)
+  Nov 19 (state media) — any corroboration (names, AIS, wreckage)**; **the Tara Gas — confirmed lost/sunk or salvage, and
   the two missing crew members total** (one Tara Gas, one on the ADNOC L&S
   ship — #211 = ADNOC is likely but unconfirmed); **the dirty-bomb report — any
   corroboration or declassification**; **the Houthi East–West pipeline claim
@@ -429,13 +475,40 @@ towards" the line); unconfirmed, no Saudi-side damage report — the Yanbu route
   identity; the Qatari two-week window; Khor Mor attribution; the Ceyhan
   ramp-up (120 → 500 kb/d) and the Iraq–Oman lane; the Fed's reaction to the
   6.5% PPI print (December-hike pricing); whether the 10-year holds above 5%
-  (five straight closes now); the OMR paywalled PDF for the month-by-month
+  (six straight closes now); the OMR paywalled PDF for the month-by-month
   inventory detail; the Volgograd halt (wire confirmation of the
   General-Staff claim still open); 10 UKMTO entries (#166, #172, #173, #189,
   #192, #193, #194, #196, #199, #200) carry API date drift against the
   adjudicated incident dates (registration-timestamp pattern; #166 stands on
   its explicit report date) — none applied; #202's API type was re-classed
   (flagged, not applied).
+- **Staging:** `fa649602-7386-4eba-8c33-f193e4ed3577` (Nov 20 follow-up
+  redeploy ~07:10 MST; supersedes `debb2932`) — the morning pass (`debb2932`: AAA Nov 20
+  applied (gasoline $3.6898 / diesel $5.8982 — 24th straight diesel decline),
+  DATA_AS_OF → Nov 20, UKMTO coverage → Nov 20, watchlist updated) PLUS the
+  external review fixes (blockade-test date → "reported Nov 19" + conditional
+  "first export since mid-July **if** it clears"; the Saudi Gazette quote cut
+  to the headline; the IRGC statement → Brig. Gen. Ali Belali, adviser to the
+  IRGC Aerospace Force commander, "no limitations… in the number of missiles,
+  launch positions or available facilities"; the unverified Araghchi line cut)
+  PLUS UKMTO #213 (a Nov 20 "suspicious activity" in the Gulf of Aden —
+  yellow pin, no description, not an attack; 132 entries, #143–#213; payload
+  archived). No new settlement plotted (US session pre-open). Geometry gate
+  PASS; verify-live staging PASS (all charts, no console errors).
+  **Prod is now in sync** (`9ae84709`, below).
+- **Prod:** `9ae84709-3460-4627-8602-c876f15e5a87` (bundle `CtMNM3iV.js`) —
+  deployed 07:05 MST Nov 20 on the user's explicit green light. Carries
+  everything in staging `fa649602`: AAA Nov 20 (gasoline $3.6898 / diesel
+  $5.8982 — 24th straight diesel decline), DATA_AS_OF → Nov 20, the external
+  review's copy fixes (blockade-test date "reported Nov 19" + conditional
+  "first export since mid-July if it clears"; Saudi Gazette quote cut to the
+  headline; the IRGC statement → Belali, Aerospace Force adviser; the
+  unverified Araghchi line cut; Japan–Saudi storage clarified), and UKMTO
+  #213 (Gulf of Aden "suspicious activity", not an attack; 132 entries,
+  coverage to Nov 20; payload archived). Same JS bundle as staging
+  `fa649602`. Geometry gate PASS on the shipped bytes; live verify on the
+  prod URL PASS (all charts, no console errors). Supersedes `aed95fa3`
+  (below).
 - **Prod:** `aed95fa3-42ae-46b6-b56d-f0be6f8903b0` (bundle `DPRixaif.js`) —
   deployed 21:29 MST Nov 19 on the user's explicit green light. Carries the
   Kpler Nov 13 map update **plus the external review's copy edits**
