@@ -1,0 +1,17 @@
+{
+ "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+ "retrieved_utc": "2026-11-20T13:57:25Z",
+ "retrieved_local": "2026-11-20T06H57ST",
+ "entries": 70,
+ "range": "#143-#213",
+ "sha256": "a256202f92d074b020b20fea0491216f2851661957af803983c73d2463abf57f",
+ "new_this_pass": [
+  {
+   "incidentNumber": 213,
+   "type": "suspicious activity",
+   "apiDateOfIncident": "2026-11-20T11:02:00Z",
+   "utcDateCreated": "2026-11-20T13:38:36Z",
+   "note": "Suspicious activity (yellow pin, level 1) at 12.9833N 48.6833E \u2014 Gulf of Aden, east of Aden. No description in the API. Not an attack; not counted in the weekly attack bars (cf. #210, the Gulf of Aden 'attempted boarding'). Appended to ukmtoIncidents via ukmto-fetch --apply on the Nov 20 midday pass; the morning fetch (06:30 MST) had 69 entries (#143-#212, +0)."
+  }
+ ]
+}

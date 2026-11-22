@@ -714,22 +714,23 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             <p class="font-mono text-[11px] text-faint tabular">Brent: selected observations and monthly averages. WTI: weekly FRED spot prices and recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: January Brent settled at $91.98 on Nov 19, up 3 cents, and December WTI settled at $83.21, down 5 cents, its lowest settlement since Aug 26 (Reuters wrap). The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly spot prices and recent futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: January Brent settled at $92.57 on Nov 20, up 59 cents, and December WTI settled at $83.98, up 77 cents, its final settlement before the series rolled to the January contract (EnergyNow wire). The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly spot prices and recent futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            On Nov 19, January Brent settled at $91.98 (up 3 cents) and
-            December WTI at $83.21 (down 5 cents; Reuters wrap) — WTI's
-            lowest settlement since Aug 26. The session was roughly flat as
-            ongoing disruption in the Strait of Hormuz offset concern about a
-            global supply surplus (Reuters). The January Brent contract is down
-            18.9% from its Oct 30 settlement of $113.43.
+            On Nov 20, January Brent settled at $92.57 (up 59 cents) and
+            December WTI at $83.98 (up 77 cents) — the December contract's
+            final settlement. Prices rose on Middle East tensions, but both
+            benchmarks fell for a third straight week: Brent lost 3.4% and WTI
+            5.2% (EnergyNow). The January Brent contract is down 18.4% from its
+            Oct 30 settlement of $113.43.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Brent combines selected observations and monthly averages; gray WTI combines
             weekly spot prices with recent futures closes. Hollow dots mark rounded estimates.
             Earlier contract switches affect comparisons. December Brent's final settlement
-            was $117.64 on Oct 30; the November points use January Brent. December WTI remains
-            the front month until Nov 20.
+            was $117.64 on Oct 30; the November points use January Brent. December WTI was
+            the front month through Nov 20, its last trading day; the series
+            tracks the January contract from there.
           </p>
         </div>
         <div class="min-w-0">
@@ -3006,9 +3007,14 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // diesel 165.8 / gasoline 73.0); Nov 19 AAA → Nov 18 WTI settle 83.26 (no same-day
       // settlement at the Nov 19 morning pass); Nov 19 AAA → Nov 19 WTI settle 83.21 (same-day
       // — re-paired from the Nov 18 basis once the Nov 19 settlement landed, Nov 19 afternoon
-      // pass; diesel 165.8 / gasoline 73.1).
-      // This retail-minus-WTI chart does not use heating-oil futures: Nov 19 diesel gap = 165.8;
-      // gasoline gap = 73.1 dollars per barrel (Nov 18: 165.8 / 73.0 same-day; Nov 17: 165.4 /
+      // pass; diesel 165.8 / gasoline 73.1); Nov 20 AAA → Nov 19 WTI settle 83.21 (no same-day
+      // settlement at the Nov 20 morning pass); Nov 20 AAA → Nov 20 WTI settle 83.98 (same-day
+      // — re-paired from the Nov 19 basis once the Nov 20 settlement landed, Nov 21 morning
+      // pass; diesel 163.7 / gasoline 71.0); Nov 21 AAA → Nov 20 WTI settle 83.98 (Nov 21 is a
+      // Saturday — no same-day settlement; diesel 162.3 / gasoline 69.7).
+      // This retail-minus-WTI chart does not use heating-oil futures: Nov 21 diesel gap = 162.3;
+      // gasoline gap = 69.7 dollars per barrel (Nov 20: 163.7 / 71.0 same-day; Nov 19: 165.8 /
+      // 73.1 same-day; Nov 18: 165.8 / 73.0 same-day; Nov 17: 165.4 /
       // 72.8 same-day; Nov 16: 166.2 / 74.4 same-day; Nov 15: 167.1 /
       // 74.9 — re-paired to the Nov 16 settlement, the nearer trading day, once it landed;
       // Nov 14: 165.0 / 72.7; Nov 13: 166.1 / 74.1 same-day; Nov 12: 167.4 / 75.4 same-day,

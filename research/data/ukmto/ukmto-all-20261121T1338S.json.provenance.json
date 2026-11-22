@@ -1,0 +1,31 @@
+{
+ "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+ "retrieved_utc": "2026-11-21T13:38:30Z",
+ "retrieved_local": "2026-11-21T06H38ST",
+ "entries": 73,
+ "range": "#143-#216",
+ "sha256": "756fcda7e4cf9d23de947ac395ea1afb83c08760dc23c50b8dfab8fe1c25f862",
+ "new_this_pass": [
+  {
+   "incidentNumber": 214,
+   "type": "attack",
+   "apiDateOfIncident": "2026-11-20T15:00:00Z",
+   "utcDateCreated": "2026-11-20T16:06:27Z",
+   "note": "Attack 8 NM north of Khasab, outbound tanker struck on the port bow by an unknown projectile, fire onboard, no casualties, no environmental impact reported. Explicit incident date 20 Nov (same-day report). Matches Tampa FP/Reuters wire of Nov 20 (\"tanker heading out of the Strait of Hormuz caught fire Friday\")."
+  },
+  {
+   "incidentNumber": 215,
+   "type": "attack",
+   "apiDateOfIncident": "2026-11-21T05:00:00Z",
+   "utcDateCreated": "2026-11-21T07:41:43Z",
+   "note": "Attack 11 NM north of Khasab, outbound tanker hit on the stern by an unknown projectile, no casualties, environmental impact unconfirmed. Same-day report; explicit incident date 21 Nov."
+  },
+  {
+   "incidentNumber": 216,
+   "type": "attack",
+   "apiDateOfIncident": "2026-11-21T05:50:00Z",
+   "utcDateCreated": "2026-11-21T08:17:15Z",
+   "note": "Attack 17 NM east of Khasab, outbound tanker hit in the engine room by an unknown projectile, no casualties, environmental impact unconfirmed. Same-day report; explicit incident date 21 Nov. Business Upturn could not rule out #215/#216 being the same vessel; the API lists them as separate warnings with distinct positions."
+  }
+ ]
+}
