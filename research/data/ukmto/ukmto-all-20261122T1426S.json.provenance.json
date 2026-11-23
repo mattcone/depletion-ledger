@@ -1,0 +1,10 @@
+{
+ "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+ "retrieved_utc": "2026-11-22T14:26:00Z",
+ "retrieved_local": "2026-11-22T07H26ST",
+ "entries": 73,
+ "range": "#143-#216",
+ "sha256": "756fcda7e4cf9d23de947ac395ea1afb83c08760dc23c50b8dfab8fe1c25f862",
+ "note": "Archived after the Nov 22 pass at the external review's request (the pass had moved ukmtoCoverageEnd to Nov 22 without saving the backing fetch — same gap the Nov 20 review flagged). Payload is byte-identical to the Nov 21 archive (ukmto-all-20261121T1338S.json, same sha256) — the API has not changed since Nov 21 13:38 UTC: no new entries, no edits to existing entries. The pass's own fetch was at 06:34 MST (13:34 UTC) and returned the same 73 entries / #143-#216.",
+ "new_this_pass": []
+}

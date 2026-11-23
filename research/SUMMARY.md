@@ -1,11 +1,47 @@
-# Crisis state — Nov 21 (morning pass ~06:30–07:30 MST + review fixes; prod in sync, `a3cc2a54`)
+# Crisis state — Nov 22 (morning pass ~06:30–06:50 MST + external-review fixes; prod in sync, `a982a4f1`)
 
-Sources and decisions: [Nov 21 daily log](logs/2026-11-21.md) · [Nov 20 daily log](logs/2026-11-20.md) · [Nov 19 daily log](logs/2026-11-19.md) · [judgment history](judgment-history.md)
+Sources and decisions: [Nov 22 daily log](logs/2026-11-22.md) · [Nov 21 daily log](logs/2026-11-21.md) · [Nov 20 daily log](logs/2026-11-20.md) · [judgment history](judgment-history.md)
 
 ## Current read
 
 **Judgment:** 10 / 50 / 40 — corridor holds / standoff / corridor lapses. **HOLD;
-any reweight remains a user decision. Nov 21:** three more UKMTO tanker
+any reweight remains a user decision. Nov 22:** Iran struck Bahrain again (the “ended the three-day pause”
+framing is GlobalSecurity's Day 268 ops-report language — its “since the
+Nov 18 attacks” premise conflicts with the site's own record, last
+Bahrain Nov 17 / Kuwait Nov 18, so it was cut from the site; the Nov 22
+review's “unsourced” note is corrected) — the IRGC claimed a “combined”
+missile-and-drone operation (code-named “Ya Umm al-Banin”) struck
+two US Army Patriot radars at the Al Rifa and Awali bases in Bahrain on
+Nov 21; Bahrain said the attack set fire to a civilian industrial facility
+and injured two people (one critically); the radar damage is not
+independently verified and CENTCOM has not commented (Al Jazeera, TRT
+World, The National, AFP). CENTCOM denied Iran’s claim that a missile
+damaged a US F-16 on Nov 20: “Iran did not attack a US F-16 fighter
+aircraft yesterday — at all” (CNA, JPost). A **Qatari delegation held two
+hours of talks in Tehran** on the night of Nov 20 — Gharibabadi: not yet
+formal negotiations; Iran’s position is that enriched uranium must not leave the country (Al Jazeera’s paraphrase); Araghchi (via Tasnim):
+reopening Hormuz is “not difficult” if Washington accepts “reasonable
+conditions” (Al Jazeera). **Bloomberg (Nov 21): the UK (PM Burnham) has
+spent weeks preparing for possible renewed US strikes**; British officials
+see little prospect of a negotiated settlement. **Iran began electricity
+rationing Nov 22** (fuel shortages + war-damaged grid; ~2 hours every two
+days). Late Nov 21 (~23:43 Riyadh time) Saudi civil defense issued a Mecca-region
+danger alert, lifted within minutes (Saudi Times); early Nov 22 the
+coalition intercepted a Houthi ballistic missile aimed at western Saudi
+Arabia **and a drone heading toward the Riyadh region** (Anadolu, Siasat,
+SANA, Arab News — al-Maliki on X). The Nov 22 review's “Riyadh-bound
+drone was Nov 21” correction is reversed — the Nov 22 drone is confirmed
+(Anadolu, Siasat, SANA, Arab News, LaPresse, Gulf News, all dated Nov
+22); the Nov 21 drones are the two Anadolu reported on Saturday. **Treasury (Nov 20 action,
+logged late):** four Iranian “oil trustees” designated under Operation
+Economic Outcast (Bavand, Taj, Servati, Arabnejad); Bessent: “The ship is
+sinking.” **No new model input** — futures did not trade over the weekend
+(Brent still $92.57), no new Kpler edition, no new UKMTO entries — the
+47th run leaves the rows at 15.0/50.0/35.0 horizon; the reweight trigger
+stays met (the escalation pile grew) and the next Kpler print (week to Nov
+16) remains the clean reweight point. UKMTO: no new entries (135,
+coverage to Nov 22). AAA Nov 22: the **26th straight daily decline**
+(diesel $5.8445, $0.6831 below the Sep 22 record). **Nov 21:** three more UKMTO tanker
 attacks in 24 hours (#214–216, Nov 20–21 — #214 struck on the port bow 8nm N of Khasab on Nov 20, fire onboard; #215 hit on the stern 11nm N and #216 in the engine room 17nm E on Nov 21; all outbound, no casualties reported, no confirmed losses — corrected from the archived payload by the Nov 21 review) — UKMTO's
 running count is **31 attacks in October, ~19 in November through Nov 18,
 more than in any earlier month of the war** (ABC, Nov 21), and the IMO counts 34 confirmed attacks in and around the strait across October–November and 138 attacks on vessels across the Middle East since the war began; Iran claims a mine hit one of the Nov 21 tankers (state media;
@@ -131,7 +167,7 @@ oil move. **Calibration ledger: 9 resolved, 2 open (running Brier
 
 ## Markets, shipping, and stocks
 
-- **Prices (Nov 20 settles, plotted):** Brent **$92.57** (January contract,
+- **Prices (Nov 20 settles, plotted — no new settlement at the Nov 22 pass: futures did not trade Nov 21–22, the weekend):** Brent **$92.57** (January contract,
   +$0.59, +0.6% vs the Nov 19 $91.98) and WTI **$83.98** (December contract,
   +$0.77, +0.9% — **the December contract's final settlement**: the
   contract's last trading day was Nov 20, so this point is the December
@@ -161,12 +197,12 @@ oil move. **Calibration ledger: 9 resolved, 2 open (running Brier
   unpublished, 6.5% is the latest official annual print — and the strongest
   case yet for a December Fed hike (CNBC: "keeping pressure on the Fed").
   November CPI, Dec 10.
-- **AAA Nov 21 (applied):** gasoline **$3.6594**, diesel **$5.8649** — the
-  **25th straight daily decline since Oct 28**, and **$0.6627 below** AAA's
-  Sep 22 record of $6.5276 (−10.2% from the record). The Nov 21 AAA pairs
-  against the Nov 20 settlement $83.98 (Nov 21 is a Saturday — no same-day
-  settlement): **≈ $162.3 diesel / $69.7 gasoline** (Nov 20 same-day:
-  ≈163.7 / 71.0; Nov 19: ≈165.8 / 73.0).
+- **AAA Nov 22 (applied):** gasoline **$3.6448** (−1.5¢), diesel
+  **$5.8445** (−2.0¢) — the **26th straight daily decline since Oct 28**,
+  and **$0.6831 below** AAA's Sep 22 record of $6.5276 (−10.5% from the
+  record). The Nov 22 AAA pairs against the Nov 20 settlement $83.98 (Nov
+  22 is a Sunday — no same-day settlement): **≈ $161.5 diesel / $69.1
+  gasoline** (Nov 21: ≈162.3 / 69.7; Nov 20 same-day: ≈163.7 / 71.0).
 - **Hormuz:** UKMTO's **Nov 13 weekly overview** is now the operative figure:
   **139 outbound / 169 inbound transits** for the week to Nov 11 (≈65% below
   pre-war levels), 8 incidents in the Strait / Arabian Gulf / Gulf of Oman (two
@@ -179,7 +215,7 @@ oil move. **Calibration ledger: 9 resolved, 2 open (running Brier
   (ADNOC did not name the ship; Riviera), so the naming is contradictory and
   unconfirmed; #211 (the likely ADNOC L&S ship; fire
   extinguished, one crew missing) and the Tara Gas (#208, still unaccounted
-  for) stand; no confirmed loss; **135 entries, coverage to Nov 21**
+  for) stand; no confirmed loss; **135 entries, coverage to Nov 22** (no new entries at the Nov 22 pass — #214–#216 remain the newest)
   (Nov 20: #213, a "suspicious activity" in the Gulf of Aden — yellow pin,
   no description, not an attack; Nov 21: **three new attacks #214–#216** — #214 struck on the port bow 8nm N of Khasab on Nov 20, fire onboard; #215 hit on the stern 11nm N and #216 in the engine room 17nm E on Nov 21; all outbound, no casualties reported, no confirmed losses — corrected from the archived payload by the Nov 21 review). **UKMTO's
   running count (ABC/AP, Nov 21): 31 attacks in October, ~19 in November
@@ -507,7 +543,50 @@ towards" the line); unconfirmed, no Saudi-side damage report — the Yanbu route
   adjudicated incident dates (registration-timestamp pattern; #166 stands on
   its explicit report date) — none applied; #202's API type was re-classed
   (flagged, not applied).
-- **Staging:** `daca3220-a8dc-4d6e-98db-b12cd8845a93` (bundle `RIW4NMW5.js`;
+- **Prod:** `a982a4f1-fdec-43a0-ac81-23be10111809` (bundle
+  `index.astro_astro_type_script_index_0_lang.CXAfn5bb.js`) — deployed
+  ~07:30 MST Nov 22 on the user's explicit green light. Same bytes as
+  staging `07f15650`. Carries the Nov 22 morning pass PLUS the external
+  review's fixes (Houthi timeline: Nov 21 — three missiles **and two
+  drones** (one toward the Riyadh region, one toward southern Saudi
+  Arabia); late-Nov-21 Mecca-region alert; early-Nov-22 — one missile
+  (western Saudi) **and one drone toward the Riyadh region** (Anadolu,
+  Siasat — the review's “drone was Nov 21” correction reversed after
+  re-verification); the uranium line attributed as Iran's position,
+  not Gharibabadi's words; the radar-damage “unverified” caveat; the
+  “three-day pause” framing cut from the site (it is GlobalSecurity's
+  ops-report language, but its “since the Nov 18 attacks” premise
+  conflicts with the site's own record: last Bahrain Nov 17, Kuwait Nov
+  18); the diplomacy item trimmed 2,355 → 1,747 chars) PLUS the Nov 11
+  crack-comment entry restoration (no rendered change). verify-live prod
+  PASS (all charts, no console errors); spot-check: “two drones”,
+  “southern Saudi Arabia”, “a drone heading toward the Riyadh region”,
+  Mecca alert, “Patriot radars” present in the live HTML; JS bundle
+  carries 5.8445 / 3.6448 / “twenty-sixth straight decline”. Supersedes
+  `a3cc2a54` (below). **Staging and prod are in sync.**
+- **Staging:** `07f15650-ef05-4914-b9c5-904cd4917448` (same bundle
+  `CXAfn5bb.js`; Nov 22 ~07:29 MST; supersedes `ab54a79c`) — the Nov 22
+  pass + the external review's fixes + the drone restoration (see prod
+  `a982a4f1` above). Geometry gate PASS on the shipped bytes; verify-live
+  staging PASS; live spot-check PASS.
+- **Staging (superseded):** `ab54a79c-f3f8-400b-bc28-3deaf32f36c3` (bundle `index.astro_astro_type_script_index_0_lang.CXAfn5bb.js`;
+  Nov 22 ~06:42 MST; supersedes `daca3220`) — the Nov 22 morning pass (pre-review): AAA Nov 22
+  (gasoline $3.6448 / diesel $5.8445 — **26th straight decline**, $0.6831
+  below the Sep 22 record), DATA_AS_OF → Nov 22, ukmtoCoverageEnd → Nov 22
+  (no new entries), watchlist (the Nov 21 Bahrain strike — IRGC claims two
+  Patriot radars hit, civilian facility fire, two injured; the CENTCOM
+  F-16 denial; the Nov 20 Qatar talks — not formal, uranium stays; the
+  early-Nov-22 Houthi interceptions + Mecca-region alert), the crack
+  comment log +Nov 22 pairing (161.5/69.1). No new settlement (weekend),
+  no new Kpler, no new assessed TTF/JKM. Geometry gate PASS on the shipped
+  bytes; verify-live staging PASS (22 charts, end-dots, no console errors);
+  spot-check: new strings present ($5.84, $3.64, “twenty-sixth straight
+  decline”, “Patriot radars”, “Al Rifa”, “at all”, “Qatari delegation”,
+  “not difficult”, “danger alert in the Mecca region”), stale strings
+  absent (5.8649, “twenty-fifth straight decline”, 0.6627). Prod
+  `a3cc2a54` untouched at the time (then moved on the user's green light —
+  `a982a4f1`, above).
+- **Staging (superseded):** `daca3220-a8dc-4d6e-98db-b12cd8845a93` (bundle `RIW4NMW5.js`;
   Nov 21 ~07:57 MST; supersedes `f5c28224`) — the Nov 21 pass WITH the
   external review's copy fixes (review-2026-11-21.md): the #214–#216 UKMTO
   details corrected from the archived payload (#214 port bow 8 NM N of
