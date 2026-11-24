@@ -1,0 +1,9 @@
+{
+ "file": "ukmto-all-20261124T1355Z.json",
+ "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+ "fetched": "2026-11-24T13:55Z",
+ "entries": 76,
+ "number_range": "143-219",
+ "sha256": "63ea544371bbe16f7b72754c2e0b65210b08638f960f966e276806c582b7d9db",
+ "note": "Pass of Nov 24: +2 time-late Nov 22 reports (#218 Dibba bulk carrier, #219 three eastbound strait vessels)."
+}

@@ -1,11 +1,11 @@
-# Crisis state — Nov 23 (morning pass ~06:38–07:15 MST; staging `52adae56`, prod still `a982a4f1`)
+# Crisis state — Nov 24 (morning pass ~06:33–07:00 MST; **prod `0ad387ae`** deployed ~07:50 MST on explicit user go-ahead after the external review + review response; staging `d086e199`; bundle `D38URn6Q.js`)
 
 Sources and decisions: [Nov 23 daily log](logs/2026-11-23.md) · [Nov 22 daily log](logs/2026-11-22.md) · [Nov 21 daily log](logs/2026-11-21.md) · [Nov 20 daily log](logs/2026-11-20.md) · [judgment history](judgment-history.md)
 
 ## Current read
 
 **Judgment:** 10 / 50 / 40 — corridor holds / standoff / corridor lapses. **HOLD;
-any reweight remains a user decision. Nov 23:** **No new model input** —
+any reweight remains a user decision. **Nov 24:** **Brent settled at $89.37 (Jan contract) — the first sub-$90 settlement since the Aug 28 close (89.31); Reuters: “lowest close since Aug 31” — and January WTI settled at $80.17 for the first time** (December's final settlement was Nov 20); both fell ~$3.2 on the restart of Libya's Sharara pipeline and recovering Middle East flows (Reuters). The 49th model run: horizon **15.1/50.0/35.0** (the settlement was the only input change — transits/volume still through Nov 11, 13 days stale); the candidate shadow reproduces 0.150772/0.499626/0.349602 exactly, and the next Kpler print (week to Nov 16) remains the clean reweight point. **Brent < $90 switches the draw band to 0.30M b/d** — at that rate the 250M floor lands ~Feb 9, 2027 (vs ~Jan 11 at 0.45M). Treasury's “Operation Economic Outcast” wave 2 (Nov 23): 22 entities + 8 people in Iran's shadow-banking network; Bessent: the economy is “underwater” and its leaders “panicking” (Gulf News; “drowning” corrected by the Nov 24 review). Baqaei: the strait could reopen “within two days” if the US lifts the blockade, ends the war and unfreezes assets (Al Jazeera, AFP). Iranian state TV (IRIB, Nov 23) denied a tanker convoy is readying to break the blockade (The National, Nov 24; Windward's 16-tankers-at-Kharg figure stays cut — the anchor date is unresolved); a Nov 23 Iranian letter to the UN accusing Bahrain and Kuwait of facilitating US aggression and demanding reparations — signatory Gholamhossein Darzi, whom AFP/Yahoo/JPost name as Iran's UN ambassador and chargé d'affaires, also carried by WANA and Mehr (the Nov 24 review's “ABNA-only / Iravani” doubt didn't survive re-check; restored to the site — review response). The US is investigating Iran's possible role in cyberattacks on up to 50 commercial ships, two bound for Texas; a Trump administration official said there's no evidence of Iranian involvement (WSJ, Nov 23). **Iraq ordered a federal takeover of oilfields in areas under Kurdish security control** and handed all regional border crossings to the federal authority (Reuters, Al Jazeera, Nov 24). The Houthis claim an 11th Wing Loong II shot down over the Lahj coast (Saba, Nov 24; unconfirmed); the UK sanctioned the Houthi group and four senior officials, including interior minister Abdulkarim al-Houthi (Al Jazeera, AFP, Nov 24). UKMTO +2 (both time-late Nov 22 reports): #218 a bulk carrier hit by a projectile at Dibba, fire, no casualties; #219 three eastbound strait vessels struck by projectiles, all crew safe. UKMTO's weekly overview counts **263 transits in the week to Nov 18, down from 308 the week before, ~65% below pre-war** (UKMTO via Iran International, Nov 21; also Marine Insight, National Security Journal — the Nov 24 review's “both weeks can't be 65%” doubt is resolved: each week is measured against pre-war levels separately; restored to the site — review response). The 10-year closed at 4.918% on Nov 23, a second straight close below 5%. AAA Nov 24: the **28th straight daily diesel decline** ($5.7982, $0.7294 below the Sep 22 record). WPSR + EIA petroleum w/e Nov 20 land tomorrow (10:30 ET). **Prod deployed** `0ad387ae` (staging `d086e199`), both re-verified live — gate PASS, served strings confirmed. **Nov 23:** No new model input —
 the latest settlement is still Nov 20 (Brent $92.57 / WTI $83.98; the Nov
 23 session was open at pass time), no new Kpler edition, no confirmed loss
 — the 48th run leaves the rows at 15.0/50.0/35.0 horizon. The escalation
@@ -32,7 +32,7 @@ sanctioned tankers passed through the strait** (Nov 13–20); Trump (Fox,
 Nov 22): “they'll all be at the bottom of the sea like the rest of the
 navy”; UKMTO: 114 vessels transited with US assistance over Nov 19–21 (via
 EA WorldView, GlobalSecurity). **Houthis claimed a strike on Aramco’s Rabigh
-refinery** (Nov 22, unconfirmed); Houthi media say a Saudi strike killed 10 at a Hodeidah telecoms building
+refinery** (Nov 22, unconfirmed); Houthi media say a Saudi strike killed 10 at a Hodeidah telecoms building (toll since revised to 17 workers killed, 11 wounded — Houthi telecoms dept via Xinhua, Nov 24; the pass's “now 4 killed / 18 injured” was the initial figure — Nov 24 review)
 (Nov 23; Riyadh no comment). The Nov 23 pass's “early Nov 23” missile-and-drone
 intercept duplicated the Nov 22 event and is cut (Nov 23 review).
 **UKMTO:** +1 advisory (#217, Nov 22 — tanker(s) and military forces,
@@ -215,21 +215,28 @@ oil move. **Calibration ledger: 9 resolved, 2 open (running Brier
 
 ## Markets, shipping, and stocks
 
-- **Prices (Nov 20 settles, plotted — no new settlement at the Nov 22 pass: futures did not trade Nov 21–22, the weekend):** Brent **$92.57** (January contract,
-  +$0.59, +0.6% vs the Nov 19 $91.98) and WTI **$83.98** (December contract,
-  +$0.77, +0.9% — **the December contract's final settlement**: the
-  contract's last trading day was Nov 20, so this point is the December
-  contract's last and the series tracks the January contract from there). The
-  wire wrap flags a **third straight weekly decline (−3.4% on the week)**;
-  Brent is down 18.4% from the Oct 30 settlement of $113.43. **Yahoo vs
-  wire: the BZ=F bar closed at 92.57 = the wire settlement (the $88.75
-  live-bar divergence flagged at the Nov 20 morning pass resolves as a feed
-  artifact); the CL=F bar closed at 83.98 = the wire.** Brent–WTI spread
-  $8.59. 10-yr: **Nov 20 close 4.912** (O 4.98 / H 4.996 / L 4.906; Yahoo
-  ^TNX session close — the Fed H.15 constant-maturity value for Nov 20 was
-  not yet posted at this pass) — **back below 5%**, ending the
-  six-straight-closes streak (Nov 12: 5.103, Nov 13: 5.154, Nov 16: 5.121,
-  Nov 17: 5.103, Nov 18: 5.066, Nov 19: 5.052). Driver (Reuters: "US yields drop for day and week; AI trade concern spurs safe-haven bid"): safe-haven demand in an AI-led equity selloff.
+- **Prices (Nov 23 settles, plotted at the Nov 24 pass):** Brent **$89.37**
+  (January contract, −$3.20, −3.5% vs the Nov 20 $92.57) and WTI **$80.17**
+  (January contract, −$3.24 vs its own Nov 20 settlement; $3.81 below the December contract's final settlement of
+  $83.98 on Nov 20 — **the first January WTI settlement in the series**;
+  December's last trading day was Nov 20). **First sub-$90 Brent settlement
+  since the Aug 28 close (89.31)** — Reuters calls it the lowest close since
+  Aug 31 (the chart's old “Aug 29, $88.10” point was actually the August
+  MONTHLY AVERAGE — Yahoo's August closes average 88.08 — and was re-dated to
+  Aug 31 per the July monthly-average convention; the review response). WTI's
+  lowest settlement since Aug 10 (Reuters). Driver: the restart of Libya's
+  Sharara pipeline and recovering Middle East flows (Reuters). JPMorgan
+  expects Brent in the high $70s in H1 2027 on an estimated supply surplus
+  (CNBC, Nov 23; Yahoo Finance — no Reuters report, as the Nov 24 review
+  found, but the forecast is well-documented; restored to the site with the
+  corrected sourcing). Brent is down 21.2% from the Oct 30 settlement of $113.43.
+  **Yahoo vs wire: the BZ=F bar closed at 89.37 = the wire; the CL=F bar
+  closed at 80.17 = the wire — no feed artifact this time.** Brent–WTI
+  spread $9.20. 10-yr: **Nov 23 close 4.918** (O 4.934 / H 4.982 / L 4.908;
+  Yahoo ^TNX session close — the Fed H.15 constant-maturity value for
+  Nov 23 was not yet posted at this pass) — **a second straight close below
+  5%**, +0.6bp on the day (no source links the move to oil — the “as oil
+  fell” clause was cut by the Nov 24 review and stays cut).
 - **CPI (released Nov 10, BLS USDL-26-1685):** October consumer prices **+0.4% MoM
   (SA)** — above the +0.3% consensus — and core **+0.3%**, the third straight
   month at that pace. **No headline or core 12-month rate was published** (the
@@ -547,10 +554,10 @@ towards" the line); unconfirmed, no Saudi-side damage report — the Yanbu route
 
 ## Next dates
 
-- **Tonight (Nov 23, ~14:30 ET)** — the Nov 23 settlements: the first
-  **January WTI** point in the series (live at pass time: WTI $81.64, down
-  from the Nov 20 settlement $83.98; plot if in-band — the 0.45 band holds
-  either way); the 10-year close (last: Nov 20, 4.912, below 5%).
+- **Tomorrow (Nov 25, 10:30 ET)** — the WPSR + EIA petroleum weekly (w/e
+  Nov 20): inventories + the SPR weekly bar (last: 276.361M w/e Nov 13) —
+  the first print since Brent crossed back under $90 (draw band now 0.30M
+  b/d; 250M floor ~Feb 9, 2027 at that pace).
 - **Fed H.15:** the page/XML lagged as of the morning pass (latest in the
   XML: Nov 19 = 5.04); official Nov 20–22 values pending — the five-day
   cross-check (Nov 13–19, H.15 vs Yahoo) is within 1–2bp, so the plotted
@@ -561,7 +568,6 @@ towards" the line); unconfirmed, no Saudi-side damage report — the Yanbu route
 - **TTF/JKM:** both new editions ingested (JOGMEC Nov 16 update; Global
   LNG Hub Nov 23) — the next assessed print is the JOGMEC week of Nov
   16–20, expected ~Nov 30.
-- **Nov 25:** WPSR w/e Nov 20 (inventories + SPR weekly bar).
 - Whether the Iranian-loaded STS ship transits and how CENTCOM responds;
   any OFAC extension or new license for the lapsed wind-down GLs;
   corroboration of the IRGC 58th-Reaper claim and the JMIC count of seven
