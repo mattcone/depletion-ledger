@@ -1,0 +1,10 @@
+{
+ "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+ "retrieved_utc": "2026-11-23T14:31:00Z",
+ "retrieved_local": "2026-11-23T07H31ST",
+ "entries": 74,
+ "range": "#143-#217",
+ "sha256": "4be02d94d7ee7f5f9f6d17c63b96c311522cc90abe1bcd7002f71a407b646760",
+ "note": "Archived after the Nov 23 pass at the external review's request — the pass applied #217 (via ukmto-fetch.mjs --apply at ~06:50 MST) and moved ukmtoCoverageEnd to Nov 23 without saving the backing fetch. This re-fetch is the authoritative payload: 74 entries (#143-#217), newest #217 ADVISORY (22 Nov, 14:25 UTC, Gulf of Oman, tanker and military forces near Chabahar — consistent with what the pass applied from Euronews/World Today). The pass's own 06:50 MST fetch saw the same new entry; the API has not changed since (the Nov 22 archive ukmto-all-20261122T1426S.json has 73 entries, #143-#216).",
+ "new_this_pass": [217]
+}

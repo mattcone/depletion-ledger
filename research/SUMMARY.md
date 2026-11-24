@@ -1,11 +1,58 @@
-# Crisis state — Nov 22 (morning pass ~06:30–06:50 MST + external-review fixes; prod in sync, `a982a4f1`)
+# Crisis state — Nov 23 (morning pass ~06:38–07:15 MST; staging `52adae56`, prod still `a982a4f1`)
 
-Sources and decisions: [Nov 22 daily log](logs/2026-11-22.md) · [Nov 21 daily log](logs/2026-11-21.md) · [Nov 20 daily log](logs/2026-11-20.md) · [judgment history](judgment-history.md)
+Sources and decisions: [Nov 23 daily log](logs/2026-11-23.md) · [Nov 22 daily log](logs/2026-11-22.md) · [Nov 21 daily log](logs/2026-11-21.md) · [Nov 20 daily log](logs/2026-11-20.md) · [judgment history](judgment-history.md)
 
 ## Current read
 
 **Judgment:** 10 / 50 / 40 — corridor holds / standoff / corridor lapses. **HOLD;
-any reweight remains a user decision. Nov 22:** Iran struck Bahrain again (the “ended the three-day pause”
+any reweight remains a user decision. Nov 23:** **No new model input** —
+the latest settlement is still Nov 20 (Brent $92.57 / WTI $83.98; the Nov
+23 session was open at pass time), no new Kpler edition, no confirmed loss
+— the 48th run leaves the rows at 15.0/50.0/35.0 horizon. The escalation
+pile grew overnight: **Trump told Fox (Nov 22) he is “inclined to resume
+strikes after the new year”** (the US delay was “for at least another
+week,” Ynet); foreign ministry spokesman Baqaei said Iran will “use all available means to
+counter U.S. aggression” over the blockade (CBS, Nov 23; the “within hours”
+IRGC line and its attribution to Gharibabadi/AFP weren't found — the Nov 23
+review); **Bahrain invoked Article 51**, saying the
+Nov 21 strike hit “purely civilian” targets; the “final solution” enrichment quote (attributed to Gharibabadi/Reuters) is
+unconfirmed — no Reuters report found (Nov 23 review); Araghchi told Iran Daily
+the enriched-uranium stockpile won't leave the country; Araghchi: talks on reopening the strait continue but the US is
+“determined to escalate.” **Russia overnight (Nov 22–23): two more
+refineries hit — Novoshakhtinsk (Rostov) is shut down** (Gov. Slyusar, via TASS, Nov 23) **and Permnefteorgsintez (Perm) was hit, killing one** (Gov.
+Makhonin, via Moscow Times); fuel shortages have spread to at least eight regions (Moscow Times,
+Nov 18, via Kyiv Post — the named sales limits are Leningrad, Nizhny
+Novgorod, Arkhangelsk, Novosibirsk, Penza, Karelia and Buryatia; the pass's
+Lipetsk–Belgorod list is unsourced). Kaleykino is Transneft's pumping
+station near Almetyevsk, **Tatarstan** (not Krasnodar Krai); Tatarstan
+reported no casualties — the “Tatarstan depot, five injured (Gov. Musin)”
+entry wasn't found and is dropped. The **tanker toll is climbing: JMIC counts seven tankers hit
+in the strait since Nov 16 (three off Oman on Nov 20–21)** and **Windward says at least 31 laden,
+sanctioned tankers passed through the strait** (Nov 13–20); Trump (Fox,
+Nov 22): “they'll all be at the bottom of the sea like the rest of the
+navy”; UKMTO: 114 vessels transited with US assistance over Nov 19–21 (via
+EA WorldView, GlobalSecurity). **Houthis claimed a strike on Aramco’s Rabigh
+refinery** (Nov 22, unconfirmed); Houthi media say a Saudi strike killed 10 at a Hodeidah telecoms building
+(Nov 23; Riyadh no comment). The Nov 23 pass's “early Nov 23” missile-and-drone
+intercept duplicated the Nov 22 event and is cut (Nov 23 review).
+**UKMTO:** +1 advisory (#217, Nov 22 — tanker(s) and military forces,
+Gulf of Oman near Chabahar; unconfirmed reports of a US attack on an
+Iranian tanker); no new incidents; count stands at 31 in October, ~19 in
+November through Nov 18. **Gas — two new editions (missed Nov 17–22):**
+JOGMEC (updated Nov 16) put the week Nov 9–13 at TTF $29.5 (Nov 13) and
+JKM in the low-$30s, EU storage 70.8%; the Nov 23 PricePedia weekly put
+**Nov 20 at TTF €88.5 and JKM €88.2 — $28.5 / $28.4 at the 1.0990 ECB
+rate** (down €2.5 / €8.6 week over week, weak demand and recovering
+supply). Plotted. (The Nov 20 source is PricePedia's own bylined weekly,
+not the JOGMEC-sourced "Global LNG Hub" series — relabeled after the Nov
+23 review flagged the mismatch; the original "Global LNG Hub (PricePedia)"
+label came from my conflation of the two.) **BZ=F live-feed artifact (third occurrence):
+the live bar printed $88.00 (−4.9%) while the wire showed Brent
+$91.1–92.3** — not plotted; WTI live $81.64 (tonight’s settlement is the
+next printed bar). **AAA Nov 23: the 27th straight daily decline** (diesel
+$5.8182, $0.7094 below the Sep 22 record). Polymarket (thin): “Hormuz
+traffic normal” by Nov 30 0.25%, by Dec 31 2.95%, the far rungs all
+slipped (Dec 31 ’27 38.5%). **Nov 22:** Iran struck Bahrain again (the “ended the three-day pause”
 framing is GlobalSecurity's Day 268 ops-report language — its “since the
 Nov 18 attacks” premise conflicts with the site's own record, last
 Bahrain Nov 17 / Kuwait Nov 18, so it was cut from the site; the Nov 22
@@ -41,7 +88,8 @@ sinking.” **No new model input** — futures did not trade over the weekend
 stays met (the escalation pile grew) and the next Kpler print (week to Nov
 16) remains the clean reweight point. UKMTO: no new entries (135,
 coverage to Nov 22). AAA Nov 22: the **26th straight daily decline**
-(diesel $5.8445, $0.6831 below the Sep 22 record). **Nov 21:** three more UKMTO tanker
+(diesel $5.8445, $0.6831 below the Sep 22 record). **Nov 21:**
+ three more UKMTO tanker
 attacks in 24 hours (#214–216, Nov 20–21 — #214 struck on the port bow 8nm N of Khasab on Nov 20, fire onboard; #215 hit on the stern 11nm N and #216 in the engine room 17nm E on Nov 21; all outbound, no casualties reported, no confirmed losses — corrected from the archived payload by the Nov 21 review) — UKMTO's
 running count is **31 attacks in October, ~19 in November through Nov 18,
 more than in any earlier month of the war** (ABC, Nov 21), and the IMO counts 34 confirmed attacks in and around the strait across October–November and 138 attacks on vessels across the Middle East since the war began; Iran claims a mine hit one of the Nov 21 tankers (state media;
@@ -442,17 +490,25 @@ towards" the line); unconfirmed, no Saudi-side damage report — the Yanbu route
   Coast for a buyer. The IEA plans a further 71M-barrel release of emergency
   stocks by end-February 2027, about 15M of it diesel (OMR, Nov 13, via Business
   Upturn).
-- **Gas (TTF/JKM):** unchanged — TTF **$28.0/MMBtu** and JKM **$32.2/MMBtu** (Dec
-  delivery, Nov 6 values, per the Global LNG Hub post of Nov 9) remain the latest
-  plotted JOGMEC-assessed prices; **no new assessed print as of this pass**
-  (last known JKM–TTF spread 51.1¢/MMBtu, Nov 12, Platts). Friday Nov 21
-  futures quotes (oilpriceapi live pages — CFD quotes, **not assessments, not
-  plotted**): TTF **$27.27/MMBtu** (−2.2%), JKM **$27.52/MMBtu** (−4.8%); a weekly bunker
-  snapshot (engine.online) shows January JKM trading around **$29.60/MMBtu** —
-  a traded CFD value, not an assessment; Reuters (via the Kpler newsletter,
-  Nov 18) put North Asia spot LNG at **$31.30/MMBtu** in the week to Nov 13 —
-  a spot level, not an assessment; NOT plotted. EU carbon slipped below
-  €90 on the free-permit deal — context, not a plotted series.
+- **Gas (TTF/JKM):** **two new editions landed this pass (missed Nov 17–22).**
+  JOGMEC updated Nov 16 (week Nov 9–13, Dec delivery): TTF **$29.5** (Nov 13;
+  up from $28.0 on Nov 6 — colder weather, reduced Norwegian supplies —
+  unplanned maintenance at Troll and Asgard — and the first Dunkelflaute of
+  the winter); JKM **low-$30s** (Nov 13; down from low-$31s on Nov 6 — the
+  price touched the high-$27s on Nov 10 as US–Iran tensions receded, then
+  rebounded on South/Southeast Asian spot buying); EU storage **70.8%** on
+  Nov 13 (AGSI+, down 14.6% YoY, 20.3% below the 5-yr average). JOGMEC's
+  JKM text is internally inconsistent on Nov 13 (lead: "fell to low-USD
+  30s on 13 November"; later: "pushed JKM up to the high-USD 30s/MBtu" the
+  same day) — the plotted 30.2 follows the lead sentence. PricePedia
+  published its Nov 23 weekly (Nov 20 values, in €/MWh): TTF **€88.5**
+  (−€2.5 w/w), JKM **€88.2** (−€8.6 w/w, steepest of the three), Henry Hub
+  €10.6 (+€0.6) — “weak demand and recovering supply.” Converted at the **ECB
+  reference rate 1.0990 (Nov 20)** (as printed by O&G ME): **TTF $28.5,
+  JKM $28.4**. Both editions plotted as assessed points; headings updated
+  (TTF +160%, JKM +165% vs pre-closure). The earlier CFD quotes (TTF
+  $27.27 / JKM $27.52, Nov 21) and the Reuters/Kpler North Asia spot level
+  ($31.30, week to Nov 13) remain un-plotted quotes, as before.
 - **WPSR w/e Nov 13 (released Nov 18, 10:30 a.m. ET; ingested ~08:52 MST):**
   SPR **276.361M (−3.174M w/w)** — second straight weekly withdrawal above 2.5M
   and the largest since the week ending Aug 21 (−3.700M; Aug 28's −3.122M was smaller — corrected at review); below every month-end level
@@ -491,16 +547,26 @@ towards" the line); unconfirmed, no Saudi-side damage report — the Yanbu route
 
 ## Next dates
 
-- **Mon (Nov 23)** — the Nov 23 settlements: the first **January WTI** point
-  in the series; the 10-year close (does it hold below 5%?); confirm the Fed
-  H.15 constant-maturity 10-yr for Nov 20 against the plotted 4.912 (Yahoo
-  session close per the standing rule). The next Kpler flow edition (the
-  preliminary days may settle 1.5–2× higher — the clean transits/volume
-  reweight point); the next TTF/JKM assessed print (site values are still
-  the Nov 6 figures); whether the Iranian-loaded STS ship transits and how
-  CENTCOM responds; any OFAC extension or new license for the lapsed
-  wind-down GLs; corroboration of the IRGC 58th-Reaper claim and the Nov 21
-  mine claim.
+- **Tonight (Nov 23, ~14:30 ET)** — the Nov 23 settlements: the first
+  **January WTI** point in the series (live at pass time: WTI $81.64, down
+  from the Nov 20 settlement $83.98; plot if in-band — the 0.45 band holds
+  either way); the 10-year close (last: Nov 20, 4.912, below 5%).
+- **Fed H.15:** the page/XML lagged as of the morning pass (latest in the
+  XML: Nov 19 = 5.04); official Nov 20–22 values pending — the five-day
+  cross-check (Nov 13–19, H.15 vs Yahoo) is within 1–2bp, so the plotted
+  Nov 20 bar (4.912, Yahoo session close) is well supported.
+- **The next Kpler flow edition** (week to Nov 16) — the clean
+  transits/volume reweight point; the preliminary days may settle 1.5–2×
+  higher.
+- **TTF/JKM:** both new editions ingested (JOGMEC Nov 16 update; Global
+  LNG Hub Nov 23) — the next assessed print is the JOGMEC week of Nov
+  16–20, expected ~Nov 30.
+- **Nov 25:** WPSR w/e Nov 20 (inventories + SPR weekly bar).
+- Whether the Iranian-loaded STS ship transits and how CENTCOM responds;
+  any OFAC extension or new license for the lapsed wind-down GLs;
+  corroboration of the IRGC 58th-Reaper claim and the JMIC count of seven
+  tankers hit since Nov 16 (the IRGC mine claims — two supertankers Nov 22 —
+  remain state media only, unverified).
 - OPEC+ ministerial, Nov 29 (2027 policy); STEO Dec edition, ~Dec 11 (next
   scheduled EIA–market spread check); **CPI, Dec 10**.
 - **The standing reweight condition remains met** after the Nov 8 review. This
