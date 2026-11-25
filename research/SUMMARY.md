@@ -1,11 +1,63 @@
-# Crisis state — Nov 24 (morning pass ~06:33–07:00 MST; **prod `0ad387ae`** deployed ~07:50 MST on explicit user go-ahead after the external review + review response; staging `d086e199`; bundle `D38URn6Q.js`)
+# Crisis state — Nov 25 (morning pass ~06:45–07:40 MST; review fixes + refinery status notes ~08:00; **prod `c93e18b0` deployed ~08:05 MST on explicit user go-ahead**; staging `1fa78fe0`; bundle `JNK9NL3k.js`)
 
 Sources and decisions: [Nov 23 daily log](logs/2026-11-23.md) · [Nov 22 daily log](logs/2026-11-22.md) · [Nov 21 daily log](logs/2026-11-21.md) · [Nov 20 daily log](logs/2026-11-20.md) · [judgment history](judgment-history.md)
 
 ## Current read
 
 **Judgment:** 10 / 50 / 40 — corridor holds / standoff / corridor lapses. **HOLD;
-any reweight remains a user decision. **Nov 24:** **Brent settled at $89.37 (Jan contract) — the first sub-$90 settlement since the Aug 28 close (89.31); Reuters: “lowest close since Aug 31” — and January WTI settled at $80.17 for the first time** (December's final settlement was Nov 20); both fell ~$3.2 on the restart of Libya's Sharara pipeline and recovering Middle East flows (Reuters). The 49th model run: horizon **15.1/50.0/35.0** (the settlement was the only input change — transits/volume still through Nov 11, 13 days stale); the candidate shadow reproduces 0.150772/0.499626/0.349602 exactly, and the next Kpler print (week to Nov 16) remains the clean reweight point. **Brent < $90 switches the draw band to 0.30M b/d** — at that rate the 250M floor lands ~Feb 9, 2027 (vs ~Jan 11 at 0.45M). Treasury's “Operation Economic Outcast” wave 2 (Nov 23): 22 entities + 8 people in Iran's shadow-banking network; Bessent: the economy is “underwater” and its leaders “panicking” (Gulf News; “drowning” corrected by the Nov 24 review). Baqaei: the strait could reopen “within two days” if the US lifts the blockade, ends the war and unfreezes assets (Al Jazeera, AFP). Iranian state TV (IRIB, Nov 23) denied a tanker convoy is readying to break the blockade (The National, Nov 24; Windward's 16-tankers-at-Kharg figure stays cut — the anchor date is unresolved); a Nov 23 Iranian letter to the UN accusing Bahrain and Kuwait of facilitating US aggression and demanding reparations — signatory Gholamhossein Darzi, whom AFP/Yahoo/JPost name as Iran's UN ambassador and chargé d'affaires, also carried by WANA and Mehr (the Nov 24 review's “ABNA-only / Iravani” doubt didn't survive re-check; restored to the site — review response). The US is investigating Iran's possible role in cyberattacks on up to 50 commercial ships, two bound for Texas; a Trump administration official said there's no evidence of Iranian involvement (WSJ, Nov 23). **Iraq ordered a federal takeover of oilfields in areas under Kurdish security control** and handed all regional border crossings to the federal authority (Reuters, Al Jazeera, Nov 24). The Houthis claim an 11th Wing Loong II shot down over the Lahj coast (Saba, Nov 24; unconfirmed); the UK sanctioned the Houthi group and four senior officials, including interior minister Abdulkarim al-Houthi (Al Jazeera, AFP, Nov 24). UKMTO +2 (both time-late Nov 22 reports): #218 a bulk carrier hit by a projectile at Dibba, fire, no casualties; #219 three eastbound strait vessels struck by projectiles, all crew safe. UKMTO's weekly overview counts **263 transits in the week to Nov 18, down from 308 the week before, ~65% below pre-war** (UKMTO via Iran International, Nov 21; also Marine Insight, National Security Journal — the Nov 24 review's “both weeks can't be 65%” doubt is resolved: each week is measured against pre-war levels separately; restored to the site — review response). The 10-year closed at 4.918% on Nov 23, a second straight close below 5%. AAA Nov 24: the **28th straight daily diesel decline** ($5.7982, $0.7294 below the Sep 22 record). WPSR + EIA petroleum w/e Nov 20 land tomorrow (10:30 ET). **Prod deployed** `0ad387ae` (staging `d086e199`), both re-verified live — gate PASS, served strings confirmed. **Nov 23:** No new model input —
+any reweight remains a user decision. **Nov 25:** **Brent back above $90 —
+Nov 24 settled $91.40 (Jan contract, +$2.03)**, a V-shaped session (intraday
+~$88, its lowest since Aug 27) that recovered on reports of attacks on
+shipping around the strait (CNBC, Nov 24) — after Nov 23's $89.37 was the
+first sub-$90 settlement since Aug 28 (89.31). The 50th model run: horizon
+**15.0/50.0/35.0** (Brent ≥ $90 reverts it to 15.0; the settlement was the
+only input change — transits/volume still through Nov 11, 14 days stale); the
+candidate shadow is unchanged at 15.1/50.0/35.0, and the next Kpler print
+(week to Nov 16) remains the clean reweight point. **Brent ≥ $90 reverts the
+draw band to 0.45M b/d** — the 250M floor returns to ~Jan 11, 2027 (from
+~Feb 9 at 0.30M). **Russia overnight Nov 24–25: two more Samara-region
+refineries hit — Syzran (Rosneft, ~8.5–8.9 Mt/yr) and Kuibyshev (the plant in the city of Samara, ~7
+Mt/yr; distinct from the Novokuibyshevsk plant)** (unit damage per the SBU and General Staff via Interfax-Ukraine/UNN — not the Defense Ministry, corrected by the Nov 25 review; fires confirmed; no halt confirmation yet); the
+strike window runs Oct 24 → Nov 25 (19 sites). The General Staff also
+confirmed three MiG-31s and two Su-34s hit at Savasleyka airfield (Nizhny
+Novgorod region). **Houthis:** a projectile struck the PIF Tower in Riyadh
+Nov 24 — the second strike on the building in under a week, 11 injured (Saudi
+Civil Defence); Nov 25 they claimed an attack on the Ras Tanura refinery
+(~550 kb/d, Saudi's largest, "caused fires") — the coalition said it intercepted four drones over Ras Tanura and did not say the refinery was hit (The National); the
+coalition struck the Hodeidah port after ordering its evacuation (Al
+Jazeera). **Iran:** Tehran told Washington through Qatari mediators (Nov 25)
+it would **reopen Hormuz within 48 hours** once its demands — lifting the
+blockade, ending the war "on all fronts" — are met (Reuters); Ghalibaf ruled
+out talks until Iran's seven conditions. NBC: US officials are debating
+targeting senior Iranian leaders; Hatami's "unimaginable" retaliation quote is unverified (the Nov 25 review found only his Nov 18 "even more devastating" warning, AFP) and is cut from the site. The IRGC Navy claimed two oil
+tankers struck naval mines (Nov 25) — **unverified, no vessel named**;
+CENTCOM has previously called such claims false, ISW sees no re-mining. **Kpler
+(via Iran International, Nov 24):** non-Iranian Gulf exports averaged just
+under 14M b/d in Sep–Oct (pre-war level), preliminary November ~12M b/d;
+Saudi + UAE above pre-war, Kuwait + Qatar below; OPEC+ ministers meet Nov 29 to set 2027 quotas (CNBC; the "expected to hold" framing is unconfirmed — previews call the outcome open). **Russia export bans**
+(Novak, Nov 25, Bloomberg wire): the Energy Ministry has proposed extending
+the jet-fuel export ban (expires Nov 30); the gasoline-ban extension beyond
+Jan 31 will be considered in December — a proposal, not a decree. Kyiv Post
+(Nov 25): 16 refineries struck since Nov 1, some halted and some at reduced rates (not 16 halted); 110+ refinery
+attacks since Jan 1. **UKMTO:** +2 (#220, #221, both Nov 22 attacks);
+coverageEnd Nov 25. **AAA Nov 25:** diesel $5.7645 — the **29th straight
+daily decline** ($0.7631 below the Sep 22 record); gas $3.5866. 10-year:
+4.904 (Nov 24), a third straight close below 5%. **WPSR w/e Nov 20: released
+10:30 ET today — not yet posted at pass end** (EIA API preliminary 273.5M,
+−2.9M; next pass applies the official print to SPR/commercial
+stocks). **Review of the pass (review-2026-11-25.md) fixed five errors in the
+tree** (the price paragraph still described Nov 23; refinery damage
+misattributed to the Defense Ministry instead of the SBU/General Staff;
+"16 refineries halted" was 16 struck; the Nov 25 mine claim sat in the Nov 24
+Brent note; "Aug 28/29" → Aug 28) and four of its own Nov 24 findings were
+withdrawn — the restorations stand. The review's open items were closed the
+same morning: the missing UKMTO Nov 25 payload archived with provenance
+(ukmto-all-20261125T1456Z.json); Syzran and Kuibyshev had **not restarted as
+of mid-November** (NV, corroborated by Ukraine Today/IntelliNews), so both
+entries carry that status and the strikes add little new offline capacity; the
+draw-band reversion to 0.45M b/d confirmed against draw_rate.py's documented
+step function. **Staging `1fa78fe0`, prod `c93e18b0` deployed ~08:05 MST on
+the user's go-ahead** (bundle `JNK9NL3k.js`), both re-verified live. **Nov 24:** **Brent settled at $89.37 (Jan contract) — the first sub-$90 settlement since the Aug 28 close (89.31); Reuters: “lowest close since Aug 31” — and January WTI settled at $80.17 for the first time** (December's final settlement was Nov 20); both fell ~$3.2 on the restart of Libya's Sharara pipeline and recovering Middle East flows (Reuters). The 49th model run: horizon **15.1/50.0/35.0** (the settlement was the only input change — transits/volume still through Nov 11, 13 days stale); the candidate shadow reproduces 0.150772/0.499626/0.349602 exactly, and the next Kpler print (week to Nov 16) remains the clean reweight point. **Brent < $90 switches the draw band to 0.30M b/d** — at that rate the 250M floor lands ~Feb 9, 2027 (vs ~Jan 11 at 0.45M). Treasury's “Operation Economic Outcast” wave 2 (Nov 23): 22 entities + 8 people in Iran's shadow-banking network; Bessent: the economy is “underwater” and its leaders “panicking” (Gulf News; “drowning” corrected by the Nov 24 review). Baqaei: the strait could reopen “within two days” if the US lifts the blockade, ends the war and unfreezes assets (Al Jazeera, AFP). Iranian state TV (IRIB, Nov 23) denied a tanker convoy is readying to break the blockade (The National, Nov 24; Windward's 16-tankers-at-Kharg figure stays cut — the anchor date is unresolved); a Nov 23 Iranian letter to the UN accusing Bahrain and Kuwait of facilitating US aggression and demanding reparations — signatory Gholamhossein Darzi, whom AFP/Yahoo/JPost name as Iran's UN ambassador and chargé d'affaires, also carried by WANA and Mehr (the Nov 24 review's “ABNA-only / Iravani” doubt didn't survive re-check; restored to the site — review response). The US is investigating Iran's possible role in cyberattacks on up to 50 commercial ships, two bound for Texas; a Trump administration official said there's no evidence of Iranian involvement (WSJ, Nov 23). **Iraq ordered a federal takeover of oilfields in areas under Kurdish security control** and handed all regional border crossings to the federal authority (Reuters, Al Jazeera, Nov 24). The Houthis claim an 11th Wing Loong II shot down over the Lahj coast (Saba, Nov 24; unconfirmed); the UK sanctioned the Houthi group and four senior officials, including interior minister Abdulkarim al-Houthi (Al Jazeera, AFP, Nov 24). UKMTO +2 (both time-late Nov 22 reports): #218 a bulk carrier hit by a projectile at Dibba, fire, no casualties; #219 three eastbound strait vessels struck by projectiles, all crew safe. UKMTO's weekly overview counts **263 transits in the week to Nov 18, down from 308 the week before, ~65% below pre-war** (UKMTO via Iran International, Nov 21; also Marine Insight, National Security Journal — the Nov 24 review's “both weeks can't be 65%” doubt is resolved: each week is measured against pre-war levels separately; restored to the site — review response). The 10-year closed at 4.918% on Nov 23, a second straight close below 5%. AAA Nov 24: the **28th straight daily diesel decline** ($5.7982, $0.7294 below the Sep 22 record). WPSR + EIA petroleum w/e Nov 20 land tomorrow (10:30 ET). **Prod deployed** `0ad387ae` (staging `d086e199`), both re-verified live — gate PASS, served strings confirmed. **Nov 23:** No new model input —
 the latest settlement is still Nov 20 (Brent $92.57 / WTI $83.98; the Nov
 23 session was open at pass time), no new Kpler edition, no confirmed loss
 — the 48th run leaves the rows at 15.0/50.0/35.0 horizon. The escalation

@@ -1,0 +1,9 @@
+{
+ "file": "ukmto-all-20261125T1456Z.json",
+ "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+ "fetched": "20261125T1456Z",
+ "entries": 78,
+ "number_range": "143-221",
+ "sha256": "03b6c5b7b0c347d5a657746120f1f9afbe98f2f99b08094c39fbb5f63c120b74",
+ "note": "Archive saved Nov 25 (external review requested the missing Nov 25 payload; the morning --apply run updated crisis.ts and the identity sidecar but did not archive the fetch)."
+}
