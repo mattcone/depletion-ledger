@@ -1,0 +1,29 @@
+{
+ "report": "EIA WPSR",
+ "weekEnd": "2026-11-20",
+ "url": "https://www.eia.gov/petroleum/supply/weekly/",
+ "retrievedAt": "2026-11-25T15:43:03.506Z",
+ "files": [
+  {
+   "file": "table1.csv",
+   "sha256": "e3fab67807719aa1972db8d124bda4760097319bd9356994f8db998bc019dfcf",
+   "bytes": 6577
+  },
+  {
+   "file": "table5.csv",
+   "sha256": "e94e2a93c5f0a4a2b3a3d44341b72c92ed0520632ee097cda448a33155cac625",
+   "bytes": 3696
+  },
+  {
+   "file": "table6.csv",
+   "sha256": "7889a9e28aa008e8270a911de740abb81caf117fa21ad2082d25d889da588b8a",
+   "bytes": 5936
+  },
+  {
+   "file": "table2.csv",
+   "sha256": "d87331c287cd96f8c3469eaadd3978a18497ac1f4f1e7c5e8e952ac90435ef5a",
+   "bytes": 8449
+  }
+ ],
+ "note": "table2.csv added Nov 25 by the daily pass: WPSR table2 (refiner inputs & utilization) is not in report-check.mjs's default set; the API (WPULEUS3) lags a week on release morning (API-RECIPES gotcha), so the same-day CSV is the source for the 97.5% w/e Nov 20 utilization."
+}

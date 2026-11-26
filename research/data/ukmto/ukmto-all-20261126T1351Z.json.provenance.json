@@ -1,0 +1,9 @@
+{
+ "file": "ukmto-all-20261126T1351Z.json",
+ "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+ "fetched": "20261126T1351ZZ",
+ "entries": 80,
+ "number_range": "143-223",
+ "sha256": "37283fd7eabce2d1f7e5278c3f72ec1ccf08c7c09a66822b6f33c78c0c766aff",
+ "note": "Nov 26 daily pass --apply fetch (2 new entries: #222 suspicious activity 2026-11-25 Southern Arabian Gulf, #223 attack 2026-11-25 Strait of Hormuz)."
+}

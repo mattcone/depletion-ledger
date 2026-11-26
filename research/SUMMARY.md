@@ -1,11 +1,11 @@
-# Crisis state — Nov 25 (morning pass ~06:45–07:40 MST; review fixes + refinery status notes ~08:00; **prod `c93e18b0` deployed ~08:05 MST on explicit user go-ahead**; staging `1fa78fe0`; bundle `JNK9NL3k.js`)
+# Crisis state — Nov 26 (morning pass ~06:40–07:15 MST; review fixes verified + log self-fixes ~07:40; **prod `c9bf8fe8` deployed ~07:35 MST on explicit user go-ahead — carries the full Nov 26 pass + the review fixes**; staging `5b63fa76`; bundle `jEZSe0GK.js`)
 
-Sources and decisions: [Nov 23 daily log](logs/2026-11-23.md) · [Nov 22 daily log](logs/2026-11-22.md) · [Nov 21 daily log](logs/2026-11-21.md) · [Nov 20 daily log](logs/2026-11-20.md) · [judgment history](judgment-history.md)
+Sources and decisions: [Nov 26 daily log](logs/2026-11-26.md) · [Nov 25 daily log](logs/2026-11-25.md) · [Nov 24 daily log](logs/2026-11-24.md) · [judgment history](judgment-history.md)
 
 ## Current read
 
 **Judgment:** 10 / 50 / 40 — corridor holds / standoff / corridor lapses. **HOLD;
-any reweight remains a user decision. **Nov 25:** **Brent back above $90 —
+any reweight remains a user decision. **Nov 26:** **Brent +3.5% at $94.61 (Nov 25 settlement, Jan contract, +$3.21)** — a two-session rally of ~6% off Nov 23's $89.37, on the Houthi claim of an attack on the Ras Tanura refinery (Saudi's largest, ~550 kb/d) and on Riyadh's financial district, plus the run-up to Sunday's OPEC+ meeting (CNBC, Bloomberg). **Satellite imagery confirmed a huge plume of black smoke over the Ras Tanura peninsula (CNN/NASA/Planet Labs, Nov 26)**; the coalition said it destroyed four drones over the facility and did not say the refinery was hit (The National) — the damage assessment is still out. **OPEC+ (Bloomberg, Nov 26):** delegates say the group is weighing holding current quotas at the Nov 29 meeting; Iraq pressing for a higher capacity estimate. 51st model run: horizon **15.0/50.0/35.0** — unchanged (Brent in the $90–100 band; the transits input is now the week ending Nov 21 — same value, 11, fresher data); candidate shadow unchanged at 15.1/50.0/35.0; **draw band stays 0.45M b/d** — 250M floor ~Jan 11, 2027 (SPR 273.5M w/e Nov 20 → ~270.8M as of Nov 26 at band pace). **Russia:** Novoshakhtinsk (Rostov) struck again overnight Nov 24–25 — a six-hour, 50+ drone/missile strike, operations suspended (governor Slyusar); **Rystad: refinery runs at a more-than-20-year low** (Bloomberg, Nov 25). **UKMTO:** +2 (both dated Nov 25: #222 suspicious activity — a projectile exploded near a tanker ~50 nm west of Dubai, no damage, posted Nov 25; #223 an outbound tanker struck 18 nm east of Khasab, crew safe, a time-late report posted Nov 26 — the raw UKMTO file); coverageEnd Nov 26. The **three Nov 22 eastbound tankers were named: Sinokor VLCCs** Bahrain Prosperity (Liberia), Cameroon Prosperity, Romania Prosperity (Maritime Executive); the **missing Jordanian sailor from the Nov 17 ADNOC-linked tanker was found dead off Ras Al Khaimah on Nov 25** — the only missing person now is the Tara Gas crew member. **IRGC claimed an LNG carrier and two oil tankers struck mines (Nov 25, no vessel named — unverified; CENTCOM denies).** **Kuwait (Nov 26):** four injured, including two Italians, by falling shrapnel from an intercepted Iranian drone. **Israel (Nov 26):** military spokesman — ready to strike "at any moment, including on our own, without the Americans"; Netanyahu convening the security cabinet (Kan). **Iran:** claimed to have shot down a US MQ-9 and "Lucas" drones over the strait (Nov 25, unconfirmed); rial at a record low above 2.9M per dollar. **Kpler (via CBS, Nov 26): 147 transits in the week to Nov 23, down from 217 the week to Nov 1; tanker crossings at 11 a day (week ending Nov 21) vs ~50 pre-war; many crossings "dark"** — the volume print through Nov 16 (the pre-committed reweight point) is still not out. **AAA Nov 26:** diesel $5.7246 — the **30th straight daily decline** ($0.8030 below the Sep 22 record); gas $3.5554. 10-year: 4.848 (Nov 25), a **fourth straight close below 5%**. No new inflation data (next CPI Dec 10, PPI Dec 15). **Prod `c9bf8fe8` deployed ~07:35 MST** (bundle `jEZSe0GK.js`, same build as verified staging `5b63fa76` — the Nov 26 pass plus the review's three error fixes, two wording fixes, the Bessent caveat and the watch-list trims; my two "unverified" items — the Kushner remark and the rial record — checked out against Dawn/Express Tribune/Al Jazeera and the Israel National News flash and stay). Review response logged (logs/2026-11-26.md). **Nov 25:** **Brent back above $90 —
 Nov 24 settled $91.40 (Jan contract, +$2.03)**, a V-shaped session (intraday
 ~$88, its lowest since Aug 27) that recovered on reports of attacks on
 shipping around the strait (CNBC, Nov 24) — after Nov 23's $89.37 was the
@@ -42,10 +42,18 @@ Jan 31 will be considered in December — a proposal, not a decree. Kyiv Post
 attacks since Jan 1. **UKMTO:** +2 (#220, #221, both Nov 22 attacks);
 coverageEnd Nov 25. **AAA Nov 25:** diesel $5.7645 — the **29th straight
 daily decline** ($0.7631 below the Sep 22 record); gas $3.5866. 10-year:
-4.904 (Nov 24), a third straight close below 5%. **WPSR w/e Nov 20: released
-10:30 ET today — not yet posted at pass end** (EIA API preliminary 273.5M,
-−2.9M; next pass applies the official print to SPR/commercial
-stocks). **Review of the pass (review-2026-11-25.md) fixed five errors in the
+4.904 (Nov 24), a third straight close below 5%. **WPSR w/e Nov 20 applied
+~08:50 MST** (the EIA host unblocked after the morning 403s; official CSV,
+API prelim NOT used): **SPR 273.465M (−2.896M, third straight weekly
+withdrawal above 2.5M, reported pace 0.414M b/d — ~8% under the model's
+$90–100 band pace of 0.45M)**; commercial crude 418.906M (third straight
+build, shrinking); distillates 105.616M (−5.9% YoY, East Coast −13.2%);
+**utilization 97.5%** (third straight week above 95%, +5.2 pt YoY). No new
+inflation data: BLS latest is 2026 M10 (CPI released Nov 10, PPI Nov 13; both on
+the site); next CPI Dec 10, PPI Dec 15. **Prod `4dc3dc03` deployed ~09:37
+MST** (bundle `CzcJTPT8.js`, same bytes as verified staging `8cb13194`;
+also carries two follow-up copy edits rewording the 1982 month-end claim). **Review of
+the pass (review-2026-11-25.md) fixed five errors in the
 tree** (the price paragraph still described Nov 23; refinery damage
 misattributed to the Defense Ministry instead of the SBU/General Staff;
 "16 refineries halted" was 16 struck; the Nov 25 mine claim sat in the Nov 24
@@ -267,28 +275,25 @@ oil move. **Calibration ledger: 9 resolved, 2 open (running Brier
 
 ## Markets, shipping, and stocks
 
-- **Prices (Nov 23 settles, plotted at the Nov 24 pass):** Brent **$89.37**
-  (January contract, −$3.20, −3.5% vs the Nov 20 $92.57) and WTI **$80.17**
-  (January contract, −$3.24 vs its own Nov 20 settlement; $3.81 below the December contract's final settlement of
-  $83.98 on Nov 20 — **the first January WTI settlement in the series**;
-  December's last trading day was Nov 20). **First sub-$90 Brent settlement
-  since the Aug 28 close (89.31)** — Reuters calls it the lowest close since
-  Aug 31 (the chart's old “Aug 29, $88.10” point was actually the August
-  MONTHLY AVERAGE — Yahoo's August closes average 88.08 — and was re-dated to
-  Aug 31 per the July monthly-average convention; the review response). WTI's
-  lowest settlement since Aug 10 (Reuters). Driver: the restart of Libya's
-  Sharara pipeline and recovering Middle East flows (Reuters). JPMorgan
-  expects Brent in the high $70s in H1 2027 on an estimated supply surplus
-  (CNBC, Nov 23; Yahoo Finance — no Reuters report, as the Nov 24 review
-  found, but the forecast is well-documented; restored to the site with the
-  corrected sourcing). Brent is down 21.2% from the Oct 30 settlement of $113.43.
-  **Yahoo vs wire: the BZ=F bar closed at 89.37 = the wire; the CL=F bar
-  closed at 80.17 = the wire — no feed artifact this time.** Brent–WTI
-  spread $9.20. 10-yr: **Nov 23 close 4.918** (O 4.934 / H 4.982 / L 4.908;
-  Yahoo ^TNX session close — the Fed H.15 constant-maturity value for
-  Nov 23 was not yet posted at this pass) — **a second straight close below
-  5%**, +0.6bp on the day (no source links the move to oil — the “as oil
-  fell” clause was cut by the Nov 24 review and stays cut).
+- **Prices (Nov 25 settles, plotted at the Nov 26 pass):** Brent **$94.61**
+  (January contract, +$3.21, +3.5% vs the Nov 24 $91.40) and WTI **$83.68**
+  (January contract, +$1.63, +2.0%) — a two-session rally of ~6% off Nov 23's
+  $89.37 (CNBC, Yahoo Finance). Drivers: the Houthi claim of an attack on the
+  Ras Tanura refinery (Saudi's largest, ~550 kb/d) and on Riyadh's financial
+  district (Nov 25), plus the run-up to Sunday's OPEC+ meeting (Bloomberg:
+  delegates weighing holding current quotas); satellite imagery later
+  confirmed a huge plume of black smoke over Ras Tanura (CNN/NASA/Planet
+  Labs, Nov 26) while the coalition said it destroyed four drones over the
+  facility and did not say the refinery was hit (The National). Brent is
+  down 16.6% from the Oct 30 settlement of $113.43. **Yahoo vs wire: the
+  BZ=F bar closed at 94.61 = the wire; the CL=F bar closed at 83.68 = the
+  wire — no feed artifact.** Brent–WTI spread $10.93. 10-yr: **Nov 25 close
+  4.848** (O 4.844 / H 4.856 / L 4.801) — **a fourth straight close below
+  5%**, −5.6bp on the day. JPMorgan expects Brent in the high $70s in H1 2027
+  on an estimated supply surplus (CNBC, Nov 23). (Superseded bullet: the
+  Nov 24 pass had logged the Nov 23 settles — Brent $89.37 / WTI $80.17, the
+  first sub-$90 Brent settlement since Aug 28 — plus the contract-switch
+  details; those points remain in the plotted series.)
 - **CPI (released Nov 10, BLS USDL-26-1685):** October consumer prices **+0.4% MoM
   (SA)** — above the +0.3% consensus — and core **+0.3%**, the third straight
   month at that pace. **No headline or core 12-month rate was published** (the
@@ -304,12 +309,12 @@ oil move. **Calibration ledger: 9 resolved, 2 open (running Brier
   unpublished, 6.5% is the latest official annual print — and the strongest
   case yet for a December Fed hike (CNBC: "keeping pressure on the Fed").
   November CPI, Dec 10.
-- **AAA Nov 22 (applied):** gasoline **$3.6448** (−1.5¢), diesel
-  **$5.8445** (−2.0¢) — the **26th straight daily decline since Oct 28**,
-  and **$0.6831 below** AAA's Sep 22 record of $6.5276 (−10.5% from the
-  record). The Nov 22 AAA pairs against the Nov 20 settlement $83.98 (Nov
-  22 is a Sunday — no same-day settlement): **≈ $161.5 diesel / $69.1
-  gasoline** (Nov 21: ≈162.3 / 69.7; Nov 20 same-day: ≈163.7 / 71.0).
+- **AAA Nov 26 (applied):** gasoline **$3.5554** (−0.3¢), diesel
+  **$5.7246** (−0.4¢) — the **30th straight daily decline since Oct 28**, and
+  **$0.8030 below** AAA's Sep 22 record of $6.5276 (−12.3% from the record).
+  The Nov 26 AAA pairs against the Nov 25 settlement $83.68 (no same-day
+  settlement at the morning pass): **≈ $156.8 diesel / $65.6 gasoline**
+  (Nov 25, after the same-day re-pair: ≈158.4 / 67.0; Nov 24: ≈161.5 / 69.8).
 - **Hormuz:** UKMTO's **Nov 13 weekly overview** is now the operative figure:
   **139 outbound / 169 inbound transits** for the week to Nov 11 (≈65% below
   pre-war levels), 8 incidents in the Strait / Arabian Gulf / Gulf of Oman (two
@@ -568,6 +573,31 @@ towards" the line); unconfirmed, no Saudi-side damage report — the Yanbu route
   (TTF +160%, JKM +165% vs pre-closure). The earlier CFD quotes (TTF
   $27.27 / JKM $27.52, Nov 21) and the Reuters/Kpler North Asia spot level
   ($31.30, week to Nov 13) remain un-plotted quotes, as before.
+- **WPSR w/e Nov 20 (released Nov 25, 10:30 a.m. ET; ingested ~08:43 MST,
+  applied ~08:50 MST — the morning 403s cleared):** SPR **273.465M
+  (−2.896M w/w)** — third straight weekly withdrawal above 2.5M (after
+  −2.649 and −3.174); reported pace **0.414M b/d**, ~8% under the model's
+  $90–100 band pace of 0.45M b/d; now below the Aug 1982 month-end (273.593M)
+  as well. Commercial crude ex-SPR **418.906M (+1.110M)** — third straight
+  build, shrinking (+4.7, +3.4, +1.1). Gasoline **217.682M (+1.733M)**.
+  Distillates **105.616M (+0.715M)**, −5.9% YoY (112.227M a year ago); East
+  Coast PADD1 **24.218M (−0.202M)**, −13.2% YoY (27.901M). 4-wk average
+  distillate supply 3.888M b/d → ≈27 days of use. **Refinery utilization
+  97.5% w/e Nov 20 (+1.9 pt, third straight week above 95%, +5.2 pt YoY vs
+  92.3%)** — from WPSR table2 (the WPULEUS3 API lags a week on release
+  morning); third-highest of 2026, behind 98.0 (Aug 28) and 97.8 (Sep 4); crude runs rose
+  428 kb/d to 17,346 kb/d. Net imports (incl. SPR) 2,981 kb/d (+1,893 w/w)
+  — the w/e Nov 13 plunge to 1,088 was a one-off. Draw-rate re-baseline
+  (0.45M band): 250M ~47 days (~Jan 11 2027), 180M ~203 days, 70M ~447
+  days; at the reported 0.414M pace: 250M ~52 days (~Jan 16 2027). Site
+  updated (stats strip, SPR + commercial + refinery copy, watch item,
+  cascade → Dec 2): staging `8cb13194` (bundle `CzcJTPT8.js`), re-verified
+  live; prod `4dc3dc03` deployed ~09:37 MST on the user's go-ahead
+  (carries this pass + two follow-up copy edits rewording the 1982
+  month-end claim — "after July 1982" / "since Jul 1982" — same
+  substance). **Inflation:
+  no new data — BLS latest is 2026 M10 (CPI released Nov 10, PPI Nov 13; both on
+  the site); next CPI Thu Dec 10, next PPI Tue Dec 15 (BLS schedules).**
 - **WPSR w/e Nov 13 (released Nov 18, 10:30 a.m. ET; ingested ~08:52 MST):**
   SPR **276.361M (−3.174M w/w)** — second straight weekly withdrawal above 2.5M
   and the largest since the week ending Aug 21 (−3.700M; Aug 28's −3.122M was smaller — corrected at review); below every month-end level
