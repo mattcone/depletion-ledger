@@ -1,0 +1,7 @@
+{
+  "url": "https://sccd.royalnavy.mod.uk/api/ukmto/all",
+  "retrieved": "2026-11-28T13:55:50.245344+00:00",
+  "sha256": "ace6d694a701ad60e1b01c7724afd992cbc6c0579eba20cc75dfdad9c81b0bd9",
+  "note": "Full UKMTO incident feed, archived for the Nov 28 2026 daily pass (new entries #224 advisory + 28082035 hijack, warning 225-26). Same plain-JSON API ukmto.org's Next.js page calls; fetched with browser headers.",
+  "entries": 82
+}

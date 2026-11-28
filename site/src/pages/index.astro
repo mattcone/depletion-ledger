@@ -720,20 +720,19 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
             <p class="font-mono text-[11px] text-faint tabular">Brent: selected observations and monthly averages. WTI: weekly FRED spot prices and recent futures closes.</p>
           </div>
           <div class="h-80 sm:h-[440px]">
-            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: January Brent settled at $96.57 on Nov 26, up $1.96, its highest settlement since Nov 6, and January WTI at $83.68 on Nov 25 — there was no WTI settlement on Nov 26, US Thanksgiving (Reuters). The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly spot prices and recent futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
+            <canvas id="brentChart" role="img" aria-label="Crude oil prices, 2026: January Brent settled at $95.44 on Nov 27, down $1.13, and January WTI at $83.08, down $0.60 from its Nov 25 settlement (Reuters). The March intraday Brent peak was $126. The chart combines selected Brent observations and monthly averages with weekly spot prices and recent futures closes. Reference lines mark $100 and the pre-crisis Brent price of $76."></canvas>
           </div>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
-            On Nov 26, January Brent settled at $96.57 (up $1.96, 2.1%), its highest
-            settlement since Nov 6 and its third straight gain (Reuters). WTI didn't
-            settle that day because of the US Thanksgiving holiday; it traded at
-            $85.08 on Nov 27, up $1.40 from its Nov 25 settlement of $83.68 (CNBC).
-            Brent rose after a projectile hit Aramco's Jazan refinery, killing a
-            worker and halting some operations (Saudi Energy Ministry), and after two
-            Italian technicians were killed in a drone attack in Kuwait. Traders are
-            also watching the Nov 29 OPEC+ meeting, where people familiar with the
-            talks expect production targets to stay unchanged through at least the
+            On Nov 27, January Brent settled at $95.44 (down $1.13, 1.2%) but rose
+            about 3% for the week, its first weekly gain in November (Reuters). The
+            week's rally followed the Houthi claim on Saudi Arabia's Ras Tanura
+            refinery, the strike on its Jazan refinery and attacks on tankers near
+            the strait. January WTI settled at $83.08,
+            down $0.60 from Nov 25; it didn't settle on Nov 26 because of the US
+            Thanksgiving holiday. OPEC+ meets Nov 29, and people familiar with the
+            talks expect it to keep production targets unchanged through at least the
             first quarter of 2027 (CNBC, Reuters). The January Brent contract is down
-            14.9% from its Oct 30 settlement of $113.43.
+            15.9% from its Oct 30 settlement of $113.43.
           </p>
           <p class="mt-3 text-[13px] leading-relaxed text-ink/70">
             Brent combines selected observations and monthly averages; gray WTI combines
@@ -3024,9 +3023,12 @@ const ukmtoAria = `Bar chart: attacks on shipping reported to UKMTO, per week, $
       // Nov 26: WTI did NOT settle (US Thanksgiving — CME/US futures ended early and did not
       // settle; CNBC, Nov 27) — the Nov 26 AAA stays paired to the Nov 25 settlement.
       // Nov 27 AAA → Nov 25 WTI settle 83.68 (nearest trading day — Nov 26 has no settlement;
-      // diesel 155.9 / gasoline 65.3).
-      // This retail-minus-WTI chart does not use heating-oil futures: Nov 27 diesel gap = 155.9;
-      // gasoline gap = 65.3 dollars per barrel (Nov 26: 156.8 / 65.6 — paired to the Nov 25
+      // diesel 155.9 / gasoline 65.3); Nov 27 AAA → Nov 27 WTI settle 83.08 (same-day — re-paired
+      // from the Nov 25 basis once the Nov 27 settlement landed, Nov 28 morning pass; diesel 156.5
+      // / gasoline 65.9 — corrected in the Nov 28 review: 5.7048×42−83.08, 3.5476×42−83.08); Nov 28 AAA → Nov 27 WTI settle 83.08 (nearest trading day — Nov 26 has
+      // no settlement; diesel 154.9 / gasoline 65.2).
+      // This retail-minus-WTI chart does not use heating-oil futures: Nov 28 diesel gap = 154.9;
+      // gasoline gap = 65.2 dollars per barrel (Nov 27: 156.5 / 65.9 same-day; Nov 26: 156.8 / 65.6 — paired to the Nov 25
       // settlement, no WTI settle Nov 26; Nov 25: 158.4 / 67.0 same-day; Nov 24: 161.5 / 69.8 same-day; Nov 23: 160.4 / 68.8 — paired to the Nov 20;
       // Nov 21: 162.3 / 69.7 — paired to the Nov 20
       // settlement; Nov 20: 163.7 / 71.0 same-day; Nov 19: 165.8 /
